@@ -1,0 +1,83 @@
+@import 'colors';
+
+.oq {
+  &.sheet {
+    .sheet-header {
+      color: @base-color;
+      padding: 8px;
+      background-color: @dark-color;
+      background-blend-mode: multiply;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+
+      input[type='text'],
+      input[type='number'],
+      input[type='password'],
+      input[type='date'],
+      input[type='time'],
+      input[type='datetime-local'],
+      input[type='search'] {
+        color: @base-color;
+        border: 0;
+        //border-bottom: 1px solid @base-color;
+      }
+
+      .name {
+        font-size: 24px;
+        font-weight: 400;
+      }
+    }
+
+    .sheet-tabs {
+      flex-grow: 0;
+    }
+
+    .sheet-body,
+    .sheet-content {
+      padding: 8px;
+      display: flex;
+
+      .tab.active {
+        display: flex;
+        flex-grow: 1;
+      }
+
+      .notes {
+        flex-grow: 1;
+      }
+
+      label,
+      legend {
+        color: @dark-color;
+      }
+
+      .characteristic {
+        align-items: center;
+        gap: 0;
+
+        label {
+          font-size: 20px;
+          margin-bottom: 5px;
+        }
+      }
+
+      .characteristic-value {
+        @size: 48px;
+        border: 1px solid @dark-color;
+        border-radius: 50%;
+        min-width: @size;
+        min-height: @size;
+        line-height: @size;
+        text-align: center;
+
+        .form-font();
+        font-size: 24px;
+      }
+    }
+
+    a.item {
+      .nav-item-font();
+    }
+  }
+}

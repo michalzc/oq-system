@@ -1,0 +1,38 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="dialog-header">
+    <h1>{{actorData.name}}</h1>
+  </header>
+  <section class="dialog-body">
+    <h2>{{ localize 'OpenQuest.Labels.Attributes' }}</h2>
+    <div class="attrs-table">
+      <label></label>
+      <label>{{ localize 'OpenQuest.Dialog.Mod' }}</label>
+
+      <label title="{{ localize 'OpenQuest.Labels.Modifiers.HitPoints.Label'}}">{{ localize
+        'OpenQuest.Labels.Modifiers.HitPoints.Abbr'}}</label>
+      <input type="number" data-dtype="Number" name="attributes.hp.mod" value="{{system.attributes.hp.mod}}">
+
+      <label title="{{ localize 'OpenQuest.Labels.Modifiers.MagicPoints.Label'}}">{{ localize
+        'OpenQuest.Labels.Modifiers.MagicPoints.Abbr'}}</label>
+      <input type="number" data-dtype="Number" name="attributes.mp.mod" value="{{system.attributes.mp.mod}}">
+
+      <label title="{{ localize 'OpenQuest.Labels.Modifiers.DamageModifier.Label'}}">{{ localize
+        'OpenQuest.Labels.Modifiers.DamageModifier.Abbr'}}</label>
+      <input type="text" data-dtype="String" name="attributes.dm.mod" value="{{system.attributes.dm.mod}}">
+
+      <label title="{{ localize 'OpenQuest.Labels.Modifiers.MovementRate.Label'}}">{{ localize
+        'OpenQuest.Labels.Modifiers.MovementRate.Abbr'}}</label>
+      <input type="number" data-dtype="Number" name="attributes.mr.mod" value="{{system.attributes.mr.mod}}">
+
+      <label title="{{ localize 'OpenQuest.Labels.Modifiers.ArmourWorn.Label'}}">{{ localize
+        'OpenQuest.Labels.Modifiers.ArmourWorn.Abbr'}}</label>
+      <input type="number" data-dtype="Number" name="attributes.ap.mod" value="{{system.attributes.ap.mod}}">
+    </div>
+  </section>
+  <section class="dialog-body">
+    <div class="flexrow">
+      <button type="reset" class="reset"><i class="fas fa-cancel"></i> {{ localize 'OpenQuest.Dialog.Reset' }} </button>
+      <button type="submit"><i class="fas fa-save"></i> {{ localize 'OpenQuest.Dialog.Save' }} </button>
+    </div>
+  </section>
+</form>

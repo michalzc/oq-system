@@ -1,0 +1,31 @@
+<form class="item-sheet skill-sheet {{cssClass}} flexcol" autocomplete="off">
+  <header class="sheet-header flex0">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" width="64" height="64" alt="{{item.name}}">
+    <div class="flexcol">
+      <input class="name" type="text" data-dtype="String" name="name" value="{{item.name}}"
+             placeholder="{{localize 'OpenQuest.Labels.Name'}}">
+      <span class="short-name">{{system.shortName}}</span>
+    </div>
+  </header>
+
+  <section class="sheet-content flexcol flex1">
+    <div class="flex0 grid1_3">
+      <label for="group">{{localize 'OpenQuest.Labels.Group'}}</label>
+
+      <select name="system.group" id="group">
+        {{selectOptions skillGroups selected=system.group localize=true}}
+      </select>
+      {{#if customGroup}}
+        <label for="customGroup">{{localize 'OpenQuest.Labels.CustomGroup'}}</label>
+        <input type="text" name="system.customGroupName" id="customGroup" value="{{system.customGroupName}}">
+      {{/if}}
+      <label for="formula">{{localize 'OpenQuest.Labels.Formula'}}</label>
+      <input type="text" name="system.formula" id="formula" value="{{system.formula}}">
+    </div>
+    <fieldset class="flexrow flex1">
+      <legend>{{localize 'OpenQuest.Labels.Description'}}</legend>
+      {{editor enrichedDescription target="system.description" id="description" engine="prosemirror" button=true class="flex1"}}
+    </fieldset>
+
+  </section>
+</form>

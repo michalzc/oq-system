@@ -1,0 +1,141 @@
+<form class="actor-sheet character-sheet {{cssClass}} flexcol" autocomplete="off">
+  <header class="sheet-header flex0">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="64" height="64" alt="{{actor.name}}" />
+    <div class="flexcol header-fields">
+      <input class="name" type="text" data-dtype="String" name="name" value="{{actor.name}}"
+             placeholder="{{ localize 'OpenQuest.Labels.Name' }}" />
+      <div class="flexrow">
+        <div class="flex1 flex-row-no-wrap">
+          <label for="gender">{{ localize 'OpenQuest.Labels.Gender' }}</label>
+          <input class="small" type="text" data-dtype="String" id="gender" name="system.personal.gender"
+                 value="{{system.personal.gender}}" />
+        </div>
+        <div class="flex1 flex-row-no-wrap">
+          <label for="age">{{ localize 'OpenQuest.Labels.Age' }}</label>
+          <input class="small" type="number" data-dtype="Number" id="age" name="system.personal.age"
+                 value="{{system.personal.age}}" />
+        </div>
+        <div class="flex2 flex-row-no-wrap">
+          <label for="culture">{{ localize 'OpenQuest.Labels.Culture' }}</label>
+          <input type="text" data-dtype="String" id="culture" name="system.personal.culture"
+                 value="{{system.personal.culture}}" />
+        </div>
+      </div>
+
+      <div class="flexrow">
+        <div class="flex1 flex-row-no-wrap">
+          <label for="rank">{{ localize 'OpenQuest.Labels.Rank' }}</label>
+          <input type="text" data-dtype="String" id="rank" name="system.personal.rank"
+                 value="{{system.personal.rank}}" />
+        </div>
+        <div class="flex1 flex-row-no-wrap">
+          <label for="organisation">{{ localize 'OpenQuest.Labels.Organisation' }}</label>
+          <input type="text" data-dtype="String" id="organisation" name="system.personal.organisation"
+                 value="{{system.personal.organisation}}" />
+        </div>
+      </div>
+      <div class="flexrow">
+        <div class="flex1 flex-row-no-wrap">
+          <label for="concept">{{ localize 'OpenQuest.Labels.Concept' }}</label>
+          <input type="text" data-dtype="String" id="concept" name="system.personal.concept"
+                 value="{{system.personal.concept}}" />
+        </div>
+      </div>
+    </div>
+  </header>
+  <section class="sheet-body">
+
+    <!-- characteristics -->
+    <div class="characteristics">
+      <h2 class="flex0">{{ localize 'OpenQuest.Labels.Characteristics' }}</h2>
+
+      <div class="flex1 flexrow">
+        {{#each system.characteristics as |char key| }}
+          <div class="flexcol characteristic">
+            <label title="{{ char.label }}" class="flex0">{{ char.abbr }}</label>
+            <div title="{{ char.label }}" class="characteristic-value flex0">{{char.value}}</div>
+          </div>
+        {{/each}}
+        <a class="modify-characteristics flex0" title="{{ localize 'OpenQuest.Labels.EditCharacteristics' }}"><i
+          class="fas fa-gear"></i></a>
+      </div>
+
+    </div>
+
+
+    <!-- attributes -->
+    <div class="attributes flex-col-top">
+      <h2 class="flex0">{{ localize 'OpenQuest.Labels.Attributes' }}</h2>
+
+      <div>
+
+        <label title="{{ localize 'OpenQuest.Labels.Modifiers.HitPoints.Label'}}">{{ localize
+          'OpenQuest.Labels.Modifiers.HitPoints.Abbr'}}</label>
+        <div class="value">
+          <input size="2" type="number" data-dtype="Number" name="system.attributes.hp.value" value="{{system.attributes.hp.value}}" />
+          <div>&nbsp;/&nbsp{{system.attributes.hp.max}}</div>
+        </div>
+
+        <label title="{{ localize 'OpenQuest.Labels.Modifiers.MagicPoints.Label'}}">{{ localize
+          'OpenQuest.Labels.Modifiers.MagicPoints.Abbr'}}</label>
+        <div class="value">
+          <input size="2" type="number" data-dtype="Number" name="system.attributes.mp.value" value="{{system.attributes.mp.value}}" />
+          <div>&nbsp;/&nbsp{{system.attributes.mp.max}}</div>
+        </div>
+
+        <a class="modify-attributes" title="{{ localize 'OpenQuest.Labels.EditAttributes' }}"><i
+          class="fas fa-gear"></i></a>
+
+        <label title="{{ localize 'OpenQuest.Labels.Modifiers.DamageModifier.Label'}}">{{ localize
+          'OpenQuest.Labels.Modifiers.DamageModifier.Abbr'}}</label>
+        <div class="value">{{system.attributes.dm.value}}</div>
+
+        <label title="{{ localize 'OpenQuest.Labels.Modifiers.MovementRate.Label'}}">{{ localize
+          'OpenQuest.Labels.Modifiers.MovementRate.Abbr'}}</label>
+        <div class="value">{{system.attributes.mr.value}}</div>
+
+        <label title="{{ localize 'OpenQuest.Labels.Modifiers.ArmourWorn.Label'}}">{{ localize
+          'OpenQuest.Labels.Modifiers.ArmourWorn.Abbr'}}</label>
+        <div class="value">{{system.attributes.ap.value}}</div>
+
+
+      </div>
+
+    </div>
+  </section>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="skills">{{ localize 'OpenQuest.Nav.Skills' }}</a>
+    <a class="item" data-tab="combat">{{ localize 'OpenQuest.Nav.Combat' }}</a>
+    <a class="item" data-tab="equipment">{{ localize 'OpenQuest.Nav.Equipment' }}</a>
+    <a class="item" data-tab="magic">{{ localize 'OpenQuest.Nav.Magic' }}</a>
+    <a class="item" data-tab="effects">{{ localize 'OpenQuest.Nav.Effects' }}</a>
+    <a class="item" data-tab="notes">{{ localize 'OpenQuest.Nav.Notes' }}</a>
+  </nav>
+
+  <section class="sheet-content">
+    <div class="tab" data-group="primary" data-tab="skills">
+      {{> systems/openquest/templates/actor/parts/skills-part.hbs this}}
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="combat">
+      Combat
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="equipment">
+      Equipment
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="magic">
+      Magic
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="effects">
+      Effects
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="notes">
+      {{> systems/openquest/templates/actor/parts/notes-part.hbs this}}
+    </div>
+  </section>
+</form>

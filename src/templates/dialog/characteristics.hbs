@@ -1,0 +1,52 @@
+<form class="{{cssClass}} dialog-characteristics" autocomplete="off">
+  <header class="dialog-header">
+    <h1>{{actorData.name}}</h1>
+  </header>
+
+  <section class="dialog-body">
+    <h2>{{localize 'OpenQuest.Dialog.Points'}}</h2>
+    <div class="points">
+      <div class="flex-row-no-wrap">
+        <label>{{ localize 'OpenQuest.Dialog.SpentPoints' }}</label>
+        <div class="spent-points">{{points.spent}}</div>
+      </div>
+      <div class="flex-row-no-wrap">
+        <label>{{ localize 'OpenQuest.Dialog.RemainPoints' }}</label>
+        <div class="remain-points">{{points.remain}}</div>
+      </div>
+      <div class="flex-row-no-wrap">
+        <label for="all-points">{{localize 'OpenQuest.Dialog.AllPoints' }}</label>
+        <input type="number" data-dtype="Number" name="points.all" class="all-points" value="{{points.all}}" />
+      </div>
+    </div>
+    <h2>{{localize 'OpenQuest.Labels.Characteristics' }}</h2>
+    <div class="chars-table">
+      <label></label>
+      <label>{{localize 'OpenQuest.Dialog.Base'}}</label>
+      <a class="roll-all" title="{{ localize 'OpenQuest.Dialog.Roll All'}}"><i class="fas fa-dice"></i></a>
+      <label>{{localize 'OpenQuest.Dialog.Roll'}}</label>
+      <label>{{localize 'OpenQuest.Dialog.Mod'}}</label>
+      {{#each system.characteristics as |char key|}}
+
+        <label for="char-{{key}}-base" title="{{char.label}}">{{ char.abbr }}</label>
+        <input type="number" class="characteristic-base-input" data-type="Number" id="char-{{key}}-base" name="characteristics.{{key}}.base"
+               value="{{char.base}}" />
+
+        <a class="roll-characteristic self-center" title="{{ localize 'OpenQuest.Dialog.Roll' }} {{ char.label }}"
+           data-key="{{key}}"><i class="fas fa-dice-two"></i></a>
+        <input type="text" data-dtype="String" name="characteristics.{{key}}.roll" value="{{char.roll}}" />
+
+        <input type="number" data-type="Number" name="characteristics.{{key}}.mod"
+               value="{{char.mod}}" />
+
+
+      {{/each}}
+    </div>
+  </section>
+  <section class="dialog-body">
+    <div class="flexrow">
+      <button type="reset" class="reset"><i class="fas fa-cancel"></i> {{ localize 'OpenQuest.Dialog.Reset' }} </button>
+      <button type="submit"><i class="fas fa-save"></i> {{ localize 'OpenQuest.Dialog.Save' }} </button>
+    </div>
+  </section>
+</form>

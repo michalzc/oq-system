@@ -1,0 +1,56 @@
+@import 'colors';
+
+.oq {
+  &.dialog {
+    .dialog-header {
+      padding: 10px 5px 5px;
+      background-color: @dark-color;
+      background-blend-mode: multiply;
+      color: @base-color;
+
+      h1 {
+        border: 0;
+      }
+    }
+
+    .dialog-body {
+      padding: 5px;
+      font-size: 18px;
+
+      label {
+        color: @dark-color;
+      }
+
+      input[type='text'],
+      input[type='number'] {
+        border: 0;
+        border-bottom: 1px solid @dark-color;
+      }
+
+      .points {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 10px;
+
+        & > * {
+          flex: 1;
+        }
+      }
+
+      .chars-table {
+        display: grid;
+        grid-template-columns: 2fr 2fr 1fr 3fr 2fr;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .attrs-table {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        align-items: center;
+        gap: 10px;
+      }
+    }
+  }
+}

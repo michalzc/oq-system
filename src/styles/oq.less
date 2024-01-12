@@ -1,4 +1,83 @@
-/* ---------------------------- */
-/*             Less             */
-/* This is your Less entry file */
-/* ---------------------------- */
+@import 'fonts';
+@import 'colors';
+
+@import 'sheet';
+@import 'character-sheet';
+@import 'dialog';
+@import 'message';
+
+.oq {
+  .window-content {
+    padding: 0;
+    background-image: url('../assets/ui/sheetbg.webp');
+    background-repeat: repeat;
+  }
+
+  input,
+  textarea,
+  .editor {
+    .form-font();
+  }
+
+  label,
+  legend {
+    .label-font();
+  }
+
+  .flex-row-no-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: baseline;
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+
+  .flexcol,
+  .flexrow {
+    gap: 5px;
+  }
+
+  .flexrowsmall {
+    gap: 5px;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 0;
+    align-items: center;
+  }
+
+  .grid1_3 {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 5px;
+    align-items: center;
+  }
+
+  .flex-col-top {
+    justify-items: flex-start;
+  }
+
+  input.small {
+    min-width: 30px;
+    text-align: center;
+  }
+
+  h1,
+  h2,
+  h3 {
+    .header-font();
+  }
+
+  .self-center {
+    align-self: center;
+    justify-self: center;
+  }
+}
+
+body {
+  font-family: Merriweather, serif;
+  background-image: url('../assets/ui/logo.webp'), url('/ui/denim.png');
+  background-repeat: no-repeat, repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
