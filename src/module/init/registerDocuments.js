@@ -1,3 +1,6 @@
+import { OQActorDocumentProxy, OQItemDocumentProxy } from '../document/documentProxy.js';
+
 export function registerDocuments() {
-  // Register custom document classes here
+  CONFIG.Actor.documentClass = OQActorDocumentProxy;
+  CONFIG.Item.documentClass = OQItemDocumentProxy;
 }

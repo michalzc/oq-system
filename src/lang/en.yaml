@@ -1,1 +1,98 @@
-{}
+---
+name: OpenQuest SRD System
+TYPES:
+  Actor:
+    character: Player Character
+    npc: Monster/NPC
+  Item:
+    skill: Skill
+    weapon: Weapon
+    armour: Armour
+    equipment: Equipment
+    spell: Spell
+OQ:
+  Errors:
+    InvalidRoll: Invalid roll definition
+  Labels:
+    Name: Name
+    Gender: Gender
+    Age: Age
+    Concept: Concept
+    Culture: Culture
+    Rank: Rank
+    Organisation: Organisation
+    Characteristics: Characteristics
+    Attributes: Attributes
+    Modifiers:
+      DamageModifier:
+        Abbr: DM
+        Label: Damage Modifier
+      HitPoints:
+        Abbr: HP
+        Label: Hit Points
+      MagicPoints:
+        Abbr: MP
+        Label: Magic Points
+      MovementRate:
+        Abbr: MR
+        Label: Movement Rate
+      ArmourWorn:
+        Abbr: AP
+        Label: Armour Worn
+    EditCharacteristics: Edit Characteristics
+    EditAttributes: Edit Attributes
+    Group: Group
+    Formula: Formula
+    Description: Description
+    CustomGroup: Custom Group
+    Notes: Notes
+  Nav:
+    Skills: Skills
+    Combat: Combat
+    Equipment: Equipment
+    Magic: Magic
+    Notes: Notes
+    Effects: Effects
+  Dialog:
+    Save: Save Data
+    Reset: Reset Data
+    Characteristics:
+      Title: Update Characteristics
+    Mod: Mod
+    Base: Base
+    Value: Value
+    Roll: Roll
+    Roll All: Roll All
+    Points: Points
+    AllPoints: All
+    SpentPoints: Spent
+    RemainPoints: Remain
+  Characteristics:
+    str:
+      label: Strength
+      abbr: Str
+    con:
+      label: Constitution
+      abbr: Con
+    dex:
+      label: Dexterity
+      abbr: Dex
+    siz:
+      label: Size
+      abbr: Siz
+    int:
+      label: Intelligence
+      abbr: Int
+    pow:
+      label: Power
+      abbr: Pow
+    cha:
+      label: Charisma
+      abbr: Cha
+  SkillGroups:
+    Resistance: Resistances
+    Combat: Combat Skills
+    Knowledge: Knowledge Skills
+    Practical: Practical Skills
+    Magic: Magic Skills
+    Custom: Custom Group

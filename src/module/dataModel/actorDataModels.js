@@ -3,7 +3,7 @@ const fields = foundry.data.fields;
 function characteristicModel() {
   return new fields.SchemaField({
     base: new fields.NumberField({ min: 0, integer: true, required: true, initial: 0 }),
-    roll: new fields.StringField({ trim: true, initial: '' }),
+    roll: new fields.StringField({ trim: true, initial: '', required: true }),
     mod: new fields.NumberField({ min: 0, integer: true, required: true, initial: 0 }),
   });
 }
@@ -59,6 +59,7 @@ function characterPersonalModel() {
     concept: new fields.StringField({ trim: true, initial: '' }),
     rank: new fields.StringField({ trim: true, initial: '' }),
     organisation: new fields.StringField({ trim: true, initial: '' }),
+    notes: new fields.HTMLField({ trim: true, initial: '' }),
   });
 }
 

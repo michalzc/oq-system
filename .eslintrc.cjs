@@ -5,7 +5,7 @@
 
 module.exports = {
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: 2024,
     extraFileExtensions: ['.cjs', '.mjs'],
     sourceType: 'module',
   },

@@ -15,7 +15,7 @@ function htmlFieldModel() {
 export class SkillDataModel extends fields.ObjectField {
   static defineSchema() {
     return {
-      description: new fields.HTMLField({ trim: true, initial: '' }),
+      description: htmlFieldModel(),
       formula: commonStringModel(),
       mod: positiveNumberModel(),
       shortName: commonStringModel(),
