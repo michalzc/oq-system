@@ -1,0 +1,58 @@
+{
+  "private": true,
+  "name": "fvtt-system-oq",
+  "version": "0.0.0",
+  "description": "<description of the package>",
+  "license": "<please choose an appropriate license. https://choosealicense.com/ is a great place to get more information if you are unsure>",
+  "homepage": "<optionally the URL to your repository or another homepage>",
+  "repository": {
+    "type": "git",
+    "url": "<optionally the URL to your repository>"
+  },
+  "bugs": {
+    "url": "<optionally the URL to your issues list>"
+  },
+  "contributors": [
+    {
+      "name": "<your name>",
+      "email": "<optionally your e-mail address>"
+    }
+  ],
+  "type": "module",
+  "scripts": {
+    "build": "gulp build",
+    "build:watch": "gulp watch",
+    "link-project": "gulp link",
+    "clean": "gulp clean",
+    "clean:link": "gulp link --clean",
+    "lint": "eslint --ext .js,.cjs,.mjs .",
+    "lint:fix": "eslint --ext .js,.cjs,.mjs --fix .",
+    "format": "prettier --write \"./**/*.(js|cjs|mjs|json|yml|less)\"",
+    "postinstall": "husky install"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/stream": "^3.0.1",
+    "@typhonjs-fvtt/eslint-config-foundry.js": "^0.8.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "fs-extra": "^11.2.0",
+    "gulp": "^4.0.2",
+    "gulp-less": "^5.0.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-yaml": "^2.0.4",
+    "husky": "^8.0.3",
+    "less": "^3.13.1",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.1",
+    "rollup": "^2.79.1",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0",
+    "yargs": "^17.7.2"
+  },
+  "lint-staged": {
+    "*.(js|cjs|mjs)": "eslint --fix",
+    "*.(json|yml|less)": "prettier --write"
+  }
+}

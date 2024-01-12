@@ -1,0 +1,24 @@
+---
+id: oq
+title: OQ System
+description: OpenQuest SRD System for FoundryVTT
+authors:
+  - name: Michał Z.
+    email: parmezan@gmail.com
+url: tbd
+license: WTFPL – Do What the Fuck You Want to Public License
+readme: README.md
+version: 0.1.0-SNAPSHOT
+compatibility:
+  minimum: 11
+  verified: 11
+esmodules:
+  - module/oq.js
+styles:
+  - styles/oq.css
+packs: []
+languages:
+  - lang: en
+    name: English
+    path: lang/en.json
+socket: false
