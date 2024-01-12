@@ -1,7 +1,103 @@
 ---
 Actor:
-  templates: { }
-  types: [ ]
+  types:
+    - character
+    - npc
+  templates:
+    common:
+      personal:
+        notes: ''
+      characteristics:
+        str:
+          base: 8
+          roll: ''
+          mod: 0
+        con:
+          base: 8
+          roll: ''
+          mod: 0
+        dex:
+          base: 8
+          roll: ''
+          mod: 0
+        siz:
+          base: 8
+          roll: ''
+          mod: 0
+        int:
+          base: 8
+          roll: ''
+          mod: 0
+        pow:
+          base: 8
+          roll: ''
+          mod: 0
+        cha:
+          base: 8
+          roll: ''
+          mod: 0
+      attributes:
+        hp:
+          mod: 0
+          max: 0
+          value: 0
+        dm:
+          mod: ''
+        mp:
+          mod: 0
+          max: 0
+          value: 0
+        mr:
+          base: 15
+          mod: 0
+        ap:
+          base: 0
+          mod: 0
+  character:
+    templates:
+      - common
+    personal:
+      gender: ''
+      age: ''
+      culture: ''
+      concept: ''
+      rank: ''
+      organisation: ''
+
+
+  npc:
+    templates:
+      - common
+    personal:
+      description: ''
+
 Item:
-  templates: { }
-  types: [ ]
+  types:
+    - skill
+    - weapon
+    - armour
+    - equipment
+  templates:
+    common:
+      description: ''
+
+  skill:
+    templates:
+      - common
+    formula: ''
+    mod: 0
+    shortName: ''
+    group: ''
+    customGroupName: ''
+
+  weapon:
+    templates:
+      - common
+
+  armour:
+    templates:
+      - common
+
+  equipment:
+    templates:
+      - common
