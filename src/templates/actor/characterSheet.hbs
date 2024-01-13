@@ -3,20 +3,20 @@
     <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="64" height="64" alt="{{actor.name}}" />
     <div class="flexcol header-fields">
       <input class="name" type="text" data-dtype="String" name="name" value="{{actor.name}}"
-             placeholder="{{ localize 'OpenQuest.Labels.Name' }}" />
+             placeholder="{{ localize 'OQ.Labels.Name' }}" />
       <div class="flexrow">
         <div class="flex1 flex-row-no-wrap">
-          <label for="gender">{{ localize 'OpenQuest.Labels.Gender' }}</label>
+          <label for="gender">{{ localize 'OQ.Labels.Gender' }}</label>
           <input class="small" type="text" data-dtype="String" id="gender" name="system.personal.gender"
                  value="{{system.personal.gender}}" />
         </div>
         <div class="flex1 flex-row-no-wrap">
-          <label for="age">{{ localize 'OpenQuest.Labels.Age' }}</label>
+          <label for="age">{{ localize 'OQ.Labels.Age' }}</label>
           <input class="small" type="number" data-dtype="Number" id="age" name="system.personal.age"
                  value="{{system.personal.age}}" />
         </div>
         <div class="flex2 flex-row-no-wrap">
-          <label for="culture">{{ localize 'OpenQuest.Labels.Culture' }}</label>
+          <label for="culture">{{ localize 'OQ.Labels.Culture' }}</label>
           <input type="text" data-dtype="String" id="culture" name="system.personal.culture"
                  value="{{system.personal.culture}}" />
         </div>
@@ -24,19 +24,19 @@
 
       <div class="flexrow">
         <div class="flex1 flex-row-no-wrap">
-          <label for="rank">{{ localize 'OpenQuest.Labels.Rank' }}</label>
+          <label for="rank">{{ localize 'OQ.Labels.Rank' }}</label>
           <input type="text" data-dtype="String" id="rank" name="system.personal.rank"
                  value="{{system.personal.rank}}" />
         </div>
         <div class="flex1 flex-row-no-wrap">
-          <label for="organisation">{{ localize 'OpenQuest.Labels.Organisation' }}</label>
+          <label for="organisation">{{ localize 'OQ.Labels.Organisation' }}</label>
           <input type="text" data-dtype="String" id="organisation" name="system.personal.organisation"
                  value="{{system.personal.organisation}}" />
         </div>
       </div>
       <div class="flexrow">
         <div class="flex1 flex-row-no-wrap">
-          <label for="concept">{{ localize 'OpenQuest.Labels.Concept' }}</label>
+          <label for="concept">{{ localize 'OQ.Labels.Concept' }}</label>
           <input type="text" data-dtype="String" id="concept" name="system.personal.concept"
                  value="{{system.personal.concept}}" />
         </div>
@@ -47,16 +47,16 @@
 
     <!-- characteristics -->
     <div class="characteristics">
-      <h2 class="flex0">{{ localize 'OpenQuest.Labels.Characteristics' }}</h2>
+      <h2 class="flex0">{{ localize 'OQ.Labels.Characteristics' }}</h2>
 
       <div class="flex1 flexrow">
         {{#each system.characteristics as |char key| }}
           <div class="flexcol characteristic">
-            <label title="{{ char.label }}" class="flex0">{{ char.abbr }}</label>
-            <div title="{{ char.label }}" class="characteristic-value flex0">{{char.value}}</div>
+            <label title="{{ localize char.label }}" class="flex0">{{ localize char.abbr }}</label>
+            <div title="{{ localize char.label }}" class="characteristic-value flex0">{{char.value}}</div>
           </div>
         {{/each}}
-        <a class="modify-characteristics flex0" title="{{ localize 'OpenQuest.Labels.EditCharacteristics' }}"><i
+        <a class="modify-characteristics flex0" title="{{ localize 'OQ.Labels.EditCharacteristics' }}"><i
           class="fas fa-gear"></i></a>
       </div>
 
@@ -65,37 +65,37 @@
 
     <!-- attributes -->
     <div class="attributes flex-col-top">
-      <h2 class="flex0">{{ localize 'OpenQuest.Labels.Attributes' }}</h2>
+      <h2 class="flex0">{{ localize 'OQ.Labels.Attributes' }}</h2>
 
       <div>
 
-        <label title="{{ localize 'OpenQuest.Labels.Modifiers.HitPoints.Label'}}">{{ localize
-          'OpenQuest.Labels.Modifiers.HitPoints.Abbr'}}</label>
+        <label title="{{ localize 'OQ.Labels.Modifiers.HitPoints.Label'}}">{{ localize
+          'OQ.Labels.Modifiers.HitPoints.Abbr'}}</label>
         <div class="value">
           <input size="2" type="number" data-dtype="Number" name="system.attributes.hp.value" value="{{system.attributes.hp.value}}" />
           <div>&nbsp;/&nbsp{{system.attributes.hp.max}}</div>
         </div>
 
-        <label title="{{ localize 'OpenQuest.Labels.Modifiers.MagicPoints.Label'}}">{{ localize
-          'OpenQuest.Labels.Modifiers.MagicPoints.Abbr'}}</label>
+        <label title="{{ localize 'OQ.Labels.Modifiers.MagicPoints.Label'}}">{{ localize
+          'OQ.Labels.Modifiers.MagicPoints.Abbr'}}</label>
         <div class="value">
           <input size="2" type="number" data-dtype="Number" name="system.attributes.mp.value" value="{{system.attributes.mp.value}}" />
           <div>&nbsp;/&nbsp{{system.attributes.mp.max}}</div>
         </div>
 
-        <a class="modify-attributes" title="{{ localize 'OpenQuest.Labels.EditAttributes' }}"><i
+        <a class="modify-attributes" title="{{ localize 'OQ.Labels.EditAttributes' }}"><i
           class="fas fa-gear"></i></a>
 
-        <label title="{{ localize 'OpenQuest.Labels.Modifiers.DamageModifier.Label'}}">{{ localize
-          'OpenQuest.Labels.Modifiers.DamageModifier.Abbr'}}</label>
+        <label title="{{ localize 'OQ.Labels.Modifiers.DamageModifier.Label'}}">{{ localize
+          'OQ.Labels.Modifiers.DamageModifier.Abbr'}}</label>
         <div class="value">{{system.attributes.dm.value}}</div>
 
-        <label title="{{ localize 'OpenQuest.Labels.Modifiers.MovementRate.Label'}}">{{ localize
-          'OpenQuest.Labels.Modifiers.MovementRate.Abbr'}}</label>
+        <label title="{{ localize 'OQ.Labels.Modifiers.MovementRate.Label'}}">{{ localize
+          'OQ.Labels.Modifiers.MovementRate.Abbr'}}</label>
         <div class="value">{{system.attributes.mr.value}}</div>
 
-        <label title="{{ localize 'OpenQuest.Labels.Modifiers.ArmourWorn.Label'}}">{{ localize
-          'OpenQuest.Labels.Modifiers.ArmourWorn.Abbr'}}</label>
+        <label title="{{ localize 'OQ.Labels.Modifiers.ArmourWorn.Label'}}">{{ localize
+          'OQ.Labels.Modifiers.ArmourWorn.Abbr'}}</label>
         <div class="value">{{system.attributes.ap.value}}</div>
 
 
@@ -105,17 +105,17 @@
   </section>
 
   <nav class="sheet-tabs tabs" data-group="primary">
-    <a class="item" data-tab="skills">{{ localize 'OpenQuest.Nav.Skills' }}</a>
-    <a class="item" data-tab="combat">{{ localize 'OpenQuest.Nav.Combat' }}</a>
-    <a class="item" data-tab="equipment">{{ localize 'OpenQuest.Nav.Equipment' }}</a>
-    <a class="item" data-tab="magic">{{ localize 'OpenQuest.Nav.Magic' }}</a>
-    <a class="item" data-tab="effects">{{ localize 'OpenQuest.Nav.Effects' }}</a>
-    <a class="item" data-tab="notes">{{ localize 'OpenQuest.Nav.Notes' }}</a>
+    <a class="item" data-tab="skills">{{ localize 'OQ.Nav.Skills' }}</a>
+    <a class="item" data-tab="combat">{{ localize 'OQ.Nav.Combat' }}</a>
+    <a class="item" data-tab="equipment">{{ localize 'OQ.Nav.Equipment' }}</a>
+    <a class="item" data-tab="magic">{{ localize 'OQ.Nav.Magic' }}</a>
+    <a class="item" data-tab="effects">{{ localize 'OQ.Nav.Effects' }}</a>
+    <a class="item" data-tab="notes">{{ localize 'OQ.Nav.Notes' }}</a>
   </nav>
 
   <section class="sheet-content">
     <div class="tab" data-group="primary" data-tab="skills">
-      {{> systems/openquest/templates/actor/parts/skills-part.hbs this}}
+      {{> systems/oq/templates/actor/parts/skills.hbs this}}
     </div>
 
     <div class="tab" data-group="primary" data-tab="combat">
@@ -135,7 +135,7 @@
     </div>
 
     <div class="tab" data-group="primary" data-tab="notes">
-      {{> systems/openquest/templates/actor/parts/notes-part.hbs this}}
+      {{> systems/oq/templates/actor/parts/notes.hbs this}}
     </div>
   </section>
 </form>

@@ -5,6 +5,8 @@ import { OQWeapon } from './document/item/weapon.js';
 import { OQArmor } from './document/item/armor.js';
 import { OQEquipment } from './document/item/equipment.js';
 import { OQSpell } from './document/item/spell.js';
+import { OQCharacterSheet } from './sheet/actor/characterSheet.js';
+import { OQNpcSheet } from './sheet/actor/npcSheet.js';
 
 export const SYSTEM_ID = 'OQ';
 export const SYSTEM_NAME = 'OQ System';
@@ -45,6 +47,10 @@ const Actor = {
     character: OQCharacterActor,
     npc: OQNpcActor,
   },
+  sheetClasses: {
+    character: OQCharacterSheet,
+    npc: OQNpcSheet,
+  },
 };
 
 const Item = {
@@ -55,6 +61,7 @@ const Item = {
     equipment: OQEquipment,
     spell: OQSpell,
   },
+  sheetClasses: {},
 };
 
 export const OQ = {
