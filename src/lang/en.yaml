@@ -90,9 +90,9 @@ OQ:
       label: Charisma
       abbr: Cha
   SkillGroups:
-    Resistance: Resistances
-    Combat: Combat Skills
-    Knowledge: Knowledge Skills
-    Practical: Practical Skills
-    Magic: Magic Skills
-    Custom: Custom Group
+    resistance: Resistances
+    combat: Combat Skills
+    knowledge: Knowledge Skills
+    practical: Practical Skills
+    magic: Magic Skills
+    custom: Custom Group

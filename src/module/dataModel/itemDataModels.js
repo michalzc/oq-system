@@ -12,7 +12,7 @@ function htmlFieldModel() {
   return new fields.HTMLField({ trim: true, initial: '' });
 }
 
-export class SkillDataModel extends fields.ObjectField {
+export class SkillDataModel extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       description: htmlFieldModel(),
@@ -25,7 +25,7 @@ export class SkillDataModel extends fields.ObjectField {
   }
 }
 
-export class WeaponDataModel extends fields.ObjectField {
+export class WeaponDataModel extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       description: htmlFieldModel(),
@@ -33,7 +33,7 @@ export class WeaponDataModel extends fields.ObjectField {
   }
 }
 
-export class ArmorDataModel extends fields.ObjectField {
+export class ArmorDataModel extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       description: htmlFieldModel(),
@@ -41,7 +41,7 @@ export class ArmorDataModel extends fields.ObjectField {
   }
 }
 
-export class EquipmentDataModel extends fields.ObjectField {
+export class EquipmentDataModel extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       description: htmlFieldModel(),
@@ -49,7 +49,7 @@ export class EquipmentDataModel extends fields.ObjectField {
   }
 }
 
-export class SpellDataModel extends fields.ObjectField {
+export class SpellDataModel extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       description: htmlFieldModel(),

@@ -7,13 +7,14 @@ import { OQEquipment } from './document/item/equipment.js';
 import { OQSpell } from './document/item/spell.js';
 import { OQCharacterSheet } from './sheet/actor/characterSheet.js';
 import { OQNpcSheet } from './sheet/actor/npcSheet.js';
+import { OQSkillSheet } from './sheet/item/skillSheet.js';
 
 export const SYSTEM_ID = 'OQ';
 export const SYSTEM_NAME = 'OQ System';
 
 const SkillGroups = ['resistance', 'combat', 'knowledge', 'practical', 'magic', 'custom'];
 
-export const DefaultCharacteristics = {
+const DefaultCharacteristics = {
   characteristicsRolls: {
     str: '3d6',
     dex: '3d6',
@@ -42,7 +43,7 @@ export const DefaultCharacteristics = {
   },
 };
 
-const Actor = {
+export const Actor = {
   documentClasses: {
     character: OQCharacterActor,
     npc: OQNpcActor,
@@ -53,7 +54,7 @@ const Actor = {
   },
 };
 
-const Item = {
+export const Item = {
   documentClasses: {
     skill: OQSkill,
     weapon: OQWeapon,
@@ -61,7 +62,9 @@ const Item = {
     equipment: OQEquipment,
     spell: OQSpell,
   },
-  sheetClasses: {},
+  sheetClasses: {
+    skill: OQSkillSheet,
+  },
 };
 
 export const OQ = {
