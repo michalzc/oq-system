@@ -10,6 +10,7 @@ export class OQSkillSheet extends OQBaseItemSheet {
     return mergeObject(baseData, {
       skillGroups: this.getSkillGroups(),
       customGroup: this.item.system.group === 'custom',
+      assigned: Boolean(this.item.parent),
     });
   }
 

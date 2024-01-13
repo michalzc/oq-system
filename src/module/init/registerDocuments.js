@@ -1,5 +1,4 @@
 import { OQActorDocumentProxy, OQItemDocumentProxy } from '../document/documentProxy.js';
-import * as CONFIG from '../consts.js';
 
 export function registerDocuments() {
   CONFIG.Actor.documentClass = OQActorDocumentProxy;

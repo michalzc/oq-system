@@ -46,6 +46,7 @@ OQ:
     Description: Description
     CustomGroup: Custom Group
     Notes: Notes
+    Mod: Mod
   Nav:
     Skills: Skills
     Combat: Combat

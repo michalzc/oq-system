@@ -14,7 +14,7 @@ export class OQSkill extends OQBaseItem {
   }
 
   getShortName() {
-    return this.name.replace(/\s/g, '').replace('(', '[').replace(')', ']');
+    return this.name.replace(/\s/g, '').replace('(', '_').replace(')', '');
   }
 
   getGroupLabel() {
@@ -22,7 +22,7 @@ export class OQSkill extends OQBaseItem {
     if (group === 'custom') {
       return this.system.customGroupName;
     } else {
-      return group;
+      return `OQ.SkillGroups.${group}`;
     }
   }
 

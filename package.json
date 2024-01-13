@@ -22,7 +22,6 @@
   "scripts": {
     "build": "gulp build",
     "build:watch": "gulp watch",
-    "link-project": "gulp link",
     "clean": "gulp clean",
     "clean:link": "gulp link --clean",
     "lint": "eslint --ext .js,.cjs,.mjs .",
@@ -54,5 +53,8 @@
   "lint-staged": {
     "*.(js|cjs|mjs)": "eslint --fix",
     "*.(json|yml|less)": "prettier --write"
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.21"
   }
 }

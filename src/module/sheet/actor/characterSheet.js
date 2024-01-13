@@ -12,6 +12,33 @@ export class OQCharacterSheet extends OQActorBaseSheet {
 
     html.find('a.modify-characteristics').on('click', this.modifyCharacteristics.bind(this));
     html.find('a.modify-attributes').on('click', this.modifyAttributes.bind(this));
+
+    html.find('.item-edit').on('click', this.modifyItem.bind(this));
+    html.find('.item-delete').on('click', this.deleteItem.bind(this));
+
+    html.find('.skill-mod').on('change', this.updateSkillValue.bind(this));
+  }
+
+  async updateSkillValue(event) {
+    event.preventDefault();
+    const dataset = event.currentTarget.dataset;
+    const item = this.actor.items.get(dataset.itemId);
+    const value = event.currentTarget.value;
+    await item.update({ 'system.mod': value });
+  }
+
+  modifyItem(event) {
+    event.preventDefault();
+    const dataset = event.currentTarget.dataset;
+    const item = this.actor.items.get(dataset.itemId);
+    item.sheet.render(true);
+  }
+
+  deleteItem(event) {
+    event.preventDefault();
+    const dataset = event.currentTarget.dataset;
+    const item = this.actor.items.get(dataset.itemId);
+    item.delete();
   }
 
   modifyCharacteristics() {

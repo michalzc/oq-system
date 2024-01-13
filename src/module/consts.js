@@ -43,7 +43,7 @@ const DefaultCharacteristics = {
   },
 };
 
-export const Actor = {
+const Actor = {
   documentClasses: {
     character: OQCharacterActor,
     npc: OQNpcActor,
@@ -54,7 +54,7 @@ export const Actor = {
   },
 };
 
-export const Item = {
+const Item = {
   documentClasses: {
     skill: OQSkill,
     weapon: OQWeapon,

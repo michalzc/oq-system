@@ -1,6 +1,7 @@
 <form class="item-sheet skill-sheet {{cssClass}} flexcol" autocomplete="off">
   <header class="sheet-header flex0">
-    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" width="64" height="64" alt="{{item.name}}">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" width="64" height="64"
+         alt="{{item.name}}">
     <div class="flexcol">
       <input class="name" type="text" data-dtype="String" name="name" value="{{item.name}}"
              placeholder="{{localize 'OQ.Labels.Name'}}">
@@ -21,10 +22,15 @@
       {{/if}}
       <label for="formula">{{localize 'OQ.Labels.Formula'}}</label>
       <input type="text" name="system.formula" id="formula" value="{{system.formula}}">
+      {{#if assigned}}
+        <label for="mod">{{localize 'OQ.Labels.Mod'}}</label>
+      <input type="number" name="system.mod" id="mod" value="{{system.mod}}">
+      {{/if}}
     </div>
     <fieldset class="flexrow flex1">
       <legend>{{localize 'OQ.Labels.Description'}}</legend>
-      {{editor enrichedDescription target="system.description" id="description" engine="prosemirror" button=true class="flex1"}}
+      {{editor enrichedDescription target="system.description" id="description" engine="prosemirror" button=true
+               class="flex1"}}
     </fieldset>
 
   </section>

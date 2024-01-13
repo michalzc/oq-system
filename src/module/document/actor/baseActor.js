@@ -1,4 +1,4 @@
-import { log } from '../../utils.js';
+import _ from 'lodash-es';
 
 export class OQBaseActor extends Actor {
   prepareBaseData() {
@@ -31,8 +31,26 @@ export class OQBaseActor extends Actor {
 
     this.system = mergeObject(this.system, {
       attributes: this.calculateAttributes(),
-      groupedSkills: this.getSkills(),
+      skills: this.getSkills(),
     });
+    this.system.groupedSkills = this.getGroupedSkills();
+  }
+
+  getRollData() {
+    const rollData = super.getRollData();
+    const charRollData = Object.fromEntries(
+      Object.entries(this.system.characteristics).map(([key, elem]) => [key, elem.value]),
+    );
+    const skillData = Object.fromEntries(
+      this.items.filter((i) => i.type === 'skill').map((skill) => [skill.system.shortName, skill.system.value]),
+    );
+
+    const newRollData = {
+      ...charRollData,
+      ...skillData,
+    };
+
+    return mergeObject(rollData, newRollData);
   }
 
   calculateAttributes() {
@@ -78,15 +96,12 @@ export class OQBaseActor extends Actor {
     };
   }
 
+  getGroupedSkills() {
+    const skills = this.getSkills();
+    return _.groupBy(skills, (skill) => skill.system.groupName);
+  }
+
   getSkills() {
-    const skills = this.items.filter((item) => item.type === 'skill');
-    const groupedSkills = Object.fromEntries(
-      skills.map((skill) => {
-        const skillData = skill.system;
-        return [skillData.groupName, skill];
-      }),
-    );
-    log('Skills', groupedSkills);
-    return groupedSkills;
+    return this.items.filter((item) => item.type === 'skill');
   }
 }

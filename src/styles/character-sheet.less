@@ -72,6 +72,55 @@
           grid-row-end: span 3;
         }
       }
+
+      .sheet-content {
+        align-content: flex-start;
+
+        .skills {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 1em;
+
+          .skill-group {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            flex-grow: 0;
+            flex-shrink: 1;
+            min-width: 30em;
+            max-width: 30em;
+            border: 0;
+            gap: 0.2em;
+
+            .skill {
+              display: flex;
+              flex-direction: row;
+              flex-wrap: nowrap;
+              flex-grow: 0;
+              flex-shrink: 1;
+              align-items: center;
+              justify-items: flex-start;
+              gap: 0.5em;
+
+              .item-roll {
+                flex-grow: 1;
+              }
+
+              .mod-value {
+                width: 2em;
+                border: 0;
+                text-align: center;
+                font-size: var(--font-size-14);
+              }
+
+              .total-value {
+                width: 2em;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
