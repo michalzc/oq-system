@@ -1,3 +1,5 @@
+import { log } from '../utils.js';
+
 export class AttributesDialog extends FormApplication {
   static get defaultOptions() {
     const options = super.defaultOptions;
@@ -31,7 +33,7 @@ export class AttributesDialog extends FormApplication {
   }
 
   async _updateObject(event, formData) {
-    logger('Got data', formData);
+    log('Got data', formData);
     await this.object.update({ data: formData });
     this.object.sheet?.render(true);
   }

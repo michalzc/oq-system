@@ -27,8 +27,8 @@
       <label>{{localize 'OQ.Dialog.Roll'}}</label>
       <label>{{localize 'OQ.Dialog.Mod'}}</label>
       {{#each system.characteristics as |char key|}}
-
-        <label for="char-{{key}}-base" title="{{char.label}}">{{ char.abbr }}</label>
+        {{ log char }}
+        <label for="char-{{key}}-base" title="{{char.label}}">{{ localize char.abbr }}</label>
         <input type="number" class="characteristic-base-input" data-type="Number" id="char-{{key}}-base" name="characteristics.{{key}}.base"
                value="{{char.base}}" />
 

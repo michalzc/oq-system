@@ -1,9 +1,6 @@
-import { log } from '../../utils.js';
-
 export class OQActorBaseSheet extends ActorSheet {
   static get defaultOptions() {
     const baseOptions = super.defaultOptions;
-    log('Base options', baseOptions);
 
     return mergeObject(baseOptions, {
       classes: ['sheet', 'oq', 'actor'],

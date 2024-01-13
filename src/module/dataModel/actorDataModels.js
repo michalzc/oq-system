@@ -35,16 +35,16 @@ function baseModAttributeModel(base = 0) {
   });
 }
 
-function modAttributeModel() {
+function stringModAttributeModel() {
   return new fields.SchemaField({
-    mod: new fields.NumberField({ min: 0, integer: true, required: true, initial: 0 }),
+    mod: new fields.StringField({ trim: true, initial: '' }),
   });
 }
 
 function attributesModel() {
   return new fields.SchemaField({
     hp: modMaxValueAttributeModel(),
-    dm: modAttributeModel(),
+    dm: stringModAttributeModel(),
     mp: modMaxValueAttributeModel(),
     mr: baseModAttributeModel(15),
     ap: baseModAttributeModel(),

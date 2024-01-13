@@ -33,11 +33,10 @@ export class CharacteristicsDialog extends FormApplication {
 
   getData(options) {
     const data = super.getData(options);
-    const actorData = this.object.toObject(false);
     const points = this.points;
+    let system = this.object.system;
     return mergeObject(data, {
-      actorData: actorData,
-      system: actorData.system,
+      system,
       points,
     });
   }
@@ -62,7 +61,7 @@ export class CharacteristicsDialog extends FormApplication {
   updatePoints(event) {
     const target = event.currentTarget;
     if (target) {
-      let dialog = $(target).closest('.oq.dialog.characteristics');
+      const dialog = $(target).closest('.oq.dialog.characteristics');
       if (dialog) {
         const sum = dialog
           .find('.characteristic-base-input')
