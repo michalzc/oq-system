@@ -4,7 +4,7 @@
     <legend>{{ localize groupKey}}</legend>
     {{#each skills as |skill|}}
       <div class="skill">
-        <a class="item-to-chat"><img class="item-icon" src="{{skill.img}}" title="{{skill.name}}" alt="{{skill.name}}"></a>
+        <a class="item-to-chat"><img class="item-icon" src="{{skill.img}}" title="{{localize 'OQ.Tooltips.SendToChat'}}" alt="{{skill.name}}"></a>
         <a class="item-roll">{{skill.name}}</a>
         <input name="skill.mod" class="skill-mod mod-value" data-item-id="{{skill.id}}" type="number" data-dtype="Number"
                value="{{skill.system.mod}}">

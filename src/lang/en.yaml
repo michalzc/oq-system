@@ -10,7 +10,7 @@ TYPES:
     armour: Armour
     equipment: Equipment
     spell: Spell
-    ability: Ability
+    specialAbility: Special Ability
 OQ:
   Errors:
     InvalidRoll: Invalid roll definition
@@ -98,3 +98,5 @@ OQ:
     practical: Practical Skills
     magic: Magic Skills
     custom: Custom Group
+  Tooltips:
+    SendToChat: Send to chat

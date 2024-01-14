@@ -8,7 +8,7 @@ import { OQSpell } from './document/item/spell.js';
 import { OQCharacterSheet } from './sheet/actor/characterSheet.js';
 import { OQNpcSheet } from './sheet/actor/npcSheet.js';
 import { OQSkillSheet } from './sheet/item/skillSheet.js';
-import { OQAbility } from './document/item/ability.js';
+import { OQSpecialAbility } from './document/item/specialAbility.js';
 
 export const SYSTEM_ID = 'OQ';
 export const SYSTEM_NAME = 'OQ System';
@@ -62,7 +62,7 @@ const Item = {
     armor: OQArmor,
     equipment: OQEquipment,
     spell: OQSpell,
-    ability: OQAbility,
+    specialAbility: OQSpecialAbility,
   },
   sheetClasses: {
     skill: OQSkillSheet,

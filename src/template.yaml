@@ -16,7 +16,7 @@ Item:
     - armour
     - equipment
     - spell
-    - ability
+    - specialAbility
   htmlFields:
     - description
 
@@ -25,4 +25,4 @@ Item:
   armour: { }
   equipment: { }
   spell: { }
-  ability: { }
+  specialAbility: { }

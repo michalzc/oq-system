@@ -57,7 +57,7 @@ export class SpellDataModel extends foundry.abstract.DataModel {
   }
 }
 
-export class AbilityDataModel extends foundry.abstract.DataModel {
+export class SpecialAbilityDataModel extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       description: htmlFieldModel(),
