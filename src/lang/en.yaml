@@ -10,6 +10,7 @@ TYPES:
     armour: Armour
     equipment: Equipment
     spell: Spell
+    ability: Ability
 OQ:
   Errors:
     InvalidRoll: Invalid roll definition

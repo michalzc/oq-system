@@ -76,6 +76,21 @@
       .sheet-content {
         align-content: flex-start;
 
+        .tab.active {
+          display: flex;
+          flex-grow: 1;
+          align-items: flex-start;
+        }
+
+        .notes {
+          flex-grow: 1;
+          align-self: normal;
+
+          .editor {
+            flex-grow: 1;
+          }
+        }
+
         .skills {
           display: flex;
           flex-direction: row;
@@ -88,8 +103,7 @@
             flex-wrap: wrap;
             flex-grow: 0;
             flex-shrink: 1;
-            min-width: 30em;
-            max-width: 30em;
+            min-width: 23em;
             border: 0;
             gap: 0.2em;
 
@@ -116,6 +130,7 @@
 
               .total-value {
                 width: 2em;
+                flex-grow: 0;
               }
             }
           }

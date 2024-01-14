@@ -2,6 +2,15 @@
 
 .oq {
   &.sheet {
+    font-size: 1rem;
+
+    .item-icon {
+      flex-grow: 0;
+      width: 1em;
+      height: 1em;
+      border: 0;
+    }
+
     .sheet-header {
       color: @base-color;
       padding: 8px;
@@ -37,16 +46,6 @@
     .sheet-content {
       padding: 8px;
       display: flex;
-
-      .tab.active {
-        display: flex;
-        flex-grow: 1;
-        align-items: flex-start;
-      }
-
-      .notes {
-        flex-grow: 1;
-      }
 
       label,
       legend {

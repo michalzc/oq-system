@@ -3,7 +3,7 @@ import { preloadTemplates } from './init/preloadTemplates.js';
 import { log } from './utils.js';
 import { OQ } from './consts.js';
 import { registerDocuments } from './init/registerDocuments.js';
-import { registerDataModels } from './dataModel/registerDataModels.js';
+import { registerDataModels } from './init/registerDataModels.js';
 
 async function init() {
   log('Initializing OQ');
