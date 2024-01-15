@@ -41,13 +41,27 @@ function stringModAttributeModel() {
   });
 }
 
-function attributesModel() {
+const characterAdditionalAttributes = {
+  fn: new fields.NumberField({ min: 0, integer: true, required: true, initial: 0 }),
+  gr: new fields.NumberField({ min: 0, integer: true, required: true, initial: 0 }),
+};
+
+const baseAttributesModel = {
+  hp: modMaxValueAttributeModel(),
+  dm: stringModAttributeModel(),
+  mp: modMaxValueAttributeModel(),
+  mr: baseModAttributeModel(15),
+  ap: baseModAttributeModel(),
+};
+
+function npcAttributesModel() {
+  return new fields.SchemaField(baseAttributesModel);
+}
+
+function characterAttributesModel() {
   return new fields.SchemaField({
-    hp: modMaxValueAttributeModel(),
-    dm: stringModAttributeModel(),
-    mp: modMaxValueAttributeModel(),
-    mr: baseModAttributeModel(15),
-    ap: baseModAttributeModel(),
+    ...baseAttributesModel,
+    ...characterAdditionalAttributes,
   });
 }
 
@@ -73,7 +87,7 @@ export class CharacterDataModel extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       characteristics: characteristicsModel(),
-      attributes: attributesModel(),
+      attributes: characterAttributesModel(),
       personal: characterPersonalModel(),
     };
   }
@@ -83,7 +97,7 @@ export class NpcDataModel extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       characteristics: characteristicsModel(),
-      attributes: attributesModel(),
+      attributes: npcAttributesModel(),
       personal: npcPersonalModel(),
     };
   }

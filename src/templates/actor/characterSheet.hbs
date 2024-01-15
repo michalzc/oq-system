@@ -1,6 +1,7 @@
 <form class="actor-sheet character-sheet {{cssClass}} flexcol" autocomplete="off">
   <header class="sheet-header flex0">
-    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="64" height="64" alt="{{actor.name}}" />
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="64" height="64"
+         alt="{{actor.name}}" />
     <div class="flexcol header-fields">
       <input class="name" type="text" data-dtype="String" name="name" value="{{actor.name}}"
              placeholder="{{ localize 'OQ.Labels.Name' }}" />
@@ -67,36 +68,49 @@
     <div class="attributes flex-col-top">
       <h2 class="flex0">{{ localize 'OQ.Labels.Attributes' }}</h2>
 
-      <div>
+      <div class="attributes-grid">
 
-        <label title="{{ localize 'OQ.Labels.Modifiers.HitPoints.Label'}}">{{ localize
-          'OQ.Labels.Modifiers.HitPoints.Abbr'}}</label>
+        <label for="hp" title="{{ localize 'OQ.Labels.AttributesNames.HitPoints.Label'}}">{{ localize
+          'OQ.Labels.AttributesNames.HitPoints.Abbr'}}</label>
         <div class="value">
-          <input size="2" type="number" data-dtype="Number" name="system.attributes.hp.value" value="{{system.attributes.hp.value}}" />
+          <input id="hp" type="number" data-dtype="Number" name="system.attributes.hp.value"
+                 value="{{system.attributes.hp.value}}" />
           <div>&nbsp;/&nbsp{{system.attributes.hp.max}}</div>
         </div>
 
-        <label title="{{ localize 'OQ.Labels.Modifiers.MagicPoints.Label'}}">{{ localize
-          'OQ.Labels.Modifiers.MagicPoints.Abbr'}}</label>
+        <label for="mp" title="{{ localize 'OQ.Labels.AttributesNames.MagicPoints.Label'}}">{{ localize
+          'OQ.Labels.AttributesNames.MagicPoints.Abbr'}}</label>
         <div class="value">
-          <input size="2" type="number" data-dtype="Number" name="system.attributes.mp.value" value="{{system.attributes.mp.value}}" />
+          <input id="mp" type="number" data-dtype="Number" name="system.attributes.mp.value"
+                 value="{{system.attributes.mp.value}}" />
           <div>&nbsp;/&nbsp{{system.attributes.mp.max}}</div>
         </div>
 
         <a class="modify-attributes" title="{{ localize 'OQ.Labels.EditAttributes' }}"><i
           class="fas fa-gear"></i></a>
 
-        <label title="{{ localize 'OQ.Labels.Modifiers.DamageModifier.Label'}}">{{ localize
-          'OQ.Labels.Modifiers.DamageModifier.Abbr'}}</label>
-        <div class="value">{{system.attributes.dm.value}}</div>
+        <label for="fp" title="{{ localize 'OQ.Labels.AttributesNames.Fortune.Label' }}">{{ localize
+          'OQ.Labels.AttributesNames.Fortune.Abbr' }}</label>
+        <div class="value"><input id="fp" type="number" name="system.attributes.fn" value="{{system.attributes.fn}}">
+        </div>
+        <label for="gp" title="{{ localize 'OQ.Labels.AttributesNames.Growth.Label' }}">{{ localize
+          'OQ.Labels.AttributesNames.Growth.Abbr' }}</label>
+        <div class="value"><input id="gp" type="number" name="system.attributes.gr" value="{{system.attributes.gr}}">
+        </div>
 
-        <label title="{{ localize 'OQ.Labels.Modifiers.MovementRate.Label'}}">{{ localize
-          'OQ.Labels.Modifiers.MovementRate.Abbr'}}</label>
-        <div class="value">{{system.attributes.mr.value}}</div>
+        <div class="wide">
+          <label title="{{ localize 'OQ.Labels.AttributesNames.DamageModifier.Label'}}">{{ localize
+            'OQ.Labels.AttributesNames.DamageModifier.Abbr'}}</label>
+          <div class="value">{{system.attributes.dm.value}}</div>
 
-        <label title="{{ localize 'OQ.Labels.Modifiers.ArmourWorn.Label'}}">{{ localize
-          'OQ.Labels.Modifiers.ArmourWorn.Abbr'}}</label>
-        <div class="value">{{system.attributes.ap.value}}</div>
+          <label title="{{ localize 'OQ.Labels.AttributesNames.MovementRate.Label'}}">{{ localize
+            'OQ.Labels.AttributesNames.MovementRate.Abbr'}}</label>
+          <div class="value">{{system.attributes.mr.value}}</div>
+
+          <label title="{{ localize 'OQ.Labels.AttributesNames.ArmourWorn.Label'}}">{{ localize
+            'OQ.Labels.AttributesNames.ArmourWorn.Abbr'}}</label>
+          <div class="value">{{system.attributes.ap.value}}</div>
+        </div>
 
 
       </div>

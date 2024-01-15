@@ -24,7 +24,7 @@ OQ:
     Organisation: Organisation
     Characteristics: Characteristics
     Attributes: Attributes
-    Modifiers:
+    AttributesNames:
       DamageModifier:
         Abbr: DM
         Label: Damage Modifier
@@ -40,6 +40,12 @@ OQ:
       ArmourWorn:
         Abbr: AP
         Label: Armour Worn
+      Fortune:
+        Abbr: FP
+        Label: Fortune Points
+      Growth:
+        Abbr: GP
+        Label: Growth Points
     EditCharacteristics: Edit Characteristics
     EditAttributes: Edit Attributes
     Group: Group

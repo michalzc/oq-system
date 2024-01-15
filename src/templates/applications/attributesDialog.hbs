@@ -8,25 +8,18 @@
       <label></label>
       <label>{{ localize 'OQ.Dialog.Mod' }}</label>
 
-      <label title="{{ localize 'OQ.Labels.Modifiers.HitPoints.Label'}}">{{ localize
-        'OQ.Labels.Modifiers.HitPoints.Abbr'}}</label>
-      <input type="number" data-dtype="Number" name="attributes.hp.mod" value="{{system.attributes.hp.mod}}">
+      <label for="hpMod">{{ localize 'OQ.Labels.AttributesNames.HitPoints.Label'}}</label>
+      <input id="hpMod" type="number" data-dtype="Number" name="attributes.hp.mod" value="{{system.attributes.hp.mod}}">
 
-      <label title="{{ localize 'OQ.Labels.Modifiers.MagicPoints.Label'}}">{{ localize
-        'OQ.Labels.Modifiers.MagicPoints.Abbr'}}</label>
-      <input type="number" data-dtype="Number" name="attributes.mp.mod" value="{{system.attributes.mp.mod}}">
+      <label for="mpMod">{{ localize 'OQ.Labels.AttributesNames.MagicPoints.Label'}}</label>
+      <input id="mpMod" type="number" data-dtype="Number" name="attributes.mp.mod" value="{{system.attributes.mp.mod}}">
 
-      <label title="{{ localize 'OQ.Labels.Modifiers.DamageModifier.Label'}}">{{ localize
-        'OQ.Labels.Modifiers.DamageModifier.Abbr'}}</label>
-      <input type="text" data-dtype="String" name="attributes.dm.mod" value="{{system.attributes.dm.mod}}">
+      <label for="dmMod">{{ localize 'OQ.Labels.AttributesNames.DamageModifier.Label'}}</label>
+      <input id="dmMod" type="text" data-dtype="String" name="attributes.dm.mod" value="{{system.attributes.dm.mod}}">
 
-      <label title="{{ localize 'OQ.Labels.Modifiers.MovementRate.Label'}}">{{ localize
-        'OQ.Labels.Modifiers.MovementRate.Abbr'}}</label>
-      <input type="number" data-dtype="Number" name="attributes.mr.mod" value="{{system.attributes.mr.mod}}">
+      <label for="mrMod">{{ localize 'OQ.Labels.AttributesNames.MovementRate.Label'}}</label>
+      <input id="mrMod" type="number" data-dtype="Number" name="attributes.mr.mod" value="{{system.attributes.mr.mod}}">
 
-      <label title="{{ localize 'OQ.Labels.Modifiers.ArmourWorn.Label'}}">{{ localize
-        'OQ.Labels.Modifiers.ArmourWorn.Abbr'}}</label>
-      <input type="number" data-dtype="Number" name="attributes.ap.mod" value="{{system.attributes.ap.mod}}">
     </div>
   </section>
   <section class="dialog-body">
