@@ -18,6 +18,7 @@ import { log } from './utils.js';
  */
 
 /**
+ *
  * Perform roll
  * @param {RollData} rollData
  * @returns {Promise<void>}
@@ -56,11 +57,30 @@ export async function roll(rollData) {
   await ChatMessage.create(messageData);
 }
 
+/**
+ * Determines the result of a roll based on various input parameters.
+ *
+ * @param {object} resultFeatures - The features of the result.
+ * @param {boolean} resultFeatures.double - Indicates if the result can be a double.
+ * @param {boolean} resultFeatures.possibleFumble - Indicates if the result can be a fumble.
+ * @param {number} rollValue - The value against which the roll is compared.
+ * @param {object} rollData - The data of the roll.
+ * @param {boolean} rollData.mastered - Indicates if the roll is mastered.
+ * @param {boolean} rollData.masterNeverThrows - Indicates if master never throws.
+ * @param {number} rollData.totalValue - The total value of the roll.
+ *
+ * @returns {string} - The result of the roll. Possible values are:
+ *   - "criticalSuccess" if the roll is a critical success.
+ *   - "success" if the roll is a success.
+ *   - "fumble" if the roll is a fumble.
+ *   - "failure" if the roll is a failure.
+ */
 export function getResult(resultFeatures, rollValue, rollData) {
   const rollResults = CONFIG.OQ.RollResults;
   if (rollData.mastered && rollData.masterNeverThrows)
     return resultFeatures.double ? rollResults.criticalSuccess : rollResults.success;
-  else if (rollValue === 100 && !rollData.mastered && !rollData.masterNeverThrows) return rollResults.fumble;
+  else if (resultFeatures.possibleFumble && !rollData.mastered && !rollData.masterNeverThrows)
+    return rollResults.fumble;
   else if (rollData.totalValue < rollValue) {
     return resultFeatures.double ? rollResults.fumble : rollResults.failure;
   } else {
@@ -69,10 +89,17 @@ export function getResult(resultFeatures, rollValue, rollData) {
   }
 }
 
+/**
+ * Determines the possible features of a given roll result.
+ *
+ * @param {object} roll - The roll object representing the result.
+ * @returns {object} - An object containing the possible features of the roll result.
+ * @property {boolean} possibleFumble - Indicates whether the roll result is a possible fumble (total equals 100).
+ * @property {boolean} double - Indicates whether the roll result is a double (left digit equals right digit).
+ */
 export function getResultFeatures(roll) {
-  const total = roll.total;
   const [left, right] = roll.total.toString();
-  const possibleFumble = total === 100;
+  const possibleFumble = roll.total === 100;
   const double = possibleFumble || left === right;
   return {
     possibleFumble,
