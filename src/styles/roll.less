@@ -2,22 +2,37 @@
   & > div {
     margin: 0.2em 0 0.2em;
     padding: 0.2em 0 0.2em;
-    text-align: center;
-    border-radius: 3px;
-    box-shadow: 0 0 2px #fff inset;
-    background-color: rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--color-border-light-2);
+    //text-align: center;
+    //border-radius: 3px;
+    //box-shadow: 0 0 2px #fff inset;
+    //background-color: rgba(0, 0, 0, 0.1);
+    //border: 1px solid var(--color-border-light-2);
   }
 
-  .roll-formula {
-    text-align: center;
-    font-size: var(--font-size-16);
-    margin: 0.2em 0 0.2em;
+  .roll-title {
+    .header-font();
+    color: @dark-color;
+    font-size: var(--font-size-18);
+  }
+
+  .label {
+    font-weight: bold;
+    text-wrap: none;
+  }
+
+  .roll-params {
+    display: grid;
+    grid-template-columns: 3fr 4fr;
+    gap: 0.5em;
+
+    font-size: var(--font-size-12);
   }
 
   .roll-result {
     font-size: var(--font-size-20);
     font-weight: bold;
+    text-align: center;
+    border-radius: 3px;
 
     &.roll-result-success {
       color: @distinction-color;

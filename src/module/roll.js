@@ -9,8 +9,8 @@ import { log } from './utils.js';
 /**
  * @typedef {Object} RollData
  * @property {boolean} mastered
- * @property {Difficulty} difficulty
- * @property {number} modifier
+ * @property {Difficulty|undefined} difficulty
+ * @property {number|undefined} modifier
  * @property {Object} speaker
  * @property {string} rollType
  * @property {string} entityName

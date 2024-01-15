@@ -49,6 +49,15 @@ OQ:
     Notes: Notes
     Mod: Mod
     SkillMastered: Skill Mastered!
+    Difficulty: Difficulty
+    DifficultyLevels:
+      easy: Easy
+      simple: Simple
+      normal: Normal
+      difficult: Difficult
+      hard: Hard
+    OtherMods: Other Modifiers
+    SkillValue: Skill Value
   Nav:
     Skills: Skills
     Combat: Combat
@@ -59,6 +68,7 @@ OQ:
   Dialog:
     Save: Save Data
     Reset: Reset Data
+    Cancel: Cancel
     Characteristics:
       Title: Update Characteristics
     Mod: Mod
@@ -70,6 +80,8 @@ OQ:
     AllPoints: All
     SpentPoints: Spent
     RemainPoints: Remain
+    SkillRollDialogTitle:
+      Title:  Skill Roll of
   Characteristics:
     str:
       label: Strength

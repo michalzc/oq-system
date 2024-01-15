@@ -1,5 +1,23 @@
 <div class="oq roll skill-roll">
   <div class="roll-title">{{entityName}}{{#if mastery}}<strong> (mastered)</strong>{{/if}}</div>
-  <div class="roll-formula">{{roll.formula}} ({{roll.total}}) ⩽ {{value}}{{#if difficulty}} + {{difficulty.value}}{{/if}}{{#if modifier}} + {{modifier}}{{/if}}</div>
+  <div class="roll-params">
+    <div class="label">{{ localize 'OQ.Labels.SkillValue' }}</div>
+    <div>{{value}}</div>
+    {{#if difficulty}}
+      <div class="label">{{ localize 'OQ.Labels.Difficulty'}}</div>
+      <div>{{ localize (concat 'OQ.Labels.DifficultyLevels.' difficulty.key)}} ({{ difficulty.value }}%)</div>
+    {{/if}}
+    {{#if modifier}}
+      <div class="label">{{ localize 'OQ.Labels.OtherMods'}}</div>
+      <div>{{modifier}}</div>
+    {{/if}}
+  </div>
   <div class="roll-result roll-result-{{rollResult}}">{{ localize (concat 'OQ.RollResults.' rollResult) }}</div>
+</div>
+
+<div class="dice-roll">
+  <div class="dice-result">
+    <div class="dice-formula">{{roll.formula}} ⩽ {{totalValue}}</div>
+    <h3 class="dice-total">{{roll.total}}</h3>
+  </div>
 </div>

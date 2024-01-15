@@ -1,5 +1,6 @@
 import { OQBaseItem } from './baseItem.js';
 import { roll } from '../../roll.js';
+import { skillRollDialog } from '../../application/skillRollDialog.js';
 
 export class OQSkill extends OQBaseItem {
   prepareDerivedData() {
@@ -42,17 +43,18 @@ export class OQSkill extends OQBaseItem {
   }
 
   async makeRoll(skipDialog) {
+    const speaker = ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token });
+    const rollData = {
+      mastered: this.system.mastered,
+      speaker,
+      rollType: 'skill',
+      entityName: this.name,
+      value: this.system.value,
+    };
     if (skipDialog) {
-      const speaker = ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token });
-      await roll({
-        mastered: this.system.mastered,
-        speaker,
-        rollType: 'skill',
-        entityName: this.name,
-        value: this.system.value,
-      });
+      await roll(rollData);
     } else {
-      //TODO: implement
+      await skillRollDialog(speaker, rollData);
     }
   }
 }

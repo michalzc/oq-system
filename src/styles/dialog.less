@@ -17,6 +17,12 @@
       padding: 5px;
       font-size: 18px;
 
+      .roll-params {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5em;
+      }
+
       label {
         color: @dark-color;
       }
@@ -25,6 +31,10 @@
       input[type='number'] {
         border: 0;
         border-bottom: 1px solid @dark-color;
+      }
+
+      input.small-input {
+        width: 2em;
       }
 
       .points {
