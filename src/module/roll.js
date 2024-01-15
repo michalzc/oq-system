@@ -79,8 +79,8 @@ export function getResult(resultFeatures, rollValue, rollData) {
   const rollResults = CONFIG.OQ.RollResults;
   if (rollData.mastered && rollData.masterNeverThrows)
     return resultFeatures.double ? rollResults.criticalSuccess : rollResults.success;
-  else if (resultFeatures.possibleFumble && !rollData.mastered && !rollData.masterNeverThrows)
-    return rollResults.fumble;
+  else if (rollData.totalValue < rollValue && rollData.mastered) return rollResults.failure;
+  else if (!rollData.mastered && resultFeatures.possibleFumble) return rollResults.fumble;
   else if (rollData.totalValue < rollValue) {
     return resultFeatures.double ? rollResults.fumble : rollResults.failure;
   } else {
