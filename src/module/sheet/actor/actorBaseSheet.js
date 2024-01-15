@@ -31,7 +31,7 @@ export class OQActorBaseSheet extends ActorSheet {
 
     const dataSet = event.currentTarget.dataset;
     const item = this.actor.items.get(dataSet?.itemId);
-    item.makeRoll(event.shiftKey);
+    item.makeRoll(!event.shiftKey);
   }
 
   async _onItemToChat(event) {

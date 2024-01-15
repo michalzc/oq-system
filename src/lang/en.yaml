@@ -125,3 +125,5 @@ OQ:
   RollMessage:
     flavour: Test of
     mastered: mastered
+  Hints:
+    ItemRollHint: Hold SHIFT key to show roll dialog.
