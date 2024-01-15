@@ -1,0 +1,40 @@
+.oq.roll {
+  & > div {
+    margin: 0.2em 0 0.2em;
+    padding: 0.2em 0 0.2em;
+    text-align: center;
+    border-radius: 3px;
+    box-shadow: 0 0 2px #fff inset;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--color-border-light-2);
+  }
+
+  .roll-formula {
+    text-align: center;
+    font-size: var(--font-size-16);
+    margin: 0.2em 0 0.2em;
+  }
+
+  .roll-result {
+    font-size: var(--font-size-20);
+    font-weight: bold;
+
+    &.roll-result-success {
+      color: @distinction-color;
+    }
+
+    &.roll-result-fumble {
+      color: @base-color;
+      background-color: @dark-color;
+    }
+
+    &.roll-result-criticalSuccess {
+      background-color: @distinction-color;
+      color: @base-color;
+    }
+
+    &.roll-result-failure {
+      color: @dark-color;
+    }
+  }
+}

@@ -10,10 +10,18 @@ import { OQNpcSheet } from './sheet/actor/npcSheet.js';
 import { OQSkillSheet } from './sheet/item/skillSheet.js';
 import { OQSpecialAbility } from './document/item/specialAbility.js';
 
-export const SYSTEM_ID = 'OQ';
+export const SYSTEM_ID = 'oq';
 export const SYSTEM_NAME = 'OQ System';
 
 const SkillGroups = ['resistance', 'combat', 'knowledge', 'practical', 'magic', 'custom'];
+
+const DifficultyLevels = {
+  easy: 50,
+  simple: 20,
+  normal: 0,
+  difficult: -20,
+  hard: -50,
+};
 
 const DefaultCharacteristics = {
   characteristicsRolls: {
@@ -69,6 +77,26 @@ const Item = {
   },
 };
 
+const SettingKeys = {
+  masterNeverThrows: {
+    key: 'masterNeverThrows',
+    localizationKey: 'MasterNeverThrows',
+    scope: 'world',
+    type: Boolean,
+    default: true,
+    config: true,
+    requiresReload: false,
+  },
+};
+
+const RollResults = {
+  criticalSuccess: 'criticalSuccess',
+  success: 'success',
+  failure: 'failure',
+  fumble: 'fumble',
+};
+
+const BaseRollFormula = 'd100';
 export const OQ = {
   SYSTEM_ID,
   SYSTEM_NAME,
@@ -76,4 +104,8 @@ export const OQ = {
   Item,
   DefaultCharacteristics,
   SkillGroups,
+  DifficultyLevels,
+  BaseRollFormula,
+  SettingKeys,
+  RollResults,
 };
