@@ -1,0 +1,12 @@
+<form class="{{cssClasses}} oq dialog" autocomplete="off">
+  <div class="dialog-body">
+    <div class="roll-params">
+      <label for="difficulty">{{localize 'OQ.Labels.Difficulty'}}</label>
+      <select name="difficulty" id="difficulty">
+        {{selectOptions difficulties selected=defaultDifficulty localize=false }}
+      </select>
+      <label for="otherMods">{{ localize 'OQ.Labels.OtherMods' }}</label>
+      <input type="number" data-dtype="Number" name="otherMods" id="otherMods">
+    </div>
+  </div>
+</form>

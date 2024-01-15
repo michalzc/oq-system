@@ -1,0 +1,51 @@
+.oq.roll {
+  & > div {
+    margin: 0.2em 0 0.2em;
+    padding: 0.2em 0 0.2em;
+  }
+
+  .roll-title {
+    .header-font();
+    color: @dark-color;
+    font-size: var(--font-size-18);
+    font-weight: bold;
+  }
+
+  .label {
+    font-weight: bold;
+    text-wrap: none;
+  }
+
+  .roll-params {
+    display: grid;
+    grid-template-columns: 3fr 4fr;
+    gap: 0.5em;
+
+    font-size: var(--font-size-12);
+  }
+
+  .roll-result {
+    font-size: var(--font-size-20);
+    font-weight: bold;
+    text-align: center;
+    border-radius: 3px;
+
+    &.roll-result-success {
+      color: @distinction-color;
+    }
+
+    &.roll-result-fumble {
+      color: @base-color;
+      background-color: @dark-color;
+    }
+
+    &.roll-result-criticalSuccess {
+      background-color: @distinction-color;
+      color: @base-color;
+    }
+
+    &.roll-result-failure {
+      color: @dark-color;
+    }
+  }
+}

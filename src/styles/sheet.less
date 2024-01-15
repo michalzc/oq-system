@@ -1,90 +1,99 @@
 @import 'colors';
 
-.oq {
-  &.sheet {
-    font-size: 1rem;
+.oq.sheet {
+  font-size: 1rem;
 
-    .item-icon {
-      flex-grow: 0;
-      width: 1em;
-      height: 1em;
-      border: 0;
-    }
+  .item-icon {
+    flex-grow: 0;
+    width: 1em;
+    height: 1em;
+    border: 0;
+  }
 
-    .item-icon:hover {
-      background-image: url('/systems/oq/assets/icons/chat-bubble.svg');
-      width: 1em;
-      height: 1em;
-      padding: 1em 0 0 0;
-    }
+  .item-icon:hover {
+    background-image: url('/systems/oq/assets/icons/chat-bubble.svg');
+    width: 1em;
+    height: 1em;
+    padding: 1em 0 0 0;
+  }
 
-    .sheet-header {
+  .sheet-header {
+    color: @base-color;
+    padding: 8px;
+    background-color: @dark-color;
+    background-blend-mode: multiply;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    input[type='text'],
+    input[type='number'],
+    input[type='password'],
+    input[type='date'],
+    input[type='time'],
+    input[type='datetime-local'],
+    input[type='search'] {
       color: @base-color;
-      padding: 8px;
-      background-color: @dark-color;
-      background-blend-mode: multiply;
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
+      border: 0;
+      //border-bottom: 1px solid @base-color;
+    }
 
-      input[type='text'],
-      input[type='number'],
-      input[type='password'],
-      input[type='date'],
-      input[type='time'],
-      input[type='datetime-local'],
-      input[type='search'] {
-        color: @base-color;
-        border: 0;
-        //border-bottom: 1px solid @base-color;
-      }
+    .name {
+      font-size: 24px;
+      font-weight: 400;
+    }
+  }
 
-      .name {
-        font-size: 24px;
-        font-weight: 400;
+  .sheet-tabs {
+    flex-grow: 0;
+  }
+
+  .sheet-body,
+  .sheet-content {
+    padding: 8px;
+    display: flex;
+
+    label,
+    legend {
+      color: @dark-color;
+    }
+
+    .characteristic {
+      align-items: center;
+      gap: 0;
+
+      label {
+        font-size: 20px;
+        margin-bottom: 5px;
       }
     }
 
-    .sheet-tabs {
-      flex-grow: 0;
+    .characteristic-value {
+      @size: 48px;
+      border: 1px solid @dark-color;
+      border-radius: 50%;
+      min-width: @size;
+      min-height: @size;
+      line-height: @size;
+      text-align: center;
+
+      .form-font();
+      font-size: 24px;
     }
+  }
 
-    .sheet-body,
-    .sheet-content {
-      padding: 8px;
-      display: flex;
+  .sheet-footer {
+    flex-grow: 0;
+    flex-shrink: 1;
+    padding: 0.5em;
+  }
 
-      label,
-      legend {
-        color: @dark-color;
-      }
+  .sheet-hint {
+    font-size: var(--font-size-12);
+    color: @unimportant-color;
+  }
 
-      .characteristic {
-        align-items: center;
-        gap: 0;
-
-        label {
-          font-size: 20px;
-          margin-bottom: 5px;
-        }
-      }
-
-      .characteristic-value {
-        @size: 48px;
-        border: 1px solid @dark-color;
-        border-radius: 50%;
-        min-width: @size;
-        min-height: @size;
-        line-height: @size;
-        text-align: center;
-
-        .form-font();
-        font-size: 24px;
-      }
-    }
-
-    a.item {
-      .nav-item-font();
-    }
+  a.item {
+    .nav-item-font();
   }
 }

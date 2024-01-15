@@ -27,7 +27,8 @@
     "lint": "eslint --ext .js,.cjs,.mjs .",
     "lint:fix": "eslint --ext .js,.cjs,.mjs --fix .",
     "format": "prettier --write \"./**/*.(js|cjs|mjs|json|yml|less)\"",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "test": "mocha"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -44,6 +45,7 @@
     "husky": "^8.0.3",
     "less": "^3.13.1",
     "lint-staged": "^15.2.0",
+    "mocha": "^10.2.0",
     "prettier": "^3.1.1",
     "rollup": "^2.79.1",
     "vinyl-buffer": "^1.0.1",

@@ -10,16 +10,18 @@ export class OQCharacterSheet extends OQActorBaseSheet {
   activateListeners(html) {
     super.activateListeners(html);
 
-    html.find('a.modify-characteristics').on('click', this.modifyCharacteristics.bind(this));
-    html.find('a.modify-attributes').on('click', this.modifyAttributes.bind(this));
+    if (!this.isEditable) return;
 
-    html.find('.item-edit').on('click', this.modifyItem.bind(this));
-    html.find('.item-delete').on('click', this.deleteItem.bind(this));
+    html.find('.modify-characteristics').on('click', this._onModifyCharacteristics.bind(this));
+    html.find('.modify-attributes').on('click', this._onModifyAttributes.bind(this));
 
-    html.find('.skill-mod').on('change', this.updateSkillValue.bind(this));
+    html.find('.item-edit').on('click', this._onModifyItem.bind(this));
+    html.find('.item-delete').on('click', this._onDeleteItem.bind(this));
+
+    html.find('.skill-mod').on('change', this._onUpdateSkillMod.bind(this));
   }
 
-  async updateSkillValue(event) {
+  async _onUpdateSkillMod(event) {
     event.preventDefault();
     const dataset = event.currentTarget.dataset;
     const item = this.actor.items.get(dataset.itemId);
@@ -27,26 +29,26 @@ export class OQCharacterSheet extends OQActorBaseSheet {
     await item.update({ 'system.mod': value });
   }
 
-  modifyItem(event) {
+  _onModifyItem(event) {
     event.preventDefault();
     const dataset = event.currentTarget.dataset;
     const item = this.actor.items.get(dataset.itemId);
     item.sheet.render(true);
   }
 
-  deleteItem(event) {
+  _onDeleteItem(event) {
     event.preventDefault();
     const dataset = event.currentTarget.dataset;
     const item = this.actor.items.get(dataset.itemId);
     item.delete();
   }
 
-  modifyCharacteristics() {
+  _onModifyCharacteristics() {
     const characteristicsDialog = new CharacteristicsDialog(this.actor);
     characteristicsDialog.render(true);
   }
 
-  modifyAttributes() {
+  _onModifyAttributes() {
     const attributesDialog = new AttributesDialog(this.actor);
     attributesDialog.render(true);
   }
