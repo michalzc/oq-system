@@ -14,6 +14,7 @@ module.exports = {
     browser: true,
     es6: true,
     jquery: true,
+    mocha: true,
   },
 
   extends: ['eslint:recommended', '@typhonjs-fvtt/eslint-config-foundry.js/0.8.0', 'plugin:prettier/recommended'],
@@ -32,4 +33,8 @@ module.exports = {
       },
     },
   ],
+
+  globals: {
+    globalThis: false, // means it is not writeable
+  },
 };

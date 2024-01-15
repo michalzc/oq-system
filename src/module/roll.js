@@ -56,19 +56,20 @@ export async function roll(rollData) {
   await ChatMessage.create(messageData);
 }
 
-function getResult(resultFeatures, rollValue, rollData) {
+export function getResult(resultFeatures, rollValue, rollData) {
   const rollResults = CONFIG.OQ.RollResults;
   if (rollData.mastered && rollData.masterNeverThrows)
     return resultFeatures.double ? rollResults.criticalSuccess : rollResults.success;
   else if (rollValue === 100 && !rollData.mastered && !rollData.masterNeverThrows) return rollResults.fumble;
   else if (rollData.totalValue < rollValue) {
     return resultFeatures.double ? rollResults.fumble : rollResults.failure;
-  } else if (rollData.totalValue >= rollValue) {
+  } else {
+    // if (rollData.totalValue >= rollValue)
     return resultFeatures.double ? rollResults.criticalSuccess : rollResults.success;
   }
 }
 
-function getResultFeatures(roll) {
+export function getResultFeatures(roll) {
   const total = roll.total;
   const [left, right] = roll.total.toString();
   const possibleFumble = total === 100;

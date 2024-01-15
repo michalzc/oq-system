@@ -1,14 +1,15 @@
-import { OQCharacterActor } from './document/actor/characterActor.js';
-import { OQNpcActor } from './document/actor/npcActor.js';
-import { OQSkill } from './document/item/skill.js';
-import { OQWeapon } from './document/item/weapon.js';
-import { OQArmor } from './document/item/armor.js';
-import { OQEquipment } from './document/item/equipment.js';
-import { OQSpell } from './document/item/spell.js';
-import { OQCharacterSheet } from './sheet/actor/characterSheet.js';
-import { OQNpcSheet } from './sheet/actor/npcSheet.js';
-import { OQSkillSheet } from './sheet/item/skillSheet.js';
-import { OQSpecialAbility } from './document/item/specialAbility.js';
+import { OQCharacterActor } from '../document/actor/characterActor.js';
+import { OQNpcActor } from '../document/actor/npcActor.js';
+import { OQSkill } from '../document/item/skill.js';
+import { OQWeapon } from '../document/item/weapon.js';
+import { OQArmor } from '../document/item/armor.js';
+import { OQEquipment } from '../document/item/equipment.js';
+import { OQSpell } from '../document/item/spell.js';
+import { OQCharacterSheet } from '../sheet/actor/characterSheet.js';
+import { OQNpcSheet } from '../sheet/actor/npcSheet.js';
+import { OQSkillSheet } from '../sheet/item/skillSheet.js';
+import { OQSpecialAbility } from '../document/item/specialAbility.js';
+import { RollResults } from './rollResults.js';
 
 export const SYSTEM_ID = 'oq';
 export const SYSTEM_NAME = 'OQ System';
@@ -87,13 +88,6 @@ const SettingKeys = {
     config: true,
     requiresReload: false,
   },
-};
-
-const RollResults = {
-  criticalSuccess: 'criticalSuccess',
-  success: 'success',
-  failure: 'failure',
-  fumble: 'fumble',
 };
 
 const BaseRollFormula = 'd100';

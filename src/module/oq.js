@@ -1,7 +1,7 @@
 import { registerSettings } from './init/settings.js';
 import { preloadTemplates } from './init/preloadTemplates.js';
 import { log } from './utils.js';
-import { OQ } from './consts.js';
+import { OQ } from './consts/consts.js';
 import { registerDocuments } from './init/registerDocuments.js';
 import { registerDataModels } from './init/registerDataModels.js';
 
