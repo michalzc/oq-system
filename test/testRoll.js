@@ -45,7 +45,7 @@ describe('roll.js', function () {
         const roll = { total: data.rollValue };
         const rollFeatures = getResultFeatures(roll);
         const result = getResult(rollFeatures, data.rollValue, updatedRollData);
-        assert(result, data.expectedResult);
+        assert.equal(result, data.expectedResult);
       });
     });
   });
@@ -72,24 +72,27 @@ describe('roll.js', function () {
       makeDataRow(55, 100, true, RollResults.criticalSuccess),
       makeDataRow(55, 100, false, RollResults.criticalSuccess),
       makeDataRow(99, 90, true, RollResults.criticalSuccess),
-      makeDataRow(91, 90, true, RollResults.failure),
-      makeDataRow(99, 90, false, RollResults.fumble),
+      makeDataRow(91, 90, true, RollResults.success),
+      makeDataRow(99, 90, false, RollResults.failure),
       makeDataRow(100, 90, true, RollResults.criticalSuccess),
-      makeDataRow(100, 90, false, RollResults.fumble),
+      makeDataRow(100, 90, false, RollResults.failure),
     ];
 
     rollsResultsAndData.forEach((data) => {
-      it(`should return ${data.expectedResult} for roll of ${data.rollValue} against mastered skill ${
+      it(`should return ${data.expectedResult} for roll of ${
+        data.rollValue
+      } against mastered skill of modified value of ${data.skillTotalValue} ${
         (data.masterNeverThrows && 'when masterNeverThrows') || ''
       }`, function () {
         const updatedRollData = {
           ...masteredSkillRollData,
           masterNeverThrows: data.masterNeverThrows,
+          totalValue: data.skillTotalValue,
         };
         const roll = { total: data.rollValue };
         const rollFeatures = getResultFeatures(roll);
         const result = getResult(rollFeatures, roll.total, updatedRollData);
-        assert(result, data.expectedResult);
+        assert.equal(result, data.expectedResult);
       });
     });
   });
