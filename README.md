@@ -1,10 +1,14 @@
-# mini-six
+# OQ System
 
 OpenQuest SRD system for Foundry VTT
 
 ## Status
 
 Pre-Alpha
+
+## Roadmap
+
+v0.1 - Basic character and npc sheets, skill, damage rolls. Skills in compendium.
 
 ## Licensing
 
