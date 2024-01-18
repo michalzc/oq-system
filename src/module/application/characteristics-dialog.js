@@ -1,5 +1,6 @@
 import { log } from '../utils.js';
 
+const mergeObject = foundry.utils.mergeObject;
 export class CharacteristicsDialog extends FormApplication {
   static get defaultOptions() {
     const options = super.defaultOptions;
@@ -15,8 +16,8 @@ export class CharacteristicsDialog extends FormApplication {
     super(object);
 
     this.points = CharacteristicsDialog.calculatePoints(
-      CONFIG.OQ.DefaultCharacteristics.characteristicPoints,
-      CONFIG.OQ.DefaultCharacteristics.basePoints,
+      CONFIG.OQ.CharacteristicsParams.characteristicPoints,
+      CONFIG.OQ.CharacteristicsParams.basePoints,
       Object.values(object.system.characteristics)
         .map((char) => char.base)
         .reduce((l, r) => l + r),
@@ -70,7 +71,7 @@ export class CharacteristicsDialog extends FormApplication {
           .reduce((l, r) => l + r);
 
         const initial = dialog.find('.all-points').val();
-        this.points = CharacteristicsDialog.calculatePoints(initial, CONFIG.OQ.DefaultCharacteristics.basePoints, sum);
+        this.points = CharacteristicsDialog.calculatePoints(initial, CONFIG.OQ.CharacteristicsParams.basePoints, sum);
         dialog.find('.spent-points').html(this.points.spent.toString());
         dialog.find('.remain-points').html(this.points.remain.toString());
       }
@@ -78,10 +79,11 @@ export class CharacteristicsDialog extends FormApplication {
   }
 
   async rollAllCharacteristics(event) {
+    //FIXME: remove default rolls
     if (event.currentTarget) {
       const characteristicsBlock = event.currentTarget.closest('.chars-table');
       if (characteristicsBlock) {
-        const rollPromises = Object.keys(CONFIG.OQ.DefaultCharacteristics.characteristicsRolls)
+        const rollPromises = Object.keys(CONFIG.OQ.CharacteristicsParams.characteristicsRolls)
           .map((key) => [key, `input[name="characteristics.${key}.roll"]`])
           .map(([key, selector]) => [key, $(characteristicsBlock).find(selector).val()])
           .filter(([, value]) => typeof value === 'string')
@@ -150,7 +152,7 @@ export class CharacteristicsDialog extends FormApplication {
   }
 
   get template() {
-    return 'systems/oq/templates/applications/characteristicsDialog.hbs';
+    return 'systems/oq/templates/applications/characteristics-dialog.hbs';
   }
 
   async _updateObject(event, formData) {

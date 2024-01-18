@@ -1,3 +1,3 @@
-import { OQBaseActor } from './baseActor.js';
+import { OQBaseActor } from './base-actor.js';
 
 export class OQNpcActor extends OQBaseActor {}

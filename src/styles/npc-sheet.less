@@ -1,0 +1,148 @@
+.oq.sheet {
+  .npc-sheet {
+    .editor {
+      flex: 1;
+      align-self: normal;
+    }
+
+    .editor.prosemirror {
+      flex: 1;
+      align-self: normal;
+      min-height: 0;
+      height: 100%;
+    }
+
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      border-bottom: 1px solid @npc-dark-color;
+    }
+
+    fieldset {
+      border: 0;
+    }
+
+    legend {
+      color: @npc-dark-color;
+    }
+
+    .sheet-header {
+      background-color: @npc-dark-color;
+      color: @base-color;
+
+      .header-fields {
+        display: flex;
+        flex-direction: column;
+        align-self: normal;
+
+        .name {
+          flex: 0;
+        }
+
+        .editor.prosemirror {
+          color: @base-color;
+
+          textarea {
+            color: @base-color;
+          }
+
+          menu {
+            background-color: @base-color-transparent;
+          }
+        }
+      }
+    }
+
+    .sheet-body {
+      gap: 1em;
+
+      label {
+        color: @npc-dark-color;
+      }
+
+      .characteristics {
+        display: flex;
+        flex-direction: column;
+        flex: 2;
+
+        .characteristics-list {
+          display: flex;
+          flex-direction: row;
+          flex-grow: 1;
+          gap: 0.5em;
+          align-items: flex-start;
+
+          .characteristic {
+            align-items: center;
+            flex-grow: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+
+            .characteristic-label {
+              text-align: center;
+            }
+
+            .characteristic-value {
+              min-width: 2em;
+              min-height: 2em;
+              width: 2em;
+              border-color: @npc-dark-color;
+            }
+
+            .characteristic-roll {
+              margin-top: 0.5em;
+              min-width: 4em;
+              width: 100%;
+              text-align: center;
+              border: 0;
+              border-bottom: 1px solid @npc-dark-color;
+              font-size: var(--font-size-14);
+            }
+          }
+
+          .roll-characteristics {
+            align-self: flex-end;
+          }
+        }
+      }
+
+      .attributes {
+        display: flex;
+        flex-direction: column;
+        flex: 2;
+      }
+
+      .value {
+        input {
+          border-bottom-color: @npc-dark-color;
+        }
+      }
+    }
+
+    .sheet-content {
+      flex: 1;
+
+      .tab[data-tab].active {
+        display: flex;
+        flex: 1;
+      }
+
+      .details {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1em;
+
+        .skills {
+          //TODO
+        }
+
+        .abilities {
+          //TODO
+        }
+      }
+    }
+  }
+}

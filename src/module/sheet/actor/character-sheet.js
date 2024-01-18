@@ -1,10 +1,11 @@
-import { OQActorBaseSheet } from './actorBaseSheet.js';
-import { AttributesDialog } from '../../application/attributesDialog.js';
-import { CharacteristicsDialog } from '../../application/characteristicsDialog.js';
+import { OQActorBaseSheet } from './actor-base-sheet.js';
+import { AttributesDialog } from '../../application/attributes-dialog.js';
+import { CharacteristicsDialog } from '../../application/characteristics-dialog.js';
+import _ from 'lodash-es';
 
 export class OQCharacterSheet extends OQActorBaseSheet {
   get template() {
-    return 'systems/oq/templates/actor/characterSheet.hbs';
+    return 'systems/oq/templates/actor/character-sheet.hbs';
   }
 
   activateListeners(html) {
@@ -19,6 +20,15 @@ export class OQCharacterSheet extends OQActorBaseSheet {
     html.find('.item-delete').on('click', this._onDeleteItem.bind(this));
 
     html.find('.skill-mod').on('change', this._onUpdateSkillMod.bind(this));
+  }
+
+  async getData(options) {
+    const context = await super.getData(options);
+    const enrichedNotes = await TextEditor.enrichHTML(this.actor.system.personal.notes, { async: true });
+    return _.merge(context, {
+      enrichedNotes,
+      isCharacter: true,
+    });
   }
 
   async _onUpdateSkillMod(event) {

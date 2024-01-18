@@ -1,0 +1,54 @@
+<!-- attributes -->
+<div class="attributes flex-col-top">
+  <h2 class="flex0">{{ localize 'OQ.Labels.Attributes' }}</h2>
+
+  <div class="attributes-grid">
+
+    <label for="hp" data-tooltip="{{ localize system.attributes.hp.label}}">{{ localize
+      system.attributes.hp.abbr}}</label>
+    <div class="value">
+      <input id="hp" type="number" data-dtype="Number" name="system.attributes.hp.value"
+             value="{{system.attributes.hp.value}}" />
+      <div>&nbsp;/&nbsp{{system.attributes.hp.max}}</div>
+    </div>
+
+    <label for="mp" data-tooltip="{{ localize system.attributes.mp.label}}">{{ localize
+      system.attributes.mp.abbr}}</label>
+    <div class="value">
+      <input id="mp" type="number" data-dtype="Number" name="system.attributes.mp.value"
+             value="{{system.attributes.mp.value}}" />
+      <div>&nbsp;/&nbsp{{system.attributes.mp.max}}</div>
+    </div>
+
+    <a class="modify-attributes" data-tooltip="{{ localize 'OQ.Labels.EditAttributes' }}"><i
+      class="fas fa-gear"></i></a>
+
+    {{#if isCharacter}}
+    <label for="fp" data-tooltip="{{ localize system.attributes.fn.label }}">{{ localize
+      system.attributes.fn.abbr }}</label>
+    <div class="value"><input id="fp" type="number" name="system.attributes.fn.value" value="{{system.attributes.fn.value}}">
+    </div>
+    <label for="gp" data-tooltip="{{ localize system.attributes.gr.label }}">{{ localize
+      system.attributes.gr.abbr }}</label>
+    <div class="value"><input id="gp" type="number" name="system.attributes.gr.value" value="{{system.attributes.gr.value}}">
+    </div>
+    {{/if}}
+
+    <div class="wide">
+      <label data-tooltip="{{ localize system.attributes.dm.label}}">{{ localize
+        system.attributes.dm.abbr}}</label>
+      <div class="value">{{system.attributes.dm.value}}</div>
+
+      <label data-tooltip="{{ localize system.attributes.mr.label}}">{{ localize
+        system.attributes.mr.abbr}}</label>
+      <div class="value">{{system.attributes.mr.value}}</div>
+
+      <label data-tooltip="{{ localize system.attributes.ap.label}}">{{ localize
+        system.attributes.ap.abbr}}</label>
+      <div class="value">{{system.attributes.ap.value}}</div>
+    </div>
+
+
+  </div>
+
+</div>

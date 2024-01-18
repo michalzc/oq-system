@@ -22,7 +22,10 @@ export async function skillRollDialog(speaker, rollData) {
     difficulties: difficultiesForDialog,
     defaultDifficulty: 'normal',
   };
-  const dialogContent = await renderTemplate('systems/oq/templates/applications/skillRollDialog.hbs', dialogRenderData);
+  const dialogContent = await renderTemplate(
+    'systems/oq/templates/applications/skill-roll-dialog.hbs',
+    dialogRenderData,
+  );
   const dialog = new Dialog({
     title: `${game.i18n.localize('OQ.Dialog.SkillRollDialogTitle.Title')} ${rollData.entityName}`,
     content: dialogContent,

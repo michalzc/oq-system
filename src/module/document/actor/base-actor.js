@@ -3,37 +3,27 @@ import _ from 'lodash-es';
 export class OQBaseActor extends Actor {
   prepareBaseData() {
     super.prepareBaseData();
-    const defaults = CONFIG.OQ.DefaultCharacteristics;
-    const localizationPrefix = 'OQ.Characteristics.';
-
-    const characteristics = Object.fromEntries(
-      Object.entries(this.system.characteristics).map(([key, elem]) => {
-        const value = elem.base + elem.mod;
-        const label = `${localizationPrefix}${key}.label`;
-        const abbr = `${localizationPrefix}${key}.abbr`;
-        const roll = elem.roll ? elem.roll : defaults.characteristicsRolls[key];
-        const base = elem.base;
-        const mod = elem.mod;
-
-        return [key, { value, label, abbr, roll, base, mod }];
-      }),
-    );
-
-    const newData = {
+    const system = this.system;
+    const characteristics = _.mapValues(system.characteristics, (characteristic) => {
+      const value = characteristic.base + characteristic.mod;
+      return {
+        ...characteristic,
+        value,
+      };
+    });
+    _.merge(this.system, {
       characteristics,
-    };
-
-    this.system = mergeObject(this.system, newData);
+    });
   }
 
   prepareDerivedData() {
     super.prepareDerivedData();
 
-    this.system = mergeObject(this.system, {
-      attributes: this.calculateAttributes(),
+    this.system = _.merge(this.system, {
       skills: this.getSkills(),
+      attributes: this.calculateAttributes(),
+      groupedSkills: this.getGroupedSkills(),
     });
-    this.system.groupedSkills = this.getGroupedSkills();
   }
 
   getRollData() {
@@ -41,22 +31,31 @@ export class OQBaseActor extends Actor {
     const charRollData = Object.fromEntries(
       Object.entries(this.system.characteristics).map(([key, elem]) => [key, elem.value]),
     );
-    const skillData = Object.fromEntries(
+    const skills = Object.fromEntries(
       this.items.filter((i) => i.type === 'skill').map((skill) => [skill.system.shortName, skill.system.value]),
     );
 
     const newRollData = {
       ...charRollData,
-      ...skillData,
+      skills,
     };
 
-    return mergeObject(rollData, newRollData);
+    return _.merge(rollData, newRollData);
+  }
+
+  getGroupedSkills() {
+    const skills = this.getSkills();
+    return _.groupBy(skills, (skill) => skill.system.groupName);
+  }
+
+  getSkills() {
+    return this.items.filter((item) => item.type === 'skill');
   }
 
   calculateAttributes() {
     const attributes = this.system.attributes;
     const characteristics = this.system.characteristics;
-    const defaults = CONFIG.OQ.DefaultCharacteristics;
+    const defaults = CONFIG.OQ.CharacteristicsParams;
 
     const baseDM = defaults.damageModifierFunction(characteristics.str.value + characteristics.siz.value);
     const dmMod = attributes.dm.mod?.trim();
@@ -75,7 +74,7 @@ export class OQBaseActor extends Actor {
     const mrValue = attributes.mr.base + attributes.mr.mod;
     const apValue = attributes.ap.base + attributes.ap.mod;
 
-    return {
+    return mergeObject(attributes, {
       dm: {
         value: dmValue,
       },
@@ -93,15 +92,6 @@ export class OQBaseActor extends Actor {
       ap: {
         value: apValue,
       },
-    };
-  }
-
-  getGroupedSkills() {
-    const skills = this.getSkills();
-    return _.groupBy(skills, (skill) => skill.system.groupName);
-  }
-
-  getSkills() {
-    return this.items.filter((item) => item.type === 'skill');
+    });
   }
 }

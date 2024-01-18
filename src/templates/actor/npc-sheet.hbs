@@ -1,0 +1,78 @@
+<form class="actor-sheet npc-sheet {{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="64" height="64"
+         alt="{{actor.name}}" />
+    <div class="header-fields">
+      <input class="name" type="text" data-dtype="String" name="name" value="{{actor.name}}"
+             placeholder="{{ localize 'OQ.Labels.Name' }}" title="{{enrichedShortDescription}}" />
+      {{editor enrichedShortDescription target="system.personal.shortDescription" id="shortDescription"
+               engine="prosemirror"
+               button=true editable=true}}
+    </div>
+
+  </header>
+  <section class="sheet-body">
+
+    <!-- Characteristics -->
+    <div class="characteristics">
+      <h2 class="flex0">{{ localize 'OQ.Labels.Characteristics' }}</h2>
+
+      <div class="characteristics-list">
+        {{#each system.characteristics as |char key| }}
+          <div class="characteristic">
+            <label for="char{{ key }}" data-tooltip="{{ localize char.label }}" class="characteristic-label">{{ localize
+              char.abbr }}</label>
+            <input id="char{{ key }}" type="number" data-dtype="Number" name="system.characteristics.{{key}}.base"
+                   data-tooltip="{{ localize char.label }}" class="characteristic-value" value="{{char.value}}">
+            <input class="characteristic-roll" name="system.characteristics.{{key}}.roll" type="text"
+                   data-dtype="String" data-tooltip="{{ localize char.label}} {{ localize 'OQ.Hints.RollFormula' }}"
+                   value="{{char.roll}}">
+          </div>
+        {{/each}}
+        <a class="roll-characteristics" data-tooltip="{{ localize 'OQ.Hints.RollAll' }}"><i class="fas fa-dice"></i></a>
+      </div>
+
+    </div>
+
+    <!-- Attributes -->
+    {{> systems/oq/templates/actor/parts/attributes.hbs this}}
+
+  </section>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="details">{{ localize 'OQ.Nav.Details' }}</a>
+    <a class="item" data-tab="description">{{ localize 'OQ.Nav.Description' }}</a>
+  </nav>
+
+  <section class="sheet-content">
+    <div class="tab" data-group="primary" data-tab="details">
+      <div class="details">
+        <fieldset class="skills">
+          <legend>{{ localize 'OQ.Labels.SkillsAbilities' }}</legend>
+        </fieldset>
+
+        <fieldset class="combat">
+          <legend>{{ localize 'OQ.Nav.Combat' }}</legend>
+        </fieldset>
+
+        <fieldset class="magic">
+          <legend>{{ localize 'OQ.Nav.Magic' }}</legend>
+        </fieldset>
+
+        <fieldset class="magic">
+          <legend>{{ localize 'OQ.Nav.Equipment' }}</legend>
+        </fieldset>
+      </div>
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="description">
+      {{editor enrichedDescription target="system.personal.description" id="description"
+               engine="prosemirror"
+               button=true editable=true}}
+    </div>
+  </section>
+
+  <section class="sheet-footer">
+    <div class="sheet-hint">{{ localize 'OQ.Hints.ItemRollHint' }}</div>
+  </section>
+</form>

@@ -5,6 +5,8 @@ Actor:
     - npc
   htmlFields:
     - notes
+    - shortDescription
+    - description
 
   character: { }
   npc: { }

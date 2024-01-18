@@ -1,4 +1,5 @@
-import { OQBaseItemSheet } from './baseItemSheet.js';
+import { OQBaseItemSheet } from './base-item-sheet.js';
+import _ from 'lodash-es';
 
 export class OQSkillSheet extends OQBaseItemSheet {
   get template() {
@@ -15,7 +16,7 @@ export class OQSkillSheet extends OQBaseItemSheet {
   }
 
   getSkillGroups() {
-    const groups = CONFIG.OQ.SkillGroups;
+    const groups = _.keys(CONFIG.OQ.SkillGroups);
     return Object.fromEntries(groups.map((key) => [key, `OQ.SkillGroups.${key}`]));
   }
 }

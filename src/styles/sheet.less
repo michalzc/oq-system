@@ -1,7 +1,16 @@
 @import 'colors';
 
 .oq.sheet {
-  font-size: 1rem;
+  .editor {
+    font-size: var(--font-size-14);
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0.5em 0 0.5em;
+    }
+  }
 
   input {
     min-width: 0;
@@ -23,13 +32,14 @@
   }
 
   .sheet-header {
-    color: @base-color;
     padding: 8px;
-    background-color: @dark-color;
     background-blend-mode: multiply;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+
+    background-color: @dark-color;
+    color: @base-color;
 
     input[type='text'],
     input[type='number'],
@@ -44,6 +54,7 @@
     }
 
     .name {
+      .header-font();
       font-size: 24px;
       font-weight: 400;
     }

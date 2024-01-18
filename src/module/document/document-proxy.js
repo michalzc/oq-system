@@ -1,4 +1,4 @@
-import { OQBaseActor } from './actor/baseActor.js';
+import { OQBaseActor } from './actor/base-actor.js';
 import { OQBaseItem } from './item/baseItem.js';
 
 const actorHandler = {
@@ -15,5 +15,5 @@ const itemHandler = {
   },
 };
 
-export const OQActorDocumentProxy = new Proxy(Actor, actorHandler);
-export const OQItemDocumentProxy = new Proxy(Item, itemHandler);
+export const OQActorDocumentProxy = new Proxy(OQBaseActor, actorHandler);
+export const OQItemDocumentProxy = new Proxy(OQBaseItem, itemHandler);

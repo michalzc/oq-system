@@ -29,7 +29,7 @@ export class AttributesDialog extends FormApplication {
   }
 
   get template() {
-    return 'systems/oq/templates/applications/attributesDialog.hbs';
+    return 'systems/oq/templates/applications/attributes-dialog.hbs';
   }
 
   async _updateObject(event, formData) {

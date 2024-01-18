@@ -1,149 +1,97 @@
-.oq {
-  &.sheet {
-    .character-sheet {
-      .sheet-header {
-        .profile-img {
-          flex: 0;
-          width: 128px;
-          height: 128px;
-          border-color: @base-color;
-        }
+.oq.sheet {
+  .character-sheet {
+    .sheet-body {
+      display: flex;
+      flex-direction: row;
+      flex-grow: 0;
+      gap: 1em;
 
-        .header-fields {
-          flex: 1;
+      .characteristics {
+        display: flex;
+        justify-items: flex-start;
+        flex-direction: column;
+        flex-grow: 2;
 
-          input {
-            border-bottom: 1px solid @base-color-transparent;
-            background: none;
-          }
-        }
-
-        .name {
-          .header-font();
+        & > div {
+          flex-grow: 1;
         }
       }
 
-      .sheet-body {
+      .value {
+        input {
+          border-bottom-color: @dark-color;
+        }
+      }
+
+      .modify-attributes {
+        justify-self: center;
+        align-self: start;
+        grid-row-end: span 3;
+      }
+    }
+
+    .sheet-content {
+      align-content: flex-start;
+
+      .editor {
+        color: var(--color-text-dark-primary);
+      }
+
+      .tab.active {
+        display: flex;
+        flex-grow: 1;
+        align-items: flex-start;
+      }
+
+      .notes {
+        flex-grow: 1;
+        align-self: normal;
+
+        .editor {
+          flex-grow: 1;
+        }
+      }
+
+      .skills {
         display: flex;
         flex-direction: row;
-        flex-grow: 0;
+        flex-wrap: wrap;
         gap: 1em;
 
-        .characteristics {
-          display: flex;
-          justify-items: flex-start;
-          flex-direction: column;
-          flex-grow: 2;
-
-          & > div {
-            flex-grow: 1;
-          }
-        }
-
-        .attributes {
-          flex-grow: 0;
+        .skill-group {
           display: flex;
           flex-direction: column;
-
-          .attributes-grid {
-            flex-grow: 0;
-            display: grid;
-            grid-template-columns: 2fr 4fr 2fr 4fr 1fr;
-            gap: 10px;
-            align-items: end;
-
-            .wide {
-              grid-column: span 4;
-              display: flex;
-              flex-direction: row;
-              justify-content: space-between;
-              align-items: center;
-            }
-          }
-        }
-
-        .value {
-          justify-self: start;
-          display: flex;
-          flex-direction: row;
-          flex-wrap: nowrap;
-
-          font-size: 18px;
-
-          input {
-            border: 0;
-            border-bottom: 1px solid @dark-color;
-            max-width: 2em;
-            text-align: center;
-          }
-        }
-
-        .modify-attributes {
-          justify-self: center;
-          align-self: start;
-          grid-row-end: span 3;
-        }
-      }
-
-      .sheet-content {
-        align-content: flex-start;
-
-        .tab.active {
-          display: flex;
-          flex-grow: 1;
-          align-items: flex-start;
-        }
-
-        .notes {
-          flex-grow: 1;
-          align-self: normal;
-
-          .editor {
-            flex-grow: 1;
-          }
-        }
-
-        .skills {
-          display: flex;
-          flex-direction: row;
           flex-wrap: wrap;
-          gap: 1em;
+          flex-grow: 0;
+          flex-shrink: 1;
+          min-width: 23em;
+          border: 0;
+          gap: 0.2em;
 
-          .skill-group {
+          .skill {
             display: flex;
-            flex-direction: column;
-            flex-wrap: wrap;
+            flex-direction: row;
+            flex-wrap: nowrap;
             flex-grow: 0;
             flex-shrink: 1;
-            min-width: 23em;
-            border: 0;
-            gap: 0.2em;
+            align-items: center;
+            justify-items: flex-start;
+            gap: 0.5em;
 
-            .skill {
-              display: flex;
-              flex-direction: row;
-              flex-wrap: nowrap;
+            .item-roll {
+              flex-grow: 1;
+            }
+
+            .mod-value {
+              width: 2em;
+              border: 0;
+              text-align: center;
+              font-size: var(--font-size-14);
+            }
+
+            .total-value {
+              width: 2.5em;
               flex-grow: 0;
-              flex-shrink: 1;
-              align-items: center;
-              justify-items: flex-start;
-              gap: 0.5em;
-
-              .item-roll {
-                flex-grow: 1;
-              }
-
-              .mod-value {
-                width: 2em;
-                border: 0;
-                text-align: center;
-                font-size: var(--font-size-14);
-              }
-
-              .total-value {
-                width: 2.5em;
-                flex-grow: 0;
-              }
             }
           }
         }

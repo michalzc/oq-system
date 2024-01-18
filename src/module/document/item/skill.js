@@ -1,6 +1,6 @@
 import { OQBaseItem } from './baseItem.js';
 import { roll } from '../../roll.js';
-import { skillRollDialog } from '../../application/skillRollDialog.js';
+import { skillRollDialog } from '../../application/skill-roll-dialog.js';
 
 export class OQSkill extends OQBaseItem {
   prepareDerivedData() {

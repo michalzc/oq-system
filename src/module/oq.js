@@ -1,9 +1,9 @@
 import { registerSettings } from './init/settings.js';
-import { preloadTemplates } from './init/preloadTemplates.js';
+import { preloadTemplates } from './init/preload-templates.js';
 import { log } from './utils.js';
 import { OQ } from './consts/consts.js';
-import { registerDocuments } from './init/registerDocuments.js';
-import { registerDataModels } from './init/registerDataModels.js';
+import { registerDocuments } from './init/register-documents.js';
+import { registerDataModels } from './init/register-data-models.js';
 
 async function init() {
   log('Initializing OQ');

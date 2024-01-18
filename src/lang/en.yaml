@@ -25,27 +25,49 @@ OQ:
     Characteristics: Characteristics
     Attributes: Attributes
     AttributesNames:
-      DamageModifier:
-        Abbr: DM
-        Label: Damage Modifier
-      HitPoints:
-        Abbr: HP
-        Label: Hit Points
-      MagicPoints:
-        Abbr: MP
-        Label: Magic Points
-      MovementRate:
-        Abbr: MR
-        Label: Movement Rate
-      ArmourWorn:
-        Abbr: AP
-        Label: Armour Worn
-      Fortune:
-        Abbr: FP
-        Label: Fortune Points
-      Growth:
-        Abbr: GP
-        Label: Growth Points
+      dm:
+        abbr: DM
+        label: Damage Modifier
+      hp:
+        abbr: HP
+        label: Hit Points
+      mp:
+        abbr: MP
+        label: Magic Points
+      mr:
+        abbr: MR
+        label: Movement Rate
+      ap:
+        abbr: AP
+        label: Armour Worn
+      fn:
+        abbr: FP
+        label: Fortune Points
+      gr:
+        abbr: GP
+        label: Growth Points
+    CharacteristicsNames:
+      str:
+        label: Strength
+        abbr: Str
+      con:
+        label: Constitution
+        abbr: Con
+      dex:
+        label: Dexterity
+        abbr: Dex
+      siz:
+        label: Size
+        abbr: Siz
+      int:
+        label: Intelligence
+        abbr: Int
+      pow:
+        label: Power
+        abbr: Pow
+      cha:
+        label: Charisma
+        abbr: Cha
     EditCharacteristics: Edit Characteristics
     EditAttributes: Edit Attributes
     Group: Group
@@ -64,6 +86,9 @@ OQ:
       hard: Hard
     OtherMods: Other Modifiers
     SkillValue: Skill Value
+    Advances: Advances
+    Abilities: Abilities
+    SkillsAbilities: Skills & Abilities
   Nav:
     Skills: Skills
     Combat: Combat
@@ -71,6 +96,8 @@ OQ:
     Magic: Magic
     Notes: Notes
     Effects: Effects
+    Details: Details
+    Description: Description
   Dialog:
     Save: Save Data
     Reset: Reset Data
@@ -88,28 +115,6 @@ OQ:
     RemainPoints: Remain
     SkillRollDialogTitle:
       Title:  Skill Roll of
-  Characteristics:
-    str:
-      label: Strength
-      abbr: Str
-    con:
-      label: Constitution
-      abbr: Con
-    dex:
-      label: Dexterity
-      abbr: Dex
-    siz:
-      label: Size
-      abbr: Siz
-    int:
-      label: Intelligence
-      abbr: Int
-    pow:
-      label: Power
-      abbr: Pow
-    cha:
-      label: Charisma
-      abbr: Cha
   SkillGroups:
     resistance: Resistances
     combat: Combat Skills
@@ -133,3 +138,5 @@ OQ:
     mastered: mastered
   Hints:
     ItemRollHint: Hold SHIFT key to show roll dialog.
+    RollAll: Roll all
+    RollFormula: Roll formula

@@ -53,69 +53,19 @@
       <div class="flex1 flexrow">
         {{#each system.characteristics as |char key| }}
           <div class="flexcol characteristic">
-            <label title="{{ localize char.label }}" class="flex0">{{ localize char.abbr }}</label>
-            <div title="{{ localize char.label }}" class="characteristic-value flex0">{{char.value}}</div>
+            <label data-tooltip="{{ localize char.label }}" class="flex0">{{ localize char.abbr }}</label>
+            <div data-tooltip="{{ localize char.label }}" class="characteristic-value flex0">{{char.value}}</div>
           </div>
         {{/each}}
-        <a class="modify-characteristics flex0" title="{{ localize 'OQ.Labels.EditCharacteristics' }}"><i
+        <a class="modify-characteristics flex0" data-tooltip="{{ localize 'OQ.Labels.EditCharacteristics' }}"><i
           class="fas fa-gear"></i></a>
       </div>
 
     </div>
 
-
-    <!-- attributes -->
-    <div class="attributes flex-col-top">
-      <h2 class="flex0">{{ localize 'OQ.Labels.Attributes' }}</h2>
-
-      <div class="attributes-grid">
-
-        <label for="hp" title="{{ localize 'OQ.Labels.AttributesNames.HitPoints.Label'}}">{{ localize
-          'OQ.Labels.AttributesNames.HitPoints.Abbr'}}</label>
-        <div class="value">
-          <input id="hp" type="number" data-dtype="Number" name="system.attributes.hp.value"
-                 value="{{system.attributes.hp.value}}" />
-          <div>&nbsp;/&nbsp{{system.attributes.hp.max}}</div>
-        </div>
-
-        <label for="mp" title="{{ localize 'OQ.Labels.AttributesNames.MagicPoints.Label'}}">{{ localize
-          'OQ.Labels.AttributesNames.MagicPoints.Abbr'}}</label>
-        <div class="value">
-          <input id="mp" type="number" data-dtype="Number" name="system.attributes.mp.value"
-                 value="{{system.attributes.mp.value}}" />
-          <div>&nbsp;/&nbsp{{system.attributes.mp.max}}</div>
-        </div>
-
-        <a class="modify-attributes" title="{{ localize 'OQ.Labels.EditAttributes' }}"><i
-          class="fas fa-gear"></i></a>
-
-        <label for="fp" title="{{ localize 'OQ.Labels.AttributesNames.Fortune.Label' }}">{{ localize
-          'OQ.Labels.AttributesNames.Fortune.Abbr' }}</label>
-        <div class="value"><input id="fp" type="number" name="system.attributes.fn" value="{{system.attributes.fn}}">
-        </div>
-        <label for="gp" title="{{ localize 'OQ.Labels.AttributesNames.Growth.Label' }}">{{ localize
-          'OQ.Labels.AttributesNames.Growth.Abbr' }}</label>
-        <div class="value"><input id="gp" type="number" name="system.attributes.gr" value="{{system.attributes.gr}}">
-        </div>
-
-        <div class="wide">
-          <label title="{{ localize 'OQ.Labels.AttributesNames.DamageModifier.Label'}}">{{ localize
-            'OQ.Labels.AttributesNames.DamageModifier.Abbr'}}</label>
-          <div class="value">{{system.attributes.dm.value}}</div>
-
-          <label title="{{ localize 'OQ.Labels.AttributesNames.MovementRate.Label'}}">{{ localize
-            'OQ.Labels.AttributesNames.MovementRate.Abbr'}}</label>
-          <div class="value">{{system.attributes.mr.value}}</div>
-
-          <label title="{{ localize 'OQ.Labels.AttributesNames.ArmourWorn.Label'}}">{{ localize
-            'OQ.Labels.AttributesNames.ArmourWorn.Abbr'}}</label>
-          <div class="value">{{system.attributes.ap.value}}</div>
-        </div>
+    {{> systems/oq/templates/actor/parts/attributes.hbs this}}
 
 
-      </div>
-
-    </div>
   </section>
 
   <nav class="sheet-tabs tabs" data-group="primary">

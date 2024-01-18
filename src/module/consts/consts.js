@@ -1,20 +1,27 @@
-import { OQCharacterActor } from '../document/actor/characterActor.js';
+import { OQCharacterActor } from '../document/actor/character-actor.js';
 import { OQNpcActor } from '../document/actor/npcActor.js';
 import { OQSkill } from '../document/item/skill.js';
 import { OQWeapon } from '../document/item/weapon.js';
 import { OQArmor } from '../document/item/armor.js';
 import { OQEquipment } from '../document/item/equipment.js';
 import { OQSpell } from '../document/item/spell.js';
-import { OQCharacterSheet } from '../sheet/actor/characterSheet.js';
-import { OQNpcSheet } from '../sheet/actor/npcSheet.js';
-import { OQSkillSheet } from '../sheet/item/skillSheet.js';
+import { OQCharacterSheet } from '../sheet/actor/character-sheet.js';
+import { OQNpcSheet } from '../sheet/actor/npc-sheet.js';
+import { OQSkillSheet } from '../sheet/item/skill-sheet.js';
 import { OQSpecialAbility } from '../document/item/specialAbility.js';
-import { RollResults } from './rollResults.js';
+import { RollResults } from './roll-results.js';
 
 export const SYSTEM_ID = 'oq';
 export const SYSTEM_NAME = 'OQ System';
 
-const SkillGroups = ['resistance', 'combat', 'knowledge', 'practical', 'magic', 'custom'];
+const SkillGroups = {
+  resistance: 'resistance',
+  combat: 'combat',
+  knowledge: 'knowledge',
+  practical: 'practical',
+  magic: 'magic',
+  custom: 'custom',
+};
 
 const DifficultyLevels = {
   easy: 50,
@@ -24,7 +31,8 @@ const DifficultyLevels = {
   hard: -50,
 };
 
-const DefaultCharacteristics = {
+//FIXME: delete after fixing rolls
+const CharacteristicsParams = {
   characteristicsRolls: {
     str: '3d6',
     dex: '3d6',
@@ -96,7 +104,7 @@ export const OQ = {
   SYSTEM_NAME,
   Actor,
   Item,
-  DefaultCharacteristics,
+  CharacteristicsParams,
   SkillGroups,
   DifficultyLevels,
   BaseRollFormula,
