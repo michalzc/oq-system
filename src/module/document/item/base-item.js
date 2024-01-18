@@ -4,7 +4,7 @@ export class OQBaseItem extends Item {
   async _onCreate(data, options, userId) {
     await super._onCreate(data, options, userId);
 
-    const newIcon = CONFIG.OQ.DefaultItemIcons[data.type];
+    const newIcon = CONFIG.OQ.ItemConfig.defaultIcons[data.type];
     if (newIcon && !options.fromCompendium) {
       await this.update({
         img: newIcon,

@@ -16,7 +16,7 @@ export class OQSkillSheet extends OQBaseItemSheet {
   }
 
   getSkillGroups() {
-    const groups = _.keys(CONFIG.OQ.SkillGroups);
+    const groups = _.keys(CONFIG.OQ.ItemConfig.skillGroups);
     return Object.fromEntries(groups.map((key) => [key, `OQ.SkillGroups.${key}`]));
   }
 }

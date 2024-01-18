@@ -10,7 +10,7 @@ import { roll } from '../roll.js';
  */
 export async function skillRollDialog(speaker, rollData) {
   log('Rolling skill with dialog', speaker, rollData);
-  let difficultyLevels = CONFIG.OQ.DifficultyLevels;
+  let difficultyLevels = CONFIG.OQ.RollConfig.difficultyLevels;
   const difficultiesForDialog = Object.fromEntries(
     Object.keys(difficultyLevels).map((key) => {
       const diffLabel = `${game.i18n.localize(`OQ.Labels.DifficultyLevels.${key}`)} (${difficultyLevels[key]})%`;
@@ -50,7 +50,7 @@ async function makeRoll(rollData, dialog) {
   const difficultyKey = $(dialog).find('#difficulty').val();
   const othMods = dialog.find('#otherMods').val();
 
-  const difficultyValue = CONFIG.OQ.DifficultyLevels[difficultyKey];
+  const difficultyValue = CONFIG.OQ.RollConfig.difficultyLevels[difficultyKey];
   await roll({
     ...rollData,
     difficulty: { key: difficultyKey, value: difficultyValue },

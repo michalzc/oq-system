@@ -3,14 +3,14 @@ import { OQBaseItem } from './item/base-item.js';
 
 const actorHandler = {
   construct(target, [data, context]) {
-    const actorConstructor = CONFIG.OQ.Actor.documentClasses[data.type];
+    const actorConstructor = CONFIG.OQ.ActorConfig.documentClasses[data.type];
     return actorConstructor ? new actorConstructor(data, context) : new OQBaseActor(data, context);
   },
 };
 
 const itemHandler = {
   construct(_, [data, context]) {
-    const itemConstructor = CONFIG.OQ.Item.documentClasses[data.type];
+    const itemConstructor = CONFIG.OQ.ItemConfig.documentClasses[data.type];
     return itemConstructor ? new itemConstructor(data, context) : new OQBaseItem(data, context);
   },
 };

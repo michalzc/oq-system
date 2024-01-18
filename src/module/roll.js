@@ -26,7 +26,7 @@ import { log } from './utils.js';
 export async function roll(rollData) {
   log('Making a roll for', rollData);
 
-  const d100 = await new Roll(CONFIG.OQ.BaseRollFormula).roll({ async: true });
+  const d100 = await new Roll(CONFIG.OQ.RollConfig.baseRollFormula).roll({ async: true });
   const resultFeatures = getResultFeatures(d100);
   const updatedRollData = {
     ...rollData,
@@ -76,7 +76,7 @@ export async function roll(rollData) {
  *   - "failure" if the roll is a failure.
  */
 export function getResult(resultFeatures, rollValue, rollData) {
-  const rollResults = CONFIG.OQ.RollResults;
+  const rollResults = CONFIG.OQ.RollConfig.rollResults;
   if (rollData.mastered && rollData.masterNeverThrows)
     return resultFeatures.double ? rollResults.criticalSuccess : rollResults.success;
   else if (rollData.totalValue < rollValue && rollData.mastered) return rollResults.failure;
