@@ -1,4 +1,4 @@
-import { OQBaseItem } from './baseItem.js';
+import { OQBaseItem } from './base-item.js';
 import { roll } from '../../roll.js';
 import { skillRollDialog } from '../../application/skill-roll-dialog.js';
 

@@ -1,6 +1,15 @@
 import _ from 'lodash-es';
 
 export class OQBaseActor extends Actor {
+  async _onCreate(data, options, userId) {
+    await super._onCreate(data, options, userId);
+
+    const newIcon = CONFIG.OQ.DefaultActorIcons[data.type];
+    if (!options.fromCompendium && newIcon) {
+      await this.update({ img: newIcon });
+    }
+  }
+
   prepareBaseData() {
     super.prepareBaseData();
     const system = this.system;

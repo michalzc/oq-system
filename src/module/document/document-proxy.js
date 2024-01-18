@@ -1,17 +1,17 @@
 import { OQBaseActor } from './actor/base-actor.js';
-import { OQBaseItem } from './item/baseItem.js';
+import { OQBaseItem } from './item/base-item.js';
 
 const actorHandler = {
   construct(target, [data, context]) {
     const actorConstructor = CONFIG.OQ.Actor.documentClasses[data.type];
-    return actorConstructor ? new actorConstructor(data, context) : OQBaseActor(data, context);
+    return actorConstructor ? new actorConstructor(data, context) : new OQBaseActor(data, context);
   },
 };
 
 const itemHandler = {
   construct(_, [data, context]) {
     const itemConstructor = CONFIG.OQ.Item.documentClasses[data.type];
-    return itemConstructor ? new itemConstructor(data, context) : OQBaseItem(data, context);
+    return itemConstructor ? new itemConstructor(data, context) : new OQBaseItem(data, context);
   },
 };
 
