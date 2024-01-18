@@ -1,4 +1,4 @@
-import { WeaponsHands } from '../consts/items.js';
+import { WeaponsHands } from '../consts/items-config.js';
 
 const fields = foundry.data.fields;
 
