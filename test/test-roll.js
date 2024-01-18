@@ -1,6 +1,6 @@
 import assert from 'assert';
 import { getResult, getResultFeatures } from '../src/module/roll.js';
-import { RollResults } from '../src/module/consts/roll-results.js';
+import { RollResults } from '../src/module/consts/rolls.js';
 
 describe('roll.js', function () {
   globalThis.CONFIG = {

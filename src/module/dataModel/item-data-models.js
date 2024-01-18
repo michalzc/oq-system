@@ -1,11 +1,13 @@
+import { WeaponsHands } from '../consts/items.js';
+
 const fields = foundry.data.fields;
 
-function commonStringModel() {
-  return new fields.StringField({ trim: true, initial: '' });
+function commonStringModel(required = false) {
+  return new fields.StringField({ trim: true, initial: '', required });
 }
 
-function positiveNumberModel() {
-  return new fields.NumberField({ min: 0, integer: true, required: true, initial: 0 });
+function positiveNumberModel(require = true, initial = 0) {
+  return new fields.NumberField({ min: 0, integer: true, require, initial });
 }
 
 function htmlFieldModel() {
@@ -29,6 +31,13 @@ export class WeaponDataModel extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       description: htmlFieldModel(),
+      damageFormula: commonStringModel(true),
+      hands: new fields.StringField({ required: true, initial: WeaponsHands.one, choices: WeaponsHands }),
+      encumbrance: positiveNumberModel(false, undefined),
+      ranged: new fields.BooleanField({ initial: false }),
+      rangeFormula: commonStringModel(false),
+      rate: positiveNumberModel(false, undefined),
+      cost: positiveNumberModel(),
     };
   }
 }

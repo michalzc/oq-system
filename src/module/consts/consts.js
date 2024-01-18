@@ -1,5 +1,5 @@
 import { OQCharacterActor } from '../document/actor/character-actor.js';
-import { OQNpcActor } from '../document/actor/npcActor.js';
+import { OQNpcActor } from '../document/actor/npc-actor.js';
 import { OQSkill } from '../document/item/skill.js';
 import { OQWeapon } from '../document/item/weapon.js';
 import { OQArmor } from '../document/item/armor.js';
@@ -9,27 +9,12 @@ import { OQCharacterSheet } from '../sheet/actor/character-sheet.js';
 import { OQNpcSheet } from '../sheet/actor/npc-sheet.js';
 import { OQSkillSheet } from '../sheet/item/skill-sheet.js';
 import { OQSpecialAbility } from '../document/item/specialAbility.js';
-import { RollResults } from './roll-results.js';
+import { BaseRollFormula, DifficultyLevels, RollResults } from './rolls.js';
+import { SkillGroups } from './items.js';
+import { OQWeaponSheet } from '../sheet/item/weapon-sheet.js';
 
 export const SYSTEM_ID = 'oq';
 export const SYSTEM_NAME = 'OQ System';
-
-const SkillGroups = {
-  resistance: 'resistance',
-  combat: 'combat',
-  knowledge: 'knowledge',
-  practical: 'practical',
-  magic: 'magic',
-  custom: 'custom',
-};
-
-const DifficultyLevels = {
-  easy: 50,
-  simple: 20,
-  normal: 0,
-  difficult: -20,
-  hard: -50,
-};
 
 //FIXME: delete after fixing rolls
 const CharacteristicsParams = {
@@ -83,6 +68,7 @@ const Item = {
   },
   sheetClasses: {
     skill: OQSkillSheet,
+    weapon: OQWeaponSheet,
   },
 };
 
@@ -98,7 +84,6 @@ const SettingKeys = {
   },
 };
 
-const BaseRollFormula = 'd100';
 export const OQ = {
   SYSTEM_ID,
   SYSTEM_NAME,
