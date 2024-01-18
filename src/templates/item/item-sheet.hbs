@@ -10,23 +10,7 @@
   </header>
 
   <section class="sheet-content flexcol flex1">
-    <div class="flex0 grid1_3">
-      <label for="group">{{localize 'OQ.Labels.Group'}}</label>
-
-      <select name="system.group" id="group">
-        {{selectOptions skillGroups selected=system.group localize=true}}
-      </select>
-      {{#if customGroup}}
-        <label for="customGroup">{{localize 'OQ.Labels.CustomGroup'}}</label>
-        <input type="text" name="system.customGroupName" id="customGroup" value="{{system.customGroupName}}">
-      {{/if}}
-      <label for="formula">{{localize 'OQ.Labels.Formula'}}</label>
-      <input type="text" name="system.formula" id="formula" value="{{system.formula}}">
-      {{#if assigned}}
-        <label for="mod">{{localize 'OQ.Labels.Mod'}}</label>
-      <input type="number" name="system.mod" id="mod" value="{{system.mod}}">
-      {{/if}}
-    </div>
+    {{ getPartial this.item.type this }}
     <fieldset class="flexrow flex1">
       <legend>{{localize 'OQ.Labels.Description'}}</legend>
       {{editor enrichedDescription target="system.description" id="description" engine="prosemirror" button=true

@@ -2,10 +2,6 @@ import { OQBaseItemSheet } from './base-item-sheet.js';
 import _ from 'lodash-es';
 
 export class OQSkillSheet extends OQBaseItemSheet {
-  get template() {
-    return 'systems/oq/templates/item/skill.hbs';
-  }
-
   async getData(options) {
     const baseData = await super.getData(options);
     return mergeObject(baseData, {

@@ -1,9 +1,12 @@
+import _ from 'lodash-es';
+
 export class OQBaseItemSheet extends ItemSheet {
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return _.merge(super.defaultOptions, {
       width: 640,
       height: 480,
       classes: ['oq', 'sheet', 'item'],
+      template: 'systems/oq/templates/item/item-sheet.hbs',
     });
   }
 
@@ -11,7 +14,7 @@ export class OQBaseItemSheet extends ItemSheet {
     const data = super.getData(options);
     const system = this.item.system;
     const enrichedDescription = await TextEditor.enrichHTML(system.description, { async: true });
-    return mergeObject(data, {
+    return _.merge(data, {
       system,
       enrichedDescription,
     });

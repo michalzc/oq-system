@@ -1,4 +1,4 @@
-import { WeaponsHands } from '../consts/items-config.js';
+import { ItemConfig } from '../consts/items-config.js';
 
 const fields = foundry.data.fields;
 
@@ -32,7 +32,11 @@ export class WeaponDataModel extends foundry.abstract.DataModel {
     return {
       description: htmlFieldModel(),
       damageFormula: commonStringModel(true),
-      hands: new fields.StringField({ required: true, initial: WeaponsHands.one, choices: WeaponsHands }),
+      hands: new fields.StringField({
+        required: true,
+        initial: ItemConfig.weaponHands.one,
+        choices: ItemConfig.weaponHands,
+      }),
       encumbrance: positiveNumberModel(false, undefined),
       ranged: new fields.BooleanField({ initial: false }),
       rangeFormula: commonStringModel(false),
