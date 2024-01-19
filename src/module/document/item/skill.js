@@ -1,6 +1,7 @@
 import { OQBaseItem } from './base-item.js';
 import { roll } from '../../roll.js';
 import { skillRollDialog } from '../../application/skill-roll-dialog.js';
+import _ from 'lodash-es';
 
 export class OQSkill extends OQBaseItem {
   prepareDerivedData() {
@@ -8,17 +9,13 @@ export class OQSkill extends OQBaseItem {
 
     let skillTotal = this.getValue();
     const extendedData = {
-      shortName: this.getShortName(),
+      skillSlug: this.name.slugify(),
       groupName: this.getGroupLabel(),
       value: skillTotal,
       mastered: skillTotal >= 100,
     };
 
-    this.system = mergeObject(this.system, extendedData);
-  }
-
-  getShortName() {
-    return this.name.replace(/\s/g, '').replace('(', '_').replace(')', '');
+    this.system = _.merge(this.system, extendedData);
   }
 
   getGroupLabel() {

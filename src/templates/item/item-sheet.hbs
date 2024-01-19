@@ -5,7 +5,9 @@
     <div class="flexcol">
       <input class="name" type="text" data-dtype="String" name="name" value="{{item.name}}"
              placeholder="{{localize 'OQ.Labels.Name'}}">
-      <span class="short-name">{{system.shortName}}</span>
+      {{#if system.skillSlug }}
+        <span class="short-name">{{system.skillSlug}}</span>
+      {{/if}}
     </div>
   </header>
 

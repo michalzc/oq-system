@@ -46,20 +46,27 @@
 
   <section class="sheet-content">
     <div class="tab" data-group="primary" data-tab="details">
-      <div class="details">
-        <fieldset class="skills">
+      <div class="items">
+        <fieldset class="item skills">
           <legend>{{ localize 'OQ.Labels.SkillsAbilities' }}</legend>
+          {{#each groupedItems.skillsAndAbilities as |skillAbility|}}
+            <div>
+              <a class="item-to-chat" data-item-id="{{skillAbility.id}}"><img class="item-icon" src="{{skillAbility.img}}" alt="{{skillAbility.name}}"></a>
+              <a class=".roll-item" data-item-id="{{skillAbility.id}}">{{skillAbility.name}}</a>
+              <input name="{{skillAbility.type}}.mod" class="skill-mod mod-value" data-item-id="{{skillAbility.id}}" type="number" data-dtype="Number" value="{{skillAbility.system.mod}}">
+            </div>
+          {{/each}}
         </fieldset>
 
-        <fieldset class="combat">
+        <fieldset class="item combat">
           <legend>{{ localize 'OQ.Nav.Combat' }}</legend>
         </fieldset>
 
-        <fieldset class="magic">
+        <fieldset class="item magic">
           <legend>{{ localize 'OQ.Nav.Magic' }}</legend>
         </fieldset>
 
-        <fieldset class="magic">
+        <fieldset class="item magic">
           <legend>{{ localize 'OQ.Nav.Equipment' }}</legend>
         </fieldset>
       </div>

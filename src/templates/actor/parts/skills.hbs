@@ -1,9 +1,9 @@
-<div class="skills">
+<div class="items">
   {{#each system.groupedSkills as |skills groupKey|}}
-    <fieldset class="skill-group">
+    <fieldset class="item-group">
       <legend>{{ localize groupKey}}</legend>
       {{#each skills as |skill|}}
-        <div class="skill">
+        <div class="item skill">
           <a class="item-to-chat" data-item-id="{{skill.id}}"><img class="item-icon" src="{{skill.img}}"
                                                                    data-tooltip="{{localize 'OQ.Tooltips.SendToChat'}}"
                                                                    alt="{{skill.name}}"></a>

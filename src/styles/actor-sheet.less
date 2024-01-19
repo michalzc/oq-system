@@ -55,5 +55,64 @@
         }
       }
     }
+
+    .sheet-content {
+      flex: 1;
+
+      .editor {
+        color: var(--color-text-dark-primary);
+      }
+
+      .tab[data-tab].active {
+        display: flex;
+        flex: 1;
+      }
+
+      .items {
+        gap: 1em;
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .item-group {
+          display: flex;
+          flex-direction: column;
+          flex-wrap: wrap;
+          flex-grow: 0;
+          flex-shrink: 1;
+          min-width: 23em;
+          border: 0;
+          gap: 0.2em;
+
+          .item {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            flex-grow: 0;
+            flex-shrink: 1;
+            align-items: center;
+            justify-items: flex-start;
+            gap: 0.5em;
+
+            .item-roll {
+              flex-grow: 1;
+            }
+
+            .mod-value {
+              width: 2em;
+              border: 0;
+              text-align: center;
+              font-size: var(--font-size-14);
+            }
+
+            .total-value {
+              width: 2.5em;
+              flex-grow: 0;
+            }
+          }
+        }
+      }
+    }
   }
 }

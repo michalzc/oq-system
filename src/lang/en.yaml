@@ -1,33 +1,45 @@
----
-name: OpenQuest SRD System
-TYPES:
-  Actor:
-    character: Player Character
-    npc: Monster/NPC
-  Item:
-    skill: Skill
-    weapon: Weapon
-    armour: Armour
-    equipment: Equipment
-    spell: Spell
-    specialAbility: Special Ability
 OQ:
+  Dialog:
+    AllPoints: All
+    Base: Base
+    Cancel: Cancel
+    Characteristics:
+      Title: Update Characteristics
+    Mod: Mod
+    Points: Points
+    RemainPoints: Remain
+    Reset: Reset Data
+    Roll: Roll
+    Roll All: Roll All
+    Save: Save Data
+    SkillRollDialogTitle:
+      Title: Skill Roll of
+    SpentPoints: Spent
+    Value: Value
   Errors:
     InvalidRoll: Invalid roll definition
+  Hints:
+    ItemRollHint: Hold SHIFT key to show roll dialog.
+    RollAll: Roll all
+    RollFormula: Roll formula
   Labels:
-    Name: Name
-    Gender: Gender
+    Abilities: Abilities
+    Advances: Advances
     Age: Age
-    Concept: Concept
-    Culture: Culture
-    Rank: Rank
-    Organisation: Organisation
-    Characteristics: Characteristics
     Attributes: Attributes
     AttributesNames:
+      ap:
+        abbr: AP
+        label: Armour Worn
       dm:
         abbr: DM
         label: Damage Modifier
+      fn:
+        abbr: FP
+        label: Fortune Points
+      gr:
+        abbr: GP
+        label: Growth Points
       hp:
         abbr: HP
         label: Hit Points
@@ -37,124 +49,112 @@ OQ:
       mr:
         abbr: MR
         label: Movement Rate
-      ap:
-        abbr: AP
-        label: Armour Worn
-      fn:
-        abbr: FP
-        label: Fortune Points
-      gr:
-        abbr: GP
-        label: Growth Points
+    Characteristics: Characteristics
     CharacteristicsNames:
-      str:
-        label: Strength
-        abbr: Str
-      con:
-        label: Constitution
-        abbr: Con
-      dex:
-        label: Dexterity
-        abbr: Dex
-      siz:
-        label: Size
-        abbr: Siz
-      int:
-        label: Intelligence
-        abbr: Int
-      pow:
-        label: Power
-        abbr: Pow
       cha:
-        label: Charisma
         abbr: Cha
-    EditCharacteristics: Edit Characteristics
-    EditAttributes: Edit Attributes
-    Group: Group
-    Formula: Formula
-    Description: Description
+        label: Charisma
+      con:
+        abbr: Con
+        label: Constitution
+      dex:
+        abbr: Dex
+        label: Dexterity
+      int:
+        abbr: Int
+        label: Intelligence
+      pow:
+        abbr: Pow
+        label: Power
+      siz:
+        abbr: Siz
+        label: Size
+      str:
+        abbr: Str
+        label: Strength
+    Concept: Concept
+    Cost: Cost
+    Culture: Culture
     CustomGroup: Custom Group
-    Notes: Notes
-    Mod: Mod
-    SkillMastered: Skill Mastered!
+    DamageFormula: Damage Formula
+    Description: Description
     Difficulty: Difficulty
     DifficultyLevels:
-      easy: Easy
-      simple: Simple
-      normal: Normal
       difficult: Difficult
+      easy: Easy
       hard: Hard
+      normal: Normal
+      simple: Simple
+    EditAttributes: Edit Attributes
+    EditCharacteristics: Edit Characteristics
+    Encumbrance: Encumbrance
+    FireRate: Fire Rate
+    Formula: Formula
+    Gender: Gender
+    Group: Group
+    Hands: Hands
+    Mod: Mod
+    Name: Name
+    Notes: Notes
+    Organisation: Organisation
     OtherMods: Other Modifiers
-    SkillValue: Skill Value
-    Advances: Advances
-    Abilities: Abilities
-    SkillsAbilities: Skills & Abilities
+    Range: Range
+    Rank: Rank
     Roll: Roll
-    DamageFormula: Damage Formula
+    RollFormula: Roll Formula
+    SkillMastered: Skill Mastered!
+    SkillValue: Skill Value
+    SkillsAbilities: Skills & Abilities
+    Traits: Traits
     WeaponHands:
       one: One Handed
-      two: Two Handed
       oneAndTwo: One or Two Handed
-    Hands: Hands
+      two: Two Handed
+    WeaponType: Weapon Type
     WeaponTypes:
       melee: Melee
       ranged: Ranged
       shield: Shield
-    WeaponType: Weapon Type
-    Encumbrance: Encumbrance
-    FireRate: Fire Rate
-    Cost: Cost
-    Range: Range
-    Traits: Traits
-
   Nav:
-    Skills: Skills
     Combat: Combat
+    Description: Description
+    Details: Details
+    Effects: Effects
     Equipment: Equipment
     Magic: Magic
     Notes: Notes
-    Effects: Effects
-    Details: Details
-    Description: Description
-  Dialog:
-    Save: Save Data
-    Reset: Reset Data
-    Cancel: Cancel
-    Characteristics:
-      Title: Update Characteristics
-    Mod: Mod
-    Base: Base
-    Value: Value
-    Roll: Roll
-    Roll All: Roll All
-    Points: Points
-    AllPoints: All
-    SpentPoints: Spent
-    RemainPoints: Remain
-    SkillRollDialogTitle:
-      Title: Skill Roll of
-  SkillGroups:
-    resistance: Resistances
-    combat: Combat Skills
-    knowledge: Knowledge Skills
-    practical: Practical Skills
-    magic: Magic Skills
-    custom: Custom Group
-  Tooltips:
-    SendToChat: Send to chat
-  Settings:
-    MasterNeverThrows:
-      name: Master Never Throws
-      hint: If checked the master roll is always success, even if the difficulty or custom modifiers decrease corresponding skill below 100
-  RollResults:
-    criticalSuccess: Critical Success
-    success: Success
-    failure: Failure
-    fumble: Fumble
+    Skills: Skills
   RollMessage:
     flavour: Test of
     mastered: mastered
-  Hints:
-    ItemRollHint: Hold SHIFT key to show roll dialog.
-    RollAll: Roll all
-    RollFormula: Roll formula
+  RollResults:
+    criticalSuccess: Critical Success
+    failure: Failure
+    fumble: Fumble
+    success: Success
+  Settings:
+    MasterNeverThrows:
+      hint: If checked the master roll is always success, even if the difficulty or
+        custom modifiers decrease corresponding skill below 100
+      name: Master Never Throws
+  SkillGroups:
+    combat: Combat Skills
+    custom: Custom Group
+    knowledge: Knowledge Skills
+    magic: Magic Skills
+    practical: Practical Skills
+    resistance: Resistances
+  Tooltips:
+    SendToChat: Send to chat
+TYPES:
+  Actor:
+    character: Player Character
+    npc: Monster/NPC
+  Item:
+    armour: Armour
+    equipment: Equipment
+    skill: Skill
+    specialAbility: Special Ability
+    spell: Spell
+    weapon: Weapon
+name: OpenQuest SRD System

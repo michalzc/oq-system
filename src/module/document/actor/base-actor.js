@@ -61,6 +61,12 @@ export class OQBaseActor extends Actor {
     return this.items.filter((item) => item.type === 'skill');
   }
 
+  getSkillsBySlug() {
+    return _.fromPairs(
+      this.items.filter((item) => item.type === 'skill').map((skill) => [skill.system.skillSlug, skill]),
+    );
+  }
+
   calculateAttributes() {
     const attributes = this.system.attributes;
     const characteristics = this.system.characteristics;
