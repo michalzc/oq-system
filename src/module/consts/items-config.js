@@ -22,11 +22,16 @@ export const ItemConfig = {
   },
   defaultIcons: {
     skill: 'systems/oq/assets/icons/skills.svg',
-    weapon: 'systems/oq/assets/icons/spears.svg',
+    weapon: 'systems/oq/assets/icons/two-handed-sword.svg',
     armour: 'systems/oq/assets/icons/armor-vest.svg',
     equipment: 'systems/oq/assets/icons/toolbox.svg',
     spell: 'systems/oq/assets/icons/magic-swirl.svg',
     specialAbility: 'systems/oq/assets/icons/embrassed-energy.svg',
+  },
+  weaponIcons: {
+    melee: 'systems/oq/assets/icons/two-handed-sword.svg',
+    ranged: 'systems/oq/assets/icons/crossbow.svg',
+    shield: 'systems/oq/assets/icons/checked-shield.svg',
   },
   skillGroups: {
     resistance: 'resistance',
@@ -40,6 +45,20 @@ export const ItemConfig = {
     one: 'one',
     two: 'two',
     oneAndTwo: 'oneAndTwo',
+  },
+  weaponArmourStatus: {
+    ready: 'ready',
+    stowed: 'stowed',
+    stored: 'stored',
+  },
+  equipmentAndConsumableStatus: {
+    stowed: 'stowed',
+    stored: 'stored',
+  },
+  weaponType: {
+    melee: 'melee',
+    ranged: 'ranged',
+    shield: 'shield',
   },
   itemSheetPartials: {
     skill: 'systems/oq/templates/item/parts/skill-sheet-details.hbs',

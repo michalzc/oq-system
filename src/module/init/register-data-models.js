@@ -1,4 +1,4 @@
-import { CharacterDataModel, NpcDataModel } from '../dataModel/actor-data-models.js';
+import { CharacterDataModel, NpcDataModel } from '../dataModel/data-models-actor.js';
 import {
   ArmorDataModel,
   EquipmentDataModel,
@@ -6,7 +6,7 @@ import {
   SpecialAbilityDataModel,
   SpellDataModel,
   WeaponDataModel,
-} from '../dataModel/item-data-models.js';
+} from '../dataModel/data-models-item.js';
 
 export function registerDataModels() {
   CONFIG.Actor.dataModels = {

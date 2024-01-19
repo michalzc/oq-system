@@ -90,6 +90,23 @@ OQ:
     Abilities: Abilities
     SkillsAbilities: Skills & Abilities
     Roll: Roll
+    DamageFormula: Damage Formula
+    WeaponHands:
+      one: One Handed
+      two: Two Handed
+      oneAndTwo: One or Two Handed
+    Hands: Hands
+    WeaponTypes:
+      melee: Melee
+      ranged: Ranged
+      shield: Shield
+    WeaponType: Weapon Type
+    Encumbrance: Encumbrance
+    FireRate: Fire Rate
+    Cost: Cost
+    Range: Range
+    Traits: Traits
+
   Nav:
     Skills: Skills
     Combat: Combat
@@ -115,7 +132,7 @@ OQ:
     SpentPoints: Spent
     RemainPoints: Remain
     SkillRollDialogTitle:
-      Title:  Skill Roll of
+      Title: Skill Roll of
   SkillGroups:
     resistance: Resistances
     combat: Combat Skills

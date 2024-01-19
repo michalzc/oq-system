@@ -42,6 +42,22 @@ export class WeaponDataModel extends foundry.abstract.DataModel {
       rangeFormula: commonStringModel(false),
       rate: positiveNumberModel(false, undefined),
       cost: positiveNumberModel(),
+      status: new fields.StringField({
+        required: true,
+        initial: ItemConfig.weaponArmourStatus.stowed,
+        choices: ItemConfig.weaponArmourStatus,
+        trim: true,
+      }),
+      weaponType: new fields.StringField({
+        required: true,
+        initial: ItemConfig.weaponType.melee,
+        choices: ItemConfig.weaponType,
+        trim: true,
+      }),
+      traits: new fields.ArrayField(commonStringModel(), {
+        required: false,
+        initial: [],
+      }),
     };
   }
 }
