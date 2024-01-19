@@ -1,9 +1,10 @@
-import { registerSettings } from './init/settings.js';
+import { registerSettings } from './init/register-settings.js';
 import { preloadTemplates } from './init/preload-templates.js';
 import { log } from './utils.js';
 import { OQ } from './consts/consts.js';
 import { registerDocuments } from './init/register-documents.js';
 import { registerDataModels } from './init/register-data-models.js';
+import { registerHelpers } from './init/handlebar-helpers.js';
 
 async function init() {
   log('Initializing OQ');
@@ -12,6 +13,8 @@ async function init() {
   registerDataModels();
   registerDocuments();
   registerSettings();
+  registerHelpers();
+
   await preloadTemplates();
 
   log('Initialized');

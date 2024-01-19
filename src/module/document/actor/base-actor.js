@@ -1,6 +1,15 @@
 import _ from 'lodash-es';
 
 export class OQBaseActor extends Actor {
+  async _onCreate(data, options, userId) {
+    await super._onCreate(data, options, userId);
+
+    const newIcon = CONFIG.OQ.ActorConfig.defaultIcons[data.type];
+    if (!options.fromCompendium && newIcon) {
+      await this.update({ img: newIcon });
+    }
+  }
+
   prepareBaseData() {
     super.prepareBaseData();
     const system = this.system;
@@ -55,7 +64,7 @@ export class OQBaseActor extends Actor {
   calculateAttributes() {
     const attributes = this.system.attributes;
     const characteristics = this.system.characteristics;
-    const defaults = CONFIG.OQ.CharacteristicsParams;
+    const defaults = CONFIG.OQ.ActorConfig.characteristicsParams;
 
     const baseDM = defaults.damageModifierFunction(characteristics.str.value + characteristics.siz.value);
     const dmMod = attributes.dm.mod?.trim();

@@ -1,11 +1,11 @@
 import assert from 'assert';
 import { getResult, getResultFeatures } from '../src/module/roll.js';
-import { RollResults } from '../src/module/consts/rolls.js';
+import { RollConfig } from '../src/module/consts/rolls-config.js';
 
 describe('roll.js', function () {
   globalThis.CONFIG = {
     OQ: {
-      RollResults,
+      RollConfig,
     },
   };
 
@@ -26,13 +26,13 @@ describe('roll.js', function () {
     }
 
     const rollsAndResults = [
-      makeRowData(10, 50, 50, RollResults.success),
-      makeRowData(60, 50, 50, RollResults.failure),
-      makeRowData(22, 50, 50, RollResults.criticalSuccess),
-      makeRowData(77, 50, 50, RollResults.fumble),
-      makeRowData(85, 80, 100, RollResults.success),
-      makeRowData(88, 80, 100, RollResults.criticalSuccess),
-      makeRowData(100, 80, 100, RollResults.fumble),
+      makeRowData(10, 50, 50, RollConfig.rollResults.success),
+      makeRowData(60, 50, 50, RollConfig.rollResults.failure),
+      makeRowData(22, 50, 50, RollConfig.rollResults.criticalSuccess),
+      makeRowData(77, 50, 50, RollConfig.rollResults.fumble),
+      makeRowData(85, 80, 100, RollConfig.rollResults.success),
+      makeRowData(88, 80, 100, RollConfig.rollResults.criticalSuccess),
+      makeRowData(100, 80, 100, RollConfig.rollResults.fumble),
     ];
 
     rollsAndResults.forEach((data) => {
@@ -67,15 +67,15 @@ describe('roll.js', function () {
     }
 
     const rollsResultsAndData = [
-      makeDataRow(51, 100, true, RollResults.success),
-      makeDataRow(51, 100, false, RollResults.success),
-      makeDataRow(55, 100, true, RollResults.criticalSuccess),
-      makeDataRow(55, 100, false, RollResults.criticalSuccess),
-      makeDataRow(99, 90, true, RollResults.criticalSuccess),
-      makeDataRow(91, 90, true, RollResults.success),
-      makeDataRow(99, 90, false, RollResults.failure),
-      makeDataRow(100, 90, true, RollResults.criticalSuccess),
-      makeDataRow(100, 90, false, RollResults.failure),
+      makeDataRow(51, 100, true, RollConfig.rollResults.success),
+      makeDataRow(51, 100, false, RollConfig.rollResults.success),
+      makeDataRow(55, 100, true, RollConfig.rollResults.criticalSuccess),
+      makeDataRow(55, 100, false, RollConfig.rollResults.criticalSuccess),
+      makeDataRow(99, 90, true, RollConfig.rollResults.criticalSuccess),
+      makeDataRow(91, 90, true, RollConfig.rollResults.success),
+      makeDataRow(99, 90, false, RollConfig.rollResults.failure),
+      makeDataRow(100, 90, true, RollConfig.rollResults.criticalSuccess),
+      makeDataRow(100, 90, false, RollConfig.rollResults.failure),
     ];
 
     rollsResultsAndData.forEach((data) => {

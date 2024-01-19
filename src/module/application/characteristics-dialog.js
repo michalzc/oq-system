@@ -16,8 +16,8 @@ export class CharacteristicsDialog extends FormApplication {
     super(object);
 
     this.points = CharacteristicsDialog.calculatePoints(
-      CONFIG.OQ.CharacteristicsParams.characteristicPoints,
-      CONFIG.OQ.CharacteristicsParams.basePoints,
+      CONFIG.OQ.ActorConfig.characteristicsParams.characteristicPoints,
+      CONFIG.OQ.ActorConfig.characteristicsParams.basePoints,
       Object.values(object.system.characteristics)
         .map((char) => char.base)
         .reduce((l, r) => l + r),
@@ -83,7 +83,7 @@ export class CharacteristicsDialog extends FormApplication {
     if (event.currentTarget) {
       const characteristicsBlock = event.currentTarget.closest('.chars-table');
       if (characteristicsBlock) {
-        const rollPromises = Object.keys(CONFIG.OQ.CharacteristicsParams.characteristicsRolls)
+        const rollPromises = Object.keys(CONFIG.OQ.ActorConfig.characteristicsParams.characteristicsRolls)
           .map((key) => [key, `input[name="characteristics.${key}.roll"]`])
           .map(([key, selector]) => [key, $(characteristicsBlock).find(selector).val()])
           .filter(([, value]) => typeof value === 'string')

@@ -1,21 +1,26 @@
 <div class="skills">
-{{#each system.groupedSkills as |skills groupKey|}}
-  <fieldset class="skill-group">
-    <legend>{{ localize groupKey}}</legend>
-    {{#each skills as |skill|}}
-      <div class="skill">
-        <a class="item-to-chat" data-item-id="{{skill.id}}"><img class="item-icon" src="{{skill.img}}" title="{{localize 'OQ.Tooltips.SendToChat'}}" alt="{{skill.name}}"></a>
-        <a class="item-roll" data-item-id="{{skill.id}}">{{skill.name}}</a>
-        {{#if skill.system.mastered}}
-          <span title="{{localize 'OQ.Labels.SkillMastered'}}"><i class="fa fa-seal"></i></span>
-        {{/if}}
-        <input name="skill.mod" class="skill-mod mod-value" data-item-id="{{skill.id}}" type="number" data-dtype="Number"
-               value="{{skill.system.mod}}" data-tooltip="{{ localize 'OQ.Labels.Advances' }}">
-        <a class="item-roll total-value" data-item-id="{{skill.id}}">{{skill.system.value}}%</a>
-        <a class="item-edit" data-item-id="{{skill.id}}"><i class="fas fa-edit"></i></a>
-        <a class="item-delete" data-item-id="{{skill.id}}"><i class="fas fa-trash"></i></a>
-      </div>
-    {{/each}}
-  </fieldset>
-{{/each}}
+  {{#each system.groupedSkills as |skills groupKey|}}
+    <fieldset class="skill-group">
+      <legend>{{ localize groupKey}}</legend>
+      {{#each skills as |skill|}}
+        <div class="skill">
+          <a class="item-to-chat" data-item-id="{{skill.id}}"><img class="item-icon" src="{{skill.img}}"
+                                                                   data-tooltip="{{localize 'OQ.Tooltips.SendToChat'}}"
+                                                                   alt="{{skill.name}}"></a>
+          <a class="item-roll" data-item-id="{{skill.id}}"
+             data-tooltip="{{localize 'OQ.Labels.Roll'}} {{skill.name}}">{{skill.name}}</a>
+          {{#if skill.system.mastered}}
+            <span data-tooltip="{{localize 'OQ.Labels.SkillMastered'}}"><i class="fa fa-seal"></i></span>
+          {{/if}}
+          <input name="skill.mod" class="skill-mod mod-value" data-item-id="{{skill.id}}" type="number"
+                 data-dtype="Number"
+                 value="{{skill.system.mod}}" data-tooltip="{{ localize 'OQ.Labels.Advances' }}">
+          <a class="item-roll total-value" data-item-id="{{skill.id}}"
+             data-tooltip="{{localize 'OQ.Labels.Roll'}} {{skill.name}}">{{skill.system.value}}%</a>
+          <a class="item-edit" data-item-id="{{skill.id}}"><i class="fas fa-edit"></i></a>
+          <a class="item-delete" data-item-id="{{skill.id}}"><i class="fas fa-trash"></i></a>
+        </div>
+      {{/each}}
+    </fieldset>
+  {{/each}}
 </div>

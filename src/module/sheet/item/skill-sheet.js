@@ -2,10 +2,6 @@ import { OQBaseItemSheet } from './base-item-sheet.js';
 import _ from 'lodash-es';
 
 export class OQSkillSheet extends OQBaseItemSheet {
-  get template() {
-    return 'systems/oq/templates/item/skill.hbs';
-  }
-
   async getData(options) {
     const baseData = await super.getData(options);
     return mergeObject(baseData, {
@@ -16,7 +12,7 @@ export class OQSkillSheet extends OQBaseItemSheet {
   }
 
   getSkillGroups() {
-    const groups = _.keys(CONFIG.OQ.SkillGroups);
+    const groups = _.keys(CONFIG.OQ.ItemConfig.skillGroups);
     return Object.fromEntries(groups.map((key) => [key, `OQ.SkillGroups.${key}`]));
   }
 }

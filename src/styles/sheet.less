@@ -1,6 +1,11 @@
 @import 'colors';
 
 .oq.sheet {
+  .profile-img {
+    flex: 0;
+    border-color: @base-color;
+  }
+
   .editor {
     font-size: var(--font-size-14);
 
@@ -111,5 +116,43 @@
 
   a.item {
     .nav-item-font();
+  }
+
+  .tag-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    font-size: var(--font-size-12);
+    align-items: flex-start;
+
+    .tag-item {
+      display: flex;
+      align-items: center;
+      flex: 0;
+      white-space: nowrap;
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+
+      a {
+        visibility: hidden;
+        margin-left: 0.5em;
+      }
+    }
+
+    .tag-item:hover {
+      box-shadow: 0.1em 0.1em 1em @dark-color;
+
+      a {
+        visibility: visible;
+      }
+    }
+
+    .tag-input {
+      flex: 1;
+      min-width: 5em;
+      font-size: var(--font-size-12);
+      //width: 100%;
+    }
   }
 }

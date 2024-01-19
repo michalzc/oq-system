@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Johannes Loher
-//
-// SPDX-License-Identifier: MIT
-
 export function registerSettings() {
   const localizationPrefix = 'OQ.Settings';
   const masterNeverThrows = CONFIG.OQ.SettingKeys.masterNeverThrows;

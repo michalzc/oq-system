@@ -1,0 +1,41 @@
+<div class="flex0 grid1_3">
+  <label for="damageFormula">{{localize 'OQ.Labels.DamageFormula'}}</label>
+  <input id="damageFormula" type="text" data-dtype="String" name="system.damageFormula"
+         value="{{ system.damageFormula }}">
+
+  <label for="hands">{{ localize 'OQ.Labels.Hands'}}</label>
+  <select id="hands" name="system.hands">
+    {{ selectOptions weaponHandsList selected=system.hands localize=true }}
+  </select>
+
+  <label for="weaponType">{{ localize 'OQ.Labels.WeaponType'}}</label>
+  <select id="weaponType" name="system.weaponType">
+    {{ selectOptions weaponTypeList selected=system.weaponType localize=true }}
+  </select>
+
+  {{#if (eq system.weaponType 'ranged')}}
+    <label for="range">{{ localize 'OQ.Labels.Range'}}</label>
+    <input id="range" type="number" data-dtype="Number" name="system.range"
+           value="{{ system.range }}">
+
+    <label for="rate">{{ localize 'OQ.Labels.FireRate'}}</label>
+    <input id="rate" type="number" data-dtype="Number" name="system.rate"
+           value="{{ system.rate }}">
+  {{/if}}
+
+  <label for="encumbrance">{{ localize 'OQ.Labels.Encumbrance'}}</label>
+  <input id="encumbrance" type="number" data-dtype="Number" name="system.encumbrance"
+         value="{{ system.encumbrance }}">
+
+  <label for="cost">{{ localize 'OQ.Labels.Cost'}}</label>
+  <input id="cost" type="number" data-dtype="Number" name="system.cost"
+         value="{{ system.cost }}">
+
+  <label for="traitInput">{{ localize 'OQ.Labels.Traits'}}</label>
+  <div class="traits tag-list">
+    {{#each system.traits as |trait|}}
+      <span class="tag-item">{{trait}}<a class="tag-delete" data-tag="{{trait}}"><i class="fas fa-delete-left"></i></a></span>
+    {{/each}}
+    <input id="traitInput" type="text" class="tag-input" data-dtype="String">
+  </div>
+</div>

@@ -1,3 +1,3 @@
-import { OQBaseItem } from './baseItem.js';
+import { OQBaseItem } from './base-item.js';
 
-export class OQArmor extends OQBaseItem {}
+export class OQArmour extends OQBaseItem {}

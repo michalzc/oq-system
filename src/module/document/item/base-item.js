@@ -1,8 +1,15 @@
 import { log } from '../../utils.js';
 
 export class OQBaseItem extends Item {
-  async _preCreate(data, option, user) {
-    super._preCreate(data, option, user);
+  async _onCreate(data, options, userId) {
+    await super._onCreate(data, options, userId);
+
+    const newIcon = CONFIG.OQ.ItemConfig.defaultIcons[data.type];
+    if (newIcon && !options.fromCompendium) {
+      await this.update({
+        img: newIcon,
+      });
+    }
   }
 
   /**
