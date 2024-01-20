@@ -1,64 +1,94 @@
 .oq.sheet {
-  .character-sheet {
+  .actor-sheet {
+    display: flex;
+    flex-direction: column;
+
+    .sheet-header {
+      flex: 0;
+
+      .header-fields {
+        flex: 1;
+
+        input {
+          border-bottom: 1px solid @base-color-transparent;
+          background: none;
+        }
+      }
+
+      .profile-img {
+        flex: 0;
+        border-color: @base-color;
+        width: 128px;
+        height: 128px;
+      }
+    }
+
     .sheet-body {
       display: flex;
       flex-direction: row;
       flex-grow: 0;
       gap: 1em;
 
-      .characteristics {
+      .attributes {
+        flex-grow: 0;
         display: flex;
-        justify-items: flex-start;
         flex-direction: column;
-        flex-grow: 2;
 
-        & > div {
-          flex-grow: 1;
+        .attributes-grid {
+          flex-grow: 0;
+          display: grid;
+          grid-template-columns: 2fr 4fr 2fr 4fr 1fr;
+          gap: 10px;
+          align-items: end;
+
+          .wide {
+            grid-column: span 4;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+          }
         }
       }
 
       .value {
-        input {
-          border-bottom-color: @dark-color;
-        }
-      }
+        justify-self: start;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
 
-      .modify-attributes {
-        justify-self: center;
-        align-self: start;
-        grid-row-end: span 3;
+        font-size: 18px;
+
+        input {
+          border: 0;
+          border-bottom: 1px solid;
+          max-width: 2em;
+          text-align: center;
+        }
       }
     }
 
     .sheet-content {
       align-content: flex-start;
 
-      .editor {
-        color: var(--color-text-dark-primary);
-      }
-
-      .tab.active {
+      .tab[data-tab].active {
         display: flex;
         flex-grow: 1;
         align-items: flex-start;
       }
 
-      .notes {
-        flex-grow: 1;
-        align-self: normal;
-
-        .editor {
-          flex-grow: 1;
-        }
+      .editor {
+        color: var(--color-text-dark-primary);
       }
 
-      .skills {
+      .items {
+        gap: 1em;
+        flex: 1;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        gap: 1em;
 
-        .skill-group {
+        .item-group {
           display: flex;
           flex-direction: column;
           flex-wrap: wrap;
@@ -68,7 +98,7 @@
           border: 0;
           gap: 0.2em;
 
-          .skill {
+          .item {
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;
@@ -92,6 +122,7 @@
             .total-value {
               width: 2.5em;
               flex-grow: 0;
+              white-space: nowrap;
             }
           }
         }

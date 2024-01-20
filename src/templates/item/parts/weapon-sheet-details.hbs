@@ -31,6 +31,10 @@
   <input id="cost" type="number" data-dtype="Number" name="system.cost"
          value="{{ system.cost }}">
 
+  <label for="rollFormula">{{localize 'OQ.Labels.RollFormula'}}</label>
+  <input id="rollFormula" type="text" data-dtype="String" name="system.rollFormula"
+         value="{{ system.rollFormula }}">
+
   <label for="traitInput">{{ localize 'OQ.Labels.Traits'}}</label>
   <div class="traits tag-list">
     {{#each system.traits as |trait|}}
@@ -38,4 +42,6 @@
     {{/each}}
     <input id="traitInput" type="text" class="tag-input" data-dtype="String">
   </div>
+
+
 </div>

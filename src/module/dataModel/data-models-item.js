@@ -20,7 +20,6 @@ export class SkillDataModel extends foundry.abstract.DataModel {
       description: htmlFieldModel(),
       formula: commonStringModel(),
       mod: positiveNumberModel(),
-      shortName: commonStringModel(),
       group: commonStringModel(),
       customGroupName: commonStringModel(),
     };
@@ -58,6 +57,7 @@ export class WeaponDataModel extends foundry.abstract.DataModel {
         required: false,
         initial: [],
       }),
+      rollFormula: commonStringModel(),
     };
   }
 }

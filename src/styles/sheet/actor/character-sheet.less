@@ -1,0 +1,47 @@
+.oq.sheet {
+  .character-sheet {
+    .sheet-body {
+      .characteristics {
+        display: flex;
+        justify-items: flex-start;
+        flex-direction: column;
+        flex-grow: 2;
+
+        & > div {
+          flex-grow: 1;
+        }
+      }
+
+      .value {
+        input {
+          border-bottom-color: @dark-color;
+        }
+      }
+
+      .modify-attributes {
+        justify-self: center;
+        align-self: start;
+        grid-row-end: span 3;
+      }
+    }
+
+    .sheet-content {
+      .notes {
+        flex-grow: 1;
+        align-self: normal;
+
+        .editor {
+          flex-grow: 1;
+        }
+      }
+
+      .items {
+        .item-group {
+          .skill {
+            //Empty for now
+          }
+        }
+      }
+    }
+  }
+}
