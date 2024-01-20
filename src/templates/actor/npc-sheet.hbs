@@ -1,4 +1,4 @@
-<form class="actor-sheet npc-sheet {{cssClass}}" autocomplete="off">
+<form class="actor-sheet npc-sheet {{cssClass}} flexcol" autocomplete="off">
   <header class="sheet-header">
     <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="64" height="64"
          alt="{{actor.name}}" />
@@ -47,24 +47,50 @@
   <section class="sheet-content">
     <div class="tab" data-group="primary" data-tab="details">
       <div class="items">
-        <fieldset class="item-group skills">
-          <legend>{{ localize 'OQ.Labels.SkillsAbilities' }}</legend>
-          {{#each groupedItems.skillsAndAbilities as |skillAbility|}}
-            {{> systems/oq/templates/actor/parts/skill-ability-row.hbs skillAbility}}
-          {{/each}}
-        </fieldset>
+        {{#if groupedItems.skillsAndAbilities }}
+          <fieldset class="item-group">
+            <legend>{{ localize 'OQ.Labels.SkillsAbilities' }}</legend>
+            {{#each groupedItems.skillsAndAbilities as |skillAbility|}}
+              {{> systems/oq/templates/actor/parts/skill-ability-row.hbs skillAbility}}
+            {{/each}}
+          </fieldset>
+        {{/if}}
 
-        <fieldset class="item combat">
-          <legend>{{ localize 'OQ.Nav.Combat' }}</legend>
-        </fieldset>
+        {{#if groupedItems.combat }}
+          <fieldset class="item-group">
+            <legend>{{ localize 'OQ.Nav.Combat' }}</legend>
+            {{#each groupedItems.combat as |combatItem|}}
+              {{#if (eq combatItem.type 'skill')}}
+                {{> systems/oq/templates/actor/parts/skill-ability-row.hbs combatItem}}
+              {{/if}}
+              {{#if (eq combatItem.type 'ability')}}
+                {{> systems/oq/templates/actor/parts/skill-ability-row.hbs combatItem}}
+              {{/if}}
 
-        <fieldset class="item magic">
-          <legend>{{ localize 'OQ.Nav.Magic' }}</legend>
-        </fieldset>
+            {{/each}}
+          </fieldset>
+        {{/if}}
 
-        <fieldset class="item magic">
-          <legend>{{ localize 'OQ.Nav.Equipment' }}</legend>
-        </fieldset>
+        {{#if groupedItems.magic }}
+          <fieldset class="item-group">
+            <legend>{{ localize 'OQ.Nav.Magic' }}</legend>
+            {{#each groupedItems.magic as |magicItem|}}
+              {{#if (eq magicItem.type 'skill')}}
+                {{> systems/oq/templates/actor/parts/skill-ability-row.hbs magicItem}}
+              {{/if}}
+              {{#if (eq magicItem.magic 'ability')}}
+                {{> systems/oq/templates/actor/parts/skill-ability-row.hbs magicItem}}
+              {{/if}}
+
+            {{/each}}
+          </fieldset>
+        {{/if}}
+
+        {{#if groupedItems.equipment }}
+          <fieldset class="item-group">
+            <legend>{{ localize 'OQ.Nav.Equipment' }}</legend>
+          </fieldset>
+        {{/if}}
       </div>
     </div>
 

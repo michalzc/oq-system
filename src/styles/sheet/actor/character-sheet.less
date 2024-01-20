@@ -1,11 +1,6 @@
 .oq.sheet {
   .character-sheet {
     .sheet-body {
-      display: flex;
-      flex-direction: row;
-      flex-grow: 0;
-      gap: 1em;
-
       .characteristics {
         display: flex;
         justify-items: flex-start;
@@ -31,14 +26,6 @@
     }
 
     .sheet-content {
-      align-content: flex-start;
-
-      .tab[data-tab].active {
-        display: flex;
-        flex-grow: 1;
-        align-items: flex-start;
-      }
-
       .notes {
         flex-grow: 1;
         align-self: normal;

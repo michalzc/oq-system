@@ -1,6 +1,11 @@
 .oq.sheet {
   .actor-sheet {
+    display: flex;
+    flex-direction: column;
+
     .sheet-header {
+      flex: 0;
+
       .header-fields {
         flex: 1;
 
@@ -13,10 +18,17 @@
       .profile-img {
         flex: 0;
         border-color: @base-color;
+        width: 128px;
+        height: 128px;
       }
     }
 
     .sheet-body {
+      display: flex;
+      flex-direction: row;
+      flex-grow: 0;
+      gap: 1em;
+
       .attributes {
         flex-grow: 0;
         display: flex;
@@ -57,15 +69,16 @@
     }
 
     .sheet-content {
-      flex: 1;
-
-      .editor {
-        color: var(--color-text-dark-primary);
-      }
+      align-content: flex-start;
 
       .tab[data-tab].active {
         display: flex;
-        flex: 1;
+        flex-grow: 1;
+        align-items: flex-start;
+      }
+
+      .editor {
+        color: var(--color-text-dark-primary);
       }
 
       .items {

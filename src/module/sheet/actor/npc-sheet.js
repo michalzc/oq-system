@@ -1,5 +1,5 @@
 import { OQActorBaseSheet } from './actor-base-sheet.js';
-import { log, logObject } from '../../utils.js';
+import { logObject } from '../../utils.js';
 import _ from 'lodash-es';
 
 export class OQNpcSheet extends OQActorBaseSheet {
@@ -53,7 +53,6 @@ export class OQNpcSheet extends OQActorBaseSheet {
 
     const equipment = groupedItems.equipment ?? [];
 
-    log('getItems', otherSkills);
     return {
       skillsAndAbilities,
       magic,
