@@ -47,14 +47,10 @@
   <section class="sheet-content">
     <div class="tab" data-group="primary" data-tab="details">
       <div class="items">
-        <fieldset class="item skills">
+        <fieldset class="item-group skills">
           <legend>{{ localize 'OQ.Labels.SkillsAbilities' }}</legend>
           {{#each groupedItems.skillsAndAbilities as |skillAbility|}}
-            <div>
-              <a class="item-to-chat" data-item-id="{{skillAbility.id}}"><img class="item-icon" src="{{skillAbility.img}}" alt="{{skillAbility.name}}"></a>
-              <a class=".roll-item" data-item-id="{{skillAbility.id}}">{{skillAbility.name}}</a>
-              <input name="{{skillAbility.type}}.mod" class="skill-mod mod-value" data-item-id="{{skillAbility.id}}" type="number" data-dtype="Number" value="{{skillAbility.system.mod}}">
-            </div>
+            {{> systems/oq/templates/actor/parts/skill-ability-row.hbs skillAbility}}
           {{/each}}
         </fieldset>
 

@@ -15,11 +15,6 @@ export class OQCharacterSheet extends OQActorBaseSheet {
 
     html.find('.modify-characteristics').on('click', this._onModifyCharacteristics.bind(this));
     html.find('.modify-attributes').on('click', this._onModifyAttributes.bind(this));
-
-    html.find('.item-edit').on('click', this._onModifyItem.bind(this));
-    html.find('.item-delete').on('click', this._onDeleteItem.bind(this));
-
-    html.find('.skill-mod').on('change', this._onUpdateSkillMod.bind(this));
   }
 
   async getData(options) {
@@ -29,28 +24,6 @@ export class OQCharacterSheet extends OQActorBaseSheet {
       enrichedNotes,
       isCharacter: true,
     });
-  }
-
-  async _onUpdateSkillMod(event) {
-    event.preventDefault();
-    const dataset = event.currentTarget.dataset;
-    const item = this.actor.items.get(dataset.itemId);
-    const value = event.currentTarget.value;
-    await item.update({ 'system.mod': value });
-  }
-
-  _onModifyItem(event) {
-    event.preventDefault();
-    const dataset = event.currentTarget.dataset;
-    const item = this.actor.items.get(dataset.itemId);
-    item.sheet.render(true);
-  }
-
-  _onDeleteItem(event) {
-    event.preventDefault();
-    const dataset = event.currentTarget.dataset;
-    const item = this.actor.items.get(dataset.itemId);
-    item.delete();
   }
 
   _onModifyCharacteristics() {

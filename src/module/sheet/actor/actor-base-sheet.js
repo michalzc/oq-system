@@ -39,6 +39,33 @@ export class OQActorBaseSheet extends ActorSheet {
 
     html.find('.item-to-chat').on('click', this._onItemToChat.bind(this));
     html.find('.item-roll').on('click', this._onItemRoll.bind(this));
+
+    html.find('.item-edit').on('click', this._onModifyItem.bind(this));
+    html.find('.item-delete').on('click', this._onDeleteItem.bind(this));
+
+    html.find('.item-mod').on('change', this._onUpdateItemMod.bind(this));
+  }
+
+  async _onUpdateItemMod(event) {
+    event.preventDefault();
+    const dataset = event.currentTarget.dataset;
+    const item = this.actor.items.get(dataset.itemId);
+    const value = event.currentTarget.value;
+    await item.update({ 'system.mod': value });
+  }
+
+  _onModifyItem(event) {
+    event.preventDefault();
+    const dataset = event.currentTarget.dataset;
+    const item = this.actor.items.get(dataset.itemId);
+    item.sheet.render(true);
+  }
+
+  _onDeleteItem(event) {
+    event.preventDefault();
+    const dataset = event.currentTarget.dataset;
+    const item = this.actor.items.get(dataset.itemId);
+    item.delete();
   }
 
   async _onItemRoll(event) {
