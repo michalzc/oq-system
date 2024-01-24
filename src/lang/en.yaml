@@ -98,6 +98,7 @@ OQ:
     Gender: Gender
     Group: Group
     Hands: Hands
+    Mastered: Mastered
     Mod: Mod
     IncludeDamageMod: Include DM
     Name: Name
@@ -142,11 +143,7 @@ OQ:
     failure: Failure
     fumble: Fumble
     success: Success
-  Settings:
-    MasterNeverThrows:
-      hint: If checked the master roll is always success, even if the difficulty or
-        custom modifiers decrease corresponding skill below 100
-      name: Master Never Throws
+  Settings: []
   SkillGroups:
     combat: Combat Skills
     custom: Custom Group

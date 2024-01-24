@@ -1,5 +1,3 @@
-import { log } from './utils.js';
-
 /**
  * @typedef {Object} Difficulty
  * @property {string} key
@@ -35,29 +33,27 @@ import { log } from './utils.js';
  * @param {RollData} rollData
  * @returns {Promise<void>}
  */
-export async function roll(rollData) {
-  log('Making a roll for', rollData);
 
+const MAX_VALUE = 100;
+
+export async function skillRoll(rollData) {
   const d100 = await new Roll(CONFIG.OQ.RollConfig.baseRollFormula).roll({ async: true });
   const resultFeatures = getResultFeatures(d100);
+  const totalValue = rollData.value + (rollData.difficulty?.value ?? 0) + (rollData?.modifier ?? 0);
+
   const updatedRollData = {
     ...rollData,
-    totalValue: rollData.value + (rollData.difficulty?.value ?? 0) + (rollData?.modifier ?? 0),
-    masterNeverThrows: game.settings.get(CONFIG.OQ.SYSTEM_ID, CONFIG.OQ.SettingKeys.masterNeverThrows.key),
+    totalValue,
   };
   const rollResult = getResult(resultFeatures, d100.total, updatedRollData);
-  const mastery =
-    (updatedRollData.totalValue === updatedRollData.value &&
-      updatedRollData.mastered &&
-      updatedRollData.masterNeverThrows) ||
-    (updatedRollData.totalValue >= 100 && updatedRollData.mastered);
   const renderRoll = await d100.render();
+  const mastered = rollData.value >= MAX_VALUE && totalValue >= MAX_VALUE && rollData.mastered;
   const renderData = {
     ...updatedRollData,
     rollResult,
-    mastery: mastery,
     roll: d100,
     renderRoll,
+    mastered,
   };
   const messageContent = await renderTemplate('systems/oq/templates/chat/parts/skill-roll.hbs', renderData);
   const messageData = {
@@ -77,9 +73,8 @@ export async function roll(rollData) {
  * @param {boolean} resultFeatures.possibleFumble - Indicates if the result can be a fumble.
  * @param {number} rollValue - The value against which the roll is compared.
  * @param {object} rollData - The data of the roll.
- * @param {boolean} rollData.mastered - Indicates if the roll is mastered.
- * @param {boolean} rollData.masterNeverThrows - Indicates if master never throws.
  * @param {number} rollData.totalValue - The total value of the roll.
+ * @param {number} rollData.value
  *
  * @returns {string} - The result of the roll. Possible values are:
  *   - "criticalSuccess" if the roll is a critical success.
@@ -89,16 +84,13 @@ export async function roll(rollData) {
  */
 export function getResult(resultFeatures, rollValue, rollData) {
   const rollResults = CONFIG.OQ.RollConfig.rollResults;
-  if (rollData.mastered && rollData.masterNeverThrows)
+  const mastered = rollData.value >= 100 && rollData.totalValue >= 100;
+
+  if (mastered) return rollResults.criticalSuccess;
+  else if (resultFeatures.possibleFumble) return rollResults.fumble;
+  else if (rollValue <= rollData.totalValue)
     return resultFeatures.double ? rollResults.criticalSuccess : rollResults.success;
-  else if (rollData.totalValue < rollValue && rollData.mastered) return rollResults.failure;
-  else if (!rollData.mastered && resultFeatures.possibleFumble) return rollResults.fumble;
-  else if (rollData.totalValue < rollValue) {
-    return resultFeatures.double ? rollResults.fumble : rollResults.failure;
-  } else {
-    // if (rollData.totalValue >= rollValue)
-    return resultFeatures.double ? rollResults.criticalSuccess : rollResults.success;
-  }
+  else return resultFeatures.double ? rollResults.fumble : rollResults.failure;
 }
 
 /**
