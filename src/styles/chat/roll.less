@@ -9,6 +9,14 @@
     color: @dark-color;
     font-size: var(--font-size-18);
     font-weight: bold;
+    grid-column-start: span 2;
+  }
+
+  .roll-img {
+    width: 64px;
+    height: 64px;
+    border: 0;
+    flex: 0;
   }
 
   .label {
@@ -16,12 +24,19 @@
     text-wrap: none;
   }
 
-  .roll-params {
-    display: grid;
-    grid-template-columns: 3fr 4fr;
+  .roll-header {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
     gap: 0.5em;
 
-    font-size: var(--font-size-12);
+    .roll-header-container {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      row-gap: 0.5em;
+      font-size: var(--font-size-12);
+      flex: 1;
+    }
   }
 
   .roll-result {

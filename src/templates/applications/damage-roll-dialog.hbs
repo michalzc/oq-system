@@ -1,0 +1,23 @@
+<form class="{{cssClasses}} oq dialog roll" autocomplete="off">
+  <div class="dialog-header">
+    <h1>{{ entityName }}</h1>
+  </div>
+  <div class="dialog-body">
+    {{ log this }}
+    <div class="roll-info">
+      <label>{{ localize 'OQ.Labels.Damage' }}</label>
+      <div>{{ damageFormula }}</div>
+
+      <label>{{ localize 'OQ.Labels.DamageMod' }}</label>
+      <div>{{ actorRollData.dm }}</div>
+    </div>
+    <div class="roll-params">
+      <label for="customFormula">{{ localize 'OQ.Dialog.CustomFormula' }}</label>
+      <input id="customFormula" type="text" data-dtype="String" name="customformula" class="custom-formula" value="{{customformula}}">
+    </div>
+    <div class="roll-buttons">
+      <button class="roll-button" type="submit"><i class="fas fa-dice"></i> {{ localize 'OQ.Dialog.Roll' }}</button>
+      <button class="cancel-button"><i class="fas fa-cancel"></i> {{ localize 'OQ.Dialog.Cancel'}}</button>
+    </div>
+  </div>
+</form>

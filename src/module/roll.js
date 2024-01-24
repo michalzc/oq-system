@@ -8,6 +8,7 @@ import { log } from './utils.js';
 
 /**
  * @typedef {Object} RollData
+ * @property {string|undefined} img
  * @property {boolean} mastered
  * @property {Difficulty|undefined} difficulty
  * @property {number|undefined} modifier
@@ -15,6 +16,17 @@ import { log } from './utils.js';
  * @property {string} rollType
  * @property {string} entityName
  * @property {number} value
+ */
+
+/**
+ * @typedef {Object} DamageRollData
+ * @property {string|undefined} img
+ * @property {Object} speaker
+ * @property {Object|undefined} actorRollData
+ * @property {string|undefined} damageFormula
+ * @property {string} entityName
+ * @property {boolean} includeDM
+ * @property {Object|undefined} customFormula
  */
 
 /**
@@ -34,18 +46,19 @@ export async function roll(rollData) {
     masterNeverThrows: game.settings.get(CONFIG.OQ.SYSTEM_ID, CONFIG.OQ.SettingKeys.masterNeverThrows.key),
   };
   const rollResult = getResult(resultFeatures, d100.total, updatedRollData);
-  let mastery =
+  const mastery =
     (updatedRollData.totalValue === updatedRollData.value &&
       updatedRollData.mastered &&
       updatedRollData.masterNeverThrows) ||
     (updatedRollData.totalValue >= 100 && updatedRollData.mastered);
-  let renderData = {
+  const renderRoll = await d100.render();
+  const renderData = {
     ...updatedRollData,
     rollResult,
     mastery: mastery,
     roll: d100,
+    renderRoll,
   };
-  log('Render data', renderData);
   const messageContent = await renderTemplate('systems/oq/templates/chat/parts/skill-roll.hbs', renderData);
   const messageData = {
     type: CONST.CHAT_MESSAGE_TYPES.ROLL,
@@ -53,7 +66,6 @@ export async function roll(rollData) {
     rolls: [d100],
     content: messageContent,
   };
-  log('Message data', messageData);
   await ChatMessage.create(messageData);
 }
 
@@ -105,4 +117,34 @@ export function getResultFeatures(roll) {
     possibleFumble,
     double,
   };
+}
+
+/**
+ *  @param {DamageRollData} rollData
+ * @return {Promise<void>}
+ */
+export async function damageRoll(rollData) {
+  if (rollData.damageFormula) {
+    const damageFormula = rollData.customFormula
+      ? rollData.customFormula
+      : rollData.includeDM
+        ? `${rollData.damageFormula} ${rollData.actorRollData.dm}`
+        : rollData.damageFormula;
+    const roll = await new Roll(damageFormula, rollData.actorRollData).roll();
+    const renderedRoll = await roll.render();
+    const content = await renderTemplate('systems/oq/templates/chat/parts/damage-roll.hbs', {
+      ...rollData,
+      roll,
+      dm: rollData.actorRollData.dm,
+      renderedRoll,
+    });
+
+    const messageData = {
+      speaker: rollData.speaker,
+      content: content,
+      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      rolls: [roll],
+    };
+    await ChatMessage.create(messageData);
+  }
 }

@@ -37,16 +37,17 @@ export class OQActorBaseSheet extends ActorSheet {
   activateListeners(html) {
     super.activateListeners(html);
 
-    html.find('.item-to-chat').on('click', this._onItemToChat.bind(this));
-    html.find('.item-roll').on('click', this._onItemRoll.bind(this));
+    html.find('a.item-to-chat').on('click', this.onItemToChat.bind(this));
+    html.find('a.item-roll').on('click', this.onItemRoll.bind(this));
+    html.find('a.damage-roll').on('click', this.onDamageRoll.bind(this));
 
-    html.find('.item-edit').on('click', this._onModifyItem.bind(this));
-    html.find('.item-delete').on('click', this._onDeleteItem.bind(this));
+    html.find('a.item-edit').on('click', this.onModifyItem.bind(this));
+    html.find('a.item-delete').on('click', this.onDeleteItem.bind(this));
 
-    html.find('.item-mod').on('change', this._onUpdateItemMod.bind(this));
+    html.find('.item-mod').on('change', this.onUpdateItemMod.bind(this));
   }
 
-  async _onUpdateItemMod(event) {
+  async onUpdateItemMod(event) {
     event.preventDefault();
     const dataset = event.currentTarget.dataset;
     const item = this.actor.items.get(dataset.itemId);
@@ -54,30 +55,39 @@ export class OQActorBaseSheet extends ActorSheet {
     await item.update({ 'system.mod': value });
   }
 
-  _onModifyItem(event) {
+  onModifyItem(event) {
     event.preventDefault();
     const dataset = event.currentTarget.dataset;
     const item = this.actor.items.get(dataset.itemId);
     item.sheet.render(true);
   }
 
-  _onDeleteItem(event) {
+  onDeleteItem(event) {
     event.preventDefault();
     const dataset = event.currentTarget.dataset;
     const item = this.actor.items.get(dataset.itemId);
     item.delete();
   }
 
-  async _onItemRoll(event) {
+  async onItemRoll(event) {
     event.preventDefault();
     log('Item roll', event);
 
     const dataSet = event.currentTarget.dataset;
     const item = this.actor.items.get(dataSet?.itemId);
-    item.makeRoll(!event.shiftKey);
+    await item.makeRoll(!event.shiftKey);
   }
 
-  async _onItemToChat(event) {
+  async onDamageRoll(event) {
+    event.preventDefault();
+    log('Damage roll', event);
+
+    const dataSet = event.currentTarget.dataset;
+    const item = this.actor.items.get(dataSet?.itemId);
+    await item.makeDamageRoll(!event.shiftKey);
+  }
+
+  async onItemToChat(event) {
     event.preventDefault();
 
     const dataSet = event.currentTarget.dataset;

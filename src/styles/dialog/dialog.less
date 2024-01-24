@@ -1,74 +1,91 @@
 @import '../colors';
 
-.oq {
-  &.dialog {
-    .dialog-header {
-      padding: 10px 5px 5px;
-      background-color: @dark-color;
-      background-blend-mode: multiply;
-      color: @base-color;
+.oq.dialog {
+  .dialog-header {
+    margin: 0;
+    padding: 10px 5px 5px;
+    background-color: @dark-color;
+    background-blend-mode: multiply;
+    color: @base-color;
 
-      h1 {
-        border: 0;
+    h1 {
+      border: 0;
+    }
+  }
+
+  .dialog-body {
+    padding: 5px;
+    font-size: 18px;
+
+    .roll-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 1em;
+      margin-bottom: 1em;
+    }
+
+    .roll-params {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5em;
+
+      .custom-formula {
+        text-align: left;
       }
     }
 
-    .dialog-body {
-      padding: 5px;
-      font-size: 18px;
+    label {
+      color: @dark-color;
+    }
 
-      .roll-params {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0.5em;
+    input[type='text'],
+    input[type='number'] {
+      border: 0;
+      border-bottom: 1px solid @dark-color;
+      min-width: 0;
+      width: 100%;
+      text-align: center;
+    }
+
+    input.small-input {
+      width: 2em;
+    }
+
+    .points {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      gap: 10px;
+
+      & > * {
+        flex: 1;
       }
+    }
 
-      label {
-        color: @dark-color;
-      }
+    .chars-table {
+      display: grid;
+      grid-template-columns: 2fr 2fr 1fr 3fr 2fr;
+      align-items: center;
+      gap: 10px;
+    }
 
-      input[type='text'],
-      input[type='number'] {
-        border: 0;
-        border-bottom: 1px solid @dark-color;
+    .attrs-table {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      align-items: center;
+      gap: 10px;
+
+      input {
         min-width: 0;
         width: 100%;
-        text-align: center;
       }
+    }
 
-      input.small-input {
-        width: 2em;
-      }
-
-      .points {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        gap: 10px;
-
-        & > * {
-          flex: 1;
-        }
-      }
-
-      .chars-table {
-        display: grid;
-        grid-template-columns: 2fr 2fr 1fr 3fr 2fr;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .attrs-table {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        align-items: center;
-        gap: 10px;
-
-        input {
-          min-width: 0;
-          width: 100%;
-        }
-      }
+    .roll-buttons {
+      margin-top: 1em;
+      display: flex;
+      flex-direction: row;
+      gap: 1em;
     }
   }
 }

@@ -30,7 +30,10 @@ export class WeaponDataModel extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       description: htmlFieldModel(),
-      damageFormula: commonStringModel(true),
+      correspondingSkill: new fields.SchemaField({
+        skillReference: new fields.StringField({ required: false, trim: true }),
+        skillMod: new fields.NumberField({ required: false, integer: true }),
+      }),
       hands: new fields.StringField({
         required: true,
         initial: ItemConfig.weaponHands.one,
@@ -57,7 +60,10 @@ export class WeaponDataModel extends foundry.abstract.DataModel {
         required: false,
         initial: [],
       }),
-      rollFormula: commonStringModel(),
+      damage: new fields.SchemaField({
+        damageFormula: commonStringModel(true),
+        includeDamageMod: new fields.BooleanField({ initial: true, required: true }),
+      }),
     };
   }
 }

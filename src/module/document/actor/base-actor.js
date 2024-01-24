@@ -1,6 +1,9 @@
 import _ from 'lodash-es';
+import { log } from '../../utils.js';
 
 export class OQBaseActor extends Actor {
+  static otherSkillsGroups = ['knowledge', 'practical', 'custom'];
+  static combatItems = ['weapon', 'armour'];
   async _onCreate(data, options, userId) {
     await super._onCreate(data, options, userId);
 
@@ -28,10 +31,9 @@ export class OQBaseActor extends Actor {
   prepareDerivedData() {
     super.prepareDerivedData();
 
-    this.system = _.merge(this.system, {
-      skills: this.getSkills(),
+    _.merge(this.system, {
       attributes: this.calculateAttributes(),
-      groupedSkills: this.getGroupedSkills(),
+      groupedItems: this.prepareGroupedItems(),
     });
   }
 
@@ -41,30 +43,57 @@ export class OQBaseActor extends Actor {
       Object.entries(this.system.characteristics).map(([key, elem]) => [key, elem.value]),
     );
     const skills = Object.fromEntries(
-      this.items.filter((i) => i.type === 'skill').map((skill) => [skill.system.shortName, skill.system.value]),
+      this.items.filter((i) => i.type === 'skill').map((skill) => [skill.system.slug, skill.system.value]),
     );
+    const dm = this.system.attributes.dm.value;
 
     const newRollData = {
       ...charRollData,
       skills,
+      dm,
     };
 
     return _.merge(rollData, newRollData);
-  }
-
-  getGroupedSkills() {
-    const skills = this.getSkills();
-    return _.groupBy(skills, (skill) => skill.system.groupName);
-  }
-
-  getSkills() {
-    return this.items.filter((item) => item.type === 'skill');
   }
 
   getSkillsBySlug() {
     return _.fromPairs(
       this.items.filter((item) => item.type === 'skill').map((skill) => [skill.system.skillSlug, skill]),
     );
+  }
+
+  prepareGroupedItems() {
+    const groupedItems = _.groupBy([...this.items], (item) => item.type);
+    const skills = groupedItems.skill ?? [];
+    const groupedSkills = _.groupBy(skills, (skill) => skill.system.group);
+    const groupedSkillByGroupName = _.groupBy(skills, (skill) => skill.system.groupName);
+    const otherSkills = _.filter(skills, (skill) => _.includes(OQBaseActor.otherSkillsGroups, skill.system.group));
+    const groupedSkillBySlug = _.fromPairs(skills.map((skill) => [skill.system.slug, skill.name]));
+    log('Skills by slug', groupedSkillBySlug);
+
+    const abilities = groupedItems.specialAbility ?? [];
+    const skillsAndAbilities = _.concat(otherSkills, abilities);
+
+    const magicSkills = groupedSkills.magic ?? [];
+    const spells = groupedItems.spell ?? [];
+    const magic = _.concat(magicSkills, spells);
+
+    const combatSkills = groupedSkills.combat ?? [];
+    const resistances = groupedSkills.resistance ?? [];
+    const weapons = groupedItems.weapon ?? [];
+    const armour = groupedItems.armour ?? [];
+    const combat = _.concat(combatSkills, resistances, weapons, armour);
+
+    const equipment = groupedItems.equipment ?? [];
+
+    return {
+      skillsAndAbilities,
+      magic,
+      combat,
+      equipment,
+      groupedSkillByGroupName,
+      groupedSkillBySlug,
+    };
   }
 
   calculateAttributes() {

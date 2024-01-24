@@ -1,4 +1,6 @@
 import { log } from '../../utils.js';
+import { damageRoll } from '../../roll.js';
+import { OQDamageRollDialog } from '../../application/damage-roll-dialog.js';
 
 export class OQBaseItem extends Item {
   async _onCreate(data, options, userId) {
@@ -23,5 +25,37 @@ export class OQBaseItem extends Item {
 
   async sendToChat() {
     log(`Sending to chat element ${this.id}`);
+  }
+
+  async makeDamageRoll(skipDialog = true) {
+    const speaker = ChatMessage.getSpeaker({ actor: this.parent, token: this.parent.token });
+    const actorRollData = this.parent.getRollData();
+    const damageFormula = this.system.damage.damageFormula;
+    const includeDM = !!this.system.damage.includeDamageMod;
+    const img = this.img;
+    const rollData = {
+      img,
+      speaker,
+      actorRollData,
+      damageFormula,
+      includeDM,
+      entityName: this.name,
+    };
+    if (skipDialog) await damageRoll(rollData);
+    else {
+      const rollDialog = new OQDamageRollDialog(rollData);
+      rollDialog.render(true);
+    }
+  }
+
+  makeRollString(rollFormula) {
+    if (this.parent && rollFormula) {
+      const roll = new Roll(rollFormula, this.parent.getRollData());
+      if (roll.isDeterministic) {
+        return roll.roll({ async: false }).total;
+      } else {
+        return roll.formula;
+      }
+    } else return '';
   }
 }

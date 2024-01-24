@@ -1,5 +1,5 @@
 <div class="items">
-  {{#each system.groupedSkills as |skills groupKey|}}
+  {{#each system.groupedItems.groupedSkillByGroupName as |skills groupKey|}}
     <fieldset class="item-group">
       <legend>{{ localize groupKey}}</legend>
       {{#each skills as |skill|}}

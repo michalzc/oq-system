@@ -32,7 +32,7 @@ export const ActorConfig = {
     damageModifiers: [
       { key: 10, value: '-1d6' },
       { key: 15, value: '-1d4' },
-      { key: 25, value: '0' },
+      { key: 25, value: '' },
       { key: 30, value: '+1d4' },
     ],
     damageModifierFunction: function (value) {

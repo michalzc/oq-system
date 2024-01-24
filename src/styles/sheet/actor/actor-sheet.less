@@ -109,7 +109,12 @@
             gap: 0.5em;
 
             .item-roll {
-              flex-grow: 1;
+              flex: 1;
+            }
+
+            .damage-roll {
+              flex: 0;
+              white-space: nowrap;
             }
 
             .mod-value {
@@ -120,9 +125,10 @@
             }
 
             .total-value {
-              width: 2.5em;
               flex-grow: 0;
+              min-width: 3em;
               white-space: nowrap;
+              text-align: right;
             }
           }
         }

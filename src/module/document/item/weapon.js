@@ -1,5 +1,6 @@
 import { OQBaseItem } from './base-item.js';
 import _ from 'lodash-es';
+import { signedNumberOrEmpty } from '../../utils.js';
 
 export class OQWeapon extends OQBaseItem {
   async _preUpdate(changed, options, user) {
@@ -20,5 +21,27 @@ export class OQWeapon extends OQBaseItem {
         img: weaponIcons[changedWeaponType],
       });
     }
+  }
+
+  get damageFormula() {
+    const damage = this.system.damage.damageFormula;
+    const includeDM = !!this.system.damage.includeDamageMod;
+    const damageFormula = includeDM ? `${damage} ${this.parent.system.attributes.dm.value}` : damage;
+
+    return this.makeRollString(damageFormula);
+  }
+  get isRollable() {
+    return (
+      !!this.parent && (!!this.system.correspondingSkill?.skillReference || !!this.system.correspondingSkill?.skillMod)
+    );
+  }
+  get rollString() {
+    const correspondingSkill = this.system.correspondingSkill;
+    // const skill =
+    const formula = [
+      correspondingSkill?.skillReference && `@skills.${correspondingSkill.skillReference}`,
+      correspondingSkill?.skillMod && signedNumberOrEmpty(correspondingSkill.skillMod),
+    ].join(' ');
+    return this.makeRollString(formula);
   }
 }

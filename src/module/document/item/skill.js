@@ -9,7 +9,7 @@ export class OQSkill extends OQBaseItem {
 
     let skillTotal = this.getValue();
     const extendedData = {
-      skillSlug: this.name.slugify(),
+      slug: this.name.slugify().replace(/\(/g, '').replace(/\)/g, ''),
       groupName: this.getGroupLabel(),
       value: skillTotal,
       mastered: skillTotal >= 100,
@@ -42,6 +42,7 @@ export class OQSkill extends OQBaseItem {
   async makeRoll(skipDialog) {
     const speaker = ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token });
     const rollData = {
+      img: this.img,
       mastered: this.system.mastered,
       speaker,
       rollType: 'skill',

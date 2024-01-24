@@ -1,0 +1,30 @@
+<div class="oq roll damage-roll">
+  <div class="roll-header">
+    {{#if img}}
+      <img class="roll-img" src="{{img}}" alt="{{ entityName }}">
+    {{/if}}
+    <div class="roll-header-container">
+      <div class="roll-title">{{entityName}}</div>
+
+      <div class="label">{{ localize 'OQ.Labels.Type' }}</div>
+      <div>{{ localize 'OQ.Labels.Damage'}}</div>
+
+      {{#unless customFormula }}
+
+        <div class="label">{{ localize 'OQ.Labels.Damage' }}</div>
+        <div>{{ damageFormula }}</div>
+
+        {{#if includeDM}}
+          <div class="label">{{ localize 'OQ.Labels.DamageMod' }}</div>
+          <div>{{ dm }}</div>
+        {{/if}}
+      {{/unless}}
+
+      {{# if customFormula }}
+        <div class="label">{{ localize 'OQ.Labels.CustomDamage' }}</div>
+        <div> {{ customFormula }}</div>
+      {{/if}}
+    </div>
+  </div>
+  {{{ renderedRoll }}}
+</div>

@@ -16,6 +16,7 @@ OQ:
       Title: Skill Roll of
     SpentPoints: Spent
     Value: Value
+    CustomFormula: Custom Formula
   Errors:
     InvalidRoll: Invalid roll definition
   Hints:
@@ -75,8 +76,12 @@ OQ:
     Concept: Concept
     Cost: Cost
     Culture: Culture
+    CustomDamage: Custom
     CustomGroup: Custom Group
+    Damage: Damage
+    DamageMod: Mod
     DamageFormula: Damage Formula
+    DamageRoll: Roll Damage
     Description: Description
     Difficulty: Difficulty
     DifficultyLevels:
@@ -94,18 +99,23 @@ OQ:
     Group: Group
     Hands: Hands
     Mod: Mod
+    IncludeDamageMod: Include DM
     Name: Name
     Notes: Notes
     Organisation: Organisation
-    OtherMods: Other Modifiers
+    OtherMods: Other Mods
     Range: Range
     Rank: Rank
+    Reference: Reference
     Roll: Roll
     RollFormula: Roll Formula
+    Skill: Skill
     SkillMastered: Skill Mastered!
+    SkillReference: Skill reference
     SkillValue: Skill Value
     SkillsAbilities: Skills & Abilities
     Traits: Traits
+    Type: Type
     WeaponHands:
       one: One Handed
       oneAndTwo: One or Two Handed

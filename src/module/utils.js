@@ -13,3 +13,13 @@ export const logObject = (message, object) => {
   log(message, object);
   return object;
 };
+
+/**
+ * Number as string with sign. In case of 0 it returns empty string.
+ * @param {number} num
+ * @returns {string} string representation with sing
+ */
+export function signedNumberOrEmpty(num) {
+  if (num === 0) return '';
+  else return num > 0 ? `+${num}` : `${num}`;
+}
