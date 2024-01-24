@@ -57,25 +57,21 @@ describe('roll.js', function () {
       totalValue: 100,
     };
 
-    function makeDataRow(rollValue, skillTotalValue, masterNeverThrows, expectedResult) {
+    function makeDataRow(rollValue, skillTotalValue, expectedResult) {
       return {
         rollValue,
         skillTotalValue,
-        masterNeverThrows,
         expectedResult,
       };
     }
 
     const rollsResultsAndData = [
-      makeDataRow(51, 100, true, RollConfig.rollResults.success),
-      makeDataRow(51, 100, false, RollConfig.rollResults.success),
-      makeDataRow(55, 100, true, RollConfig.rollResults.criticalSuccess),
-      makeDataRow(55, 100, false, RollConfig.rollResults.criticalSuccess),
-      makeDataRow(99, 90, true, RollConfig.rollResults.criticalSuccess),
-      makeDataRow(91, 90, true, RollConfig.rollResults.success),
-      makeDataRow(99, 90, false, RollConfig.rollResults.failure),
-      makeDataRow(100, 90, true, RollConfig.rollResults.criticalSuccess),
-      makeDataRow(100, 90, false, RollConfig.rollResults.failure),
+      makeDataRow(51, 100, RollConfig.rollResults.criticalSuccess),
+      makeDataRow(55, 100, RollConfig.rollResults.criticalSuccess),
+      makeDataRow(99, 90, RollConfig.rollResults.fumble),
+      makeDataRow(91, 90, RollConfig.rollResults.failure),
+      makeDataRow(81, 90, RollConfig.rollResults.success),
+      makeDataRow(100, 90, RollConfig.rollResults.fumble),
     ];
 
     rollsResultsAndData.forEach((data) => {
@@ -86,7 +82,6 @@ describe('roll.js', function () {
       }`, function () {
         const updatedRollData = {
           ...masteredSkillRollData,
-          masterNeverThrows: data.masterNeverThrows,
           totalValue: data.skillTotalValue,
         };
         const roll = { total: data.rollValue };

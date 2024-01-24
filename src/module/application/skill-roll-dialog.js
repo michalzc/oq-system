@@ -1,5 +1,5 @@
 import { log } from '../utils.js';
-import { roll } from '../roll.js';
+import { skillRoll } from '../roll.js';
 
 /**
  * Displays a skill roll dialog.
@@ -51,7 +51,7 @@ async function makeRoll(rollData, dialog) {
   const othMods = dialog.find('#otherMods').val();
 
   const difficultyValue = CONFIG.OQ.RollConfig.difficultyLevels[difficultyKey];
-  await roll({
+  await skillRoll({
     ...rollData,
     difficulty: { key: difficultyKey, value: difficultyValue },
     modifier: othMods & parseInt(othMods),

@@ -1,5 +1,5 @@
 import { OQBaseItem } from './base-item.js';
-import { roll } from '../../roll.js';
+import { skillRoll } from '../../roll.js';
 import { skillRollDialog } from '../../application/skill-roll-dialog.js';
 import _ from 'lodash-es';
 
@@ -50,7 +50,7 @@ export class OQSkill extends OQBaseItem {
       value: this.system.value,
     };
     if (skipDialog) {
-      await roll(rollData);
+      await skillRoll(rollData);
     } else {
       await skillRollDialog(speaker, rollData);
     }
