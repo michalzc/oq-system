@@ -1,13 +1,13 @@
 import { log } from '../../utils.js';
 import { damageRoll } from '../../roll.js';
-import { OQDamageRollDialog } from '../../application/damage-roll-dialog.js';
+import { OQDamageRollDialog } from '../../application/dialog/damage-roll-dialog.js';
 
 export class OQBaseItem extends Item {
   async _onCreate(data, options, userId) {
     await super._onCreate(data, options, userId);
 
     const newIcon = CONFIG.OQ.ItemConfig.defaultIcons[data.type];
-    if (newIcon && !options.fromCompendium) {
+    if (data.img === CONFIG.OQ.ItemConfig.bagIcon && newIcon && !options.fromCompendium) {
       await this.update({
         img: newIcon,
       });
@@ -19,7 +19,7 @@ export class OQBaseItem extends Item {
    *
    * @param {boolean} skipDialog - The data for the roll.
    */
-  async makeRoll(skipDialog) {
+  async itemTestRoll(skipDialog) {
     log(`Making roll for ${this.id}`, skipDialog);
   }
 
@@ -57,5 +57,18 @@ export class OQBaseItem extends Item {
         return roll.formula;
       }
     } else return '';
+  }
+
+  /**
+   *
+   * @returns {{img: string, entityName: string, speaker: (object|undefined)}}
+   */
+  makeBaseTestRollData() {
+    const speaker = ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token });
+    return {
+      img: this.img,
+      speaker,
+      entityName: this.name,
+    };
   }
 }

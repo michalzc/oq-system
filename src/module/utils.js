@@ -20,6 +20,6 @@ export const logObject = (message, object) => {
  * @returns {string} string representation with sing
  */
 export function signedNumberOrEmpty(num) {
-  if (num === 0) return '';
+  if (!num) return '';
   else return num > 0 ? `+${num}` : `${num}`;
 }

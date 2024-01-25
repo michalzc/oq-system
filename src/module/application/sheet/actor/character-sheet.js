@@ -1,6 +1,6 @@
 import { OQActorBaseSheet } from './actor-base-sheet.js';
-import { AttributesDialog } from '../../application/attributes-dialog.js';
-import { CharacteristicsDialog } from '../../application/characteristics-dialog.js';
+import { AttributesDialog } from '../../dialog/attributes-dialog.js';
+import { CharacteristicsDialog } from '../../dialog/characteristics-dialog.js';
 import _ from 'lodash-es';
 
 export class OQCharacterSheet extends OQActorBaseSheet {

@@ -1,7 +1,7 @@
 import { OQBaseItem } from './base-item.js';
-import { skillRoll } from '../../roll.js';
-import { skillRollDialog } from '../../application/skill-roll-dialog.js';
+import { testRoll } from '../../roll.js';
 import _ from 'lodash-es';
+import { OQTestRollDialog } from '../../application/dialog/test-roll-dialog.js';
 
 export class OQSkill extends OQBaseItem {
   prepareDerivedData() {
@@ -39,20 +39,24 @@ export class OQSkill extends OQBaseItem {
     }
   }
 
-  async makeRoll(skipDialog) {
-    const speaker = ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token });
+  /**
+   * @param {boolean} skipDialog
+   * @returns {Promise<void>}
+   */
+  async itemTestRoll(skipDialog) {
+    const baseRollData = this.makeBaseTestRollData();
     const rollData = {
-      img: this.img,
+      ...baseRollData,
       mastered: this.system.mastered,
-      speaker,
       rollType: 'skill',
-      entityName: this.name,
       value: this.system.value,
     };
     if (skipDialog) {
-      await skillRoll(rollData);
+      await testRoll(rollData);
     } else {
-      await skillRollDialog(speaker, rollData);
+      const dialog = new OQTestRollDialog(rollData);
+      await dialog.render(true);
+      // await skillRollDialog(rollData);
     }
   }
 }

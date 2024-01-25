@@ -20,7 +20,7 @@ OQ:
   Errors:
     InvalidRoll: Invalid roll definition
   Hints:
-    ItemRollHint: Hold SHIFT key to show roll dialog.
+    ItemRollHint: Hold SHIFT key to skip roll dialog.
     RollAll: Roll all
     RollFormula: Roll formula
   Labels:

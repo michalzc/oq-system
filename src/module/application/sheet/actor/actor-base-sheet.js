@@ -1,4 +1,4 @@
-import { log } from '../../utils.js';
+import { log } from '../../../utils.js';
 import _ from 'lodash-es';
 
 const mergeObject = foundry.utils.mergeObject;
@@ -71,11 +71,10 @@ export class OQActorBaseSheet extends ActorSheet {
 
   async onItemRoll(event) {
     event.preventDefault();
-    log('Item roll', event);
 
     const dataSet = event.currentTarget.dataset;
     const item = this.actor.items.get(dataSet?.itemId);
-    await item.makeRoll(!event.shiftKey);
+    await item.itemTestRoll(event.shiftKey);
   }
 
   async onDamageRoll(event) {

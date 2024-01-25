@@ -1,7 +1,7 @@
 import { OQCharacterActor } from '../document/actor/character-actor.js';
 import { OQNpcActor } from '../document/actor/npc-actor.js';
-import { OQCharacterSheet } from '../sheet/actor/character-sheet.js';
-import { OQNpcSheet } from '../sheet/actor/npc-sheet.js';
+import { OQCharacterSheet } from '../application/sheet/actor/character-sheet.js';
+import { OQNpcSheet } from '../application/sheet/actor/npc-sheet.js';
 
 export const ActorConfig = {
   documentClasses: {

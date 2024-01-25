@@ -4,10 +4,11 @@ import { OQArmour } from '../document/item/armor.js';
 import { OQEquipment } from '../document/item/equipment.js';
 import { OQSpell } from '../document/item/spell.js';
 import { OQSpecialAbility } from '../document/item/special-ability.js';
-import { OQSkillSheet } from '../sheet/item/skill-sheet.js';
-import { OQWeaponSheet } from '../sheet/item/weapon-sheet.js';
+import { OQSkillSheet } from '../application/sheet/item/skill-sheet.js';
+import { OQWeaponSheet } from '../application/sheet/item/weapon-sheet.js';
 
 export const ItemConfig = {
+  bagIcon: 'icons/svg/item-bag.svg',
   documentClasses: {
     skill: OQSkill,
     weapon: OQWeapon,

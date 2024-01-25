@@ -9,6 +9,7 @@ export async function preloadTemplates() {
     'systems/oq/templates/actor/parts/weapon.hbs',
     'systems/oq/templates/chat/parts/skill-roll.hbs',
     'systems/oq/templates/chat/parts/damage-roll.hbs',
+    'systems/oq/templates/chat/parts/weapon-roll.hbs',
   ];
 
   return loadTemplates(_.concat(templatePaths, _.values(CONFIG.OQ.ItemConfig.itemSheetPartials)));

@@ -6,6 +6,8 @@
 
 /**
  * @typedef {Object} RollData
+ * @property {'skill'|'weapon'} rollType
+ * @property {string|undefined} skillName
  * @property {string|undefined} img
  * @property {boolean} mastered
  * @property {Difficulty|undefined} difficulty
@@ -16,50 +18,38 @@
  * @property {number} value
  */
 
-/**
- * @typedef {Object} DamageRollData
- * @property {string|undefined} img
- * @property {Object} speaker
- * @property {Object|undefined} actorRollData
- * @property {string|undefined} damageFormula
- * @property {string} entityName
- * @property {boolean} includeDM
- * @property {Object|undefined} customFormula
- */
+const MAX_VALUE = 100;
+
+const TestRollTemplates = {
+  skill: 'systems/oq/templates/chat/parts/skill-roll.hbs',
+  weapon: 'systems/oq/templates/chat/parts/weapon-roll.hbs',
+};
 
 /**
- *
- * Perform roll
+ * Performs test roll
  * @param {RollData} rollData
  * @returns {Promise<void>}
  */
+export async function testRoll(rollData) {
+  const roll = await new Roll(CONFIG.OQ.RollConfig.baseRollFormula).roll({ async: true });
+  const resultFeatures = getResultFeatures(roll);
+  const totalValue = (rollData.value ?? 0) + (rollData.difficulty?.value ?? 0) + (rollData?.modifier ?? 0);
 
-const MAX_VALUE = 100;
-
-export async function skillRoll(rollData) {
-  const d100 = await new Roll(CONFIG.OQ.RollConfig.baseRollFormula).roll({ async: true });
-  const resultFeatures = getResultFeatures(d100);
-  const totalValue = rollData.value + (rollData.difficulty?.value ?? 0) + (rollData?.modifier ?? 0);
-
-  const updatedRollData = {
-    ...rollData,
-    totalValue,
-  };
-  const rollResult = getResult(resultFeatures, d100.total, updatedRollData);
-  const renderRoll = await d100.render();
+  const rollResult = getResult(resultFeatures, roll.total, { value: rollData.value, totalValue });
   const mastered = rollData.value >= MAX_VALUE && totalValue >= MAX_VALUE && rollData.mastered;
   const renderData = {
-    ...updatedRollData,
+    ...rollData,
+    totalValue,
     rollResult,
-    roll: d100,
-    renderRoll,
+    roll,
     mastered,
   };
-  const messageContent = await renderTemplate('systems/oq/templates/chat/parts/skill-roll.hbs', renderData);
+  const template = TestRollTemplates[rollData.rollType];
+  const messageContent = await renderTemplate(template, renderData);
   const messageData = {
     type: CONST.CHAT_MESSAGE_TYPES.ROLL,
     speaker: rollData.speaker,
-    rolls: [d100],
+    rolls: [roll],
     content: messageContent,
   };
   await ChatMessage.create(messageData);
@@ -94,10 +84,17 @@ export function getResult(resultFeatures, rollValue, rollData) {
 }
 
 /**
+ * @typedef RollFeatures
+ * @property {boolean} double
+ * @property {boolean} possibleFumble
+ */
+
+/**
  * Determines the possible features of a given roll result.
  *
  * @param {object} roll - The roll object representing the result.
- * @returns {object} - An object containing the possible features of the roll result.
+ * @param {number} roll.total - Total roll result.
+ * @returns {RollFeatures} - An object containing the possible features of the roll result.
  * @property {boolean} possibleFumble - Indicates whether the roll result is a possible fumble (total equals 100).
  * @property {boolean} double - Indicates whether the roll result is a double (left digit equals right digit).
  */
@@ -110,6 +107,17 @@ export function getResultFeatures(roll) {
     double,
   };
 }
+
+/**
+ * @typedef {Object} DamageRollData
+ * @property {string|undefined} img
+ * @property {Object} speaker
+ * @property {Object|undefined} actorRollData
+ * @property {string|undefined} damageFormula
+ * @property {string} entityName
+ * @property {boolean} includeDM
+ * @property {Object|undefined} customFormula
+ */
 
 /**
  *  @param {DamageRollData} rollData

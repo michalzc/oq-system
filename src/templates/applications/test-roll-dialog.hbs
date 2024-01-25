@@ -1,0 +1,25 @@
+<form class="{{cssClasses}} oq dialog roll" autocomplete="off">
+  <div class="dialog-header">
+    <h1>{{ entityName }}</h1>
+    {{#if skillName}}
+      <h2>{{ skillName }}</h2>
+    {{/if}}
+  </div>
+  <div class="dialog-body">
+    <div class="roll-info">
+
+    </div>
+    <div class="roll-params">
+      <label for="difficulty">{{localize 'OQ.Labels.Difficulty'}}</label>
+      <select name="difficulty" id="difficulty">
+        {{selectOptions difficulties selected=defaultDifficulty localize=false }}
+      </select>
+      <label for="modifier">{{ localize 'OQ.Labels.OtherMods' }}</label>
+      <input type="number" data-dtype="Number" name="modifier" id="modifier" value="{{modifier}}">
+    </div>
+    <div class="roll-buttons">
+      <button class="roll-button" type="submit"><i class="fas fa-dice"></i> {{ localize 'OQ.Dialog.Roll' }}</button>
+      <button class="cancel-button"><i class="fas fa-cancel"></i> {{ localize 'OQ.Dialog.Cancel'}}</button>
+    </div>
+  </div>
+</form>

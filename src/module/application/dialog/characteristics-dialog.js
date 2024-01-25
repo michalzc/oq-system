@@ -1,4 +1,4 @@
-import { log } from '../utils.js';
+import { log } from '../../utils.js';
 
 const mergeObject = foundry.utils.mergeObject;
 export class CharacteristicsDialog extends FormApplication {
