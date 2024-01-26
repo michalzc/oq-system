@@ -1,5 +1,4 @@
 import _ from 'lodash-es';
-import { log } from '../../utils.js';
 
 export class OQBaseActor extends Actor {
   static otherSkillsGroups = ['knowledge', 'practical', 'custom'];
@@ -66,10 +65,9 @@ export class OQBaseActor extends Actor {
     const groupedItems = _.groupBy([...this.items], (item) => item.type);
     const skills = groupedItems.skill ?? [];
     const groupedSkills = _.groupBy(skills, (skill) => skill.system.group);
-    const groupedSkillByGroupName = _.groupBy(skills, (skill) => skill.system.groupName);
+
     const otherSkills = _.filter(skills, (skill) => _.includes(OQBaseActor.otherSkillsGroups, skill.system.group));
     const groupedSkillBySlug = _.fromPairs(skills.map((skill) => [skill.system.slug, skill.name]));
-    log('Skills by slug', groupedSkillBySlug);
 
     const abilities = groupedItems.specialAbility ?? [];
     const skillsAndAbilities = _.concat(otherSkills, abilities);
@@ -87,12 +85,18 @@ export class OQBaseActor extends Actor {
     const equipment = groupedItems.equipment ?? [];
 
     return {
+      skills,
+      combatSkills,
+      resistances,
+      groupedItems,
+      groupedSkills,
       skillsAndAbilities,
       magic,
       combat,
       equipment,
-      groupedSkillByGroupName,
       groupedSkillBySlug,
+      weapons,
+      armour,
     };
   }
 

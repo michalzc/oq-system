@@ -121,6 +121,7 @@ OQ:
       one: One Handed
       oneAndTwo: One or Two Handed
       two: Two Handed
+    Weapons: Weapons
     WeaponType: Weapon Type
     WeaponTypes:
       melee: Melee

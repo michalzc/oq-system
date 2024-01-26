@@ -28,9 +28,9 @@ export class OQWeapon extends OQBaseItem {
   get damageFormula() {
     const damage = this.system.damage.damageFormula;
     const includeDM = !!this.system.damage.includeDamageMod;
-    const damageFormula = includeDM ? `${damage} ${this.parent.system.attributes.dm.value}` : damage;
+    const damageFormula = (includeDM ? `${damage} ${this.parent.system.attributes.dm.value}` : damage).trim();
 
-    return this.makeRollString(damageFormula);
+    return damageFormula ? this.makeRollString(damageFormula) : '';
   }
 
   get isRollable() {

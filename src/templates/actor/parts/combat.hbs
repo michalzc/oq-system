@@ -1,0 +1,22 @@
+<div class="items">
+  <fieldset class="item-group">
+    <legend>{{ localize 'OQ.SkillGroups.combat'}}</legend>
+    {{#each system.groupedItems.combatSkills as |skill|}}
+      {{> systems/oq/templates/actor/parts/skill-ability-row.hbs skill}}
+    {{/each}}
+  </fieldset>
+
+  <fieldset class="item-group">
+    <legend>{{ localize 'OQ.SkillGroups.resistance'}}</legend>
+    {{#each system.groupedItems.resistances as |skill|}}
+      {{> systems/oq/templates/actor/parts/skill-ability-row.hbs skill}}
+    {{/each}}
+  </fieldset>
+
+  <fieldset class="item-group">
+    <legend>{{ localize 'OQ.Labels.Weapons' }}</legend>
+    {{#each system.groupedItems.weapons as |weapon|}}
+      {{> systems/oq/templates/actor/parts/weapon.hbs weapon}}
+    {{/each}}
+  </fieldset>
+</div>

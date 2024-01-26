@@ -4,6 +4,7 @@ export async function preloadTemplates() {
   const templatePaths = [
     'systems/oq/templates/actor/parts/notes.hbs',
     'systems/oq/templates/actor/parts/skills.hbs',
+    'systems/oq/templates/actor/parts/combat.hbs',
     'systems/oq/templates/actor/parts/attributes.hbs',
     'systems/oq/templates/actor/parts/skill-ability-row.hbs',
     'systems/oq/templates/actor/parts/weapon.hbs',
