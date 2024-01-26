@@ -10,6 +10,9 @@ import sourcemaps from 'gulp-sourcemaps';
 import buffer from 'vinyl-buffer';
 import source from 'vinyl-source-stream';
 import yaml from 'gulp-yaml';
+import zip from 'gulp-zip';
+import jsonModify from 'gulp-json-modify';
+import version from './version.mjs';
 
 import rollupStream from '@rollup/stream';
 
@@ -21,6 +24,7 @@ import rollupConfig from './rollup.config.mjs';
 
 const packageId = 'oq';
 const sourceDirectory = './src';
+const buildDirectory = './build';
 const distDirectory = './dist';
 const stylesDirectory = `${sourceDirectory}/styles`;
 const stylesExtension = 'less';
@@ -34,6 +38,8 @@ const yamlExtension = 'yaml';
 
 let cache;
 
+const downloadPath = 'https://bitbucket.org/parmezan/oq-system/downloads';
+
 /**
  * Build the distributable JavaScript code
  */
@@ -46,7 +52,7 @@ function buildCode() {
     .pipe(buffer())
     .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(`${distDirectory}/module`));
+    .pipe(gulp.dest(`${buildDirectory}/module`));
 }
 
 /**
@@ -56,7 +62,7 @@ function buildStyles() {
   return gulp
     .src(`${stylesDirectory}/${packageId}.${stylesExtension}`)
     .pipe(less())
-    .pipe(gulp.dest(`${distDirectory}/styles`));
+    .pipe(gulp.dest(`${buildDirectory}/styles`));
 }
 
 /**
@@ -67,7 +73,7 @@ async function buildYaml() {
   return gulp
     .src([`${sourceDirectory}/**/*.${yamlExtension}`, `!${sourceDirectory}/packs/**/*.${yamlExtension}`])
     .pipe(yaml({ space: 2, safe: true }))
-    .pipe(gulp.dest(`${distDirectory}`));
+    .pipe(gulp.dest(`${buildDirectory}`));
 }
 
 /**
@@ -76,7 +82,7 @@ async function buildYaml() {
 async function copyFiles() {
   for (const file of staticFiles) {
     if (fs.existsSync(`${sourceDirectory}/${file}`)) {
-      await fs.copy(`${sourceDirectory}/${file}`, `${distDirectory}/${file}`);
+      await fs.copy(`${sourceDirectory}/${file}`, `${buildDirectory}/${file}`);
     }
   }
 }
@@ -95,7 +101,40 @@ export function watch() {
   );
 }
 
-export const build = gulp.series(clean, gulp.parallel(buildCode, buildStyles, buildYaml, copyFiles));
+async function copySystem() {
+  if (fs.existsSync(`${buildDirectory}/system.json`)) {
+    await fs.copy(`${buildDirectory}/system.json`, `${distDirectory}/oq-${version}.json`); //FIXME: find solution for this
+    await fs.copy(`${buildDirectory}/system.json`, `${distDirectory}/oq-${version}.json`);
+    await fs.copy(`${buildDirectory}/system.json`, `${distDirectory}/oq.json`);
+  }
+}
+async function zipFiles() {
+  return gulp
+    .src(`${buildDirectory}/**`)
+    .pipe(zip(`oq-${version}.zip`))
+    .pipe(gulp.dest(`${distDirectory}`));
+}
+
+async function updateJson() {
+  return gulp
+    .src(`${buildDirectory}/system.json`)
+    .pipe(
+      jsonModify({
+        key: 'manifest',
+        value: `${downloadPath}/oq.json`,
+      }),
+    )
+    .pipe(
+      jsonModify({
+        key: 'download',
+        value: `${downloadPath}/oq-${version}.zip`,
+      }),
+    )
+    .pipe(gulp.dest(`${buildDirectory}`));
+}
+
+export const build = gulp.series(clean, gulp.parallel(buildCode, buildStyles, buildYaml, copyFiles), updateJson);
+export const dist = gulp.series(build, zipFiles, copySystem);
 
 /********************/
 /*      CLEAN       */
@@ -115,6 +154,8 @@ export async function clean() {
   console.log('   ', files.join('\n    '));
 
   for (const filePath of files) {
-    await fs.remove(`${distDirectory}/${filePath}`);
+    await fs.remove(`${buildDirectory}/${filePath}`);
   }
+
+  await fs.remove(distDirectory);
 }

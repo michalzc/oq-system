@@ -23,7 +23,8 @@ npm-debug.log
 foundryconfig.json
 
 # Distribution files
-dist
+dist/
+build/
 
 # ESLint
 .eslintcache
