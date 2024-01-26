@@ -1,6 +1,6 @@
-<form class="{{cssClass}}" autocomplete="off">
+<form class="{{cssClass}} {{type}}" autocomplete="off">
   <header class="dialog-header">
-    <h1>{{actorData.name}}</h1>
+    <h1>{{name}}</h1>
   </header>
   <section class="dialog-body">
     <h2>{{ localize 'OQ.Labels.Attributes' }}</h2>
@@ -19,6 +19,9 @@
 
       <label for="mrMod">{{ localize 'OQ.Labels.AttributesNames.mr.label'}}</label>
       <input id="mrMod" type="number" data-dtype="Number" name="attributes.mr.mod" value="{{system.attributes.mr.mod}}">
+
+      <label for="apMod">{{ localize 'OQ.Labels.AttributesNames.ap.label'}}</label>
+      <input id="apMod" type="number" data-dtype="Number" name="attributes.ap.mod" value="{{system.attributes.ap.mod}}">
 
     </div>
   </section>

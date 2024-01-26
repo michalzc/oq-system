@@ -32,6 +32,7 @@ export class OQWeapon extends OQBaseItem {
 
     return this.makeRollString(damageFormula);
   }
+
   get isRollable() {
     if (this.parent) {
       const skillReference = this.system.correspondingSkill?.skillReference;
@@ -57,29 +58,24 @@ export class OQWeapon extends OQBaseItem {
    * @returns {Promise<void>}
    */
   async itemTestRoll(skipDialog) {
-    //skipDialog) {
-    if (this.parent) {
-      const baseRollData = this.makeBaseTestRollData();
+    const parentRollData = this.parent.getRollData();
 
-      const parentRollData = this.parent.getRollData();
+    const skillReference = this.system.correspondingSkill?.skillReference;
+    const value = skillReference && _.get(parentRollData, `skills.${skillReference}`);
+    const modifier = this.system.correspondingSkill?.skillMod;
+    const skillName = this.parent?.system.groupedItems.groupedSkillBySlug[skillReference];
+    const rollData = _.merge(this.makeBaseTestRollData(), {
+      rollType: 'weapon',
+      value,
+      modifier,
+      skillName,
+    });
 
-      const skillReference = this.system.correspondingSkill?.skillReference;
-      const value = skillReference && _.get(parentRollData, `skills.${skillReference}`);
-      const modifier = this.system.correspondingSkill?.skillMod;
-      const skillName = this.parent?.system.groupedItems.groupedSkillBySlug[skillReference];
-      const rollData = {
-        ...baseRollData,
-        rollType: 'weapon',
-        value,
-        modifier,
-        skillName,
-      };
-      if (skipDialog) {
-        await testRoll(rollData);
-      } else {
-        const dialog = new OQTestRollDialog(rollData);
-        dialog.render(true);
-      }
+    if (skipDialog) {
+      await testRoll(rollData);
+    } else {
+      const dialog = new OQTestRollDialog(rollData);
+      dialog.render(true);
     }
   }
 }

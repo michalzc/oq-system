@@ -1,5 +1,4 @@
 import { OQActorBaseSheet } from './actor-base-sheet.js';
-import { AttributesDialog } from '../../dialog/attributes-dialog.js';
 import { CharacteristicsDialog } from '../../dialog/characteristics-dialog.js';
 import _ from 'lodash-es';
 
@@ -12,9 +11,7 @@ export class OQCharacterSheet extends OQActorBaseSheet {
     super.activateListeners(html);
 
     if (!this.isEditable) return;
-
-    html.find('.modify-characteristics').on('click', this._onModifyCharacteristics.bind(this));
-    html.find('.modify-attributes').on('click', this._onModifyAttributes.bind(this));
+    html.find('.modify-characteristics').on('click', this.onModifyCharacteristics.bind(this));
   }
 
   async getData(options) {
@@ -26,13 +23,8 @@ export class OQCharacterSheet extends OQActorBaseSheet {
     });
   }
 
-  _onModifyCharacteristics() {
+  onModifyCharacteristics() {
     const characteristicsDialog = new CharacteristicsDialog(this.actor);
     characteristicsDialog.render(true);
-  }
-
-  _onModifyAttributes() {
-    const attributesDialog = new AttributesDialog(this.actor);
-    attributesDialog.render(true);
   }
 }

@@ -23,9 +23,9 @@ export class OQTestRollDialog extends FormApplication {
     html.find('.cancel-button').on('click', this.onCancel.bind(this));
   }
 
-  onCancel(event) {
+  async onCancel(event) {
     event.preventDefault();
-    this.close();
+    await this.close();
   }
 
   getData(options = {}) {

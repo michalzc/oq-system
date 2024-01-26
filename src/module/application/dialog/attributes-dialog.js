@@ -1,4 +1,5 @@
 import { log } from '../../utils.js';
+import _ from 'lodash-es';
 
 export class AttributesDialog extends FormApplication {
   static get defaultOptions() {
@@ -16,11 +17,12 @@ export class AttributesDialog extends FormApplication {
   }
 
   getData(options) {
-    const data = super.getData(options);
-    const actorData = this.object.toObject(false);
-    return mergeObject(data, {
-      actorData: actorData,
-      system: actorData.system,
+    const context = super.getData(options);
+    const actor = this.object;
+    return _.merge(context, {
+      name: actor.name,
+      type: actor.type,
+      system: actor.system,
     });
   }
 

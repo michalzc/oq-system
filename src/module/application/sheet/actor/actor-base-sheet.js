@@ -1,5 +1,6 @@
 import { log } from '../../../utils.js';
 import _ from 'lodash-es';
+import { AttributesDialog } from '../../dialog/attributes-dialog.js';
 
 const mergeObject = foundry.utils.mergeObject;
 export class OQActorBaseSheet extends ActorSheet {
@@ -41,10 +42,19 @@ export class OQActorBaseSheet extends ActorSheet {
     html.find('a.item-roll').on('click', this.onItemRoll.bind(this));
     html.find('a.damage-roll').on('click', this.onDamageRoll.bind(this));
 
+    if (!this.isEditable) return;
+
+    html.find('.modify-attributes').on('click', this.onModifyAttributes.bind(this));
+
     html.find('a.item-edit').on('click', this.onModifyItem.bind(this));
     html.find('a.item-delete').on('click', this.onDeleteItem.bind(this));
 
     html.find('.item-mod').on('change', this.onUpdateItemMod.bind(this));
+  }
+
+  onModifyAttributes() {
+    const attributesDialog = new AttributesDialog(this.actor);
+    attributesDialog.render(true);
   }
 
   async onUpdateItemMod(event) {

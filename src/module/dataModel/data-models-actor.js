@@ -45,7 +45,7 @@ function characteristicsModel(defaults) {
 
 function modMaxValueAttributeModel() {
   return new fields.SchemaField({
-    mod: new fields.NumberField({ min: 0, integer: true, required: true, initial: 0 }),
+    mod: new fields.NumberField({ integer: true, required: true, initial: 0 }),
     max: new fields.NumberField({ min: 0, integer: true, required: true, initial: 0 }),
     value: new fields.NumberField({ min: 0, integer: true, required: true, initial: 0 }),
   });
@@ -54,7 +54,7 @@ function modMaxValueAttributeModel() {
 function baseModAttributeModel(base = 0) {
   return new fields.SchemaField({
     base: new fields.NumberField({ min: 0, integer: true, required: true, initial: base }),
-    mod: new fields.NumberField({ min: 0, integer: true, required: true, initial: 0 }),
+    mod: new fields.NumberField({ integer: true, required: true, initial: 0 }),
   });
 }
 

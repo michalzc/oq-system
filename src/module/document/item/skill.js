@@ -44,13 +44,12 @@ export class OQSkill extends OQBaseItem {
    * @returns {Promise<void>}
    */
   async itemTestRoll(skipDialog) {
-    const baseRollData = this.makeBaseTestRollData();
-    const rollData = {
-      ...baseRollData,
+    const rollData = _.merge(this.makeBaseTestRollData(), {
       mastered: this.system.mastered,
       rollType: 'skill',
       value: this.system.value,
-    };
+    });
+
     if (skipDialog) {
       await testRoll(rollData);
     } else {
