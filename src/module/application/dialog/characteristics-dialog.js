@@ -1,4 +1,5 @@
-import { log } from '../../utils.js';
+import { logError } from '../../utils.js';
+import _ from 'lodash-es';
 
 const mergeObject = foundry.utils.mergeObject;
 export class CharacteristicsDialog extends FormApplication {
@@ -9,6 +10,7 @@ export class CharacteristicsDialog extends FormApplication {
       classes: ['oq', 'dialog', 'characteristics'],
       width: 400,
       id: 'characteristics-dialog',
+      template: 'systems/oq/templates/applications/characteristics-dialog.hbs',
     });
   }
 
@@ -37,6 +39,7 @@ export class CharacteristicsDialog extends FormApplication {
     const points = this.points;
     let system = this.object.system;
     return mergeObject(data, {
+      name: this.object.name,
       system,
       points,
     });
@@ -71,7 +74,11 @@ export class CharacteristicsDialog extends FormApplication {
           .reduce((l, r) => l + r);
 
         const initial = dialog.find('.all-points').val();
-        this.points = CharacteristicsDialog.calculatePoints(initial, CONFIG.OQ.CharacteristicsParams.basePoints, sum);
+        this.points = CharacteristicsDialog.calculatePoints(
+          initial,
+          CONFIG.OQ.ActorConfig.characteristicsParams.basePoints,
+          sum,
+        );
         dialog.find('.spent-points').html(this.points.spent.toString());
         dialog.find('.remain-points').html(this.points.remain.toString());
       }
@@ -79,11 +86,11 @@ export class CharacteristicsDialog extends FormApplication {
   }
 
   async rollAllCharacteristics(event) {
-    //FIXME: remove default rolls
     if (event.currentTarget) {
       const characteristicsBlock = event.currentTarget.closest('.chars-table');
       if (characteristicsBlock) {
-        const rollPromises = Object.keys(CONFIG.OQ.ActorConfig.characteristicsParams.characteristicsRolls)
+        const characteristicKeys = _.keys(this.object.system.characteristics);
+        const rollPromises = characteristicKeys
           .map((key) => [key, `input[name="characteristics.${key}.roll"]`])
           .map(([key, selector]) => [key, $(characteristicsBlock).find(selector).val()])
           .filter(([, value]) => typeof value === 'string')
@@ -94,27 +101,25 @@ export class CharacteristicsDialog extends FormApplication {
               .catch(() => undefined),
           );
         const resolvedPromises = await Promise.all(rollPromises);
-        const rolls = resolvedPromises.filter((e) => e && e[1]);
+        const rolls = _.fromPairs(resolvedPromises.filter((e) => e && e[1]));
 
-        const messageHtml = rolls.map(([key, roll]) => {
-          const i18key = `OQ.Characteristics.${key}.label`;
-          return `<label class="chat-label">${game.i18n.localize(i18key)}: </label> ${roll.total}`;
+        const content = await renderTemplate('systems/oq/templates/chat/parts/characteristics-roll.hbs', {
+          rolls,
         });
-        const message = `<div class="oq">${messageHtml.join('<br>')}</div>`;
 
         const messageData = {
-          content: message,
+          content: content,
           type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-          rolls: rolls.map((e) => e[1]),
+          rolls: _.values(rolls),
           speaker: ChatMessage.getSpeaker(this.object),
-          classes: ['oq'],
         };
 
         await ChatMessage.create(messageData);
 
-        rolls.forEach(([key, roll]) => {
+        _.forIn(rolls, (roll, key) => {
           $(characteristicsBlock).find(`#char-${key}-base`).val(roll.total);
         });
+
         this.updatePoints(event);
       }
     }
@@ -129,14 +134,13 @@ export class CharacteristicsDialog extends FormApplication {
         const selector = `input[name="characteristics.${key}.roll"]`;
         const rolls = charsTable.find(selector).val();
         if (typeof rolls === 'string') {
-          const roll = new Roll(rolls).evaluate({ async: false });
-          // const htmlRoll = await roll.render();
-          charsTable.find(`#char-${key}-base`).val(roll.total);
-          const messageContent = `<div class="oq"><label class="chat-label">${game.i18n.localize(
-            `OQ.Characteristics.${key}.label`,
-          )}</label>: ${roll.total}</div>`;
+          const roll = await new Roll(rolls).evaluate({ async: true });
+
+          const content = await renderTemplate('systems/oq/templates/chat/parts/characteristics-roll.hbs', {
+            rolls: { [key]: roll },
+          });
           const messageData = {
-            content: messageContent,
+            content: content,
             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             rolls: [roll],
             class: ['oq'],
@@ -144,15 +148,12 @@ export class CharacteristicsDialog extends FormApplication {
           };
           this.updatePoints(event);
           await ChatMessage.create(messageData);
+          charsTable.find(`#char-${key}-base`).val(roll.total);
         }
       } catch (e) {
-        log('Error during roll', e);
+        logError('Error during roll', e);
       }
     }
-  }
-
-  get template() {
-    return 'systems/oq/templates/applications/characteristics-dialog.hbs';
   }
 
   async _updateObject(event, formData) {

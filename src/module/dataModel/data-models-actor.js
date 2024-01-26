@@ -30,7 +30,7 @@ function characteristicModel(defaultValue, defaultRoll) {
   return new fields.SchemaField({
     base: new fields.NumberField({ min: 0, integer: true, required: true, initial: defaultValue }),
     roll: new fields.StringField({ trim: true, initial: defaultRoll, required: true }),
-    mod: new fields.NumberField({ min: 0, integer: true, required: true, initial: 0 }),
+    mod: new fields.NumberField({ integer: true, required: true, initial: 0 }),
   });
 }
 

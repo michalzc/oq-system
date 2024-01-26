@@ -17,16 +17,6 @@ export const ActorConfig = {
     npc: 'systems/oq/assets/icons/cultist.svg',
   },
   characteristicsParams: {
-    characteristicsRolls: {
-      //FIXME delete after fixing dialog rolls
-      str: '3d6',
-      dex: '3d6',
-      con: '3d6',
-      siz: '2d6+6',
-      int: '2d6+6',
-      pow: '3d6',
-      cha: '3d6',
-    },
     characteristicPoints: 30,
     basePoints: 56,
     damageModifiers: [

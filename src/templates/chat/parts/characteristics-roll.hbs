@@ -1,0 +1,6 @@
+<div class="oq roll characteristics-roll">
+  {{#each rolls as |roll key|}}
+    <label class="chat-label">{{ localize (concat 'OQ.Labels.CharacteristicsNames.' key '.label')}}</label>
+    <div>{{roll.total}}</div>
+  {{/each}}
+</div>

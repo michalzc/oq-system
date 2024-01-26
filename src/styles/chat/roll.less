@@ -1,9 +1,4 @@
 .oq.roll {
-  & > div {
-    margin: 0.2em 0 0.2em;
-    padding: 0.2em 0 0.2em;
-  }
-
   .roll-title {
     .header-font();
     color: @dark-color;
@@ -68,6 +63,19 @@
     }
 
     &.roll-result-failure {
+      color: @dark-color;
+    }
+  }
+
+  &.characteristics-roll {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.2em;
+
+    .chat-label {
+      .header-font();
+      font-weight: bold;
+      font-size: var(--font-size-18);
       color: @dark-color;
     }
   }
