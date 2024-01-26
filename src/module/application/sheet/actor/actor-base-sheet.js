@@ -44,12 +44,34 @@ export class OQActorBaseSheet extends ActorSheet {
 
     if (!this.isEditable) return;
 
+    this.weaponStatesMenu(html);
     html.find('.modify-attributes').on('click', this.onModifyAttributes.bind(this));
 
     html.find('a.item-edit').on('click', this.onModifyItem.bind(this));
     html.find('a.item-delete').on('click', this.onDeleteItem.bind(this));
 
     html.find('.item-mod').on('change', this.onUpdateItemMod.bind(this));
+  }
+
+  weaponStatesMenu(html) {
+    const elems = _.values(
+      _.mapValues(CONFIG.OQ.ItemConfig.weaponArmourStates, (elem, key) => ({
+        icon: elem.icon,
+        callback: this.onItemUpdateState.bind(this, key),
+        name: game.i18n.localize(`OQ.Labels.ItemStates.${key}`),
+      })),
+    );
+
+    new ContextMenu(html, '.item-state-weapon', elems, { eventName: 'click' });
+  }
+
+  async onItemUpdateState(state, elem) {
+    const itemId = elem.data().itemId;
+    const item = itemId && this.actor.items.get(itemId);
+    if (item) {
+      await item.update({ 'system.state': state });
+      this.render(true);
+    }
   }
 
   onModifyAttributes() {
@@ -118,7 +140,6 @@ export class OQActorBaseSheet extends ActorSheet {
   }
 
   updateAttributesLabels(attributes) {
-    log('Attributes to update', attributes);
     const localizationPrefix = 'OQ.Labels.AttributesNames';
     return _.mapValues(attributes, (attribute, key) => {
       const label = `${localizationPrefix}.${key}.label`;

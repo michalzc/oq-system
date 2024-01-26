@@ -101,6 +101,12 @@ OQ:
     Mastered: Mastered
     Mod: Mod
     IncludeDamageMod: Include DM
+    ItemStates:
+      carried: Carried
+      readied: Readied
+      stored: Stored
+      worn: Worn
+      natural: Natural
     Name: Name
     Notes: Notes
     Organisation: Organisation
@@ -115,6 +121,7 @@ OQ:
     SkillReference: Skill reference
     SkillValue: Skill Value
     SkillsAbilities: Skills & Abilities
+    State: State
     Traits: Traits
     Type: Type
     WeaponHands:

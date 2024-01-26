@@ -1,4 +1,5 @@
 import { ItemConfig } from '../consts/items-config.js';
+import _ from 'lodash-es';
 
 const fields = foundry.data.fields;
 
@@ -44,10 +45,10 @@ export class WeaponDataModel extends foundry.abstract.DataModel {
       rangeFormula: commonStringModel(false),
       rate: positiveNumberModel(false, undefined),
       cost: positiveNumberModel(),
-      status: new fields.StringField({
+      state: new fields.StringField({
         required: true,
-        initial: ItemConfig.weaponArmourStatus.stowed,
-        choices: ItemConfig.weaponArmourStatus,
+        initial: ItemConfig.weaponArmourStates.carried.key,
+        choices: _.keys(ItemConfig.weaponArmourStates),
         trim: true,
       }),
       weaponType: new fields.StringField({

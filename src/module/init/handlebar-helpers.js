@@ -11,4 +11,9 @@ export function registerHelpers() {
       return '';
     }
   });
+
+  Handlebars.registerHelper('itemState', (state) => {
+    const icon = CONFIG.OQ.ItemConfig.allItemsStates[state].icon ?? '';
+    return new Handlebars.SafeString(icon);
+  });
 }

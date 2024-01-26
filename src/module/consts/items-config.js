@@ -7,6 +7,28 @@ import { OQSpecialAbility } from '../document/item/special-ability.js';
 import { OQSkillSheet } from '../application/sheet/item/skill-sheet.js';
 import { OQWeaponSheet } from '../application/sheet/item/weapon-sheet.js';
 
+const allItemsStates = {
+  stored: {
+    key: 'stored',
+    icon: '<i class="fas fa-archive"></i>',
+  },
+  carried: {
+    key: 'carried',
+    icon: '<i class="fas fa-suitcase"></i>',
+  },
+  readied: {
+    key: 'readied',
+    icon: '<i class="fas fa-hand-paper"></i>',
+  },
+  worn: {
+    key: 'worn',
+    icon: '<i class="fas fa-t-shirt"></i>',
+  },
+  natural: {
+    key: 'natural',
+    icon: '<i class="fas fa-paw-claws"></i>',
+  },
+};
 export const ItemConfig = {
   bagIcon: 'icons/svg/item-bag.svg',
   documentClasses: {
@@ -47,14 +69,16 @@ export const ItemConfig = {
     two: 'two',
     oneAndTwo: 'oneAndTwo',
   },
-  weaponArmourStatus: {
-    ready: 'ready',
-    stowed: 'stowed',
-    stored: 'stored',
+  allItemsStates,
+  weaponArmourStates: {
+    readied: allItemsStates.readied,
+    carried: allItemsStates.carried,
+    stored: allItemsStates.stored,
+    natural: allItemsStates.natural,
   },
-  equipmentAndConsumableStatus: {
-    stowed: 'stowed',
-    stored: 'stored',
+  equipmentAndConsumableStates: {
+    carried: allItemsStates.carried,
+    stored: allItemsStates.stored,
   },
   weaponType: {
     melee: 'melee',
