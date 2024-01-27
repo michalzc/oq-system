@@ -5,6 +5,10 @@
     }
 
     .sheet-content {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+
       .item-details {
         display: grid;
         grid-template-columns: 1fr 3fr;
@@ -46,6 +50,20 @@
             flex: 1;
             text-align: center;
           }
+        }
+
+        input[type='checkbox'] {
+          width: 1em;
+        }
+      }
+
+      .description-container {
+        flex: 1;
+        min-height: 16em;
+        display: flex;
+
+        .editor {
+          flex: 1;
         }
       }
     }

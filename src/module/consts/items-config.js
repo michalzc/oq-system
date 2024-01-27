@@ -6,6 +6,8 @@ import { OQSpell } from '../document/item/spell.js';
 import { OQSpecialAbility } from '../document/item/special-ability.js';
 import { OQSkillSheet } from '../application/sheet/item/skill-sheet.js';
 import { OQWeaponSheet } from '../application/sheet/item/weapon-sheet.js';
+import { OQArmourSheet } from '../application/sheet/item/armour-sheet.js';
+import { OQEquipmentSheet } from '../application/sheet/item/equipment-sheet.js';
 
 const allItemsStates = {
   stored: {
@@ -42,6 +44,8 @@ export const ItemConfig = {
   sheetClasses: {
     skill: OQSkillSheet,
     weapon: OQWeaponSheet,
+    armour: OQArmourSheet,
+    equipment: OQEquipmentSheet,
   },
   defaultIcons: {
     skill: 'systems/oq/assets/icons/skills.svg',
@@ -70,13 +74,20 @@ export const ItemConfig = {
     oneAndTwo: 'oneAndTwo',
   },
   allItemsStates,
-  weaponArmourStates: {
+  weaponStates: {
     readied: allItemsStates.readied,
     carried: allItemsStates.carried,
     stored: allItemsStates.stored,
     natural: allItemsStates.natural,
   },
-  equipmentAndConsumableStates: {
+  armourStates: {
+    worn: allItemsStates.worn,
+    carried: allItemsStates.carried,
+    stored: allItemsStates.stored,
+    natural: allItemsStates.natural,
+  },
+  equipmentStates: {
+    readied: allItemsStates.readied,
     carried: allItemsStates.carried,
     stored: allItemsStates.stored,
   },
@@ -88,8 +99,8 @@ export const ItemConfig = {
   itemSheetPartials: {
     skill: 'systems/oq/templates/item/parts/skill-sheet-details.hbs',
     weapon: 'systems/oq/templates/item/parts/weapon-sheet-details.hbs',
-    // armour: 'systems/oq/templates/item/armor-sheet.html',
-    // equipment: 'systems/oq/templates/item/equipment-sheet.html',
+    armour: 'systems/oq/templates/item/parts/armour-sheet-details.hbs',
+    equipment: 'systems/oq/templates/item/parts/equipment-sheet-details.hbs',
     // spell: 'systems/oq/templates/item/spell-sheet.html',
     // specialAbility: 'systems/oq/templates/item/special-ability-sheet.html',
   },

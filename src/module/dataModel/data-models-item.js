@@ -15,6 +15,10 @@ function htmlFieldModel() {
   return new fields.HTMLField({ trim: true, initial: '' });
 }
 
+function encumbranceModel() {
+  return new fields.NumberField({ min: 0, integer: false, initial: 0 });
+}
+
 export class SkillDataModel extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
@@ -40,15 +44,15 @@ export class WeaponDataModel extends foundry.abstract.DataModel {
         initial: ItemConfig.weaponHands.one,
         choices: ItemConfig.weaponHands,
       }),
-      encumbrance: positiveNumberModel(false, undefined),
+      encumbrance: encumbranceModel(),
       ranged: new fields.BooleanField({ initial: false }),
       rangeFormula: commonStringModel(false),
       rate: positiveNumberModel(false, undefined),
       cost: positiveNumberModel(),
       state: new fields.StringField({
         required: true,
-        initial: ItemConfig.weaponArmourStates.carried.key,
-        choices: _.keys(ItemConfig.weaponArmourStates),
+        initial: ItemConfig.weaponStates.carried.key,
+        choices: _.keys(ItemConfig.weaponStates),
         trim: true,
       }),
       weaponType: new fields.StringField({
@@ -72,7 +76,16 @@ export class WeaponDataModel extends foundry.abstract.DataModel {
 export class ArmorDataModel extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
+      ap: positiveNumberModel(true, 0),
+      cost: positiveNumberModel(true, 0),
+      encumbrance: encumbranceModel(),
       description: htmlFieldModel(),
+      state: new fields.StringField({
+        required: true,
+        initial: ItemConfig.armourStates.worn.key,
+        choices: _.keys(ItemConfig.armourStates),
+        trim: true,
+      }),
     };
   }
 }
@@ -81,6 +94,16 @@ export class EquipmentDataModel extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       description: htmlFieldModel(),
+      cost: positiveNumberModel(true, 0),
+      encumbrance: encumbranceModel(),
+      consumable: new fields.BooleanField({ required: true, initial: false }),
+      quantity: positiveNumberModel(false),
+      state: new fields.StringField({
+        required: true,
+        initial: ItemConfig.armourStates.carried.key,
+        choices: _.keys(ItemConfig.equipmentStates),
+        trim: true,
+      }),
     };
   }
 }

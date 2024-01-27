@@ -4,7 +4,6 @@ export class OQBaseItemSheet extends ItemSheet {
   static get defaultOptions() {
     return _.merge(super.defaultOptions, {
       width: 640,
-      height: 640,
       classes: ['oq', 'sheet', 'item'],
       template: 'systems/oq/templates/item/item-sheet.hbs',
     });

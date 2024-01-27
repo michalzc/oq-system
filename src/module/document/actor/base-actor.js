@@ -3,6 +3,7 @@ import _ from 'lodash-es';
 export class OQBaseActor extends Actor {
   static otherSkillsGroups = ['knowledge', 'practical', 'custom'];
   static combatItems = ['weapon', 'armour'];
+
   async _onCreate(data, options, userId) {
     await super._onCreate(data, options, userId);
 
@@ -62,7 +63,8 @@ export class OQBaseActor extends Actor {
   }
 
   prepareGroupedItems() {
-    const groupedItems = _.groupBy([...this.items], (item) => item.type);
+    const allItems = _.sortBy([...this.items], (item) => item.name);
+    const groupedItems = _.groupBy(allItems, (item) => item.type);
     const skills = groupedItems.skill ?? [];
     const groupedSkills = _.groupBy(skills, (skill) => skill.system.group);
 
@@ -79,8 +81,8 @@ export class OQBaseActor extends Actor {
     const combatSkills = groupedSkills.combat ?? [];
     const resistances = groupedSkills.resistance ?? [];
     const weapons = groupedItems.weapon ?? [];
-    const armour = groupedItems.armour ?? [];
-    const combat = _.concat(combatSkills, resistances, weapons, armour);
+    const armours = groupedItems.armour ?? [];
+    const combat = _.concat(combatSkills, resistances, weapons, armours);
 
     const equipment = groupedItems.equipment ?? [];
 
@@ -96,7 +98,7 @@ export class OQBaseActor extends Actor {
       equipment,
       groupedSkillBySlug,
       weapons,
-      armour,
+      armours,
     };
   }
 
@@ -119,10 +121,22 @@ export class OQBaseActor extends Actor {
     const mpMax = characteristics.pow.value + attributes.mp.mod;
     const mpValue = Math.min(mpMax, attributes.mp.value);
 
-    const mrValue = attributes.mr.base + attributes.mr.mod;
-    const apValue = attributes.ap.base + attributes.ap.mod;
+    const armourStatuses = CONFIG.OQ.ItemConfig.armourStates;
+    const maxArmour = Math.max(
+      0,
+      ...this.items
+        .filter(
+          (item) =>
+            item.type === 'armour' &&
+            (item.system.state === armourStatuses.worn.key || item.system.state === armourStatuses.natural.key),
+        )
+        .map((armour) => armour.system.ap ?? 0),
+    );
 
-    return mergeObject(attributes, {
+    const mrValue = attributes.mr.base + attributes.mr.mod;
+    const apValue = attributes.ap.base + attributes.ap.mod + maxArmour;
+
+    return _.merge(attributes, {
       dm: {
         value: dmValue,
       },

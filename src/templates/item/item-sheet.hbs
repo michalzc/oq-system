@@ -1,4 +1,4 @@
-<form class="item-sheet skill-sheet {{cssClass}} flexcol" autocomplete="off">
+<form class="item-sheet {{cssClass}} flexcol" autocomplete="off">
   <header class="sheet-header flex0">
     <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" width="64" height="64"
          alt="{{item.name}}">
@@ -11,9 +11,9 @@
     </div>
   </header>
 
-  <section class="sheet-content flexcol flex1">
+  <section class="sheet-content">
     {{ getPartial this.item.type this }}
-    <fieldset class="flexrow flex1">
+    <fieldset class="description-container">
       <legend>{{localize 'OQ.Labels.Description'}}</legend>
       {{editor enrichedDescription target="system.description" id="description" engine="prosemirror" button=true
                class="flex1"}}

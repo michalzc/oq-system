@@ -69,6 +69,9 @@
               {{#if (eq combatItem.type 'weapon')}}
                 {{> systems/oq/templates/actor/parts/weapon.hbs combatItem}}
               {{/if}}
+              {{#if (eq combatItem.type 'armour')}}
+                {{> systems/oq/templates/actor/parts/armour.hbs combatItem}}
+              {{/if}}
 
             {{/each}}
           </fieldset>
@@ -92,6 +95,9 @@
         {{#if system.groupedItems.equipment }}
           <fieldset class="item-group">
             <legend>{{ localize 'OQ.Nav.Equipment' }}</legend>
+            {{#each system.groupedItems.equipment as |equipment|}}
+              {{> systems/oq/templates/actor/parts/equipment.hbs equipment}}
+            {{/each}}
           </fieldset>
         {{/if}}
       </div>

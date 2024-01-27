@@ -23,6 +23,7 @@ module.exports = {
 
   rules: {
     // Specify any specific ESLint rules.
+    // quotes: ["error", "double"], //for future
   },
 
   overrides: [

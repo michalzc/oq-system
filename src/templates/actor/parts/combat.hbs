@@ -16,9 +16,14 @@
   <fieldset class="item-group">
     <legend>{{ localize 'OQ.Labels.Weapons' }}</legend>
     {{#each system.groupedItems.weapons as |weapon|}}
-      {{#if (eq weapon.system.state 'readied')}}
-        {{> systems/oq/templates/actor/parts/weapon.hbs weapon}}
-      {{/if}}
+      {{> systems/oq/templates/actor/parts/weapon.hbs weapon}}
+    {{/each}}
+  </fieldset>
+
+  <fieldset class="item-group">
+    <legend>{{ localize 'OQ.Labels.Armours' }}</legend>
+    {{#each system.groupedItems.armours as |armour|}}
+      {{> systems/oq/templates/actor/parts/armour.hbs armour}}
     {{/each}}
   </fieldset>
 </div>

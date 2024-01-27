@@ -1,0 +1,15 @@
+<div class="item-details">
+  <label for="ap">{{ localize 'OQ.Labels.ArmourPoints' }}</label>
+  <input id="ap" type="number" data-dtype="Number" name="system.ap" value="{{system.ap}}">
+
+  <label for="encumbrance">{{ localize 'OQ.Labels.Encumbrance'}}</label>
+  <input id="encumbrance" type="number" data-dtype="Number" name="system.encumbrance" value="{{ system.encumbrance }}">
+
+  <label for="cost">{{ localize 'OQ.Labels.Cost'}}</label>
+  <input id="cost" type="number" data-dtype="Number" name="system.cost" value="{{ system.cost }}">
+
+  <label for="itemState">{{ localize 'OQ.Labels.State'}}</label>
+  <select id="itemState" name="system.state">
+    {{selectOptions itemStates selected=system.state localize=true }}
+  </select>
+</div>

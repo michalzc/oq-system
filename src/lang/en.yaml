@@ -27,6 +27,8 @@ OQ:
     Abilities: Abilities
     Advances: Advances
     Age: Age
+    ArmourPoints: Armour Points
+    Armours: Armours
     Attributes: Attributes
     AttributesNames:
       ap:
@@ -74,6 +76,7 @@ OQ:
         abbr: Str
         label: Strength
     Concept: Concept
+    Consumable: Consumable
     Cost: Cost
     Culture: Culture
     CustomDamage: Custom
@@ -111,6 +114,7 @@ OQ:
     Notes: Notes
     Organisation: Organisation
     OtherMods: Other Mods
+    Quantity: Quantity
     Range: Range
     Rank: Rank
     Reference: Reference
@@ -122,6 +126,7 @@ OQ:
     SkillValue: Skill Value
     SkillsAbilities: Skills & Abilities
     State: State
+    TotalEncumbrance: Total Encumbrance
     Traits: Traits
     Type: Type
     WeaponHands:

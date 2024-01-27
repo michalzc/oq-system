@@ -1,0 +1,28 @@
+<div class="items equipment">
+  <div class="item-group">
+    <div class="item">
+      <label>{{ localize 'OQ.Labels.TotalEncumbrance' }}</label>
+      <div>{{system.enc.totalEncumbrance}} / {{system.enc.maxEncumbrance}}</div>
+    </div>
+  </div>
+  <fieldset class="item-group">
+    <legend>{{ localize 'OQ.Labels.Weapons' }}</legend>
+    {{#each system.groupedItems.weapons as |weapon|}}
+      {{> systems/oq/templates/actor/parts/weapon.hbs weapon}}
+    {{/each}}
+  </fieldset>
+
+  <fieldset class="item-group">
+    <legend>{{ localize 'OQ.Labels.Armours' }}</legend>
+    {{#each system.groupedItems.armours as |armour|}}
+      {{> systems/oq/templates/actor/parts/armour.hbs armour}}
+    {{/each}}
+  </fieldset>
+
+  <fieldset class="item-group">
+    <legend>{{ localize 'OQ.Nav.Equipment' }}</legend>
+    {{#each system.groupedItems.equipment as |equipment|}}
+      {{> systems/oq/templates/actor/parts/equipment.hbs equipment}}
+    {{/each}}
+  </fieldset>
+</div>

@@ -13,7 +13,8 @@ export function registerHelpers() {
   });
 
   Handlebars.registerHelper('itemState', (state) => {
-    const icon = CONFIG.OQ.ItemConfig.allItemsStates[state].icon ?? '';
+    const itemState = CONFIG.OQ.ItemConfig.allItemsStates[state];
+    const icon = state !== 'natural' ? itemState?.icon ?? '' : '';
     return new Handlebars.SafeString(icon);
   });
 }

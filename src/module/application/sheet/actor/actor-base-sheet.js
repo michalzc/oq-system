@@ -9,7 +9,7 @@ export class OQActorBaseSheet extends ActorSheet {
 
     return mergeObject(baseOptions, {
       classes: ['sheet', 'oq', 'actor'],
-      width: 800,
+      width: 900,
       height: 1000,
       tabs: [
         {
@@ -44,25 +44,53 @@ export class OQActorBaseSheet extends ActorSheet {
 
     if (!this.isEditable) return;
 
-    this.weaponStatesMenu(html);
+    // this.weaponStatesMenu(html);
+    this.statusMenu(html, CONFIG.OQ.ItemConfig.weaponStates, '.item-state-weapon');
+    this.statusMenu(html, CONFIG.OQ.ItemConfig.armourStates, '.item-state-armour');
     html.find('.modify-attributes').on('click', this.onModifyAttributes.bind(this));
 
     html.find('a.item-edit').on('click', this.onModifyItem.bind(this));
     html.find('a.item-delete').on('click', this.onDeleteItem.bind(this));
 
     html.find('.item-mod').on('change', this.onUpdateItemMod.bind(this));
+
+    html.find('.item-quantity-value').on('change', this.onItemUpdateQuantity.bind(this));
+    html.find('.item-quantity-update').on('click', this.onItemQuantityIncreaseDecrease.bind(this));
   }
 
-  weaponStatesMenu(html) {
+  statusMenu(element, statuses, selector) {
     const elems = _.values(
-      _.mapValues(CONFIG.OQ.ItemConfig.weaponArmourStates, (elem, key) => ({
+      _.mapValues(statuses, (elem, key) => ({
         icon: elem.icon,
         callback: this.onItemUpdateState.bind(this, key),
         name: game.i18n.localize(`OQ.Labels.ItemStates.${key}`),
       })),
     );
 
-    new ContextMenu(html, '.item-state-weapon', elems, { eventName: 'click' });
+    new ContextMenu(element, selector, elems, { eventName: 'click' });
+  }
+
+  async onItemUpdateQuantity(event) {
+    event.preventDefault();
+    const currentTarget = event.currentTarget;
+    const itemId = $(currentTarget).closest('.item-quantity').data().itemId;
+    const item = this.actor.items.get(itemId);
+    const value = currentTarget.value;
+    await item.update({ 'system.quantity': value });
+    this.render(true);
+  }
+
+  async onItemQuantityIncreaseDecrease(event) {
+    event.preventDefault();
+    const currentTarget = event.currentTarget;
+    const itemId = $(currentTarget).closest('.item-quantity').data().itemId;
+    const item = this.actor.items.get(itemId);
+    if (item) {
+      const currentValue = item.system.quantity ?? 0;
+      const update = parseInt(currentTarget.dataset.value);
+      await item.update({ 'system.quantity': currentValue + update });
+      this.render(true);
+    }
   }
 
   async onItemUpdateState(state, elem) {
