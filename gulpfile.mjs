@@ -12,6 +12,7 @@ import source from 'vinyl-source-stream';
 import yaml from 'gulp-yaml';
 import zip from 'gulp-zip';
 import jsonModify from 'gulp-json-modify';
+import rename from 'gulp-rename';
 import version from './version.mjs';
 
 import rollupStream from '@rollup/stream';
@@ -101,13 +102,6 @@ export function watch() {
   );
 }
 
-async function copySystem() {
-  if (fs.existsSync(`${buildDirectory}/system.json`)) {
-    await fs.copy(`${buildDirectory}/system.json`, `${distDirectory}/oq-${version}.json`); //FIXME: find solution for this
-    await fs.copy(`${buildDirectory}/system.json`, `${distDirectory}/oq-${version}.json`);
-    await fs.copy(`${buildDirectory}/system.json`, `${distDirectory}/oq.json`);
-  }
-}
 async function zipFiles() {
   return gulp
     .src(`${buildDirectory}/**`)
@@ -121,20 +115,24 @@ async function updateJson() {
     .pipe(
       jsonModify({
         key: 'manifest',
-        value: `${downloadPath}/oq.json`,
+        value: `${downloadPath}/${packageId}.json`,
       }),
     )
     .pipe(
       jsonModify({
         key: 'download',
-        value: `${downloadPath}/oq-${version}.zip`,
+        value: `${downloadPath}/${packageId}-${version}.zip`,
       }),
     )
-    .pipe(gulp.dest(`${buildDirectory}`));
+    .pipe(gulp.dest(buildDirectory))
+    .pipe(rename(`${packageId}.json`))
+    .pipe(gulp.dest(`${distDirectory}`))
+    .pipe(rename(`${packageId}-${version}.json`))
+    .pipe(gulp.dest(`${distDirectory}`));
 }
 
-export const build = gulp.series(clean, gulp.parallel(buildCode, buildStyles, buildYaml, copyFiles), updateJson);
-export const dist = gulp.series(build, zipFiles, copySystem);
+export const build = gulp.series(clean, gulp.parallel(buildCode, buildStyles, buildYaml, copyFiles));
+export const dist = gulp.series(build, updateJson, zipFiles);
 
 /********************/
 /*      CLEAN       */
