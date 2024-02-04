@@ -1,4 +1,4 @@
-@import '../colors';
+@import '../variables';
 
 .oq.sheet {
   .profile-img {
@@ -24,16 +24,20 @@
 
   .item-icon {
     flex-grow: 0;
-    width: 1em;
-    height: 1em;
+    min-width: @item-row-height;
+    min-height: @item-row-height;
+    width: @item-row-height;
+    height: @item-row-height;
     border: 0;
   }
 
   .item-icon:hover {
-    background-image: url('/systems/oq/assets/icons/chat-bubble.svg');
-    width: 1em;
-    height: 1em;
-    padding: 1em 0 0 0;
+    background-image: url('/systems/oq/assets/icons/send-to-chat.svg');
+    min-width: @item-row-height;
+    min-height: @item-row-height;
+    width: @item-row-height;
+    height: @item-row-height;
+    padding: @item-row-height 0 0 0;
   }
 
   .sheet-header {

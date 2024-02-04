@@ -1,0 +1,27 @@
+<div class="items">
+  {{log spellsPerType}}
+  {{#if system.groupedItems.groupedSkills.magic}}
+    <fieldset class="item-group">
+      <legend>{{ localize 'OQ.SkillGroups.magic'}}</legend>
+      {{#each system.groupedItems.groupedSkills.magic as |skill|}}
+        {{> systems/oq/templates/actor/parts/skill-ability-row.hbs skill}}
+      {{/each}}
+    </fieldset>
+  {{/if}}
+  {{#if system.groupedItems.groupedSkills.resistance}}
+    <fieldset class="item-group">
+      <legend>{{ localize 'OQ.SkillGroups.resistance'}}</legend>
+      {{#each system.groupedItems.groupedSkills.resistance as |skill|}}
+        {{> systems/oq/templates/actor/parts/skill-ability-row.hbs skill}}
+      {{/each}}
+    </fieldset>
+  {{/if}}
+  {{#each spellsPerType as |spellGroup groupKey|}}
+    <fieldset class="item-group">
+      <legend>{{ localize (concat 'OQ.Labels.SpellTypes.' groupKey) }}</legend>
+      {{#each spellGroup as |spell|}}
+        {{> systems/oq/templates/actor/parts/spell.hbs spell}}
+      {{/each}}
+    </fieldset>
+  {{/each}}
+</div>

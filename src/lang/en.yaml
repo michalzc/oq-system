@@ -125,6 +125,25 @@ OQ:
     SkillReference: Skill reference
     SkillValue: Skill Value
     SkillsAbilities: Skills & Abilities
+    Spells: Spells
+    SpellTraitsLabel: Spell Traits
+    SpellTraits:
+      Area: Area
+      Concentration: Concentration
+      Duration: Duration
+      Ranged: Ranged
+      Instant: Instant
+      Magnitude: Magnitude
+      NonVariable: Non-Variable
+      Permanent: Permanent
+      Progressive: Progressive
+      Resist: Resist
+      Touch: Touch
+    SpellType: Spell Type
+    SpellTypes:
+      personal: Personal Magic
+      divine: Divine Magic
+      sorcery: Sorcery
     State: State
     TotalEncumbrance: Total Encumbrance
     Traits: Traits

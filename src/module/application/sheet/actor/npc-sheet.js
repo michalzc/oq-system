@@ -1,5 +1,4 @@
 import { OQActorBaseSheet } from './actor-base-sheet.js';
-import { logObject } from '../../../utils.js';
 import _ from 'lodash-es';
 
 export class OQNpcSheet extends OQActorBaseSheet {
@@ -12,13 +11,10 @@ export class OQNpcSheet extends OQActorBaseSheet {
     const personal = this.actor.system.personal;
     const enrichedDescription = await TextEditor.enrichHTML(personal.description, { async: true });
     const enrichedShortDescription = await TextEditor.enrichHTML(personal.shortDescription, { async: true });
-    return logObject(
-      'SheetContext',
-      _.merge(context, {
-        enrichedDescription,
-        enrichedShortDescription,
-      }),
-    );
+    return _.merge(context, {
+      enrichedDescription,
+      enrichedShortDescription,
+    });
   }
 
   activateListeners(html) {

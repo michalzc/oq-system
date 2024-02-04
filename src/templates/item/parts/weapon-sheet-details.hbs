@@ -27,8 +27,6 @@
   <label for="skillReference">{{localize 'OQ.Labels.Skill'}}</label>
   <div class="skill-reference">
     {{#if this.item.parent}}
-      {{ log this.item.parent.system.groupedItems.groupedSkillBySlug }}
-
       <select id="skillReference" class="skill-reference-slug" name="system.correspondingSkill.skillReference">
         {{ selectOptions this.item.parent.system.groupedItems.groupedSkillBySlug
                          selected=system.correspondingSkill.skillReference blank='' sort=true }}
@@ -58,13 +56,7 @@
       system.damage.includeDamageMod }}>
   </div>
 
-  <label for="traitInput">{{ localize 'OQ.Labels.Traits'}}</label>
-  <div class="traits tag-list">
-    {{#each system.traits as |trait|}}
-      <span class="tag-item">{{trait}}<a class="tag-delete" data-tag="{{trait}}"><i class="fas fa-delete-left"></i></a></span>
-    {{/each}}
-    <input id="traitInput" type="text" class="tag-input" data-dtype="String">
-  </div>
+  {{> systems/oq/templates/item/parts/traits.hbs }}
 
 
 </div>

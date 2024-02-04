@@ -4,15 +4,19 @@ import { OQDamageRollDialog } from '../../application/dialog/damage-roll-dialog.
 import _ from 'lodash-es';
 
 export class OQBaseItem extends Item {
-  async _onCreate(data, options, userId) {
-    await super._onCreate(data, options, userId);
-
-    const newIcon = CONFIG.OQ.ItemConfig.defaultIcons[data.type];
-    if (data.img === CONFIG.OQ.ItemConfig.bagIcon && newIcon && !options.fromCompendium) {
-      await this.update({
-        img: newIcon,
+  async _preCreate(source, options, user) {
+    await super._preCreate(source, options, user);
+    const newImage = CONFIG.OQ.ItemConfig.defaultIcons[source.type];
+    if (!source.img && newImage) {
+      this.updateSource({
+        img: newImage,
       });
     }
+  }
+
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.tooltip = this.system.description;
   }
 
   /**

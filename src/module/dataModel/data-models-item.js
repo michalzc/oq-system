@@ -111,6 +111,17 @@ export class EquipmentDataModel extends foundry.abstract.DataModel {
 export class SpellDataModel extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
+      type: new fields.StringField({
+        required: true,
+        trim: true,
+        choices: _.keys(ItemConfig.spellsTypes),
+        initial: ItemConfig.spellsTypes.personal,
+      }),
+      traits: new fields.ArrayField(commonStringModel(), {
+        nullable: false,
+        required: false,
+        initial: [],
+      }),
       description: htmlFieldModel(),
     };
   }

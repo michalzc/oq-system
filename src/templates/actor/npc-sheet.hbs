@@ -80,12 +80,12 @@
         {{#if system.groupedItems.magic }}
           <fieldset class="item-group">
             <legend>{{ localize 'OQ.Nav.Magic' }}</legend>
-            {{#each groupedItems.magic as |magicItem|}}
+            {{#each system.groupedItems.magic as |magicItem|}}
               {{#if (eq magicItem.type 'skill')}}
                 {{> systems/oq/templates/actor/parts/skill-ability-row.hbs magicItem}}
               {{/if}}
-              {{#if (eq magicItem.magic 'ability')}}
-                {{> systems/oq/templates/actor/parts/skill-ability-row.hbs magicItem}}
+              {{#if (eq magicItem.type 'spell')}}
+                {{> systems/oq/templates/actor/parts/spell.hbs magicItem}}
               {{/if}}
 
             {{/each}}

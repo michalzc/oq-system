@@ -4,12 +4,14 @@ export class OQBaseActor extends Actor {
   static otherSkillsGroups = ['knowledge', 'practical', 'custom'];
   static combatItems = ['weapon', 'armour'];
 
-  async _onCreate(data, options, userId) {
-    await super._onCreate(data, options, userId);
-
-    const newIcon = CONFIG.OQ.ActorConfig.defaultIcons[data.type];
-    if (!options.fromCompendium && newIcon) {
-      await this.update({ img: newIcon });
+  async _preCreate(source, options, userId) {
+    await super._preCreate(source, options, userId);
+    const newImage = CONFIG.OQ.ActorConfig.defaultIcons[source.type];
+    if (!source.img && newImage) {
+      this.updateSource({
+        img: newImage,
+        'prototypeToken.texture.src': newImage,
+      });
     }
   }
 

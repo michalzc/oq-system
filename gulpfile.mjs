@@ -105,7 +105,7 @@ export function watch() {
 async function zipFiles() {
   return gulp
     .src(`${buildDirectory}/**`)
-    .pipe(zip(`oq-${version}.zip`))
+    .pipe(zip(`${packageId}-${version}.zip`))
     .pipe(gulp.dest(`${distDirectory}`));
 }
 

@@ -8,6 +8,7 @@ import { OQSkillSheet } from '../application/sheet/item/skill-sheet.js';
 import { OQWeaponSheet } from '../application/sheet/item/weapon-sheet.js';
 import { OQArmourSheet } from '../application/sheet/item/armour-sheet.js';
 import { OQEquipmentSheet } from '../application/sheet/item/equipment-sheet.js';
+import { OQSpellSheet } from '../application/sheet/item/spell-sheet.js';
 
 const allItemsStates = {
   stored: {
@@ -33,6 +34,14 @@ const allItemsStates = {
 };
 export const ItemConfig = {
   bagIcon: 'icons/svg/item-bag.svg',
+  itemTypes: {
+    skill: 'skill',
+    weapon: 'weapon',
+    armour: 'armour',
+    equipment: 'equipment',
+    spell: 'spell',
+    specialAbility: 'specialAbility',
+  },
   documentClasses: {
     skill: OQSkill,
     weapon: OQWeapon,
@@ -46,6 +55,7 @@ export const ItemConfig = {
     weapon: OQWeaponSheet,
     armour: OQArmourSheet,
     equipment: OQEquipmentSheet,
+    spell: OQSpellSheet,
   },
   defaultIcons: {
     skill: 'systems/oq/assets/icons/skills.svg',
@@ -101,7 +111,32 @@ export const ItemConfig = {
     weapon: 'systems/oq/templates/item/parts/weapon-sheet-details.hbs',
     armour: 'systems/oq/templates/item/parts/armour-sheet-details.hbs',
     equipment: 'systems/oq/templates/item/parts/equipment-sheet-details.hbs',
-    // spell: 'systems/oq/templates/item/spell-sheet.html',
+    spell: 'systems/oq/templates/item/parts/spell-sheet-details.hbs',
     // specialAbility: 'systems/oq/templates/item/special-ability-sheet.html',
+  },
+  spellsTypes: {
+    personal: 'personal',
+    divine: 'divine',
+    sorcery: 'sorcery',
+  },
+
+  spellTraits: {
+    personal: ['area', 'concentration', 'instant', 'magnitude', 'nonVariable', 'permanent', 'resist', 'touch'],
+    divine: [
+      'area',
+      'common',
+      'concentration',
+      'duration',
+      'instant',
+      'magnitude',
+      'nonVariable',
+      'permanent',
+      'progressive',
+      'ranged',
+      'resist',
+      'touch',
+      'variable',
+    ],
+    sorcery: ['concentration', 'instant', 'permanent', 'resist', 'touch'],
   },
 };

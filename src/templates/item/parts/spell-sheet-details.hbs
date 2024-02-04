@@ -1,0 +1,9 @@
+<div class="item-details">
+  <label for="type">{{ localize 'OQ.Labels.SpellType' }}</label>
+  <select id="type" name="system.type">
+    {{selectOptions spellTypes selected=system.type localize=true }}
+  </select>
+
+  {{> systems/oq/templates/item/parts/traits.hbs }}
+
+</div>

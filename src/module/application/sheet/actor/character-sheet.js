@@ -17,10 +17,18 @@ export class OQCharacterSheet extends OQActorBaseSheet {
   async getData(options) {
     const context = await super.getData(options);
     const enrichedNotes = await TextEditor.enrichHTML(this.actor.system.personal.notes, { async: true });
+    const spellsPerType = this.getSpellsPerType();
     return _.merge(context, {
       enrichedNotes,
       isCharacter: true,
+      spellsPerType,
     });
+  }
+
+  getSpellsPerType() {
+    const itemTypes = CONFIG.OQ.ItemConfig.itemTypes;
+    const allSpells = this.actor.items.filter((item) => item.type === itemTypes.spell);
+    return _.groupBy(allSpells, (spell) => spell.system.type);
   }
 
   onModifyCharacteristics() {
