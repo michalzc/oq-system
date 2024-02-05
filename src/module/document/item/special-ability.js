@@ -31,6 +31,8 @@ export class OQSpecialAbility extends OQBaseItem {
         return Math.min(Math.max(0, value), 100);
       }
     }
+
+    return null;
   }
 
   async makeDamageRoll(skipDialog = true) {
