@@ -1,0 +1,14 @@
+<div class="item-details">
+  <label for="type">{{ localize 'OQ.Labels.Type' }}</label>
+  <select id="type" name="system.type">
+    {{ selectOptions specialAbilityTypes selected=system.type localize=true }}
+  </select>
+
+  <label for="formula">{{ localize 'OQ.Labels.Formula' }}</label>
+  <input type="text" id="formula" data-dtype="String" name="system.formula" value="{{ system.formula }}">
+
+  <label for="damageFormula">{{ localize 'OQ.Labels.DamageFormula' }}</label>
+  <input type="text" id="damageFormula" data-dtype="String" name="system.damageFormula" value="{{ system.damageFormula }}">
+
+  {{> systems/oq/templates/item/parts/traits.hbs }}
+</div>

@@ -131,6 +131,19 @@ export class SpecialAbilityDataModel extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       description: htmlFieldModel(),
+      traits: new fields.ArrayField(commonStringModel(), {
+        nullable: false,
+        required: false,
+        initial: [],
+      }),
+      formula: commonStringModel(),
+      damageFormula: commonStringModel(),
+      type: new fields.StringField({
+        required: true,
+        trim: true,
+        initial: ItemConfig.specialAbilityType.general,
+        choices: _.keys(ItemConfig.specialAbilityType),
+      }),
     };
   }
 }

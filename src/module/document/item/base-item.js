@@ -1,7 +1,4 @@
 import { log } from '../../utils.js';
-import { damageRoll } from '../../roll.js';
-import { OQDamageRollDialog } from '../../application/dialog/damage-roll-dialog.js';
-import _ from 'lodash-es';
 
 export class OQBaseItem extends Item {
   async _preCreate(source, options, user) {
@@ -33,20 +30,7 @@ export class OQBaseItem extends Item {
   }
 
   async makeDamageRoll(skipDialog = true) {
-    const actorRollData = this.parent.getRollData();
-    const damageFormula = this.system.damage.damageFormula;
-    const includeDM = !!this.system.damage.includeDamageMod;
-    const rollData = _.merge(this.makeBaseTestRollData(), {
-      actorRollData,
-      damageFormula,
-      includeDM,
-    });
-
-    if (skipDialog) await damageRoll(rollData);
-    else {
-      const rollDialog = new OQDamageRollDialog(rollData);
-      rollDialog.render(true);
-    }
+    log(`Makeing damage for ${this.id}`, skipDialog);
   }
 
   makeRollString(rollFormula) {
@@ -72,5 +56,15 @@ export class OQBaseItem extends Item {
       entityName: this.name,
       type: this.actor.type,
     };
+  }
+
+  async tooltipWithTraits() {
+    if (this.system.traits && this.system.traits.length) {
+      const description = this.system.description;
+      const traits = (this.system.traits ?? []).join(' | ');
+      return await renderTemplate('systems/oq/templates/tooltip.hbs', { description, traits });
+    } else {
+      return this.system.description;
+    }
   }
 }

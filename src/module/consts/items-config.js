@@ -9,6 +9,7 @@ import { OQWeaponSheet } from '../application/sheet/item/weapon-sheet.js';
 import { OQArmourSheet } from '../application/sheet/item/armour-sheet.js';
 import { OQEquipmentSheet } from '../application/sheet/item/equipment-sheet.js';
 import { OQSpellSheet } from '../application/sheet/item/spell-sheet.js';
+import { OQSpecialAbilitySheet } from '../application/sheet/item/special-ability-sheet.js';
 
 const allItemsStates = {
   stored: {
@@ -56,6 +57,7 @@ export const ItemConfig = {
     armour: OQArmourSheet,
     equipment: OQEquipmentSheet,
     spell: OQSpellSheet,
+    specialAbility: OQSpecialAbilitySheet,
   },
   defaultIcons: {
     skill: 'systems/oq/assets/icons/skills.svg',
@@ -112,7 +114,7 @@ export const ItemConfig = {
     armour: 'systems/oq/templates/item/parts/armour-sheet-details.hbs',
     equipment: 'systems/oq/templates/item/parts/equipment-sheet-details.hbs',
     spell: 'systems/oq/templates/item/parts/spell-sheet-details.hbs',
-    // specialAbility: 'systems/oq/templates/item/special-ability-sheet.html',
+    specialAbility: 'systems/oq/templates/item/parts/special-ability-details.hbs',
   },
   spellsTypes: {
     personal: 'personal',
@@ -138,5 +140,10 @@ export const ItemConfig = {
       'variable',
     ],
     sorcery: ['concentration', 'instant', 'permanent', 'resist', 'touch'],
+  },
+  specialAbilityType: {
+    general: 'general',
+    magic: 'magic',
+    combat: 'combat',
   },
 };

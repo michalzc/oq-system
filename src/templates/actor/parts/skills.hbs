@@ -3,8 +3,16 @@
     <fieldset class="item-group">
       <legend>{{ localize groupKey}}</legend>
       {{#each skills as |skill|}}
-        {{> systems/oq/templates/actor/parts/skill-ability-row.hbs skill}}
+        {{> systems/oq/templates/actor/parts/skill.hbs skill}}
       {{/each}}
     </fieldset>
   {{/each}}
+  {{#if system.groupedItems.abilities }}
+    <fieldset class="item-group">
+      <legend>{{localize 'OQ.Labels.SpecialAbilities' }}</legend>
+      {{#each system.groupedItems.abilities as |ability|}}
+        {{> systems/oq/templates/actor/parts/ability.hbs ability}}
+      {{/each}}
+    </fieldset>
+  {{/if}}
 </div>

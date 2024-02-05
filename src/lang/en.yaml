@@ -125,6 +125,12 @@ OQ:
     SkillReference: Skill reference
     SkillValue: Skill Value
     SkillsAbilities: Skills & Abilities
+    SpecialAbilities: Special Abilities
+    SpecialAbility: Special Ability
+    SpecialAbilityTypes:
+      general: General
+      magic: Magic
+      combat: Combat
     Spells: Spells
     SpellTraitsLabel: Spell Traits
     SpellTraits:
@@ -185,6 +191,8 @@ OQ:
     resistance: Resistances
   Tooltips:
     SendToChat: Send to chat
+  Warnings:
+    NoSpecialAbility: Player Character is not eligible for Special Abilities
 TYPES:
   Actor:
     character: Player Character

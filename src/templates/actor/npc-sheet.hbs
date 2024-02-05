@@ -51,7 +51,12 @@
           <fieldset class="item-group">
             <legend>{{ localize 'OQ.Labels.SkillsAbilities' }}</legend>
             {{#each system.groupedItems.skillsAndAbilities as |skillAbility|}}
-              {{> systems/oq/templates/actor/parts/skill-ability-row.hbs skillAbility}}
+              {{#if (eq skillAbility.type 'skill') }}
+                {{> systems/oq/templates/actor/parts/skill.hbs skillAbility}}
+              {{/if}}
+              {{#if (eq skillAbility.type 'specialAbility') }}
+                {{> systems/oq/templates/actor/parts/ability.hbs skillAbility}}
+              {{/if}}
             {{/each}}
           </fieldset>
         {{/if}}
@@ -61,10 +66,10 @@
             <legend>{{ localize 'OQ.Nav.Combat' }}</legend>
             {{#each system.groupedItems.combat as |combatItem|}}
               {{#if (eq combatItem.type 'skill')}}
-                {{> systems/oq/templates/actor/parts/skill-ability-row.hbs combatItem}}
+                {{> systems/oq/templates/actor/parts/skill.hbs combatItem}}
               {{/if}}
-              {{#if (eq combatItem.type 'ability')}}
-                {{> systems/oq/templates/actor/parts/skill-ability-row.hbs combatItem}}
+              {{#if (eq combatItem.type 'specialAbility')}}
+                {{> systems/oq/templates/actor/parts/ability.hbs combatItem}}
               {{/if}}
               {{#if (eq combatItem.type 'weapon')}}
                 {{> systems/oq/templates/actor/parts/weapon.hbs combatItem}}
@@ -82,7 +87,10 @@
             <legend>{{ localize 'OQ.Nav.Magic' }}</legend>
             {{#each system.groupedItems.magic as |magicItem|}}
               {{#if (eq magicItem.type 'skill')}}
-                {{> systems/oq/templates/actor/parts/skill-ability-row.hbs magicItem}}
+                {{> systems/oq/templates/actor/parts/skill.hbs magicItem}}
+              {{/if}}
+              {{#if (eq magicItem.type 'specialAbility')}}
+                {{> systems/oq/templates/actor/parts/ability.hbs magicItem}}
               {{/if}}
               {{#if (eq magicItem.type 'spell')}}
                 {{> systems/oq/templates/actor/parts/spell.hbs magicItem}}

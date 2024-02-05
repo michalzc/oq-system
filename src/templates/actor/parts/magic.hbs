@@ -1,10 +1,9 @@
 <div class="items">
-  {{log spellsPerType}}
   {{#if system.groupedItems.groupedSkills.magic}}
     <fieldset class="item-group">
       <legend>{{ localize 'OQ.SkillGroups.magic'}}</legend>
       {{#each system.groupedItems.groupedSkills.magic as |skill|}}
-        {{> systems/oq/templates/actor/parts/skill-ability-row.hbs skill}}
+        {{> systems/oq/templates/actor/parts/skill.hbs skill}}
       {{/each}}
     </fieldset>
   {{/if}}
@@ -12,7 +11,7 @@
     <fieldset class="item-group">
       <legend>{{ localize 'OQ.SkillGroups.resistance'}}</legend>
       {{#each system.groupedItems.groupedSkills.resistance as |skill|}}
-        {{> systems/oq/templates/actor/parts/skill-ability-row.hbs skill}}
+        {{> systems/oq/templates/actor/parts/skill.hbs skill}}
       {{/each}}
     </fieldset>
   {{/if}}
@@ -24,4 +23,12 @@
       {{/each}}
     </fieldset>
   {{/each}}
+  {{#if system.groupedItems.magicAbilities}}
+    <fieldset class="item-group">
+      <legend>{{ localize 'OQ.Labels.SpecialAbilities'}}</legend>
+      {{#each system.groupedItems.magicAbilities as |ability|}}
+        {{> systems/oq/templates/actor/parts/ability.hbs ability}}
+      {{/each}}
+    </fieldset>
+  {{/if}}
 </div>

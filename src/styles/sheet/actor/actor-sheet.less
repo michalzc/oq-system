@@ -29,8 +29,19 @@
       flex-grow: 0;
       gap: 1em;
 
+      .characteristics {
+        display: flex;
+        justify-items: flex-start;
+        flex-direction: column;
+        flex: 3;
+
+        & > div {
+          flex-grow: 1;
+        }
+      }
+
       .attributes {
-        flex-grow: 0;
+        flex: 2;
         display: flex;
         flex-direction: column;
 

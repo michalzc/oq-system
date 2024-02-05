@@ -7,8 +7,10 @@
       <label>{{ localize 'OQ.Labels.Damage' }}</label>
       <div>{{ damageFormula }}</div>
 
+      {{#if includeDM}}
       <label>{{ localize 'OQ.Labels.DamageMod' }}</label>
       <div>{{ actorRollData.dm }}</div>
+      {{/if}}
     </div>
     <div class="roll-params">
       <label for="customFormula">{{ localize 'OQ.Dialog.CustomFormula' }}</label>

@@ -1,4 +1,3 @@
-import { log } from '../../../utils.js';
 import _ from 'lodash-es';
 import { AttributesDialog } from '../../dialog/attributes-dialog.js';
 
@@ -139,7 +138,6 @@ export class OQActorBaseSheet extends ActorSheet {
 
   async onDamageRoll(event) {
     event.preventDefault();
-    log('Damage roll', event);
 
     const dataSet = event.currentTarget.dataset;
     const item = this.actor.items.get(dataSet?.itemId);

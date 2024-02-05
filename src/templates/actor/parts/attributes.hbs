@@ -23,16 +23,6 @@
     <a class="modify-attributes" data-tooltip="{{ localize 'OQ.Labels.EditAttributes' }}"><i
       class="fas fa-gear"></i></a>
 
-    {{#if isCharacter}}
-    <label for="fp" data-tooltip="{{ localize system.attributes.fn.label }}">{{ localize
-      system.attributes.fn.abbr }}</label>
-    <div class="value"><input id="fp" type="number" name="system.attributes.fn.value" value="{{system.attributes.fn.value}}">
-    </div>
-    <label for="gp" data-tooltip="{{ localize system.attributes.gr.label }}">{{ localize
-      system.attributes.gr.abbr }}</label>
-    <div class="value"><input id="gp" type="number" name="system.attributes.gr.value" value="{{system.attributes.gr.value}}">
-    </div>
-    {{/if}}
 
     <div class="wide">
       <label data-tooltip="{{ localize system.attributes.dm.label}}">{{ localize
@@ -47,6 +37,21 @@
         system.attributes.ap.abbr}}</label>
       <div class="value">{{system.attributes.ap.value}}</div>
     </div>
+
+
+
+    {{#if isCharacter}}
+      <label for="fp" data-tooltip="{{ localize system.attributes.fn.label }}">{{ localize
+        system.attributes.fn.abbr }}</label>
+      <div class="value"><input id="fp" type="number" name="system.attributes.fn.value"
+                                value="{{system.attributes.fn.value}}">
+      </div>
+      <label for="gp" data-tooltip="{{ localize system.attributes.gr.label }}">{{ localize
+        system.attributes.gr.abbr }}</label>
+      <div class="value"><input id="gp" type="number" name="system.attributes.gr.value"
+                                value="{{system.attributes.gr.value}}">
+      </div>
+    {{/if}}
 
 
   </div>

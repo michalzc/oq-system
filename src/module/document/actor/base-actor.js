@@ -65,42 +65,50 @@ export class OQBaseActor extends Actor {
   }
 
   prepareGroupedItems() {
+    //FIXME: Move to sheet
     const allItems = _.sortBy([...this.items], (item) => item.name);
     const groupedItems = _.groupBy(allItems, (item) => item.type);
     const skills = groupedItems.skill ?? [];
+    const abilities = groupedItems.specialAbility ?? [];
     const groupedSkills = _.groupBy(skills, (skill) => skill.system.group);
+    const groupedAbilities = _.groupBy(abilities, (ability) => ability.system.type);
 
     const otherSkills = _.filter(skills, (skill) => _.includes(OQBaseActor.otherSkillsGroups, skill.system.group));
     const groupedSkillBySlug = _.fromPairs(skills.map((skill) => [skill.system.slug, skill.name]));
 
-    const abilities = groupedItems.specialAbility ?? [];
-    const skillsAndAbilities = _.concat(otherSkills, abilities);
+    const generalAbilities = groupedAbilities.general ?? [];
+    const skillsAndAbilities = _.concat(otherSkills, generalAbilities);
 
     const magicSkills = groupedSkills.magic ?? [];
+    const magicAbilities = groupedAbilities.magic ?? [];
     const spells = groupedItems.spell ?? [];
-    const magic = _.concat(magicSkills, spells);
+    const magic = _.concat(magicSkills, magicAbilities, spells);
 
     const combatSkills = groupedSkills.combat ?? [];
     const resistances = groupedSkills.resistance ?? [];
+    const combatAbilities = groupedAbilities.combat ?? [];
     const weapons = groupedItems.weapon ?? [];
     const armours = groupedItems.armour ?? [];
-    const combat = _.concat(combatSkills, resistances, weapons, armours);
+    const combat = _.concat(combatSkills, resistances, combatAbilities, weapons, armours);
 
     const equipment = groupedItems.equipment ?? [];
 
     return {
-      skills,
-      combatSkills,
-      resistances,
-      groupedItems,
-      groupedSkills,
-      skillsAndAbilities,
-      magic,
-      combat,
-      equipment,
-      groupedSkillBySlug,
-      weapons,
+      abilities,
       armours,
+      combat,
+      combatAbilities,
+      combatSkills,
+      equipment,
+      groupedItems,
+      groupedSkillBySlug,
+      groupedSkills,
+      magic,
+      magicAbilities,
+      resistances,
+      skills,
+      skillsAndAbilities,
+      weapons,
     };
   }
 

@@ -21,7 +21,8 @@
 const MAX_VALUE = 100;
 
 const TestRollTemplates = {
-  skill: 'systems/oq/templates/chat/parts/skill-roll.hbs',
+  skill: 'systems/oq/templates/chat/parts/skill-ability-roll.hbs',
+  specialAbility: 'systems/oq/templates/chat/parts/skill-ability-roll.hbs',
   weapon: 'systems/oq/templates/chat/parts/weapon-roll.hbs',
 };
 
@@ -37,12 +38,14 @@ export async function testRoll(rollData) {
 
   const rollResult = getResult(resultFeatures, roll.total, { value: rollData.value, totalValue });
   const mastered = rollData.value >= MAX_VALUE && totalValue >= MAX_VALUE && rollData.mastered;
+  const rollTypeLabel = `TYPES.Item.${rollData.rollType}`;
   const renderData = {
     ...rollData,
-    totalValue,
-    rollResult,
-    roll,
     mastered,
+    roll,
+    rollResult,
+    rollTypeLabel,
+    totalValue,
   };
   const template = TestRollTemplates[rollData.rollType];
   const messageContent = await renderTemplate(template, renderData);
@@ -124,7 +127,8 @@ export function getResultFeatures(roll) {
  * @return {Promise<void>}
  */
 export async function damageRoll(rollData) {
-  if (rollData.damageFormula) {
+  const makeRoll = rollData.damageFormula || (rollData.includeDM && rollData.actorRollData.dm);
+  if (makeRoll) {
     const damageFormula = rollData.customFormula
       ? rollData.customFormula
       : rollData.includeDM
