@@ -23,3 +23,8 @@ export function signedNumberOrEmpty(num) {
   if (!num) return '';
   else return num > 0 ? `+${num}` : `${num}`;
 }
+
+export const minMaxValue = (value) => Math.max(0, Math.min(100, value));
+
+export const mostSignificantModifier = (left, right) =>
+  Math.abs(left) === Math.abs(right) ? 0 : Math.abs(left) > Math.abs(right) ? left : right;

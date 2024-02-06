@@ -152,8 +152,10 @@ OQ:
       sorcery: Sorcery
     State: State
     TotalEncumbrance: Total Encumbrance
+    TotalValue: Total Value
     Traits: Traits
     Type: Type
+    Value: Value
     WeaponHands:
       one: One Handed
       oneAndTwo: One or Two Handed

@@ -8,9 +8,9 @@
     <span data-tooltip="{{localize 'OQ.Labels.SkillMastered'}}"><i class="fa fa-seal"></i></span>
   {{/if}}
   <input name="item.mod" class="item-mod mod-value" data-item-id="{{id}}" type="number" data-dtype="Number"
-         value="{{system.mod}}" data-tooltip="{{ localize 'OQ.Labels.Advances' }}">
+         value="{{system.advancement}}" data-tooltip="{{ localize 'OQ.Labels.Advances' }}">
   <a class="item-roll total-value" data-item-id="{{id}}"
-     data-tooltip="{{localize 'OQ.Labels.Roll'}} {{name}}">{{system.value}} %</a>
+     data-tooltip="{{localize 'OQ.Labels.Roll'}} {{name}}">{{system.value}} {{#if system.valueWithMod}}({{system.valueWithMod}}){{/if}} %</a>
   <a class="item-edit" data-item-id="{{id}}"><i class="fas fa-edit"></i></a>
   <a class="item-delete" data-item-id="{{id}}"><i class="fas fa-trash"></i></a>
 </div>

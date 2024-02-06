@@ -44,9 +44,12 @@ export class OQBaseActor extends Actor {
     const charRollData = Object.fromEntries(
       Object.entries(this.system.characteristics).map(([key, elem]) => [key, elem.value]),
     );
-    const skills = Object.fromEntries(
-      this.items.filter((i) => i.type === 'skill').map((skill) => [skill.system.slug, skill.system.value]),
+    const skills = _.fromPairs(
+      this.items
+        .filter((i) => i.type === 'skill')
+        .map((skill) => [skill.system.slug, { value: skill.system.value, mod: skill.system.mod }]),
     );
+
     const dm = this.system.attributes.dm.value;
 
     const newRollData = {

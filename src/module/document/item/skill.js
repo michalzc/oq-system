@@ -2,17 +2,20 @@ import { OQBaseItem } from './base-item.js';
 import { testRoll } from '../../roll.js';
 import _ from 'lodash-es';
 import { OQTestRollDialog } from '../../application/dialog/test-roll-dialog.js';
+import { minMaxValue } from '../../utils.js';
 
 export class OQSkill extends OQBaseItem {
   prepareDerivedData() {
     super.prepareDerivedData();
 
-    let skillTotal = this.getValue();
+    const value = this.getValue();
+    const valueWithMod = this.system.mod && minMaxValue(value + this.system.mod);
     const extendedData = {
       slug: this.name.slugify().replace(/\(/g, '').replace(/\)/g, ''),
       groupName: this.getGroupLabel(),
-      value: skillTotal,
-      mastered: skillTotal >= 100,
+      value,
+      valueWithMod,
+      mastered: value >= 100,
     };
 
     this.system = _.merge(this.system, extendedData);
@@ -30,10 +33,10 @@ export class OQSkill extends OQBaseItem {
   getValue() {
     if (this.parent) {
       const rollData = this.parent.getRollData();
-      const formula = `${this.system.formula} + ${this.system.mod}`;
+      const formula = `${this.system.formula} + ${this.system.advancement}`;
       const total = new Roll(formula, rollData).roll({ async: false }).total;
 
-      return Math.min(100, Math.max(0, total));
+      return minMaxValue(total);
     } else {
       return 0;
     }
@@ -48,6 +51,7 @@ export class OQSkill extends OQBaseItem {
       mastered: this.system.mastered,
       rollType: 'skill',
       value: this.system.value,
+      modifier: this.system.mod,
     });
 
     if (skipDialog) {
