@@ -3,6 +3,7 @@ import _ from 'lodash-es';
 import { damageRoll, testRoll } from '../../roll.js';
 import { OQTestRollDialog } from '../../application/dialog/test-roll-dialog.js';
 import { OQDamageRollDialog } from '../../application/dialog/damage-roll-dialog.js';
+import { minMaxValue } from '../../utils.js';
 
 export class OQSpecialAbility extends OQBaseItem {
   async prepareDerivedData() {
@@ -28,7 +29,7 @@ export class OQSpecialAbility extends OQBaseItem {
       const roll = new Roll(this.system.formula, this.parent.getRollData());
       if (roll.isDeterministic) {
         const value = roll.roll({ async: false }).total;
-        return Math.min(Math.max(0, value), 100);
+        return minMaxValue(value);
       }
     }
 

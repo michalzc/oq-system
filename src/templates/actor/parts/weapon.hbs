@@ -1,3 +1,4 @@
+{{ log this }}
 <div class="item">
   <a class="item-to-chat" data-item-id="{{id}}">
     <img class="item-icon" src="{{img}}" data-tooltip="{{localize 'OQ.Tooltips.SendToChat'}}" alt="{{name}}">
@@ -21,7 +22,7 @@
 
   {{#if rollValue }}
     <a class="item-roll total-value" data-item-id="{{id}}" data-tooltip="{{localize 'OQ.Labels.Roll'}} {{name}}">
-      {{ rollValue }} %
+      {{ rollValue }} {{#if rollValueWithMod}}({{rollValueWithMod}}){{/if}} %
     </a>
   {{else}}
     <div class="total-value"></div>

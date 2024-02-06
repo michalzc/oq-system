@@ -10,6 +10,9 @@
 
     </div>
     <div class="roll-params">
+      <label>{{ localize 'OQ.Labels.Value' }}</label>
+      <div>{{ value }}</div>
+
       <label for="difficulty">{{localize 'OQ.Labels.Difficulty'}}</label>
       <select name="difficulty" id="difficulty">
         {{selectOptions difficulties selected=defaultDifficulty localize=false }}

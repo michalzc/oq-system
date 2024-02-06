@@ -1,9 +1,9 @@
 import { OQBaseItem } from './base-item.js';
 import _ from 'lodash-es';
-import { signedNumberOrEmpty } from '../../utils.js';
 import { damageRoll, testRoll } from '../../roll.js';
 import { OQTestRollDialog } from '../../application/dialog/test-roll-dialog.js';
 import { OQDamageRollDialog } from '../../application/dialog/damage-roll-dialog.js';
+import { mostSignificantModifier } from '../../utils.js';
 
 export class OQWeapon extends OQBaseItem {
   async _preUpdate(changed, options, user) {
@@ -29,13 +29,16 @@ export class OQWeapon extends OQBaseItem {
   async prepareDerivedData() {
     super.prepareDerivedData();
     const tooltip = await this.tooltipWithTraits();
-    const rollValue = this.getRollValue();
+    const [rollValue, rollMod] = this.getRollValues();
+    const rollValueWithMod = rollValue && rollMod && rollValue + rollMod;
     const damageRollValue = this.getDamageRollValue();
 
     _.merge(this, {
-      tooltip,
-      rollValue,
       damageRollValue,
+      rollMod,
+      rollValue,
+      rollValueWithMod,
+      tooltip,
     });
   }
 
@@ -72,15 +75,17 @@ export class OQWeapon extends OQBaseItem {
     }
   }
 
-  getRollValue() {
+  getRollValues() {
     const correspondingSkill = this.system.correspondingSkill;
     if (this.parent && correspondingSkill?.skillReference) {
-      const formula = `@skills.${correspondingSkill.skillReference} ${signedNumberOrEmpty(
-        correspondingSkill.skillMod,
-      )}`;
-      const roll = new Roll(formula, this.parent.getRollData()).roll({ async: false });
-      return roll.total;
-    } else return 0;
+      const formula = `@skills.${correspondingSkill.skillReference}.value`;
+      const skillModValueFormula = `@skills.${correspondingSkill.skillReference}.mod`;
+
+      const valueRoll = new Roll(formula, this.parent.getRollData()).roll({ async: false }).total;
+      const skillModRoll = new Roll(skillModValueFormula, this.parent.getRollData()).roll({ async: false }).total;
+      const mod = mostSignificantModifier(skillModRoll ?? 0, this.system.skillReference?.skillMod ?? 0);
+      return [valueRoll, mod];
+    } else return [null, null];
   }
 
   /**
@@ -88,16 +93,13 @@ export class OQWeapon extends OQBaseItem {
    * @returns {Promise<void>}
    */
   async itemTestRoll(skipDialog) {
-    const parentRollData = this.parent.getRollData();
-
     const skillReference = this.system.correspondingSkill?.skillReference;
-    const value = skillReference && _.get(parentRollData, `skills.${skillReference}`);
-    const modifier = this.system.correspondingSkill?.skillMod;
+
     const skillName = this.parent?.system.groupedItems.groupedSkillBySlug[skillReference];
     const rollData = _.merge(this.makeBaseTestRollData(), {
       rollType: 'weapon',
-      value,
-      modifier,
+      value: this.rollValue,
+      modifier: this.rollMod,
       skillName,
     });
 

@@ -27,6 +27,7 @@ export class SkillDataModel extends foundry.abstract.DataModel {
       mod: positiveNumberModel(),
       group: commonStringModel(),
       customGroupName: commonStringModel(),
+      advancement: positiveNumberModel(),
     };
   }
 }

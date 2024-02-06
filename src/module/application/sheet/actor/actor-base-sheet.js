@@ -111,7 +111,7 @@ export class OQActorBaseSheet extends ActorSheet {
     const dataset = event.currentTarget.dataset;
     const item = this.actor.items.get(dataset.itemId);
     const value = event.currentTarget.value;
-    await item.update({ 'system.mod': value });
+    await item.update({ 'system.advancement': value });
   }
 
   onModifyItem(event) {

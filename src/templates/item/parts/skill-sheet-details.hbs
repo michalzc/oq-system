@@ -1,3 +1,4 @@
+{{ log this }}
 <div class="item-details">
   <label for="group">{{localize 'OQ.Labels.Group'}}</label>
 
@@ -11,7 +12,14 @@
   <label for="formula">{{localize 'OQ.Labels.Formula'}}</label>
   <input type="text" name="system.formula" id="formula" value="{{system.formula}}">
   {{#if assigned}}
+    <label for="advancement">{{ localize 'OQ.Labels.Advances' }}</label>
+    <input type="number" data-dtype="Number" id="advancement" name="system.advancement" value="{{ system.advancement }}">
+
     <label for="mod">{{localize 'OQ.Labels.Mod'}}</label>
     <input type="number" name="system.mod" id="mod" value="{{system.mod}}">
+
+    <label>{{ localize 'OQ.Labels.TotalValue' }}</label>
+    <div>{{ system.value }}</div>
   {{/if}}
+
 </div>
