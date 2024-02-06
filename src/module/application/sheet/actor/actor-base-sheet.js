@@ -55,6 +55,8 @@ export class OQActorBaseSheet extends ActorSheet {
 
     html.find('.item-quantity-value').on('change', this.onItemUpdateQuantity.bind(this));
     html.find('.item-quantity-update').on('click', this.onItemQuantityIncreaseDecrease.bind(this));
+
+    html.find('.resource-update').on('mouseup', this.onUpdateResource.bind(this));
   }
 
   statusMenu(element, statuses, selector) {
@@ -150,6 +152,19 @@ export class OQActorBaseSheet extends ActorSheet {
     const dataSet = event.currentTarget.dataset;
     const item = this.actor.items.get(dataSet?.itemId);
     await item.sendToChat();
+  }
+
+  async onUpdateResource(event) {
+    const update = event.which === 1 ? 1 : -1;
+    const dataSet = event.currentTarget.dataset;
+    const resourceId = dataSet.resourceId;
+    const path = `system.attributes.${resourceId}.value`;
+    const value = _.get(this.actor, path);
+
+    if (value) {
+      await this.actor.update({ [path]: value + update });
+      await this.render(true);
+    }
   }
 
   updateCharacteristicsLabels(characteristics) {
