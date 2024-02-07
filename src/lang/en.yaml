@@ -95,6 +95,7 @@ OQ:
       simple: Simple
     EditAttributes: Edit Attributes
     EditCharacteristics: Edit Characteristics
+    Enc: Enc
     Encumbrance: Encumbrance
     FireRate: Fire Rate
     Formula: Formula

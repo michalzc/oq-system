@@ -110,4 +110,32 @@ export class OQWeapon extends OQBaseItem {
       dialog.render(true);
     }
   }
+
+  getItemDataForChat() {
+    const context = super.getItemDataForChat();
+
+    const { correspondingSkill, hands, encumbrance, rangeFormula, rate, cost, damage } = this.system;
+    const parentSystem = this.parent?.system;
+    const skillName =
+      correspondingSkill?.skillReference &&
+      parentSystem?.groupedItems?.groupedSkillBySlug[correspondingSkill.skillReference];
+
+    const fields = [
+      skillName && { label: `OQ.Labels.Skill`, value: skillName },
+      encumbrance && { label: 'OQ.Labels.Enc', value: encumbrance },
+      hands && { label: `OQ.Labels.Hands`, value: game.i18n.localize(`OQ.Labels.WeaponHands.${hands}`) },
+      rangeFormula && { label: `OQ.Labels.Range`, value: rangeFormula },
+      rate && { label: `OQ.Labels.FireRate`, value: rate },
+      cost && { label: `OQ.Labels.Cost`, value: cost },
+      damage?.damageFormula && {
+        label: `OQ.Labels.Damage`,
+        value: `${damage.damageFormula} ${damage.includeDamageMod ? parentSystem?.attributes?.dm?.value ?? '' : ''}`,
+      },
+    ].filter((item) => !!item);
+
+    return _.merge(context, {
+      itemSubtypeLabel: `OQ.Labels.WeaponTypes.${this.system.weaponType}`,
+      fields,
+    });
+  }
 }

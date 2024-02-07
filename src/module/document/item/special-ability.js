@@ -64,4 +64,11 @@ export class OQSpecialAbility extends OQBaseItem {
       await dialog.render(true);
     }
   }
+
+  getItemDataForChat() {
+    const context = super.getItemDataForChat();
+    return _.merge(context, {
+      itemSubtypeLabel: `OQ.Labels.SpecialAbilityTypes.${this.system.type}`,
+    });
+  }
 }

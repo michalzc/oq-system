@@ -59,7 +59,17 @@ export class OQSkill extends OQBaseItem {
     } else {
       const dialog = new OQTestRollDialog(rollData);
       await dialog.render(true);
-      // await skillRollDialog(rollData);
     }
+  }
+
+  getItemDataForChat() {
+    const context = super.getItemDataForChat();
+    const { group, customGroupName } = this.system;
+    const groupLabel =
+      group === CONFIG.OQ.ItemConfig.skillGroups.custom ? customGroupName ?? '' : `OQ.SkillGroups.${group}`;
+
+    return _.merge(context, {
+      itemSubtypeLabel: groupLabel,
+    });
   }
 }
