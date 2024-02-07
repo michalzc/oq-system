@@ -163,7 +163,6 @@ export class OQActorBaseSheet extends ActorSheet {
 
     if (value) {
       await this.actor.update({ [path]: value + update });
-      await this.render(true);
     }
   }
 
