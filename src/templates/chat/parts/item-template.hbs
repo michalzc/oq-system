@@ -1,3 +1,4 @@
+{{ log this }}
 <div class="oq chat-item">
   <div class="item-header">
     {{#if img}}
@@ -5,9 +6,21 @@
     {{/if}}
     <div class="item-header-container">
       <div class="item-title">{{ name }}</div>
+      <div class="item-subtitle">
+        {{ localize itemTypeLabel }}{{#if itemSubtypeLabel}}: {{ localize itemSubtypeLabel }}{{/if}}
+      </div>
+      <div class="item-header-fields">
+        {{#each fields as |field|}}
+          <div class="field-label">{{ localize field.label }}</div>
+          <div class="field-value">{{ field.value }}</div>
+        {{/each}}
+      </div>
     </div>
   </div>
   <div class="item-body">
-    <div class="item-description"> {{ system.description }}git </div>
+    <div class="item-description"> {{{ description }}} </div>
+    {{#if traits}}
+      <div class="item-traits"><strong>{{ localize 'OQ.Labels.Traits' }}: </strong>{{{traits}}}</div>
+    {{/if}}
   </div>
 </div>

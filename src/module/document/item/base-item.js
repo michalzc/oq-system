@@ -1,4 +1,5 @@
 import { log } from '../../utils.js';
+import { displayItem } from '../../../chat.js';
 
 export class OQBaseItem extends Item {
   async _preCreate(source, options, user) {
@@ -9,6 +10,18 @@ export class OQBaseItem extends Item {
         img: newImage,
       });
     }
+  }
+
+  getItemDataForChat() {
+    const traits = this.system.traits && this.system.traits.join(', ');
+    return {
+      speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token }),
+      name: this.name,
+      itemTypeLabel: `TYPES.Item.${this.type}`,
+      img: this.img,
+      description: this.system.description,
+      traits: traits,
+    };
   }
 
   prepareDerivedData() {
@@ -26,7 +39,8 @@ export class OQBaseItem extends Item {
   }
 
   async sendToChat() {
-    log(`Sending to chat element ${this.id}`);
+    const chatData = this.getItemDataForChat();
+    displayItem(chatData);
   }
 
   async makeDamageRoll(skipDialog = true) {

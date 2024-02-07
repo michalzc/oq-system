@@ -1,0 +1,58 @@
+.oq.chat-item {
+  display: flex;
+  flex-direction: column;
+
+  .item-header {
+    color: @dark-color;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+
+    .item-image {
+      width: 64px;
+      height: 64px;
+      border: 0;
+      flex: 0;
+    }
+
+    .item-header-container {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+
+      .item-title {
+        .header-font();
+        font-size: var(--font-size-18);
+      }
+
+      .item-header-fields {
+        margin-top: 0.5em;
+        display: grid;
+        grid-template-columns: auto auto;
+        row-gap: 0.1em;
+        column-gap: 0.2em;
+        .main-font();
+        color: black;
+        font-size: var(--font-size-12);
+
+        .field-label {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
+  .item-body {
+    .item-traits {
+      font-size: var(--font-size-14);
+      font-style: italic;
+      color: @dark-gray-color;
+
+      strong {
+        color: black;
+        font-weight: bold;
+        font-style: normal;
+      }
+    }
+  }
+}
