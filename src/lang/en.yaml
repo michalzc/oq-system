@@ -23,6 +23,8 @@ OQ:
     ItemRollHint: Hold SHIFT key to skip test roll dialog. For damage hold SHIFT to show dialog.
     RollAll: Roll all
     RollFormula: Roll formula
+    ApplyDamage: Apply damage
+    ApplyDamageIA: Apply damage and ignore armour
   Labels:
     Abilities: Abilities
     Advances: Advances
@@ -82,6 +84,7 @@ OQ:
     CustomDamage: Custom
     CustomGroup: Custom Group
     Damage: Damage
+    DamageIA: Damage I/A
     DamageMod: Mod
     DamageFormula: Damage Formula
     DamageRoll: Roll Damage

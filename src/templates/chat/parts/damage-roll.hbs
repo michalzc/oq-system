@@ -27,4 +27,13 @@
     </div>
   </div>
   {{{ renderedRoll }}}
+  <div class="roll-buttons">
+    <button class="apply-damage" data-damage-value="{{ roll.total }}" data-damage-apply-type="normal" data-tooltip="{{ localize 'OQ.Hints.ApplyDamage' }}">
+      <i class="fal fa-heart-broken"></i>{{ localize 'OQ.Labels.Damage' }}
+    </button>
+    <button class="apply-damage" data-damage-value="{{ roll.total }}" data-damage-apply-type="ignoreArmour" data-tooltip="{{ localize 'OQ.Hints.ApplyDamageIA' }}">
+      <i class="fas fa-heart-broken"></i>
+      {{ localize 'OQ.Labels.DamageIA'}}
+    </button>
+  </div>
 </div>

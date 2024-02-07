@@ -5,6 +5,7 @@ import { OQ } from './consts/consts.js';
 import { registerDocuments } from './init/register-documents.js';
 import { registerDataModels } from './init/register-data-models.js';
 import { registerHelpers } from './init/handlebar-helpers.js';
+import { registerCustomHookHandlers } from './init/custom-hook-handlers.js';
 
 async function init() {
   log('Initializing OQ');
@@ -14,6 +15,7 @@ async function init() {
   registerDocuments();
   registerSettings();
   registerHelpers();
+  registerCustomHookHandlers();
 
   await preloadTemplates();
 
