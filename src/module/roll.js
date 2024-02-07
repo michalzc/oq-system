@@ -148,6 +148,9 @@ export async function damageRoll(rollData) {
       content: content,
       type: CONST.CHAT_MESSAGE_TYPES.ROLL,
       rolls: [roll],
+      flags: {
+        oqMessageType: CONFIG.OQ.ChatConfig.MessageFlags.updateFromChat,
+      },
     };
     await ChatMessage.create(messageData);
   }

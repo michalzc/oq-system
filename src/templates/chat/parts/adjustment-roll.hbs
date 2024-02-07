@@ -1,0 +1,39 @@
+<div class="oq roll adjustment-roll">
+  <div class="roll-header">
+    <div class="roll-title">{{localize ( concat 'OQ.Labels.AdjustmentRollHeader.' type)}}</div>
+  </div>
+  {{{ renderedRoll }}}
+  <div class="roll-buttons">
+    {{#if (eq type 'hp')}}
+      <div class="buttons-group">
+        <button class="apply-damage" data-damage-value="{{ roll.total }}" data-damage-apply-type="normal"
+                data-tooltip="{{ localize 'OQ.Hints.ApplyDamage' }}">
+          <i class="fas fa-minus"></i>
+          <i class="fal fa-heart-broken"></i>
+        </button>
+        <button class="apply-damage" data-damage-value="{{ roll.total }}" data-damage-apply-type="ignoreArmour"
+                data-tooltip="{{ localize 'OQ.Hints.ApplyDamageIA' }}">
+          <i class="fas fa-minus"></i>
+          <i class="fas fa-heart-broken"></i>
+        </button>
+      </div>
+      <div class="buttons-group">
+        <button class="apply-healing" data-healing-value="{{ roll.total }}" data-tooltip="{{ localize 'OQ.Labels.Heal' }}">
+          <i class="fas fa-plus"></i>
+          <i class="fas fa-heart"></i>
+        </button>
+      </div>
+    {{/if}}
+    {{#if (eq type 'mp')}}
+      <button class="adjust-mp" data-value="-{{ roll.total }}" data-tooltip="{{ localize 'OQ.Labels.AdjustMP.decrease' }}">
+        <i class="fas fa-minus"></i>
+        <i class="fal fa-sparkles"></i>
+      </button>
+
+      <button class="adjust-mp" data-value="{{ roll.total }}" data-tooltip="{{ localize 'OQ.Labels.AdjustMP.increase' }}">
+        <i class="fas fa-plus"></i>
+        <i class="fas fa-sparkles"></i>
+      </button>
+    {{/if}}
+  </div>
+</div>

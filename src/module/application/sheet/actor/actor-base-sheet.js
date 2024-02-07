@@ -2,6 +2,7 @@ import _ from 'lodash-es';
 import { AttributesDialog } from '../../dialog/attributes-dialog.js';
 
 const mergeObject = foundry.utils.mergeObject;
+
 export class OQActorBaseSheet extends ActorSheet {
   static get defaultOptions() {
     const baseOptions = super.defaultOptions;
@@ -161,9 +162,7 @@ export class OQActorBaseSheet extends ActorSheet {
     const path = `system.attributes.${resourceId}.value`;
     const value = _.get(this.actor, path);
 
-    if (value) {
-      await this.actor.update({ [path]: value + update });
-    }
+    await this.actor.update({ [path]: value + update });
   }
 
   updateCharacteristicsLabels(characteristics) {
