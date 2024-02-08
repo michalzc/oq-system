@@ -1,0 +1,22 @@
+---
+name: Athletics
+_id: BKmzFfwklq8LnJKK
+img: systems/oq/assets/icons/skills.svg
+folder: BKmzFfwklq8LnJKK
+system:
+  group: practical
+  formula: '@dex+@str'
+  description: >-
+    <p>This broad skill covers a range of athletic activities useful to adventuring characters, including acrobatics, climbing, jumping and swimming.</p>
+
+    <p>Acrobatics: This allows a character to perform a variety of gymnastics and balancing tasks, such as tumbling, walking a tightrope or keeping balance on a narrow or unstable ledge. The character can move at half their normal speed across an unstable surface without penalty. To move at a normal rate requires an Acrobatics test. A successful Acrobatics test will also halve the damage suffered from falling.</p>
+
+    <p>Brute Force: Brute force is an application of Athletics that relies purely on power, with no finesse involved. Brute force involves pushing, lifting or dragging.</p>
+
+    Climbing: Given enough hand and footholds, a character can climb any surface, given enough time, without the need for a test. Under normal circumstances, a character can ascend or descend one-quarter of their Movement per Combat Round (see Chapter 5 Combat for details). A character can double the rate of their climb or descent by making a Hard Athletics test.
+
+    Jumping: In general, a successful Athletics test allows a character to jump up to twice their height horizontally or up to half their height vertically, if they have at least five metres to run first. For standing jumps, half these distances. For humans, average height is roughly 1.8m which gives a jumping distance of 4m.
+
+    For greater distances, the Referee can apply a -20% or even -50% penalty. If the distance involved is absurd, the Referee should feel free to say the test is impossible
+
+    Swimming: Characters usually swim at half their usual movement. Athletics tests are only required when conditions are less than ideal – swimming while heavily encumbered or in strong currents, for example.
