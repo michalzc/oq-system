@@ -25,14 +25,22 @@
       }
 
       .items {
-        .item-group {
-          .skill {
-            //Empty for now
+        .top-row-item {
+          grid-column-end: span 2;
+          padding-left: 1em;
+          display: flex;
+          flex-direction: row;
+          gap: 1em;
+          align-items: center;
+
+          .short-input {
+            width: 2em;
           }
         }
       }
 
       .items.equipment {
+        display: flex;
         flex-direction: column;
       }
     }

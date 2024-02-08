@@ -1,4 +1,7 @@
 <div class="items">
+  <div class="top-row-item">
+    {{> systems/oq/templates/actor/parts/initiative.hbs }}
+  </div>
   <fieldset class="item-group">
     <legend>{{ localize 'OQ.SkillGroups.combat'}}</legend>
     {{#each system.groupedItems.combatSkills as |skill|}}

@@ -77,6 +77,16 @@ function characterAdditionalAttributes() {
   };
 }
 
+function initiative() {
+  return new fields.SchemaField(
+    {
+      reference: new fields.StringField({ required: true, trim: '' }),
+      mod: new fields.NumberField({ required: true, integer: true, min: 0 }),
+    },
+    { required: false },
+  );
+}
+
 function baseAttributesModel() {
   return {
     hp: modMaxValueAttributeModel(),
@@ -84,6 +94,7 @@ function baseAttributesModel() {
     mp: modMaxValueAttributeModel(),
     mr: baseModAttributeModel(15),
     ap: baseModAttributeModel(),
+    initiative: initiative(),
   };
 }
 

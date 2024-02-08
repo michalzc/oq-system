@@ -14,6 +14,7 @@ export async function preloadTemplates() {
     'systems/oq/templates/actor/parts/spell.hbs',
     'systems/oq/templates/actor/parts/magic.hbs',
     'systems/oq/templates/actor/parts/ability.hbs',
+    'systems/oq/templates/actor/parts/initiative.hbs',
     'systems/oq/templates/chat/parts/skill-ability-roll.hbs',
     'systems/oq/templates/chat/parts/damage-roll.hbs',
     'systems/oq/templates/chat/parts/weapon-roll.hbs',

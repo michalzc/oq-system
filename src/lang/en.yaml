@@ -111,6 +111,7 @@ OQ:
     Heal: Heal
     Mastered: Mastered
     Mod: Mod
+    Initiative: Initiative
     IncludeDamageMod: Include DM
     ItemStates:
       carried: Carried
@@ -122,6 +123,7 @@ OQ:
     Notes: Notes
     Organisation: Organisation
     OtherMods: Other Mods
+    Protection: Protection
     Quantity: Quantity
     Range: Range
     Rank: Rank

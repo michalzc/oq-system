@@ -26,12 +26,13 @@ export class OQActorBaseSheet extends ActorSheet {
     const system = this.actor.system;
     const characteristics = this.updateCharacteristicsLabels(system.characteristics);
     const attributes = this.updateAttributesLabels(system.attributes);
-    const updatedSystem = _.merge(system, {
-      characteristics: characteristics,
-      attributes: attributes,
-    });
+    const initiativeOptions = this.getInitiativeOptions();
     return _.merge(context, {
-      system: updatedSystem,
+      system: _.merge(system, {
+        characteristics: characteristics,
+        attributes: attributes,
+      }),
+      initiativeOptions,
     });
   }
 
@@ -47,6 +48,8 @@ export class OQActorBaseSheet extends ActorSheet {
     // this.weaponStatesMenu(html);
     this.statusMenu(html, CONFIG.OQ.ItemConfig.weaponStates, '.item-state-weapon');
     this.statusMenu(html, CONFIG.OQ.ItemConfig.armourStates, '.item-state-armour');
+    this.statusMenu(html, CONFIG.OQ.ItemConfig.equipmentStates, '.item-state-equipment');
+
     html.find('.modify-attributes').on('click', this.onModifyAttributes.bind(this));
 
     html.find('a.item-edit').on('click', this.onModifyItem.bind(this));
@@ -163,6 +166,13 @@ export class OQActorBaseSheet extends ActorSheet {
     const value = _.get(this.actor, path);
 
     await this.actor.update({ [path]: value + update });
+  }
+
+  getInitiativeOptions() {
+    const itemTypes = CONFIG.OQ.ItemConfig.itemTypes;
+    const initiativeTypes = [itemTypes.skill, itemTypes.specialAbility, itemTypes.weapon];
+    const items = this.actor.items.filter((item) => initiativeTypes.includes(item.type));
+    return _.fromPairs(items.map((item) => [item.id, item.name]));
   }
 
   updateCharacteristicsLabels(characteristics) {

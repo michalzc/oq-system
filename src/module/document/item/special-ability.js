@@ -9,12 +9,10 @@ export class OQSpecialAbility extends OQBaseItem {
   async prepareDerivedData() {
     super.prepareDerivedData();
     const tooltip = await this.tooltipWithTraits();
-    const rollValue = this.getRollValue();
     const damageRollValue = this.getDamageRollValue();
 
-    _.merge(this, {
+    this.system = _.merge(this.system, {
       tooltip,
-      rollValue,
       damageRollValue,
     });
   }
@@ -28,17 +26,20 @@ export class OQSpecialAbility extends OQBaseItem {
     if (this.parent && this.system.formula) {
       const roll = new Roll(this.system.formula, this.parent.getRollData());
       if (roll.isDeterministic) {
-        const value = roll.roll({ async: false }).total;
-        return minMaxValue(value);
+        const rollValue = minMaxValue(roll.roll({ async: false }).total);
+
+        return {
+          rollValue,
+        };
       }
     }
 
-    return null;
+    return {};
   }
 
   async makeDamageRoll(skipDialog = true) {
     const actorRollData = this.parent.getRollData();
-    const damageFormula = this.damageRollValue;
+    const damageFormula = this.system.damageRollValue;
     const rollData = _.merge(this.makeBaseTestRollData(), {
       actorRollData,
       damageFormula,
@@ -54,7 +55,7 @@ export class OQSpecialAbility extends OQBaseItem {
   async itemTestRoll(skipDialog) {
     const rollData = _.merge(this.makeBaseTestRollData(), {
       rollType: 'specialAbility',
-      value: this.rollValue,
+      value: this.system.rollValue,
     });
 
     if (skipDialog) {

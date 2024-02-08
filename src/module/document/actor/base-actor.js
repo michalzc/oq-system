@@ -47,7 +47,7 @@ export class OQBaseActor extends Actor {
     const skills = _.fromPairs(
       this.items
         .filter((i) => i.type === 'skill')
-        .map((skill) => [skill.system.slug, { value: skill.system.value, mod: skill.system.mod }]),
+        .map((skill) => [skill.system.slug, { value: skill.system.rollValue, mod: skill.system.rollMod }]),
     );
 
     const dm = this.system.attributes.dm.value;
@@ -135,6 +135,7 @@ export class OQBaseActor extends Actor {
     const mpValue = Math.min(mpMax, attributes.mp.value);
 
     const armourStatuses = CONFIG.OQ.ItemConfig.armourStates;
+
     const maxArmour = Math.max(
       0,
       ...this.items
@@ -167,6 +168,21 @@ export class OQBaseActor extends Actor {
       ap: {
         value: apValue,
       },
+      initiative: {
+        value: this.calculateInitiative(),
+      },
     });
+  }
+
+  calculateInitiative() {
+    const { reference, mod } = this.system.attributes.initiative;
+    const initiativeItem = reference && this.items.get(reference);
+    if (initiativeItem) {
+      const { rollValue } = initiativeItem.getRollValue();
+
+      return (rollValue ?? 0) + (mod ?? 0);
+    }
+
+    return mod ?? 0;
   }
 }

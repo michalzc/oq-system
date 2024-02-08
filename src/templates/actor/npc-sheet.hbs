@@ -62,8 +62,12 @@
         {{/if}}
 
         {{#if system.groupedItems.combat }}
+
           <fieldset class="item-group">
             <legend>{{ localize 'OQ.Nav.Combat' }}</legend>
+            <div class="item initiative">
+              {{> systems/oq/templates/actor/parts/initiative.hbs }}
+            </div>
             {{#each system.groupedItems.combat as |combatItem|}}
               {{#if (eq combatItem.type 'skill')}}
                 {{> systems/oq/templates/actor/parts/skill.hbs combatItem}}

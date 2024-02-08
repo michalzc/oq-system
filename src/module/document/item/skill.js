@@ -2,20 +2,15 @@ import { OQBaseItem } from './base-item.js';
 import { testRoll } from '../../roll.js';
 import _ from 'lodash-es';
 import { OQTestRollDialog } from '../../application/dialog/test-roll-dialog.js';
-import { minMaxValue } from '../../utils.js';
+import { makeSlug, minMaxValue } from '../../utils.js';
 
 export class OQSkill extends OQBaseItem {
   prepareDerivedData() {
     super.prepareDerivedData();
 
-    const value = this.getValue();
-    const valueWithMod = this.system.mod && minMaxValue(value + this.system.mod);
     const extendedData = {
-      slug: this.name.slugify().replace(/\(/g, '').replace(/\)/g, ''),
+      slug: makeSlug(this.name),
       groupName: this.getGroupLabel(),
-      value,
-      valueWithMod,
-      mastered: value >= 100,
     };
 
     this.system = _.merge(this.system, extendedData);
@@ -30,15 +25,25 @@ export class OQSkill extends OQBaseItem {
     }
   }
 
-  getValue() {
+  getRollValue() {
     if (this.parent) {
+      const { formula, advancement, mod } = this.system;
+      const rollMod = mod ?? 0;
       const rollData = this.parent.getRollData();
-      const formula = `${this.system.formula} + ${this.system.advancement}`;
-      const total = new Roll(formula, rollData).roll({ async: false }).total;
+      const rollFormula = `${formula} + ${advancement}`;
+      const total = new Roll(rollFormula, rollData).roll({ async: false }).total;
+      const rollValue = minMaxValue(total);
+      const rollValueWithMod = rollMod && minMaxValue(rollValue + rollMod);
+      const mastered = rollValue >= 100;
 
-      return minMaxValue(total);
+      return {
+        rollValue,
+        rollMod,
+        rollValueWithMod,
+        mastered,
+      };
     } else {
-      return 0;
+      return {};
     }
   }
 
@@ -50,8 +55,8 @@ export class OQSkill extends OQBaseItem {
     const rollData = _.merge(this.makeBaseTestRollData(), {
       mastered: this.system.mastered,
       rollType: 'skill',
-      value: this.system.value,
-      modifier: this.system.mod,
+      value: this.system.rollValue,
+      modifier: this.system.rollMod,
     });
 
     if (skipDialog) {
