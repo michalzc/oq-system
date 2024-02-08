@@ -9,12 +9,10 @@ export class OQSpecialAbility extends OQBaseItem {
   async prepareDerivedData() {
     super.prepareDerivedData();
     const tooltip = await this.tooltipWithTraits();
-    const rollValue = this.getRollValue();
     const damageRollValue = this.getDamageRollValue();
 
     this.system = _.merge(this.system, {
       tooltip,
-      rollValue,
       damageRollValue,
     });
   }
@@ -28,12 +26,15 @@ export class OQSpecialAbility extends OQBaseItem {
     if (this.parent && this.system.formula) {
       const roll = new Roll(this.system.formula, this.parent.getRollData());
       if (roll.isDeterministic) {
-        const value = roll.roll({ async: false }).total;
-        return minMaxValue(value);
+        const rollValue = minMaxValue(roll.roll({ async: false }).total);
+
+        return {
+          rollValue,
+        };
       }
     }
 
-    return null;
+    return {};
   }
 
   async makeDamageRoll(skipDialog = true) {

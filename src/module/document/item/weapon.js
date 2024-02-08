@@ -3,7 +3,7 @@ import _ from 'lodash-es';
 import { damageRoll, testRoll } from '../../roll.js';
 import { OQTestRollDialog } from '../../application/dialog/test-roll-dialog.js';
 import { OQDamageRollDialog } from '../../application/dialog/damage-roll-dialog.js';
-import { mostSignificantModifier } from '../../utils.js';
+import { minMaxValue, mostSignificantModifier } from '../../utils.js';
 
 export class OQWeapon extends OQBaseItem {
   async _preUpdate(changed, options, user) {
@@ -30,15 +30,11 @@ export class OQWeapon extends OQBaseItem {
     super.prepareDerivedData();
 
     const tooltip = await this.tooltipWithTraits();
-    const [rollValue, rollMod] = this.getRollValues();
-    const rollValueWithMod = rollValue && rollMod && rollValue + rollMod;
+
     const damageRollValue = this.getDamageRollValue();
 
     _.merge(this.system, {
       damageRollValue,
-      rollMod,
-      rollValue,
-      rollValueWithMod,
       tooltip,
     });
   }
@@ -76,18 +72,23 @@ export class OQWeapon extends OQBaseItem {
     }
   }
 
-  getRollValues() {
+  getRollValue() {
     const correspondingSkill = this.system.correspondingSkill;
     if (this.parent && correspondingSkill?.skillReference) {
       const formula = `@skills.${correspondingSkill.skillReference}.value`;
       const skillModValueFormula = `@skills.${correspondingSkill.skillReference}.mod`;
 
       const parentRollData = this.parent.getRollData();
-      const valueRoll = new Roll(formula, parentRollData).roll({ async: false }).total;
+      const rollValue = minMaxValue(new Roll(formula, parentRollData).roll({ async: false }).total);
       const skillModRoll = new Roll(skillModValueFormula, parentRollData).roll({ async: false }).total;
-      const mod = mostSignificantModifier(skillModRoll ?? 0, correspondingSkill?.skillMod ?? 0);
-      return [valueRoll, mod];
-    } else return [null, null];
+      const rollMod = mostSignificantModifier(skillModRoll ?? 0, correspondingSkill?.skillMod ?? 0);
+      const rollValueWithMod = rollMod && minMaxValue(rollValue + rollMod);
+      return {
+        rollValue,
+        rollMod,
+        rollValueWithMod,
+      };
+    } else return {};
   }
 
   /**

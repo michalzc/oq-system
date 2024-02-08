@@ -1,6 +1,13 @@
 import { log } from '../../utils.js';
 import { displayItem } from '../../../chat.js';
+import _ from 'lodash-es';
 
+/**
+ * @typedef {object} ItemRollValue
+ * @property {number|undefined} rollValue
+ * @property {number|undefined} rollMod
+ * @property {number|undefined} rollValueWithMod
+ */
 export class OQBaseItem extends Item {
   async _preCreate(source, options, user) {
     await super._preCreate(source, options, user);
@@ -26,7 +33,15 @@ export class OQBaseItem extends Item {
 
   prepareDerivedData() {
     super.prepareDerivedData();
-    this.system.tooltip = this.system.description;
+    const tooltip = this.system.description;
+    const rollValue = this.getRollValue();
+
+    _.merge(this, {
+      system: {
+        ...rollValue,
+        tooltip,
+      },
+    });
   }
 
   /**
@@ -80,5 +95,12 @@ export class OQBaseItem extends Item {
     } else {
       return this.system.description;
     }
+  }
+
+  /**
+   * returns {undefined|ItemRollValue}
+   */
+  getRollValue() {
+    return {};
   }
 }

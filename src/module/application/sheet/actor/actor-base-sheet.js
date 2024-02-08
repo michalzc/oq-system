@@ -48,6 +48,8 @@ export class OQActorBaseSheet extends ActorSheet {
     // this.weaponStatesMenu(html);
     this.statusMenu(html, CONFIG.OQ.ItemConfig.weaponStates, '.item-state-weapon');
     this.statusMenu(html, CONFIG.OQ.ItemConfig.armourStates, '.item-state-armour');
+    this.statusMenu(html, CONFIG.OQ.ItemConfig.equipmentStates, '.item-state-equipment');
+
     html.find('.modify-attributes').on('click', this.onModifyAttributes.bind(this));
 
     html.find('a.item-edit').on('click', this.onModifyItem.bind(this));
@@ -168,7 +170,7 @@ export class OQActorBaseSheet extends ActorSheet {
 
   getInitiativeOptions() {
     const itemTypes = CONFIG.OQ.ItemConfig.itemTypes;
-    const initiativeTypes = [itemTypes.skill];
+    const initiativeTypes = [itemTypes.skill, itemTypes.specialAbility, itemTypes.weapon];
     const items = this.actor.items.filter((item) => initiativeTypes.includes(item.type));
     return _.fromPairs(items.map((item) => [item.id, item.name]));
   }

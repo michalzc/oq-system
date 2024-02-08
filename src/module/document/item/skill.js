@@ -8,16 +8,9 @@ export class OQSkill extends OQBaseItem {
   prepareDerivedData() {
     super.prepareDerivedData();
 
-    const rollValue = this.getValue();
-    const rollMod = this.system.mod;
-    const rollValueWithMod = rollMod && minMaxValue(rollValue + rollMod);
     const extendedData = {
       slug: makeSlug(this.name),
       groupName: this.getGroupLabel(),
-      rollValue,
-      rollValueWithMod,
-      rollMod,
-      mastered: rollValue >= 100,
     };
 
     this.system = _.merge(this.system, extendedData);
@@ -32,15 +25,25 @@ export class OQSkill extends OQBaseItem {
     }
   }
 
-  getValue() {
+  getRollValue() {
     if (this.parent) {
+      const { formula, advancement, mod } = this.system;
+      const rollMod = mod ?? 0;
       const rollData = this.parent.getRollData();
-      const formula = `${this.system.formula} + ${this.system.advancement}`;
-      const total = new Roll(formula, rollData).roll({ async: false }).total;
+      const rollFormula = `${formula} + ${advancement}`;
+      const total = new Roll(rollFormula, rollData).roll({ async: false }).total;
+      const rollValue = minMaxValue(total);
+      const rollValueWithMod = rollMod && minMaxValue(rollValue + rollMod);
+      const mastered = rollValue >= 100;
 
-      return minMaxValue(total);
+      return {
+        rollValue,
+        rollMod,
+        rollValueWithMod,
+        mastered,
+      };
     } else {
-      return 0;
+      return {};
     }
   }
 
