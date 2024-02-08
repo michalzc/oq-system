@@ -12,7 +12,7 @@ export class OQSpecialAbility extends OQBaseItem {
     const rollValue = this.getRollValue();
     const damageRollValue = this.getDamageRollValue();
 
-    _.merge(this.system, {
+    this.system = _.merge(this.system, {
       tooltip,
       rollValue,
       damageRollValue,

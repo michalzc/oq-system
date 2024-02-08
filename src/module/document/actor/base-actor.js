@@ -135,6 +135,11 @@ export class OQBaseActor extends Actor {
     const mpValue = Math.min(mpMax, attributes.mp.value);
 
     const armourStatuses = CONFIG.OQ.ItemConfig.armourStates;
+
+    const { reference, mod } = attributes.initiative;
+    const initiativeItem = reference && this.items.get(reference);
+    const initiativeValue = initiativeItem?.system?.rollValue ?? 0;
+
     const maxArmour = Math.max(
       0,
       ...this.items
@@ -166,6 +171,9 @@ export class OQBaseActor extends Actor {
       },
       ap: {
         value: apValue,
+      },
+      initiative: {
+        value: initiativeValue + mod,
       },
     });
   }

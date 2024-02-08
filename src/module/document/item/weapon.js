@@ -28,6 +28,7 @@ export class OQWeapon extends OQBaseItem {
 
   async prepareDerivedData() {
     super.prepareDerivedData();
+
     const tooltip = await this.tooltipWithTraits();
     const [rollValue, rollMod] = this.getRollValues();
     const rollValueWithMod = rollValue && rollMod && rollValue + rollMod;

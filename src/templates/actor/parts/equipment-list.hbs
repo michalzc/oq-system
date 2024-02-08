@@ -1,10 +1,8 @@
 <div class="items equipment">
-  <div class="item-group">
-    <div class="item">
+    <div class="top-row-item">
       <label>{{ localize 'OQ.Labels.TotalEncumbrance' }}</label>
       <div>{{system.enc.totalEncumbrance}} / {{system.enc.maxEncumbrance}}</div>
     </div>
-  </div>
   <fieldset class="item-group">
     <legend>{{ localize 'OQ.Labels.Weapons' }}</legend>
     {{#each system.groupedItems.weapons as |weapon|}}

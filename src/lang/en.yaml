@@ -111,6 +111,7 @@ OQ:
     Heal: Heal
     Mastered: Mastered
     Mod: Mod
+    Initiative: Initiative
     IncludeDamageMod: Include DM
     ItemStates:
       carried: Carried
