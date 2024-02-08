@@ -26,7 +26,7 @@ export class OQBaseItem extends Item {
 
   prepareDerivedData() {
     super.prepareDerivedData();
-    this.tooltip = this.system.description;
+    this.system.tooltip = this.system.description;
   }
 
   /**

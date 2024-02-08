@@ -47,7 +47,7 @@ export class OQBaseActor extends Actor {
     const skills = _.fromPairs(
       this.items
         .filter((i) => i.type === 'skill')
-        .map((skill) => [skill.system.slug, { value: skill.system.value, mod: skill.system.mod }]),
+        .map((skill) => [skill.system.slug, { value: skill.system.rollValue, mod: skill.system.rollMod }]),
     );
 
     const dm = this.system.attributes.dm.value;

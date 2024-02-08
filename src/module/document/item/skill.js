@@ -2,20 +2,22 @@ import { OQBaseItem } from './base-item.js';
 import { testRoll } from '../../roll.js';
 import _ from 'lodash-es';
 import { OQTestRollDialog } from '../../application/dialog/test-roll-dialog.js';
-import { minMaxValue } from '../../utils.js';
+import { makeSlug, minMaxValue } from '../../utils.js';
 
 export class OQSkill extends OQBaseItem {
   prepareDerivedData() {
     super.prepareDerivedData();
 
-    const value = this.getValue();
-    const valueWithMod = this.system.mod && minMaxValue(value + this.system.mod);
+    const rollValue = this.getValue();
+    const rollMod = this.system.mod;
+    const rollValueWithMod = rollMod && minMaxValue(rollValue + rollMod);
     const extendedData = {
-      slug: this.name.slugify().replace(/\(/g, '').replace(/\)/g, ''),
+      slug: makeSlug(this.name),
       groupName: this.getGroupLabel(),
-      value,
-      valueWithMod,
-      mastered: value >= 100,
+      rollValue,
+      rollValueWithMod,
+      rollMod,
+      mastered: rollValue >= 100,
     };
 
     this.system = _.merge(this.system, extendedData);
@@ -50,8 +52,8 @@ export class OQSkill extends OQBaseItem {
     const rollData = _.merge(this.makeBaseTestRollData(), {
       mastered: this.system.mastered,
       rollType: 'skill',
-      value: this.system.value,
-      modifier: this.system.mod,
+      value: this.system.rollValue,
+      modifier: this.system.rollMod,
     });
 
     if (skipDialog) {

@@ -8,21 +8,21 @@
   <fieldset class="item-group">
     <legend>{{ localize 'OQ.Labels.Weapons' }}</legend>
     {{#each system.groupedItems.weapons as |weapon|}}
-      {{> systems/oq/templates/actor/parts/weapon.hbs weapon}}
+      {{> systems/oq/templates/actor/parts/weapon.hbs weapon id=weapon.id showEq=true}}
     {{/each}}
   </fieldset>
 
   <fieldset class="item-group">
     <legend>{{ localize 'OQ.Labels.Armours' }}</legend>
     {{#each system.groupedItems.armours as |armour|}}
-      {{> systems/oq/templates/actor/parts/armour.hbs armour}}
+      {{> systems/oq/templates/actor/parts/armour.hbs armour id=armour.id showEq=true}}
     {{/each}}
   </fieldset>
 
   <fieldset class="item-group">
     <legend>{{ localize 'OQ.Nav.Equipment' }}</legend>
     {{#each system.groupedItems.equipment as |equipment|}}
-      {{> systems/oq/templates/actor/parts/equipment.hbs equipment}}
+      {{> systems/oq/templates/actor/parts/equipment.hbs equipment id=equipment.id showEq=true}}
     {{/each}}
   </fieldset>
 </div>

@@ -28,3 +28,5 @@ export const minMaxValue = (value) => Math.max(0, Math.min(100, value));
 
 export const mostSignificantModifier = (left, right) =>
   Math.abs(left) === Math.abs(right) ? 0 : Math.abs(left) > Math.abs(right) ? left : right;
+
+export const makeSlug = (name) => name.slugify().replace(/\(/g, '').replace(/\)/g, '');

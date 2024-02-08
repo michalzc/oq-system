@@ -33,7 +33,7 @@ export class OQWeapon extends OQBaseItem {
     const rollValueWithMod = rollValue && rollMod && rollValue + rollMod;
     const damageRollValue = this.getDamageRollValue();
 
-    _.merge(this, {
+    _.merge(this.system, {
       damageRollValue,
       rollMod,
       rollValue,
@@ -81,9 +81,10 @@ export class OQWeapon extends OQBaseItem {
       const formula = `@skills.${correspondingSkill.skillReference}.value`;
       const skillModValueFormula = `@skills.${correspondingSkill.skillReference}.mod`;
 
-      const valueRoll = new Roll(formula, this.parent.getRollData()).roll({ async: false }).total;
-      const skillModRoll = new Roll(skillModValueFormula, this.parent.getRollData()).roll({ async: false }).total;
-      const mod = mostSignificantModifier(skillModRoll ?? 0, this.system.skillReference?.skillMod ?? 0);
+      const parentRollData = this.parent.getRollData();
+      const valueRoll = new Roll(formula, parentRollData).roll({ async: false }).total;
+      const skillModRoll = new Roll(skillModValueFormula, parentRollData).roll({ async: false }).total;
+      const mod = mostSignificantModifier(skillModRoll ?? 0, correspondingSkill?.skillMod ?? 0);
       return [valueRoll, mod];
     } else return [null, null];
   }
@@ -98,8 +99,8 @@ export class OQWeapon extends OQBaseItem {
     const skillName = this.parent?.system.groupedItems.groupedSkillBySlug[skillReference];
     const rollData = _.merge(this.makeBaseTestRollData(), {
       rollType: 'weapon',
-      value: this.rollValue,
-      modifier: this.rollMod,
+      value: this.system.rollValue,
+      modifier: this.system.rollMod,
       skillName,
     });
 
