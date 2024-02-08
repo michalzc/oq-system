@@ -16,7 +16,20 @@ esmodules:
   - module/oq.js
 styles:
   - styles/oq.css
-packs: []
+packs:
+  - name: oq-system-basic-skills
+    label: Basic Skills
+    path: packs/basic-skills
+    type: Item
+    system: oq
+    ownership:
+      - PLAYER: OBSERVER
+      - ASSISTANT: OWNER
+packFolders:
+  - name: OpenQuest SRD
+    sorting: a
+    packs:
+      - oq-system-basic-skills
 languages:
   - lang: en
     name: English
