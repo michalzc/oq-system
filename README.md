@@ -19,3 +19,7 @@ v0.1 - Basic character and npc sheets, skill, damage rolls. Skills in compendium
 * Project skeleton: [Foundry Factory](https://github.com/ghost-fvtt/foundry-factory) - [REUSE](https://reuse.software/)
 * The rest of source code: [WTFPL](http://www.wtfpl.net/)
 
+## Install
+Put below link into 'Manifest URL' field.
+
+https://github.com/michalzc/oq-system/releases/latest/download/system.json
