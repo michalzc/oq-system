@@ -1,5 +1,5 @@
 import { log } from '../../utils.js';
-import { displayItem } from '../../../chat.js';
+import { displayItem } from '../../chat.js';
 import _ from 'lodash-es';
 
 /**

@@ -23,8 +23,8 @@ packs:
     type: Item
     system: oq
     ownership:
-      - PLAYER: OBSERVER
-      - ASSISTANT: OWNER
+      PLAYER: OBSERVER
+      ASSISTANT: OWNER
 packFolders:
   - name: OpenQuest SRD
     sorting: a

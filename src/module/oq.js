@@ -13,7 +13,7 @@ async function init() {
 
   registerDataModels();
   registerDocuments();
-  registerSettings();
+
   registerHelpers();
   registerCustomHookHandlers();
 
@@ -24,6 +24,7 @@ async function init() {
 
 async function ready() {
   log('Ready');
+  registerSettings();
 }
 
 async function setup() {
