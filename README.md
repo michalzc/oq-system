@@ -4,7 +4,7 @@ OpenQuest SRD system for Foundry VTT
 
 ## Status
 
-Pre
+Alpha
 
 ## Roadmap
 
