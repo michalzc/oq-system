@@ -36,3 +36,5 @@ languages:
     path: lang/en.json
 socket: false
 initiative: "@attributes.initiative.value"
+manifest: tbd
+download: tbd
