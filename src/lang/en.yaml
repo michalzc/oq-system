@@ -193,7 +193,10 @@ OQ:
     failure: Failure
     fumble: Fumble
     success: Success
-  Settings: []
+  Settings:
+    defaultItemsCompendium:
+      name: Default Items Compendium
+      hint: Select the name of the compendium that contains default items for newly created characters.
   SkillGroups:
     combat: Combat Skills
     custom: Custom Group

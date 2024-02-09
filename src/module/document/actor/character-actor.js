@@ -1,11 +1,25 @@
 import { OQBaseActor } from './base-actor.js';
 import _ from 'lodash-es';
+import { getDefaultItemsForCharacter } from '../../compendium-utils.js';
 
 export class OQCharacterActor extends OQBaseActor {
   prepareDerivedData() {
     super.prepareDerivedData();
 
     _.merge(this.system, this.prepareSkills(), this.prepareEncumbrance());
+  }
+
+  async _preCreate(source, options, userId) {
+    await super._preCreate(source, options, userId);
+
+    if (!source.items) {
+      const defaultItems = await getDefaultItemsForCharacter();
+      if (defaultItems) {
+        this.updateSource({
+          items: defaultItems,
+        });
+      }
+    }
   }
 
   prepareSkills() {

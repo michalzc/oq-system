@@ -6,7 +6,14 @@ import { ChatConfig } from './chat-config.js';
 export const SYSTEM_ID = 'oq';
 export const SYSTEM_NAME = 'OQ System';
 
-const SettingKeys = {};
+const SettingsConfig = {
+  keys: {
+    defaultItemsCompendium: 'defaultSkillsCompendium',
+  },
+  defaults: {
+    characterItemsCompendium: 'oq-system-basic-skills',
+  },
+};
 
 export const OQ = {
   SYSTEM_ID,
@@ -15,5 +22,5 @@ export const OQ = {
   ItemConfig,
   RollConfig,
   ChatConfig,
-  SettingKeys,
+  SettingsConfig,
 };
