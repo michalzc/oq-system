@@ -95,19 +95,20 @@
       .items {
         gap: 1em;
         flex: 1;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        //flex-direction: row;
-        //flex-wrap: wrap;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        max-height: 40em;
 
         .item-group {
           display: flex;
           flex-direction: column;
           flex-wrap: wrap;
-          min-width: 25em;
+          min-width: 30em;
+          width: 30em;
           border: 0;
           gap: 0.2em;
-          flex: 1 1 0;
+          flex: 0;
 
           .item {
             display: flex;

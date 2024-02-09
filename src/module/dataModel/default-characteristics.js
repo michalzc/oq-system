@@ -3,11 +3,11 @@ export const pcCharacteristics = {
     value: 8,
     roll: '3d6',
   },
-  dex: {
+  con: {
     value: 8,
     roll: '3d6',
   },
-  con: {
+  dex: {
     value: 8,
     roll: '3d6',
   },
