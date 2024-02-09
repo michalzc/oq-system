@@ -19,6 +19,8 @@ v0.1 - Basic character and npc sheets, skill, damage rolls. Skills in compendium
 * Project skeleton: [Foundry Factory](https://github.com/ghost-fvtt/foundry-factory) - [REUSE](https://reuse.software/)
 * The rest of source code: [WTFPL](http://www.wtfpl.net/)
 
+OpenQuest is the trademark of Paul Newport, used with Permission
+
 ## Install
 Put below link into 'Manifest URL' field.
 
