@@ -11,7 +11,7 @@ const SettingsConfig = {
     defaultItemsCompendium: 'defaultSkillsCompendium',
   },
   defaults: {
-    characterItemsCompendium: 'oq-system-basic-skills',
+    characterItemsCompendium: 'oq.oq-system-basic-skills',
   },
 };
 
