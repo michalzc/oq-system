@@ -25,11 +25,20 @@ packs:
     ownership:
       PLAYER: OBSERVER
       ASSISTANT: OWNER
+  - name: oq-system-documentation
+    label: Documentation
+    path: packs/documentation
+    type: JournalEntry
+    system: oq
+    ownership:
+      PLAYER: OBSERVER
+      ASSISTANT: OWNER
 packFolders:
   - name: OpenQuest SRD
     sorting: a
     packs:
       - oq-system-basic-skills
+      - oq-system-documentation
 languages:
   - lang: en
     name: English
