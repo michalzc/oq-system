@@ -122,41 +122,46 @@
     .nav-item-font();
   }
 
-  .tag-list {
+  .traits {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0.5em;
-    font-size: var(--font-size-12);
-    align-items: flex-start;
+    flex-direction: column;
 
-    .tag-item {
+    .tag-list {
       display: flex;
-      align-items: center;
-      flex: 0;
-      white-space: nowrap;
-      padding-left: 0.5em;
-      padding-right: 0.5em;
-
-      a {
-        visibility: hidden;
-        margin-left: 0.5em;
-      }
-    }
-
-    .tag-item:hover {
-      box-shadow: 0.1em 0.1em 1em @dark-color;
-
-      a {
-        visibility: visible;
-      }
-    }
-
-    .tag-input {
-      flex: 1;
-      min-width: 5em;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.2em;
       font-size: var(--font-size-12);
-      //width: 100%;
+      align-items: flex-start;
+      flex: 1;
+      margin-bottom: 0.5em;
+
+      .tag-item {
+        display: flex;
+        align-items: center;
+        flex: 0;
+        white-space: nowrap;
+        padding: 0.2em;
+
+        a {
+          margin-left: 0.5em;
+        }
+      }
+
+      .tag-item:hover {
+        box-shadow: 0.05em 0.05em 0.05em @dark-color;
+
+        //a {
+        //  visibility: visible;
+        //}
+      }
+
+      .tag-input {
+        flex: 1;
+        min-width: 5em;
+        font-size: var(--font-size-12);
+        //width: 100%;
+      }
     }
   }
 }

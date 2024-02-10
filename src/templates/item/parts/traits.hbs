@@ -1,7 +1,10 @@
 <label for="traitInput">{{ localize 'OQ.Labels.Traits'}}</label>
-<div class="traits tag-list">
-  {{#each system.traits as |trait|}}
-    <span class="tag-item">{{trait}}<a class="tag-delete" data-tag="{{trait}}"><i class="fas fa-delete-left"></i></a></span>
-  {{/each}}
+<div class="traits">
+  <div class="tag-list">
+    {{#each system.traits as |trait|}}
+      <span class="tag-item">{{trait}}<a class="tag-delete" data-tag="{{trait}}"><i class="fas fa-delete-left"></i></a></span>
+    {{/each}}
+
+  </div>
   <input id="traitInput" type="text" class="tag-input" data-dtype="String">
 </div>

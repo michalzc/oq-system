@@ -2,12 +2,12 @@
   <a class="item-to-chat" data-item-id="{{id}}">
     <img class="item-icon" src="{{img}}" data-tooltip="{{localize 'OQ.Tooltips.SendToChat'}}" alt="{{name}}">
   </a>
-  {{#if rollValue}}
-    <a class="item-roll item-name" data-item-id="{{id}}" data-tooltip="{{tooltip}}" data-tooltip-direction="LEFT">
+  {{#if system.rollValue}}
+    <a class="item-roll item-name" data-item-id="{{id}}" data-tooltip="{{system.tooltip}}" data-tooltip-direction="LEFT">
       {{name}}
     </a>
   {{else}}
-    <div class="item-name" data-tooltip="{{tooltip}}" data-tooltip-direction="LEFT">{{name}}</div>
+    <div class="item-name" data-tooltip="{{system.tooltip}}" data-tooltip-direction="LEFT">{{name}}</div>
   {{/if}}
   <a class="item-state item-state-weapon" data-item-id="{{id}}"
      data-tooltip="{{ localize (concat 'OQ.Labels.ItemStates.' system.state) }}">
