@@ -5,8 +5,11 @@ import { getDefaultItemsForCharacter } from '../../compendium-utils.js';
 export class OQCharacterActor extends OQBaseActor {
   prepareDerivedData() {
     super.prepareDerivedData();
+    const enc = this.prepareEncumbrance();
 
-    _.merge(this.system, this.prepareSkills(), this.prepareEncumbrance());
+    _.merge(this.system, {
+      enc,
+    });
   }
 
   async _preCreate(source, options, userId) {
@@ -22,31 +25,9 @@ export class OQCharacterActor extends OQBaseActor {
     }
   }
 
-  prepareSkills() {
-    const skills = this.system.groupedItems.skills;
-    const groupedSkillByGroupName = _.sortBy(
-      _.map(
-        _.groupBy(skills, (skill) => `${skill.system.group}|${skill.system.groupName}`),
-        (skills, key) => {
-          const [group, label] = key.split('|', 2);
-          return {
-            group,
-            label,
-            skills,
-          };
-        },
-      ),
-      (elem) => elem.label,
-    );
-
-    return {
-      groupedItems: {
-        groupedSkillByGroupName,
-      },
-    };
-  }
   prepareEncumbrance() {
-    const maxEncumbrance = this.system.characteristics.str.value + this.system.characteristics.siz.value;
+    const characteristics = this.system.characteristics;
+    const maxEncumbrance = characteristics.str.value + characteristics.siz.value;
     const itemStates = CONFIG.OQ.ItemConfig.allItemsStates;
     const encItems = ['weapon', 'armour', 'equipment'];
     const encStates = [itemStates.worn, itemStates.readied, itemStates.carried].map((is) => is.key);
@@ -56,10 +37,8 @@ export class OQCharacterActor extends OQBaseActor {
       .map((item) => item.system.totalEncumbrance ?? item.system.encumbrance ?? 0)
       .reduce((l, r) => l + r, 0);
     return {
-      enc: {
-        maxEncumbrance,
-        totalEncumbrance,
-      },
+      maxEncumbrance,
+      totalEncumbrance,
     };
   }
 }
