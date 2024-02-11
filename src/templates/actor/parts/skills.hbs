@@ -1,12 +1,12 @@
 <div class="items skills">
-  {{#each system.groupedItems.groupedSkillByGroupName as |skills groupKey|}}
+  {{#each system.groupedItems.groupedSkillByGroupName as |skillGroup|}}
     <div class="item-group">
       <div class="item label">
-        <div>{{ localize groupKey }}</div>
-        <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize groupKey }}"
-           data-type="skill" data-group="{{ groupKey }}"><i class="fas fa-plus"></i></a>
+        <div>{{ localize skillGroup.label }}</div>
+        <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize skillGroup.label }}"
+           data-type="skill" data-group="{{ skillGroup.group }}" data-custom-group-name="{{ skillGroup.label }}"><i class="fas fa-plus"></i></a>
       </div>
-      {{#each skills as |skill|}}
+      {{#each skillGroup.skills as |skill|}}
         {{> systems/oq/templates/actor/parts/skill.hbs skill}}
       {{/each}}
     </div>

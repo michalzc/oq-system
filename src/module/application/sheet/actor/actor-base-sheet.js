@@ -80,12 +80,19 @@ export class OQActorBaseSheet extends ActorSheet {
   async onAddNewItem(event) {
     event.preventDefault();
     const currentTarget = event.currentTarget;
-    const type = currentTarget.dataset.type;
+    const dataset = currentTarget.dataset;
+    const type = dataset.type;
+    const group = type === CONFIG.OQ.ItemConfig.itemTypes.skill && dataset.group;
+    const customGroupName = group && group === CONFIG.OQ.ItemConfig.skillGroups.custom && dataset.customGroupName;
     const typeLabel = `TYPES.Item.${type}`;
     const name = `${game.i18n.localize('OQ.Labels.New')} ${game.i18n.localize(typeLabel)}`;
     const itemData = {
       name,
       type,
+      system: {
+        group,
+        customGroupName,
+      },
     };
     await this.actor.createEmbeddedDocuments('Item', [itemData], { renderSheet: true });
   }
