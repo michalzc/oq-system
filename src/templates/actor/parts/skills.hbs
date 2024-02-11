@@ -1,18 +1,24 @@
 <div class="items skills">
-  {{#each system.groupedItems.groupedSkillByGroupName as |skills groupKey|}}
-    <fieldset class="item-group">
-      <legend>{{ localize groupKey}}</legend>
-      {{#each skills as |skill|}}
+  {{#each system.groupedItems.groupedSkillByGroupName as |skillGroup|}}
+    <div class="item-group">
+      <div class="item label">
+        <div>{{ localize skillGroup.label }}</div>
+        <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize skillGroup.label }}"
+           data-type="skill" data-group="{{ skillGroup.group }}" data-custom-group-name="{{ skillGroup.label }}"><i class="fas fa-plus"></i></a>
+      </div>
+      {{#each skillGroup.skills as |skill|}}
         {{> systems/oq/templates/actor/parts/skill.hbs skill}}
       {{/each}}
-    </fieldset>
+    </div>
   {{/each}}
-  {{#if system.groupedItems.abilities }}
-    <fieldset class="item-group">
-      <legend>{{localize 'OQ.Labels.SpecialAbilities' }}</legend>
+    <div class="item-group">
+      <div class="item label">
+        <div>{{ localize 'OQ.Labels.SpecialAbilities'}}</div>
+        <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.specialAbility' }}"
+           data-type="specialAbility" data-system-type="general"><i class="fas fa-plus"></i></a>
+      </div>
       {{#each system.groupedItems.abilities as |ability|}}
         {{> systems/oq/templates/actor/parts/ability.hbs ability}}
       {{/each}}
-    </fieldset>
-  {{/if}}
+    </div>
 </div>

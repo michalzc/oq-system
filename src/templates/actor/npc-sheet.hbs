@@ -48,13 +48,28 @@
     <div class="tab" data-group="primary" data-tab="details">
       <div class="items">
 
+        <div class="item-group">
+          {{> systems/oq/templates/actor/parts/initiative.hbs }}
+        </div>
+
+        {{#if system.groupedItems.skillsAndAbilities }}
+          <div class="item-group">
+            <label>{{ localize 'OQ.Labels.SkillsAbilities' }}</label>
+            {{#each system.groupedItems.skillsAndAbilities as |skillAbility|}}
+              {{#if (eq skillAbility.type 'skill') }}
+                {{> systems/oq/templates/actor/parts/skill.hbs skillAbility}}
+              {{/if}}
+              {{#if (eq skillAbility.type 'specialAbility') }}
+                {{> systems/oq/templates/actor/parts/ability.hbs skillAbility}}
+              {{/if}}
+            {{/each}}
+          </div>
+        {{/if}}
+
         {{#if system.groupedItems.combat }}
 
-          <fieldset class="item-group">
-            <legend>{{ localize 'OQ.Nav.Combat' }}</legend>
-            <div class="item initiative">
-              {{> systems/oq/templates/actor/parts/initiative.hbs }}
-            </div>
+          <div class="item-group">
+            <label>{{ localize 'OQ.Nav.Combat' }}</label>
             {{#each system.groupedItems.combat as |combatItem|}}
               {{#if (eq combatItem.type 'skill')}}
                 {{> systems/oq/templates/actor/parts/skill.hbs combatItem}}
@@ -70,28 +85,13 @@
               {{/if}}
 
             {{/each}}
-          </fieldset>
+          </div>
         {{/if}}
-
-        {{#if system.groupedItems.skillsAndAbilities }}
-          <fieldset class="item-group">
-            <legend>{{ localize 'OQ.Labels.SkillsAbilities' }}</legend>
-            {{#each system.groupedItems.skillsAndAbilities as |skillAbility|}}
-              {{#if (eq skillAbility.type 'skill') }}
-                {{> systems/oq/templates/actor/parts/skill.hbs skillAbility}}
-              {{/if}}
-              {{#if (eq skillAbility.type 'specialAbility') }}
-                {{> systems/oq/templates/actor/parts/ability.hbs skillAbility}}
-              {{/if}}
-            {{/each}}
-          </fieldset>
-        {{/if}}
-
 
 
         {{#if system.groupedItems.magic }}
-          <fieldset class="item-group">
-            <legend>{{ localize 'OQ.Nav.Magic' }}</legend>
+          <div class="item-group">
+            <label>{{ localize 'OQ.Nav.Magic' }}</label>
             {{#each system.groupedItems.magic as |magicItem|}}
               {{#if (eq magicItem.type 'skill')}}
                 {{> systems/oq/templates/actor/parts/skill.hbs magicItem}}
@@ -104,16 +104,16 @@
               {{/if}}
 
             {{/each}}
-          </fieldset>
+          </div>
         {{/if}}
 
         {{#if system.groupedItems.equipment }}
-          <fieldset class="item-group">
-            <legend>{{ localize 'OQ.Nav.Equipment' }}</legend>
+          <div class="item-group">
+            <label>{{ localize 'OQ.Nav.Equipment' }}</label>
             {{#each system.groupedItems.equipment as |equipment|}}
               {{> systems/oq/templates/actor/parts/equipment.hbs equipment}}
             {{/each}}
-          </fieldset>
+          </div>
         {{/if}}
       </div>
     </div>

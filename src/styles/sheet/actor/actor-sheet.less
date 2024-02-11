@@ -2,6 +2,7 @@
   .actor-sheet {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 
     .sheet-header {
       flex: 0;
@@ -81,6 +82,7 @@
 
     .sheet-content {
       align-content: flex-start;
+      overflow: hidden;
 
       .tab[data-tab].active {
         display: flex;
@@ -93,19 +95,23 @@
       }
 
       .items {
-        gap: 1em;
-        flex: 1;
+        flex: 1 1 0;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         flex-wrap: wrap;
-        max-height: 40em;
+        max-height: 100%;
+        overflow-y: hidden;
+        overflow-x: auto;
+        column-gap: 2em;
+        row-gap: 1em;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
 
         .item-group {
           display: flex;
           flex-direction: column;
           flex-wrap: wrap;
           min-width: 30em;
-          width: 30em;
           border: 0;
           gap: 0.2em;
           flex: 0;
@@ -114,10 +120,10 @@
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;
-            flex-grow: 0;
-            flex-shrink: 1;
+            flex: 1 1 0;
+            justify-content: space-between;
             align-items: center;
-            justify-items: flex-start;
+
             min-height: @item-row-height;
             height: @item-row-height;
             gap: 0.5em;
@@ -192,6 +198,15 @@
                 font-size: var(--font-size-14);
               }
             }
+          }
+
+          .item.label {
+            .label-font();
+            color: @dark-color;
+          }
+
+          .item.initiative {
+            margin-top: 0.5em;
           }
 
           .item:hover {

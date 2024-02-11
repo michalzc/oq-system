@@ -61,6 +61,8 @@ export class OQActorBaseSheet extends ActorSheet {
     html.find('.item-quantity-update').on('click', this.onItemQuantityIncreaseDecrease.bind(this));
 
     html.find('.resource-update').on('mouseup', this.onUpdateResource.bind(this));
+
+    html.find('.add-new-item').on('click', this.onAddNewItem.bind(this));
   }
 
   statusMenu(element, statuses, selector) {
@@ -73,6 +75,28 @@ export class OQActorBaseSheet extends ActorSheet {
     );
 
     new ContextMenu(element, selector, elems, { eventName: 'click' });
+  }
+
+  async onAddNewItem(event) {
+    event.preventDefault();
+    const currentTarget = event.currentTarget;
+    const dataset = currentTarget.dataset;
+    const type = dataset.type;
+    const group = type === CONFIG.OQ.ItemConfig.itemTypes.skill && dataset.group;
+    const customGroupName = group && group === CONFIG.OQ.ItemConfig.skillGroups.custom && dataset.customGroupName;
+    const systemType = dataset.systemType;
+    const typeLabel = `TYPES.Item.${type}`;
+    const name = `${game.i18n.localize('OQ.Labels.New')} ${game.i18n.localize(typeLabel)}`;
+    const itemData = {
+      name,
+      type,
+      system: {
+        group,
+        customGroupName,
+        type: systemType,
+      },
+    };
+    await this.actor.createEmbeddedDocuments('Item', [itemData], { renderSheet: true });
   }
 
   async onItemUpdateQuantity(event) {

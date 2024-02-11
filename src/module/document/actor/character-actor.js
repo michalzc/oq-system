@@ -24,7 +24,21 @@ export class OQCharacterActor extends OQBaseActor {
 
   prepareSkills() {
     const skills = this.system.groupedItems.skills;
-    const groupedSkillByGroupName = _.groupBy(skills, (skill) => skill.system.groupName);
+    const groupedSkillByGroupName = _.sortBy(
+      _.map(
+        _.groupBy(skills, (skill) => `${skill.system.group}|${skill.system.groupName}`),
+        (skills, key) => {
+          const [group, label] = key.split('|', 2);
+          return {
+            group,
+            label,
+            skills,
+          };
+        },
+      ),
+      (elem) => elem.label,
+    );
+
     return {
       groupedItems: {
         groupedSkillByGroupName,
