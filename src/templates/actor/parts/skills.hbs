@@ -11,12 +11,14 @@
       {{/each}}
     </div>
   {{/each}}
-  {{#if system.groupedItems.abilities }}
     <div class="item-group">
-      <label>{{localize 'OQ.Labels.SpecialAbilities' }}</label>
+      <div class="item label">
+        <div>{{ localize 'OQ.Labels.SpecialAbilities'}}</div>
+        <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.specialAbility' }}"
+           data-type="specialAbility" data-system-type="general"><i class="fas fa-plus"></i></a>
+      </div>
       {{#each system.groupedItems.abilities as |ability|}}
         {{> systems/oq/templates/actor/parts/ability.hbs ability}}
       {{/each}}
     </div>
-  {{/if}}
 </div>

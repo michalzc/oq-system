@@ -1,4 +1,4 @@
-import { logError } from '../utils.js';
+import { log, logError } from '../utils.js';
 
 export function registerHelpers() {
   Handlebars.registerHelper('getPartial', function (name, context) {
@@ -16,5 +16,10 @@ export function registerHelpers() {
     const itemState = CONFIG.OQ.ItemConfig.allItemsStates[state];
     const icon = state !== 'natural' ? itemState?.icon ?? '' : '';
     return new Handlebars.SafeString(icon);
+  });
+
+  Handlebars.registerHelper('propertyByName', function (obj, propertyName) {
+    log('propertyByName', obj, propertyName);
+    return obj[propertyName];
   });
 }

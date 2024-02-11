@@ -1,34 +1,49 @@
 <div class="items">
-  {{#if system.groupedItems.groupedSkills.magic}}
-    <div class="item-group">
-      <label>{{ localize 'OQ.SkillGroups.magic'}}</label>
-      {{#each system.groupedItems.groupedSkills.magic as |skill|}}
-        {{> systems/oq/templates/actor/parts/skill.hbs skill}}
-      {{/each}}
+  <div class="item-group">
+    <div class="item label">
+      <div>{{ localize 'OQ.SkillGroups.magic'}}</div>
+      <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'OQ.SkillGroups.magic' }}"
+         data-type="skill" data-group="magic"><i class="fas fa-plus"></i></a>
     </div>
-  {{/if}}
-  {{#if system.groupedItems.groupedSkills.resistance}}
-    <div class="item-group">
-      <label>{{ localize 'OQ.SkillGroups.resistance'}}</label>
-      {{#each system.groupedItems.groupedSkills.resistance as |skill|}}
-        {{> systems/oq/templates/actor/parts/skill.hbs skill}}
-      {{/each}}
+    {{#each system.groupedItems.groupedSkills.magic as |skill|}}
+      {{> systems/oq/templates/actor/parts/skill.hbs skill}}
+    {{/each}}
+  </div>
+  <div class="item-group">
+    <div class="item label">
+      <div>{{ localize 'OQ.SkillGroups.resistance'}}</div>
+      <a class="add-new-item"
+         data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'OQ.SkillGroups.resistance' }}" data-type="skill"
+         data-group="combat"><i class="fas fa-plus"></i></a>
     </div>
-  {{/if}}
-  {{#each spellsPerType as |spellGroup groupKey|}}
+    {{#each system.groupedItems.groupedSkills.resistance as |skill|}}
+      {{> systems/oq/templates/actor/parts/skill.hbs skill}}
+    {{/each}}
+  </div>
+  {{ log spellsPerType }}
+  {{#each spellTypes as |spellType|}}
     <div class="item-group">
-      <label>{{ localize (concat 'OQ.Labels.SpellTypes.' groupKey) }}</label>
-      {{#each spellGroup as |spell|}}
+      <div class="item label">
+        <div>{{ localize (concat 'OQ.Labels.SpellTypes.' spellType) }} {{localize 'OQ.Labels.Spells'}}</div>
+        <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize
+          (concat 'OQ.Labels.SpellTypes.' spellType) }} {{localize 'OQ.Labels.Spells'}}" data-type="spell"
+           data-system-type="{{spellType}}"><i class="fas fa-plus"></i></a>
+      </div>
+      {{#each (propertyByName ../spellsPerType spellType) as |spell|}}
         {{> systems/oq/templates/actor/parts/spell.hbs spell}}
       {{/each}}
     </div>
   {{/each}}
-  {{#if system.groupedItems.magicAbilities}}
-    <div class="item-group">
-      <label>{{ localize 'OQ.Labels.SpecialAbilities'}}</label>
-      {{#each system.groupedItems.magicAbilities as |ability|}}
-        {{> systems/oq/templates/actor/parts/ability.hbs ability}}
-      {{/each}}
+
+  <div class="item-group">
+    <div class="item label">
+      <div>{{ localize 'OQ.Labels.Abilities'}}</div>
+      <a class="add-new-item"
+         data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.specialAbility' }}"
+         data-type="specialAbility" data-system-type="magic"><i class="fas fa-plus"></i></a>
     </div>
-  {{/if}}
+    {{#each system.groupedItems.magicAbilities as |ability|}}
+      {{> systems/oq/templates/actor/parts/ability.hbs ability}}
+    {{/each}}
+  </div>
 </div>

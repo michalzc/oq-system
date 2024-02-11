@@ -84,6 +84,7 @@ export class OQActorBaseSheet extends ActorSheet {
     const type = dataset.type;
     const group = type === CONFIG.OQ.ItemConfig.itemTypes.skill && dataset.group;
     const customGroupName = group && group === CONFIG.OQ.ItemConfig.skillGroups.custom && dataset.customGroupName;
+    const systemType = dataset.systemType;
     const typeLabel = `TYPES.Item.${type}`;
     const name = `${game.i18n.localize('OQ.Labels.New')} ${game.i18n.localize(typeLabel)}`;
     const itemData = {
@@ -92,6 +93,7 @@ export class OQActorBaseSheet extends ActorSheet {
       system: {
         group,
         customGroupName,
+        type: systemType,
       },
     };
     await this.actor.createEmbeddedDocuments('Item', [itemData], { renderSheet: true });
