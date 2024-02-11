@@ -10,7 +10,7 @@ export class OQActorBaseSheet extends ActorSheet {
     return mergeObject(baseOptions, {
       classes: ['sheet', 'oq', 'actor'],
       width: 900,
-      height: 1000,
+      height: 1024,
       tabs: [
         {
           navSelector: '.sheet-tabs',
