@@ -1,5 +1,5 @@
 <div class="items skills">
-  {{#each system.groupedItems.groupedSkillByGroupName as |skillGroup|}}
+  {{#each groupedItems.groupedSkillByGroupName as |skillGroup|}}
     <div class="item-group">
       <div class="item label">
         <div>{{ localize skillGroup.label }}</div>
@@ -17,7 +17,7 @@
         <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.specialAbility' }}"
            data-type="specialAbility" data-system-type="general"><i class="fas fa-plus"></i></a>
       </div>
-      {{#each system.groupedItems.abilities as |ability|}}
+      {{#each groupedItems.abilities as |ability|}}
         {{> systems/oq/templates/actor/parts/ability.hbs ability}}
       {{/each}}
     </div>

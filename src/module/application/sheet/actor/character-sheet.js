@@ -23,10 +23,10 @@ export class OQCharacterSheet extends OQActorBaseSheet {
     return _.merge(context, {
       enrichedNotes,
       isCharacter: true,
-      spellsPerType,
       spellTypes,
       groupedItems: {
         groupedSkillByGroupName,
+        spellsPerType,
       },
     });
   }

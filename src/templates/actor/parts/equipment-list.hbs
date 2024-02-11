@@ -9,7 +9,7 @@
       <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.weapon' }}"
          data-type="weapon"><i class="fas fa-plus"></i></a>
     </div>
-    {{#each system.groupedItems.weapons as |weapon|}}
+    {{#each groupedItems.weapons as |weapon|}}
       {{> systems/oq/templates/actor/parts/weapon.hbs weapon id=weapon.id showEq=true}}
     {{/each}}
   </div>
@@ -20,7 +20,7 @@
       <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.armour' }}"
          data-type="armour"><i class="fas fa-plus"></i></a>
     </div>
-    {{#each system.groupedItems.armours as |armour|}}
+    {{#each groupedItems.armours as |armour|}}
       {{> systems/oq/templates/actor/parts/armour.hbs armour id=armour.id showEq=true}}
     {{/each}}
   </div>
@@ -31,7 +31,7 @@
       <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.equipment' }}"
          data-type="equipment"><i class="fas fa-plus"></i></a>
     </div>
-    {{#each system.groupedItems.equipment as |equipment|}}
+    {{#each groupedItems.equipment as |equipment|}}
       {{> systems/oq/templates/actor/parts/equipment.hbs equipment id=equipment.id showEq=true}}
     {{/each}}
   </div>

@@ -52,10 +52,10 @@
           {{> systems/oq/templates/actor/parts/initiative.hbs }}
         </div>
 
-        {{#if system.groupedItems.skillsAndAbilities }}
+        {{#if groupedItems.skillsAndAbilities }}
           <div class="item-group">
             <label>{{ localize 'OQ.Labels.SkillsAbilities' }}</label>
-            {{#each system.groupedItems.skillsAndAbilities as |skillAbility|}}
+            {{#each groupedItems.skillsAndAbilities as |skillAbility|}}
               {{#if (eq skillAbility.type 'skill') }}
                 {{> systems/oq/templates/actor/parts/skill.hbs skillAbility}}
               {{/if}}
@@ -66,11 +66,11 @@
           </div>
         {{/if}}
 
-        {{#if system.groupedItems.combat }}
+        {{#if groupedItems.combat }}
 
           <div class="item-group">
             <label>{{ localize 'OQ.Nav.Combat' }}</label>
-            {{#each system.groupedItems.combat as |combatItem|}}
+            {{#each groupedItems.combat as |combatItem|}}
               {{#if (eq combatItem.type 'skill')}}
                 {{> systems/oq/templates/actor/parts/skill.hbs combatItem}}
               {{/if}}
@@ -89,10 +89,10 @@
         {{/if}}
 
 
-        {{#if system.groupedItems.magic }}
+        {{#if groupedItems.magic }}
           <div class="item-group">
             <label>{{ localize 'OQ.Nav.Magic' }}</label>
-            {{#each system.groupedItems.magic as |magicItem|}}
+            {{#each groupedItems.magic as |magicItem|}}
               {{#if (eq magicItem.type 'skill')}}
                 {{> systems/oq/templates/actor/parts/skill.hbs magicItem}}
               {{/if}}
@@ -107,10 +107,10 @@
           </div>
         {{/if}}
 
-        {{#if system.groupedItems.equipment }}
+        {{#if groupedItems.equipment }}
           <div class="item-group">
             <label>{{ localize 'OQ.Nav.Equipment' }}</label>
-            {{#each system.groupedItems.equipment as |equipment|}}
+            {{#each groupedItems.equipment as |equipment|}}
               {{> systems/oq/templates/actor/parts/equipment.hbs equipment}}
             {{/each}}
           </div>

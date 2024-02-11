@@ -19,6 +19,6 @@ export function registerHelpers() {
   });
 
   Handlebars.registerHelper('propertyByName', function (obj, propertyName) {
-    return obj[propertyName];
+    return obj && propertyName in obj && obj[propertyName];
   });
 }
