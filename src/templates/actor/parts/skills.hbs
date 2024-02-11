@@ -1,7 +1,11 @@
 <div class="items skills">
   {{#each system.groupedItems.groupedSkillByGroupName as |skills groupKey|}}
     <div class="item-group">
-      <label>{{ localize groupKey}}</label>
+      <div class="item label">
+        <div>{{ localize groupKey }}</div>
+        <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize groupKey }}"
+           data-type="skill" data-group="{{ groupKey }}"><i class="fas fa-plus"></i></a>
+      </div>
       {{#each skills as |skill|}}
         {{> systems/oq/templates/actor/parts/skill.hbs skill}}
       {{/each}}
