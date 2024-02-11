@@ -1,18 +1,18 @@
 <div class="items skills">
   {{#each system.groupedItems.groupedSkillByGroupName as |skills groupKey|}}
-    <fieldset class="item-group">
-      <legend>{{ localize groupKey}}</legend>
+    <div class="item-group">
+      <label>{{ localize groupKey}}</label>
       {{#each skills as |skill|}}
         {{> systems/oq/templates/actor/parts/skill.hbs skill}}
       {{/each}}
-    </fieldset>
+    </div>
   {{/each}}
   {{#if system.groupedItems.abilities }}
-    <fieldset class="item-group">
-      <legend>{{localize 'OQ.Labels.SpecialAbilities' }}</legend>
+    <div class="item-group">
+      <label>{{localize 'OQ.Labels.SpecialAbilities' }}</label>
       {{#each system.groupedItems.abilities as |ability|}}
         {{> systems/oq/templates/actor/parts/ability.hbs ability}}
       {{/each}}
-    </fieldset>
+    </div>
   {{/if}}
 </div>

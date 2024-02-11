@@ -1,34 +1,34 @@
 <div class="items">
   {{#if system.groupedItems.groupedSkills.magic}}
-    <fieldset class="item-group">
-      <legend>{{ localize 'OQ.SkillGroups.magic'}}</legend>
+    <div class="item-group">
+      <label>{{ localize 'OQ.SkillGroups.magic'}}</label>
       {{#each system.groupedItems.groupedSkills.magic as |skill|}}
         {{> systems/oq/templates/actor/parts/skill.hbs skill}}
       {{/each}}
-    </fieldset>
+    </div>
   {{/if}}
   {{#if system.groupedItems.groupedSkills.resistance}}
-    <fieldset class="item-group">
-      <legend>{{ localize 'OQ.SkillGroups.resistance'}}</legend>
+    <div class="item-group">
+      <label>{{ localize 'OQ.SkillGroups.resistance'}}</label>
       {{#each system.groupedItems.groupedSkills.resistance as |skill|}}
         {{> systems/oq/templates/actor/parts/skill.hbs skill}}
       {{/each}}
-    </fieldset>
+    </div>
   {{/if}}
   {{#each spellsPerType as |spellGroup groupKey|}}
-    <fieldset class="item-group">
-      <legend>{{ localize (concat 'OQ.Labels.SpellTypes.' groupKey) }}</legend>
+    <div class="item-group">
+      <label>{{ localize (concat 'OQ.Labels.SpellTypes.' groupKey) }}</label>
       {{#each spellGroup as |spell|}}
         {{> systems/oq/templates/actor/parts/spell.hbs spell}}
       {{/each}}
-    </fieldset>
+    </div>
   {{/each}}
   {{#if system.groupedItems.magicAbilities}}
-    <fieldset class="item-group">
-      <legend>{{ localize 'OQ.Labels.SpecialAbilities'}}</legend>
+    <div class="item-group">
+      <label>{{ localize 'OQ.Labels.SpecialAbilities'}}</label>
       {{#each system.groupedItems.magicAbilities as |ability|}}
         {{> systems/oq/templates/actor/parts/ability.hbs ability}}
       {{/each}}
-    </fieldset>
+    </div>
   {{/if}}
 </div>

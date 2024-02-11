@@ -1,41 +1,41 @@
 <div class="items combat">
-  <div class="top-row-item">
+  <div class="item-group">
     {{> systems/oq/templates/actor/parts/initiative.hbs }}
   </div>
-  <fieldset class="item-group">
-    <legend>{{ localize 'OQ.SkillGroups.combat'}}</legend>
+  <div class="item-group">
+    <label>{{ localize 'OQ.SkillGroups.combat'}}</label>
     {{#each system.groupedItems.combatSkills as |skill|}}
       {{> systems/oq/templates/actor/parts/skill.hbs skill}}
     {{/each}}
-  </fieldset>
+  </div>
 
-  <fieldset class="item-group">
-    <legend>{{ localize 'OQ.SkillGroups.resistance'}}</legend>
+  <div class="item-group">
+    <label>{{ localize 'OQ.SkillGroups.resistance'}}</label>
     {{#each system.groupedItems.resistances as |skill|}}
       {{> systems/oq/templates/actor/parts/skill.hbs skill}}
     {{/each}}
-  </fieldset>
+  </div>
 
-  <fieldset class="item-group">
-    <legend>{{ localize 'OQ.Labels.Weapons' }}</legend>
+  <div class="item-group">
+    <label>{{ localize 'OQ.Labels.Weapons' }}</label>
     {{#each system.groupedItems.weapons as |weapon|}}
       {{> systems/oq/templates/actor/parts/weapon.hbs weapon}}
     {{/each}}
-  </fieldset>
+  </div>
 
-  <fieldset class="item-group">
-    <legend>{{ localize 'OQ.Labels.Armours' }}</legend>
+  <div class="item-group">
+    <label>{{ localize 'OQ.Labels.Armours' }}</label>
     {{#each system.groupedItems.armours as |armour|}}
       {{> systems/oq/templates/actor/parts/armour.hbs armour}}
     {{/each}}
-  </fieldset>
+  </div>
 
   {{#if system.groupedItems.combatAbilities}}
-    <fieldset class="item-group">
-      <legend>{{ localize 'OQ.Labels.SpecialAbilities'}}</legend>
+    <div class="item-group">
+      <label>{{ localize 'OQ.Labels.SpecialAbilities'}}</label>
       {{#each system.groupedItems.combatAbilities as |ability|}}
         {{> systems/oq/templates/actor/parts/ability.hbs ability}}
       {{/each}}
-    </fieldset>
+    </div>
   {{/if}}
 </div>

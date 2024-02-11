@@ -3,24 +3,24 @@
       <label>{{ localize 'OQ.Labels.TotalEncumbrance' }}</label>
       <div>{{system.enc.totalEncumbrance}} / {{system.enc.maxEncumbrance}}</div>
     </div>
-  <fieldset class="item-group">
-    <legend>{{ localize 'OQ.Labels.Weapons' }}</legend>
+  <div class="item-group">
+    <label>{{ localize 'OQ.Labels.Weapons' }}</label>
     {{#each system.groupedItems.weapons as |weapon|}}
       {{> systems/oq/templates/actor/parts/weapon.hbs weapon id=weapon.id showEq=true}}
     {{/each}}
-  </fieldset>
+  </div>
 
-  <fieldset class="item-group">
-    <legend>{{ localize 'OQ.Labels.Armours' }}</legend>
+  <div class="item-group">
+    <label>{{ localize 'OQ.Labels.Armours' }}</label>
     {{#each system.groupedItems.armours as |armour|}}
       {{> systems/oq/templates/actor/parts/armour.hbs armour id=armour.id showEq=true}}
     {{/each}}
-  </fieldset>
+  </div>
 
-  <fieldset class="item-group">
-    <legend>{{ localize 'OQ.Nav.Equipment' }}</legend>
+  <div class="item-group">
+    <label>{{ localize 'OQ.Nav.Equipment' }}</label>
     {{#each system.groupedItems.equipment as |equipment|}}
       {{> systems/oq/templates/actor/parts/equipment.hbs equipment id=equipment.id showEq=true}}
     {{/each}}
-  </fieldset>
+  </div>
 </div>
