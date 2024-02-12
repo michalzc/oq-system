@@ -1,7 +1,5 @@
 import { OQBaseItem } from './base-item.js';
-import { testRoll } from '../../roll.js';
 import _ from 'lodash-es';
-import { OQTestRollDialog } from '../../application/dialog/test-roll-dialog.js';
 import { makeSlug, minMaxValue } from '../../utils.js';
 
 export class OQSkill extends OQBaseItem {
@@ -25,7 +23,7 @@ export class OQSkill extends OQBaseItem {
     }
   }
 
-  getRollValue() {
+  getRollValues() {
     if (this.parent) {
       const { formula, advancement, mod } = this.system;
       const rollMod = mod ?? 0;
@@ -47,24 +45,15 @@ export class OQSkill extends OQBaseItem {
     }
   }
 
-  /**
-   * @param {boolean} skipDialog
-   * @returns {Promise<void>}
-   */
-  async itemTestRoll(skipDialog) {
-    const rollData = _.merge(this.makeBaseTestRollData(), {
+  getTestRollData() {
+    const context = super.getTestRollData();
+
+    return _.merge(context, {
       mastered: this.system.mastered,
       rollType: 'skill',
       value: this.system.rollValue,
       modifier: this.system.rollMod,
     });
-
-    if (skipDialog) {
-      await testRoll(rollData);
-    } else {
-      const dialog = new OQTestRollDialog(rollData);
-      await dialog.render(true);
-    }
   }
 
   getItemDataForChat() {

@@ -23,12 +23,11 @@
   <label for="cost">{{ localize 'OQ.Labels.Cost'}}</label>
   <input id="cost" type="number" data-dtype="Number" name="system.cost" value="{{ system.cost }}">
 
-
   <label for="skillReference">{{localize 'OQ.Labels.Skill'}}</label>
   <div class="skill-reference">
     {{#if this.item.parent}}
       <select id="skillReference" class="skill-reference-slug" name="system.correspondingSkill.skillReference">
-        {{ selectOptions this.item.parent.system.groupedItems.groupedSkillBySlug
+        {{ selectOptions parentSkills
                          selected=system.correspondingSkill.skillReference blank='' sort=true }}
       </select>
 

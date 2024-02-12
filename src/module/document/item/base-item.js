@@ -1,6 +1,8 @@
 import { log } from '../../utils.js';
 import { displayItem } from '../../chat.js';
 import _ from 'lodash-es';
+import { testRoll } from '../../roll.js';
+import { OQTestRollDialog } from '../../application/dialog/test-roll-dialog.js';
 
 /**
  * @typedef {object} ItemRollValue
@@ -19,22 +21,10 @@ export class OQBaseItem extends Item {
     }
   }
 
-  getItemDataForChat() {
-    const traits = this.system.traits && this.system.traits.join(', ');
-    return {
-      speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token }),
-      name: this.name,
-      itemTypeLabel: `TYPES.Item.${this.type}`,
-      img: this.img,
-      description: this.system.description,
-      traits: traits,
-    };
-  }
-
-  prepareDerivedData() {
+  async prepareDerivedData() {
     super.prepareDerivedData();
-    const tooltip = this.system.description;
-    const rollValue = this.getRollValue();
+    const tooltip = await this.getTooltipWithTraits();
+    const rollValue = this.getRollValues();
 
     _.merge(this, {
       system: {
@@ -49,17 +39,30 @@ export class OQBaseItem extends Item {
    *
    * @param {boolean} skipDialog - The data for the roll.
    */
-  async itemTestRoll(skipDialog) {
-    log(`Making roll for ${this.id}`, skipDialog);
+  async rollItemTest(skipDialog) {
+    // const rollData = _.merge(this.getTestRollData(), {
+    //   mastered: this.system.mastered,
+    //   rollType: 'skill',
+    //   value: this.system.rollValue,
+    //   modifier: this.system.rollMod,
+    // });
+    const rollData = this.getTestRollData();
+
+    if (skipDialog) {
+      await testRoll(rollData);
+    } else {
+      const dialog = new OQTestRollDialog(rollData);
+      await dialog.render(true);
+    }
   }
 
-  async sendToChat() {
-    const chatData = this.getItemDataForChat();
-    displayItem(chatData);
-  }
-
-  async makeDamageRoll(skipDialog = true) {
+  async rollItemDamage(skipDialog = true) {
     log(`Makeing damage for ${this.id}`, skipDialog);
+  }
+
+  async sendItemToChat() {
+    const chatData = this.getItemDataForChat();
+    await displayItem(chatData);
   }
 
   makeRollString(rollFormula) {
@@ -77,7 +80,7 @@ export class OQBaseItem extends Item {
    *
    * @returns {{img: string, entityName: string, speaker: (object|undefined)}}
    */
-  makeBaseTestRollData() {
+  getTestRollData() {
     const speaker = ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token });
     return {
       img: this.img,
@@ -87,7 +90,7 @@ export class OQBaseItem extends Item {
     };
   }
 
-  async tooltipWithTraits() {
+  async getTooltipWithTraits() {
     if (this.system.traits && this.system.traits.length) {
       const description = this.system.description;
       const traits = (this.system.traits ?? []).join(' | ');
@@ -97,10 +100,22 @@ export class OQBaseItem extends Item {
     }
   }
 
+  getItemDataForChat() {
+    const traits = this.system.traits && this.system.traits.join(', ');
+    return {
+      speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token }),
+      name: this.name,
+      itemTypeLabel: `TYPES.Item.${this.type}`,
+      img: this.img,
+      description: this.system.description,
+      traits: traits,
+    };
+  }
+
   /**
    * returns {undefined|ItemRollValue}
    */
-  getRollValue() {
+  getRollValues() {
     return {};
   }
 }

@@ -18,6 +18,7 @@ export class OQBaseActor extends Actor {
   prepareBaseData() {
     super.prepareBaseData();
     const system = this.system;
+    // const skillsBySlug = this.getSkillsBySlug();
     const characteristics = _.mapValues(system.characteristics, (characteristic) => {
       const value = characteristic.base + characteristic.mod;
       return {
@@ -27,14 +28,17 @@ export class OQBaseActor extends Actor {
     });
     _.merge(this.system, {
       characteristics,
+      // skillsBySlug,
     });
   }
 
   prepareDerivedData() {
     super.prepareDerivedData();
+    const skillsBySlug = this.getSkillsBySlug();
 
     _.merge(this.system, {
       attributes: this.calculateAttributes(),
+      skillsBySlug,
     });
   }
 
@@ -61,9 +65,7 @@ export class OQBaseActor extends Actor {
   }
 
   getSkillsBySlug() {
-    return _.fromPairs(
-      this.items.filter((item) => item.type === 'skill').map((skill) => [skill.system.skillSlug, skill]),
-    );
+    return _.fromPairs(this.items.filter((item) => item.type === 'skill').map((skill) => [skill.system.slug, skill]));
   }
 
   calculateAttributes() {
@@ -129,7 +131,7 @@ export class OQBaseActor extends Actor {
     const { reference, mod } = this.system.attributes.initiative;
     const initiativeItem = reference && this.items.get(reference);
     if (initiativeItem) {
-      const { rollValue } = initiativeItem.getRollValue();
+      const { rollValue } = initiativeItem.getRollValues();
 
       return (rollValue ?? 0) + (mod ?? 0);
     }

@@ -43,7 +43,7 @@ export class OQActorBaseSheet extends ActorSheet {
     super.activateListeners(html);
 
     html.find('a.item-to-chat').on('click', this.onItemToChat.bind(this));
-    html.find('a.item-roll').on('click', this.onItemRoll.bind(this));
+    html.find('a.item-roll').on('click', this.onItemTestRoll.bind(this));
     html.find('a.damage-roll').on('click', this.onDamageRoll.bind(this));
 
     if (!this.isEditable) return;
@@ -161,12 +161,12 @@ export class OQActorBaseSheet extends ActorSheet {
     item.delete();
   }
 
-  async onItemRoll(event) {
+  async onItemTestRoll(event) {
     event.preventDefault();
 
     const dataSet = event.currentTarget.dataset;
     const item = this.actor.items.get(dataSet?.itemId);
-    await item.itemTestRoll(event.shiftKey);
+    await item.rollItemTest(event.shiftKey);
   }
 
   async onDamageRoll(event) {
@@ -174,7 +174,7 @@ export class OQActorBaseSheet extends ActorSheet {
 
     const dataSet = event.currentTarget.dataset;
     const item = this.actor.items.get(dataSet?.itemId);
-    await item.makeDamageRoll(!event.shiftKey);
+    await item.rollItemDamage(!event.shiftKey);
   }
 
   async onItemToChat(event) {
@@ -182,7 +182,7 @@ export class OQActorBaseSheet extends ActorSheet {
 
     const dataSet = event.currentTarget.dataset;
     const item = this.actor.items.get(dataSet?.itemId);
-    await item.sendToChat();
+    await item.sendItemToChat();
   }
 
   async onUpdateResource(event) {

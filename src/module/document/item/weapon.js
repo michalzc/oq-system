@@ -1,7 +1,6 @@
 import { OQBaseItem } from './base-item.js';
 import _ from 'lodash-es';
-import { damageRoll, testRoll } from '../../roll.js';
-import { OQTestRollDialog } from '../../application/dialog/test-roll-dialog.js';
+import { damageRoll } from '../../roll.js';
 import { OQDamageRollDialog } from '../../application/dialog/damage-roll-dialog.js';
 import { minMaxValue, mostSignificantModifier } from '../../utils.js';
 
@@ -29,7 +28,7 @@ export class OQWeapon extends OQBaseItem {
   async prepareDerivedData() {
     super.prepareDerivedData();
 
-    const tooltip = await this.tooltipWithTraits();
+    const tooltip = await this.getTooltipWithTraits();
 
     const damageRollValue = this.getDamageRollValue();
 
@@ -55,11 +54,11 @@ export class OQWeapon extends OQBaseItem {
     return null;
   }
 
-  async makeDamageRoll(skipDialog = true) {
+  async rollItemDamage(skipDialog = true) {
     const actorRollData = this.parent.getRollData();
     const damageFormula = this.system.damage.damageFormula;
     const includeDM = !!this.system.damage.includeDamageMod;
-    const rollData = _.merge(this.makeBaseTestRollData(), {
+    const rollData = _.merge(this.getTestRollData(), {
       actorRollData,
       damageFormula,
       includeDM,
@@ -72,7 +71,7 @@ export class OQWeapon extends OQBaseItem {
     }
   }
 
-  getRollValue() {
+  getRollValues() {
     const correspondingSkill = this.system.correspondingSkill;
     if (this.parent && correspondingSkill?.skillReference) {
       const formula = `@skills.${correspondingSkill.skillReference}.value`;
@@ -91,27 +90,17 @@ export class OQWeapon extends OQBaseItem {
     } else return {};
   }
 
-  /**
-   * @param {boolean} skipDialog
-   * @returns {Promise<void>}
-   */
-  async itemTestRoll(skipDialog) {
-    const skillReference = this.system.correspondingSkill?.skillReference;
+  getTestRollData() {
+    const context = super.getTestRollData();
 
-    const skillName = this.parent?.system.groupedItems.groupedSkillBySlug[skillReference];
-    const rollData = _.merge(this.makeBaseTestRollData(), {
+    const skillReference = this.system.correspondingSkill?.skillReference;
+    const skillName = this.parent?.system.skillsBySlug[skillReference];
+    return _.merge(context, {
       rollType: 'weapon',
       value: this.system.rollValue,
       modifier: this.system.rollMod,
       skillName,
     });
-
-    if (skipDialog) {
-      await testRoll(rollData);
-    } else {
-      const dialog = new OQTestRollDialog(rollData);
-      dialog.render(true);
-    }
   }
 
   getItemDataForChat() {
