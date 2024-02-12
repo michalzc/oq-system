@@ -21,14 +21,14 @@ export class OQSpecialAbility extends OQBaseItem {
     return damage ? this.makeRollString(damage) : '';
   }
 
-  getRollValues() {
+  calculateRollValues() {
     if (this.parent && this.system.formula) {
       const roll = new Roll(this.system.formula, this.parent.getRollData());
       if (roll.isDeterministic) {
-        const rollValue = minMaxValue(roll.roll({ async: false }).total);
+        const value = minMaxValue(roll.roll({ async: false }).total);
 
         return {
-          rollValue,
+          value,
         };
       }
     }
@@ -53,10 +53,8 @@ export class OQSpecialAbility extends OQBaseItem {
 
   getTestRollData() {
     const context = super.getTestRollData();
-
     return _.merge(context, {
       rollType: 'specialAbility',
-      value: this.system.rollValue,
     });
   }
 

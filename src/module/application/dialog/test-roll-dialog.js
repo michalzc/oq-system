@@ -49,11 +49,11 @@ export class OQTestRollDialog extends FormApplication {
   async _updateObject(event, formData) {
     const difficultyKey = formData.difficulty;
     const difficulty = difficultyKey && { key: difficultyKey, value: this.difficultyLevels[difficultyKey] };
-    const modifier = formData.modifier;
+    const mod = formData.modifier;
     await testRoll(
       _.merge(this.rollData, {
         difficulty,
-        modifier,
+        mod,
       }),
     );
   }

@@ -13,4 +13,8 @@ export class OQSpell extends OQBaseItem {
       itemSubtypeLabel: `OQ.Labels.SpellTypes.${this.system.type}`,
     });
   }
+
+  async rollItemTest() {
+    await this.sendItemToChat();
+  }
 }

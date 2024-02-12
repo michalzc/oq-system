@@ -24,11 +24,11 @@ export class OQBaseItem extends Item {
   async prepareDerivedData() {
     super.prepareDerivedData();
     const tooltip = await this.getTooltipWithTraits();
-    const rollValue = this.getRollValues();
+    const rollValues = this.calculateRollValues();
 
     _.merge(this, {
       system: {
-        ...rollValue,
+        rollValues,
         tooltip,
       },
     });
@@ -76,11 +76,13 @@ export class OQBaseItem extends Item {
    */
   getTestRollData() {
     const speaker = ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token });
+    const rollValues = this.getRollValues();
     return {
       img: this.img,
       speaker,
       entityName: this.name,
       type: this.actor.type,
+      ...rollValues,
     };
   }
 
@@ -109,7 +111,10 @@ export class OQBaseItem extends Item {
   /**
    * returns {undefined|ItemRollValue}
    */
-  getRollValues() {
-    return {};
+  getRollValues(forceCalculation = false) {
+    if (forceCalculation || !this.system.rollValues) return this.calculateRollValues();
+    else return this.system.rollValues;
   }
+
+  calculateRollValues() {}
 }

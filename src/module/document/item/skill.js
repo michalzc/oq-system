@@ -23,21 +23,21 @@ export class OQSkill extends OQBaseItem {
     }
   }
 
-  getRollValues() {
+  calculateRollValues() {
     if (this.parent) {
       const { formula, advancement, mod } = this.system;
-      const rollMod = mod ?? 0;
+      const finalMod = mod ?? 0;
       const rollData = this.parent.getRollData();
       const rollFormula = `${formula} + ${advancement}`;
       const total = new Roll(rollFormula, rollData).roll({ async: false }).total;
-      const rollValue = minMaxValue(total);
-      const rollValueWithMod = rollMod && minMaxValue(rollValue + rollMod);
-      const mastered = rollValue >= 100;
+      const value = minMaxValue(total);
+      const valueWithMod = mod && minMaxValue(value + mod);
+      const mastered = value >= 100;
 
       return {
-        rollValue,
-        rollMod,
-        rollValueWithMod,
+        value,
+        mod: finalMod,
+        valueWithMod,
         mastered,
       };
     } else {
@@ -49,10 +49,7 @@ export class OQSkill extends OQBaseItem {
     const context = super.getTestRollData();
 
     return _.merge(context, {
-      mastered: this.system.mastered,
       rollType: 'skill',
-      value: this.system.rollValue,
-      modifier: this.system.rollMod,
     });
   }
 

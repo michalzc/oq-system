@@ -71,21 +71,21 @@ export class OQWeapon extends OQBaseItem {
     }
   }
 
-  getRollValues() {
+  calculateRollValues() {
     const correspondingSkill = this.system.correspondingSkill;
     if (this.parent && correspondingSkill?.skillReference) {
       const skills = this.parent.getSkillsBySlug();
       const skill = skills && skills[correspondingSkill.skillReference];
       if (skill) {
-        const skillRollValues = skill.getRollValues();
-        const rollValue = skillRollValues.rollValue;
+        const skillRollValues = skill.getRollValues(true);
+        const value = skillRollValues.value;
 
-        const rollMod = mostSignificantModifier(skillRollValues.rollMod ?? 0, correspondingSkill?.skillMod ?? 0);
-        const rollValueWithMod = rollMod && minMaxValue(skillRollValues.rollValue + rollMod);
+        const mod = mostSignificantModifier(skillRollValues.mod ?? 0, correspondingSkill?.skillMod ?? 0);
+        const valueWithMod = mod && minMaxValue(skillRollValues.value + mod);
         return {
-          rollValue,
-          rollMod,
-          rollValueWithMod,
+          value,
+          mod,
+          valueWithMod,
         };
       }
     }
@@ -101,8 +101,6 @@ export class OQWeapon extends OQBaseItem {
     const skillName = skill?.name;
     return _.merge(context, {
       rollType: 'weapon',
-      value: this.system.rollValue,
-      modifier: this.system.rollMod,
       skillName,
     });
   }

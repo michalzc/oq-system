@@ -11,7 +11,7 @@
  * @property {string|undefined} img
  * @property {boolean} mastered
  * @property {Difficulty|undefined} difficulty
- * @property {number|undefined} modifier
+ * @property {number|undefined} mod
  * @property {Object} speaker
  * @property {string} rollType
  * @property {string} entityName
@@ -34,7 +34,7 @@ const TestRollTemplates = {
 export async function testRoll(rollData) {
   const roll = await new Roll(CONFIG.OQ.RollConfig.baseRollFormula).roll({ async: true });
   const resultFeatures = getResultFeatures(roll);
-  const totalValue = (rollData.value ?? 0) + (rollData.difficulty?.value ?? 0) + (rollData?.modifier ?? 0);
+  const totalValue = (rollData.value ?? 0) + (rollData.difficulty?.value ?? 0) + (rollData?.mod ?? 0);
 
   const rollResult = getResult(resultFeatures, roll.total, { value: rollData.value, totalValue });
   const mastered = rollData.value >= MAX_VALUE && totalValue >= MAX_VALUE && rollData.mastered;

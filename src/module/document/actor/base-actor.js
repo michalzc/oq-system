@@ -127,9 +127,9 @@ export class OQBaseActor extends Actor {
     const { reference, mod } = this.system.attributes.initiative;
     const initiativeItem = reference && this.items.get(reference);
     if (initiativeItem) {
-      const { rollValue } = initiativeItem.getRollValues();
+      const { value } = initiativeItem.getRollValues();
 
-      return (rollValue ?? 0) + (mod ?? 0);
+      return (value ?? 0) + (mod ?? 0);
     }
 
     return mod ?? 0;
