@@ -81,7 +81,7 @@ function initiative() {
   return new fields.SchemaField(
     {
       reference: new fields.StringField({ required: true, trim: '' }),
-      mod: new fields.NumberField({ required: true, integer: true, min: 0 }),
+      mod: new fields.NumberField({ required: true, integer: true }),
     },
     { required: false },
   );

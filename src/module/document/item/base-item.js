@@ -40,12 +40,6 @@ export class OQBaseItem extends Item {
    * @param {boolean} skipDialog - The data for the roll.
    */
   async rollItemTest(skipDialog) {
-    // const rollData = _.merge(this.getTestRollData(), {
-    //   mastered: this.system.mastered,
-    //   rollType: 'skill',
-    //   value: this.system.rollValue,
-    //   modifier: this.system.rollMod,
-    // });
     const rollData = this.getTestRollData();
 
     if (skipDialog) {

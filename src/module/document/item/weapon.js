@@ -74,27 +74,31 @@ export class OQWeapon extends OQBaseItem {
   getRollValues() {
     const correspondingSkill = this.system.correspondingSkill;
     if (this.parent && correspondingSkill?.skillReference) {
-      const formula = `@skills.${correspondingSkill.skillReference}.value`;
-      const skillModValueFormula = `@skills.${correspondingSkill.skillReference}.mod`;
+      const skills = this.parent.getSkillsBySlug();
+      const skill = skills && skills[correspondingSkill.skillReference];
+      if (skill) {
+        const skillRollValues = skill.getRollValues();
+        const rollValue = skillRollValues.rollValue;
 
-      const parentRollData = this.parent.getRollData();
-      const rollValue = minMaxValue(new Roll(formula, parentRollData).roll({ async: false }).total);
-      const skillModRoll = new Roll(skillModValueFormula, parentRollData).roll({ async: false }).total;
-      const rollMod = mostSignificantModifier(skillModRoll ?? 0, correspondingSkill?.skillMod ?? 0);
-      const rollValueWithMod = rollMod && minMaxValue(rollValue + rollMod);
-      return {
-        rollValue,
-        rollMod,
-        rollValueWithMod,
-      };
-    } else return {};
+        const rollMod = mostSignificantModifier(skillRollValues.rollMod ?? 0, correspondingSkill?.skillMod ?? 0);
+        const rollValueWithMod = rollMod && minMaxValue(skillRollValues.rollValue + rollMod);
+        return {
+          rollValue,
+          rollMod,
+          rollValueWithMod,
+        };
+      }
+    }
+
+    return {};
   }
 
   getTestRollData() {
     const context = super.getTestRollData();
 
     const skillReference = this.system.correspondingSkill?.skillReference;
-    const skillName = this.parent?.system.skillsBySlug[skillReference];
+    const skill = this.parent?.system.skillsBySlug[skillReference];
+    const skillName = skill?.name;
     return _.merge(context, {
       rollType: 'weapon',
       value: this.system.rollValue,

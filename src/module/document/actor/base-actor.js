@@ -18,7 +18,6 @@ export class OQBaseActor extends Actor {
   prepareBaseData() {
     super.prepareBaseData();
     const system = this.system;
-    // const skillsBySlug = this.getSkillsBySlug();
     const characteristics = _.mapValues(system.characteristics, (characteristic) => {
       const value = characteristic.base + characteristic.mod;
       return {
@@ -28,7 +27,6 @@ export class OQBaseActor extends Actor {
     });
     _.merge(this.system, {
       characteristics,
-      // skillsBySlug,
     });
   }
 
@@ -44,9 +42,7 @@ export class OQBaseActor extends Actor {
 
   getRollData() {
     const rollData = super.getRollData();
-    const charRollData = Object.fromEntries(
-      Object.entries(this.system.characteristics).map(([key, elem]) => [key, elem.value]),
-    );
+    const charRollData = _.fromPairs(_.map(this.system.characteristics, (char, key) => [key, char.value]));
     const skills = _.fromPairs(
       this.items
         .filter((i) => i.type === 'skill')
@@ -61,7 +57,7 @@ export class OQBaseActor extends Actor {
       dm,
     };
 
-    return _.merge(rollData, newRollData);
+    return { ...rollData, ...newRollData };
   }
 
   getSkillsBySlug() {
