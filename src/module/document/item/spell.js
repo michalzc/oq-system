@@ -4,7 +4,7 @@ import _ from 'lodash-es';
 export class OQSpell extends OQBaseItem {
   async prepareDerivedData() {
     super.prepareDerivedData();
-    this.system.tooltip = await this.tooltipWithTraits();
+    this.system.tooltip = await this.getTooltipWithTraits();
   }
 
   getItemDataForChat() {
@@ -12,5 +12,9 @@ export class OQSpell extends OQBaseItem {
     return _.merge(context, {
       itemSubtypeLabel: `OQ.Labels.SpellTypes.${this.system.type}`,
     });
+  }
+
+  async rollItemTest() {
+    await this.sendItemToChat();
   }
 }

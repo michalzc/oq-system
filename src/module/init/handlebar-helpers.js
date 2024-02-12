@@ -1,4 +1,4 @@
-import { log, logError } from '../utils.js';
+import { logError } from '../utils.js';
 
 export function registerHelpers() {
   Handlebars.registerHelper('getPartial', function (name, context) {
@@ -19,7 +19,6 @@ export function registerHelpers() {
   });
 
   Handlebars.registerHelper('propertyByName', function (obj, propertyName) {
-    log('propertyByName', obj, propertyName);
-    return obj[propertyName];
+    return obj && propertyName in obj && obj[propertyName];
   });
 }

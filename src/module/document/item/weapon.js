@@ -1,8 +1,5 @@
 import { OQBaseItem } from './base-item.js';
 import _ from 'lodash-es';
-import { damageRoll, testRoll } from '../../roll.js';
-import { OQTestRollDialog } from '../../application/dialog/test-roll-dialog.js';
-import { OQDamageRollDialog } from '../../application/dialog/damage-roll-dialog.js';
 import { minMaxValue, mostSignificantModifier } from '../../utils.js';
 
 export class OQWeapon extends OQBaseItem {
@@ -26,92 +23,56 @@ export class OQWeapon extends OQBaseItem {
     }
   }
 
-  async prepareDerivedData() {
-    super.prepareDerivedData();
-
-    const tooltip = await this.tooltipWithTraits();
-
-    const damageRollValue = this.getDamageRollValue();
-
-    _.merge(this.system, {
-      damageRollValue,
-      tooltip,
-    });
+  calculateDamageRollValues() {
+    if (this.parent) {
+      const damage = this.system.damage;
+      const dmValue = this.parent.system.attributes.dm.value;
+      if (damage.damageFormula || (damage.includeDamageMod && dmValue)) {
+        const damageFormula = damage.damageFormula;
+        const includeDM = !!damage.includeDamageMod;
+        const finalFormula = (includeDM ? `${damageFormula} ${dmValue}` : damageFormula).trim();
+        const finalDamageFormula = this.makeRollString(finalFormula);
+        return {
+          damageFormula,
+          finalDamageFormula,
+          includeDM,
+        };
+      }
+    }
   }
 
-  getDamageRollValue() {
-    if (this.parent) {
-      const damageEntity = this.system.damage;
-      const dmValue = this.parent.system.attributes.dm.value;
-      if (damageEntity.damageFormula || (damageEntity.includeDamageMod && dmValue)) {
-        const damage = damageEntity.damageFormula;
-        const includeDM = !!damageEntity.includeDamageMod;
-        const damageFormula = (includeDM ? `${damage} ${dmValue}` : damage).trim();
+  calculateRollValues() {
+    const correspondingSkill = this.system.correspondingSkill;
+    if (this.parent && correspondingSkill?.skillReference) {
+      const skills = this.parent.getSkillsBySlug();
+      const skill = skills && skills[correspondingSkill.skillReference];
+      if (skill) {
+        const skillRollValues = skill.getRollValues(true);
+        const value = skillRollValues.value;
 
-        return this.makeRollString(damageFormula);
+        const mod = mostSignificantModifier(skillRollValues.mod ?? 0, correspondingSkill?.skillMod ?? 0);
+        const valueWithMod = mod && minMaxValue(skillRollValues.value + mod);
+        return {
+          value,
+          mod,
+          valueWithMod,
+        };
       }
     }
 
-    return null;
+    return {};
   }
 
-  async makeDamageRoll(skipDialog = true) {
-    const actorRollData = this.parent.getRollData();
-    const damageFormula = this.system.damage.damageFormula;
-    const includeDM = !!this.system.damage.includeDamageMod;
-    const rollData = _.merge(this.makeBaseTestRollData(), {
-      actorRollData,
-      damageFormula,
-      includeDM,
-    });
+  getTestRollData() {
+    const context = super.getTestRollData();
 
-    if (skipDialog) await damageRoll(rollData);
-    else {
-      const rollDialog = new OQDamageRollDialog(rollData);
-      rollDialog.render(true);
-    }
-  }
-
-  getRollValue() {
-    const correspondingSkill = this.system.correspondingSkill;
-    if (this.parent && correspondingSkill?.skillReference) {
-      const formula = `@skills.${correspondingSkill.skillReference}.value`;
-      const skillModValueFormula = `@skills.${correspondingSkill.skillReference}.mod`;
-
-      const parentRollData = this.parent.getRollData();
-      const rollValue = minMaxValue(new Roll(formula, parentRollData).roll({ async: false }).total);
-      const skillModRoll = new Roll(skillModValueFormula, parentRollData).roll({ async: false }).total;
-      const rollMod = mostSignificantModifier(skillModRoll ?? 0, correspondingSkill?.skillMod ?? 0);
-      const rollValueWithMod = rollMod && minMaxValue(rollValue + rollMod);
-      return {
-        rollValue,
-        rollMod,
-        rollValueWithMod,
-      };
-    } else return {};
-  }
-
-  /**
-   * @param {boolean} skipDialog
-   * @returns {Promise<void>}
-   */
-  async itemTestRoll(skipDialog) {
     const skillReference = this.system.correspondingSkill?.skillReference;
-
-    const skillName = this.parent?.system.groupedItems.groupedSkillBySlug[skillReference];
-    const rollData = _.merge(this.makeBaseTestRollData(), {
+    const skill = this.parent?.system.skillsBySlug[skillReference];
+    const skillName = skill?.name;
+    return _.merge(context, {
       rollType: 'weapon',
-      value: this.system.rollValue,
-      modifier: this.system.rollMod,
       skillName,
     });
-
-    if (skipDialog) {
-      await testRoll(rollData);
-    } else {
-      const dialog = new OQTestRollDialog(rollData);
-      dialog.render(true);
-    }
   }
 
   getItemDataForChat() {

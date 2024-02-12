@@ -19,11 +19,15 @@ export class OQCharacterSheet extends OQActorBaseSheet {
     const enrichedNotes = await TextEditor.enrichHTML(this.actor.system.personal.notes, { async: true });
     const spellsPerType = this.getSpellsPerType();
     const spellTypes = CONFIG.OQ.ItemConfig.spellsTypes;
+    const groupedSkillByGroupName = this.prepareSkills(context.groupedItems.skills);
     return _.merge(context, {
       enrichedNotes,
       isCharacter: true,
-      spellsPerType,
       spellTypes,
+      groupedItems: {
+        groupedSkillByGroupName,
+        spellsPerType,
+      },
     });
   }
 
@@ -37,4 +41,44 @@ export class OQCharacterSheet extends OQActorBaseSheet {
     const characteristicsDialog = new CharacteristicsDialog(this.actor);
     characteristicsDialog.render(true);
   }
+
+  prepareSkills = (skills) =>
+    _.sortBy(
+      _.map(
+        _.groupBy(skills, (skill) => `${skill.system.group}|${skill.system.groupName}`),
+        (skills, key) => {
+          const [group, label] = key.split('|', 2);
+          return {
+            group,
+            label,
+            skills,
+          };
+        },
+      ),
+      (elem) => elem.label,
+    );
+
+  // prepareSkills(skills) {
+  //   // const skills = this.system.groupedItems.skills;
+  //   const groupedSkillByGroupName = _.sortBy(
+  //     _.map(
+  //       _.groupBy(skills, (skill) => `${skill.system.group}|${skill.system.groupName}`),
+  //       (skills, key) => {
+  //         const [group, label] = key.split('|', 2);
+  //         return {
+  //           group,
+  //           label,
+  //           skills,
+  //         };
+  //       },
+  //     ),
+  //     (elem) => elem.label,
+  //   );
+  //
+  //   return {
+  //     groupedItems: {
+  //       groupedSkillByGroupName,
+  //     },
+  //   };
+  // }
 }

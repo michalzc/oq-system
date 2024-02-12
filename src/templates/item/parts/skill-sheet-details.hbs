@@ -1,4 +1,3 @@
-{{ log this }}
 <div class="item-details">
   <label for="group">{{localize 'OQ.Labels.Group'}}</label>
 
@@ -19,7 +18,7 @@
     <input type="number" name="system.mod" id="mod" value="{{system.mod}}">
 
     <label>{{ localize 'OQ.Labels.TotalValue' }}</label>
-    <div>{{ system.rollValue }}</div>
+    <div>{{ system.rollValues.value }}</div>
   {{/if}}
 
 </div>

@@ -8,7 +8,7 @@
       <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'OQ.SkillGroups.combat' }}"
          data-type="skill" data-group="combat"><i class="fas fa-plus"></i></a>
     </div>
-    {{#each system.groupedItems.combatSkills as |skill|}}
+    {{#each groupedItems.combatSkills as |skill|}}
       {{> systems/oq/templates/actor/parts/skill.hbs skill}}
     {{/each}}
   </div>
@@ -19,7 +19,7 @@
       <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'OQ.SkillGroups.resistance' }}"
          data-type="skill" data-group="combat"><i class="fas fa-plus"></i></a>
     </div>
-    {{#each system.groupedItems.resistances as |skill|}}
+    {{#each groupedItems.resistances as |skill|}}
       {{> systems/oq/templates/actor/parts/skill.hbs skill}}
     {{/each}}
   </div>
@@ -30,7 +30,7 @@
       <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.weapon' }}"
          data-type="weapon"><i class="fas fa-plus"></i></a>
     </div>
-    {{#each system.groupedItems.weapons as |weapon|}}
+    {{#each groupedItems.weapons as |weapon|}}
       {{> systems/oq/templates/actor/parts/weapon.hbs weapon}}
     {{/each}}
   </div>
@@ -41,7 +41,7 @@
       <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.armour' }}"
          data-type="armour"><i class="fas fa-plus"></i></a>
     </div>
-    {{#each system.groupedItems.armours as |armour|}}
+    {{#each groupedItems.armours as |armour|}}
       {{> systems/oq/templates/actor/parts/armour.hbs armour}}
     {{/each}}
   </div>
@@ -52,7 +52,7 @@
       <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.specialAbility' }}"
          data-type="specialAbility" data-system-type="combat"><i class="fas fa-plus"></i></a>
     </div>
-    {{#each system.groupedItems.combatAbilities as |ability|}}
+    {{#each groupedItems.combatAbilities as |ability|}}
       {{> systems/oq/templates/actor/parts/ability.hbs ability}}
     {{/each}}
   </div>

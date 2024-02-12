@@ -32,18 +32,17 @@ export class OQBaseActor extends Actor {
 
   prepareDerivedData() {
     super.prepareDerivedData();
+    const skillsBySlug = this.getSkillsBySlug();
 
     _.merge(this.system, {
       attributes: this.calculateAttributes(),
-      groupedItems: this.prepareGroupedItems(),
+      skillsBySlug,
     });
   }
 
   getRollData() {
     const rollData = super.getRollData();
-    const charRollData = Object.fromEntries(
-      Object.entries(this.system.characteristics).map(([key, elem]) => [key, elem.value]),
-    );
+    const charRollData = _.fromPairs(_.map(this.system.characteristics, (char, key) => [key, char.value]));
     const skills = _.fromPairs(
       this.items
         .filter((i) => i.type === 'skill')
@@ -58,61 +57,11 @@ export class OQBaseActor extends Actor {
       dm,
     };
 
-    return _.merge(rollData, newRollData);
+    return { ...rollData, ...newRollData };
   }
 
   getSkillsBySlug() {
-    return _.fromPairs(
-      this.items.filter((item) => item.type === 'skill').map((skill) => [skill.system.skillSlug, skill]),
-    );
-  }
-
-  prepareGroupedItems() {
-    //FIXME: Move to sheet
-    const allItems = _.sortBy([...this.items], (item) => item.name);
-    const groupedItems = _.groupBy(allItems, (item) => item.type);
-    const skills = groupedItems.skill ?? [];
-    const abilities = groupedItems.specialAbility ?? [];
-    const groupedSkills = _.groupBy(skills, (skill) => skill.system.group);
-    const groupedAbilities = _.groupBy(abilities, (ability) => ability.system.type);
-
-    const otherSkills = _.filter(skills, (skill) => _.includes(OQBaseActor.otherSkillsGroups, skill.system.group));
-    const groupedSkillBySlug = _.fromPairs(skills.map((skill) => [skill.system.slug, skill.name]));
-
-    const generalAbilities = groupedAbilities.general ?? [];
-    const skillsAndAbilities = _.concat(otherSkills, generalAbilities);
-
-    const magicSkills = groupedSkills.magic ?? [];
-    const magicAbilities = groupedAbilities.magic ?? [];
-    const spells = groupedItems.spell ?? [];
-    const magic = _.concat(magicSkills, magicAbilities, spells);
-
-    const combatSkills = groupedSkills.combat ?? [];
-    const resistances = groupedSkills.resistance ?? [];
-    const combatAbilities = groupedAbilities.combat ?? [];
-    const weapons = groupedItems.weapon ?? [];
-    const armours = groupedItems.armour ?? [];
-    const combat = _.concat(combatSkills, resistances, combatAbilities, weapons, armours);
-
-    const equipment = groupedItems.equipment ?? [];
-
-    return {
-      abilities,
-      armours,
-      combat,
-      combatAbilities,
-      combatSkills,
-      equipment,
-      groupedItems,
-      groupedSkillBySlug,
-      groupedSkills,
-      magic,
-      magicAbilities,
-      resistances,
-      skills,
-      skillsAndAbilities,
-      weapons,
-    };
+    return _.fromPairs(this.items.filter((item) => item.type === 'skill').map((skill) => [skill.system.slug, skill]));
   }
 
   calculateAttributes() {
@@ -178,9 +127,9 @@ export class OQBaseActor extends Actor {
     const { reference, mod } = this.system.attributes.initiative;
     const initiativeItem = reference && this.items.get(reference);
     if (initiativeItem) {
-      const { rollValue } = initiativeItem.getRollValue();
+      const { value } = initiativeItem.getRollValues();
 
-      return (rollValue ?? 0) + (mod ?? 0);
+      return (value ?? 0) + (mod ?? 0);
     }
 
     return mod ?? 0;

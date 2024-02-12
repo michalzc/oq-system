@@ -1,5 +1,6 @@
 import _ from 'lodash-es';
 import { AttributesDialog } from '../../dialog/attributes-dialog.js';
+import { OQBaseActor } from '../../../document/actor/base-actor.js';
 
 const mergeObject = foundry.utils.mergeObject;
 
@@ -27,12 +28,14 @@ export class OQActorBaseSheet extends ActorSheet {
     const characteristics = this.updateCharacteristicsLabels(system.characteristics);
     const attributes = this.updateAttributesLabels(system.attributes);
     const initiativeOptions = this.getInitiativeOptions();
+    const groupedItems = this.prepareGroupedItems();
     return _.merge(context, {
       system: _.merge(system, {
         characteristics: characteristics,
         attributes: attributes,
       }),
       initiativeOptions,
+      groupedItems,
     });
   }
 
@@ -40,7 +43,7 @@ export class OQActorBaseSheet extends ActorSheet {
     super.activateListeners(html);
 
     html.find('a.item-to-chat').on('click', this.onItemToChat.bind(this));
-    html.find('a.item-roll').on('click', this.onItemRoll.bind(this));
+    html.find('a.item-roll').on('click', this.onItemTestRoll.bind(this));
     html.find('a.damage-roll').on('click', this.onDamageRoll.bind(this));
 
     if (!this.isEditable) return;
@@ -158,12 +161,12 @@ export class OQActorBaseSheet extends ActorSheet {
     item.delete();
   }
 
-  async onItemRoll(event) {
+  async onItemTestRoll(event) {
     event.preventDefault();
 
     const dataSet = event.currentTarget.dataset;
     const item = this.actor.items.get(dataSet?.itemId);
-    await item.itemTestRoll(event.shiftKey);
+    await item.rollItemTest(event.shiftKey);
   }
 
   async onDamageRoll(event) {
@@ -171,7 +174,7 @@ export class OQActorBaseSheet extends ActorSheet {
 
     const dataSet = event.currentTarget.dataset;
     const item = this.actor.items.get(dataSet?.itemId);
-    await item.makeDamageRoll(!event.shiftKey);
+    await item.rollItemDamage(!event.shiftKey);
   }
 
   async onItemToChat(event) {
@@ -179,7 +182,7 @@ export class OQActorBaseSheet extends ActorSheet {
 
     const dataSet = event.currentTarget.dataset;
     const item = this.actor.items.get(dataSet?.itemId);
-    await item.sendToChat();
+    await item.sendItemToChat();
   }
 
   async onUpdateResource(event) {
@@ -223,5 +226,53 @@ export class OQActorBaseSheet extends ActorSheet {
         abbr,
       };
     });
+  }
+
+  prepareGroupedItems() {
+    //FIXME: Move to sheet
+    const allItems = _.sortBy([...this.actor.items], (item) => item.name);
+    const groupedItems = _.groupBy(allItems, (item) => item.type);
+    const skills = groupedItems.skill ?? [];
+    const abilities = groupedItems.specialAbility ?? [];
+    const groupedSkills = _.groupBy(skills, (skill) => skill.system.group);
+    const groupedAbilities = _.groupBy(abilities, (ability) => ability.system.type);
+
+    const otherSkills = _.filter(skills, (skill) => _.includes(OQBaseActor.otherSkillsGroups, skill.system.group));
+    const groupedSkillBySlug = _.fromPairs(skills.map((skill) => [skill.system.slug, skill.name]));
+
+    const generalAbilities = groupedAbilities.general ?? [];
+    const skillsAndAbilities = _.concat(otherSkills, generalAbilities);
+
+    const magicSkills = groupedSkills.magic ?? [];
+    const magicAbilities = groupedAbilities.magic ?? [];
+    const spells = groupedItems.spell ?? [];
+    const magic = _.concat(magicSkills, magicAbilities, spells);
+
+    const combatSkills = groupedSkills.combat ?? [];
+    const resistances = groupedSkills.resistance ?? [];
+    const combatAbilities = groupedAbilities.combat ?? [];
+    const weapons = groupedItems.weapon ?? [];
+    const armours = groupedItems.armour ?? [];
+    const combat = _.concat(combatSkills, resistances, combatAbilities, weapons, armours);
+
+    const equipment = groupedItems.equipment ?? [];
+
+    return {
+      abilities,
+      armours,
+      combat,
+      combatAbilities,
+      combatSkills,
+      equipment,
+      groupedItems,
+      groupedSkillBySlug,
+      groupedSkills,
+      magic,
+      magicAbilities,
+      resistances,
+      skills,
+      skillsAndAbilities,
+      weapons,
+    };
   }
 }

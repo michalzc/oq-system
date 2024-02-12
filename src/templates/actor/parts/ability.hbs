@@ -2,7 +2,7 @@
   <a class="item-to-chat" data-item-id="{{id}}">
     <img class="item-icon" src="{{img}}" data-tooltip="{{localize 'OQ.Tooltips.SendToChat'}}" alt="{{name}}">
   </a>
-  {{#if system.rollValue}}
+  {{#if system.rollValues}}
     <a class="item-roll item-name" data-item-id="{{id}}" data-tooltip="{{system.tooltip}}" data-tooltip-direction="LEFT">
       {{name}}
     </a>
@@ -14,14 +14,14 @@
     {{itemState system.state}}
   </a>
 
-  {{# if system.damageRollValue}}
+  {{# if system.damageRollValues }}
     <a class="damage-roll" data-item-id="{{id}}" data-tooltip="{{localize 'OQ.Labels.DamageRoll' }}">
-      <i class="fas fa-hammer-crash"></i> {{ system.damageRollValue }}
+      <i class="fas fa-hammer-crash"></i> {{ system.damageRollValues.finalDamageFormula }}
     </a>
   {{/if}}
-  {{#if system.rollValue}}
+  {{#if system.rollValues}}
     <a class="item-roll total-value" data-item-id="{{id}}" data-tooltip="{{localize 'OQ.Labels.Roll'}} {{name}}">
-      {{system.rollValue}} %
+      {{system.rollValues.value}} %
     </a>
   {{else}}
     <div class="total-value"></div>

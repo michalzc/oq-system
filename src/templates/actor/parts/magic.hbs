@@ -5,7 +5,7 @@
       <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'OQ.SkillGroups.magic' }}"
          data-type="skill" data-group="magic"><i class="fas fa-plus"></i></a>
     </div>
-    {{#each system.groupedItems.groupedSkills.magic as |skill|}}
+    {{#each groupedItems.groupedSkills.magic as |skill|}}
       {{> systems/oq/templates/actor/parts/skill.hbs skill}}
     {{/each}}
   </div>
@@ -14,13 +14,12 @@
       <div>{{ localize 'OQ.SkillGroups.resistance'}}</div>
       <a class="add-new-item"
          data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'OQ.SkillGroups.resistance' }}" data-type="skill"
-         data-group="combat"><i class="fas fa-plus"></i></a>
+         data-group="resistance"><i class="fas fa-plus"></i></a>
     </div>
-    {{#each system.groupedItems.groupedSkills.resistance as |skill|}}
+    {{#each groupedItems.groupedSkills.resistance as |skill|}}
       {{> systems/oq/templates/actor/parts/skill.hbs skill}}
     {{/each}}
   </div>
-  {{ log spellsPerType }}
   {{#each spellTypes as |spellType|}}
     <div class="item-group">
       <div class="item label">
@@ -29,7 +28,7 @@
           (concat 'OQ.Labels.SpellTypes.' spellType) }} {{localize 'OQ.Labels.Spells'}}" data-type="spell"
            data-system-type="{{spellType}}"><i class="fas fa-plus"></i></a>
       </div>
-      {{#each (propertyByName ../spellsPerType spellType) as |spell|}}
+      {{#each (propertyByName ../groupedItems.spellsPerType spellType) as |spell|}}
         {{> systems/oq/templates/actor/parts/spell.hbs spell}}
       {{/each}}
     </div>
@@ -42,7 +41,7 @@
          data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.specialAbility' }}"
          data-type="specialAbility" data-system-type="magic"><i class="fas fa-plus"></i></a>
     </div>
-    {{#each system.groupedItems.magicAbilities as |ability|}}
+    {{#each groupedItems.magicAbilities as |ability|}}
       {{> systems/oq/templates/actor/parts/ability.hbs ability}}
     {{/each}}
   </div>
