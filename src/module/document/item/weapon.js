@@ -1,7 +1,5 @@
 import { OQBaseItem } from './base-item.js';
 import _ from 'lodash-es';
-import { damageRoll } from '../../roll.js';
-import { OQDamageRollDialog } from '../../application/dialog/damage-roll-dialog.js';
 import { minMaxValue, mostSignificantModifier } from '../../utils.js';
 
 export class OQWeapon extends OQBaseItem {
@@ -25,49 +23,21 @@ export class OQWeapon extends OQBaseItem {
     }
   }
 
-  async prepareDerivedData() {
-    super.prepareDerivedData();
-
-    const tooltip = await this.getTooltipWithTraits();
-
-    const damageRollValue = this.getDamageRollValue();
-
-    _.merge(this.system, {
-      damageRollValue,
-      tooltip,
-    });
-  }
-
-  getDamageRollValue() {
+  calculateDamageRollValues() {
     if (this.parent) {
-      const damageEntity = this.system.damage;
+      const damage = this.system.damage;
       const dmValue = this.parent.system.attributes.dm.value;
-      if (damageEntity.damageFormula || (damageEntity.includeDamageMod && dmValue)) {
-        const damage = damageEntity.damageFormula;
-        const includeDM = !!damageEntity.includeDamageMod;
-        const damageFormula = (includeDM ? `${damage} ${dmValue}` : damage).trim();
-
-        return this.makeRollString(damageFormula);
+      if (damage.damageFormula || (damage.includeDamageMod && dmValue)) {
+        const damageFormula = damage.damageFormula;
+        const includeDM = !!damage.includeDamageMod;
+        const finalFormula = (includeDM ? `${damageFormula} ${dmValue}` : damageFormula).trim();
+        const finalDamageFormula = this.makeRollString(finalFormula);
+        return {
+          damageFormula,
+          finalDamageFormula,
+          includeDM,
+        };
       }
-    }
-
-    return null;
-  }
-
-  async rollItemDamage(skipDialog = true) {
-    const actorRollData = this.parent.getRollData();
-    const damageFormula = this.system.damage.damageFormula;
-    const includeDM = !!this.system.damage.includeDamageMod;
-    const rollData = _.merge(this.getTestRollData(), {
-      actorRollData,
-      damageFormula,
-      includeDM,
-    });
-
-    if (skipDialog) await damageRoll(rollData);
-    else {
-      const rollDialog = new OQDamageRollDialog(rollData);
-      rollDialog.render(true);
     }
   }
 

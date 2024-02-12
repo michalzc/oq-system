@@ -1,8 +1,8 @@
-import { log } from '../../utils.js';
 import { displayItem } from '../../chat.js';
 import _ from 'lodash-es';
-import { testRoll } from '../../roll.js';
+import { damageRoll, testRoll } from '../../roll.js';
 import { OQTestRollDialog } from '../../application/dialog/test-roll-dialog.js';
+import { OQDamageRollDialog } from '../../application/dialog/damage-roll-dialog.js';
 
 /**
  * @typedef {object} ItemRollValue
@@ -25,11 +25,13 @@ export class OQBaseItem extends Item {
     super.prepareDerivedData();
     const tooltip = await this.getTooltipWithTraits();
     const rollValues = this.calculateRollValues();
+    const damageRollValues = this.calculateDamageRollValues();
 
     _.merge(this, {
       system: {
         rollValues,
         tooltip,
+        damageRollValues,
       },
     });
   }
@@ -51,7 +53,13 @@ export class OQBaseItem extends Item {
   }
 
   async rollItemDamage(skipDialog = true) {
-    log(`Makeing damage for ${this.id}`, skipDialog);
+    const rollData = this.getDamageRollData();
+
+    if (skipDialog) await damageRoll(rollData);
+    else {
+      const rollDialog = new OQDamageRollDialog(rollData);
+      rollDialog.render(true);
+    }
   }
 
   async sendItemToChat() {
@@ -74,15 +82,28 @@ export class OQBaseItem extends Item {
    *
    * @returns {{img: string, entityName: string, speaker: (object|undefined)}}
    */
-  getTestRollData() {
+  getBaseRollData() {
     const speaker = ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token });
-    const rollValues = this.getRollValues();
     return {
       img: this.img,
       speaker,
       entityName: this.name,
       type: this.actor.type,
-      ...rollValues,
+    };
+  }
+
+  getTestRollData() {
+    return {
+      ...this.getBaseRollData(),
+      ...this.getRollValues(),
+    };
+  }
+
+  getDamageRollData() {
+    return {
+      ...this.getBaseRollData(),
+      ...this.getDamageRollValues(),
+      actorRollData: this.parent.getRollData(),
     };
   }
 
@@ -116,5 +137,12 @@ export class OQBaseItem extends Item {
     else return this.system.rollValues;
   }
 
+  getDamageRollValues(forceCalculation = false) {
+    if (forceCalculation || !this.system.damageRollValues) return this.calculateDamageRollValues();
+    else return this.system.damageRollValues;
+  }
+
   calculateRollValues() {}
+
+  calculateDamageRollValues() {}
 }

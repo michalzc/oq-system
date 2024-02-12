@@ -1,24 +1,15 @@
 import { OQBaseItem } from './base-item.js';
 import _ from 'lodash-es';
-import { damageRoll } from '../../roll.js';
-import { OQDamageRollDialog } from '../../application/dialog/damage-roll-dialog.js';
 import { minMaxValue } from '../../utils.js';
 
 export class OQSpecialAbility extends OQBaseItem {
-  async prepareDerivedData() {
-    super.prepareDerivedData();
-    const tooltip = await this.getTooltipWithTraits();
-    const damageRollValue = this.getDamageRollValue();
+  calculateDamageRollValues() {
+    const finalDamageFormula = this.makeRollString(this.system.damageFormula);
 
-    this.system = _.merge(this.system, {
-      tooltip,
-      damageRollValue,
-    });
-  }
-
-  getDamageRollValue() {
-    const damage = this.system.damageFormula;
-    return damage ? this.makeRollString(damage) : '';
+    return {
+      damageFormula: finalDamageFormula,
+      finalDamageFormula,
+    };
   }
 
   calculateRollValues() {
@@ -34,21 +25,6 @@ export class OQSpecialAbility extends OQBaseItem {
     }
 
     return {};
-  }
-
-  async rollItemDamage(skipDialog = true) {
-    const actorRollData = this.parent.getRollData();
-    const damageFormula = this.system.damageRollValue;
-    const rollData = _.merge(this.getTestRollData(), {
-      actorRollData,
-      damageFormula,
-    });
-
-    if (skipDialog) await damageRoll(rollData);
-    else {
-      const rollDialog = new OQDamageRollDialog(rollData);
-      rollDialog.render(true);
-    }
   }
 
   getTestRollData() {

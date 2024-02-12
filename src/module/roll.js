@@ -117,6 +117,7 @@ export function getResultFeatures(roll) {
  * @property {Object} speaker
  * @property {Object|undefined} actorRollData
  * @property {string|undefined} damageFormula
+ * @property {string|undefined} finalDamageFormula
  * @property {string} entityName
  * @property {boolean} includeDM
  * @property {Object|undefined} customFormula
@@ -127,31 +128,24 @@ export function getResultFeatures(roll) {
  * @return {Promise<void>}
  */
 export async function damageRoll(rollData) {
-  const makeRoll = rollData.damageFormula || (rollData.includeDM && rollData.actorRollData.dm);
-  if (makeRoll) {
-    const damageFormula = rollData.customFormula
-      ? rollData.customFormula
-      : rollData.includeDM
-        ? `${rollData.damageFormula} ${rollData.actorRollData.dm}`
-        : rollData.damageFormula;
-    const roll = await new Roll(damageFormula, rollData.actorRollData).roll();
-    const renderedRoll = await roll.render();
-    const content = await renderTemplate('systems/oq/templates/chat/parts/damage-roll.hbs', {
-      ...rollData,
-      roll,
-      dm: rollData.actorRollData.dm,
-      renderedRoll,
-    });
+  const damageFormula = rollData.customFormula ? rollData.customFormula : rollData.finalDamageFormula;
+  const roll = await new Roll(damageFormula, rollData.actorRollData).roll();
+  const renderedRoll = await roll.render();
+  const content = await renderTemplate('systems/oq/templates/chat/parts/damage-roll.hbs', {
+    ...rollData,
+    roll,
+    dm: rollData.actorRollData.dm,
+    renderedRoll,
+  });
 
-    const messageData = {
-      speaker: rollData.speaker,
-      content: content,
-      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-      rolls: [roll],
-      flags: {
-        oqMessageType: CONFIG.OQ.ChatConfig.MessageFlags.updateFromChat,
-      },
-    };
-    await ChatMessage.create(messageData);
-  }
+  const messageData = {
+    speaker: rollData.speaker,
+    content: content,
+    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+    rolls: [roll],
+    flags: {
+      oqMessageType: CONFIG.OQ.ChatConfig.MessageFlags.updateFromChat,
+    },
+  };
+  await ChatMessage.create(messageData);
 }
