@@ -36,3 +36,5 @@ OpenQuest is the trademark of Paul Newport, used with Permission.
 Put below link into 'Manifest URL' field.
 
 https://github.com/michalzc/oq-system/releases/latest/download/system.json
+
+![Screenshot](assets/OQSystemScreenshot.webp "Screenshot")
