@@ -1,24 +1,46 @@
-<div class="items skills">
-  {{#each groupedItems.groupedSkillByGroupName as |skillGroup|}}
-    <div class="item-group">
-      <div class="item label">
-        <div>{{ localize skillGroup.label }}</div>
-        <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize skillGroup.label }}"
-           data-type="skill" data-group="{{ skillGroup.group }}" data-custom-group-name="{{ skillGroup.label }}"><i class="fas fa-plus"></i></a>
+{{ log this }}
+<div class="two-columns">
+  <div class="items skills">
+    {{#each groupedItems.skillsTabContent.left as |skillGroup|}}
+      <div class="item-group">
+        <div class="item label">
+          <div>{{ localize skillGroup.label }}</div>
+          <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize skillGroup.label }}"
+             data-type="skill" data-group="{{ skillGroup.group }}" data-custom-group-name="{{ skillGroup.label }}">
+            <i class="fas fa-plus"></i></a>
+        </div>
+        {{#each skillGroup.skills as |skill|}}
+          {{> systems/oq/templates/actor/parts/skill.hbs skill}}
+        {{/each}}
       </div>
-      {{#each skillGroup.skills as |skill|}}
-        {{> systems/oq/templates/actor/parts/skill.hbs skill}}
-      {{/each}}
-    </div>
-  {{/each}}
+    {{/each}}
+  </div>
+  <div class="items skills">
+
+    {{#each groupedItems.skillsTabContent.right as |skillGroup|}}
+      <div class="item-group">
+        <div class="item label">
+          <div>{{ localize skillGroup.label }}</div>
+          <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize skillGroup.label }}"
+             data-type="skill" data-group="{{ skillGroup.group }}" data-custom-group-name="{{ skillGroup.label }}">
+            <i class="fas fa-plus"></i></a>
+        </div>
+        {{#each skillGroup.skills as |skill|}}
+          {{> systems/oq/templates/actor/parts/skill.hbs skill}}
+        {{/each}}
+      </div>
+    {{/each}}
+
     <div class="item-group">
       <div class="item label">
         <div>{{ localize 'OQ.Labels.SpecialAbilities'}}</div>
-        <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.specialAbility' }}"
+        <a class="add-new-item"
+           data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.specialAbility' }}"
            data-type="specialAbility" data-system-type="general"><i class="fas fa-plus"></i></a>
       </div>
       {{#each groupedItems.abilities as |ability|}}
         {{> systems/oq/templates/actor/parts/ability.hbs ability}}
       {{/each}}
     </div>
+  </div>
 </div>

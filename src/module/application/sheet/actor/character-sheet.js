@@ -19,14 +19,14 @@ export class OQCharacterSheet extends OQActorBaseSheet {
     const enrichedNotes = await TextEditor.enrichHTML(this.actor.system.personal.notes, { async: true });
     const spellsPerType = this.getSpellsPerType();
     const spellTypes = CONFIG.OQ.ItemConfig.spellsTypes;
-    const groupedSkillByGroupName = this.prepareSkills(context.groupedItems.skills);
+    const skillsTabContent = this.splitSkills(context.groupedItems.groupedSkills, context.groupedItems.abilities);
     return _.merge(context, {
       enrichedNotes,
       isCharacter: true,
       spellTypes,
       groupedItems: {
-        groupedSkillByGroupName,
         spellsPerType,
+        skillsTabContent,
       },
     });
   }
@@ -42,43 +42,34 @@ export class OQCharacterSheet extends OQActorBaseSheet {
     characteristicsDialog.render(true);
   }
 
-  prepareSkills = (skills) =>
-    _.sortBy(
-      _.map(
-        _.groupBy(skills, (skill) => `${skill.system.group}|${skill.system.groupName}`),
-        (skills, key) => {
-          const [group, label] = key.split('|', 2);
-          return {
-            group,
-            label,
-            skills,
-          };
-        },
-      ),
-      (elem) => elem.label,
+  splitSkills(groupedSkills) {
+    const makeGroup = ([groupName, elements]) => ({
+      group: groupName,
+      label: `OQ.SkillGroups.${groupName}`,
+      skills: elements,
+    });
+
+    const skillGroups = CONFIG.OQ.ItemConfig.skillGroups;
+    const leftKeys = [skillGroups.resistance, skillGroups.combat, skillGroups.knowledge, skillGroups.magic];
+    const left = _.map(
+      _.filter(_.toPairs(groupedSkills), ([key]) => leftKeys.includes(key)),
+      makeGroup,
     );
 
-  // prepareSkills(skills) {
-  //   // const skills = this.system.groupedItems.skills;
-  //   const groupedSkillByGroupName = _.sortBy(
-  //     _.map(
-  //       _.groupBy(skills, (skill) => `${skill.system.group}|${skill.system.groupName}`),
-  //       (skills, key) => {
-  //         const [group, label] = key.split('|', 2);
-  //         return {
-  //           group,
-  //           label,
-  //           skills,
-  //         };
-  //       },
-  //     ),
-  //     (elem) => elem.label,
-  //   );
-  //
-  //   return {
-  //     groupedItems: {
-  //       groupedSkillByGroupName,
-  //     },
-  //   };
-  // }
+    const customSkills = _.map(
+      _.groupBy(groupedSkills.custom, (skill) => skill.system.customGroupName),
+      (skills, label) => ({
+        group: skillGroups.custom,
+        label: label,
+        customGroupName: label,
+        skills: skills,
+      }),
+    );
+    const right = _.concat([makeGroup([skillGroups.practical, groupedSkills.practical])], customSkills);
+
+    return {
+      left,
+      right,
+    };
+  }
 }

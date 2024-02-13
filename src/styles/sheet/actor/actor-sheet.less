@@ -88,30 +88,42 @@
         display: flex;
         flex-grow: 1;
         align-items: flex-start;
+        overflow-y: auto;
       }
 
       .editor {
         color: var(--color-text-dark-primary);
       }
 
+      .two-columns {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 1em;
+        flex: 1;
+
+        .top-row {
+          grid-column-end: span 2;
+        }
+      }
+
       .items {
-        flex: 1 1 0;
         display: flex;
         flex-direction: column;
-        flex-wrap: wrap;
-        max-height: 100%;
-        overflow-y: hidden;
-        overflow-x: auto;
+        align-items: stretch;
+
+        height: 100%;
+        width: 100%;
         column-gap: 2em;
         row-gap: 1em;
         padding-left: 0.5em;
         padding-right: 0.5em;
+        overflow: hidden;
 
         .item-group {
           display: flex;
           flex-direction: column;
           flex-wrap: wrap;
-          min-width: 30em;
+          min-width: 28em;
           border: 0;
           gap: 0.2em;
           flex: 0;

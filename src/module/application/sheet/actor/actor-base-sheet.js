@@ -255,6 +255,8 @@ export class OQActorBaseSheet extends ActorSheet {
     const armours = groupedItems.armour ?? [];
     const combat = _.concat(combatSkills, resistances, combatAbilities, weapons, armours);
 
+    const customSkillsByGroup = _.groupBy(groupedSkills.custom ?? [], (skill) => skill.system.customGroupName);
+
     const equipment = groupedItems.equipment ?? [];
 
     return {
@@ -273,6 +275,7 @@ export class OQActorBaseSheet extends ActorSheet {
       skills,
       skillsAndAbilities,
       weapons,
+      customSkillsByGroup,
     };
   }
 }
