@@ -34,11 +34,11 @@ export const npcCharacteristics = {
     value: 11,
     roll: '3d6',
   },
-  dex: {
+  con: {
     value: 11,
     roll: '3d6',
   },
-  con: {
+  dex: {
     value: 11,
     roll: '3d6',
   },
