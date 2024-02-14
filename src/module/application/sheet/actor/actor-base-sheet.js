@@ -238,7 +238,6 @@ export class OQActorBaseSheet extends ActorSheet {
     const groupedAbilities = _.groupBy(abilities, (ability) => ability.system.type);
 
     const otherSkills = _.filter(skills, (skill) => _.includes(OQBaseActor.otherSkillsGroups, skill.system.group));
-    const groupedSkillBySlug = _.fromPairs(skills.map((skill) => [skill.system.slug, skill.name]));
 
     const generalAbilities = groupedAbilities.general ?? [];
     const skillsAndAbilities = _.concat(otherSkills, generalAbilities);
@@ -248,31 +247,37 @@ export class OQActorBaseSheet extends ActorSheet {
     const spells = groupedItems.spell ?? [];
     const magic = _.concat(magicSkills, magicAbilities, spells);
 
-    const combatSkills = groupedSkills.combat ?? [];
     const resistances = groupedSkills.resistance ?? [];
     const combatAbilities = groupedAbilities.combat ?? [];
     const weapons = groupedItems.weapon ?? [];
     const armours = groupedItems.armour ?? [];
-    const combat = _.concat(combatSkills, resistances, combatAbilities, weapons, armours);
 
     const equipment = groupedItems.equipment ?? [];
+    const weaponsBySkills = this.getWeaponBySkills(weapons, groupedSkills.combat);
 
     return {
       abilities,
       armours,
-      combat,
       combatAbilities,
-      combatSkills,
       equipment,
-      groupedItems,
-      groupedSkillBySlug,
       groupedSkills,
       magic,
       magicAbilities,
       resistances,
-      skills,
       skillsAndAbilities,
       weapons,
+      weaponsBySkills,
     };
+  }
+
+  getWeaponBySkills(weapons, combatSkills) {
+    const combatSkillsRefs = combatSkills.map((skill) => skill.system.slug);
+    const groupedWeapons = _.groupBy(weapons, (weapon) => weapon.system.correspondingSkill.skillReference);
+    const buildEntity = (reference) => ({
+      skill: this.actor.system.skillsBySlug[reference],
+      weapons: groupedWeapons[reference] ?? [],
+    });
+
+    return _.map(_.sortedUniq(_.sortBy(_.concat(combatSkillsRefs ?? [], _.keys(groupedWeapons)))), buildEntity);
   }
 }

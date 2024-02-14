@@ -1,59 +1,70 @@
-<div class="items combat">
-  <div class="item-group">
-    {{> systems/oq/templates/actor/parts/initiative.hbs }}
-  </div>
-  <div class="item-group">
-    <div class="item label">
-      <div>{{ localize 'OQ.SkillGroups.combat'}}</div>
-      <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'OQ.SkillGroups.combat' }}"
-         data-type="skill" data-group="combat"><i class="fas fa-plus"></i></a>
+{{ log groupedItems }}
+<div class="two-columns combat">
+
+  <!-- left -->
+  <div class="items">
+    <div class="item-group">
+      <div class="item label">
+        <div>{{ localize 'OQ.Labels.Weapons'}}</div>
+        <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.weapon' }}"
+           data-type="weapon"><i class="fas fa-plus"></i></a>
+      </div>
     </div>
-    {{#each groupedItems.combatSkills as |skill|}}
-      {{> systems/oq/templates/actor/parts/skill.hbs skill}}
+    {{#each groupedItems.weaponsBySkills as |skillWithWeapons|}}
+      <div class="item-group">
+        {{#if skillWithWeapons.skill}}
+          {{> systems/oq/templates/actor/parts/skill.hbs skillWithWeapons.skill}}
+        {{/if}}
+        {{#each skillWithWeapons.weapons as |weapon|}}
+          {{> systems/oq/templates/actor/parts/weapon.hbs weapon}}
+        {{/each}}
+      </div>
     {{/each}}
   </div>
 
-  <div class="item-group">
-    <div class="item label">
-      <div>{{ localize 'OQ.SkillGroups.resistance'}}</div>
-      <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'OQ.SkillGroups.resistance' }}"
-         data-type="skill" data-group="combat"><i class="fas fa-plus"></i></a>
+  <!-- right -->
+  <div class="items">
+    <div class="item-group">
+      <div class="item initiative">
+        {{> systems/oq/templates/actor/parts/initiative.hbs }}
+      </div>
     </div>
-    {{#each groupedItems.resistances as |skill|}}
-      {{> systems/oq/templates/actor/parts/skill.hbs skill}}
-    {{/each}}
+
+    <div class="item-group">
+      <div class="item label">
+        <div>{{ localize 'OQ.SkillGroups.resistance'}}</div>
+        <a class="add-new-item"
+           data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'OQ.SkillGroups.resistance' }}" data-type="skill"
+           data-group="combat"><i class="fas fa-plus"></i></a>
+      </div>
+      {{#each groupedItems.resistances as |skill|}}
+        {{> systems/oq/templates/actor/parts/skill.hbs skill}}
+      {{/each}}
+    </div>
+
+    <div class="item-group">
+      <div class="item label">
+        <div>{{ localize 'OQ.Labels.Armours'}}</div>
+        <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.armour' }}"
+           data-type="armour"><i class="fas fa-plus"></i></a>
+      </div>
+      {{#each groupedItems.armours as |armour|}}
+        {{> systems/oq/templates/actor/parts/armour.hbs armour}}
+      {{/each}}
+    </div>
+
+    <div class="item-group">
+      <div class="item label">
+        <div>{{ localize 'OQ.Labels.Abilities'}}</div>
+        <a class="add-new-item"
+           data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.specialAbility' }}"
+           data-type="specialAbility" data-system-type="combat"><i class="fas fa-plus"></i></a>
+      </div>
+      {{#each groupedItems.combatAbilities as |ability|}}
+        {{> systems/oq/templates/actor/parts/ability.hbs ability}}
+      {{/each}}
+    </div>
   </div>
 
-  <div class="item-group">
-    <div class="item label">
-      <div>{{ localize 'OQ.Labels.Weapons'}}</div>
-      <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.weapon' }}"
-         data-type="weapon"><i class="fas fa-plus"></i></a>
-    </div>
-    {{#each groupedItems.weapons as |weapon|}}
-      {{> systems/oq/templates/actor/parts/weapon.hbs weapon}}
-    {{/each}}
-  </div>
 
-  <div class="item-group">
-    <div class="item label">
-      <div>{{ localize 'OQ.Labels.Armours'}}</div>
-      <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.armour' }}"
-         data-type="armour"><i class="fas fa-plus"></i></a>
-    </div>
-    {{#each groupedItems.armours as |armour|}}
-      {{> systems/oq/templates/actor/parts/armour.hbs armour}}
-    {{/each}}
-  </div>
-
-  <div class="item-group">
-    <div class="item label">
-      <div>{{ localize 'OQ.Labels.Abilities'}}</div>
-      <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.specialAbility' }}"
-         data-type="specialAbility" data-system-type="combat"><i class="fas fa-plus"></i></a>
-    </div>
-    {{#each groupedItems.combatAbilities as |ability|}}
-      {{> systems/oq/templates/actor/parts/ability.hbs ability}}
-    {{/each}}
-  </div>
 </div>

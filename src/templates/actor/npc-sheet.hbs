@@ -45,78 +45,89 @@
   </nav>
 
   <section class="sheet-content">
-    <div class="tab" data-group="primary" data-tab="details">
-      <div class="items">
 
-        <div class="item-group">
+    <div class="tab" data-group="primary" data-tab="details">
+
+      <div class="two-columns">
+
+        <!-- left -->
+        <div class="items">
+          {{#if groupedItems.skillsAndAbilities }}
+            <div class="item-group">
+              <label class="item label">{{ localize 'OQ.Labels.SkillsAbilities' }}</label>
+              {{#each groupedItems.skillsAndAbilities as |skillAbility|}}
+                {{#if (eq skillAbility.type 'skill') }}
+                  {{> systems/oq/templates/actor/parts/skill.hbs skillAbility}}
+                {{/if}}
+                {{#if (eq skillAbility.type 'specialAbility') }}
+                  {{> systems/oq/templates/actor/parts/ability.hbs skillAbility}}
+                {{/if}}
+              {{/each}}
+            </div>
+          {{/if}}
+
+          {{#if groupedItems.magic }}
+            <div class="item-group">
+              <label class="item label">{{ localize 'OQ.Nav.Magic' }}</label>
+              {{#each groupedItems.magic as |magicItem|}}
+                {{#if (eq magicItem.type 'skill')}}
+                  {{> systems/oq/templates/actor/parts/skill.hbs magicItem}}
+                {{/if}}
+                {{#if (eq magicItem.type 'specialAbility')}}
+                  {{> systems/oq/templates/actor/parts/ability.hbs magicItem}}
+                {{/if}}
+                {{#if (eq magicItem.type 'spell')}}
+                  {{> systems/oq/templates/actor/parts/spell.hbs magicItem}}
+                {{/if}}
+
+              {{/each}}
+            </div>
+          {{/if}}
+
+          {{#if groupedItems.equipment }}
+            <div class="item-group">
+              <label class="item label">{{ localize 'OQ.Nav.Equipment' }}</label>
+              {{#each groupedItems.equipment as |equipment|}}
+                {{> systems/oq/templates/actor/parts/equipment.hbs equipment}}
+              {{/each}}
+            </div>
+          {{/if}}
+        </div>
+      </div>
+
+      <!-- right -->
+    <div class="items">
+      <div class="item-group">
+        <div class="item initiative">
           {{> systems/oq/templates/actor/parts/initiative.hbs }}
         </div>
-
-        {{#if groupedItems.skillsAndAbilities }}
-          <div class="item-group">
-            <label>{{ localize 'OQ.Labels.SkillsAbilities' }}</label>
-            {{#each groupedItems.skillsAndAbilities as |skillAbility|}}
-              {{#if (eq skillAbility.type 'skill') }}
-                {{> systems/oq/templates/actor/parts/skill.hbs skillAbility}}
-              {{/if}}
-              {{#if (eq skillAbility.type 'specialAbility') }}
-                {{> systems/oq/templates/actor/parts/ability.hbs skillAbility}}
-              {{/if}}
-            {{/each}}
-          </div>
-        {{/if}}
-
-        {{#if groupedItems.combat }}
-
-          <div class="item-group">
-            <label>{{ localize 'OQ.Nav.Combat' }}</label>
-            {{#each groupedItems.combat as |combatItem|}}
-              {{#if (eq combatItem.type 'skill')}}
-                {{> systems/oq/templates/actor/parts/skill.hbs combatItem}}
-              {{/if}}
-              {{#if (eq combatItem.type 'specialAbility')}}
-                {{> systems/oq/templates/actor/parts/ability.hbs combatItem}}
-              {{/if}}
-              {{#if (eq combatItem.type 'weapon')}}
-                {{> systems/oq/templates/actor/parts/weapon.hbs combatItem}}
-              {{/if}}
-              {{#if (eq combatItem.type 'armour')}}
-                {{> systems/oq/templates/actor/parts/armour.hbs combatItem}}
-              {{/if}}
-
-            {{/each}}
-          </div>
-        {{/if}}
-
-
-        {{#if groupedItems.magic }}
-          <div class="item-group">
-            <label>{{ localize 'OQ.Nav.Magic' }}</label>
-            {{#each groupedItems.magic as |magicItem|}}
-              {{#if (eq magicItem.type 'skill')}}
-                {{> systems/oq/templates/actor/parts/skill.hbs magicItem}}
-              {{/if}}
-              {{#if (eq magicItem.type 'specialAbility')}}
-                {{> systems/oq/templates/actor/parts/ability.hbs magicItem}}
-              {{/if}}
-              {{#if (eq magicItem.type 'spell')}}
-                {{> systems/oq/templates/actor/parts/spell.hbs magicItem}}
-              {{/if}}
-
-            {{/each}}
-          </div>
-        {{/if}}
-
-        {{#if groupedItems.equipment }}
-          <div class="item-group">
-            <label>{{ localize 'OQ.Nav.Equipment' }}</label>
-            {{#each groupedItems.equipment as |equipment|}}
-              {{> systems/oq/templates/actor/parts/equipment.hbs equipment}}
-            {{/each}}
-          </div>
-        {{/if}}
       </div>
+      {{#if groupedItems.weaponsBySkills }}
+
+        <div class="item-group">
+          <label class="item label">{{ localize 'OQ.Nav.Combat' }}</label>
+        </div>
+        {{#each groupedItems.weaponsBySkills as |skillWithWeapons|}}
+          <div class="item-group">
+            {{#if skillWithWeapons.skill}}
+              {{> systems/oq/templates/actor/parts/skill.hbs skillWithWeapons.skill}}
+            {{/if}}
+            {{#each skillWithWeapons.weapons as |weapon|}}
+              {{> systems/oq/templates/actor/parts/weapon.hbs weapon}}
+            {{/each}}
+          </div>
+        {{/each}}
+
+        <div class="item-group">
+          {{#each groupedItems.combatAbilities as |ability|}}
+            {{> systems/oq/templates/actor/parts/ability.hbs ability}}
+          {{/each}}
+        </div>
+
+      </div>
+      {{/if}}
     </div>
+
 
     <div class="tab" data-group="primary" data-tab="description">
       {{editor enrichedDescription target="system.personal.description" id="description"

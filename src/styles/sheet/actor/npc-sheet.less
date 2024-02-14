@@ -115,20 +115,27 @@
 
     .sheet-content {
       .items {
-        .item.label {
-          color: @npc-dark-color;
-        }
+        .item-group {
+          .item.label {
+            color: @npc-dark-color;
+          }
 
-        .item.initiative {
-          margin-bottom: 0.5em;
-        }
+          .item.initiative {
+            margin-bottom: 0.5em;
 
-        .skills {
-          //TODO Empty for now
-        }
+            select {
+              border: 0;
+              border-bottom: 1px solid @npc-dark-color;
+            }
+          }
 
-        .abilities {
-          //TODO Empty for now
+          .skills {
+            //TODO Empty for now
+          }
+
+          .abilities {
+            //TODO Empty for now
+          }
         }
       }
     }
