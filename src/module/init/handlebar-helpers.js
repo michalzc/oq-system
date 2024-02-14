@@ -14,7 +14,7 @@ export function registerHelpers() {
 
   Handlebars.registerHelper('itemState', (state) => {
     const itemState = CONFIG.OQ.ItemConfig.allItemsStates[state];
-    const icon = state !== 'natural' ? itemState?.icon ?? '' : '';
+    const icon = itemState?.icon ?? '';
     return new Handlebars.SafeString(icon);
   });
 

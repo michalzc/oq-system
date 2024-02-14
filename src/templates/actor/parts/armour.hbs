@@ -3,12 +3,13 @@
     <img class="item-icon" src="{{img}}" data-tooltip="{{localize 'OQ.Tooltips.SendToChat'}}" alt="{{name}}">
   </a>
   <span class="item-roll" data-tooltip="{{tooltip}}" data-tooltip-direction="LEFT">{{name}}</span>
-  <a class="item-state item-state-armour" data-item-id="{{id}}"
-     data-tooltip="{{ localize (concat 'OQ.Labels.ItemStates.' system.state) }}">
-    {{itemState system.state}}
-  </a>
+
   <span class="short-value" data-dtype="{{localize 'OQ.Labels.ArmourPoints'}}" data-tooltip="{{ localize 'OQ.Labels.Protection' }}">{{system.ap}}</span>
   {{#if showEq}}
+    <a class="item-state item-state-armour" data-item-id="{{id}}"
+       data-tooltip="{{ localize (concat 'OQ.Labels.ItemStates.' system.state) }}">
+      {{itemState system.state}}
+    </a>
     <div class="cost-value" data-tooltip="{{ localize 'OQ.Labels.Cost' }}"> {{ system.cost }}</div>
     <div class="short-value" data-tooltip="{{ localize 'OQ.Labels.Encumbrance' }}"> {{ system.encumbrance }}</div>
   {{/if}}

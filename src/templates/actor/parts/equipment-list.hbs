@@ -1,8 +1,10 @@
 <div class="items equipment">
-    <div class="top-row-item">
+  <div class="item-group">
+    <div class="item">
       <label>{{ localize 'OQ.Labels.TotalEncumbrance' }}</label>
-      <div>{{formatNumber system.enc.totalEncumbrance decimals=1}} / {{system.enc.maxEncumbrance}}</div>
+      <div>{{formatNumber system.enc.totalEncumbrance decimals=0}} / {{system.enc.maxEncumbrance}}</div>
     </div>
+  </div>
   <div class="item-group">
     <div class="item label">
       <div>{{ localize 'OQ.Labels.Weapons'}}</div>

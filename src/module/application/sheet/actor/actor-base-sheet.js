@@ -258,6 +258,7 @@ export class OQActorBaseSheet extends ActorSheet {
     const customSkillsByGroup = _.groupBy(groupedSkills.custom ?? [], (skill) => skill.system.customGroupName);
 
     const equipment = groupedItems.equipment ?? [];
+    const weaponsBySkills = this.getWeaponBySkills(weapons, groupedSkills.combat);
 
     return {
       abilities,
@@ -276,6 +277,18 @@ export class OQActorBaseSheet extends ActorSheet {
       skillsAndAbilities,
       weapons,
       customSkillsByGroup,
+      weaponsBySkills,
     };
+  }
+
+  getWeaponBySkills(weapons, combatSkills) {
+    const combatSkillsRefs = combatSkills.map((skill) => skill.system.slug);
+    const groupedWeapons = _.groupBy(weapons, (weapon) => weapon.system.correspondingSkill.skillReference);
+    const buildEntity = (reference) => ({
+      skill: this.actor.system.skillsBySlug[reference],
+      weapons: groupedWeapons[reference] ?? [],
+    });
+
+    return _.map(_.sortedUniq(_.sortBy(_.concat(combatSkillsRefs ?? [], _.keys(groupedWeapons)))), buildEntity);
   }
 }

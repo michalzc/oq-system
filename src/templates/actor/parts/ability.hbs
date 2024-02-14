@@ -16,7 +16,7 @@
 
   {{# if system.damageRollValues }}
     <a class="damage-roll" data-item-id="{{id}}" data-tooltip="{{localize 'OQ.Labels.DamageRoll' }}">
-      <i class="fas fa-hammer-crash"></i> {{ system.damageRollValues.finalDamageFormula }}
+      {{ system.damageRollValues.finalDamageFormula }}
     </a>
   {{/if}}
   {{#if system.rollValues}}
