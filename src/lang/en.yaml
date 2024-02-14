@@ -26,6 +26,9 @@ OQ:
     ApplyDamage: Apply damage
     ApplyDamageIA: Apply damage and ignore armour
   Labels:
+    AdjustMP:
+      increase: Increase Magic Points
+      decrease: Decrease Magic Points
     Abilities: Abilities
     AddNew: Add New
     AdjustmentRollHeader:
