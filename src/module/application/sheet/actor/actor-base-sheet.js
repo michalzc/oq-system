@@ -238,7 +238,6 @@ export class OQActorBaseSheet extends ActorSheet {
     const groupedAbilities = _.groupBy(abilities, (ability) => ability.system.type);
 
     const otherSkills = _.filter(skills, (skill) => _.includes(OQBaseActor.otherSkillsGroups, skill.system.group));
-    const groupedSkillBySlug = _.fromPairs(skills.map((skill) => [skill.system.slug, skill.name]));
 
     const generalAbilities = groupedAbilities.general ?? [];
     const skillsAndAbilities = _.concat(otherSkills, generalAbilities);
@@ -248,14 +247,10 @@ export class OQActorBaseSheet extends ActorSheet {
     const spells = groupedItems.spell ?? [];
     const magic = _.concat(magicSkills, magicAbilities, spells);
 
-    const combatSkills = groupedSkills.combat ?? [];
     const resistances = groupedSkills.resistance ?? [];
     const combatAbilities = groupedAbilities.combat ?? [];
     const weapons = groupedItems.weapon ?? [];
     const armours = groupedItems.armour ?? [];
-    const combat = _.concat(combatSkills, resistances, combatAbilities, weapons, armours);
-
-    const customSkillsByGroup = _.groupBy(groupedSkills.custom ?? [], (skill) => skill.system.customGroupName);
 
     const equipment = groupedItems.equipment ?? [];
     const weaponsBySkills = this.getWeaponBySkills(weapons, groupedSkills.combat);
@@ -263,20 +258,14 @@ export class OQActorBaseSheet extends ActorSheet {
     return {
       abilities,
       armours,
-      combat,
       combatAbilities,
-      combatSkills,
       equipment,
-      groupedItems,
-      groupedSkillBySlug,
       groupedSkills,
       magic,
       magicAbilities,
       resistances,
-      skills,
       skillsAndAbilities,
       weapons,
-      customSkillsByGroup,
       weaponsBySkills,
     };
   }
