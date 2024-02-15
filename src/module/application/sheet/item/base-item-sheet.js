@@ -42,12 +42,13 @@ export class OQBaseItemSheet extends ItemSheet {
   async onTagAdd(event) {
     event.preventDefault();
     const input = event.currentTarget;
-    const newTrait = input.value;
-    const traitList = this.item.system.traits;
-    if (newTrait && !_.includes(traitList, newTrait)) {
-      traitList.push(newTrait);
+    const newTraits = (input.value ?? '').split(',').map((trait) => trait.trim());
+    if (newTraits) {
+      const traitList = this.item.system.traits;
+      const allTraits = _.filter(_.sortedUniq(_.sortBy(_.concat(traitList, newTraits))), (trait) => !!trait);
+
       await this.item.update({
-        'system.traits': traitList,
+        'system.traits': allTraits,
       });
 
       const result = this.render(true);
