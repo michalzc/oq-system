@@ -4,6 +4,13 @@
     {{selectOptions spellTypes selected=system.type localize=true }}
   </select>
 
+  <label for="magnitude">{{ localize 'OQ.Labels.Magnitude'}}</label>
+  <div class="input-with-checkbox">
+    <input id="magnitude" type="number" data-dtype="Number" name="system.magnitude" value="{{ system.magnitude }}">
+    <label for="nonVariable">{{ localize 'OQ.Labels.NonVariable' }}</label>
+    <input id="nonVariable" type="checkbox" name="system.nonVariant" {{checked system.nonVariant }}>
+  </div>
+
   {{> systems/oq/templates/item/parts/traits.hbs }}
 
 </div>

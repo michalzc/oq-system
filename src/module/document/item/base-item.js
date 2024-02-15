@@ -110,7 +110,7 @@ export class OQBaseItem extends Item {
   async getTooltipWithTraits() {
     if (this.system.traits && this.system.traits.length) {
       const description = this.system.description;
-      const traits = (this.system.traits ?? []).join(' | ');
+      const traits = (this.system.traits ?? []).join(', ');
       return await renderTemplate('systems/oq/templates/tooltip.hbs', { description, traits });
     } else {
       return this.system.description;
@@ -118,14 +118,13 @@ export class OQBaseItem extends Item {
   }
 
   getItemDataForChat() {
-    const traits = this.system.traits && this.system.traits.join(', ');
     return {
       speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token }),
       name: this.name,
       itemTypeLabel: `TYPES.Item.${this.type}`,
       img: this.img,
       description: this.system.description,
-      traits: traits,
+      traits: this.system.traits,
     };
   }
 

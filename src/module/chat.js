@@ -1,3 +1,5 @@
+import _ from 'lodash-es';
+
 /**
  * @typedef {object} FieldData
  * @property {string} label
@@ -22,7 +24,13 @@
  * @returns {Promise<void>}
  */
 export async function displayItem(itemData) {
-  const content = await renderTemplate(CONFIG.OQ.ChatConfig.itemTemplate, itemData);
+  const traits = (itemData.traits ?? []).join(', ');
+  const content = await renderTemplate(
+    CONFIG.OQ.ChatConfig.itemTemplate,
+    _.merge(itemData, {
+      traits,
+    }),
+  );
   await ChatMessage.create({
     type: CONST.CHAT_MESSAGE_TYPES.IC,
     content,

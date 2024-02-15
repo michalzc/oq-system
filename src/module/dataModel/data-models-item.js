@@ -112,6 +112,8 @@ export class EquipmentDataModel extends foundry.abstract.DataModel {
 export class SpellDataModel extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
+      magnitude: positiveNumberModel(),
+      nonVariant: new fields.BooleanField({ required: true, initial: false }),
       type: new fields.StringField({
         required: true,
         trim: true,

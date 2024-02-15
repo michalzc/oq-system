@@ -113,6 +113,7 @@ OQ:
     Group: Group
     Hands: Hands
     Heal: Heal
+    Magnitude: Magnitude
     Mastered: Mastered
     Mod: Mod
     Initiative: Initiative
@@ -125,6 +126,7 @@ OQ:
       natural: Natural
     Name: Name
     New: New
+    NonVariable: Non-Variable
     Notes: Notes
     Organisation: Organisation
     OtherMods: Other Mods
