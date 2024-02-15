@@ -66,6 +66,8 @@ export class OQActorBaseSheet extends ActorSheet {
     html.find('.resource-update').on('mouseup', this.onUpdateResource.bind(this));
 
     html.find('.add-new-item').on('click', this.onAddNewItem.bind(this));
+
+    html.find('.item-to-drag').on('dragstart', this.onItemDragStart.bind(this));
   }
 
   statusMenu(element, statuses, selector) {
@@ -105,7 +107,7 @@ export class OQActorBaseSheet extends ActorSheet {
   async onItemUpdateQuantity(event) {
     event.preventDefault();
     const currentTarget = event.currentTarget;
-    const itemId = $(currentTarget).closest('.item-quantity').data().itemId;
+    const itemId = $(currentTarget).closest('.item').data().itemId;
     const item = this.actor.items.get(itemId);
     const value = currentTarget.value;
     await item.update({ 'system.quantity': value });
@@ -115,7 +117,7 @@ export class OQActorBaseSheet extends ActorSheet {
   async onItemQuantityIncreaseDecrease(event) {
     event.preventDefault();
     const currentTarget = event.currentTarget;
-    const itemId = $(currentTarget).closest('.item-quantity').data().itemId;
+    const itemId = $(currentTarget).closest('.item').data().itemId;
     const item = this.actor.items.get(itemId);
     if (item) {
       const currentValue = item.system.quantity ?? 0;
@@ -141,48 +143,73 @@ export class OQActorBaseSheet extends ActorSheet {
 
   async onUpdateItemMod(event) {
     event.preventDefault();
-    const dataset = event.currentTarget.dataset;
-    const item = this.actor.items.get(dataset.itemId);
-    const value = event.currentTarget.value;
-    await item.update({ 'system.advancement': value });
+    // const dataset = event.currentTarget.dataset;
+    const itemContainer = event.currentTarget.closest('.item');
+    const item = this.actor.items.get(itemContainer?.dataset?.itemId);
+    if (item) {
+      const value = event.currentTarget.value;
+      await item.update({ 'system.advancement': value });
+    }
   }
 
   onModifyItem(event) {
     event.preventDefault();
-    const dataset = event.currentTarget.dataset;
-    const item = this.actor.items.get(dataset.itemId);
-    item.sheet.render(true);
+    const itemContainer = event.currentTarget.closest('.item');
+    const item = this.actor.items.get(itemContainer?.dataset?.itemId);
+    if (item) {
+      item.sheet.render(true);
+    }
   }
 
   onDeleteItem(event) {
     event.preventDefault();
-    const dataset = event.currentTarget.dataset;
-    const item = this.actor.items.get(dataset.itemId);
-    item.delete();
+    const itemContainer = event.currentTarget.closest('.item');
+    const item = this.actor.items.get(itemContainer?.dataset?.itemId);
+    if (item) {
+      item.delete();
+    }
   }
 
   async onItemTestRoll(event) {
     event.preventDefault();
 
-    const dataSet = event.currentTarget.dataset;
-    const item = this.actor.items.get(dataSet?.itemId);
-    await item.rollItemTest(event.shiftKey);
+    const itemContainer = event.currentTarget.closest('.item');
+    const item = this.actor.items.get(itemContainer?.dataset?.itemId);
+    if (item) {
+      await item.rollItemTest(event.shiftKey);
+    }
   }
 
   async onDamageRoll(event) {
     event.preventDefault();
 
-    const dataSet = event.currentTarget.dataset;
-    const item = this.actor.items.get(dataSet?.itemId);
-    await item.rollItemDamage(!event.shiftKey);
+    const itemContainer = event.currentTarget.closest('.item');
+    const item = this.actor.items.get(itemContainer?.dataset?.itemId);
+    if (item) {
+      await item.rollItemDamage(!event.shiftKey);
+    }
   }
 
   async onItemToChat(event) {
     event.preventDefault();
 
-    const dataSet = event.currentTarget.dataset;
-    const item = this.actor.items.get(dataSet?.itemId);
-    await item.sendItemToChat();
+    const itemContainer = event.currentTarget.closest('.item');
+    const item = this.actor.items.get(itemContainer?.dataset?.itemId);
+    if (item) {
+      await item.sendItemToChat();
+    }
+  }
+
+  async onItemDragStart(event) {
+    const itemContainer = event.currentTarget.closest('.item');
+    const item = this.actor.items.get(itemContainer?.dataset?.itemId);
+    if (item) {
+      const data = _.merge(item.toObject(true), {
+        folder: null,
+        dragSource: CONFIG.OQ.SYSTEM_ID,
+      });
+      event.originalEvent.dataTransfer.setData('text/plain', JSON.stringify(data));
+    }
   }
 
   async onUpdateResource(event) {
