@@ -1,6 +1,7 @@
 import _ from 'lodash-es';
 import { AttributesDialog } from '../../dialog/attributes-dialog.js';
 import { OQBaseActor } from '../../../document/actor/base-actor.js';
+import { asyncFlattenItemsFromFolder } from '../../../utils.js';
 
 const mergeObject = foundry.utils.mergeObject;
 
@@ -80,6 +81,32 @@ export class OQActorBaseSheet extends ActorSheet {
     );
 
     new ContextMenu(element, selector, elems, { eventName: 'click' });
+  }
+
+  async _onDrop(event) {
+    event.preventDefault();
+
+    const rawData = event.dataTransfer.getData('text/plain');
+    const data = rawData && JSON.parse(rawData);
+    if (data && data.dragSource === CONFIG.OQ.SYSTEM_ID) {
+      await this.actor.createEmbeddedDocuments('Item', [data]);
+    } else {
+      return super._onDrop(event);
+    }
+  }
+
+  async _onDropFolder(event, data) {
+    if (data.type === 'Folder' && data.uuid) {
+      const folder = await fromUuid(data.uuid);
+      if (folder.type === 'Item') {
+        const content = await asyncFlattenItemsFromFolder(folder);
+        if (content) {
+          await this.actor.createEmbeddedDocuments('Item', content);
+        }
+      }
+    } else {
+      return super._onDropFolder(event, data);
+    }
   }
 
   async onAddNewItem(event) {
@@ -298,7 +325,7 @@ export class OQActorBaseSheet extends ActorSheet {
   }
 
   getWeaponBySkills(weapons, combatSkills) {
-    const combatSkillsRefs = combatSkills.map((skill) => skill.system.slug);
+    const combatSkillsRefs = (combatSkills ?? []).map((skill) => skill.system.slug);
     const groupedWeapons = _.groupBy(weapons, (weapon) => weapon.system.correspondingSkill.skillReference);
     const buildEntity = (reference) => ({
       skill: this.actor.system.skillsBySlug[reference],

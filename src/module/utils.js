@@ -1,3 +1,4 @@
+import _ from 'lodash-es';
 const SYSTEM_NAME = 'OQ System';
 export const log = console.log.bind(undefined, `${SYSTEM_NAME} |`);
 
@@ -30,3 +31,19 @@ export const mostSignificantModifier = (left, right) =>
   Math.abs(left) === Math.abs(right) ? 0 : Math.abs(left) > Math.abs(right) ? left : right;
 
 export const makeSlug = (name) => name.slugify().replace(/\(/g, '').replace(/\)/g, '');
+
+export function flattenItemsFromFolder(folder) {
+  return _.concat(
+    folder.contents ?? [],
+    _.flatMap(
+      _.map(folder.children ?? [], (f) => f.folder),
+      flattenItemsFromFolder,
+    ),
+  );
+}
+
+export async function asyncFlattenItemsFromFolder(folder) {
+  const content = flattenItemsFromFolder(folder) ?? [];
+  const retrieved = await Promise.all(content.map((elem) => (elem.uuid ? fromUuid(elem.uuid) : elem)));
+  return _.map(retrieved, (item) => (item.toObject ? item.toObject(true) : item));
+}

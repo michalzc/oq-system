@@ -10,13 +10,13 @@
     <div class="item-name" data-tooltip="{{system.tooltip}}" data-tooltip-direction="LEFT">{{name}}</div>
   {{/if}}
 
-  {{#if system.damageRollValues }}
+  {{#if system.damageRollValues.finalDamageFormula }}
     <a class="damage-roll" data-tooltip="{{localize 'OQ.Labels.DamageRoll' }}">
       {{ system.damageRollValues.finalDamageFormula }}
     </a>
   {{/if}}
 
-  {{#if system.rollValues }}
+  {{#if system.rollValues.value }}
     <a class="item-roll total-value" data-tooltip="{{localize 'OQ.Labels.Roll'}} {{name}}">
       {{ system.rollValues.value }} {{#if system.rollValues.valueWithMod}}({{system.rollValues.valueWithMod}}){{/if}} %
     </a>

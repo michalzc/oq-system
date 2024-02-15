@@ -96,16 +96,20 @@
       </div>
 
       <!-- right -->
-    <div class="items">
-      <div class="item-group">
-        <div class="item initiative">
-          {{> systems/oq/templates/actor/parts/initiative.hbs }}
+      <div class="items">
+        <div class="item-group">
+          <div class="item initiative">
+            {{> systems/oq/templates/actor/parts/initiative.hbs }}
+          </div>
         </div>
-      </div>
-      {{#if groupedItems.weaponsBySkills }}
 
         <div class="item-group">
           <label class="item label">{{ localize 'OQ.Nav.Combat' }}</label>
+        </div>
+        <div class="item-group">
+          {{#each groupedItems.resistances as |skill|}}
+            {{> systems/oq/templates/actor/parts/skill.hbs skill}}
+          {{/each}}
         </div>
         {{#each groupedItems.weaponsBySkills as |skillWithWeapons|}}
           <div class="item-group">
@@ -125,7 +129,6 @@
         </div>
 
       </div>
-      {{/if}}
     </div>
 
 
