@@ -1,6 +1,7 @@
 import _ from 'lodash-es';
 import { AttributesDialog } from '../../dialog/attributes-dialog.js';
 import { OQBaseActor } from '../../../document/actor/base-actor.js';
+import { asyncFlattenItemsFromFolder } from '../../../utils.js';
 
 const mergeObject = foundry.utils.mergeObject;
 
@@ -66,6 +67,8 @@ export class OQActorBaseSheet extends ActorSheet {
     html.find('.resource-update').on('mouseup', this.onUpdateResource.bind(this));
 
     html.find('.add-new-item').on('click', this.onAddNewItem.bind(this));
+
+    html.find('.item-to-drag').on('dragstart', this.onItemDragStart.bind(this));
   }
 
   statusMenu(element, statuses, selector) {
@@ -78,6 +81,32 @@ export class OQActorBaseSheet extends ActorSheet {
     );
 
     new ContextMenu(element, selector, elems, { eventName: 'click' });
+  }
+
+  async _onDrop(event) {
+    event.preventDefault();
+
+    const rawData = event.dataTransfer.getData('text/plain');
+    const data = rawData && JSON.parse(rawData);
+    if (data && data.dragSource === CONFIG.OQ.SYSTEM_ID) {
+      await this.actor.createEmbeddedDocuments('Item', [data]);
+    } else {
+      return super._onDrop(event);
+    }
+  }
+
+  async _onDropFolder(event, data) {
+    if (data.type === 'Folder' && data.uuid) {
+      const folder = await fromUuid(data.uuid);
+      if (folder.type === 'Item') {
+        const content = await asyncFlattenItemsFromFolder(folder);
+        if (content) {
+          await this.actor.createEmbeddedDocuments('Item', content);
+        }
+      }
+    } else {
+      return super._onDropFolder(event, data);
+    }
   }
 
   async onAddNewItem(event) {
@@ -105,7 +134,7 @@ export class OQActorBaseSheet extends ActorSheet {
   async onItemUpdateQuantity(event) {
     event.preventDefault();
     const currentTarget = event.currentTarget;
-    const itemId = $(currentTarget).closest('.item-quantity').data().itemId;
+    const itemId = $(currentTarget).closest('.item').data().itemId;
     const item = this.actor.items.get(itemId);
     const value = currentTarget.value;
     await item.update({ 'system.quantity': value });
@@ -115,7 +144,7 @@ export class OQActorBaseSheet extends ActorSheet {
   async onItemQuantityIncreaseDecrease(event) {
     event.preventDefault();
     const currentTarget = event.currentTarget;
-    const itemId = $(currentTarget).closest('.item-quantity').data().itemId;
+    const itemId = $(currentTarget).closest('.item').data().itemId;
     const item = this.actor.items.get(itemId);
     if (item) {
       const currentValue = item.system.quantity ?? 0;
@@ -141,48 +170,73 @@ export class OQActorBaseSheet extends ActorSheet {
 
   async onUpdateItemMod(event) {
     event.preventDefault();
-    const dataset = event.currentTarget.dataset;
-    const item = this.actor.items.get(dataset.itemId);
-    const value = event.currentTarget.value;
-    await item.update({ 'system.advancement': value });
+    // const dataset = event.currentTarget.dataset;
+    const itemContainer = event.currentTarget.closest('.item');
+    const item = this.actor.items.get(itemContainer?.dataset?.itemId);
+    if (item) {
+      const value = event.currentTarget.value;
+      await item.update({ 'system.advancement': value });
+    }
   }
 
   onModifyItem(event) {
     event.preventDefault();
-    const dataset = event.currentTarget.dataset;
-    const item = this.actor.items.get(dataset.itemId);
-    item.sheet.render(true);
+    const itemContainer = event.currentTarget.closest('.item');
+    const item = this.actor.items.get(itemContainer?.dataset?.itemId);
+    if (item) {
+      item.sheet.render(true);
+    }
   }
 
   onDeleteItem(event) {
     event.preventDefault();
-    const dataset = event.currentTarget.dataset;
-    const item = this.actor.items.get(dataset.itemId);
-    item.delete();
+    const itemContainer = event.currentTarget.closest('.item');
+    const item = this.actor.items.get(itemContainer?.dataset?.itemId);
+    if (item) {
+      item.delete();
+    }
   }
 
   async onItemTestRoll(event) {
     event.preventDefault();
 
-    const dataSet = event.currentTarget.dataset;
-    const item = this.actor.items.get(dataSet?.itemId);
-    await item.rollItemTest(event.shiftKey);
+    const itemContainer = event.currentTarget.closest('.item');
+    const item = this.actor.items.get(itemContainer?.dataset?.itemId);
+    if (item) {
+      await item.rollItemTest(event.shiftKey);
+    }
   }
 
   async onDamageRoll(event) {
     event.preventDefault();
 
-    const dataSet = event.currentTarget.dataset;
-    const item = this.actor.items.get(dataSet?.itemId);
-    await item.rollItemDamage(!event.shiftKey);
+    const itemContainer = event.currentTarget.closest('.item');
+    const item = this.actor.items.get(itemContainer?.dataset?.itemId);
+    if (item) {
+      await item.rollItemDamage(!event.shiftKey);
+    }
   }
 
   async onItemToChat(event) {
     event.preventDefault();
 
-    const dataSet = event.currentTarget.dataset;
-    const item = this.actor.items.get(dataSet?.itemId);
-    await item.sendItemToChat();
+    const itemContainer = event.currentTarget.closest('.item');
+    const item = this.actor.items.get(itemContainer?.dataset?.itemId);
+    if (item) {
+      await item.sendItemToChat();
+    }
+  }
+
+  async onItemDragStart(event) {
+    const itemContainer = event.currentTarget.closest('.item');
+    const item = this.actor.items.get(itemContainer?.dataset?.itemId);
+    if (item) {
+      const data = _.merge(item.toObject(true), {
+        folder: null,
+        dragSource: CONFIG.OQ.SYSTEM_ID,
+      });
+      event.originalEvent.dataTransfer.setData('text/plain', JSON.stringify(data));
+    }
   }
 
   async onUpdateResource(event) {
@@ -271,7 +325,7 @@ export class OQActorBaseSheet extends ActorSheet {
   }
 
   getWeaponBySkills(weapons, combatSkills) {
-    const combatSkillsRefs = combatSkills.map((skill) => skill.system.slug);
+    const combatSkillsRefs = (combatSkills ?? []).map((skill) => skill.system.slug);
     const groupedWeapons = _.groupBy(weapons, (weapon) => weapon.system.correspondingSkill.skillReference);
     const buildEntity = (reference) => ({
       skill: this.actor.system.skillsBySlug[reference],

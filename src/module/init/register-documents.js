@@ -1,4 +1,5 @@
 import { OQActorDocumentProxy, OQItemDocumentProxy } from '../document/document-proxy.js';
+import { OQItemDirectory } from '../document/item-directory.js';
 
 export function registerDocuments() {
   CONFIG.Actor.documentClass = OQActorDocumentProxy;
@@ -21,4 +22,6 @@ export function registerDocuments() {
       label: `${localizeItemPrefix}.${key}`,
     });
   });
+
+  CONFIG.ui.items = OQItemDirectory;
 }
