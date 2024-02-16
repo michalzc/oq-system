@@ -45,11 +45,11 @@ export class OQCharacterSheet extends OQActorBaseSheet {
   splitSkills(groupedSkills) {
     const makeGroup = ([groupName, elements]) => ({
       group: groupName,
-      label: `OQ.SkillGroups.${groupName}`,
+      label: `OQ.SkillTypes.${groupName}`,
       skills: elements,
     });
 
-    const skillGroups = CONFIG.OQ.ItemConfig.skillGroups;
+    const skillGroups = CONFIG.OQ.ItemConfig.skillTypes;
     const leftKeys = [skillGroups.resistance, skillGroups.combat, skillGroups.knowledge, skillGroups.magic];
     const left = _.map(
       _.filter(_.toPairs(groupedSkills), ([key]) => leftKeys.includes(key)),
@@ -57,11 +57,11 @@ export class OQCharacterSheet extends OQActorBaseSheet {
     );
 
     const customSkills = _.map(
-      _.groupBy(groupedSkills.custom, (skill) => skill.system.customGroupName),
+      _.groupBy(groupedSkills.custom, (skill) => skill.system.customTypeName),
       (skills, label) => ({
-        group: skillGroups.custom,
+        type: skillGroups.custom,
         label: label,
-        customGroupName: label,
+        customTypeName: label,
         skills: skills,
       }),
     );

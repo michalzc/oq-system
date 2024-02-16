@@ -1,7 +1,7 @@
 import _ from 'lodash-es';
 
 export class OQBaseActor extends Actor {
-  static otherSkillsGroups = ['knowledge', 'practical', 'custom'];
+  static otherSkillsTypes = ['knowledge', 'practical', 'custom'];
   static combatItems = ['weapon', 'armour'];
 
   async _preCreate(source, options, userId) {
