@@ -89,7 +89,7 @@ OQ:
     Cost: Cost
     Culture: Culture
     CustomDamage: Custom
-    CustomGroup: Custom Group
+    CustomType: Custom Type
     Damage: Damage
     DamageIA: Damage I/A
     DamageMod: Mod
@@ -204,9 +204,9 @@ OQ:
     defaultItemsCompendium:
       name: Default Items Compendium
       hint: Select the name of the compendium that contains default items for newly created characters.
-  SkillGroups:
+  SkillTypes:
     combat: Combat Skills
-    custom: Custom Group
+    custom: Custom Type
     knowledge: Knowledge Skills
     magic: Magic Skills
     practical: Practical Skills

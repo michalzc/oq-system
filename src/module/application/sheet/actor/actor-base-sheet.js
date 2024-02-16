@@ -114,17 +114,15 @@ export class OQActorBaseSheet extends ActorSheet {
     const currentTarget = event.currentTarget;
     const dataset = currentTarget.dataset;
     const type = dataset.type;
-    const group = type === CONFIG.OQ.ItemConfig.itemTypes.skill && dataset.group;
-    const customGroupName = group && group === CONFIG.OQ.ItemConfig.skillGroups.custom && dataset.customGroupName;
     const systemType = dataset.systemType;
+    const customTypeName = systemType === CONFIG.OQ.ItemConfig.skillTypes.custom && dataset.customTypeName;
     const typeLabel = `TYPES.Item.${type}`;
     const name = `${game.i18n.localize('OQ.Labels.New')} ${game.i18n.localize(typeLabel)}`;
     const itemData = {
       name,
       type,
       system: {
-        group,
-        customGroupName,
+        customTypeName,
         type: systemType,
       },
     };
@@ -288,10 +286,10 @@ export class OQActorBaseSheet extends ActorSheet {
     const groupedItems = _.groupBy(allItems, (item) => item.type);
     const skills = groupedItems.skill ?? [];
     const abilities = groupedItems.specialAbility ?? [];
-    const groupedSkills = _.groupBy(skills, (skill) => skill.system.group);
+    const groupedSkills = _.groupBy(skills, (skill) => skill.system.type);
     const groupedAbilities = _.groupBy(abilities, (ability) => ability.system.type);
 
-    const otherSkills = _.filter(skills, (skill) => _.includes(OQBaseActor.otherSkillsGroups, skill.system.group));
+    const otherSkills = _.filter(skills, (skill) => _.includes(OQBaseActor.otherSkillsTypes, skill.system.type));
 
     const generalAbilities = groupedAbilities.general ?? [];
     const skillsAndAbilities = _.concat(otherSkills, generalAbilities);

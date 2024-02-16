@@ -8,18 +8,18 @@ export class OQSkill extends OQBaseItem {
 
     const extendedData = {
       slug: makeSlug(this.name),
-      groupName: this.getGroupLabel(),
+      typeName: this.getTypeLabel(),
     };
 
     this.system = _.merge(this.system, extendedData);
   }
 
-  getGroupLabel() {
-    const group = this.system.group;
+  getTypeLabel() {
+    const group = this.system.type;
     if (group === 'custom') {
-      return this.system.customGroupName;
+      return this.system.customTypeName;
     } else {
-      return `OQ.SkillGroups.${group}`;
+      return `OQ.SkillTypes.${group}`;
     }
   }
 
@@ -55,12 +55,11 @@ export class OQSkill extends OQBaseItem {
 
   getItemDataForChat() {
     const context = super.getItemDataForChat();
-    const { group, customGroupName } = this.system;
-    const groupLabel =
-      group === CONFIG.OQ.ItemConfig.skillGroups.custom ? customGroupName ?? '' : `OQ.SkillGroups.${group}`;
+    const { type, customTypeName } = this.system;
+    const typeLabel = type === CONFIG.OQ.ItemConfig.skillTypes.custom ? customTypeName ?? '' : `OQ.SkillTypes.${type}`;
 
     return _.merge(context, {
-      itemSubtypeLabel: groupLabel,
+      itemSubtypeLabel: typeLabel,
     });
   }
 }

@@ -25,10 +25,26 @@ export class SkillDataModel extends foundry.abstract.DataModel {
       description: htmlFieldModel(),
       formula: commonStringModel(),
       mod: positiveNumberModel(),
-      group: commonStringModel(),
-      customGroupName: commonStringModel(),
+      type: commonStringModel(),
+      customTypeName: commonStringModel(),
       advancement: positiveNumberModel(),
     };
+  }
+
+  static migrateData(source) {
+    const group = source.group;
+    const customGroupName = source.customGroupName;
+    const updatedSource =
+      group || customGroupName
+        ? _.merge(source, {
+            group: null,
+            customGroupName: null,
+            type: group,
+            customTypeName: customGroupName,
+          })
+        : source;
+
+    return super.migrateData(updatedSource);
   }
 }
 

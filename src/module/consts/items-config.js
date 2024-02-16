@@ -72,7 +72,7 @@ export const ItemConfig = {
     ranged: 'systems/oq/assets/icons/crossbow.svg',
     shield: 'systems/oq/assets/icons/checked-shield.svg',
   },
-  skillGroups: {
+  skillTypes: {
     resistance: 'resistance',
     combat: 'combat',
     knowledge: 'knowledge',

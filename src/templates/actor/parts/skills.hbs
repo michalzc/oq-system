@@ -5,7 +5,7 @@
         <div class="item label">
           <div>{{ localize skillGroup.label }}</div>
           <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize skillGroup.label }}"
-             data-type="skill" data-group="{{ skillGroup.group }}" data-custom-group-name="{{ skillGroup.label }}">
+             data-type="skill" data-system-type="{{ skillGroup.type }}" data-custom-type-name="{{ skillGroup.label }}">
             <i class="fas fa-plus"></i></a>
         </div>
         {{#each skillGroup.skills as |skill|}}
@@ -21,7 +21,7 @@
         <div class="item label">
           <div>{{ localize skillGroup.label }}</div>
           <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize skillGroup.label }}"
-             data-type="skill" data-group="{{ skillGroup.group }}" data-custom-group-name="{{ skillGroup.label }}">
+             data-type="skill" data-system-type="{{ skillGroup.type }}" data-custom-type-name="{{ skillGroup.label }}">
             <i class="fas fa-plus"></i></a>
         </div>
         {{#each skillGroup.skills as |skill|}}
