@@ -1,0 +1,52 @@
+_id: 7PhcLCq73tunH1S5
+_stats: null
+fileType: journal.pages
+flags: {}
+image: null
+name: Items
+ownership:
+  default: -1
+  jzN44THfEHA8DC8v: 3
+sort: 200000
+src: null
+system: {}
+text:
+  content: <h1>Skills</h1><p>The skill sheet includes a 'skill formula' field that
+    utilizes the roll data provided by the actor to compute its total value once assigned
+    to the actor. For instance, '@str+@dex' would evaluate to the sum of the Strength
+    and Dexterity characteristics, which serve as default values.</p><p>Upon assignment
+    to an actor, the advancement field becomes visible, allowing the user to input
+    skill advancements. The total value will then consist of the default value calculated
+    from the formula in addition to any advancements made by the user. The advancement
+    field is also visible on the actor sheet within the skills listing. This allows
+    for convenient access and modification of skill advancements directly from the
+    actor's skill section.</p><p>The 'mod' field operates with a slight variation.
+    Instead of being directly added to the skill value, it functions as an additional
+    modifier provided to the roll dialog. This modifier can be adjusted before initiating
+    the roll.</p><p>Below the skill name, the skill's <em>slug</em> is visible. This
+    simplified name serves as a reference in rolls (accessible in the <em>skills</em>
+    collection) and can also be used as the value for the corresponding skill field
+    on the weapon sheet.</p><h1>Weapons</h1><p>When a weapon is not attached to an
+    actor, the skill field appears as a text input for the skill <em>slug</em>. Once
+    attached to an actor, it transforms into a combo box displaying a list of the
+    actor's skills. If the actor possesses a skill with the previously entered <em>slug</em>,
+    that skill will be automatically selected upon attachment to the actor.</p><p>The
+    skill mod field functions similarly to the skill mod. It does not directly augment
+    the weapon's skill value but is instead supplied to the roll dialog as an extra
+    modifier. If the corresponding skill's mod is also configured, then the more significant
+    modifier is selected, adhering to the rules of the game.</p><p>The damage formula
+    can be a roll formula and may include the actor's roll data. It is unnecessary
+    to directly incorporate the actor's damage modifier, as it will be automatically
+    included if the 'Include DM' checkbox is selected.</p><h1>Special Ability</h1><p>Similar
+    to skills, a special ability features a formula field where the actor's roll data
+    can be utilized. Unlike skills, it does not possess advancements or mods. Additionally,
+    it includes a damage formula akin to weapons.</p><p>Primarily designed for use
+    with NPCs, special abilities can also be assigned to characters if needed.</p>
+  format: 1
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5

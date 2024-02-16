@@ -1,0 +1,42 @@
+_id: pShuViHJwJITOQFX
+_stats: null
+effects: []
+fileType: items
+flags:
+  core: {}
+folder: JvpDkeDs9DS0MQBD
+img: systems/oq/assets/icons/skills.svg
+name: Natural Lore
+ownership:
+  KsTXxaVKKsCmFqBq: 3
+  default: 0
+sort: 0
+system:
+  advancement: 0
+  customGroupName: ''
+  description: "<p>Broadly speaking, this Lore deals with the character\u2019s knowledge\
+    \ of the natural world. It can be broken into five specialist areas.</p><p><em>Animal:</em>\
+    \ This covers the ability to recognise an animal, know its feeding habits, breeding\
+    \ cycle, habitats and so on. A character with a skill of at least 50% may try\
+    \ to domesticate a wild animal, making a skill test after every full week of training.\
+    \ If the character also has a Riding skill of at least 50% and the animal is capable\
+    \ of being ridden, they may train the animal to be ridden during this period.\
+    \ The character may later train the animal not to panic in battle and to strike\
+    \ at his enemies, after a further period of training, with the character making\
+    \ a skill test at the end of each week to succeed.</p><p><em>Plant:</em> A character\
+    \ can identify plants in the wild, discover the right places to grow crops, decide\
+    \ which plants are edible and what unusual properties they may possess.</p><p><em>Mineral:</em>\
+    \  This skill allows the character to detect precious metals and stones, detect\
+    \ fault lines and other dangerous features in the rock, etc.</p><p><em>Survival:</em>\
+    \ One Survival test will be required every day that a character lacks either food,\
+    \ water or a safe place to sleep. Success indicates the character manages to find\
+    \ whatever they lack \u2013 failure means they will go without, which over several\
+    \ days could result in severe consequences. Survival tests aren\u2019t called\
+    \ for when the character is in a city or town.</p><p><em>Tracking:</em> With this\
+    \ skill, a character can locate the tracks of a specific creature and follow them\
+    \ while in the wilderness.</p><p><em>Weather:</em> The character can predict changes\
+    \ in the climate.</p>"
+  formula: ''
+  group: knowledge
+  mod: 0
+type: skill

@@ -1,0 +1,27 @@
+_id: GxfTSPqLT5K8V7tG
+_stats: null
+effects: []
+fileType: items
+flags: {}
+folder: szWzZEdK1HVFTQEr
+img: systems/oq/assets/icons/skills.svg
+name: Mechanisms
+ownership:
+  KsTXxaVKKsCmFqBq: 3
+  default: 0
+sort: 0
+system:
+  advancement: 0
+  customGroupName: ''
+  description: <p>The Mechanisms skill is used for picking a lock or disassembling
+    a trap. Usually, this takes at least one minute (12 combat rounds) to perform,
+    whereas larger or particularly complex devices will take longer.</p><p>Usually,
+    a character will merely make a Mechanisms test to succeed at assembling or disassembling
+    a device, with appropriate bonuses or penalties decided upon by the Referee. If
+    a device has been designed to resist attempts at disassembly specifically, the
+    Mechanisms test becomes opposed by the Mechanisms skill of the character who created
+    it.</p>
+  formula: '@dex+@int'
+  group: practical
+  mod: 0
+type: skill

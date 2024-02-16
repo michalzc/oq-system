@@ -1,0 +1,53 @@
+_id: UTjphPIpYI0hCNn0
+_stats: null
+fileType: journal.pages
+flags: {}
+image: null
+name: Actors
+ownership:
+  default: -1
+  jzN44THfEHA8DC8v: 3
+sort: 100000
+src: null
+system: {}
+text:
+  content: <h2>Character</h2><h3>Character creation</h3><p>When a new Character actor
+    is created, all the skills from the Basic Skills compendium are copied.</p><h4>Characteristics</h4><p>Characteristics
+    can be updated using the Characteristics dialogue box, the 'cog' icon on the Characteristics
+    panel. It calculates the points, as described in the rules. Characteristics can
+    be rolled, all or individual.</p><h5>Mod</h5><p>Mod is a workaround for tracking
+    temporary modifications. For characteristics it is simply added to the final value.</p><h4>Attributes</h4><p>Attributes
+    are calculated from characteristics. Only mods can be updated in the attributes
+    dialogue. It works in the same way as above.</p><header class="journal-page-header"
+    style="box-sizing:border-box;user-select:text;color:rgb(25, 24, 19);font-family:Merriweather,
+    serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial"><h2><span
+    style="font-family:Merriweather, serif">NPC</span></h2></header><section class="journal-page-content"
+    style="box-sizing:border-box;user-select:text;color:rgb(25, 24, 19);font-family:Merriweather,
+    serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial"><h3><span
+    style="font-family:Merriweather, serif">NPC Creation</span></h3><h4>Characteristics</h4><p><span
+    style="font-family:Merriweather, serif">All characteristics possess default values
+    corresponding to those of an average human and are editable directly on the NPC
+    sheet. Beneath each value lies a roll formula representing the average human defaults.</span></p><p><span
+    style="font-family:Merriweather, serif">The dice icon located at the bottom of
+    the panel initiates a dice roll for all characteristics based on their respective
+    formulas and subsequently updates the values.</span></p><h4><span style="font-family:Merriweather,
+    serif">Attributes</span></h4><p><span style="font-family:Merriweather, serif">Similar
+    to character attributes, NPCs possess the same characteristics and functionalities.</span></p><h2><span
+    style="font-family:Merriweather, serif">Roll data</span></h2><p><span style="font-family:Merriweather,
+    serif">Actors furnish attribute values, damage modifiers, and skills as 'roll
+    data' for utilization in roll formulas.</span></p><p><span style="font-family:Merriweather,
+    serif">Attributes are accessible by their abbreviations, such as Strength represented
+    by 'str'. Skills reside within the 'skills' collection and can be accessed as
+    'skills.skill-slug.value' and 'skills.skill-slug.mod'. Damage modifiers are represented
+    as 'dm'.</span></p><p><span style="font-family:Merriweather, serif">It's worth
+    noting that the damage modifier already incorporates the '+' or '-' sign and hence
+    should not be appended to the roll formula, for instance, "/roll d6 @dm".</span></p></section>
+  format: 1
+  markdown: ''
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5

@@ -1,0 +1,25 @@
+_id: 0QbHmLsAat60XDaM
+_stats: null
+effects: []
+fileType: items
+flags: {}
+folder: JvpDkeDs9DS0MQBD
+img: systems/oq/assets/icons/skills.svg
+name: Language (Other)
+ownership:
+  KsTXxaVKKsCmFqBq: 3
+  default: 0
+sort: 0
+system:
+  advancement: 0
+  customGroupName: ''
+  description: <p>The Language skill is several separate skills grouped under a single
+    heading. Language (Gatanese), Language (Dark Lander) and Language (Goblinoid),
+    for example, are all individual skills.</p><p>Every character with a Language
+    skill of 50% or more is fluent in that language, although they are likely to have
+    an accent if it is not their native language.</p><p>A score in a Language skill
+    of 80% or more will mean the character can also read and write in that language.</p>
+  formula: '@int'
+  group: knowledge
+  mod: 0
+type: skill

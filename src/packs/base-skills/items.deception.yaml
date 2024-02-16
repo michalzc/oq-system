@@ -1,0 +1,28 @@
+_id: VpJttXklUk4cJQLY
+_stats: null
+effects: []
+fileType: items
+flags: {}
+folder: szWzZEdK1HVFTQEr
+img: systems/oq/assets/icons/skills.svg
+name: Deception
+ownership:
+  KsTXxaVKKsCmFqBq: 3
+  default: 0
+sort: 0
+system:
+  advancement: 0
+  customGroupName: ''
+  description: "<p>Deception covers the arts of:</p><p><em>Disguise:</em> Used to\
+    \ change a character\u2019s appearance and adopt a different outward persona.</p><p><em>Sleight:</em>\
+    \ Used to hide or take objects, without drawing undue attention.</p><p><em>Stealth:</em>\
+    \ Used whenever a character attempts to evade detection by another character personally.\
+    \ Usually, this happens when a character either tries to creep past an enemy,\
+    \ hide from one, or performs a combination of both.</p><p>When testing the skill,\
+    \ Deception is often opposed by the Perception skill and is modified according\
+    \ to the situation. Note that attempts at Fast Talk use the Influence skill rather\
+    \ than Deception.</p>"
+  formula: '@dex+@int'
+  group: practical
+  mod: 0
+type: skill

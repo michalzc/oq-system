@@ -1,0 +1,22 @@
+_id: emLIFB7lgPCWwWrR
+_stats: null
+effects: []
+fileType: items
+flags: {}
+folder: szWzZEdK1HVFTQEr
+img: systems/oq/assets/icons/skills.svg
+name: Performance
+ownership:
+  KsTXxaVKKsCmFqBq: 3
+  default: 0
+sort: 0
+system:
+  advancement: 0
+  customGroupName: ''
+  description: "<p>A successful test with this skill will result in the audience or\
+    \ partner being pleased by the character\u2019s performance.  This skill covers\
+    \ acting, composing poetry, dancing, singing, readings and playing an instrument.</p>"
+  formula: '@cha+10'
+  group: practical
+  mod: 0
+type: skill
