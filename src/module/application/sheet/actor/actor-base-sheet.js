@@ -249,8 +249,8 @@ export class OQActorBaseSheet extends ActorSheet {
 
   getInitiativeOptions() {
     const itemTypes = CONFIG.OQ.ItemConfig.itemTypes;
-    const initiativeTypes = [itemTypes.skill, itemTypes.specialAbility, itemTypes.weapon];
-    const items = this.actor.items.filter((item) => initiativeTypes.includes(item.type));
+    const initiativeTypes = [itemTypes.skill, itemTypes.specialAbility];
+    const items = this.actor.items.filter((item) => initiativeTypes.includes(item.type) && item.system.formula);
     return _.fromPairs(items.map((item) => [item.id, item.name]));
   }
 
