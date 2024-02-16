@@ -215,6 +215,7 @@ OQ:
     SendToChat: Send to chat
   Warnings:
     NoSpecialAbility: Player Character is not eligible for Special Abilities
+    OnlyItemCanBeMacro: The macro can be created only from owned items!
 TYPES:
   Actor:
     character: Player Character
