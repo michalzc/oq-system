@@ -5,7 +5,7 @@ export const getCompendiumList = () =>
     game.packs.filter((pack) => pack.documentName === 'Item').map((pack) => [pack.metadata.id, pack.metadata.label]),
   );
 
-export async function getDefaultItemsForCharacter() {
+export async function getDefaultItemsForActor(actorType) {
   const defaultItemsCompendium = game.settings.get(
     CONFIG.OQ.SYSTEM_ID,
     CONFIG.OQ.SettingsConfig.keys.defaultItemsCompendium,
@@ -16,7 +16,9 @@ export async function getDefaultItemsForCharacter() {
     if (compendium) {
       const documents = await compendium.getDocuments({});
       if (documents) {
-        return documents.map((item) => item.toObject(true));
+        return documents
+          .map((item) => item.toObject(true))
+          .filter((item) => (item.flags?.oq?.newActor ?? []).includes(actorType));
       }
     }
   }

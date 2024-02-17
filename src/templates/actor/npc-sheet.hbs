@@ -1,13 +1,13 @@
 <form class="actor-sheet npc-sheet {{cssClass}} flexcol" autocomplete="off">
   <header class="sheet-header">
     <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="64" height="64"
-         alt="{{actor.name}}" />
+      alt="{{actor.name}}" />
     <div class="header-fields">
       <input class="name" type="text" data-dtype="String" name="name" value="{{actor.name}}"
-             placeholder="{{ localize 'OQ.Labels.Name' }}" title="{{enrichedShortDescription}}" />
+        placeholder="{{ localize 'OQ.Labels.Name' }}" title="{{enrichedShortDescription}}" />
       {{editor enrichedShortDescription target="system.personal.shortDescription" id="shortDescription"
-               engine="prosemirror"
-               button=true editable=true}}
+      engine="prosemirror"
+      button=true editable=true}}
     </div>
 
   </header>
@@ -19,15 +19,14 @@
 
       <div class="characteristics-list">
         {{#each system.characteristics as |char key| }}
-          <div class="characteristic">
-            <label for="char{{ key }}" data-tooltip="{{ localize char.label }}" class="characteristic-label">{{ localize
-              char.abbr }}</label>
-            <input id="char{{ key }}" type="number" data-dtype="Number" name="system.characteristics.{{key}}.base"
-                   data-tooltip="{{ localize char.label }}" class="characteristic-value" value="{{char.value}}">
-            <input class="characteristic-roll" name="system.characteristics.{{key}}.roll" type="text"
-                   data-dtype="String" data-tooltip="{{ localize char.label}} {{ localize 'OQ.Hints.RollFormula' }}"
-                   value="{{char.roll}}">
-          </div>
+        <div class="characteristic">
+          <label for="char{{ key }}" data-tooltip="{{ localize char.label }}" class="characteristic-label">{{ localize
+            char.abbr }}</label>
+          <input id="char{{ key }}" type="number" data-dtype="Number" name="system.characteristics.{{key}}.base"
+            data-tooltip="{{ localize char.label }}" class="characteristic-value" value="{{char.value}}">
+          <input class="characteristic-roll" name="system.characteristics.{{key}}.roll" type="text" data-dtype="String"
+            data-tooltip="{{ localize char.label}} {{ localize 'OQ.Hints.RollFormula' }}" value="{{char.roll}}">
+        </div>
         {{/each}}
         <a class="roll-characteristics" data-tooltip="{{ localize 'OQ.Hints.RollAll' }}"><i class="fas fa-dice"></i></a>
       </div>
@@ -53,95 +52,96 @@
         <!-- left -->
         <div class="items">
           {{#if groupedItems.skillsAndAbilities }}
-            <div class="item-group">
-              <label class="item label">{{ localize 'OQ.Labels.SkillsAbilities' }}</label>
-              {{#each groupedItems.skillsAndAbilities as |skillAbility|}}
-                {{#if (eq skillAbility.type 'skill') }}
-                  {{> systems/oq/templates/actor/parts/skill.hbs skillAbility}}
-                {{/if}}
-                {{#if (eq skillAbility.type 'specialAbility') }}
-                  {{> systems/oq/templates/actor/parts/ability.hbs skillAbility}}
-                {{/if}}
-              {{/each}}
-            </div>
+          <div class="item-group">
+            <label class="item label">{{ localize 'OQ.Labels.SkillsAbilities' }}</label>
+            {{#each groupedItems.skillsAndAbilities as |skillAbility|}}
+            {{#if (eq skillAbility.type 'skill') }}
+            {{> systems/oq/templates/actor/parts/skill.hbs skillAbility}}
+            {{/if}}
+            {{#if (eq skillAbility.type 'specialAbility') }}
+            {{> systems/oq/templates/actor/parts/ability.hbs skillAbility}}
+            {{/if}}
+            {{/each}}
+          </div>
           {{/if}}
 
           {{#if groupedItems.magic }}
-            <div class="item-group">
-              <label class="item label">{{ localize 'OQ.Nav.Magic' }}</label>
-              {{#each groupedItems.magic as |magicItem|}}
-                {{#if (eq magicItem.type 'skill')}}
-                  {{> systems/oq/templates/actor/parts/skill.hbs magicItem}}
-                {{/if}}
-                {{#if (eq magicItem.type 'specialAbility')}}
-                  {{> systems/oq/templates/actor/parts/ability.hbs magicItem}}
-                {{/if}}
-                {{#if (eq magicItem.type 'spell')}}
-                  {{> systems/oq/templates/actor/parts/spell.hbs magicItem}}
-                {{/if}}
+          <div class="item-group">
+            <label class="item label">{{ localize 'OQ.Nav.Magic' }}</label>
+            {{#each groupedItems.magic as |magicItem|}}
+            {{#if (eq magicItem.type 'skill')}}
+            {{> systems/oq/templates/actor/parts/skill.hbs magicItem}}
+            {{/if}}
+            {{#if (eq magicItem.type 'specialAbility')}}
+            {{> systems/oq/templates/actor/parts/ability.hbs magicItem}}
+            {{/if}}
+            {{#if (eq magicItem.type 'spell')}}
+            {{> systems/oq/templates/actor/parts/spell.hbs magicItem}}
+            {{/if}}
 
-              {{/each}}
-            </div>
+            {{/each}}
+          </div>
           {{/if}}
 
           {{#if groupedItems.equipment }}
-            <div class="item-group">
-              <label class="item label">{{ localize 'OQ.Nav.Equipment' }}</label>
-              {{#each groupedItems.equipment as |equipment|}}
-                {{> systems/oq/templates/actor/parts/equipment.hbs equipment}}
-              {{/each}}
-            </div>
-          {{/if}}
-        </div>
-      </div>
-
-      <!-- right -->
-      <div class="items">
-        <div class="item-group">
-          <div class="item initiative">
-            {{> systems/oq/templates/actor/parts/initiative.hbs }}
-          </div>
-        </div>
-
-        <div class="item-group">
-          <label class="item label">{{ localize 'OQ.Nav.Combat' }}</label>
-        </div>
-        <div class="item-group">
-          {{#each groupedItems.resistances as |skill|}}
-            {{> systems/oq/templates/actor/parts/skill.hbs skill}}
-          {{/each}}
-        </div>
-        {{#each groupedItems.weaponsBySkills as |skillWithWeapons|}}
           <div class="item-group">
-            {{#if skillWithWeapons.skill}}
-              {{> systems/oq/templates/actor/parts/skill.hbs skillWithWeapons.skill}}
-            {{/if}}
-            {{#each skillWithWeapons.weapons as |weapon|}}
-              {{> systems/oq/templates/actor/parts/weapon.hbs weapon}}
+            <label class="item label">{{ localize 'OQ.Nav.Equipment' }}</label>
+            {{#each groupedItems.equipment as |equipment|}}
+            {{> systems/oq/templates/actor/parts/equipment.hbs equipment}}
             {{/each}}
           </div>
-        {{/each}}
+          {{/if}}
+        </div>
 
-        <div class="item-group">
-          {{#each groupedItems.combatAbilities as |ability|}}
+
+        <!-- right -->
+        <div class="items">
+          <div class="item-group">
+            <div class="item initiative">
+              {{> systems/oq/templates/actor/parts/initiative.hbs }}
+            </div>
+          </div>
+
+          <div class="item-group">
+            <label class="item label">{{ localize 'OQ.Nav.Combat' }}</label>
+          </div>
+          <div class="item-group">
+            {{#each groupedItems.resistances as |skill|}}
+            {{> systems/oq/templates/actor/parts/skill.hbs skill}}
+            {{/each}}
+          </div>
+          {{#each groupedItems.weaponsBySkills as |skillWithWeapons|}}
+          <div class="item-group">
+            {{#if skillWithWeapons.skill}}
+            {{> systems/oq/templates/actor/parts/skill.hbs skillWithWeapons.skill}}
+            {{/if}}
+            {{#each skillWithWeapons.weapons as |weapon|}}
+            {{> systems/oq/templates/actor/parts/weapon.hbs weapon}}
+            {{/each}}
+          </div>
+          {{/each}}
+
+          <div class="item-group">
+            {{#each groupedItems.combatAbilities as |ability|}}
             {{> systems/oq/templates/actor/parts/ability.hbs ability}}
-          {{/each}}
-        </div>
+            {{/each}}
+          </div>
 
-        <div class="item-group">
-          {{#each groupedItems.armours as |armour|}}
+          <div class="item-group">
+            {{#each groupedItems.armours as |armour|}}
             {{> systems/oq/templates/actor/parts/armour.hbs armour}}
-          {{/each}}
-        </div>
+            {{/each}}
+          </div>
 
+        </div>
       </div>
     </div>
 
 
     <div class="tab" data-group="primary" data-tab="description">
       {{editor enrichedDescription target="system.personal.description" id="description"
-               engine="prosemirror"
-               button=true editable=true}}
+      engine="prosemirror"
+      button=true editable=true}}
     </div>
   </section>
 
