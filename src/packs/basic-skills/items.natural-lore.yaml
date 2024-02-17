@@ -3,7 +3,9 @@ _stats: null
 effects: []
 fileType: items
 flags:
-  core: {}
+  oq:
+    newActor:
+      - character
 folder: JvpDkeDs9DS0MQBD
 img: systems/oq/assets/icons/skills.svg
 name: Natural Lore

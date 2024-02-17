@@ -3,7 +3,7 @@
 "$id": https://github.com/michalzc/oq-system/oq-system-document.schema.yaml
 title: OQ System Document Schema
 description: Schema for documents stored in compendium packs of OQ System
-oneOf:
+anyOf:
   - "$ref": "#/$defs/item"
   - "$ref": "#/$defs/folder"
 
@@ -108,7 +108,7 @@ oneOf:
       advancement:
         type: integer
         minimum: 0
-      customGroupName:
+      customTypeName:
         oneOf:
           - type: null
           - type: string
@@ -116,7 +116,7 @@ oneOf:
         type: string
       formula:
         type: string
-      group:
+      type:
         enum:
           - resistance
           - combat
@@ -127,7 +127,6 @@ oneOf:
       mod:
         type: integer
     required:
-      - advancement
       - formula
-      - group
+      - type
     additionalProperties: false

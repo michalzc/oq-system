@@ -1,4 +1,5 @@
 import _ from 'lodash-es';
+import { getDefaultItemsForActor } from '../../compendium-utils.js';
 
 export class OQBaseActor extends Actor {
   static otherSkillsTypes = ['knowledge', 'practical', 'custom'];
@@ -12,6 +13,15 @@ export class OQBaseActor extends Actor {
         img: newImage,
         'prototypeToken.texture.src': newImage,
       });
+    }
+
+    if (!source.items) {
+      const defaultItems = await getDefaultItemsForActor(source.type);
+      if (defaultItems) {
+        this.updateSource({
+          items: defaultItems,
+        });
+      }
     }
   }
 

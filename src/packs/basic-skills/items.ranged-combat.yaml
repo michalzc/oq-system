@@ -2,7 +2,10 @@ _id: 1fFs1Dkfz4joZmFM
 _stats: null
 effects: []
 fileType: items
-flags: {}
+flags:
+  oq:
+    newActor:
+      - character
 folder: FG6ln8k3Rk5vyfJY
 img: systems/oq/assets/icons/skills.svg
 name: Ranged Combat

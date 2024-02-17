@@ -2,7 +2,10 @@ _id: SBkfdLOaIBd6sGSK
 _stats: null
 effects: []
 fileType: items
-flags: {}
+flags:
+  oq:
+    newActor:
+      - character
 folder: szWzZEdK1HVFTQEr
 img: systems/oq/assets/icons/skills.svg
 name: Perception

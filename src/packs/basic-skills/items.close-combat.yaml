@@ -2,7 +2,10 @@ _id: I7eCb1L7rkiGzRFS
 _stats: null
 effects: []
 fileType: items
-flags: {}
+flags:
+  oq:
+    newActor:
+      - character
 folder: FG6ln8k3Rk5vyfJY
 img: systems/oq/assets/icons/skills.svg
 name: Close Combat

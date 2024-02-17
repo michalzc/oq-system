@@ -2,7 +2,11 @@ _id: GIoe35hE1meAWW2e
 _stats: null
 effects: []
 fileType: items
-flags: {}
+flags:
+  oq:
+    newActor:
+      - character
+      - npc
 folder: qqPG8bsnE8NcmJV4
 img: systems/oq/assets/icons/skills.svg
 name: Dodge
@@ -12,12 +16,11 @@ ownership:
 sort: 0
 system:
   advancement: 0
-  customGroupName: ''
   description: <p>The Dodge skill is used to avoid incoming objects that are swung
     or thrown at the character. The skill is usually used when a character attempts
     to dodge an incoming blow in combat or a physical hazard that can be avoided,
     such as falling masonry.</p>
   formula: '@dex+10'
-  group: resistance
+  type: resistance
   mod: 0
 type: skill
