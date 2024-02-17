@@ -1,0 +1,34 @@
+_id: jSQ4r85hI4fk38lA
+parentId: 0gYOY3NnDcT8Fzpj
+_stats: null
+fileType: journal.pages
+flags: {}
+image: null
+name: Combat
+ownership:
+  default: -1
+  jzN44THfEHA8DC8v: 3
+sort: 400000
+src: null
+system: {}
+text:
+  content: <h1>Initiative</h1><p>On the character sheet, within the 'Combat' tab,
+    and on the NPC sheet, located in the 'Combat' section, there is a combo box containing
+    a list of skills, weapons, and special abilities that can be selected as a base
+    for initiative during combat. Adjacent to this box is a field designated for an
+    additional modifier.</p><p>Initiative calculations solely consider the values
+    of the chosen skill or special ability without incorporating mods. Any additional
+    modifiers can be specified in the corresponding field.</p><h1>Combat Tracker</h1><p>In
+    this version, the combat tracker requires manually rerolling initiative every
+    turn. At the end of each round, the Game Master (GM) must click the 'Reset Initiative'
+    button on the Combat Tracker. Subsequently, both players and the GM (for monsters
+    and NPCs) update their initiative values, if necessary. Once completed, the GM
+    can then click the 'Reroll Initiative' button and proceed to the next round.</p>
+  format: 1
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5

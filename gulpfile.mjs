@@ -14,6 +14,9 @@ import zip from 'gulp-zip';
 import jsonModify from 'gulp-json-modify';
 import rename from 'gulp-rename';
 import version from './version.mjs';
+import { ClassicLevel } from 'classic-level';
+import groupAggregate from 'gulp-group-aggregate';
+import path from 'path';
 
 import rollupStream from '@rollup/stream';
 
@@ -28,9 +31,10 @@ const sourceDirectory = './src';
 const buildDirectory = './build';
 const distDirectory = './dist';
 const stylesDirectory = `${sourceDirectory}/styles`;
+const packsDirectory = `${sourceDirectory}/packs`;
 const stylesExtension = 'less';
 const sourceFileExtension = 'js';
-const staticFiles = ['assets', 'fonts', 'packs', 'templates'];
+const staticFiles = ['assets', 'fonts', 'templates'];
 const yamlExtension = 'yaml';
 
 /********************/
@@ -131,7 +135,40 @@ async function updateJson() {
     .pipe(gulp.dest(`${distDirectory}`));
 }
 
-export const build = gulp.series(clean, gulp.parallel(buildCode, buildStyles, buildYaml, copyFiles));
+export async function buildPacks() {
+  return gulp
+    .src(`${packsDirectory}/*/**.yaml`)
+    .pipe(yaml())
+    .pipe(
+      groupAggregate({
+        group: (file) => path.relative(packsDirectory, file.dirname),
+
+        aggregate: function (dbName, files) {
+          const dbPath = `${buildDirectory}/packs/${dbName}`;
+          const db = new ClassicLevel(dbPath, { valueEncoding: 'json' });
+          const batch = files
+            .map((file) => JSON.parse(file.contents.toString()))
+            .map((entry) => {
+              const { fileType, parentId, ...content } = entry;
+              const { _id } = content;
+              return {
+                type: 'put',
+                key: parentId ? `!${fileType}!${parentId}.${_id}` : `!${fileType}!${_id}`,
+                value: content,
+              };
+            });
+          db.batch(batch, { sync: true });
+          return {
+            path: `${dbName}.json`,
+            contents: new Buffer(JSON.stringify(batch.map((op) => op.value))),
+          };
+        },
+      }),
+    )
+    .pipe(gulp.dest(`temp/packs-json`)); //FIXME: find better termination
+}
+
+export const build = gulp.series(clean, gulp.parallel(buildCode, buildStyles, buildYaml, copyFiles, buildPacks));
 export const dist = gulp.series(build, updateJson, zipFiles);
 
 /********************/
@@ -142,7 +179,7 @@ export const dist = gulp.series(build, updateJson, zipFiles);
  * Remove built files from `dist` folder while ignoring source files
  */
 export async function clean() {
-  const files = [...staticFiles, 'module', 'lang', 'system.json', 'template.json'];
+  const files = [...staticFiles, 'packs', 'module', 'lang', 'system.json', 'template.json'];
 
   if (fs.existsSync(`${stylesDirectory}/${packageId}.${stylesExtension}`)) {
     files.push('styles');

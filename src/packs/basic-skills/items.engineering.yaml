@@ -1,0 +1,22 @@
+_id: Zd5PduBhx31AKyT3
+_stats: null
+effects: []
+fileType: items
+flags: {}
+folder: szWzZEdK1HVFTQEr
+img: systems/oq/assets/icons/skills.svg
+name: Engineering
+ownership:
+  KsTXxaVKKsCmFqBq: 3
+  default: 0
+sort: 0
+system:
+  advancement: 0
+  customGroupName: ''
+  description: <p>This skill is used to design, build, activate, repair, sabotage
+    or disassemble large mechanisms or constructs, such as siege machines, city gates
+    and drawbridges, mine-shafts, sailing ships and so forth.</p>
+  formula: '@int+10'
+  group: practical
+  mod: 0
+type: skill

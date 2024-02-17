@@ -1,0 +1,133 @@
+---
+"$schema": https://json-schema.org/draft/2020-12/schema
+"$id": https://github.com/michalzc/oq-system/oq-system-document.schema.yaml
+title: OQ System Document Schema
+description: Schema for documents stored in compendium packs of OQ System
+oneOf:
+  - "$ref": "#/$defs/item"
+  - "$ref": "#/$defs/folder"
+
+"$defs":
+  _id:
+    type: string
+    description: An unique id of the document
+    pattern: "^[a-zA-Z0-9]{16}$"
+  version:
+    type: string
+    pattern: "^\\d+(\\.\\d+)*([._-]?\\w+)?$"
+  _stats:
+    type: object
+    description: statistics object
+    properties:
+      coreVersion:
+        "$ref": "#/$defs/version"
+      createdTime:
+        type: integer
+      lastModifiedBy:
+        "$ref": "#/$defs/_id"
+      modifiedTime:
+        type: integer
+      systemId:
+        type: string
+      systemVersion:
+        type: string
+  elementType:
+    enum:
+      - Item
+      - Actor
+    description: "TODO: Add more later"
+  itemType:
+    enum:
+      - skill
+
+  folder:
+    type: object
+    properties:
+      _id:
+        "$ref": "#/$defs/_id"
+      _stats:
+        "$ref": "#/$defs/_stats"
+      color:
+        type: string
+      flags:
+        type: object
+      folder:
+        oneOf:
+          - type: null
+          - "$ref": "#/$defs/_id"
+      name:
+        type: string
+      sort:
+        type: integer
+      sorting:
+        enum:
+          - a
+          - m
+      type:
+        "$ref": "#/$defs/elementType"
+
+    required:
+      - _id
+      - name
+      - type
+    additionalProperties: false
+
+  item:
+    type: object
+    properties:
+      _id:
+        "$ref": "#/$defs/_id"
+      _stats:
+        "$ref": "#/$defs/_stats"
+      flags:
+        type: object
+      img:
+        type: string
+      name:
+        type: string
+      sort:
+        type: integer
+      system:
+        oneOf:
+          - "$ref": "#/$defs/skillDataModel"
+      folder:
+        oneOf:
+          - type: null
+          - "$ref": "#/$defs/_id"
+      type:
+        "$ref": "#/$defs/itemType"
+    required:
+      - _id
+      - name
+      - img
+      - type
+
+  skillDataModel:
+    type: object
+    properties:
+      advancement:
+        type: integer
+        minimum: 0
+      customGroupName:
+        oneOf:
+          - type: null
+          - type: string
+      description:
+        type: string
+      formula:
+        type: string
+      group:
+        enum:
+          - resistance
+          - combat
+          - knowledge
+          - practical
+          - magic
+          - custom
+      mod:
+        type: integer
+    required:
+      - advancement
+      - formula
+      - group
+    additionalProperties: false
