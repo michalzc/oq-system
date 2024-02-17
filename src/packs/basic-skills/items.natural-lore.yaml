@@ -36,7 +36,7 @@ system:
     \ skill, a character can locate the tracks of a specific creature and follow them\
     \ while in the wilderness.</p><p><em>Weather:</em> The character can predict changes\
     \ in the climate.</p>"
-  formula: ''
+  formula: '@int+10'
   group: knowledge
   mod: 0
 type: skill

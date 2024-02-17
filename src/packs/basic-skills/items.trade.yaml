@@ -25,6 +25,6 @@ system:
     the skill test. Success will allow a character to guess the average monetary value
     of the object, usually guessing accurately to within 10% of its actual value.</p>
   formula: '@int+10'
-  group: resistance
+  group: practical
   mod: 0
 type: skill

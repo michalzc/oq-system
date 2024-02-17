@@ -143,8 +143,8 @@ export async function buildPacks() {
     .pipe(
       through2.obj(function (file, enc, cb) {
         const { fileType, ...content } = JSON.parse(file.contents.toString());
-        const objId = content._id;
-        const key = `!${fileType}!${objId}`;
+        const { _id, parentId } = content;
+        const key = parentId ? `!${fileType}!${parentId}.${_id}` : `!${fileType}!${_id}`;
         const dbName = path.relative(packsDirectory, file.dirname);
         const dbPath = `${buildDirectory}/packs/${dbName}`;
         const db = new ClassicLevel(dbPath, { valueEncoding: 'json' });
