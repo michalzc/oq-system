@@ -15,7 +15,7 @@ import jsonModify from 'gulp-json-modify';
 import rename from 'gulp-rename';
 import version from './version.mjs';
 import { ClassicLevel } from 'classic-level';
-import through2 from 'through2';
+import groupAggregate from 'gulp-group-aggregate';
 import path from 'path';
 
 import rollupStream from '@rollup/stream';
@@ -136,23 +136,36 @@ async function updateJson() {
 }
 
 export async function buildPacks() {
-  console.log(ClassicLevel);
   return gulp
     .src(`${packsDirectory}/*/**.yaml`)
     .pipe(yaml())
     .pipe(
-      through2.obj(function (file, enc, cb) {
-        const { fileType, parentId, ...content } = JSON.parse(file.contents.toString());
-        const { _id } = content;
-        const key = parentId ? `!${fileType}!${parentId}.${_id}` : `!${fileType}!${_id}`;
-        const dbName = path.relative(packsDirectory, file.dirname);
-        const dbPath = `${buildDirectory}/packs/${dbName}`;
-        const db = new ClassicLevel(dbPath, { valueEncoding: 'json' });
-        db.put(key, content, { sync: true });
-        db.close((error) => cb(error, file));
+      groupAggregate({
+        group: (file) => path.relative(packsDirectory, file.dirname),
+
+        aggregate: function (dbName, files) {
+          const dbPath = `${buildDirectory}/packs/${dbName}`;
+          const db = new ClassicLevel(dbPath, { valueEncoding: 'json' });
+          const batch = files
+            .map((file) => JSON.parse(file.contents.toString()))
+            .map((entry) => {
+              const { fileType, parentId, ...content } = entry;
+              const { _id } = content;
+              return {
+                type: 'put',
+                key: parentId ? `!${fileType}!${parentId}.${_id}` : `!${fileType}!${_id}`,
+                value: content,
+              };
+            });
+          db.batch(batch, { sync: true });
+          return {
+            path: `${dbName}.json`,
+            contents: new Buffer(JSON.stringify(batch.map((op) => op.value))),
+          };
+        },
       }),
     )
-    .pipe(gulp.dest(`temp/packs-json`));
+    .pipe(gulp.dest(`temp/packs-json`)); //FIXME: find better termination
 }
 
 export const build = gulp.series(clean, gulp.parallel(buildCode, buildStyles, buildYaml, copyFiles, buildPacks));
