@@ -1,0 +1,154 @@
+name,folder,img,magnitude,nonVariant,type,traits,description
+Befuddle,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,personal,Resist (Persistence),"<p>This spell confuses and clouds the mind of its target if they fail a
+Persistence roll. The affected target may not cast spells and may only take
+non-offensive actions. The target may run if it so chooses and may dodge and
+normally parry in combat.  Any skills that have INT as a base are at -20% when
+tested while the target is under the effects of this spell.</p>
+<p>This spell is effective against humanoids and natural creatures. Other
+creatures (such as spirits or magical beasts like dragons) are not affected by
+this spell.</p>"
+Block Sense (Sense),PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,3,TRUE,personal,Resist (Persistence),"<p>Depending on the version of this spell it will Blind/Deafen/Desensitise taste
+or smell/Numb touch on a failed resistance roll for the duration of the
+spell.</p>"
+Call Spirit (Type),PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,3,TRUE,personal,Resist (Persistence),"<p>Magnitude 3, Non-Variable, Resist (Persistence)</p> <p>This spell summons a
+single spirit of a given type from the Spirit World to do the bidding of the
+caster. The spirit resists the call by using its Persistence. If it succeeds, it
+can return to the Spirit World. Unless combined with a Binding attempt (see
+below), the spirit that fails a Persistence roll must perform one action, within
+its power, for the caster, after which it returns to the Spirit World.</p>
+<p><i>Types of Spirits</i></p> <ul> <li>Disease spirits inflict disease upon the
+possessed victim.</li> <li>Passion (Fear/Madness/Pain) these spirits work upon
+the passions of a victim and cause mental debilitation and distress.</li>
+<li>Healing spirits heal wounds and drive out possessing disease spirits.</li>
+<li>Magic spirits know spells and have magic points that the caller may
+use.</li> <li>For more information about Spirits, see the Creatures
+chapter.</li> </ul>"
+Binding Spirits,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,,"<p>If the character wants to bind a spirit, they must engage in spiritual
+combat. If they win, they can bind the spirit to an item or their person, by
+spending an additional growth point. If they fail, the spirit either flees to
+the Spirit World if it is a Magic or Healing spirit or possesses the caster if
+it is a Disease or Passion spirit.</p>"
+Care,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,personal,Touch,"<p>This spell places the recipient under the care of the caster.  If the caster
+has any active Protection or Countermagic spells, the character under the
+effects of the Care spell also benefits from the effects of these spells.</p>"
+Clear Path,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,Touch,"<p>This spell allows the caster to move through even the most tangled, thorny
+brush as if they were on an open road. For each additional point of magnitude,
+an additional person can accompany them.</p>"
+Coordination,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,Touch,"<p>For every point of magnitude.</p> <ul> <li>+10% added to the target’s combat
+order.</li> <li>+10% to Dodge or DEX based Athletics tests.</li> </ul>"
+Countermagic,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,Instant,"<p>This spell is cast in advance and sits dormant until a hostile spell attacks
+the recipient. At this point, the Countermagic spell fires off. As long as
+Countermagic’s magnitude equals or exceeds the target spell’s magnitude, the
+target spell does not take effect.  After the Countermagic tries to block a
+spell, successfully or not, it ends.</p>"
+Cover Blind Side,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,1,TRUE,personal,,"<p>For the duration of the spell, the target can react to attacks from behind or
+flank attacks as if they were a normal attack from the front. It does not confer
+any additional reactions.</p>"
+Create Charms,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,Permanent,"<p>A charm is a physical item that stores one or more Personal Magic spells. A
+charm could be a necklace that holds a Befuddle 4 spell; a sword etched with
+runes that holds a Weapon Enhance 2 spell; or even a sheet of paper with a poem
+written on it that, when held against the skin, provides a Protection 1
+spell.</p> <p>To create a charm a character must possess both the spell they
+wish to store and Create Charm at the same or greater magnitude.</p> <p>The item
+which going to hold the charm within close range of the caster for the length of
+the casting.</p> <p>If the caster spends one growth point at the time of
+creation, the spell within the charm is reusable. Otherwise once the spell is
+cast the charm is dispelled.</p> <p>A spell stored in a charm uses the wielder’s
+Personal Magic Casting skill and the wielder’s magic points.</p> <p>The time
+taken to create a single-use charm is one hour per point of the magnitude of the
+spell; Reusable charms take three hours per point of magnitude to create.</p>
+<p>Charms are mundane items.  Breaking the item dispels the charm.</p>"
+Create Magic Point Store,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,Permanent,"<p>This spell allows the caster to create an item that has magic point storing
+capabilities. Magic Point Stores allow the owner to have a pool of magic points
+in addition to their own.</p> <p>Typically, crystals, due to their physical
+toughness, make good stores. This spell can also be combined with an existing
+charm, such as a sword with Weapon Enhance 2 stored in it, to provide a pool of
+magic points to cast the spell from. In-game terms treat anything enchanted with
+this spell as unbreakable.</p> <p>Magic point stores take one hour per magic
+point stored in them to create.</p> <p>The caster must fill the item with their
+magic points as part of the spell. The number of magic points put into the item
+at the time of casting becomes the maximum.</p> <p>By default, when used, the
+stored magic points do not regenerate and when all used up the spell ends. If
+the caster spends one growth point while creating the store, it is reusable, and
+the caster can refill the store using their magic points.</p> <p>If the item
+containing the store becomes damaged or destroyed, the magic points are released
+harmlessly into the surrounding area.</p>"
+Create Potion,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,Permanent,"<p>Potions are liquids that store one or more Personal Magic spells.  The
+magnitude of the Create Potion spell needs to equal or exceed the total of the
+magnitude of the spells placed into the potion.</p> <p>All potions are one use.
+They must be drunk in one swift gulp to work.</p> <p>The potion automatically
+works and doesn’t incur a cost in magic points to the person who is drinking
+it.</p> <p>If multiple spells are placed in the potion, they are all cast on the
+drinker when the potion is drunk.</p> <p>Drinking the potion takes place on the
+drinker’s Athletics skill, if the timing is important such as when determining
+combat order.</p> <p>The potion costs the enchanter magic points. They must know
+the spell at the magnitude enchanting at, with the magic points of the spell(s)
+placed into the potion.</p> <p>There is an associated cost of 1 Gold Ducat per
+magnitude in materials, which includes the flask that contains the potion.</p>
+<p>Potions take one hour per point of the magnitude of the spell(s) stored to
+create.</p> <p>An airtight container must be used to store a potion, or it
+evaporates, losing one point of magnitude per week.</p>"
+Create Scroll,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,Permanent,"<p>This spell allows the caster to create a written version of the spell for use
+later. Either to impart knowledge of the spell to a trainee or as a reference
+when casting the spell in the field.</p> <p>The caster must be able to read and
+write in some form of written language, which is represented by having a
+Language skill of over 80%.  They must also pay for the special inks and scroll
+paper (1 Gold Ducat per point of magnitude).</p> <p>The trainee must be able to
+read the language that the scroll uses. Once every three months they may study
+the scroll, which takes one day per point of spell, and then make a Language
+skill test. If successful, they spend the normal growth cost to learn the spell.
+If they roll a critical they half that cost, to the nearest whole unit. If they
+fumble, they can never learn the spell from that scroll, it is beyond their
+understanding.</p> <p>To directly cast a spell from the scroll, the caster must
+be able to read the language the scroll uses. Then cast the spell as normal.
+Casting is much slower than if the caster is casting the spell from memory.
+First, the caster reads the spell out loud and then harnesses and shapes the
+magical energies. Therefore, no matter what their normal casting skill, the
+spell takes an entire combat round to cast, and fires off at the end of the
+combat round.</p> <p>In both cases, once learnt or cast, unless the original
+writer spends one growth point at the time of creation to make the scroll
+reusable, the ink fades, and the scroll crumbles to dust.</p>"
+Cushion Fall,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,personal,,"<p>The successful casting of this spell eliminates all falling damage for the
+recipient for the duration of the spell.</p>"
+Darkwall,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,personal,Area (5m),"<p>Light sources within a Darkwall area shed no light, and normal sight ceases
+to function. Other senses such as a bat’s sonar and night vision (see chapter 11
+Creatures) function normally.</p> <p>The caster may move the Darkwall 15 metres
+per combat round if they concentrate on the spell.</p>"
+Demoralise,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,personal,Resist (Persistence),"<p>This spell creates doubt and uncertainty into the very heart and soul of the
+target. The target of this spell has all combat skills halved and may not cast
+offensive spells. If this spell takes effect before combat begins, the target
+will try to avoid fighting and will either run or surrender. The Fanaticism
+spell automatically cancels the effects of this spell, and vice versa.</p>"
+Detect (Type),PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,1,TRUE,personal,Concentration,"<p>This description covers a family of spells that all operate similarly,
+allowing the caster to locate the closest target of the spell within its range.
+Any Detect spell is stopped by a thick substance, such as metal, earth or stone,
+at least one metre thick. It is also blocked by Countermagic, though the caster
+will know the target is somewhere within range (though not its precise location)
+and that Countermagic is protecting it. The separate Detect spells are listed
+below, and each must be learned separately.</p> <p><i>Detect Enemy:</i> Gives
+the location of the nearest creatures that intend to harm the caster.</p>
+<p><i>Detect Magic:</i> Gives the location of the nearest magic item, magical
+creature or active spell.</p> <p><i>Detect Species:</i> Each Detect Species
+spell will give the location of the nearest creature of the specified species.
+Examples of this spell include Detect Goblin, Detect Rhino and Detect Elf.</p>
+<p><i>Detect Substance:</i> Each Detect Substance spell will give the location
+of the nearest substance of the specified type. Examples of this spell include
+Detect Coal, Detect Gold and Detect Wood</p>"
+Dispel Magic,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,Instant,"<p>This spell will attack and eliminate other spells. Dispel Magic will
+eliminate a combined magnitude of spells equal to its magnitude, starting with
+the most powerful affecting the target. If it fails to eliminate any spell
+(because the spell’s magnitude is too high), then its effects immediately end.
+Dispel Magic cannot partially dispel spells, so a target under the effects of a
+spell whose magnitude is higher than that of Dispel Magic will not have any
+spells currently affecting it eliminated.</p>"
+Disruption,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,"Instant, Resist (Resilience)","<p>Disruption pulls a target’s body apart. On a failed Resilience skill test,
+the target will suffer 1D4 points of damage per point of magnitude, ignoring any
+armour points.</p>"
+Drive Out Spirit,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,"Instant, Resist (Persistence)","<p>This spell excommunicates a spirit that is either covertly or dominantly,
+possessing a character or physical location. The spirit resists eviction from
+its host using its Persistence, with a penalty of -10% for every magnitude point
+of the spell. If the spirit fails the test, it goes back to the Spirit
+World.</p>"
+Dull Weapon,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,,"<p>This spell works on any weapon. For every point of magnitude, it reduces the
+damage dealt by the target weapon by two points. This spell does not affect the
+damage inflicted by the damage bonus of the user.</p>"

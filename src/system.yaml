@@ -16,6 +16,7 @@ esmodules:
   - module/oq.js
 styles:
   - styles/oq.css
+  -
 packs:
   - name: oq-system-basic-skills
     label: Basic Skills
@@ -25,6 +26,7 @@ packs:
     ownership:
       PLAYER: OBSERVER
       ASSISTANT: OWNER
+
   - name: oq-system-documentation
     label: Documentation
     path: packs/documentation
@@ -33,12 +35,23 @@ packs:
     ownership:
       PLAYER: OBSERVER
       ASSISTANT: OWNER
+
+  - name: oq-system-spells
+    label: Spells
+    path: packs/spells
+    type: Item
+    system: oq
+    ownership:
+      PLAYER: OBSERVER
+      ASSISTANT: OWNER
+
 packFolders:
   - name: OpenQuest SRD
     sorting: a
     packs:
       - oq-system-basic-skills
       - oq-system-documentation
+      - oq-system-spells
 languages:
   - lang: en
     name: English

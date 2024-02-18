@@ -1,0 +1,13 @@
+folder: PmL84WZU2luOrJSw
+img: systems/oq/assets/icons/magic-swirl.svg
+fileType: items
+type: spell
+_id: rJJf1CNU3ZeLHZQT
+system:
+  type: personal
+  nonVariant: false
+  description: |-
+    <p>This spell works on any weapon. For every point of magnitude, it reduces the
+    damage dealt by the target weapon by two points. This spell does not affect the
+    damage inflicted by the damage bonus of the user.</p>
+name: Dull Weapon

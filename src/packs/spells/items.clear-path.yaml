@@ -1,0 +1,15 @@
+_id: jNEKCdTXvQCOYsp1
+fileType: items
+name: Clear Path
+folder: PmL84WZU2luOrJSw
+img: systems/oq/assets/icons/magic-swirl.svg
+system:
+  nonVariant: false
+  traits:
+  - Touch
+  description: |-
+    <p>This spell allows the caster to move through even the most tangled, thorny
+    brush as if they were on an open road. For each additional point of magnitude,
+    an additional person can accompany them.</p>
+  type: personal
+type: spell

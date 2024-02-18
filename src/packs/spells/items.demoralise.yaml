@@ -1,0 +1,18 @@
+folder: PmL84WZU2luOrJSw
+fileType: items
+type: spell
+system:
+  description: |-
+    <p>This spell creates doubt and uncertainty into the very heart and soul of the
+    target. The target of this spell has all combat skills halved and may not cast
+    offensive spells. If this spell takes effect before combat begins, the target
+    will try to avoid fighting and will either run or surrender. The Fanaticism
+    spell automatically cancels the effects of this spell, and vice versa.</p>
+  type: personal
+  nonVariant: true
+  traits:
+  - Resist (Persistence)
+  magnitude: 2
+_id: ropsqFJpRFXnLEiE
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Demoralise

@@ -1,0 +1,27 @@
+fileType: items
+img: systems/oq/assets/icons/magic-swirl.svg
+_id: kD8azTIdZ0McDQTQ
+folder: PmL84WZU2luOrJSw
+name: Create Potion
+type: spell
+system:
+  description: |-
+    <p>Potions are liquids that store one or more Personal Magic spells.  The
+    magnitude of the Create Potion spell needs to equal or exceed the total of the
+    magnitude of the spells placed into the potion.</p> <p>All potions are one use.
+    They must be drunk in one swift gulp to work.</p> <p>The potion automatically
+    works and doesn’t incur a cost in magic points to the person who is drinking
+    it.</p> <p>If multiple spells are placed in the potion, they are all cast on the
+    drinker when the potion is drunk.</p> <p>Drinking the potion takes place on the
+    drinker’s Athletics skill, if the timing is important such as when determining
+    combat order.</p> <p>The potion costs the enchanter magic points. They must know
+    the spell at the magnitude enchanting at, with the magic points of the spell(s)
+    placed into the potion.</p> <p>There is an associated cost of 1 Gold Ducat per
+    magnitude in materials, which includes the flask that contains the potion.</p>
+    <p>Potions take one hour per point of the magnitude of the spell(s) stored to
+    create.</p> <p>An airtight container must be used to store a potion, or it
+    evaporates, losing one point of magnitude per week.</p>
+  traits:
+  - Permanent
+  nonVariant: false
+  type: personal
