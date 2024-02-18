@@ -16,7 +16,6 @@ esmodules:
   - module/oq.js
 styles:
   - styles/oq.css
-  -
 packs:
   - name: oq-system-basic-skills
     label: Basic Skills
