@@ -1,0 +1,19 @@
+_id: 6CKcTOlbUpjq2neF
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Soul Sight
+system:
+  description: |-
+    <p>This spell allows the recipient to see the POW aura of anyone they looks at,
+    enabling them to discern that creature’s current magic points, as well as the
+    nature of any active spells or enchanted items the creature is carrying. It also
+    allows the recipient to see into the Spirit World.</p>
+  magnitude: 1
+  nonVariant: true
+  traits:
+  - Common
+  - Duration (15)
+  - Touch
+  type: divine
+type: spell

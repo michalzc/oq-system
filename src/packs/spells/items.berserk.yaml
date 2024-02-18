@@ -1,0 +1,27 @@
+_id: eoV2leIgJPw2iyQK
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Berserk
+system:
+  description: |-
+    <p>The recipient of this spell is overcome with blood-lust, causing them to
+    disregard their safety and loyalties but imbuing them with tremendous stamina
+    and combat ability.</p> <p>The recipient will automatically succeed any
+    Resilience test for the duration of the spell. The recipient also automatically
+    succeeds at any Fatigue tests and cannot be rendered unconscious. The Close
+    Combat skills of the recipient receive a +50% bonus for the spell’s
+    duration.</p> <p>However, the subject may not Parry, Dodge or cast any magic
+    spells while under the influence of Berserk. Normally, the recipient remains in
+    the Berserk state for the entire 15-minute duration of the spell. Still,
+    Referees may allow a Berserk character to shake off the effects with a
+    Persistence test modified by -50%. At the end of the spell, the recipient
+    immediately becomes Fatigued.</p> <p>Berserk does not combine with Fanaticism –
+    Berserk will always take precedence in such cases.</p>
+  magnitude: 2
+  nonVariant: true
+  traits:
+  - Duration (15)
+  - Touch
+  type: divine
+type: spell

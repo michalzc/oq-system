@@ -1,0 +1,34 @@
+_id: frJm16WSd9AIPXuZ
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Mystic Vision
+system:
+  description: |-
+    <p>This spell allows the recipient to literally see magic. By augmenting the
+    recipient’s natural vision, the spell allows them to see a creature’s magic
+    points, as well as enchanted items with their own magic points or spells. The
+    recipient must be able to see the creature or object for this spell to work.
+    Mystic Vision also allows a recipient to see into the Spirit World.</p> <p>On a
+    normal success, the recipient of the spell will only know roughly how many magic
+    points an object or creature has (1–10, 11–20, 21–30 and so forth). On a
+    critical, they will know the exact amount. On a fumble, the Referee should give
+    the player a misleading total.</p> <p>By looking at a spell’s effect, a
+    recipient of Mystic Vision will automatically be aware of its magical origin
+    (Divine Magic, Personal Magic, or Sorcery). By increasing the magnitude of
+    Mystic Vision, the caster can learn more about what they are seeing. Compare the
+    magnitude of Mystic Vision to the magnitude of any spell that the target is
+    either casting or under the influence of. As long as Mystic Vision’s magnitude
+    exceeds the other spell’s, the caster will be able to precisely determine the
+    effects of the perceived spell, and a mental image of who cast the spell (if it
+    is not obvious).</p> <p>By looking at an enchanted item, a recipient of Mystic
+    Vision will automatically be aware of its gross magical effects (such as the
+    types of enchantment currently on the item). Each point of magnitude of Mystic
+    Vision will also determine either the invested POW (and therefore the relevant
+    strength) of a particular enchantment or a particular condition laid upon an
+    enchantment (Referee’s choice).</p>
+  nonVariant: false
+  traits:
+  - Concentration
+  type: 9nSgoZ4l88FtYgms
+type: spell

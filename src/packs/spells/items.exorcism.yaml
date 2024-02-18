@@ -1,0 +1,21 @@
+_id: wpXN1hHb7y3KaOGf
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Exorcism
+system:
+  description: |-
+    <p>A Divine Magic caster can draw out a spirit currently possessing a mortal
+    being by using this spell. Whether the possession is dominant or covert is
+    immaterial.</p> <p>This spell forces a possessing spirit into Spirit Combat. The
+    caster uses his Religion (Own) as the attacking skill in the opposed contest, as
+    this represents the strength of their faith. If the caster is successful in
+    defeating the spirit, it is cast out of the victim and flees. If the caster
+    fails, the spirit remains in the possessed victim.</p>
+  magnitude: 3
+  nonVariant: true
+  traits:
+  - Common
+  - Concentration
+  type: divine
+type: spell

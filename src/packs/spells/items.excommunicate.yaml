@@ -1,0 +1,22 @@
+_id: Zh56rSMPJTw0DMDR
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Excommunicate
+system:
+  description: |-
+    <p>This spell severs the mystical link an Initiate enjoys with their god,
+    causing the target of the spell to immediately and permanently lose all Divine
+    Magic from the caster’s religion. The target will never again be able to learn
+    or use Divine Magic spells from the religion. However, they will still be able
+    to use their Religion skill for purely academic purposes.</p> <p>A Priest of the
+    same religion as the target casts the spell in a ceremony that takes one hour to
+    cast. The Initiate need not be present.</p>
+  magnitude: 5
+  nonVariant: true
+  traits:
+  - Common
+  - Permanent
+  - Resist (Persistence)
+  type: divine
+type: spell

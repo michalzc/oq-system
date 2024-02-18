@@ -1,0 +1,19 @@
+_id: fwZelUXJzFIbI570
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Spell Resistance
+system:
+  description: |-
+    <p>This spell matches its magnitude against the magnitude of any incoming spell.
+    If Spell Resistance’s magnitude is greater than the incoming spell’s, then the
+    incoming spell has no effect. If the incoming spell’s magnitude is equal to or
+    greater than the magnitude of Spell Resistance, then the spell affects the
+    target normally.</p> <p>Unlike many protective spells, Spell Resistance remains
+    in place for the entirety of its duration – spells that successfully breach the
+    spell do not dispel it. However, it does not discriminate between incoming
+    spells – a comrade attempting to magically heal the recipient of Spell
+    Resistance must overcome it in order to successfully use a healing spell.</p>
+  nonVariant: false
+  type: 9nSgoZ4l88FtYgms
+type: spell

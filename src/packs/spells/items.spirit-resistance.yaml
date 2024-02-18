@@ -1,0 +1,17 @@
+_id: mJQ9Om9YPEZbkkwa
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Spirit Resistance
+system:
+  description: |-
+    <p>This spell matches its magnitude against the POW of any spirit that comes
+    into contact with the recipient. If the recipient of the caster’s  POW  the
+    Spirit Resistance’s magnitude is greater than the spirit’s POW, the spirit
+    cannot touch the recipient.</p> <p>A spirit unable to touch a recipient will not
+    be able to attack or directly harm them, including through ranged attacks. A
+    spell cast by a spirit at the recipient is blocked unless its magnitude exceeds
+    the Spirit Resistance’s magnitude.</p>
+  nonVariant: false
+  type: 9nSgoZ4l88FtYgms
+type: spell

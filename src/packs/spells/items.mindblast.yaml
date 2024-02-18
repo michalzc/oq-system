@@ -1,0 +1,18 @@
+_id: rPeODzETP0RADKM7
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Mindblast
+system:
+  description: |-
+    <p>This spell applies a penalty to the victim’s INT equal to the magnitude of
+    the spell. The effect lasts days equal to the Caster’s current CHA.</p>
+  magnitude: 1
+  nonVariant: false
+  traits:
+  - Instant
+  - Progressive
+  - Ranged
+  - Resist (Persistence)
+  type: divine
+type: spell

@@ -1,0 +1,19 @@
+_id: qMmMlJb18wsdBDrT
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Sunspear
+system:
+  description: |-
+    <p>This spell will only function in direct sunlight. When cast, a shaft of light
+    two metres wide streaks from the sky to blast a single target, who must be
+    visible to the caster. If the target does not dive out of the way, the blazing
+    light will burn it for 4D6 damage. Armour points are not effective against this
+    damage, and it counts as both magical and fire damage.</p>
+  magnitude: 4
+  nonVariant: true
+  traits:
+  - Ranged
+  - Resist (Dodge)
+  type: divine
+type: spell

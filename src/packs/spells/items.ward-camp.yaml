@@ -1,0 +1,19 @@
+_id: 3SxWvERdMlFUb7mo
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Ward Camp
+system:
+  description: |-
+    <p>This spell protects a camp with an area of 50 meters squared.  Anyone
+    crossing the invisible boundary of the spell takes 1D10 damage and sets off a
+    magical alarm that immediately awakens everyone within the camp.  The Ward stays
+    in place, even after it has been crossed, for the full duration of the
+    spell.</p>
+  magnitude: 2
+  nonVariant: true
+  traits:
+  - Area
+  - Duration (8h)
+  type: divine
+type: spell

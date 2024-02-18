@@ -1,0 +1,22 @@
+_id: oxkr594sSiIhxz8u
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Animate (Substance)
+system:
+  description: |-
+    <p>This spell allows the sorcerer to animate the substance indicated, up to one
+    SIZ for every point of magnitude. The sorcerer can cause it to move about and
+    interact, albeit relatively clumsily (Movement of 1m per three points of
+    magnitude).</p> <p>The sorcerer’s chance to have the animated object perform any
+    physical skill successfully is equal to half their own chance to perform that
+    action (before any modifiers). If the appropriate Form/Set spell is cast
+    immediately after this spell, the caster can perform much finer manipulation of
+    the object. In this case, the animated object will use the caster’s full skill
+    scores for physical activities.</p> <p>This spell can only be used on inanimate
+    matter.</p>
+  nonVariant: false
+  traits:
+  - Concentration
+  type: sorcery
+type: spell

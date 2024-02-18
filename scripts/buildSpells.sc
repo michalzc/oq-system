@@ -67,7 +67,7 @@ def buildSpell(data: List[String]): Option[Spell] = data match
 def buildSpells(csvFile: os.Path, outDir: os.Path, dryRun: Boolean = false): Unit =
   implicit val slugify = Slugify.builder.build
   val yamlPrinter = Printer(
-    preserveOrder = false,
+    preserveOrder = true,
     dropNullKeys = true,
   )
   val reader = CSVReader.open(csvFile.toIO)

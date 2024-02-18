@@ -1,0 +1,16 @@
+_id: kN1GsbUG1kb4i6o2
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Cast Back
+system:
+  description: |-
+    <p>This protective spell shields the caster from hostile magic and has a chance
+    of sending it back to the attacking spell caster.</p> <p>Cast Back only affects
+    spells that target the user specifically and have the Resist trait. Such spells
+    may affect the protected character normally, but if it is resisted, the spell is
+    launched back at the person who cast it, as long as its magnitude is not greater
+    than the Cast Back’s magnitude.</p>
+  nonVariant: false
+  type: 9nSgoZ4l88FtYgms
+type: spell

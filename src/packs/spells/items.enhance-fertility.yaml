@@ -1,0 +1,18 @@
+_id: jK7gGWc2bUFrc6x8
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Enhance Fertility
+system:
+  description: |-
+    <p>This spell makes any one creature more fertile than normal. If it is an
+    animal that has multiple offspring, then it doubles the number. For creatures
+    who usually have singular births, it guarantees the conception and birth of the
+    offspring.</p> <p>This spell negates the effects of any “Block Fertility”
+    spell.</p>
+  magnitude: 3
+  nonVariant: true
+  traits:
+  - Permanent
+  type: divine
+type: spell

@@ -1,0 +1,17 @@
+_id: 2pKPHDklkrBPpkRG
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Treasury
+system:
+  description: |-
+    <p>This spell creates a secure room, for one day, to store valuables.  All the
+    entrances are locked and only the caster can come in and out without setting off
+    a magical alarm that they can hear, no matter how far away from the room they
+    are.</p>
+  magnitude: 4
+  nonVariant: true
+  traits:
+  - Duration (1d)
+  type: divine
+type: spell

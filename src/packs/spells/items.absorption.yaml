@@ -1,0 +1,32 @@
+_id: FSUyJvSSGKPldst4
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Absorption
+system:
+  description: |-
+    <p>This spell absorbs incoming spells aimed at the target or their equipment,
+    converting their magical energy into magic points which are then available to
+    the target. Once cast on a subject, Absorption will attempt to absorb the
+    effects of any spells cast at the target. It will not have any effect on spells
+    that are already affecting a character. The effects of Absorption depend on the
+    relative magnitude of both itself and the incoming spell – see the Absorption
+    Results table for more details. Any spell absorbed by this spell is cancelled
+    and does not affect the target.</p> <table> <caption>Absorption
+    Results</caption> <thead> <tr> <th>Incoming Spell’s Magnitude is</th>
+    <th>Effect</th> </tr> </thead> <tbody> <tr> <td>Equal to or weaker than
+    Absorption’s magnitude.</td> <td>Incoming spell absorbed and Absorption
+    remains.</td> </tr> <tr> <td>1 or more points stronger than Absorption’s
+    magnitude.</td> <td>Absorption eliminated and incoming spell takes effect.</td>
+    </tr> </tbody> </table> <p>A character may not accumulate more magic points than
+    his POW while Absorption is in effect – excess magic points garnered through
+    Absorption simply vanish. Absorption is incompatible with Reflection, Shield and
+    Spirit Block.</p>
+  magnitude: 1
+  nonVariant: false
+  traits:
+  - Duration (15)
+  - Progressive
+  - Touch
+  type: divine
+type: spell

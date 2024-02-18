@@ -1,0 +1,36 @@
+_id: oYARj64dcsEfXsDl
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Illusion
+system:
+  description: |-
+    <p>This spell creates an illusion based on all five senses. The illusion will
+    seem real and solid unless the person looking at it succeeds in a Perception
+    test, which is subject to a modifier based on the magnitude of the spell. If the
+    viewer succeeds in a Perception test, and the illusion could usually cause
+    damage if believed in, it can no longer cause damage to that character. As soon
+    as a viewer disbelieves the illusion, it becomes insubstantial and ghost-like to
+    them.</p> <p>The magnitude also governs the Size of the illusion.  A magnitude 1
+    Illusion can quite happily create small household items, say a fake table and
+    chair, but would not be able to create an illusion of a fire-breathing
+    Dragon.</p> <table> <caption>Illusions</caption>
+    <thead><tr><th>Magnitude</th><th>Modifier to Perception test</th><th>Type of
+    illusion possible</th></tr></thead> <tbody> <tr><td>1</td><td>+50 %</td><td>Not
+    capable of motion or causing damage. Slightly fuzzy and unreal round the edges.
+    Limit of SIZ 10.</td></tr> <tr><td>2</td><td>+25 %</td><td>Some minor
+    discrepancies. Capable of motion, but not of damage. Limit of SIZ 15.</td></tr>
+    <tr><td>3</td><td>0</td><td>Capable of motion and causing damage. Limit of SIZ
+    20.</td></tr> <tr><td>4</td><td>-25 %</td><td>Capable of motion and causing
+    damage. Limit of SIZ 30.</td></tr> <tr><td>5</td><td>-50
+    %</td><td>Indistinguishable from the real thing, capable of motion and damage.
+    Limit of SIZ 40.</td></tr> <tr><td>+1</td><td>-50%</td><td>+10 SIZ per
+    magnitude.</td></tr> </tbody> </table>
+  magnitude: 1
+  nonVariant: false
+  traits:
+  - Duration (15)
+  - Progressive
+  - Ranged
+  type: divine
+type: spell
