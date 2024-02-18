@@ -1,0 +1,23 @@
+_id: hx0NVLA3ztZSG9t2
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Diminish (characteristic)
+system:
+  description: |-
+    <p>There are seven Diminish spells, one for each characteristic. The spell will
+    temporarily apply a penalty to the specified characteristic equal to the
+    magnitude of the spell. The penalty applied by this spell may not reduce a
+    characteristic below one, and a creature must have the characteristic in
+    question to be affected by this spell.</p> <p>Diminish (STR, DEX, CON and SIZ)
+    are resisted with Resilience. Diminish (INT, POW and CHA) are resisted with
+    Persistence.</p> <p>Applying a penalty to POW does not reduce the character’s
+    magic points.</p> <p>Note that not all uses of this spell are malicious. Thieves
+    and others often value the timely use of a Diminish (SIZ) spell, as it can
+    greatly enhance their ability to enter restricted areas.</p>
+  nonVariant: false
+  traits:
+  - Resist (Persistence/Resilience)
+  - Touch
+  type: 9nSgoZ4l88FtYgms
+type: spell

@@ -1,0 +1,16 @@
+_id: lEecNAFaJ4SaFTQB
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Palsy
+system:
+  description: |-
+    <p>If the caster is able to overcome their Target with this spell, they can turn
+    the victim’s own nervous system against them. The spell will paralyse the
+    target, provided the spell’s magnitude is greater than quarter of the target’s
+    current hit points.</p>
+  nonVariant: false
+  traits:
+  - Resist (Resilience)
+  type: 9nSgoZ4l88FtYgms
+type: spell

@@ -1,0 +1,36 @@
+_id: 2dXZTpCS4KHppGhm
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Time Travel (Time Period)
+system:
+  description: |-
+    <p>This spell transports the caster and creatures (of SIZ 12-18) equal to the
+    magnitude of the spell to a named time era via a time tunnel that opens up and
+    instantly sucks them through to their destination.  The duration of the spell is
+    the time that the caster and group jump forward or backwards through time.</p>
+    <p>Sorcerers usually have some knowledge about the time period they are
+    travelling to and use an Anchor, a landmark such as a bronze statue, that exists
+    in both the original and destination time period. If they are travelling blind
+    without such an Anchor, the casting roll is at -25%, and the effects of a
+    fumbled roll are even more catastrophic than the examples below suggest.</p>
+    <p>If the spell casting is failed, the caster and group still travel, but they
+    end up in the wrong location (1D10 Km away from the anchor point) and time (1D10
+    time units away, the length of the time unit depends on duration, e.g. if the
+    duration was in days, the time unit is days).</p> <p>If the spell casting is
+    fumbled, catastrophic events occur.  Here are some example events, the creative
+    Referee is encouraged to create more:</p> <p>A guardian creature from the Other
+    World emerges through the portal and attacks the sorcerer in an attempt to close
+    the portal.</p> <p>The sorcerer, and all within 10m of them, is sucked through
+    the portal which then promptly closes. The sorcerer is so befuddled that they
+    cannot remember the spell for D20+D4 hours.</p> <p>As above, but the sorcerer
+    and party arrive in a completely different Time Era or even an Alternative
+    Reality.</p> <p>Sorcerers with this spell can “change” time freely without
+    having to worry about unintentional “butterfly effect” changes or any
+    alterations in their own existence or memory from changing “their” past.
+    However, regular use risks the catastrophic effects of a fumble.</p>
+  nonVariant: false
+  traits:
+  - Instant
+  type: 9nSgoZ4l88FtYgms
+type: spell

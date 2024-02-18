@@ -1,0 +1,26 @@
+_id: pY1D1sV4kBV50hvm
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Smother
+system:
+  description: |-
+    <p>If successful, this spell neutralises the air surrounding the target, making
+    each breath stale and worthless, depriving it of oxygen. The caster must
+    concentrate each round, in order to keep the spell operating. For the duration
+    of the spell, the target will be unable to breathe, essentially drowning on dry
+    land.</p> <p>When the spell begins, the target’s Resilience test determines
+    whether it is able to gasp in one last breath before Smother cuts off the
+    surrounding oxygen supply. If the target succeeds, it may hold its breath as
+    normal. If it fails, it will start drowning in the next combat round.</p>
+    <p>This spell can also be used to extinguish fires, as the flames will be
+    starved of oxygen. At magnitude 1, it can extinguish a Flame, magnitude 2 a
+    Large Flame, magnitude 4 a Small Fire, magnitude 7 a Large Fire and magnitude 10
+    it will put out an Inferno. Smother has no effect on magical fire or on
+    fire-based creatures.</p>
+  nonVariant: false
+  traits:
+  - Concentration
+  - Resist (Resilience Special)
+  type: 9nSgoZ4l88FtYgms
+type: spell

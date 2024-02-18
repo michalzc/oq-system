@@ -1,0 +1,34 @@
+_id: 98aCb2Pi67dGoeqr
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Tap (characteristic)
+system:
+  description: |-
+    <p>There are actually seven Tap spells, one for each characteristic. These
+    devastating spells allow the caster to permanently strip a target of
+    characteristic points, transforming them into magic points for their own
+    use.</p> <p>The caster must make contact with the target, either physically or
+    through Touch Projection, in order to Tap it – therefore the spell cannot be
+    used on incorporeal creatures, such as spirits.</p> <p>Tap will only work if its
+    magnitude is equal to, or greater than, the target’s specified characteristic.
+    Thus, a magnitude 6 Tap Strength spell would only work on targets with a STR of
+    6 or lower.</p> <p>The number of points Tapped by the spell is equal to 1D6 per
+    combat round the spell is applied to the victim.</p> <p>Characteristic points
+    lost to Tap are lost permanently, though the victim can raise them again through
+    the normal means of increasing a characteristic. Characteristics may be tapped
+    to 0, which usually involves the death of the victim (the exception being
+    Charisma).</p> <p>For each characteristic point the sorcerer Taps, they will
+    gain one magic point. The sorcerer is limited in the number of magic points they
+    can gain through Tap; the spell can only increase their magic points to double
+    their normal limit. A sorcerer may simply Tap a target and dissipate any gained
+    magic points.</p> <p>If the sorcerer gains more magic points through Tap than
+    their normal maximum, the points will disappear at the rate of one magic point
+    per minute once the spell finishes.</p>
+  nonVariant: false
+  traits:
+  - Concentration
+  - Resist (Persistence)
+  - Touch
+  type: 9nSgoZ4l88FtYgms
+type: spell

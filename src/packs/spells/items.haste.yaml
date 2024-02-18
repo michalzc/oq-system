@@ -1,0 +1,13 @@
+_id: BP18Xb3D1CTmsvlg
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Haste
+system:
+  description: |-
+    <p>Each point of magnitude of Haste adds 1m to the Movement rate of the
+    recipient. Every two points of magnitude also add +10% to the recipient’s skills
+    for the purposes of determining the order in combat.</p>
+  nonVariant: false
+  type: 9nSgoZ4l88FtYgms
+type: spell

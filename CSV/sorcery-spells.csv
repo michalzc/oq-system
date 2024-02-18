@@ -1,0 +1,382 @@
+name,folder,img,magnitude,nonVariant,type,traits,description
+Animate (Substance),9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,sorcery,Concentration,"<p>This spell allows the sorcerer to animate the substance indicated, up to one
+SIZ for every point of magnitude. The sorcerer can cause it to move about and
+interact, albeit relatively clumsily (Movement of 1m per three points of
+magnitude).</p> <p>The sorcerer’s chance to have the animated object perform any
+physical skill successfully is equal to half their own chance to perform that
+action (before any modifiers). If the appropriate Form/Set spell is cast
+immediately after this spell, the caster can perform much finer manipulation of
+the object. In this case, the animated object will use the caster’s full skill
+scores for physical activities.</p> <p>This spell can only be used on inanimate
+matter.</p>"
+Cast Back,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,,"<p>This protective spell shields the caster from hostile magic and has a chance
+of sending it back to the attacking spell caster.</p> <p>Cast Back only affects
+spells that target the user specifically and have the Resist trait. Such spells
+may affect the protected character normally, but if it is resisted, the spell is
+launched back at the person who cast it, as long as its magnitude is not greater
+than the Cast Back’s magnitude.</p>"
+Create Godform (Deity),9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,Touch,"<p>This spell can be cast on a recipient other than the caster. It allows the
+recipient to assume the magical form of the deity for the duration of the spell.
+While not quite the same as becoming the god itself, it allows the recipient to
+assume some of the powers of the deity.</p> <p>While the spell is in operation,
+the recipient gains:</p> <ul> <li>+20% in all the skills that the deity
+teaches.</li> <li>Each magnitude of the spell beyond the first allows the
+recipient to learn and cast one point of the deity’s Divine or Personal Magic
+for the duration of the spell. Divine Magic is one use, and Personal Magic must
+be paid for from the recipients’ magic points. </li> <li>The recipient knows
+anything the deity would know.</li> <li>This is an exceptionally powerful spell,
+whose use and knowledge automatically puts the sorcerer on the enemy list of the
+deity’s cult, should they find out that the sorcerer knows how to Godform their
+god.</li> </ul> <p>If the spell is fumbled, one of the following events, or one
+similar from the Referee’s fertile imagination, occurs: </p> <ul> <li>The deity
+sends one of its guardians, an Otherworld servant, to exact divine vengeance
+upon the sorcerer.</li> <li>The deity transports the sorcerer and all ‘helpers’
+to their court in the Houses of the Holy to explain themselves.</li> <li>The
+deity tells a local priest of the sorcerer’s heresy and makes it clear that it
+is their temple’s job to exact revenge on their deity’s behalf.</li> </ul>"
+Damage Boosting,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,Touch,"<p>This spell can be cast upon any weapon up to 5 ENC. Each point of magnitude
+adds one point to the weapon’s damage (e.g. the basic spell will increase a
+hatchet from 1D6 damage to 1D6+1 damage).</p>"
+Damage Resistance,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,Touch,"<p>This spell protects the body of the recipient. Any incoming attack dealing
+damage equal to or less than the magnitude of the spell is ignored. Any incoming
+attack dealing more damage than the magnitude of Damage Resistance is unaffected
+and will deal its full damage as normal. Note, the protected character may still
+suffer from Knockback if applicable.</p> <p>Damage Resistance may be combined
+with the Divine Magic spell Shield, in which case incoming damage is compared to
+the Damage Resistance spell first and only encounters the Shield spell if the
+Damage Resistance is bypassed.</p>"
+Diminish (characteristic),9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,"Resist (Persistence/Resilience), Touch","<p>There are seven Diminish spells, one for each characteristic. The spell will
+temporarily apply a penalty to the specified characteristic equal to the
+magnitude of the spell. The penalty applied by this spell may not reduce a
+characteristic below one, and a creature must have the characteristic in
+question to be affected by this spell.</p> <p>Diminish (STR, DEX, CON and SIZ)
+are resisted with Resilience. Diminish (INT, POW and CHA) are resisted with
+Persistence.</p> <p>Applying a penalty to POW does not reduce the character’s
+magic points.</p> <p>Note that not all uses of this spell are malicious. Thieves
+and others often value the timely use of a Diminish (SIZ) spell, as it can
+greatly enhance their ability to enter restricted areas.</p>"
+Dominate (Species),9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,Resist (Persistence),"<p>This spell allows the caster to gain control over a creature belonging to a
+specific species. If the target fails to resist the spell, it must obey the
+commands of the caster for the duration of the spell.</p> <p>The controlled
+creature shares a telepathic link with the sorcerer by which it can receive its
+orders. If the sorcerer and the creature dominated do not share a common
+language, the sorcerer can order it about, by forming a mental image of the
+actions they wish the dominated creature to perform.</p>"
+Energy Projection (Type),9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,"Ranged, Instant, Resist (Dodge)","<p>Energy is either projected as a beam or a ball towards the target, who can
+avoid the attack by Dodging.</p> <p>If the spell takes effect, the target takes
+damage equal to double the magnitude of the spell. Physical armour does not
+protect against the damage, but magical protection does. Types of energy that
+can be projected by this spell are Cold (Dark), Lightning, Heat (Fire), Shards
+of Rock (Earth), Windblast (Air).</p>"
+Enhance (characteristic),9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,Touch,"<p>There are seven Enhance spells, one for each characteristic. Essentially the
+reverse of the Diminish spell, Enhance allows the Sorcerer to temporarily apply
+a bonus to the specified characteristic equal to the magnitude of the spell. A
+creature must have the characteristic in question to be affected by this
+spell.</p> <p>Applying a bonus to POW does not increase the character’s magic
+points.</p>"
+Fly,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,"Concentration, Resist (Persistence)","<p>Using this spell allows the caster (or whomever or whatever they target with
+the spell) to fly.  The caster may levitate objects or characters (the caster
+counting as one of these characters if they so wish).</p> <p>A levitated
+character may not be overloaded and must have a SIZ characteristic which is
+lower than the sorcerer’s POW characteristic.</p> <p>Objects must have an ENC
+lower than the sorcerer’s POW characteristic.</p> <p>Character or objects moved
+by this spell have a base Movement Rate of 6m. All objects and characters moved
+by this spell move at the spell caster’s behest, not their own.</p> <p>Each
+point of the spell’s magnitude may either be used to increase the target’s
+Movement by +2m or to target an additional object or character – but not both. A
+sorcerer casting this spell at magnitude 4 may fly themselves with a Movement of
+14m, fly themselves and a friend with a Movement of 10m each, or fly themselves
+and three friends with a Movement of 6m each.</p>"
+Form/Set (Substance),9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,Instant,"<p>There is an unlimited number of Form/Set spells in existence, one for every
+substance imaginable, from steel to smoke to water.</p> <p>Each point of
+magnitude allows the caster to shape one ENC of solid substance or one cubic
+metre of an ethereal substance (like darkness). The caster must be familiar with
+the shape they are forming.</p> <p>When the caster has finished the forming
+process, the substance retains its shape. Rigid substances like steel will hold
+the form they had at the end of the spell, while more mutable substances like
+water will immediately lose their shape.</p> <p>This spell can be used to mend
+the damage done to an object. The sorcerer must form the entire object and must
+succeed at an appropriate Craft test.  If successful they will restore the item
+to its original condition.</p> <p>This spell can only be used on inanimate
+substances.</p>"
+Glow,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,,"<p>This spell causes a glowing point of light to appear on a solid substance. At
+its base, the spell creates an area of light one metre in radius, giving off the
+same illumination as a candle. Each additional point of magnitude increases the
+radius of effect by one metre. At magnitude 3, the brightness of the spell
+increases to that of a flaming brand at its centre. At magnitude 5, it increases
+to that of a camp-fire and at magnitude 10 to that of a bonfire.</p> <p>This
+spell can be cast on an opponent’s eyes. If cast on a living being, the spell
+also gains the Resist (Dodge) trait. If the target fails to resist it, they will
+suffer a penalty to all attack, parry and Dodge tests, as well as any skills
+relying upon vision, equal to five times the spell’s magnitude, until the spell
+ends or is dispelled.</p>"
+Hamper,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,Resist (Resilience),"<p>Each point of magnitude of Hamper subtracts 1m from the Movement rate of the
+target. Every two points of magnitude also subtract -10% from a recipient’s
+skills for the purposes of determining the order in combat.</p>"
+Haste,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,,"<p>Each point of magnitude of Haste adds 1m to the Movement rate of the
+recipient. Every two points of magnitude also add +10% to the recipient’s skills
+for the purposes of determining the order in combat.</p>"
+Holdfast,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,Touch,"<p>This spell causes two adjacent ten centimetres by ten centimetre surfaces
+(roughly the size of a person’s palm) to commingle into one. The basic bond has
+a STR of 1. Each additional point of magnitude will either increase the STR of
+the bond by +1 or double the area affected.</p> <p>This spell can affect organic
+and inorganic substances. If the caster is attempting to bond a living being
+with this spell, the spell gains the Resist (Resilience) trait.</p>"
+Make Potion,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,Permanent,"<p>Using the arts of alchemy, Sorcerers can store Sorcery spells in a liquid
+known as a Potion.</p> <p>All potions have an attached cost of 1 Gold Ducat per
+magnitude of spell in ingredients. Multiple spells may be stored in one potion,
+with the understanding that they will all be cast when the potion is drunk at
+the magnitude that the creator originally put into the potion.</p>"
+Make Scroll,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,Permanent,"<p>Magical scrolls are written items that store Sorcery spells. All scrolls have
+an attached cost of 1 Gold Ducat per magnitude of spell in ingredients (for
+special inks/parchments, etc.).</p> <p>The resulting scroll is a one-use item
+which, upon a successful Sorcery Casting test, casts the spell(s) with any
+included manipulations at the magnitude that was cast on the scroll.</p>
+<p>Alternatively, upon a successful Sorcery Casting skill test, the reader of
+the scroll can learn the spell by spending the appropriate number of <i>Growth
+points</i>.</p> <p>Either way, upon the successful use of the scroll, the spell
+fades from the scroll. If the casting roll merely fails, the spell remains, but
+the reader cannot attempt to use the scroll until their Sorcery Casting skill
+increases. If the casting roll is fumbled, the spell fades from the scroll,
+without any benefit to the reader.</p>"
+Make Spell Matrix,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,Permanent,"<p>This spell creates items that store Sorcery spells.</p> <p>All spell matrices
+have an attached cost of 10 Gold Ducats per spell in special materials.</p>
+<p>The enchanter pays 1 Growth point per spell stored in the matrix.</p> <p>The
+wielder can cast and manipulate the spell at the skill of the original
+enchanter, using their own magic points as fuel.</p> <p>Spell matrices are
+reusable and permanent.</p> <p>Spell matrices are mundane items in their own
+right and if the item is broken, the spell is dispelled. However, at the time of
+enchantment, the enchanter can spend another growth point to magically harden
+the item, making it indestructible.</p>"
+Mirage,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,,"<p>This is the Sorcerers’ version of Illusion.</p> <p>This spell creates an
+illusion based on all five senses. The illusion will seem real and solid unless
+the person looking at it succeeds in a Perception test, which is subject to a
+modifier based on the magnitude of the spell. If the viewer succeeds in a
+Perception test, and the illusion could usually cause damage if believed in, it
+can no longer cause damage to that character. As soon as a viewer disbelieves
+the illusion, it becomes insubstantial and ghost-like to them.</p> <p>The size
+of the illusion is also governed by the magnitude. A magnitude 1 Illusion can be
+used to create small household items, say a fake table and chair, but would not
+be able to create an illusion of a fire-breathing dragon. </p> <table> <thead>
+<tr> <th>Magnitude</th> <th>Modifier to Perception test</th> <th>Type of
+illusion possible</th> </tr> </thead> <tbody> <tr> <td>1</td> <td>+50 %</td>
+<td>Not capable of motion or causing damage. Slightly fuzzy and unreal around
+the edges. Limit of SIZ 10.</td> </tr> <tr> <td>2</td> <td>+25 %</td> <td>Some
+minor discrepancies. Capable of motion, but not of damage. Limit of SIZ 15.</td>
+</tr> <tr> <td>3</td> <td>0</td> <td>Capable of motion and causing damage. Limit
+of SIZ 20.</td> </tr> <tr> <td>4</td> <td>-25 %</td> <td>Capable of motion and
+causing damage. Limit of SIZ 30.</td> </tr> <tr> <td>5</td> <td>-50 %</td>
+<td>Indistinguishable from the real thing, capable of motion and damage. Limit
+of SIZ 40.</td> </tr> <tr> <td>+1</td> <td>-50%</td> <td>+10 SIZ per
+magnitude.</td> </tr> </tbody> </table>"
+Mystic Vision,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,Concentration,"<p>This spell allows the recipient to literally see magic. By augmenting the
+recipient’s natural vision, the spell allows them to see a creature’s magic
+points, as well as enchanted items with their own magic points or spells. The
+recipient must be able to see the creature or object for this spell to work.
+Mystic Vision also allows a recipient to see into the Spirit World.</p> <p>On a
+normal success, the recipient of the spell will only know roughly how many magic
+points an object or creature has (1–10, 11–20, 21–30 and so forth). On a
+critical, they will know the exact amount. On a fumble, the Referee should give
+the player a misleading total.</p> <p>By looking at a spell’s effect, a
+recipient of Mystic Vision will automatically be aware of its magical origin
+(Divine Magic, Personal Magic, or Sorcery). By increasing the magnitude of
+Mystic Vision, the caster can learn more about what they are seeing. Compare the
+magnitude of Mystic Vision to the magnitude of any spell that the target is
+either casting or under the influence of. As long as Mystic Vision’s magnitude
+exceeds the other spell’s, the caster will be able to precisely determine the
+effects of the perceived spell, and a mental image of who cast the spell (if it
+is not obvious).</p> <p>By looking at an enchanted item, a recipient of Mystic
+Vision will automatically be aware of its gross magical effects (such as the
+types of enchantment currently on the item). Each point of magnitude of Mystic
+Vision will also determine either the invested POW (and therefore the relevant
+strength) of a particular enchantment or a particular condition laid upon an
+enchantment (Referee’s choice).</p>"
+Neutralise Magic,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,Instant,"<p>This spell allows a caster to neutralise other spells. Neutralise Magic will
+eliminate a combined magnitude of spells equal to its own magnitude, starting
+with the most powerful affecting the target. If it fails to eliminate the most
+powerful spell, then it will instead target the second-most powerful spell. As
+soon as Neutralise Magic can no longer dismiss a target’s spells, because all
+the remaining spell’s magnitudes are too high, its effects immediately end.</p>
+<p>Neutralise Magic can be fired as a Reaction, but only when another spell that
+the character wishes to counter is cast within Neutralise Magic’s range. A
+successful Neutralise Magic disrupts the other spell and nullifies it. As long
+as Neutralise Magic’s magnitude equals or exceeds the target spell’s magnitude,
+the target spell is countered.</p>"
+Other World Portal (Other World),9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,,"<p>This spell creates a portal to a named Other World. The magnitude of the
+spell is the number of creatures (of SIZ range 12-18) who can use the portal
+simultaneously.  The portal exists as long as the spell is in effect. When the
+spell’s duration is reached, the portal closes instantly.</p> <p>If the spell
+casting is fumbled, catastrophic events occur.  Here are some example events.
+The creative Referee is encouraged to create more.</p> <p>A malignant creature
+from that Other World emerges and attacks the sorcerer in an attempt to close
+the portal.</p> <p>The sorcerer and all within 10m of them are sucked through
+the portal, which then promptly closes. Worse, the Sorcerer is so befuddled that
+they cannot remember this spell for D20+D4 hours.</p> <p>The Other World, to
+which the portal is connected, invades the home reality in a 1D10 km diameter
+from the portal. The home reality protects itself by throwing up a magical
+barrier that lets things into the beachhead but not out.</p>"
+Palsy,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,Resist (Resilience),"<p>If the caster is able to overcome their Target with this spell, they can turn
+the victim’s own nervous system against them. The spell will paralyse the
+target, provided the spell’s magnitude is greater than quarter of the target’s
+current hit points.</p>"
+Poison Antidote,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,,"<p>This spell counteracts an antidote to any poison. For the duration of the
+spell, it reduces any poison’s potency by its magnitude X 5. This is for the
+chance to resist the poison initially. If that resistance test is failed, it
+still reduces the poison’s effective potency by its magnitude X 5.   If cast on
+a person who is already affected by a poison, they get another chance to resist
+the poison.</p>"
+Protective Sphere,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,,"<p>When completed, the Protective Sphere will create a sphere-shaped area of
+protection with a radius in metres equal to the spell’s magnitude. If this spell
+is cast on the ground (or another immovable place), it cannot be moved. If cast
+on a vehicle (such as the bed of a wagon) or a person, it will move with the
+target.  After the sphere has been completed any one or all of the following
+spells can be added to provide the defensive capacities of the Sphere during the
+duration of the Sphere. The Sphere on its own provides no protection, that is
+down to the Resistance spells.</p> <p>Damage Resistance, Spell Resistance,
+Spirit Resistance.</p> <p>The Protective Sphere’s perimeter contains the
+benefits of its combined Resistance spell(s). The Protective Sphere only
+inhibits spells or attacks entering the circle from the outside – attacks or
+spells originating within the circle are unaffected. Thus, a Protective Sphere
+against spirits would block out outside spirits but have no effect on those
+already inside its perimeter.  A Protective Sphere against damage or spells
+would block out incoming attacks/spells but have no effect on attacks made
+within the sphere (including attacks targeting those outside the sphere).</p>"
+Remove Disease,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,,"<p>This spell purges the recipient of any disease that is currently afflicting
+them. Make an opposed roll of the spell’s magnitude vs. the disease’s potency.
+If successful the character is restored to full health, any penalties to
+characteristics are removed and any hit points lost to the effects of the
+disease are regained.</p>"
+(Sense) Projection,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,Concentration,"<p>Each (Sense) Projection spell is a separate spell. These spells encompass the
+five base senses, but there are also variants for any unusual sensory mechanisms
+appropriate to the game world (such as sonar).</p> <p>This spell allows the
+caster to project one of their senses anywhere within the spell’s range. The
+spell forms an invisible and intangible sensor, some ten centimetres across,
+which receives the specified type of sensory input and transmits it to the
+caster. The sensor can move metres per combat round equal to the spell’s
+magnitude, directed by the sorcerer, and allows the sorcerer to use their
+Perception skill through the sensor.</p> <p>Spells can be cast through the
+sensor of some Projection spells. For instance, ranged spells require Sight
+Projection, while touch spells require Touch Projection (and likely Sight
+Projection too, so the Sorcerer can find their target efficiently).</p>
+<p>Characters using Mystic Vision can see the sensor and attack it if they wish,
+though it is only vulnerable to magic. Magical weapons and spells employed
+against the sensor will not destroy it but will instead transfer their damage
+directly to the caster.</p>"
+Sense (Substance),9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,Concentration,"<p>Eminently useful for finding valuables from afar, this spell has a variation
+for every substance imaginable. Sense (Substance) will cause all sources of the
+substance within range of the spell to glow an appropriate colour, visible only
+to the caster – diamonds will gleam like ice, amber will shine like a camp-fire
+and so on. Each point of this spell’s magnitude allows it to penetrate one metre
+of rock, wood or dirt. If the source is concealed behind such a material, the
+surface nearest the caster will glow for a moment. The spell cannot penetrate
+refined metal, though it can penetrate ore.</p>"
+Shapechange (Species) to (Species),9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,"Resist (Resilience), Touch","<p>Each Shapechange spell is a separate spell. Of all the spells with multiple
+variations, the Shapechange spell has the most, comprising a new spell for
+almost every combination of creatures imaginable. The spell only works on living
+things – the dead or inanimate cannot be shape changed.</p> <p>The magnitude of
+the spell must be equal to or greater than the average SIZ of both specified
+species. Thus, changing a mouse (SIZ 1) into a newt (also SIZ 1) is magnitude 1.
+Changing a mouse into a lion (SIZ 19) is magnitude 10.</p> <p>If the spell is
+successful, the target will be biologically changed, gaining the STR, DEX, CON
+and SIZ of its new form. Its INT, POW and CHA are unchanged, and the target
+retains its memories and abilities (though it may be unable to use some of those
+abilities in its new form).</p>"
+Skin of Life,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,Touch,"<p>This spell protects the recipient from suffocation by air deprivation, due to
+such factors as drowning or the Smother spell. Each point of magnitude will
+cover three points of SIZ – thus a magnitude 4 Skin of Life spell would sustain
+a SIZ 12 creature.</p>"
+Smother,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,"Concentration, Resist (Resilience Special)","<p>If successful, this spell neutralises the air surrounding the target, making
+each breath stale and worthless, depriving it of oxygen. The caster must
+concentrate each round, in order to keep the spell operating. For the duration
+of the spell, the target will be unable to breathe, essentially drowning on dry
+land.</p> <p>When the spell begins, the target’s Resilience test determines
+whether it is able to gasp in one last breath before Smother cuts off the
+surrounding oxygen supply. If the target succeeds, it may hold its breath as
+normal. If it fails, it will start drowning in the next combat round.</p>
+<p>This spell can also be used to extinguish fires, as the flames will be
+starved of oxygen. At magnitude 1, it can extinguish a Flame, magnitude 2 a
+Large Flame, magnitude 4 a Small Fire, magnitude 7 a Large Fire and magnitude 10
+it will put out an Inferno. Smother has no effect on magical fire or on
+fire-based creatures.</p>"
+Spell Resistance,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,,"<p>This spell matches its magnitude against the magnitude of any incoming spell.
+If Spell Resistance’s magnitude is greater than the incoming spell’s, then the
+incoming spell has no effect. If the incoming spell’s magnitude is equal to or
+greater than the magnitude of Spell Resistance, then the spell affects the
+target normally.</p> <p>Unlike many protective spells, Spell Resistance remains
+in place for the entirety of its duration – spells that successfully breach the
+spell do not dispel it. However, it does not discriminate between incoming
+spells – a comrade attempting to magically heal the recipient of Spell
+Resistance must overcome it in order to successfully use a healing spell.</p>"
+Spirit Resistance,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,,"<p>This spell matches its magnitude against the POW of any spirit that comes
+into contact with the recipient. If the recipient of the caster’s  POW  the
+Spirit Resistance’s magnitude is greater than the spirit’s POW, the spirit
+cannot touch the recipient.</p> <p>A spirit unable to touch a recipient will not
+be able to attack or directly harm them, including through ranged attacks. A
+spell cast by a spirit at the recipient is blocked unless its magnitude exceeds
+the Spirit Resistance’s magnitude.</p>"
+Summon (Other World creature),9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,Resist (Persistence),"<p>This spell allows the sorcerer to summon one Other World creature, per
+casting, to the mundane world. The creature is not automatically under the
+sorcerer’s control. If the summoned creature succeeds its Persistence test, it
+is free of the sorcerer’s command and, if so inclined, may be hostile to the
+sorcerer. Otherwise, it acts as if under the influence of a Dominate spell, for
+the duration of the spell.  The duration of the summon spell also determines how
+long the creature is trapped in the Mundane World.</p> <p>Example Other World
+creatures: Demons, Elementals, Spirits and Undead.</p>"
+Tap (characteristic),9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,"Concentration, Resist (Persistence), Touch","<p>There are actually seven Tap spells, one for each characteristic. These
+devastating spells allow the caster to permanently strip a target of
+characteristic points, transforming them into magic points for their own
+use.</p> <p>The caster must make contact with the target, either physically or
+through Touch Projection, in order to Tap it – therefore the spell cannot be
+used on incorporeal creatures, such as spirits.</p> <p>Tap will only work if its
+magnitude is equal to, or greater than, the target’s specified characteristic.
+Thus, a magnitude 6 Tap Strength spell would only work on targets with a STR of
+6 or lower.</p> <p>The number of points Tapped by the spell is equal to 1D6 per
+combat round the spell is applied to the victim.</p> <p>Characteristic points
+lost to Tap are lost permanently, though the victim can raise them again through
+the normal means of increasing a characteristic. Characteristics may be tapped
+to 0, which usually involves the death of the victim (the exception being
+Charisma).</p> <p>For each characteristic point the sorcerer Taps, they will
+gain one magic point. The sorcerer is limited in the number of magic points they
+can gain through Tap; the spell can only increase their magic points to double
+their normal limit. A sorcerer may simply Tap a target and dissipate any gained
+magic points.</p> <p>If the sorcerer gains more magic points through Tap than
+their normal maximum, the points will disappear at the rate of one magic point
+per minute once the spell finishes.</p>"
+Teleport,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,"Instant, Resist (Dodge)","<p>Teleport allows a sorcerer to move their self or a target, instantaneously,
+to anywhere within the range of the spell, as long as the destination can be
+directly observed (Sense Projection spells allow the Caster to ‘see’ locations
+beyond the physical line of sight), there is solid footing, and no objects bar
+their arrival. If these conditions are not met, the spell automatically fails.
+The caster is able to teleport objects up to 3 points of SIZ per point of
+magnitude.</p>"
+Time Travel (Time Period),9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,Instant,"<p>This spell transports the caster and creatures (of SIZ 12-18) equal to the
+magnitude of the spell to a named time era via a time tunnel that opens up and
+instantly sucks them through to their destination.  The duration of the spell is
+the time that the caster and group jump forward or backwards through time.</p>
+<p>Sorcerers usually have some knowledge about the time period they are
+travelling to and use an Anchor, a landmark such as a bronze statue, that exists
+in both the original and destination time period. If they are travelling blind
+without such an Anchor, the casting roll is at -25%, and the effects of a
+fumbled roll are even more catastrophic than the examples below suggest.</p>
+<p>If the spell casting is failed, the caster and group still travel, but they
+end up in the wrong location (1D10 Km away from the anchor point) and time (1D10
+time units away, the length of the time unit depends on duration, e.g. if the
+duration was in days, the time unit is days).</p> <p>If the spell casting is
+fumbled, catastrophic events occur.  Here are some example events, the creative
+Referee is encouraged to create more:</p> <p>A guardian creature from the Other
+World emerges through the portal and attacks the sorcerer in an attempt to close
+the portal.</p> <p>The sorcerer, and all within 10m of them, is sucked through
+the portal which then promptly closes. The sorcerer is so befuddled that they
+cannot remember the spell for D20+D4 hours.</p> <p>As above, but the sorcerer
+and party arrive in a completely different Time Era or even an Alternative
+Reality.</p> <p>Sorcerers with this spell can “change” time freely without
+having to worry about unintentional “butterfly effect” changes or any
+alterations in their own existence or memory from changing “their” past.
+However, regular use risks the catastrophic effects of a fumble.</p>"
+Treat Wounds,9nSgoZ4l88FtYgms,systems/oq/assets/icons/magic-swirl.svg,,FALSE,9nSgoZ4l88FtYgms,"Instant, Touch","<p>This spell must be cast upon a wounded character. It dramatically accelerates
+the natural healing rate of the target.  For every point of magnitude of this
+spell the caster can repair one hit point per combat round, for the duration of
+the spell.</p> <p>The spell cast at magnitude 6 instantly heals mortal wounds,
+bringing the character’s hit point total to one.</p> <p>This spell does not
+treat disease or poison. See Remove Disease and Poison Antidote,
+respectively.</p>"
