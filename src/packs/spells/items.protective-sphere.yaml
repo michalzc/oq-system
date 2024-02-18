@@ -22,5 +22,5 @@ system:
     would block out incoming attacks/spells but have no effect on attacks made
     within the sphere (including attacks targeting those outside the sphere).</p>
   nonVariant: false
-  type: 9nSgoZ4l88FtYgms
+  type: sorcery
 type: spell

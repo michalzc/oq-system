@@ -9,10 +9,7 @@ export class OQSpell extends OQBaseItem {
 
   getItemDataForChat() {
     const context = super.getItemDataForChat();
-    return _.merge(context, {
-      traits: this.getTraits(),
-      itemSubtypeLabel: `OQ.Labels.SpellTypes.${this.system.type}`,
-    });
+    return { ...context, traits: [...this.getTraits()], itemSubtypeLabel: `OQ.Labels.SpellTypes.${this.system.type}` };
   }
 
   async rollItemTest() {
