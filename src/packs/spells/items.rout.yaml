@@ -1,0 +1,16 @@
+_id: bh52vvlzWkhauQsG
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Rout
+system:
+  description: |-
+    <p>When aimed at a body of warriors, of no more than one hundred persons, they
+    must make a Persistence roll or immediately lose all cohesion as a unit and
+    rout. Routing units move at double movement, away from the caster, to ideally a
+    place of safety.  They will not defend themselves but will attack any enemy
+    units that get in their way, to get through them to their place of safety.</p>
+  magnitude: 3
+  nonVariant: true
+  type: divine
+type: spell

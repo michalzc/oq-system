@@ -1,0 +1,21 @@
+_id: i3NHltbvhBHnbKkn
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Invisibility
+system:
+  description: |-
+    <p>For the duration of the spell, the recipient is entirely invisible to sight.
+    They can still be heard, felt or smelled, with a -20% to Perception tests. Also,
+    if the caster loses concentration, or the recipient casts a spell or makes an
+    attack, the spell ends. The recipient also becomes visible immediately after the
+    spell ends, so even if the caster immediately casts another Invisibility spell,
+    there will be a delay between castings where the recipient is visible.</p>
+  magnitude: 4
+  nonVariant: true
+  traits:
+  - Concentration
+  - Personal
+  - Touch
+  type: divine
+type: spell

@@ -1,0 +1,18 @@
+_id: GolLLFPwvy4jvHQG
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/magic-swirl.svg
+name: See Past
+system:
+  description: |-
+    <p>When cast on a 10m area, the caster, as long as they concentrate, can see the
+    area as it was in any past point of time they wish.  They still need to make
+    successful Perception rolls to notice details, such as important clues, and they
+    cannot interact with the scene they see in any way, shape or form.</p>
+  magnitude: 2
+  nonVariant: true
+  traits:
+  - Area
+  - Concentration
+  type: divine
+type: spell

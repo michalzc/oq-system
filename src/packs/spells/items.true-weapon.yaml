@@ -1,0 +1,18 @@
+_id: rMuHpVgIkmWZCJBV
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/magic-swirl.svg
+name: True (Weapon)
+system:
+  description: |-
+    <p>When cast on the specified type of weapon, this spell doubles that weapon’s
+    normal damage dice. Other modifiers, such as Damage Modifier, are not affected.
+    The wielder of the weapon should roll the weapon’s damage twice and total the
+    result.</p>
+  magnitude: 3
+  nonVariant: true
+  traits:
+  - Duration (8h)
+  - Ranged
+  type: divine
+type: spell

@@ -1,0 +1,22 @@
+_id: I4Ak2ANGvQbQ6NqQ
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Consecrate
+system:
+  description: |-
+    <p>This spell is as much a part of a temple’s foundation as is its cornerstone.
+    It creates a sphere with a radius of ten metres per point of magnitude. The
+    consecrated sphere is sacred to the caster’s god. Consecrate by itself does
+    nothing to keep outsiders at bay, but the caster of the spell will know if a
+    spell, spirit or someone who is not a lay member of his religion, crosses the
+    boundaries of the Consecrate spell.</p>
+  magnitude: 1
+  nonVariant: false
+  traits:
+  - Area (Special)
+  - Common
+  - Permanent
+  - Progressive
+  type: divine
+type: spell

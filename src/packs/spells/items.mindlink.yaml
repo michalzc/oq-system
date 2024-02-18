@@ -1,0 +1,35 @@
+_id: Ihjzo7f8OtIbTkEL
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Mindlink
+system:
+  description: |-
+    <p>This spell allows the transmission of conscious thoughts, spell knowledge,
+    runes and magic points between participants.</p> <p>Additional points of
+    magnitude allow multiple sets of people to be linked together, either creating
+    several separate pairs of Mindlinked people or making the Caster the central hub
+    of a small Mindlink network. In the second case, only the ‘central’ character is
+    linked directly to other participants.</p> <p>Mindlink must be cast upon all
+    participants at the same time and is limited to consenting participants. Any
+    participant in a Mindlink may use the spell knowledge and magic points of others
+    they linked to without consent.</p> <p>Participants in a Mindlink have a special
+    vulnerability to INT, POW, CHA and morale-affecting spells. Such a spell cast
+    against any member of a Mindlink will affect all those connected, though all
+    participants are entitled to defend themselves individually.</p> <p>Although
+    participants in a Mindlink share magic points and conscious thought, they remain
+    their own entity. Mindlink does not include hidden thoughts, memories,
+    unconscious urges or permanent spell knowledge. A Mindlink participant may cast
+    a spell using one of those the other participants have, but only if they have
+    the necessary spell casting skill – Mindlink does not allow sharing of
+    skills.</p> <p>Any participant may sever their connection to the Mindlink as a
+    combat action. If any participant in Mindlink leaves the spell’s range, that
+    participant has left the Mindlink.</p>
+  magnitude: 1
+  nonVariant: false
+  traits:
+  - Duration (15)
+  - Progressive
+  - Ranged
+  type: divine
+type: spell

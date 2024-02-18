@@ -1,0 +1,475 @@
+name,folder,img,magnitude,nonVariant,type,traits,description
+Absorption,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,FALSE,divine,"Duration (15), Progressive, Touch","<p>This spell absorbs incoming spells aimed at the target or their equipment,
+converting their magical energy into magic points which are then available to
+the target. Once cast on a subject, Absorption will attempt to absorb the
+effects of any spells cast at the target. It will not have any effect on spells
+that are already affecting a character. The effects of Absorption depend on the
+relative magnitude of both itself and the incoming spell – see the Absorption
+Results table for more details. Any spell absorbed by this spell is cancelled
+and does not affect the target.</p> <table> <caption>Absorption
+Results</caption> <thead> <tr> <th>Incoming Spell’s Magnitude is</th>
+<th>Effect</th> </tr> </thead> <tbody> <tr> <td>Equal to or weaker than
+Absorption’s magnitude.</td> <td>Incoming spell absorbed and Absorption
+remains.</td> </tr> <tr> <td>1 or more points stronger than Absorption’s
+magnitude.</td> <td>Absorption eliminated and incoming spell takes effect.</td>
+</tr> </tbody> </table> <p>A character may not accumulate more magic points than
+his POW while Absorption is in effect – excess magic points garnered through
+Absorption simply vanish. Absorption is incompatible with Reflection, Shield and
+Spirit Block.</p>"
+Berserk,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,divine,"Duration (15), Touch","<p>The recipient of this spell is overcome with blood-lust, causing them to
+disregard their safety and loyalties but imbuing them with tremendous stamina
+and combat ability.</p> <p>The recipient will automatically succeed any
+Resilience test for the duration of the spell. The recipient also automatically
+succeeds at any Fatigue tests and cannot be rendered unconscious. The Close
+Combat skills of the recipient receive a +50% bonus for the spell’s
+duration.</p> <p>However, the subject may not Parry, Dodge or cast any magic
+spells while under the influence of Berserk. Normally, the recipient remains in
+the Berserk state for the entire 15-minute duration of the spell. Still,
+Referees may allow a Berserk character to shake off the effects with a
+Persistence test modified by -50%. At the end of the spell, the recipient
+immediately becomes Fatigued.</p> <p>Berserk does not combine with Fanaticism –
+Berserk will always take precedence in such cases.</p>"
+Block Fertility,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,3,TRUE,divine,Permanent,"<p>While this spell is in place, the recipient is unable to conceive. Depending
+on the view of the recipient, this is a blessing or a curse. The spell can be
+dispelled by the caster whenever they want. Otherwise, the effects of the spell
+are permanent.</p>"
+Breathe Water,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,divine,"Duration (15), Touch","<p>This spell allows an air-breathing creature to breathe water for the spell’s
+duration (the subject will still be able to breathe air as well). It may also be
+used upon a water-breathing creature to allow it to breathe air.</p>"
+Call (Elemental),dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,FALSE,divine,"Permanent, Progressive","<p>This spell summons and binds to the service of the caster an elemental from
+another plane of existence, of size dependent on the magnitude of the spell.</p>
+<p>1 = Small, 2= Medium, 3= Large, 4=Huge</p> <p>For more details on Elementals,
+see Chapter 11 ‘Creatures’.</p> <p>The elemental stays under the control of the
+Priest until killed, or the Call spell is dispelled.</p> <p>To be successfully
+cast, the spell requires an equal volume of the source material for the
+elemental. For example, before a successful summoning, a Large Undine (Water
+elemental) requires a pool of water of at least 50m3.</p>"
+Call (Undead),dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,FALSE,divine,"Permanent, Progressive","<p>This spell reanimates a dead human corpse and turns it into an undead
+creature, of a type determined by the magnitude of the spell.</p> <p>1 =
+Skeleton, 2 = Zombie, 5= Ghoul, 8= Vampire</p> <p>The undead creature stays
+under the control of the Priest until killed.</p>"
+Consecrate,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,FALSE,divine,"Area (Special), Common, Permanent, Progressive","<p>This spell is as much a part of a temple’s foundation as is its cornerstone.
+It creates a sphere with a radius of ten metres per point of magnitude. The
+consecrated sphere is sacred to the caster’s god. Consecrate by itself does
+nothing to keep outsiders at bay, but the caster of the spell will know if a
+spell, spirit or someone who is not a lay member of his religion, crosses the
+boundaries of the Consecrate spell.</p>"
+Create Blessed Items,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,FALSE,divine,"Area (Special), Common, Permanent, Progressive","<p>This spell allows the caster to create items which store Divine Magic
+spell(s) that are blessed by a Priest with power from the religion’s deity.</p>
+<p>Only Priests and High Priests can create blessed items.</p> <p>The enchanter
+forgets the spell(s) they blessed the item with.</p> <p>The wielder of the item
+can cast the spell(s) that has blessed the item but doing so discharges the
+item’s power. After discharging it, to recharge the item, it is taken to a
+temple of the religion that created it. This recharge takes as many hours as the
+magnitude of the spell. If the magnitude of the spell is higher than two, the
+consecrating team must have at least one Priest.</p> <p>The wielder must be a
+member of either the religion that created the blessed item or an allied
+religion.</p> <p>Blessed items become protected by the religion’s deity and are
+unbreakable by normal non-magical means.</p>"
+Create Idol,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,4,TRUE,divine,"Common, Permanent","<p>This spell requires an image of the caster’s god worth 100 GD, specially
+consecrated by a Priest reading from the sacred texts of the deity telling the
+tales and myths. The idol stores the god’s spells and can be used by Priest and
+Initiates to regain spells. It can be used by Lay Members to receive ‘lessons’,
+via visions, upon touching the idol.  Such visions will increase the Religion
+skill of a Lay Member by 1D10% when exposed to them.</p>"
+Create the Crystal Ship,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,4,TRUE,divine,Duration (the length of the voyage),"<p>From out of the air coalesces the Crystal Ship, a magical vessel that sails
+through the air to a single destination preordained by the caster. The caster
+need never have been there, but the caster’s deity must know of it. The ship is
+about the size of a merchant cog and fitted with no weapons.  Although the ship
+heads steadily towards the destination, at a rate of 100 km a day, the fine
+manoeuvring of the ship is managed by the thoughts of the caster.</p>"
+Dismiss Magic,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,FALSE,divine,"Common, Instant, Progressive, Ranged","<p>Dismiss Magic is used either against a general target or a specific spell and
+as a reaction when attacked with magic.</p> <p>When used against a general
+target, Dismiss Magic will eliminate a combined magnitude of spells equal to its
+magnitude, starting with the most powerful affecting the target. If it fails to
+eliminate any spell (because the spell’s magnitude is too high), then its
+effects immediately end and it will dispel no more spells.</p> <p>The caster can
+also target Dismiss Magic against a single specific spell. It will work
+successfully as long as Dismiss Magic’s magnitude equals or exceeds the target
+spell’s magnitude.</p> <p>When used as a defensive reaction against incoming
+magic, as long as the attacking caster is within Dismiss Magic’s range, a
+successful Dismiss Magic disrupts the other spell and nullifies it.</p>"
+Divination,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,FALSE,divine,"Common, Instant, Progressive","<p>For each point of the magnitude of this spell, the caster can ask one
+question of their deity, which they must answer to the best of their ability.  A
+deity can only answer questions it knows about, and that falls within its sphere
+of power. For example, a Mountain God will know exactly what is going on its
+slopes at any given time but will be completely ignorant about the ocean.</p>
+<p>Gods will also commonly ask for a sacrifice of an animal or precious object
+worth one gold ducat per question asked. Particularly cruel and bloodthirsty
+deities will demand blood sacrifices of sentient beings.</p> <p>Note, a weaker
+and less direct form of divination can be obtained at temples and shrines,
+without use of this spell. See Asking the Gods above.</p>"
+Divine Heal,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,divine,"Instant, Touch","<p>This powerful spell instantly heals any lost hit points, even if the
+character is mortally wounded, back to their full total. It also cures any
+natural disease, i.e. one not caused by a spirit; and any deadly poison is
+purged instantly from the character. Any damage or effects caused by it are
+removed.</p>"
+Enhance Fertility,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,3,TRUE,divine,Permanent,"<p>This spell makes any one creature more fertile than normal. If it is an
+animal that has multiple offspring, then it doubles the number. For creatures
+who usually have singular births, it guarantees the conception and birth of the
+offspring.</p> <p>This spell negates the effects of any “Block Fertility”
+spell.</p>"
+Enhance Unit,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,3,TRUE,divine,Duration (6h),"<p>For the duration of this spell, a troop of up to thirty soldiers gain +1D6
+damage.  Also, they cannot be routed or affected by any mind control magic (such
+as Befuddle).</p>"
+Excommunicate,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,5,TRUE,divine,"Common, Permanent, Resist (Persistence)","<p>This spell severs the mystical link an Initiate enjoys with their god,
+causing the target of the spell to immediately and permanently lose all Divine
+Magic from the caster’s religion. The target will never again be able to learn
+or use Divine Magic spells from the religion. However, they will still be able
+to use their Religion skill for purely academic purposes.</p> <p>A Priest of the
+same religion as the target casts the spell in a ceremony that takes one hour to
+cast. The Initiate need not be present.</p>"
+Exorcism,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,3,TRUE,divine,"Common, Concentration","<p>A Divine Magic caster can draw out a spirit currently possessing a mortal
+being by using this spell. Whether the possession is dominant or covert is
+immaterial.</p> <p>This spell forces a possessing spirit into Spirit Combat. The
+caster uses his Religion (Own) as the attacking skill in the opposed contest, as
+this represents the strength of their faith. If the caster is successful in
+defeating the spirit, it is cast out of the victim and flees. If the caster
+fails, the spirit remains in the possessed victim.</p>"
+Extension,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,FALSE,divine,"Common, Duration (Special), Progressive","<p>This spell lengthens the duration of any Divine Magic spell with the Duration
+trait. Extension, and the spell it is extending, are cast simultaneously by the
+caster – this is an exception to the normal rule that only one Divine Magic
+spell is cast during a combat round.</p> <p>Each point of magnitude of the
+Extension spell doubles the target spell’s duration. Thus, a magnitude 1
+Extension increases Breathe Water’s Duration to 30 minutes, a magnitude 2
+increases it to one hour, magnitude 3 increases it to two hours, magnitude 4
+increases it to four hours, and so on.</p>"
+Fear,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,TRUE,divine,"Instant, Ranged, Resist (Persistence)","<p>This spell causes the target to become overwhelmed with fear. Fear does not
+affect unconscious targets, those without an INT characteristic or those that
+are currently under the influence of a Fear spell.</p> <table> <caption>Fear
+Effects</caption> <thead><tr><th>Target’s Persistence
+Test</th><th>Effect</th></tr></thead> <tbody> <tr><td>Target fumbles Persistence
+test</td><td>The victim instantly loses half original hit points damage, as its
+heart falters. Falls into a coma for 1D12 hours.</td></tr> <tr><td>Target fails
+Persistence test</td><td>The victim flees in screaming terror for combat rounds
+equal to 20 minus its POW (minimum of one combat round). The victim will not
+engage in combat unless forced to and will use the Run combat action whenever
+possible (unless a faster mode of egress is available).</td></tr> <tr><td>Target
+succeeds Persistence test</td><td>The victim is shaken and disturbed, suffering
+a –20% penalty to all skill tests for combat rounds equal to 20 minus its POW
+(minimum of one combat round).</td></tr> <tr><td>Target critically succeeds
+Persistence test</td><td>The victim is unaffected by the spell and cannot be
+affected by further Fear spells for combat rounds equal to its POW.</td></tr>
+</tbody></table>"
+Find (Type),dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,TRUE,divine,"Duration (15), Ranged","<p>This spell is several spells, though they all operate in a similar fashion,
+which allows the caster to locate the closest target of the spell within its
+range. This effect is stopped by a thick substance such as metal, earth or
+stone, if it is at least one metre thick. It is also blocked by Absorption,
+though the caster will know the target is somewhere within range (though not its
+precise location). The separate Find spells are listed below.</p> <p>Unlike the
+Personal Magic Detect spells, the Find spells do not require concentration on
+the part of the caster – they simply function and alert them to the presence of
+whatever they locate.</p> <p><i>Find Enemy:</i> Gives the location of one
+creature who intends to harm the caster.</p> <p><i>Find Magic:</i> Gives the
+location of the nearest magic item, magical creature, or active spell.</p>
+<p><i>Find (Species):</i> Each Find Species spell will give the location of the
+nearest creature of the specified species. Examples of this spell include Find
+Goblin, Find Dwarf and Find Horse.</p> <p><i>Find Substance:</i> Each Find
+Substance spell will give the location of the nearest substance of the specified
+type. Examples of this spell include Find Coal, Find Gold and Find Wood.</p>
+<p>The Referee should provide the rough power of the detected subject (e.g.
+‘weak magic’ or ‘rich gold lode’).</p>"
+Illusion,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,FALSE,divine,"Duration (15), Progressive, Ranged","<p>This spell creates an illusion based on all five senses. The illusion will
+seem real and solid unless the person looking at it succeeds in a Perception
+test, which is subject to a modifier based on the magnitude of the spell. If the
+viewer succeeds in a Perception test, and the illusion could usually cause
+damage if believed in, it can no longer cause damage to that character. As soon
+as a viewer disbelieves the illusion, it becomes insubstantial and ghost-like to
+them.</p> <p>The magnitude also governs the Size of the illusion.  A magnitude 1
+Illusion can quite happily create small household items, say a fake table and
+chair, but would not be able to create an illusion of a fire-breathing
+Dragon.</p> <table> <caption>Illusions</caption>
+<thead><tr><th>Magnitude</th><th>Modifier to Perception test</th><th>Type of
+illusion possible</th></tr></thead> <tbody> <tr><td>1</td><td>+50 %</td><td>Not
+capable of motion or causing damage. Slightly fuzzy and unreal round the edges.
+Limit of SIZ 10.</td></tr> <tr><td>2</td><td>+25 %</td><td>Some minor
+discrepancies. Capable of motion, but not of damage. Limit of SIZ 15.</td></tr>
+<tr><td>3</td><td>0</td><td>Capable of motion and causing damage. Limit of SIZ
+20.</td></tr> <tr><td>4</td><td>-25 %</td><td>Capable of motion and causing
+damage. Limit of SIZ 30.</td></tr> <tr><td>5</td><td>-50
+%</td><td>Indistinguishable from the real thing, capable of motion and damage.
+Limit of SIZ 40.</td></tr> <tr><td>+1</td><td>-50%</td><td>+10 SIZ per
+magnitude.</td></tr> </tbody> </table>"
+Invisibility,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,4,TRUE,divine,"Concentration, Personal, Touch","<p>For the duration of the spell, the recipient is entirely invisible to sight.
+They can still be heard, felt or smelled, with a -20% to Perception tests. Also,
+if the caster loses concentration, or the recipient casts a spell or makes an
+attack, the spell ends. The recipient also becomes visible immediately after the
+spell ends, so even if the caster immediately casts another Invisibility spell,
+there will be a delay between castings where the recipient is visible.</p>"
+Jigsaw,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,4,TRUE,divine,Duration (6h),"<p>This spell causes the target to fall to pieces upon a failed Persistence
+roll.  The victim will still be alive but will not require food or water during
+the time the spell is in operation. When the spell ends, due to being dispelled
+or running out of duration, the victim will die unless painstakingly put back
+together beforehand.</p>"
+Lightning Strike,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,FALSE,divine,"Instant, Progressive, Ranged, Resist (Dodge)","<p>This spell causes a sizzling bolt of lightning to streak from the hand of the
+caster toward the target. If the bolt hits, each point of magnitude of the spell
+will cause 1D6 damage. Armour Points are not effective against this damage, and
+it counts as both magical and electrical damage.</p>"
+Madness,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,TRUE,divine,"Instant, Ranged, Resist (Persistence)","<p>This spell causes the target to lose contact with reality and become a
+gibbering loon. Madness does not affect unconscious targets, those without an
+INT Characteristic or those that are already under the effect of a Madness
+spell.</p> <table> <caption>Madness Effects</caption> <thead><tr><th>Target’s
+Persistence Test</th><th>Effect</th></tr></thead> <tbody> <tr><td>Target fumbles
+Persistence test</td><td>Victim instantly loses 1D4 INT permanently and lapses
+into a catatonic state for minutes equal to 20 minus its POW (minimum of one
+combat round).</td></tr> <tr><td>Target fails Persistence test</td> <td>
+<p>Victim gibbers and raves uncontrollably for combat rounds equal to 20 minus
+its POW (minimum of one combat round).</p> <p>The victim will perform random
+combat actions during this period.</p> <p>Roll 1D6.</p> <ul> <ol>Move to close
+combat attack a random target.</ol> <ol>Run in a random direction (Roll 1D12 as
+clock face to determine direction).</ol> <ol>Cast a spell at a random
+target.</ol> <ol>Use ranged attack against a random target.</ol> <ol>Shout at a
+random target.</ol> <ol>Change stance.</ol> </ul> </td></tr> <tr><td>Target
+succeeds Persistence test</td><td>The victim is shaken and disturbed, suffering
+a –20% penalty to all skill tests for combat rounds equal to 20 minus its POW
+(minimum of one combat round).</td></tr> <tr><td>Target critically succeeds
+Persistence test</td><td>The victim is unaffected by the spell and cannot be
+affected by further Madness spells for combat rounds equal to its POW.</td></tr>
+</tbody> </table>"
+Mindblast,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,FALSE,divine,"Instant, Progressive, Ranged, Resist (Persistence)","<p>This spell applies a penalty to the victim’s INT equal to the magnitude of
+the spell. The effect lasts days equal to the Caster’s current CHA.</p>"
+Mindlink,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,FALSE,divine,"Duration (15), Progressive, Ranged","<p>This spell allows the transmission of conscious thoughts, spell knowledge,
+runes and magic points between participants.</p> <p>Additional points of
+magnitude allow multiple sets of people to be linked together, either creating
+several separate pairs of Mindlinked people or making the Caster the central hub
+of a small Mindlink network. In the second case, only the ‘central’ character is
+linked directly to other participants.</p> <p>Mindlink must be cast upon all
+participants at the same time and is limited to consenting participants. Any
+participant in a Mindlink may use the spell knowledge and magic points of others
+they linked to without consent.</p> <p>Participants in a Mindlink have a special
+vulnerability to INT, POW, CHA and morale-affecting spells. Such a spell cast
+against any member of a Mindlink will affect all those connected, though all
+participants are entitled to defend themselves individually.</p> <p>Although
+participants in a Mindlink share magic points and conscious thought, they remain
+their own entity. Mindlink does not include hidden thoughts, memories,
+unconscious urges or permanent spell knowledge. A Mindlink participant may cast
+a spell using one of those the other participants have, but only if they have
+the necessary spell casting skill – Mindlink does not allow sharing of
+skills.</p> <p>Any participant may sever their connection to the Mindlink as a
+combat action. If any participant in Mindlink leaves the spell’s range, that
+participant has left the Mindlink.</p>"
+Miraculous Item,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,FALSE,divine,"Duration (1h), Progressive","<p>This spell allows the Caster to create items literally from nowhere. The size
+of the item depends upon the magnitude of the spell.</p> <table>
+<caption>Magnitude vs. Size of Miraculous Item</caption>
+<thead><tr><th>Magnitude</th><th>Size of item</th></tr></thead> <tbody>
+<tr><td>1</td><td>Small items. Such as pots, plates, knives, and a defaced
+detail on a stone fresco, etc.</td></tr> <tr><td>2</td><td>Medium. Large
+containers such as wine amphorae, target shields, long swords, human-sized
+armour, a missing arm on a broken statue.</td></tr> <tr><td>3</td><td>Large.
+Tower shields, broken doors, a missing masonry feature such as a
+column.</td></tr> <td><td>4</td><td>Huge. Giant armour, ruined houses, shattered
+towers.</td></td> <tr><td>5</td><td>Enormous. The broken parts of a walking
+castle, the ruined walls of a city.</td></tr> </tbody> </table> <p>Such items
+are always of the finest quality and do not break under any circumstance.  For
+the cost of the magnitude in growth points, the item can last permanently.
+Otherwise, it disappears after one hour.</p>"
+Mythic Journey,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,4,TRUE,divine,"Common, Duration (1d)","<p>This spell opens a gate to a place in the Houses of the Holy associated most
+closely with the worshipper’s deity or pantheon. The worshipper may take any
+number of companions with them but must be aware that if they are not acceptable
+to the residents of the place they are going to, they may be attacked or
+expelled. Also, the companions must have some strong spiritual connection with
+the caster, such as being members of the same religion or good friends.</p>
+<p>Time works differently in the worlds of mythology, perhaps no longer being a
+workable concept, but for where time is important, in the Real World, the
+spell’s duration is the amount of time that the caster and their companions are
+away in the Mythic World.</p> <p><i>For example,</i> Ethelred uses this spell to
+travel to the Palace of the Celestial Emperor to ask him in person for help in
+the Real World against the invading Burning Horde. Once his business has
+finished there, he decides to stay and linger enjoying the delights of the
+Divine Court. Months pass, or so it seems, until Ethelred loses track of how
+many Imperial Banquets he has enjoyed. One morning, instead of waking up in his
+crystal room with its bed made of satin sheets, in the palace, he awakes in the
+Real World Temple of the Celestial Emperor in one of the initiates beds, a
+rather rude affair with rougher linen sheets. He asks the passing novice how
+long he has been away and finds out that it’s only a day after he passed through
+the gate when he cast the spell.</p> <p>It is also possible to get trapped in
+the Mythic World (for example, through getting captured by magical powers) in
+which case the character does not return form the Mythic World until they escape
+whatever power that has them in their thrall.</p> <p><i>For example,</i> Nykos
+the Squire accompanies Ethelred to the Palace of the Celestial Emperor. While
+his master is conducting his business, Nykos meets one of the Imperial
+Handmaidens and becomes beguiled by her charms. When Ethelred returns to the
+real world, after months of pleasure, Nykos remains still under the spell of the
+Imperial Handmaiden.</p>"
+Mischief,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,divine,"Resist (Persistence), Touch","<p>Mischief is a minor trickster’s spell which afflicts its target with a small
+irritating curse.</p> <p>Roll 1D20 on the following list for a result, which
+stays in place for the duration of the spell.</p> <table> <caption>Type of
+Mischief</caption> <thead><tr><th>Roll 1D20</th><th>Result</th></tr></thead>
+<tbody> <tr><td>1</td><td>Clothes disappear.</td></tr> <tr><td>2</td><td>Hair
+goes green.</td></tr> <tr><td>3</td><td>Hair drops out.</td></tr>
+<tr><td>4</td><td>Grows beard regardless of sex.</td></tr> <tr><td>5</td><td>The
+target’s weapon becomes a bunch of flowers.</td></tr> <tr><td>6</td><td>Armour
+becomes the festive dress of the opposite sex.</td></tr> <tr><td>7</td><td>Feet
+become duck feet.</td></tr> <tr><td>8</td><td>Head becomes that of a domestic
+animal (cow, pig, sheep, etc.).</td></tr> <tr><td>9</td><td>Victim smells of
+excrement (-20% to any Deception or Influence rolls).</td></tr>
+<tr><td>10</td><td>Wobbles uncontrollably, -20% to attacks, Athletics and any
+other roll involving dexterity.</td></tr> <tr><td>11</td><td>The victim can only
+speak gibberish.</td></tr> <tr><td>12</td><td>The victim says the most
+inappropriate things at the most socially awkward times. -20% to any Influence
+rolls.</td></tr> <tr><td>13</td><td>The victim falls asleep for 1D6 rounds on
+failed Persistence roll whenever they enter combat.</td></tr>
+<tr><td>14</td><td>Makes loud flatulent noises whenever they move; -25 to any
+Deception rolls.</td></tr> <tr><td>15</td><td>The victim is compelled to tell
+the truth at all times.</td></tr> <tr><td>16</td><td>No one ever takes the
+character seriously. Always has to make an Influence roll at -20% to convince
+others.</td></tr> <tr><td>17</td><td>Turns into a dog.</td></tr>
+<tr><td>18</td><td>Arms turn to rubber, unable to hold anything.</td></tr>
+<tr><td>19</td><td>The victim becomes short, half SIZ.</td></tr>
+<tr><td>20</td><td>Roll twice.</td></tr> </tbody> </table>"
+Puppet,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,3,TRUE,divine,"Concentration, Duration (6h), Resist (Persistence)","<p>The caster uses this spell to enchant a puppet, which is the focus of the
+spell and the stand-in for the victim. The victim can use Persistence to resist
+the spell, and if they fail, their actions are controlled via the puppet by the
+caster, for the duration of the spell. The victim is aware of not being in
+control of their body but is powerless to stop it. The exception to this rule is
+when the victim’s life or that of a friend is in danger because of the
+Puppeteer’s commands. Then the victim is allowed another Persistence roll, and,
+if successful, break free of the spell’s control.</p>"
+Purity (Religion/Creed),dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,divine,Touch,"<p>This spell removes a perceived sin according to a particular religion. If the
+caster is out of favour because of said sin, all is forgotten and forgiven.</p>"
+Quicksand,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,divine,Area,"<p>This spell creates a patch of quicksand 10m square. The earth in the area
+becomes boggy and saturated with water. On a failed Persistence roll, any
+character standing on the patch will sink into the earth, at a rate of 1 metre a
+combat round, The quicksand holds the victim firmly and only by dispelling the
+magic can they be rescued.</p> <p>Once the duration of the spell is over, the
+victim, if not on the surface, is buried under the now solid earth (see
+Suffocation rules).</p>"
+Radiant Appearance,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,divine,Duration (1d),"<p>The recipient of this spell glows with light and power. They gain +50% to any
+Influence rolls for the duration of the spell.  Also, any light-hating creatures
+suffer -20% when attacking the recipient.</p>"
+Repair and Replace,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,FALSE,divine,"Instant, Progressive","<p>This spell repairs broken crafted items. It also replaces missing parts of an
+item.</p> <p>The size of the item depends on the magnitude of the spell.</p>
+<table> <caption>Size of Item vs Magnitude</caption>
+<thead><tr><th>Magnitude</th><th>Size of Item</th></tr></thead> <tbody>
+<tr><td>1</td><td>Small items, such as pots, plates, knives, a defaced detail on
+a stone fresco, etc.</td></tr> <tr><td>2</td><td>Medium. Large containers, such
+as wine amphorae, target shields, long swords, human-sized armour, a missing arm
+on a broken statue.</td></tr> <tr><td>3</td><tr>Large. Tower shields, broken
+doors, a missing masonry feature such as a column.</tr></tr>
+<tr><td>4</td><td>Huge. Giant armour, ruined houses, shattered towers.</td></tr>
+<tr><td>5</td><td>Enormous. The broken parts of a walking castle, the ruined
+walls of a city.</td></tr> </tbody> </table>"
+Reflection,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,FALSE,divine,"Duration (15), Progressive, Ranged","<p>This spell reflects incoming spells aimed at the target or his equipment,
+redirecting the spell back at the original caster. Once cast on a subject,
+Reflection will attempt to reflect any spells cast at the target. It will not
+have any effect on spells that are already affecting a character. The effects of
+Reflection depend on the relative magnitude of both itself and the incoming
+spell – see the Reflection Results table for more details.</p> <p>Reflection is
+incompatible with Absorption, Shield and Spirit Block</p> <table>
+<caption>Reflection Results</caption> <thead> <tr> <th>Incoming Spell’s
+Magnitude is...</th> <th>Effect</th> </tr> </thead> <tbody> <tr><td>Equal to or
+weaker than Reflection’s magnitude.</td><td>Incoming spell reflected and
+Reflection remains.</td></tr> <tr><td>1 or more points stronger than
+Reflection’s magnitude.</td><td>Reflection is eliminated and the incoming spell
+takes effect.</td></tr> </tbody> </table>"
+Resurrect,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,5,TRUE,divine,"Concentration (Special), Instant, Touch","<p>The body of the deceased must be present and must be whole. If the target
+died due to disease or poison, the recipient returns to life cured.</p> <p>This
+spell summons the deceased spirit to return its former body. Taking minutes
+equal to the target’s totalled Characteristics to take effect, during which time
+the caster must maintain concentration on the spell. If interrupted, the spell
+fails. When the spell is successful, the dead character returns to life with one
+hit point.</p> <p>Resurrect must be cast within days equal to the POW of the
+deceased. Casting the spell after this point results in the magic automatically
+failing.</p>"
+Rout,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,3,TRUE,divine,,"<p>When aimed at a body of warriors, of no more than one hundred persons, they
+must make a Persistence roll or immediately lose all cohesion as a unit and
+rout. Routing units move at double movement, away from the caster, to ideally a
+place of safety.  They will not defend themselves but will attack any enemy
+units that get in their way, to get through them to their place of safety.</p>"
+See Past,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,divine,"Area, Concentration","<p>When cast on a 10m area, the caster, as long as they concentrate, can see the
+area as it was in any past point of time they wish.  They still need to make
+successful Perception rolls to notice details, such as important clues, and they
+cannot interact with the scene they see in any way, shape or form.</p>"
+Shield,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,FALSE,divine,"Duration (15), Progressive","<p>This spell protects the caster from physical and magical attacks. Each point
+of magnitude gives the caster one Armour Point and provides a +10% bonus to any
+tests the caster may make to resist malign magical effects. A magnitude 4 Shield
+spell provides the caster with +4 AP and a +40% bonus against malign spells, for
+instance. These effects are cumulative with other spells, as well as any
+physical armour the caster is wearing. Shield is incompatible with Absorption,
+Reflection and Spirit Block.</p>"
+Soul Sight,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,TRUE,divine,"Common, Duration (15), Touch","<p>This spell allows the recipient to see the POW aura of anyone they looks at,
+enabling them to discern that creature’s current magic points, as well as the
+nature of any active spells or enchanted items the creature is carrying. It also
+allows the recipient to see into the Spirit World.</p>"
+Stink Bomb,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,TRUE,divine,Resist (Resilience),"<p>Upon being targeted by this spell, the victim becomes covered in a tightly
+fitting cloak of noxious smelling gas for 1D6 rounds. Each round the victim must
+make a Resilience test or take 1D4 damage. If the resistance test result is
+fumbled, the character is unconscious for the remaining duration of the spell
+from being knocked out by the smell.  All Influence tests and other social
+interactions are at -20% for the duration of the spell.</p>"
+Spirit Block,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,FALSE,divine,"Common, Duration (15), Progressive, Touch","<p>Spirits may only touch the recipient of Spirit Block with a POW high enough
+to break through the spell’s magnitude (see table).</p> <table> <caption>Spirit
+Block Effectiveness</caption> <thead> <tr> <th>Spirit Block’s Magnitude</th>
+<th>Recipient May Only Be Harmed By Spirits With…</th> </tr> </thead> <tbody>
+<tr> <td>1</td> <td>POW 10 or higher</td> </tr> <tr> <td>2</td> <td>POW 17 or
+higher</td> </tr> <tr> <td>3</td> <td>POW 26 or higher</td> </tr> <tr>
+<td>4</td> <td>POW 37 or higher</td> </tr> <tr> <td>5</td> <td>POW 50 or
+higher</td> </tr> <tr> <td>6</td> <td>POW 65 or higher</td> </tr> <tr>
+<td>7</td> <td>POW 82 or higher</td> </tr> <tr> <td>8</td> <td>POW 101 or
+higher</td> </tr> </tbody> </table> <p>A spirit unable to touch a Spirit Blocked
+character will not be able to personally attack or harm the recipient, including
+through ranged attacks (such as a thrown spectral javelin). A spell cast by a
+spirit at the recipient is blocked unless its magnitude exceeds Spirit Block’s
+magnitude.</p> <p>Spirit Block is incompatible with Absorption, Reflection and
+Shield.</p>"
+Sun Disc,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,TRUE,divine,"Ranged, Resist (Dodge)","<p>Upon casting this spell, the Caster projects a disc of blinding light from
+their hand. Targets in the path of the disc are blinded for 1D4 hours, unless
+they pass their Dodge skill test. Its warming effect melts ice upon contact,
+even magical ice, if under three magnitude in power, and gives anyone it touches
++50% resistance versus cold.</p>"
+Sunspear,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,4,TRUE,divine,"Ranged, Resist (Dodge)","<p>This spell will only function in direct sunlight. When cast, a shaft of light
+two metres wide streaks from the sky to blast a single target, who must be
+visible to the caster. If the target does not dive out of the way, the blazing
+light will burn it for 4D6 damage. Armour points are not effective against this
+damage, and it counts as both magical and fire damage.</p>"
+Sureshot,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,TRUE,divine,"Duration (15), Ranged","<p>When cast on a missile weapon (such as a knife, arrow, javelin or rock),
+firing it triggers the spell. Unless the wielder of the weapon rolls an
+automatic failure or a fumble, the missile hits successfully (though it may be
+dodged or parried). So long as the target is within the maximum range of the
+weapon, the missile will strike home, regardless of concealment or any other
+factors. Attempts to parry or dodge the missile suffer a –20% penalty.</p>
+<p>Combining Sureshot with Firearrow, Multimissile or Speedart does not work,
+since Sureshot will always take precedence in such cases.</p>"
+Thunder’s Voice,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,divine,,"<p>This spell grants the caster a loud voice of command which gives the caster
++20% added to their Influence skill, heard at up to 200 metres.</p>"
+Touch of Death,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,4,TRUE,divine,"Instant, Resist (Persistence), Touch","<p>The caster must touch their victim, and on a failed Persistence test, the
+victim falls dead. This incredibly powerful spell is available to only members
+of religions whose deity wields the power of death itself. Usually, to redress
+the balance, where a person who by all rights should be dead is still alive.</p>"
+Treasury,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,4,TRUE,divine,Duration (1d),"<p>This spell creates a secure room, for one day, to store valuables.  All the
+entrances are locked and only the caster can come in and out without setting off
+a magical alarm that they can hear, no matter how far away from the room they
+are.</p>"
+True (Weapon),dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,3,TRUE,divine,"Duration (8h), Ranged","<p>When cast on the specified type of weapon, this spell doubles that weapon’s
+normal damage dice. Other modifiers, such as Damage Modifier, are not affected.
+The wielder of the weapon should roll the weapon’s damage twice and total the
+result.</p>"
+Ward Camp,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,divine,"Area, Duration (8h)","<p>This spell protects a camp with an area of 50 meters squared.  Anyone
+crossing the invisible boundary of the spell takes 1D10 damage and sets off a
+magical alarm that immediately awakens everyone within the camp.  The Ward stays
+in place, even after it has been crossed, for the full duration of the
+spell.</p>"
+Wax Effigy,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,4,TRUE,divine,Resist (Persistence),"<p>This spell enchants a small wax representation of the intended victim. Spells
+can be cast at the effigy and affect the victim, despite the distance between
+the effigy and the victim. The caster need not have seen/met the victim, since
+it is the power of their god that is providing the link.  Once a day, the victim
+can be caused physical harm by driving pins into the effigy, at 1D4 damage per
+pin. The caster can attempt to kill the victim outright by breaking off the head
+of the effigy.  In this case, the victim gets a Persistence roll to avoid death.
+On a failed Persistence test, the victim dies. On a successful Persistence roll,
+the effigy no longer has any power over the victim.</p>"
+Whirlwind,dbvkv9rUDY2YT8qS,systems/oq/assets/icons/magic-swirl.svg,1,FALSE,divine,"Duration (15m), Progressive","<p>Each point of magnitude of this spell whips up a whirlwind capable of
+carrying 20 SIZ in its whirling vortex. Each round the whirlwind moves ten
+metres per point, in a random direction (use a D8 to determine the direction,
+with 1 being North and 5 being South, progressing clockwise around the
+directions). For each point of magnitude the whirlwind is 10 metres tall.</p>
+<p>If the whirlwind hits a character, make a Dodge roll to avoid being caught up
+in it. Characters caught are whipped off their feet, 1D6 metres into the vortex.
+Each round roll a 1D6 and consult the following table.</p> <table>
+<caption>Whirlwind Results</caption> <thead> <tr> <th>Roll 1D6</th>
+<th>Result</th> </tr> </thead> <tbody> <tr> <td>1-2</td> <td>The character is
+carried up 1D10 metres (if already at the top), blown out of the whirlwind the
+additional height before falling to earth (taking damage).</td> </tr> <tr>
+<td>3-4</td> <td>Stay at the height they are.</td> </tr> <tr> <td>5-6</td>
+<td>Fall 1D6 down in the vortex. If this takes them to the ground, they take
+falling damage.</td> </tr> </tbody> </table>"
