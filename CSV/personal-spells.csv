@@ -152,3 +152,214 @@ World.</p>"
 Dull Weapon,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,,"<p>This spell works on any weapon. For every point of magnitude, it reduces the
 damage dealt by the target weapon by two points. This spell does not affect the
 damage inflicted by the damage bonus of the user.</p>"
+Enhance (Skill),PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,,"<p>Like Detect (Type), this includes several different spells, each of which
+affects a different non-combat skill.  For each point of magnitude, the
+recipient gains +10% to any skill test using the Enhanced skill.  Alternatively,
+for each additional point of magnitude of the spell, the caster can affect one
+more target.  How the caster allocates this magnitude between bonuses and
+targets is up to the caster, providing each bonus are in multiples of 10%, and
+the total of bonuses equals the spells magnitude x 10%.</p> <p>For example,
+Ethelred may have Enhance (Deception) 5.  He could cast it all on himself to
+give a whopping +50% to their Deception or could cast it on himself and an ally,
+giving himself +30% and their ally +20%. If in a larger group, he could even
+cast it on 5 allies, each of whom would gain +10% to their Deception skill.</p>
+<p>The most common spells of this type are:</p> <ul> <li><i>Enhance
+(Deception)</i>, often used by thieves.</li> <li><i>Enhance (Trade)</i>, used by
+merchants.</li> <li><i>Enhance (Influence)</i>, used by lawyers, con-artists and
+officers.</li> <li><i>Enhance (Resilience)</i>, used by warriors.</li>
+<li><i>Enhance (Persistence)</i>, used by magicians.</li> </ul>"
+Extinguish,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,Instant,"<p>This spell instantly puts out fires. At magnitude 1 it can extinguish a
+flame, magnitude 2 a small fire, magnitude 3 a large fire and magnitude 4 will
+put out an inferno.</p>"
+Fanaticism,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,personal,,"<p>The target of this spell will have close combat and unarmed combat skills
+increased by +20% but may not attempt  to  cast spells. Also, for the duration
+of the spell, the target has a +50% bonus to any Persistence test. The
+Demoralise spell and vice versa automatically cancel the effects of this
+spell.</p>"
+Farsight,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,Concentration,"<p>Each point of this spell extends the caster’s field of vision by twenty
+metres as long as they maintain their concentration.  Although they can see
+small details at a distance, this spell does not let the caster see through
+walls or other obstructions.</p>"
+Firearrow,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,personal,Touch,"<p>Casting this spell on a missile weapon will allow it to fire magical missiles
+of flame. When one of these missiles hits a target, it deals 1D10 points of
+magical fire damage. Since the Firearrow does magical damage, it affects
+creatures that are immune to normal damage. A target remains on fire once hit,
+taking 1D10 damage per round in subsequent rounds, until they spend a combat
+action putting out the flames or someone successfully casts Extinguish on them.
+A missile weapon under the effects of Firearrow cannot benefit from Multimissile
+or Speedart</p>"
+Fireblade,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,4,TRUE,personal,Touch,"<p>For the duration of the spell, the target weapon deals an additional 1D10
+magical fire damage as well as its normal damage. One struck by the weapon
+remains on fire, taking 1D10 damage per round in subsequent rounds, until they
+spend a combat action putting out the flames or someone successfully casts
+Extinguish on them. A weapon under the effects of Fireblade cannot benefit from
+Weapon Enhance. Since Fireblade does magical damage, it damages creatures immune
+to normal damage.”</p>"
+Fist of Gold,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,,"<p>Each point of magnitude allows the caster to make one extra unarmed attack.
+These attacks happen in a blur of motion as soon as the spell fires (i.e. when
+the spell takes effect), instead of the normal combat order that the character’s
+attacks happen on. An attack roll is made separately for each attack.</p>"
+Frostbite,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,personal,"Instant, Resist (Resilience)","<p>This attack spell allows the caster to freeze their opponent, dealing 1D8
+points of damage, ignoring any armour points. Magical protection that protects
+against cold damage can block this effect, but mundane items (such as severe
+weather gear) are ineffective.</p>"
+Glue,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,"Area, Touch","<p>This spell covers an area of one centimetre square for each magnitude with
+extremely sticky glue. If a creature steps on the glue, it must make an
+Athletics roll vs. the magnitude x 10% to avoid being stuck for one round. On
+subsequent rounds, it must make the same roll to break free. This spell can also
+make conventional repairs, for example repairing a broken sword, with magnitude
+x 10% being the chance that the item won’t break again if used in circumstances
+that would cause it to.</p>"
+Harden,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,1,TRUE,personal,Touch,"<p>This spell makes a target item unbreakable for the duration of the spell.
+Therefore, weapons with this spell cast on them will not break when a fumble
+occurs in combat, and it allows items that are normally too brittle to be
+wielded in combat to be used as improvised weapons.</p>"
+Heal,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,"Instant, Touch","<p>For every point of the magnitude of this spell, the caster can repair one hit
+point to damage to either themselves or another target.</p> <p><i>Mortal
+Wounds.</i> A magnitude 6 or higher Heal spell will heal a mortal wound (any
+damage that takes the character to zero hit point or less) instantly, restoring
+them to one hit point.</p> <p><i>Curing Disease or Poison.</i> At magnitude 5 or
+higher , a Heal spell will also cure any single poison or disease affecting the
+target. Lost hit points are restored normally, but any other damage caused by
+the poison or disease, such as characteristic loss, will not be restored.</p>
+<p>This spell can not be used to bring characters who are dead back to life.</p>"
+Hinder (Skill),PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,"Ranged, Resist (Persistence)","<p>Like Enhance (Skill), this is several different spells, each of which affects
+a different skill.  For each point of the magnitude of the spell, the target
+gains a -10% penalty to the next skill test using the affected skill.</p>
+<p>Alternatively, for each additional point of magnitude of the spell, the
+caster can affect one more target.  The bonuses and targets are allocated as
+necessary, provided each penalty is in multiples of 10%, and the total of
+bonuses equals the spell’s magnitude x 10%.  If used in this way, each target is
+affected separately; if one target succeeds in resisting the spell, other
+targets may fail and be affected.</p> <p>The most common spells of this type are
+as follows.</p> <ul> <li><i>Hinder (Perception),</i> often used by thieves.</li>
+<li><i>Hinder (Trade),</i> used by the nastier traders.</li> <li><i>Hinder
+(Persistence),</i> used by magicians against enemy spellcasters before casting
+spells upon them.</li> </ul>"
+Ignite,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,1,TRUE,personal,Instant,"<p>Ignite will set fire to anything flammable within range, creating a flame. If
+the target is attached to a living being (such as hair, fur or clothes), then
+the spell gains the Resist (Resilience) trait.</p>"
+Ironmind,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,3,TRUE,personal,,"<p>This spell hardens the resolve of the recipient for its duration. The spell
+adds 20 % to all Persistence tests against magical attacks to the mind (e.g.
+Fear, Befuddle, etc.) or opposed tests vs. Influence.</p>"
+Leap,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,"Touch, Resist (Dodge)","<p>This spell causes the target to leap 2m up in the air for each point of
+magnitude. If cast upon an unwilling target, make a resistance roll and roll for
+falling damage on failure.</p>"
+Levitating Disc,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,"Area, Concentration","<p>This spell creates an invisible disc, 1m in diameter for each point of
+magnitude.  It can carry weight equivalent to one person and their belongings
+per point of magnitude and moves at twice the magnitude in metres per combat
+round.</p> <p><i>For example,</i> a Levitating Disc with magnitude 3 can carry 3
+people, is 3m in diameter, and moves at a rate of 6m per combat round.</p>"
+Light,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,1,TRUE,personal,Area (10m),"<p>When cast on a physical object (including living material), this spell causes
+the object to shed light across the area of effect. The spell illuminates only
+the specified area – everything outside the area of effect is not lit. This
+spell creates raw light, not a flame.</p>"
+Lock,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,"Permanent, Touch","<p>This spell gives an item a resistance to being opened equal to the spell’s
+magnitude x 10%. The item must have a lock, such as might be found on a door or
+a chest, as a focus for the spell. Once the lock has been forced/picked, the
+spell ends.</p>"
+Mindspeech,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,,"<p>This spell can affect one target for every point of magnitude. It allows
+telepathy between the caster and any target, though targets will not have
+telepathy with one another. The words transmitted by telepathy must be whispered
+and will be heard directly in the head of the recipient, in the same language in
+which the caster spoke it.</p>"
+Mobility,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,,"<p>For every point of the magnitude of this spell, the target’s movement rate
+increases by an additional two meters.</p>"
+Multimissile,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,Touch,"<p>If the caster succeeds in casting the spell, a missile weapon holds the spell
+for ten minutes. A missile under the effects of Multimissile cannot benefit from
+Firearrow or Speedart.</p> <p>When the Multimissile-enchanted missile is fired
+or thrown, one additional magical missile fires for every point of magnitude.
+Each magic missile’s attack is separate, and each does the same damage as the
+original (though they will not benefit from the character’s damage modifier).
+Magical missiles created through Multimissile will not cause critical hits,
+though the original missile can. Magical missiles created through Multimissile
+will affect creatures that can only be hurt by magic.</p>"
+Personal Insight,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,personal,,"<p>This spell gives the caster or recipient a straightforward insight into a
+small question directly relevant to them, in the form of an internal
+intuition.</p> <p><i>For example</i> the question “Why can I not harm the
+creature?” would get the answer “Because your sword is not enchanted”, while
+“Why can we not harm the creature?” would not get an answer.</p>"
+Pierce,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,Touch,"<p>This spell affects any weapon with a blade or point. For every point of
+magnitude, it ignores one armour point when it strikes armour. Pierce can bypass
+magical armour as easily as normal armour.</p>"
+Protection,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,,"<p>For every point of the magnitude of this spell, the armour of the target
+gains one additional armour point.</p>"
+Push/Pull,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,"Instant, Resist (Resilience)","<p>This spell allows the caster to move an item of up to 3 SIZ or ENC per point
+of magnitude either towards or away from them in a straight line as if pushed
+suddenly from one direction or the other. The item does not move with
+significant enough force to inflict damage unless it is naturally damaging (a
+bottle of acid, for instance). The caster has no control over the distance
+pushed or pulled, as this depends on the location of the item and/or the surface
+on which it rests. Living creatures targeted by this spell are allowed a
+Resilience roll to resist.</p>"
+Read Emotion,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,1,TRUE,personal,"Instant, Resist (Persistence)","<p>This spell, when cast, tells you what the true emotional state of the target
+is if they fail a Persistence roll.</p>"
+Resist (Element),PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,,"<p>This spell increases resistance against hostile effects, magic or otherwise,
+from a given element (Air/Darkness/Earth/Fire/Water) by 10% per point of
+magnitude and subtracts 2 points of damage from that element per point of
+magnitude.</p>"
+Restore Energy,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,"Instant, Touch","<p>Each point of this spell’s magnitude instantly removes one fatigue level from
+the recipient.</p>"
+Sap Energy,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,"Instant, Touch, Resist (Resilience)","<p>Each point of this spell’s magnitude adds one fatigue level from the target
+upon a failed Resilience roll.</p>"
+Scare,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,personal,Resist (Persistence),"<p>On a failed resistance roll, the target is scared for 1D6 rounds. Scared
+targets must withdraw from combat with the caster for the duration of the spell,
+and move as quickly as they are able, directly away from the caster.</p>"
+Second Sight,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,3,TRUE,personal,,"<p>Second Sight allows the caster to gauge the POW of every creature and magic
+item within the range. Anything that prevents normal vision stops the spell. The
+caster will know if each aura created by the illuminated POW is less than their
+POW, within three points of their POW, or greater than their POW.</p>
+<p>Additionally, Second Sight provides a +20% bonus on Perception tests to
+notice hidden magical items or hiding people or creatures. Second Sight will
+also reveal invisible entities, though only a hazy image will show (treat such
+targets as partially obscured).</p>"
+Slip,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,1,TRUE,personal,Resist (Dodge),"<p>The caster makes the ground under the target’s feet as slippery as black
+sheet ice.  The target must make a Dodge roll or fall over prone.</p>"
+Slow,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,Resist (Resilience),"<p>For every point of the magnitude of this spell, decrease target’s movement
+rate by 2m. A target’s movement may not go below one metre through use of this
+spell.</p>"
+Speedart,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,personal,Touch,"<p>This spell is cast on a missile weapon and triggers when fired. It gives a
++20% to Ranged Combat and +3 damage while using the weapon. A missile weapon
+under the effects of Speedart cannot benefit from Firearrow or Multimissile.</p>"
+Spirit Shield,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,,"<p>This spell forms a magical barrier that protects the caster from magic point
+loss as the result of a successful attack during spirit combat (see “Spirit
+Combat” ). Each point of magnitude reduces the damage done by an attacking
+spirit by one point.</p>"
+Strength,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,Touch,"<p>For every point of the magnitude of this spell, the target’s damage increases
+by +1 and strength-based athletics tests are +10% per magnitude.  Note, the
+increased damage is not magical damage.</p>"
+Talk to Animal,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,3,TRUE,personal,,"<p>With this spell, the recipient can talk to any beast within ten metres of
+them. This communication is verbal; therefore, the recipient must be able to
+speak and be heard by the target animal.</p>"
+Tongues,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,2,TRUE,personal,,"<p>This spell allows the recipient to speak another language perfectly for its
+duration.</p>"
+Truth Seeker,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,Instant,"<p>This spell grants the caster a +10% bonus per point of magnitude to their
+next skill test they make to discover lies, secrets or hidden objects.  It does
+not stack with any other spell-effect bonuses.</p>"
+Unlock,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,"Instant, Touch","<p>This spell has a chance of opening a lock equal to the spell’s magnitude x
+20%, minus any modifiers due to the intricacy of the lock. If cast on a lock
+that has had a Lock spell cast on it, the test is an opposed test vs. the
+magnitude x 20% of the Lock spell.</p>"
+Vigour,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,Touch,"<p>For every point of the magnitude of this spell, the target’s hit points
+increase by +2. A target cannot have its hit points increased in this way to
+more than twice its original score.  Damage is taken from the ‘magical’ hit
+points first, so when the spell dissipates the inflicted damage taken on the
+magical hit points disappears too</p>"
+Vomit,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,"Ranged, Resist (Resilience)","<p>This spell disables its victim for 1 round per point of magnitude, due to
+uncontrollable vomiting. On a fumbled Resilience roll, the victim also takes 1D6
+hit points damage.</p>"
+Walk on (Element),PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,3,TRUE,personal,,"<p>This spell allows the recipient to walk on the specified element
+(Air/Darkness/Earth/Fire/Water) without sinking or taking any harm for the
+spell’s duration. With this spell for the appropriate element, the caster can
+walk across lava, quicksand, water, or even through the air. Each additional
+point of magnitude increases the duration of the spell by 1 minute.</p>"
+Water Breath,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,Touch,"<p>This spell allows the target to breathe water for the duration of the spell.
+For every point of magnitude, one additional person can breathe water, or the
+duration is increased by one minute. Water Breath does not affect the target’s
+ability to breathe air.</p>"
+Weapon Enhance,PmL84WZU2luOrJSw,systems/oq/assets/icons/magic-swirl.svg,,FALSE,personal,Touch,"<p>Cast this spell on any close combat weapon or any unarmed attack. For every
+point of magnitude, it increases the chance to hit with the weapon by +10% and
+deals one point of extra damage. This extra damage is magical and will affect
+creatures that can only be hurt by magic. The weapon’s base damage remains
+non-magical. A weapon under the effects of this spell cannot benefit from
+Fireblade.</p>"

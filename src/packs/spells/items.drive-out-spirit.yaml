@@ -1,10 +1,8 @@
-folder: PmL84WZU2luOrJSw
-type: spell
-img: systems/oq/assets/icons/magic-swirl.svg
-name: Drive Out Spirit
 fileType: items
+folder: PmL84WZU2luOrJSw
+_id: VOPxet0yrdFGYcd9
+img: systems/oq/assets/icons/magic-swirl.svg
 system:
-  nonVariant: false
   description: |-
     <p>This spell excommunicates a spirit that is either covertly or dominantly,
     possessing a character or physical location. The spirit resists eviction from
@@ -13,6 +11,8 @@ system:
     World.</p>
   traits:
   - Instant
-  - ' Resist (Persistence)'
+  - Resist (Persistence)
   type: personal
-_id: x2kBq6H6EVa0i5mi
+  nonVariant: false
+type: spell
+name: Drive Out Spirit

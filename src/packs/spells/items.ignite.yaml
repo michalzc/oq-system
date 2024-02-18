@@ -1,0 +1,16 @@
+name: Ignite
+system:
+  description: |-
+    <p>Ignite will set fire to anything flammable within range, creating a flame. If
+    the target is attached to a living being (such as hair, fur or clothes), then
+    the spell gains the Resist (Resilience) trait.</p>
+  type: personal
+  traits:
+  - Instant
+  magnitude: 1
+  nonVariant: true
+type: spell
+_id: neD6x5aAxSJK0TM1
+img: systems/oq/assets/icons/magic-swirl.svg
+fileType: items
+folder: PmL84WZU2luOrJSw

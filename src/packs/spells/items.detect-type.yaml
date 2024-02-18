@@ -1,9 +1,10 @@
+name: Detect (Type)
 type: spell
+folder: PmL84WZU2luOrJSw
+_id: qw1qjNPrcxtU5j6k
 img: systems/oq/assets/icons/magic-swirl.svg
 fileType: items
 system:
-  nonVariant: true
-  type: personal
   description: |-
     <p>This description covers a family of spells that all operate similarly,
     allowing the caster to locate the closest target of the spell within its range.
@@ -20,9 +21,8 @@ system:
     <p><i>Detect Substance:</i> Each Detect Substance spell will give the location
     of the nearest substance of the specified type. Examples of this spell include
     Detect Coal, Detect Gold and Detect Wood</p>
-  magnitude: 1
+  nonVariant: true
   traits:
   - Concentration
-name: Detect (Type)
-folder: PmL84WZU2luOrJSw
-_id: rUyVbMAFsWTlv801
+  type: personal
+  magnitude: 1

@@ -1,10 +1,8 @@
-name: Befuddle
-_id: ZHAQ3W8WxCKp2ZNp
-folder: PmL84WZU2luOrJSw
-type: spell
-img: systems/oq/assets/icons/magic-swirl.svg
-fileType: items
 system:
+  nonVariant: true
+  magnitude: 2
+  traits:
+  - Resist (Persistence)
   type: personal
   description: |-
     <p>This spell confuses and clouds the mind of its target if they fail a
@@ -15,7 +13,9 @@ system:
     <p>This spell is effective against humanoids and natural creatures. Other
     creatures (such as spirits or magical beasts like dragons) are not affected by
     this spell.</p>
-  traits:
-  - Resist (Persistence)
-  magnitude: 2
-  nonVariant: true
+fileType: items
+name: Befuddle
+folder: PmL84WZU2luOrJSw
+img: systems/oq/assets/icons/magic-swirl.svg
+_id: dkm3WaqZ20np7giO
+type: spell

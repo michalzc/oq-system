@@ -1,6 +1,10 @@
-name: Create Scroll
+fileType: items
 folder: PmL84WZU2luOrJSw
+name: Create Scroll
+_id: IYC4DNTyAzPBr2ox
 system:
+  traits:
+  - Permanent
   description: |-
     <p>This spell allows the caster to create a written version of the spell for use
     later. Either to impart knowledge of the spell to a trainee or as a reference
@@ -22,11 +26,7 @@ system:
     combat round.</p> <p>In both cases, once learnt or cast, unless the original
     writer spends one growth point at the time of creation to make the scroll
     reusable, the ink fades, and the scroll crumbles to dust.</p>
-  nonVariant: false
-  traits:
-  - Permanent
   type: personal
-type: spell
+  nonVariant: false
 img: systems/oq/assets/icons/magic-swirl.svg
-_id: L1rzv0eRiOHYGFnQ
-fileType: items
+type: spell

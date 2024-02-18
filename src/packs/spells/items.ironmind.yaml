@@ -1,0 +1,14 @@
+system:
+  type: personal
+  description: |-
+    <p>This spell hardens the resolve of the recipient for its duration. The spell
+    adds 20 % to all Persistence tests against magical attacks to the mind (e.g.
+    Fear, Befuddle, etc.) or opposed tests vs. Influence.</p>
+  magnitude: 3
+  nonVariant: true
+name: Ironmind
+type: spell
+_id: 0GyQnxPmYhhKYdfP
+folder: PmL84WZU2luOrJSw
+img: systems/oq/assets/icons/magic-swirl.svg
+fileType: items

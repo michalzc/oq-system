@@ -54,7 +54,7 @@ def buildSpell(data: List[String]): Option[Spell] = data match
         description = description,
         magnitude = magnitude.toIntOption,
         nonVariant = nonVariant.toBoolean,
-        traits = if traits.isEmpty then none else traits.trim.split(",").toList.some,
+        traits = if traits.isEmpty then none else traits.trim.split(",").toList.map(_.trim).some,
         `type` = typ,
       ),
       `type` = "spell"

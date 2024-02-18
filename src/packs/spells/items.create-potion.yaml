@@ -1,10 +1,7 @@
-fileType: items
-img: systems/oq/assets/icons/magic-swirl.svg
-_id: kD8azTIdZ0McDQTQ
-folder: PmL84WZU2luOrJSw
+_id: dYIe4pVDjD4Iy9so
 name: Create Potion
-type: spell
 system:
+  type: personal
   description: |-
     <p>Potions are liquids that store one or more Personal Magic spells.  The
     magnitude of the Create Potion spell needs to equal or exceed the total of the
@@ -21,7 +18,10 @@ system:
     <p>Potions take one hour per point of the magnitude of the spell(s) stored to
     create.</p> <p>An airtight container must be used to store a potion, or it
     evaporates, losing one point of magnitude per week.</p>
+  nonVariant: false
   traits:
   - Permanent
-  nonVariant: false
-  type: personal
+fileType: items
+folder: PmL84WZU2luOrJSw
+type: spell
+img: systems/oq/assets/icons/magic-swirl.svg

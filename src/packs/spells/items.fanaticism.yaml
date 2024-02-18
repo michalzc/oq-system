@@ -1,0 +1,16 @@
+name: Fanaticism
+type: spell
+fileType: items
+img: systems/oq/assets/icons/magic-swirl.svg
+_id: 8Gfm6mER1EmtGt88
+system:
+  description: |-
+    <p>The target of this spell will have close combat and unarmed combat skills
+    increased by +20% but may not attempt  to  cast spells. Also, for the duration
+    of the spell, the target has a +50% bonus to any Persistence test. The
+    Demoralise spell and vice versa automatically cancel the effects of this
+    spell.</p>
+  nonVariant: true
+  type: personal
+  magnitude: 2
+folder: PmL84WZU2luOrJSw

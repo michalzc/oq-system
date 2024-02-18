@@ -1,5 +1,9 @@
+type: spell
+name: Dispel Magic
+img: systems/oq/assets/icons/magic-swirl.svg
 system:
-  nonVariant: false
+  traits:
+  - Instant
   description: |-
     <p>This spell will attack and eliminate other spells. Dispel Magic will
     eliminate a combined magnitude of spells equal to its magnitude, starting with
@@ -8,12 +12,8 @@ system:
     Dispel Magic cannot partially dispel spells, so a target under the effects of a
     spell whose magnitude is higher than that of Dispel Magic will not have any
     spells currently affecting it eliminated.</p>
+  nonVariant: false
   type: personal
-  traits:
-  - Instant
-fileType: items
-_id: X6pmZXqVsDsUy3tQ
-type: spell
+_id: DsJmssMEUeKIman3
 folder: PmL84WZU2luOrJSw
-name: Dispel Magic
-img: systems/oq/assets/icons/magic-swirl.svg
+fileType: items

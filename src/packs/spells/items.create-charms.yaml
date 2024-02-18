@@ -1,13 +1,7 @@
-_id: ak6oRDLUFH4uhpgE
-fileType: items
-name: Create Charms
-img: systems/oq/assets/icons/magic-swirl.svg
-folder: PmL84WZU2luOrJSw
 system:
+  type: personal
   traits:
   - Permanent
-  nonVariant: false
-  type: personal
   description: |-
     <p>A charm is a physical item that stores one or more Personal Magic spells. A
     charm could be a necklace that holds a Befuddle 4 spell; a sword etched with
@@ -23,4 +17,10 @@ system:
     taken to create a single-use charm is one hour per point of the magnitude of the
     spell; Reusable charms take three hours per point of magnitude to create.</p>
     <p>Charms are mundane items.  Breaking the item dispels the charm.</p>
+  nonVariant: false
+img: systems/oq/assets/icons/magic-swirl.svg
+_id: rGSj5N0pUmsCpADO
+fileType: items
 type: spell
+folder: PmL84WZU2luOrJSw
+name: Create Charms

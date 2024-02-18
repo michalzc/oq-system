@@ -1,8 +1,3 @@
-fileType: items
-img: systems/oq/assets/icons/magic-swirl.svg
-folder: PmL84WZU2luOrJSw
-name: Create Magic Point Store
-type: spell
 system:
   nonVariant: false
   type: personal
@@ -24,4 +19,9 @@ system:
     the caster can refill the store using their magic points.</p> <p>If the item
     containing the store becomes damaged or destroyed, the magic points are released
     harmlessly into the surrounding area.</p>
-_id: vnVCFKJINOkltoBx
+img: systems/oq/assets/icons/magic-swirl.svg
+_id: 0PGqW5LIHcwCrtHb
+type: spell
+name: Create Magic Point Store
+fileType: items
+folder: PmL84WZU2luOrJSw

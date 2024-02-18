@@ -1,14 +1,14 @@
+type: spell
 name: Cover Blind Side
+_id: ZOJzXJBKf49TXjrC
 system:
-  type: personal
+  nonVariant: true
+  magnitude: 1
   description: |-
     <p>For the duration of the spell, the target can react to attacks from behind or
     flank attacks as if they were a normal attack from the front. It does not confer
     any additional reactions.</p>
-  nonVariant: true
-  magnitude: 1
-img: systems/oq/assets/icons/magic-swirl.svg
-_id: VvWXGBt9ldddKned
-folder: PmL84WZU2luOrJSw
-type: spell
+  type: personal
 fileType: items
+folder: PmL84WZU2luOrJSw
+img: systems/oq/assets/icons/magic-swirl.svg
