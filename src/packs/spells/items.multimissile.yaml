@@ -1,0 +1,21 @@
+name: Multimissile
+type: spell
+fileType: items
+system:
+  nonVariant: false
+  type: personal
+  traits:
+  - Touch
+  description: |-
+    <p>If the caster succeeds in casting the spell, a missile weapon holds the spell
+    for ten minutes. A missile under the effects of Multimissile cannot benefit from
+    Firearrow or Speedart.</p> <p>When the Multimissile-enchanted missile is fired
+    or thrown, one additional magical missile fires for every point of magnitude.
+    Each magic missile’s attack is separate, and each does the same damage as the
+    original (though they will not benefit from the character’s damage modifier).
+    Magical missiles created through Multimissile will not cause critical hits,
+    though the original missile can. Magical missiles created through Multimissile
+    will affect creatures that can only be hurt by magic.</p>
+_id: xVKWKkfGPhkiTeHo
+img: systems/oq/assets/icons/magic-swirl.svg
+folder: PmL84WZU2luOrJSw

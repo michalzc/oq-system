@@ -1,0 +1,16 @@
+name: Care
+type: spell
+system:
+  nonVariant: true
+  type: personal
+  magnitude: 2
+  description: |-
+    <p>This spell places the recipient under the care of the caster.  If the caster
+    has any active Protection or Countermagic spells, the character under the
+    effects of the Care spell also benefits from the effects of these spells.</p>
+  traits:
+  - Touch
+folder: PmL84WZU2luOrJSw
+_id: vki0TblIDyvLzexW
+img: systems/oq/assets/icons/magic-swirl.svg
+fileType: items

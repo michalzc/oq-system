@@ -1,0 +1,17 @@
+type: spell
+_id: aEi0aLb9CQZErKb2
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Light
+system:
+  type: personal
+  nonVariant: true
+  traits:
+  - Area (10m)
+  description: |-
+    <p>When cast on a physical object (including living material), this spell causes
+    the object to shed light across the area of effect. The spell illuminates only
+    the specified area – everything outside the area of effect is not lit. This
+    spell creates raw light, not a flame.</p>
+  magnitude: 1
+folder: PmL84WZU2luOrJSw
+fileType: items

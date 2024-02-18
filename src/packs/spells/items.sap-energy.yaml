@@ -1,0 +1,16 @@
+_id: gFDVZ3s5sFMurNUK
+fileType: items
+system:
+  traits:
+  - Instant
+  - Touch
+  - Resist (Resilience)
+  nonVariant: false
+  type: personal
+  description: |-
+    <p>Each point of this spell’s magnitude adds one fatigue level from the target
+    upon a failed Resilience roll.</p>
+folder: PmL84WZU2luOrJSw
+name: Sap Energy
+img: systems/oq/assets/icons/magic-swirl.svg
+type: spell

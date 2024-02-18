@@ -1,0 +1,16 @@
+folder: PmL84WZU2luOrJSw
+img: systems/oq/assets/icons/magic-swirl.svg
+system:
+  description: |-
+    <p>This spell, when cast, tells you what the true emotional state of the target
+    is if they fail a Persistence roll.</p>
+  traits:
+  - Instant
+  - Resist (Persistence)
+  magnitude: 1
+  nonVariant: true
+  type: personal
+type: spell
+name: Read Emotion
+fileType: items
+_id: XRgS94ul4XHHLRWE

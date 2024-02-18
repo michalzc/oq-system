@@ -1,0 +1,17 @@
+folder: PmL84WZU2luOrJSw
+fileType: items
+type: spell
+system:
+  type: personal
+  traits:
+  - Instant
+  - Touch
+  nonVariant: false
+  description: |-
+    <p>This spell has a chance of opening a lock equal to the spell’s magnitude x
+    20%, minus any modifiers due to the intricacy of the lock. If cast on a lock
+    that has had a Lock spell cast on it, the test is an opposed test vs. the
+    magnitude x 20% of the Lock spell.</p>
+img: systems/oq/assets/icons/magic-swirl.svg
+_id: JcLmy8uLAvjBTfGm
+name: Unlock

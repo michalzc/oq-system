@@ -39,6 +39,7 @@ anyOf:
   itemType:
     enum:
       - skill
+      - spell
 
   folder:
     type: object
@@ -49,6 +50,8 @@ anyOf:
         "$ref": "#/$defs/_stats"
       color:
         type: string
+      fileType:
+        const: folders
       flags:
         type: object
       folder:
@@ -79,6 +82,9 @@ anyOf:
         "$ref": "#/$defs/_id"
       _stats:
         "$ref": "#/$defs/_stats"
+      fileType:
+        enum:
+          - items
       flags:
         type: object
       img:
@@ -90,6 +96,7 @@ anyOf:
       system:
         oneOf:
           - "$ref": "#/$defs/skillDataModel"
+          - "$ref": "#/$defs/spellDataModel"
       folder:
         oneOf:
           - type: null
@@ -130,3 +137,23 @@ anyOf:
       - formula
       - type
     additionalProperties: false
+
+  spellDataModel:
+    type: object
+    properties:
+      description:
+        type: string
+      magnitude:
+        type: integer
+      nonVariant:
+        type: boolean
+      traits:
+        type: array
+        items:
+          type: string
+      type:
+        enum:
+          - personal
+          - divine
+          - sorcery
+

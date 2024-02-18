@@ -1,0 +1,26 @@
+system:
+  type: personal
+  traits:
+  - Permanent
+  description: |-
+    <p>A charm is a physical item that stores one or more Personal Magic spells. A
+    charm could be a necklace that holds a Befuddle 4 spell; a sword etched with
+    runes that holds a Weapon Enhance 2 spell; or even a sheet of paper with a poem
+    written on it that, when held against the skin, provides a Protection 1
+    spell.</p> <p>To create a charm a character must possess both the spell they
+    wish to store and Create Charm at the same or greater magnitude.</p> <p>The item
+    which going to hold the charm within close range of the caster for the length of
+    the casting.</p> <p>If the caster spends one growth point at the time of
+    creation, the spell within the charm is reusable. Otherwise once the spell is
+    cast the charm is dispelled.</p> <p>A spell stored in a charm uses the wielder’s
+    Personal Magic Casting skill and the wielder’s magic points.</p> <p>The time
+    taken to create a single-use charm is one hour per point of the magnitude of the
+    spell; Reusable charms take three hours per point of magnitude to create.</p>
+    <p>Charms are mundane items.  Breaking the item dispels the charm.</p>
+  nonVariant: false
+img: systems/oq/assets/icons/magic-swirl.svg
+_id: rGSj5N0pUmsCpADO
+fileType: items
+type: spell
+folder: PmL84WZU2luOrJSw
+name: Create Charms

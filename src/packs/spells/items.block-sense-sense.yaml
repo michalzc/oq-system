@@ -1,0 +1,16 @@
+folder: PmL84WZU2luOrJSw
+img: systems/oq/assets/icons/magic-swirl.svg
+fileType: items
+type: spell
+system:
+  type: personal
+  nonVariant: true
+  magnitude: 3
+  description: |-
+    <p>Depending on the version of this spell it will Blind/Deafen/Desensitise taste
+    or smell/Numb touch on a failed resistance roll for the duration of the
+    spell.</p>
+  traits:
+  - Resist (Persistence)
+_id: ozNubPa2QeVHcBe4
+name: Block Sense (Sense)

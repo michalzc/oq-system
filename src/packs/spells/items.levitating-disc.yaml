@@ -1,0 +1,18 @@
+_id: QTadCqCvts21QBPg
+fileType: items
+folder: PmL84WZU2luOrJSw
+type: spell
+img: systems/oq/assets/icons/magic-swirl.svg
+system:
+  traits:
+  - Area
+  - Concentration
+  type: personal
+  nonVariant: false
+  description: |-
+    <p>This spell creates an invisible disc, 1m in diameter for each point of
+    magnitude.  It can carry weight equivalent to one person and their belongings
+    per point of magnitude and moves at twice the magnitude in metres per combat
+    round.</p> <p><i>For example,</i> a Levitating Disc with magnitude 3 can carry 3
+    people, is 3m in diameter, and moves at a rate of 6m per combat round.</p>
+name: Levitating Disc

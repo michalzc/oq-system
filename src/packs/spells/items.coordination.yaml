@@ -1,0 +1,14 @@
+name: Coordination
+folder: PmL84WZU2luOrJSw
+_id: MtrN7Hi63h17yCU6
+img: systems/oq/assets/icons/magic-swirl.svg
+type: spell
+fileType: items
+system:
+  nonVariant: false
+  traits:
+  - Touch
+  type: personal
+  description: |-
+    <p>For every point of magnitude.</p> <ul> <li>+10% added to the target’s combat
+    order.</li> <li>+10% to Dodge or DEX based Athletics tests.</li> </ul>

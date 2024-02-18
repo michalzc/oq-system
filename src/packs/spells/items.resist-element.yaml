@@ -1,0 +1,14 @@
+_id: B06EbrTwKUAhjXSb
+type: spell
+name: Resist (Element)
+fileType: items
+system:
+  description: |-
+    <p>This spell increases resistance against hostile effects, magic or otherwise,
+    from a given element (Air/Darkness/Earth/Fire/Water) by 10% per point of
+    magnitude and subtracts 2 points of damage from that element per point of
+    magnitude.</p>
+  nonVariant: false
+  type: personal
+img: systems/oq/assets/icons/magic-swirl.svg
+folder: PmL84WZU2luOrJSw

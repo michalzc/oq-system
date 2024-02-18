@@ -1,0 +1,17 @@
+folder: PmL84WZU2luOrJSw
+name: Darkwall
+fileType: items
+type: spell
+system:
+  description: |-
+    <p>Light sources within a Darkwall area shed no light, and normal sight ceases
+    to function. Other senses such as a bat’s sonar and night vision (see chapter 11
+    Creatures) function normally.</p> <p>The caster may move the Darkwall 15 metres
+    per combat round if they concentrate on the spell.</p>
+  magnitude: 2
+  type: personal
+  nonVariant: true
+  traits:
+  - Area (5m)
+img: systems/oq/assets/icons/magic-swirl.svg
+_id: KTbOwmCnqkPx0qDP

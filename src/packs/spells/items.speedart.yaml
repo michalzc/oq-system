@@ -1,0 +1,16 @@
+fileType: items
+name: Speedart
+system:
+  magnitude: 2
+  description: |-
+    <p>This spell is cast on a missile weapon and triggers when fired. It gives a
+    +20% to Ranged Combat and +3 damage while using the weapon. A missile weapon
+    under the effects of Speedart cannot benefit from Firearrow or Multimissile.</p>
+  traits:
+  - Touch
+  nonVariant: true
+  type: personal
+img: systems/oq/assets/icons/magic-swirl.svg
+type: spell
+_id: 4C94G7NBZiO28ovx
+folder: PmL84WZU2luOrJSw

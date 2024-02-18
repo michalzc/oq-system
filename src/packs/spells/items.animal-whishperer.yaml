@@ -1,0 +1,17 @@
+_id: Ma4gtc3Giu4qJAu3
+fileType: items
+folder: PmL84WZU2luOrJSw
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Animal Whisperer
+system:
+  description: >-
+    <p>The caster whispers into the ear of a distressed animal, calming
+    it. If the distressed animal is under the influence of a spell such as Fear (see
+    page 120 in Divine Magic) or Scare (see page 101), then it gets another Persistence
+    test to shake off the effect of the spell.</p>
+  magnitude: 2
+  nonVariant: true
+  traits:
+    - Touch
+  type: personal
+type: spell

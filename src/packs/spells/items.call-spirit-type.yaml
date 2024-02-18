@@ -1,0 +1,26 @@
+folder: PmL84WZU2luOrJSw
+fileType: items
+_id: Guze8QoPo8pHfNAE
+system:
+  nonVariant: true
+  magnitude: 3
+  description: |-
+    <p>Magnitude 3, Non-Variable, Resist (Persistence)</p> <p>This spell summons a
+    single spirit of a given type from the Spirit World to do the bidding of the
+    caster. The spirit resists the call by using its Persistence. If it succeeds, it
+    can return to the Spirit World. Unless combined with a Binding attempt (see
+    below), the spirit that fails a Persistence roll must perform one action, within
+    its power, for the caster, after which it returns to the Spirit World.</p>
+    <p><i>Types of Spirits</i></p> <ul> <li>Disease spirits inflict disease upon the
+    possessed victim.</li> <li>Passion (Fear/Madness/Pain) these spirits work upon
+    the passions of a victim and cause mental debilitation and distress.</li>
+    <li>Healing spirits heal wounds and drive out possessing disease spirits.</li>
+    <li>Magic spirits know spells and have magic points that the caller may
+    use.</li> <li>For more information about Spirits, see the Creatures
+    chapter.</li> </ul>
+  traits:
+  - Resist (Persistence)
+  type: personal
+type: spell
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Call Spirit (Type)
