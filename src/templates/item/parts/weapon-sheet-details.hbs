@@ -5,11 +5,11 @@
   </select>
 
   <label for="weaponType">{{ localize 'OQ.Labels.WeaponType'}}</label>
-  <select id="weaponType" name="system.weaponType">
-    {{ selectOptions weaponTypeList selected=system.weaponType localize=true }}
+  <select id="weaponType" name="system.type">
+    {{ selectOptions weaponTypeList selected=system.type localize=true }}
   </select>
 
-  {{#if (eq system.weaponType 'ranged')}}
+  {{#if (eq system.type 'ranged')}}
     <label for="range">{{ localize 'OQ.Labels.Range'}}</label>
     <input id="range" type="text" data-dtype="String" name="system.rangeFormula" value="{{ system.rangeFormula }}">
 
