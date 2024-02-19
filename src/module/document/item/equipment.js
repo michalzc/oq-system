@@ -23,7 +23,8 @@ export class OQEquipment extends OQBaseItem {
   }
 
   getNewImage(source) {
-    return CONFIG.OQ.ItemConfig.equipmentIcons[source.system?.type];
+    const imageByType = CONFIG.OQ.ItemConfig.equipmentIcons[source.system?.type];
+    return imageByType ?? CONFIG.OQ.ItemConfig.equipmentIcons.single;
   }
 
   prepareBaseData() {
