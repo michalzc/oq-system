@@ -44,7 +44,7 @@ export class OQCharacterSheet extends OQActorBaseSheet {
 
   splitSkills(groupedSkills) {
     const makeGroup = ([groupName, elements]) => ({
-      group: groupName,
+      type: groupName,
       label: `OQ.SkillTypes.${groupName}`,
       skills: elements,
     });

@@ -22,11 +22,18 @@ export class OQEquipment extends OQBaseItem {
     }
   }
 
+  getNewImage(source) {
+    return CONFIG.OQ.ItemConfig.equipmentIcons[source.system?.type];
+  }
+
   prepareBaseData() {
     super.prepareBaseData();
+    const countTypes = [CONFIG.OQ.ItemConfig.equipmentTypes.ammunition, CONFIG.OQ.ItemConfig.equipmentTypes.consumable];
 
-    const quantity = this.system.consumable && !this.system.quantity ? 1 : this.system.quantity;
-    const totalEncumbrance = this.system.consumable ? this.system.encumbrance * quantity : this.system.encumbrance;
+    const quantity = countTypes.includes(this.system.type) && !this.system.quantity ? 0 : this.system.quantity;
+    const totalEncumbrance = countTypes.includes(this.system.type)
+      ? this.system.encumbrance * quantity
+      : this.system.encumbrance;
 
     _.merge(this.system, {
       quantity,

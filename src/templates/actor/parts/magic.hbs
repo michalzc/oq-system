@@ -4,7 +4,7 @@
       <div class="item label">
         <div>{{ localize 'OQ.SkillTypes.magic'}}</div>
         <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'OQ.SkillTypes.magic' }}"
-           data-type="skill" data-group="magic"><i class="fas fa-plus"></i></a>
+           data-type="skill" data-system-type="magic"><i class="fas fa-plus"></i></a>
       </div>
       {{#each groupedItems.groupedSkills.magic as |skill|}}
         {{> systems/oq/templates/actor/parts/skill.hbs skill}}
@@ -15,7 +15,7 @@
         <div>{{ localize 'OQ.SkillTypes.resistance'}}</div>
         <a class="add-new-item"
            data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'OQ.SkillTypes.resistance' }}" data-type="skill"
-           data-group="resistance"><i class="fas fa-plus"></i></a>
+           data-system-type="resistance"><i class="fas fa-plus"></i></a>
       </div>
       {{#each groupedItems.groupedSkills.resistance as |skill|}}
         {{> systems/oq/templates/actor/parts/skill.hbs skill}}

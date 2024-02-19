@@ -13,12 +13,16 @@ import { OQDamageRollDialog } from '../../application/damage-roll-dialog.js';
 export class OQBaseItem extends Item {
   async _preCreate(source, options, user) {
     await super._preCreate(source, options, user);
-    const newImage = CONFIG.OQ.ItemConfig.defaultIcons[source.type];
+    const newImage = this.getNewImage(source);
     if (!source.img && newImage) {
       this.updateSource({
         img: newImage,
       });
     }
+  }
+
+  getNewImage(source) {
+    return CONFIG.OQ.ItemConfig.defaultIcons[source.type];
   }
 
   async prepareDerivedData() {
