@@ -1,8 +1,8 @@
 import { displayItem } from '../../chat.js';
 import _ from 'lodash-es';
 import { damageRoll, testRoll } from '../../roll.js';
-import { OQTestRollDialog } from '../../application/dialog/test-roll-dialog.js';
-import { OQDamageRollDialog } from '../../application/dialog/damage-roll-dialog.js';
+import { OQTestRollDialog } from '../../application/test-roll-dialog.js';
+import { OQDamageRollDialog } from '../../application/damage-roll-dialog.js';
 
 /**
  * @typedef {object} ItemRollValue
@@ -13,12 +13,16 @@ import { OQDamageRollDialog } from '../../application/dialog/damage-roll-dialog.
 export class OQBaseItem extends Item {
   async _preCreate(source, options, user) {
     await super._preCreate(source, options, user);
-    const newImage = CONFIG.OQ.ItemConfig.defaultIcons[source.type];
+    const newImage = this.getNewImage(source);
     if (!source.img && newImage) {
       this.updateSource({
         img: newImage,
       });
     }
+  }
+
+  getNewImage(source) {
+    return CONFIG.OQ.ItemConfig.defaultIcons[source.type];
   }
 
   async prepareDerivedData() {

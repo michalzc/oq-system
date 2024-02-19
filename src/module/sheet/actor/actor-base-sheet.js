@@ -1,7 +1,7 @@
 import _ from 'lodash-es';
-import { AttributesDialog } from '../../dialog/attributes-dialog.js';
-import { OQBaseActor } from '../../../document/actor/base-actor.js';
-import { asyncFlattenItemsFromFolder } from '../../../utils.js';
+import { AttributesDialog } from '../../application/attributes-dialog.js';
+import { OQBaseActor } from '../../document/actor/base-actor.js';
+import { asyncFlattenItemsFromFolder } from '../../utils.js';
 
 const mergeObject = foundry.utils.mergeObject;
 
@@ -146,8 +146,9 @@ export class OQActorBaseSheet extends ActorSheet {
     const item = this.actor.items.get(itemId);
     if (item) {
       const currentValue = item.system.quantity ?? 0;
-      const update = parseInt(currentTarget.dataset.value);
-      await item.update({ 'system.quantity': currentValue + update });
+      const updateValue = parseInt(currentTarget.dataset.value);
+      const update = { 'system.quantity': currentValue + updateValue };
+      await item.update(update);
       this.render(true);
     }
   }
@@ -305,6 +306,7 @@ export class OQActorBaseSheet extends ActorSheet {
     const armours = groupedItems.armour ?? [];
 
     const equipment = groupedItems.equipment ?? [];
+    const equipmentByType = _.groupBy(equipment, (eq) => eq.system.type);
     const weaponsBySkills = this.getWeaponBySkills(weapons, groupedSkills.combat);
 
     return {
@@ -319,6 +321,7 @@ export class OQActorBaseSheet extends ActorSheet {
       skillsAndAbilities,
       weapons,
       weaponsBySkills,
+      equipmentByType,
     };
   }
 

@@ -1,0 +1,17 @@
+_id: 5owGbwyu6Fl9HtT5
+fileType: items
+folder: VlZllXyyJC54uoOE
+img: systems/oq/assets/icons/war-pick.svg
+name: War Pick
+system:
+  correspondingSkill:
+    skillReference: close-combat
+  hands: one
+  encumbrance: 2
+  cost: 120
+  state: carried
+  type: melee
+  damage:
+    damageFormula: 1d8
+    includeDamageMod: true
+type: weapon

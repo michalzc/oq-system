@@ -1,0 +1,17 @@
+_id: NTw1QZVEktN3Ra9A
+fileType: items
+folder: VlZllXyyJC54uoOE
+img: systems/oq/assets/icons/piercing-sword.svg
+name: Shortsword
+system:
+  correspondingSkill:
+    skillReference: close-combat
+  hands: one
+  encumbrance: 1
+  cost: 100
+  state: carried
+  type: melee
+  damage:
+    damageFormula: 1d6
+    includeDamageMod: true
+type: weapon

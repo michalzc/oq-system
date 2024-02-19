@@ -1,5 +1,5 @@
 import { OQActorBaseSheet } from './actor-base-sheet.js';
-import { CharacteristicsDialog } from '../../dialog/characteristics-dialog.js';
+import { CharacteristicsDialog } from '../../application/characteristics-dialog.js';
 import _ from 'lodash-es';
 
 export class OQCharacterSheet extends OQActorBaseSheet {
@@ -44,7 +44,7 @@ export class OQCharacterSheet extends OQActorBaseSheet {
 
   splitSkills(groupedSkills) {
     const makeGroup = ([groupName, elements]) => ({
-      group: groupName,
+      type: groupName,
       label: `OQ.SkillTypes.${groupName}`,
       skills: elements,
     });

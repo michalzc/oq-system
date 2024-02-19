@@ -1,0 +1,18 @@
+_id: O1V8XJFKPJQvCyLz
+fileType: items
+folder: 3XzLI3qEcMxeUqEk
+img: systems/oq/assets/icons/thrown-knife.svg
+name: Throwing Knife
+system:
+  correspondingSkill:
+    skillReference: ranged-combat
+  hands: one
+  rangeFormula: STR m
+  rate: 1
+  cost: 30
+  state: carried
+  type: ranged
+  damage:
+    damageFormula: 1d6
+    includeDamageMod: true
+type: weapon

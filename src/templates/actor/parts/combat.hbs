@@ -19,6 +19,16 @@
         {{/each}}
       </div>
     {{/each}}
+    <div class="item-group">
+      <div class="item label">
+        <div>{{ localize 'OQ.Labels.EquipmentTypes.ammunition'}}</div>
+        <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'OQ.Labels.EquipmentTypes.ammunition' }}"
+           data-type="equipment" data-system-type="ammunition"><i class="fas fa-plus"></i></a>
+      </div>
+      {{#each groupedItems.equipmentByType.ammunition as |ammunition|}}
+        {{> systems/oq/templates/actor/parts/equipment.hbs ammunition}}
+      {{/each}}
+    </div>
   </div>
 
   <!-- right -->

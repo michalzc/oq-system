@@ -1,0 +1,18 @@
+_id: mmr0rudQBeQ2uXry
+fileType: items
+folder: 3XzLI3qEcMxeUqEk
+img: systems/oq/assets/icons/halberd-shuriken.svg
+name: Throwing Star
+system:
+  correspondingSkill:
+    skillReference: ranged-combat
+  hands: one
+  rangeFormula: STR m
+  rate: 1
+  cost: 15
+  state: carried
+  type: ranged
+  damage:
+    damageFormula: 1d4
+    includeDamageMod: true
+type: weapon

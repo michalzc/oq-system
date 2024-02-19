@@ -27,14 +27,16 @@
     {{/each}}
   </div>
 
-  <div class="item-group">
-    <div class="item label">
-      <div>{{ localize 'OQ.Nav.Equipment'}}</div>
-      <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.equipment' }}"
-         data-type="equipment"><i class="fas fa-plus"></i></a>
+  {{#each groupedItems.equipmentByType as |equipmentGroup key|}}
+    <div class="item-group">
+      <div class="item label">
+        <div>{{ localize (concat 'OQ.Labels.EquipmentTypes.' key)}}</div>
+        <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.equipment' }}"
+           data-type="equipment" data-system-type="{{key}}"><i class="fas fa-plus"></i></a>
+      </div>
+      {{#each equipmentGroup as |equipment|}}
+        {{> systems/oq/templates/actor/parts/equipment.hbs equipment id=equipment.id showEq=true}}
+      {{/each}}
     </div>
-    {{#each groupedItems.equipment as |equipment|}}
-      {{> systems/oq/templates/actor/parts/equipment.hbs equipment id=equipment.id showEq=true}}
-    {{/each}}
-  </div>
+  {{/each}}
 </div>

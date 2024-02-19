@@ -109,8 +109,8 @@ OQ:
     Encumbrance: Encumbrance
     EquipmentTypes:
       ammunition: Ammunition
-      consumable: Consumable
-      single: Single item
+      consumable: Consumables
+      single: Items
     FireRate: Fire Rate
     Formula: Formula
     Gender: Gender
