@@ -1,0 +1,13 @@
+_id: E4GTRnMlJZOkvvql
+fileType: items
+name: Chainmail
+folder: 1LSg8TGkuL3Z4Wyx
+img: systems/oq/assets/icons/chain-mail.svg
+type: armour
+system:
+  ap: 5
+  encumbrance: 8
+  cost: 3000
+  state: worn
+  description: |-
+    <p>Links of chain made into a suit.</p>
