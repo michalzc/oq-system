@@ -133,6 +133,10 @@ export class EquipmentDataModel extends foundry.abstract.DataModel {
         choices: _.keys(ItemConfig.equipmentTypes),
         trim: true,
       }),
+      traits: new fields.ArrayField(commonStringModel(), {
+        required: false,
+        initial: [],
+      }),
     };
   }
 
