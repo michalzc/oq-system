@@ -1,0 +1,15 @@
+_id: oKnD6bGLAAfqsQlC
+fileType: items
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/knapsack.svg
+name: Backpack
+system:
+  description: <p>It can hold 20 ENC of equipment.</p>
+  cost: 5
+  encumbrance: 1
+  quantity: 1
+  state: carried
+  type: single
+  traits:
+  - Capacity (20 ENC)
+type: equipment

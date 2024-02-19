@@ -1,0 +1,14 @@
+_id: yjI6TfC7yr9EanBv
+fileType: items
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/flint-spark.svg
+name: Flint & Tinder
+system:
+  description: |-
+    <p>A character with flint and tinder can build a fire in one minute under normal
+    conditions without having to roll his Natural Lore skill.</p>
+  cost: 0.5
+  quantity: 1
+  state: carried
+  type: single
+type: equipment

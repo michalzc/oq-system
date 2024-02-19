@@ -1,0 +1,18 @@
+_id: CYBVRTPIrRpH1WCo
+fileType: items
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/old-lantern.svg
+name: Lantern
+system:
+  description: |-
+    <p>A lantern provides bright illumination out to a three-metre radius. It will
+    burn for two hours on a flask of oil.</p>
+  cost: 10
+  encumbrance: 1
+  quantity: 1
+  state: carried
+  type: single
+  traits:
+  - Duration (2h)
+  - Range (3m)
+type: equipment

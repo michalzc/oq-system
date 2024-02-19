@@ -1,0 +1,17 @@
+_id: 91zdujo5TRDEhcX6
+fileType: items
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/apothecary.svg
+name: Healer’s Kit
+system:
+  description: |-
+    <p>A healer's kit is good for five uses (whether the skill test succeeds or
+    fails).</p>
+  cost: 150
+  encumbrance: 1
+  quantity: 1
+  state: carried
+  type: single
+  traits:
+  - Usage (5)
+type: equipment

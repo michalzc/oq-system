@@ -1,0 +1,13 @@
+_id: ydMApkoVUvQpedoL
+fileType: items
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/telescopic-baton.svg
+name: Pole, 3m
+system:
+  description: ''
+  cost: 1
+  encumbrance: 1
+  quantity: 1
+  state: carried
+  type: single
+type: equipment

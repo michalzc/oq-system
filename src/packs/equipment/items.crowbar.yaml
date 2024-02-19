@@ -1,0 +1,19 @@
+_id: 8nqiudO3ftXUtxjN
+fileType: items
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/crowbar.svg
+name: Crowbar
+system:
+  description: |-
+    <p>Adds +20% to brute force Athletics tests. If used as a weapon, it is
+    considered a club (wielded with a –20% penalty).</p>
+  cost: 25
+  encumbrance: 1
+  quantity: 1
+  state: carried
+  type: single
+  traits:
+  - Bonus (+20% Athletics)
+  - Improvised Weapon (-20%)
+  - Damage (1d6)
+type: equipment

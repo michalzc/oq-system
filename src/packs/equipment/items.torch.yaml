@@ -1,0 +1,18 @@
+_id: rxYZcT6qynzF1Cu2
+fileType: items
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/primitive-torch.svg
+name: Torch
+system:
+  description: |-
+    <p>It will burn for one hour. A torch illuminates within a three metre radius.
+    If used as a weapon, it is considered a club (wielded with a –20% penalty),
+    except that it does not inflict normal damage – instead, it inflicts 1D4 fire
+    damage and a fumble, or critical hit will also extinguish the brand.</p>
+  cost: 0.4
+  quantity: 1
+  state: carried
+  type: consumable
+  traits:
+    - Duration (1h)
+type: equipment

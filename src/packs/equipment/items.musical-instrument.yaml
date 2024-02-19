@@ -1,0 +1,13 @@
+_id: mWYaB8lCGD1qjFv1
+fileType: items
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/carnyx.svg
+name: Musical Instrument
+system:
+  description: ''
+  cost: 70
+  encumbrance: 2
+  quantity: 1
+  state: carried
+  type: single
+type: equipment

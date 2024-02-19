@@ -1,0 +1,14 @@
+_id: lQvX5tbOdqNlLZ7z
+fileType: items
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/fishing-hook.svg
+name: Fish Hook
+system:
+  description: |-
+    <p>This item allows a character to use their Lore (Natural World) skill to catch
+    a fish without suffering a penalty on the test.</p>
+  cost: 0.04
+  quantity: 1
+  state: carried
+  type: single
+type: equipment

@@ -1,0 +1,17 @@
+_id: 6o319l7rDdz4yVZW
+fileType: items
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/water-flask.svg
+name: Oil, Flask
+system:
+  description: |-
+    <p>A flask of oil is enough to fuel a lantern for two hours or, if broken on the
+    ground and ignited, enough to sustain a small fire for one minute.</p>
+  cost: 1
+  encumbrance: 1
+  quantity: 1
+  state: carried
+  type: consumable
+  traits:
+  - Duration (2h)
+type: equipment

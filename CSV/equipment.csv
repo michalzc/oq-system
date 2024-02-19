@@ -1,0 +1,55 @@
+Name,Img,Cost,Enc,Traits,Description
+Backpack,knapsack.svg,5,1,Capacity (20 ENC),<p>It can hold 20 ENC of equipment.</p>
+Bedroll,rolled-cloth.svg,1,1,,
+Block & Tackle,ascending-block.svg,15,1,Bonus (+20% Mechanisms),"<p>Adds +20% to Mechanisms tests to make or disarm large traps and makes
+Engineering tests possible in some circumstances. It requires at least 10m of
+rope to function.</p>"
+"Bottle, glass",water-flask.svg,2,,,
+Candle,candle-light.svg,0.1,,Duration (1h),"<p>A candle illuminates a one-metre radius. Any wind stronger than a slight
+breeze will extinguish a candle.</p>"
+Chain,crossed-chains.svg,40,2,Length (2m),
+Climbing kit,mountain-climbing.svg,25,1,Bonus (+20% Athletics),"<p>A climbing kit provides a bonus of +20% to any Athletics skill tests made to
+climb.</p>"
+Codex,book-cover.svg,60,1,,
+Craft Tools,stone-crafting.svg,75,2,,
+Crowbar,crowbar.svg,25,1,"Bonus (+20% Athletics), Improvised Weapon (-20%), Damage (1d6)","<p>Adds +20% to brute force Athletics tests. If used as a weapon, it is
+considered a club (wielded with a –20% penalty).</p>"
+Fish Hook,fishing-hook.svg,0.04,,,"<p>This item allows a character to use their Lore (Natural World) skill to catch
+a fish without suffering a penalty on the test.</p>"
+Fishing Kit,fishing-pole.svg,15,1,Bonus (+20% Natural Lore),"<p>The fishing kit grants a character a +20% bonus to their Natural Lore
+test to catch fish.</p>"
+Flint & Tinder,flint-spark.svg,0.5,,,"<p>A character with flint and tinder can build a fire in one minute under normal
+conditions without having to roll his Natural Lore skill.</p>"
+Grappling Hook,meat-hook.svg,5,,,"<p>It will support the weight of 50 ENC or 50 SIZ, or any combination
+thereof.</p>"
+Hammer,3d-hammer.svg,1,,"Improvised Weapon (-20%), Damage (1d6)","<p>If used as a weapon, it is treated as a club (wielded with a –20% penalty).
+Hammers may be used on inanimate objects without being destroyed.</p>"
+Healer’s Kit,apothecary.svg,150,1,Usage (5),"<p>A healer's kit is good for five uses (whether the skill test succeeds or
+fails).</p>"
+"Ladder, 3m",ladder.svg,2,4,,
+Lantern,old-lantern.svg,10,1,"Duration (2h), Range (3m)","<p>A lantern provides bright illumination out to a three-metre radius. It will
+burn for two hours on a flask of oil.</p>"
+Lock Picks,lockpicks.svg,75,,,
+Mining Pick,war-pick.svg,35,1,"Improvised Weapon (-20%), Damage (1d6)","<p>If used as a weapon, it is considered a club (wielded with a –20% penalty).
+Mining picks may be used on inanimate objects without being destroyed.</p>"
+Musical Instrument,carnyx.svg,70,2,,
+"Oil, Flask",water-flask.svg,1,1,Duration (2h),"<p>A flask of oil is enough to fuel a lantern for two hours or, if broken on the
+ground and ignited, enough to sustain a small fire for one minute.</p>"
+"Papyrus, Sheet",folded-paper.svg,0.5,,,
+"Pole, 3m",telescopic-baton.svg,1,1,,
+Quiver,quiver.svg,2,,,
+Rope,rope-coil.svg,10,2,Length (10m),"<p>A standard rope can support the weight of 50 ENC or 50 SIZ, or any
+combination thereof.</p>"
+"Sack, Large",swap-bag.svg,0.5,1,Capacity (10 ENC),<p>Able to hold 10 ENC of equipment.</p>
+"Sack, Small",swap-bag.svg,0.2,,Capacity (5 ENC),<p>A small sack can hold 5 ENC of equipment.</p>
+Scythe,scythe.svg,30,2,"Improvised Weapon (-20%), Damage (1d6)","<p>If used as a weapon, it is considered a bill (wielded with a –20%
+penalty).</p>"
+Slingbag,swap-bag.svg,0.5,1,,<p>It can carry 15 ENC of equipment.</p>
+Spade,spade.svg,25,1,,"<p>If used as a weapon, it is considered a club (wielded with a –20%
+penalty).</p>"
+Torch,primitive-torch.svg,0.4,,,"<p>It will burn for one hour. A torch illuminates within a three metre radius.
+If used as a weapon, it is considered a club (wielded with a –20% penalty),
+except that it does not inflict normal damage – instead, it inflicts 1D4 fire
+damage and a fumble, or critical hit will also extinguish the brand.</p>"
+Waterskin,magic-potion.svg,0.5,1,,<p>A waterskin can hold enough water to sustain an adventurer for two days.</p>
+Writing kit,feather.svg,45,1,,
