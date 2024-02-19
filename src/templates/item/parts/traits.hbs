@@ -1,8 +1,9 @@
+{{log this}}
 <label for="traitInput">{{ localize 'OQ.Labels.Traits'}}</label>
 <div class="traits">
   <div class="tag-list">
     {{#each system.traits as |trait|}}
-      <span class="tag-item">{{trait}}<a class="tag-delete" data-tag="{{trait}}"><i class="fas fa-delete-left"></i></a></span>
+      <span class="tag-item">{{trait}}{{#if ../editable}}<a class="tag-delete" data-tag="{{trait}}"><i class="fas fa-delete-left"></i></a>{{/if}}</span>
     {{/each}}
 
   </div>
