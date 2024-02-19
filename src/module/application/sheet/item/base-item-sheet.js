@@ -22,8 +22,10 @@ export class OQBaseItemSheet extends ItemSheet {
   activateListeners(html) {
     super.activateListeners(html);
 
-    html.find('.traits, .tag-input').on('change', this.onTagAdd.bind(this));
-    html.find('.traits .tag-delete').on('click', this.onTagDelete.bind(this));
+    if (this.isEditable) {
+      html.find('.traits, .tag-input').on('change', this.onTagAdd.bind(this));
+      html.find('.traits .tag-delete').on('click', this.onTagDelete.bind(this));
+    }
   }
 
   async onTagDelete(event) {
