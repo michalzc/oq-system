@@ -1,4 +1,4 @@
-import { log } from '../../utils.js';
+import { log } from '../utils.js';
 import _ from 'lodash-es';
 
 export class AttributesDialog extends FormApplication {

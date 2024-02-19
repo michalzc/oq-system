@@ -1,4 +1,4 @@
-import { logError } from '../../utils.js';
+import { logError } from '../utils.js';
 import _ from 'lodash-es';
 
 const mergeObject = foundry.utils.mergeObject;

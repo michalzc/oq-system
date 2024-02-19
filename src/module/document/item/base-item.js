@@ -1,8 +1,8 @@
 import { displayItem } from '../../chat.js';
 import _ from 'lodash-es';
 import { damageRoll, testRoll } from '../../roll.js';
-import { OQTestRollDialog } from '../../application/dialog/test-roll-dialog.js';
-import { OQDamageRollDialog } from '../../application/dialog/damage-roll-dialog.js';
+import { OQTestRollDialog } from '../../application/test-roll-dialog.js';
+import { OQDamageRollDialog } from '../../application/damage-roll-dialog.js';
 
 /**
  * @typedef {object} ItemRollValue

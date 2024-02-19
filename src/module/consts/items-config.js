@@ -4,12 +4,12 @@ import { OQArmour } from '../document/item/armor.js';
 import { OQEquipment } from '../document/item/equipment.js';
 import { OQSpell } from '../document/item/spell.js';
 import { OQSpecialAbility } from '../document/item/special-ability.js';
-import { OQSkillSheet } from '../application/sheet/item/skill-sheet.js';
-import { OQWeaponSheet } from '../application/sheet/item/weapon-sheet.js';
-import { OQArmourSheet } from '../application/sheet/item/armour-sheet.js';
-import { OQEquipmentSheet } from '../application/sheet/item/equipment-sheet.js';
-import { OQSpellSheet } from '../application/sheet/item/spell-sheet.js';
-import { OQSpecialAbilitySheet } from '../application/sheet/item/special-ability-sheet.js';
+import { OQSkillSheet } from '../sheet/item/skill-sheet.js';
+import { OQWeaponSheet } from '../sheet/item/weapon-sheet.js';
+import { OQArmourSheet } from '../sheet/item/armour-sheet.js';
+import { OQEquipmentSheet } from '../sheet/item/equipment-sheet.js';
+import { OQSpellSheet } from '../sheet/item/spell-sheet.js';
+import { OQSpecialAbilitySheet } from '../sheet/item/special-ability-sheet.js';
 
 const allItemsStates = {
   stored: {
