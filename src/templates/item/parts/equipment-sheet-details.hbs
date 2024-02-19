@@ -1,20 +1,21 @@
 <div class="item-details">
-  <label for="encumbrance">{{ localize 'OQ.Labels.Encumbrance'}}</label>
+  <label for="encumbrance">{{localize 'OQ.Labels.Encumbrance'}}</label>
   <input id="encumbrance" type="number" data-dtype="Number" name="system.encumbrance" value="{{ system.encumbrance }}">
 
-  <label for="cost">{{ localize 'OQ.Labels.Cost'}}</label>
+  <label for="cost">{{localize 'OQ.Labels.Cost'}}</label>
   <input id="cost" type="number" data-dtype="Number" name="system.cost" value="{{ system.cost }}">
 
-  <label for="consumable">{{ localize 'OQ.Labels.Consumable' }}</label>
-  <input type="checkbox" id="consumable" name="system.consumable" {{ checked system.consumable }}>
+  <label for="type">{{localize 'OQ.Labels.Type'}}</label>
+  <select id="type" name="system.type">
+    {{selectOptions itemTypes selected=system.type localize=true }}
+  </select>
 
-
-  {{#if system.consumable}}
-    <label for="quantity">{{ localize 'OQ.Labels.Quantity' }}</label>
+  {{#unless (eq system.type 'single')}}
+    <label for="quantity">{{localize 'OQ.Labels.Quantity' }}</label>
     <input type="number" id="quantity" data-dtype="Number" name="system.quantity" value="{{ system.quantity }}">
-  {{/if}}
+  {{/unless}}
 
-  <label for="itemState">{{ localize 'OQ.Labels.State'}}</label>
+  <label for="itemState">{{localize 'OQ.Labels.State'}}</label>
   <select id="itemState" name="system.state">
     {{selectOptions itemStates selected=system.state localize=true }}
   </select>

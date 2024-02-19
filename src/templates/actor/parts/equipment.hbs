@@ -4,14 +4,14 @@
   </a>
   <div class="item-roll" data-tooltip="{{system.tooltip}}" data-tooltip-direction="LEFT">{{name}}</div>
 
-  {{#if system.consumable}}
+  {{#unless (eq system.type 'single')}}
     <div class="item-quantity">
       <a class="item-quantity-update" data-value="-1"><i class="fas fa-minus"></i></a>
       <input type="number" class="item-quantity-value" name="system.quantity" value="{{ system.quantity }}"
              data-tooltip="{{ localize 'OQ.Labels.Quantity' }}" />
       <a class="item-quantity-update" data-value="1"><i class="fas fa-plus"></i></a>
     </div>
-  {{/if}}
+  {{/unless}}
 
   {{#if showEq}}
     <a class="item-state item-state-equipment"

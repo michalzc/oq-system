@@ -2,6 +2,26 @@ import { OQBaseItem } from './base-item.js';
 import _ from 'lodash-es';
 
 export class OQEquipment extends OQBaseItem {
+  async _preUpdate(changed, options, user) {
+    await super._preUpdate(changed, options, user);
+
+    const changedEquipmentType = changed.system?.type;
+    const currentImage = this.img;
+    const equipmentImages = CONFIG.OQ.ItemConfig.equipmentIcons;
+    const newImage = equipmentImages[changedEquipmentType];
+
+    if (
+      changedEquipmentType &&
+      changedEquipmentType !== this.system.type &&
+      _.includes(_.values(equipmentImages), currentImage) &&
+      newImage
+    ) {
+      _.merge(changed, {
+        img: newImage,
+      });
+    }
+  }
+
   prepareBaseData() {
     super.prepareBaseData();
 
@@ -25,6 +45,7 @@ export class OQEquipment extends OQBaseItem {
     ];
 
     return _.merge(context, {
+      itemSubtypeLabel: `OQ.Labels.EquipmentTypes.${this.system.type}`,
       fields,
     });
   }

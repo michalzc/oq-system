@@ -107,6 +107,10 @@ OQ:
     EditCharacteristics: Edit Characteristics
     Enc: Enc
     Encumbrance: Encumbrance
+    EquipmentTypes:
+      ammunition: Ammunition
+      consumable: Consumable
+      single: Single item
     FireRate: Fire Rate
     Formula: Formula
     Gender: Gender
