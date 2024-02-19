@@ -1,0 +1,18 @@
+_id: cYCkZ5E7w3QcOXab
+fileType: items
+folder: 3XzLI3qEcMxeUqEk
+img: systems/oq/assets/icons/sling.svg
+name: Sling
+system:
+  correspondingSkill:
+    skillReference: ranged-combat
+  hands: one
+  rangeFormula: 50m
+  rate: 1
+  cost: 50
+  state: carried
+  type: ranged
+  damage:
+    damageFormula: 1d6
+    includeDamageMod: true
+type: weapon

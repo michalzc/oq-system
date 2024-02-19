@@ -1,0 +1,17 @@
+_id: JgTKzfiRF2qyfgcH
+fileType: items
+folder: VlZllXyyJC54uoOE
+img: systems/oq/assets/icons/spear-hook.svg
+name: Longspear
+system:
+  correspondingSkill:
+    skillReference: close-combat
+  hands: two
+  encumbrance: 2
+  cost: 30
+  state: carried
+  type: melee
+  damage:
+    damageFormula: 1d8
+    includeDamageMod: true
+type: weapon

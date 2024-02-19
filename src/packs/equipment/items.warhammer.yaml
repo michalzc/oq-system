@@ -1,0 +1,17 @@
+_id: adVsCpIfWXP9wmBJ
+fileType: items
+folder: VlZllXyyJC54uoOE
+img: systems/oq/assets/icons/warhammer.svg
+name: Warhammer
+system:
+  correspondingSkill:
+    skillReference: close-combat
+  hands: one
+  encumbrance: 2
+  cost: 120
+  state: carried
+  type: melee
+  damage:
+    damageFormula: 1d8
+    includeDamageMod: true
+type: weapon

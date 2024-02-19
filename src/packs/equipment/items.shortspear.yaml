@@ -1,0 +1,17 @@
+_id: Jjxq2wyuXrMDFGGK
+fileType: items
+folder: VlZllXyyJC54uoOE
+img: systems/oq/assets/icons/spear-hook.svg
+name: Shortspear
+system:
+  correspondingSkill:
+    skillReference: close-combat
+  hands: one
+  encumbrance: 2
+  cost: 20
+  state: carried
+  type: melee
+  damage:
+    damageFormula: 1d6
+    includeDamageMod: true
+type: weapon

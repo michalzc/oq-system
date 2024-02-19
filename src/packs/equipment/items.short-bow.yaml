@@ -1,0 +1,19 @@
+_id: mMUD0GjyhBU6vFFs
+fileType: items
+folder: 3XzLI3qEcMxeUqEk
+img: systems/oq/assets/icons/pocket-bow.svg
+name: Short Bow
+system:
+  correspondingSkill:
+    skillReference: ranged-combat
+  hands: two
+  encumbrance: 1
+  rangeFormula: 75m
+  rate: 1
+  cost: 75
+  state: carried
+  type: ranged
+  damage:
+    damageFormula: 1d8
+    includeDamageMod: true
+type: weapon
