@@ -154,7 +154,7 @@ export class OQActorBaseSheet extends ActorSheet {
   }
 
   async onItemUpdateState(state, elem) {
-    const itemId = elem.data().itemId;
+    const itemId = $(elem).closest('.item').data().itemId;
     const item = itemId && this.actor.items.get(itemId);
     if (item) {
       await item.update({ 'system.state': state });
@@ -306,7 +306,9 @@ export class OQActorBaseSheet extends ActorSheet {
     const armours = groupedItems.armour ?? [];
 
     const equipment = groupedItems.equipment ?? [];
-    const equipmentByType = _.groupBy(equipment, (eq) => eq.system.type);
+    const equipmentByType = _.fromPairs(
+      _.sortBy(_.toPairs(_.groupBy(equipment, (eq) => eq.system.type)), ([key]) => key),
+    );
     const weaponsBySkills = this.getWeaponBySkills(weapons, groupedSkills.combat);
 
     return {
