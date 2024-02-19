@@ -62,7 +62,6 @@ export class WeaponDataModel extends foundry.abstract.DataModel {
         choices: ItemConfig.weaponHands,
       }),
       encumbrance: encumbranceModel(),
-      ranged: new fields.BooleanField({ initial: false }),
       rangeFormula: commonStringModel(false),
       rate: positiveNumberModel(false, undefined),
       cost: positiveNumberModel(),
@@ -72,7 +71,7 @@ export class WeaponDataModel extends foundry.abstract.DataModel {
         choices: _.keys(ItemConfig.weaponStates),
         trim: true,
       }),
-      weaponType: new fields.StringField({
+      type: new fields.StringField({
         required: true,
         initial: ItemConfig.weaponType.melee,
         choices: ItemConfig.weaponType,
@@ -87,6 +86,14 @@ export class WeaponDataModel extends foundry.abstract.DataModel {
         includeDamageMod: new fields.BooleanField({ initial: true, required: true }),
       }),
     };
+  }
+
+  static migrateData(source) {
+    if (source.weaponType !== undefined) {
+      _.merge(source, {
+        type: source.weaponType,
+      });
+    }
   }
 }
 

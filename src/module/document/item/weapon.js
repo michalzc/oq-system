@@ -6,14 +6,14 @@ export class OQWeapon extends OQBaseItem {
   async _preUpdate(changed, options, user) {
     await super._preUpdate(changed, options, user);
 
-    const changedWeaponType = changed.system?.weaponType;
+    const changedWeaponType = changed.system?.type;
     const currentImage = this.img;
     const weaponIcons = CONFIG.OQ.ItemConfig.weaponIcons;
     const newImage = weaponIcons[changedWeaponType];
 
     if (
       changedWeaponType &&
-      changedWeaponType !== this.system.weaponType &&
+      changedWeaponType !== this.system.type &&
       _.includes(_.values(weaponIcons), currentImage) &&
       newImage
     ) {
@@ -98,7 +98,7 @@ export class OQWeapon extends OQBaseItem {
     ].filter((item) => !!item);
 
     return _.merge(context, {
-      itemSubtypeLabel: `OQ.Labels.WeaponTypes.${this.system.weaponType}`,
+      itemSubtypeLabel: `OQ.Labels.WeaponTypes.${this.system.type}`,
       fields,
     });
   }
