@@ -63,7 +63,7 @@ export const ItemConfig = {
     skill: 'systems/oq/assets/icons/skills.svg',
     weapon: 'systems/oq/assets/icons/two-handed-sword.svg',
     armour: 'systems/oq/assets/icons/armor-vest.svg',
-    equipment: 'systems/oq/assets/icons/toolbox.svg',
+    equipment: 'systems/oq/assets/icons/jigsaw-box.svg',
     spell: 'systems/oq/assets/icons/magic-swirl.svg',
     specialAbility: 'systems/oq/assets/icons/embrassed-energy.svg',
   },
@@ -71,6 +71,12 @@ export const ItemConfig = {
     melee: 'systems/oq/assets/icons/two-handed-sword.svg',
     ranged: 'systems/oq/assets/icons/crossbow.svg',
     shield: 'systems/oq/assets/icons/checked-shield.svg',
+  },
+  equipmentIcons: {
+    single: 'systems/oq/assets/icons/jigsaw-box.svg',
+    consumable: 'systems/oq/assets/icons/swap-bag.svg',
+    ammunition: 'systems/oq/assets/icons/quiver.svg',
+    unused: 'systems/oq/assets/icons/toolbox.svg',
   },
   skillTypes: {
     resistance: 'resistance',
@@ -145,5 +151,10 @@ export const ItemConfig = {
     general: 'general',
     magic: 'magic',
     combat: 'combat',
+  },
+  equipmentTypes: {
+    ammunition: 'ammunition',
+    consumable: 'consumable',
+    single: 'single',
   },
 };

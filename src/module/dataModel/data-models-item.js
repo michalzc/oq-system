@@ -8,7 +8,7 @@ function commonStringModel(required = false) {
 }
 
 function positiveNumberModel(require = true, initial = 0) {
-  return new fields.NumberField({ min: 0, integer: true, require, initial });
+  return new fields.NumberField({ min: 0, integer: false, require, initial });
 }
 
 function htmlFieldModel() {
@@ -113,15 +113,28 @@ export class EquipmentDataModel extends foundry.abstract.DataModel {
       description: htmlFieldModel(),
       cost: positiveNumberModel(true, 0),
       encumbrance: encumbranceModel(),
-      consumable: new fields.BooleanField({ required: true, initial: false }),
-      quantity: positiveNumberModel(false),
+      quantity: positiveNumberModel(false, 1),
       state: new fields.StringField({
         required: true,
         initial: ItemConfig.armourStates.carried.key,
         choices: _.keys(ItemConfig.equipmentStates),
         trim: true,
       }),
+      type: new fields.StringField({
+        required: true,
+        initial: ItemConfig.equipmentTypes.single,
+        choices: _.keys(ItemConfig.equipmentTypes),
+        trim: true,
+      }),
     };
+  }
+
+  static migrateData(source) {
+    if (source.consumable !== undefined) {
+      _.merge(source, {
+        type: source.consumable ? ItemConfig.equipmentTypes.consumable : ItemConfig.equipmentTypes.single,
+      });
+    }
   }
 }
 
