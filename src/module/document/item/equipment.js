@@ -2,6 +2,15 @@ import { OQBaseItem } from './base-item.js';
 import _ from 'lodash-es';
 
 export class OQEquipment extends OQBaseItem {
+  static getDefaultArtwork(itemData) {
+    const itemConfig = CONFIG.OQ.ItemConfig;
+    const img = itemConfig.equipmentIcons[itemData.system?.type] ?? itemConfig.defaultIcons.equipment;
+
+    return {
+      img,
+    };
+  }
+
   async _preUpdate(changed, options, user) {
     await super._preUpdate(changed, options, user);
 
