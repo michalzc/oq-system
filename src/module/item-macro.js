@@ -1,15 +1,12 @@
-import { log } from './utils.js';
-
 export async function createItemMacro(bar, data, slot) {
-  const allowedMacrotItems = [
+  const allowedMacroItems = [
     CONFIG.OQ.ItemConfig.itemTypes.skill,
     CONFIG.OQ.ItemConfig.itemTypes.weapon,
     CONFIG.OQ.ItemConfig.itemTypes.specialAbility,
   ];
 
-  log('HotbarDrop', data, slot);
-  if (allowedMacrotItems.includes(data.type)) {
-    const command = `game.oq.rollItem('${data._id}')`;
+  if (allowedMacroItems.includes(data.type)) {
+    const command = `game.oq.rollItem('${data.name}')`;
     const existingMacro = game.macros.find((macro) => macro.name === data.name && macro.command === command);
     const macro = existingMacro
       ? existingMacro
@@ -26,17 +23,4 @@ export async function createItemMacro(bar, data, slot) {
   }
 
   return false;
-}
-
-export async function rollItem(itemId) {
-  log('Rolling item', itemId);
-
-  const speaker = ChatMessage.getSpeaker();
-  const actor = game.actors.tokens[speaker.token] ?? game.actors.get(speaker.actor);
-  if (actor) {
-    const item = actor.items.get(itemId);
-    if (item) {
-      item.rollItemTest();
-    }
-  }
 }
