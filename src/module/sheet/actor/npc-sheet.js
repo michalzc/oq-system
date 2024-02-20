@@ -1,5 +1,6 @@
 import { OQActorBaseSheet } from './actor-base-sheet.js';
 import _ from 'lodash-es';
+import { OQNPCShortDescriptionEdit } from '../../application/short-desc-editor.js';
 
 export class OQNpcSheet extends OQActorBaseSheet {
   get template() {
@@ -21,6 +22,7 @@ export class OQNpcSheet extends OQActorBaseSheet {
     super.activateListeners(html);
 
     html.find('.roll-characteristics').on('click', this.onRollCharacteristics.bind(this));
+    html.find('.show-short-description-dialog').on('click', this.onEditShortDescription.bind(this));
   }
 
   async onRollCharacteristics(event) {
@@ -39,5 +41,12 @@ export class OQNpcSheet extends OQActorBaseSheet {
     };
     await this.actor.update(characteristicsToUpdate);
     this.actor.sheet.render(true);
+  }
+
+  async onEditShortDescription(event) {
+    event.preventDefault();
+
+    const dialog = new OQNPCShortDescriptionEdit(this.actor);
+    dialog.render(true);
   }
 }

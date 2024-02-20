@@ -1,7 +1,8 @@
-<form class="{{cssClass}} {{type}}" autocomplete="off">
+<form class="{{cssClass}} {{type}} dialog-form" autocomplete="off">
   <section class="dialog-body short-description">
-    {{editor shortDescription target="system.shortDescription" id="shortDescription"
+    {{editor enrichedDescription target="system.personal.shortDescription"
              engine="prosemirror"
-             button=true editable=true}}
+             editable=true
+             collaborate=false}}
   </section>
 </form>
