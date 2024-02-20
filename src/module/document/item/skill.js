@@ -3,6 +3,11 @@ import _ from 'lodash-es';
 import { makeSlug, minMaxValue } from '../../utils.js';
 
 export class OQSkill extends OQBaseItem {
+  static getDefaultArtwork() {
+    return {
+      img: CONFIG.OQ.ItemConfig.defaultIcons.skill,
+    };
+  }
   prepareDerivedData() {
     super.prepareDerivedData();
 

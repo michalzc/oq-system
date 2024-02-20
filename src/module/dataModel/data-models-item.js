@@ -7,7 +7,7 @@ function commonStringModel(required = false) {
   return new fields.StringField({ trim: true, initial: '', required });
 }
 
-function positiveNumberModel(required = true, initial = 1) {
+function positiveNumberModel(required = true, initial = 0) {
   return new fields.NumberField({ min: 0, integer: false, required: required, initial: initial });
 }
 

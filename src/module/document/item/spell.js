@@ -2,6 +2,11 @@ import { OQBaseItem } from './base-item.js';
 import _ from 'lodash-es';
 
 export class OQSpell extends OQBaseItem {
+  static getDefaultArtwork() {
+    return {
+      img: CONFIG.OQ.ItemConfig.defaultIcons.spell,
+    };
+  }
   async prepareDerivedData() {
     super.prepareDerivedData();
     this.system.tooltip = await this.getTooltipWithTraits();

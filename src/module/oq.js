@@ -6,14 +6,12 @@ import { registerDocuments } from './init/register-documents.js';
 import { registerDataModels } from './init/register-data-models.js';
 import { registerHelpers } from './init/handlebar-helpers.js';
 import { registerCustomHookHandlers } from './init/custom-hook-handlers.js';
-import { rollItem } from './item-macro.js';
+import { oqGame } from './oq-game.js';
 
 async function init() {
   log('Initializing OQ');
   CONFIG.OQ = OQ;
-  game.oq = {
-    rollItem,
-  };
+  game.oq = oqGame;
 
   registerDataModels();
   registerDocuments();
