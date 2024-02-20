@@ -239,6 +239,8 @@ export class OQActorBaseSheet extends ActorSheet {
   }
 
   async onUpdateResource(event) {
+    event.preventDefault();
+
     const update = event.which === 1 ? 1 : -1;
     const dataSet = event.currentTarget.dataset;
     const resourceId = dataSet.resourceId;
