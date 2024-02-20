@@ -1,0 +1,16 @@
+_id: cU0TNJHyFTcln9Z1
+fileType: items
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/candle-light.svg
+name: Candle
+system:
+  description: |-
+    <p>A candle illuminates a one-metre radius. Any wind stronger than a slight
+    breeze will extinguish a candle.</p>
+  cost: 0.1
+  quantity: 1
+  state: carried
+  type: consumable
+  traits:
+  - Duration (1h)
+type: equipment

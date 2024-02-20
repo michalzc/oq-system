@@ -1,0 +1,17 @@
+_id: 8bBx5VqGs6vuHVgx
+fileType: items
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/mountain-climbing.svg
+name: Climbing kit
+system:
+  description: |-
+    <p>A climbing kit provides a bonus of +20% to any Athletics skill tests made to
+    climb.</p>
+  cost: 25
+  encumbrance: 1
+  quantity: 1
+  state: carried
+  type: single
+  traits:
+  - Bonus (+20% Athletics)
+type: equipment

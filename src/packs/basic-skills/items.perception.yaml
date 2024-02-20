@@ -6,6 +6,7 @@ flags:
   oq:
     newActor:
       - character
+      - npc
 folder: szWzZEdK1HVFTQEr
 img: systems/oq/assets/icons/skills.svg
 name: Perception

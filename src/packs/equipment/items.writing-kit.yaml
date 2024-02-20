@@ -1,0 +1,13 @@
+_id: hCxIJ3pSLs1rSJLX
+fileType: items
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/feather.svg
+name: Writing kit
+system:
+  description: ''
+  cost: 45
+  encumbrance: 1
+  quantity: 1
+  state: carried
+  type: single
+type: equipment

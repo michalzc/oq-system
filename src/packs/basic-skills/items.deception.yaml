@@ -1,7 +1,11 @@
 _id: VpJttXklUk4cJQLY
 effects: []
 fileType: items
-flags: {}
+flags:
+  oq:
+    newActor:
+      - character
+      - npc
 folder: szWzZEdK1HVFTQEr
 img: systems/oq/assets/icons/skills.svg
 name: Deception

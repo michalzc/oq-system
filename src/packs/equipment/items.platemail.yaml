@@ -1,0 +1,13 @@
+_id: bta8GEikTGw2e8Hm
+fileType: items
+name: Platemail
+folder: 1LSg8TGkuL3Z4Wyx
+img: systems/oq/assets/icons/breastplate.svg
+type: armour
+system:
+  ap: 6
+  encumbrance: 12
+  cost: 9000
+  state: worn
+  description: |-
+    <p>Steel plates that cover the body, over a chain mail backing.</p>

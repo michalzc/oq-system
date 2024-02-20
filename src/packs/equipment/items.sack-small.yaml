@@ -1,0 +1,14 @@
+_id: XqMdfk4EOFqugE0i
+fileType: items
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/swap-bag.svg
+name: Sack, Small
+system:
+  description: <p>A small sack can hold 5 ENC of equipment.</p>
+  cost: 0.2
+  quantity: 1
+  state: carried
+  type: single
+  traits:
+  - Capacity (5 ENC)
+type: equipment
