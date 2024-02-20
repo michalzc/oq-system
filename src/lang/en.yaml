@@ -17,6 +17,8 @@ OQ:
     SpentPoints: Spent
     Value: Value
     CustomFormula: Custom Formula
+    ShortDescription:
+      title: Edit short description of
   Errors:
     InvalidRoll: Invalid roll definition
   Hints:

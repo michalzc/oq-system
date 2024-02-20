@@ -5,9 +5,10 @@
     <div class="header-fields">
       <input class="name" type="text" data-dtype="String" name="name" value="{{actor.name}}"
         placeholder="{{ localize 'OQ.Labels.Name' }}" title="{{enrichedShortDescription}}" />
-      {{editor enrichedShortDescription target="system.personal.shortDescription" id="shortDescription"
-      engine="prosemirror"
-      button=true editable=true}}
+      <div class="short-description">
+        <div>{{{ enrichedShortDescription }}}</div>
+        <button class="show-short-description-dialog" type="button"><i class="fas fa-edit"></i></button>
+      </div>
     </div>
 
   </header>
