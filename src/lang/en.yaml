@@ -1,4 +1,14 @@
 OQ:
+  Chat:
+    damageMessage: >-
+      {0} has taken {1} points of damage.
+    healMessage: >-
+      {0} has gained {1} hit points.
+    spentMagicPoints: >-
+      {0} has spent {1} magic points.
+    gainMagicPoints: >-
+      {0} has gained {1} magic points.
+
   Dialog:
     AllPoints: All
     Base: Base
