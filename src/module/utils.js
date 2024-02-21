@@ -47,3 +47,7 @@ export async function asyncFlattenItemsFromFolder(folder) {
   const retrieved = await Promise.all(content.map((elem) => (elem.uuid ? fromUuid(elem.uuid) : elem)));
   return _.map(retrieved, (item) => (item.toObject ? item.toObject(true) : item));
 }
+
+export function formatString(format, ...values) {
+  return values.reduce((acc, value, index) => acc.replace(`{${index}}`, value), format);
+}
