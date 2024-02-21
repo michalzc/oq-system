@@ -39,6 +39,9 @@ export async function testRoll(rollData) {
   const rollResult = getResult(resultFeatures, roll.total, { value: rollData.value, totalValue });
   const mastered = rollData.value >= MAX_VALUE && totalValue >= MAX_VALUE && rollData.mastered;
   const rollTypeLabel = `TYPES.Item.${rollData.rollType}`;
+  const rollResults = CONFIG.OQ.RollConfig.rollResults;
+  const showDamageButton =
+    rollData.hasDamage && [rollResults.success, rollResults.criticalSuccess].includes(rollResult);
   const renderData = {
     ...rollData,
     mastered,
@@ -46,14 +49,18 @@ export async function testRoll(rollData) {
     rollResult,
     rollTypeLabel,
     totalValue,
+    showDamageButton,
   };
+
   const template = TestRollTemplates[rollData.rollType];
   const messageContent = await renderTemplate(template, renderData);
+  const flags = showDamageButton && { oqMessageType: CONFIG.OQ.ChatConfig.MessageFlags.hasRollDamage };
   const messageData = {
     type: CONST.CHAT_MESSAGE_TYPES.ROLL,
     speaker: rollData.speaker,
     rolls: [roll],
     content: messageContent,
+    flags: flags,
   };
   await ChatMessage.create(messageData);
 }

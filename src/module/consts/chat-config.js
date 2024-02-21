@@ -5,6 +5,7 @@ export const ChatConfig = {
   MessageFlags: {
     key: 'oqMessageType',
     updateFromChat: 'updateFromChat',
+    hasRollDamage: 'hasRollDamage',
   },
   AdjustmentType: {
     mp: 'mp',

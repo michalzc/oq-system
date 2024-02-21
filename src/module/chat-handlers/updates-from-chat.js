@@ -1,5 +1,6 @@
 import _ from 'lodash-es';
 import { formatString } from '../utils.js';
+import { rollDamageFromItem } from '../oq-game.js';
 
 function findTargets() {
   const targetTokens = canvas.tokens.controlled;
@@ -73,11 +74,23 @@ async function adjustMagicPoints(event) {
   await Promise.all(updates);
 }
 
+async function rollDamageFromChatMessage(event) {
+  event.preventDefault();
+  const itemName = event.currentTarget.dataset.itemName;
+  if (itemName) {
+    rollDamageFromItem(itemName);
+  }
+}
+
 export function handleDamageRollChatMessage(chatMessage, html) {
   const chatConfig = CONFIG.OQ.ChatConfig;
   if (chatMessage.flags[chatConfig.MessageFlags.key] === chatConfig.MessageFlags.updateFromChat) {
     html.find('.oq.roll .apply-damage').on('click', applyDamage);
     html.find('.oq.roll .apply-healing').on('click', applyHealing);
     html.find('.oq.roll .adjust-mp').on('click', adjustMagicPoints);
+  }
+
+  if (chatMessage.flags[chatConfig.MessageFlags.key] === chatConfig.MessageFlags.hasRollDamage) {
+    html.find('.oq.roll .roll-damage').on('click', rollDamageFromChatMessage);
   }
 }
