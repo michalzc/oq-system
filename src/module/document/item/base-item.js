@@ -86,7 +86,12 @@ export class OQBaseItem extends Item {
     return {
       ...this.getBaseRollData(),
       ...this.getRollValues(),
+      hasDamage: this.hasDamage,
     };
+  }
+
+  get hasDamage() {
+    return !!this.system.damageRollValues?.finalDamageFormula;
   }
 
   getDamageRollData() {

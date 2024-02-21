@@ -33,4 +33,10 @@
     </div>
   </div>
 
+  {{#if showDamageButton}}
+    <div class="damage-button">
+      <button type="button" class="roll-damage" data-item-name="{{ entityName }}">{{ localize 'OQ.Labels.DamageRoll'}}</button>
+    </div>
+  {{/if}}
+
 </div>
