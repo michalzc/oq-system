@@ -17,8 +17,9 @@ export async function getDefaultItemsForActor(actorType) {
       const documents = await compendium.getDocuments({});
       if (documents) {
         return documents
+          .filter((item) => (item.flags?.oq?.newActor ?? []).includes(actorType))
           .map((item) => item.toObject(true))
-          .filter((item) => (item.flags?.oq?.newActor ?? []).includes(actorType));
+          .map((item) => game.items.fromCompendium(item));
       }
     }
   }

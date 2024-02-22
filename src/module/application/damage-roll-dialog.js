@@ -43,4 +43,12 @@ export class OQDamageRollDialog extends FormApplication {
       await damageRoll(_.merge(rollData, { customFormula }));
     }
   }
+
+  async _render(force, options) {
+    await super._render(force, options);
+    setTimeout(() => {
+      const inputField = $(this.form).find('#customFormula');
+      inputField.select();
+    }, 50);
+  }
 }
