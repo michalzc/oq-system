@@ -4,6 +4,8 @@
  * @property {number} value
  */
 
+import { minMaxValue } from './utils.js';
+
 /**
  * @typedef {Object} RollData
  * @property {'skill'|'weapon'} rollType
@@ -34,7 +36,7 @@ const TestRollTemplates = {
 export async function testRoll(rollData) {
   const roll = await new Roll(CONFIG.OQ.RollConfig.baseRollFormula).roll({ async: true });
   const resultFeatures = getResultFeatures(roll);
-  const totalValue = (rollData.value ?? 0) + (rollData.difficulty?.value ?? 0) + (rollData?.mod ?? 0);
+  const totalValue = minMaxValue((rollData.value ?? 0) + (rollData.difficulty?.value ?? 0) + (rollData?.mod ?? 0));
 
   const rollResult = getResult(resultFeatures, roll.total, { value: rollData.value, totalValue });
   const mastered = rollData.value >= MAX_VALUE && totalValue >= MAX_VALUE && rollData.mastered;
