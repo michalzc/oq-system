@@ -7,30 +7,9 @@ system:
   description: |-
     <p>Mischief is a minor trickster’s spell which afflicts its target with a small
     irritating curse.</p> <p>Roll 1D20 on the following list for a result, which
-    stays in place for the duration of the spell.</p> <table> <caption>Type of
-    Mischief</caption> <thead><tr><th>Roll 1D20</th><th>Result</th></tr></thead>
-    <tbody> <tr><td>1</td><td>Clothes disappear.</td></tr> <tr><td>2</td><td>Hair
-    goes green.</td></tr> <tr><td>3</td><td>Hair drops out.</td></tr>
-    <tr><td>4</td><td>Grows beard regardless of sex.</td></tr> <tr><td>5</td><td>The
-    target’s weapon becomes a bunch of flowers.</td></tr> <tr><td>6</td><td>Armour
-    becomes the festive dress of the opposite sex.</td></tr> <tr><td>7</td><td>Feet
-    become duck feet.</td></tr> <tr><td>8</td><td>Head becomes that of a domestic
-    animal (cow, pig, sheep, etc.).</td></tr> <tr><td>9</td><td>Victim smells of
-    excrement (-20% to any Deception or Influence rolls).</td></tr>
-    <tr><td>10</td><td>Wobbles uncontrollably, -20% to attacks, Athletics and any
-    other roll involving dexterity.</td></tr> <tr><td>11</td><td>The victim can only
-    speak gibberish.</td></tr> <tr><td>12</td><td>The victim says the most
-    inappropriate things at the most socially awkward times. -20% to any Influence
-    rolls.</td></tr> <tr><td>13</td><td>The victim falls asleep for 1D6 rounds on
-    failed Persistence roll whenever they enter combat.</td></tr>
-    <tr><td>14</td><td>Makes loud flatulent noises whenever they move; -25 to any
-    Deception rolls.</td></tr> <tr><td>15</td><td>The victim is compelled to tell
-    the truth at all times.</td></tr> <tr><td>16</td><td>No one ever takes the
-    character seriously. Always has to make an Influence roll at -20% to convince
-    others.</td></tr> <tr><td>17</td><td>Turns into a dog.</td></tr>
-    <tr><td>18</td><td>Arms turn to rubber, unable to hold anything.</td></tr>
-    <tr><td>19</td><td>The victim becomes short, half SIZ.</td></tr>
-    <tr><td>20</td><td>Roll twice.</td></tr> </tbody> </table>
+    stays in place for the duration of the spell.</p>
+    <p>@UUID[Compendium.oq.oq-system-documentation.JournalEntry.tQAx53vXPFGozPEk.JournalEntryPage.wWCRB02MMRERgevu]{Type
+    of Mischief}</p>
   magnitude: 2
   nonVariant: true
   traits:

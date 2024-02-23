@@ -1,0 +1,29 @@
+_id: uVCGEbKPd3cNW2pB
+parentId: tQAx53vXPFGozPEk
+fileType: journal.pages
+name: Madness Effects
+text:
+  content: >-
+    <table> <caption>Madness Effects</caption> <thead> <tr> <th>Target’s Persistence
+    Test</th> <th>Effect</th> </tr> </thead> <tbody> <tr> <td>Target fumbles
+    Persistence test</td> <td>Victim instantly loses 1D4 INT permanently and lapses
+    into a catatonic state for minutes equal to 20 minus its POW (minimum of one
+    combat round).</td> </tr> <tr> <td>Target fails Persistence test</td> <td>
+    <p>Victim gibbers and raves uncontrollably for combat rounds equal to 20 minus
+    its POW (minimum of one combat round).</p> <p>The victim will perform random
+    combat actions during this period.</p> <p>Roll 1D6.</p> <ul> <ol>Move to close
+    combat attack a random target.</ol> <ol>Run in a random direction (Roll 1D12 as
+    clock face to determine direction).</ol> <ol>Cast a spell at a random
+    target.</ol> <ol>Use ranged attack against a random target.</ol> <ol>Shout at a
+    random target.</ol> <ol>Change stance.</ol> </ul> </td> </tr> <tr> <td>Target
+    succeeds Persistence test</td> <td>The victim is shaken and disturbed, suffering
+    a –20% penalty to all skill tests for combat rounds equal to 20 minus its POW
+    (minimum of one combat round).</td> </tr> <tr> <td>Target critically succeeds
+    Persistence test</td> <td>The victim is unaffected by the spell and cannot be
+    affected by further Madness spells for combat rounds equal to its POW.</td>
+    </tr> </tbody> </table>
+  format: 1
+title:
+  level: 1
+  show: true
+type: text

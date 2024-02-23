@@ -7,16 +7,8 @@ system:
   description: |-
     <p>This spell repairs broken crafted items. It also replaces missing parts of an
     item.</p> <p>The size of the item depends on the magnitude of the spell.</p>
-    <table> <caption>Size of Item vs Magnitude</caption>
-    <thead><tr><th>Magnitude</th><th>Size of Item</th></tr></thead> <tbody>
-    <tr><td>1</td><td>Small items, such as pots, plates, knives, a defaced detail on
-    a stone fresco, etc.</td></tr> <tr><td>2</td><td>Medium. Large containers, such
-    as wine amphorae, target shields, long swords, human-sized armour, a missing arm
-    on a broken statue.</td></tr> <tr><td>3</td><tr>Large. Tower shields, broken
-    doors, a missing masonry feature such as a column.</tr></tr>
-    <tr><td>4</td><td>Huge. Giant armour, ruined houses, shattered towers.</td></tr>
-    <tr><td>5</td><td>Enormous. The broken parts of a walking castle, the ruined
-    walls of a city.</td></tr> </tbody> </table>
+    <p>@UUID[Compendium.oq.oq-system-documentation.JournalEntry.tQAx53vXPFGozPEk.JournalEntryPage.xKi8bjZoCdynKjIv]{Size
+    of Item vs Magnitude}</p>
   magnitude: 1
   nonVariant: false
   traits:

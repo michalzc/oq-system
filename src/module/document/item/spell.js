@@ -22,7 +22,7 @@ export class OQSpell extends OQBaseItem {
   }
 
   async getTooltipWithTraits() {
-    const description = this.system.description;
+    const description = await TextEditor.enrichHTML(this.system.description, { async: true });
     const traits = this.getTraits().join(', ');
     return await renderTemplate('systems/oq/templates/tooltip.hbs', { description, traits });
   }

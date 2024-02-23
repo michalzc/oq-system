@@ -14,18 +14,9 @@ system:
     the illusion, it becomes insubstantial and ghost-like to them.</p> <p>The size
     of the illusion is also governed by the magnitude. A magnitude 1 Illusion can be
     used to create small household items, say a fake table and chair, but would not
-    be able to create an illusion of a fire-breathing dragon. </p> <table> <thead>
-    <tr> <th>Magnitude</th> <th>Modifier to Perception test</th> <th>Type of
-    illusion possible</th> </tr> </thead> <tbody> <tr> <td>1</td> <td>+50 %</td>
-    <td>Not capable of motion or causing damage. Slightly fuzzy and unreal around
-    the edges. Limit of SIZ 10.</td> </tr> <tr> <td>2</td> <td>+25 %</td> <td>Some
-    minor discrepancies. Capable of motion, but not of damage. Limit of SIZ 15.</td>
-    </tr> <tr> <td>3</td> <td>0</td> <td>Capable of motion and causing damage. Limit
-    of SIZ 20.</td> </tr> <tr> <td>4</td> <td>-25 %</td> <td>Capable of motion and
-    causing damage. Limit of SIZ 30.</td> </tr> <tr> <td>5</td> <td>-50 %</td>
-    <td>Indistinguishable from the real thing, capable of motion and damage. Limit
-    of SIZ 40.</td> </tr> <tr> <td>+1</td> <td>-50%</td> <td>+10 SIZ per
-    magnitude.</td> </tr> </tbody> </table>
+    be able to create an illusion of a fire-breathing dragon. </p> <p>
+    @UUID[Compendium.oq.oq-system-documentation.JournalEntry.tQAx53vXPFGozPEk.JournalEntryPage.lNGpuk8jNUwoBXEY]{Mirage}</p>
   nonVariant: false
+  magnitude: 1
   type: sorcery
 type: spell
