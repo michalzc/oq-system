@@ -8,8 +8,9 @@ Alpha
 
 ## Roadmap
 
-* v0.4 - https://github.com/michalzc/oq-system/milestone/4. Support for active effects and customized Combat Tracker.
-* v0.3 - https://github.com/michalzc/oq-system/milestone/3. SRD Content in compendia, some QoL updates.
+* v1.0 - https://github.com/michalzc/oq-system/milestone/4. Support for active effects and customized Combat Tracker.
+* v0.4 - https://github.com/michalzc/oq-system/milestone/5. SRD Bestiary in compendium.
+* v0.3 - https://github.com/michalzc/oq-system/milestone/3. SRD content (without bestiary) in compendiums and few QoL features.
 * v0.2 - https://github.com/michalzc/oq-system/milestone/2. **Done**
 * v0.1 - Basic character and npc sheets, skill, damage rolls. Skills in compendium. **Done**
 
