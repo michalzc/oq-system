@@ -12,14 +12,9 @@ system:
     directions). For each point of magnitude the whirlwind is 10 metres tall.</p>
     <p>If the whirlwind hits a character, make a Dodge roll to avoid being caught up
     in it. Characters caught are whipped off their feet, 1D6 metres into the vortex.
-    Each round roll a 1D6 and consult the following table.</p> <table>
-    <caption>Whirlwind Results</caption> <thead> <tr> <th>Roll 1D6</th>
-    <th>Result</th> </tr> </thead> <tbody> <tr> <td>1-2</td> <td>The character is
-    carried up 1D10 metres (if already at the top), blown out of the whirlwind the
-    additional height before falling to earth (taking damage).</td> </tr> <tr>
-    <td>3-4</td> <td>Stay at the height they are.</td> </tr> <tr> <td>5-6</td>
-    <td>Fall 1D6 down in the vortex. If this takes them to the ground, they take
-    falling damage.</td> </tr> </tbody> </table>
+    Each round roll a 1D6 and consult the following table.</p>
+    <p>@UUID[Compendium.oq.oq-system-documentation.JournalEntry.tQAx53vXPFGozPEk.JournalEntryPage.4VGYVzvW6Dti0GRW]{Whirlwind
+    Results}</p>
   magnitude: 1
   nonVariant: false
   traits:

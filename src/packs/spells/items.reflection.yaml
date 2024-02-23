@@ -11,13 +11,9 @@ system:
     have any effect on spells that are already affecting a character. The effects of
     Reflection depend on the relative magnitude of both itself and the incoming
     spell – see the Reflection Results table for more details.</p> <p>Reflection is
-    incompatible with Absorption, Shield and Spirit Block</p> <table>
-    <caption>Reflection Results</caption> <thead> <tr> <th>Incoming Spell’s
-    Magnitude is...</th> <th>Effect</th> </tr> </thead> <tbody> <tr><td>Equal to or
-    weaker than Reflection’s magnitude.</td><td>Incoming spell reflected and
-    Reflection remains.</td></tr> <tr><td>1 or more points stronger than
-    Reflection’s magnitude.</td><td>Reflection is eliminated and the incoming spell
-    takes effect.</td></tr> </tbody> </table>
+    incompatible with Absorption, Shield and Spirit Block</p>
+    <p>@UUID[Compendium.oq.oq-system-documentation.JournalEntry.tQAx53vXPFGozPEk.JournalEntryPage.B11Ii3ssupRu3Yny]{Reflection
+    Results}</p>
   magnitude: 1
   nonVariant: false
   traits:

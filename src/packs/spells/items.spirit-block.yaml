@@ -6,18 +6,12 @@ name: Spirit Block
 system:
   description: |-
     <p>Spirits may only touch the recipient of Spirit Block with a POW high enough
-    to break through the spell’s magnitude (see table).</p> <table> <caption>Spirit
-    Block Effectiveness</caption> <thead> <tr> <th>Spirit Block’s Magnitude</th>
-    <th>Recipient May Only Be Harmed By Spirits With…</th> </tr> </thead> <tbody>
-    <tr> <td>1</td> <td>POW 10 or higher</td> </tr> <tr> <td>2</td> <td>POW 17 or
-    higher</td> </tr> <tr> <td>3</td> <td>POW 26 or higher</td> </tr> <tr>
-    <td>4</td> <td>POW 37 or higher</td> </tr> <tr> <td>5</td> <td>POW 50 or
-    higher</td> </tr> <tr> <td>6</td> <td>POW 65 or higher</td> </tr> <tr>
-    <td>7</td> <td>POW 82 or higher</td> </tr> <tr> <td>8</td> <td>POW 101 or
-    higher</td> </tr> </tbody> </table> <p>A spirit unable to touch a Spirit Blocked
-    character will not be able to personally attack or harm the recipient, including
-    through ranged attacks (such as a thrown spectral javelin). A spell cast by a
-    spirit at the recipient is blocked unless its magnitude exceeds Spirit Block’s
+    to break through the spell’s magnitude (see table).</p>
+    <p>@UUID[Compendium.oq.oq-system-documentation.JournalEntry.tQAx53vXPFGozPEk.JournalEntryPage.qKW313w78WHd3It7]{Spirit
+    Block Effectiveness}</p> <p>A spirit unable to touch a Spirit Blocked character
+    will not be able to personally attack or harm the recipient, including through
+    ranged attacks (such as a thrown spectral javelin). A spell cast by a spirit at
+    the recipient is blocked unless its magnitude exceeds Spirit Block’s
     magnitude.</p> <p>Spirit Block is incompatible with Absorption, Reflection and
     Shield.</p>
   magnitude: 1
