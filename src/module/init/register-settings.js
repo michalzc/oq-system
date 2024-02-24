@@ -1,8 +1,8 @@
 import { OQ } from '../consts/consts.js';
-import { getCompendiumList } from '../compendium-utils.js';
+import { getCompendiumList } from '../utils/compendium-utils.js';
 
 export function registerDefaultItemsSetting() {
-  game.settings.register(OQ.SYSTEM_ID, OQ.SettingsConfig.keys.defaultItemsCompendium, {
+  game.settings.register(OQ.SYSTEM_ID, CONFIG.OQ.SettingsConfig.keys.defaultItemsCompendium, {
     name: 'OQ.Settings.defaultItemsCompendium.name',
     hint: 'OQ.Settings.defaultItemsCompendium.hint',
     scope: 'world',

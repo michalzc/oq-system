@@ -1,6 +1,6 @@
 import _ from 'lodash-es';
-import { formatString } from '../utils.js';
-import { rollDamageFromItem } from '../oq-game.js';
+import { formatString } from '../utils/utils.js';
+import { rollDamageFromItem } from '../utils/oq-game.js';
 
 function findTargets() {
   const targetTokens = canvas.tokens.controlled;

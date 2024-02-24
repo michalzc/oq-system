@@ -1,7 +1,7 @@
 import _ from 'lodash-es';
 import { AttributesDialog } from '../../application/attributes-dialog.js';
 import { OQBaseActor } from '../../document/actor/base-actor.js';
-import { asyncFlattenItemsFromFolder } from '../../utils.js';
+import { asyncFlattenItemsFromFolder } from '../../utils/utils.js';
 
 const mergeObject = foundry.utils.mergeObject;
 

@@ -1,5 +1,5 @@
 import _ from 'lodash-es';
-import { getDefaultItemsForActor } from '../../compendium-utils.js';
+import { getDefaultItemsForActor } from '../../utils/compendium-utils.js';
 
 export class OQBaseActor extends Actor {
   static otherSkillsTypes = ['knowledge', 'practical', 'custom'];

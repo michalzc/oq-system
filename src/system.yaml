@@ -18,7 +18,7 @@ styles:
   - styles/oq.css
 packs:
   - name: oq-system-basic-skills
-    label: Basic Skills
+    label: Skills
     path: packs/basic-skills
     type: Item
     system: oq

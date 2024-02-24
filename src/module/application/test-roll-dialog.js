@@ -1,5 +1,5 @@
 import _ from 'lodash-es';
-import { testRoll } from '../roll.js';
+import { testRoll } from '../utils/roll.js';
 
 export class OQTestRollDialog extends FormApplication {
   constructor(object, options) {

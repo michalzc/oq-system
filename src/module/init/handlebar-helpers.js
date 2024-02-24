@@ -1,4 +1,4 @@
-import { logError } from '../utils.js';
+import { logError } from '../utils/logger.js';
 
 export function registerHelpers() {
   Handlebars.registerHelper('getPartial', function (name, context) {

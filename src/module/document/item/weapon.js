@@ -1,6 +1,6 @@
 import { OQBaseItem } from './base-item.js';
 import _ from 'lodash-es';
-import { minMaxValue, mostSignificantModifier } from '../../utils.js';
+import { minMaxValue, mostSignificantModifier } from '../../utils/utils.js';
 
 export class OQWeapon extends OQBaseItem {
   static getDefaultArtwork(itemData) {

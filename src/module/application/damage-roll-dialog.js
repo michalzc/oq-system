@@ -1,5 +1,5 @@
 import _ from 'lodash-es';
-import { damageRoll } from '../roll.js';
+import { damageRoll } from '../utils/roll.js';
 
 export class OQDamageRollDialog extends FormApplication {
   static get defaultOptions() {
