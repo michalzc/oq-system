@@ -97,6 +97,7 @@ OQ:
         abbr: Str
         label: Strength
     Concept: Concept
+    ConsolidateMoney: Consolidate Coins
     Consumable: Consumable
     Cost: Cost
     Culture: Culture
@@ -132,6 +133,7 @@ OQ:
     Magnitude: Magnitude
     Mastered: Mastered
     Mod: Mod
+    Money: Money
     Initiative: Initiative
     IncludeDamageMod: Include DM
     ItemStates:

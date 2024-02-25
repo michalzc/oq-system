@@ -12,6 +12,7 @@ export class OQCharacterSheet extends OQActorBaseSheet {
 
     if (!this.isEditable) return;
     html.find('.modify-characteristics').on('click', this.onModifyCharacteristics.bind(this));
+    html.find('.consolidate-money').on('click', this.onConsolidateMoney.bind(this));
   }
 
   async getData(options) {
@@ -24,11 +25,27 @@ export class OQCharacterSheet extends OQActorBaseSheet {
       enrichedNotes,
       isCharacter: true,
       spellTypes,
+      money: this.prepareMoney(),
       groupedItems: {
         spellsPerType,
         skillsTabContent,
       },
     });
+  }
+
+  prepareMoney() {
+    const money = this.actor.system.personal.money ?? {};
+    const fields = game.oq.moneyService?.fields ?? [];
+    if (fields) {
+      return _(fields)
+        .map((field) => ({
+          ...field,
+          amount: money[field.name] ?? 0,
+        }))
+        .value();
+    } else {
+      ui.notifications.warning('Invalid money configuration!');
+    }
   }
 
   getSpellsPerType() {
@@ -40,6 +57,24 @@ export class OQCharacterSheet extends OQActorBaseSheet {
   onModifyCharacteristics() {
     const characteristicsDialog = new CharacteristicsDialog(this.actor);
     characteristicsDialog.render(true);
+  }
+
+  async onConsolidateMoney(event) {
+    event.preventDefault();
+
+    const money = this.actor.system.personal.money;
+    if (money && game.oq.moneyService) {
+      const consolidated = _(game.oq.moneyService.consolidate(money))
+        .map((elem) => [elem.name, elem.amount])
+        .fromPairs()
+        .value();
+
+      if (consolidated) {
+        await this.actor.update({
+          'system.personal.money': consolidated,
+        });
+      }
+    }
   }
 
   splitSkills(groupedSkills) {

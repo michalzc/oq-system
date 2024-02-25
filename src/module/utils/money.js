@@ -33,19 +33,18 @@ export class OQMoneyService {
       this.fields,
       (newMoney, coinsDef) => {
         const { remains } = newMoney;
-        const count = Math.floor(remains / (coinsDef.multiplier * this.multiplier));
+        const amount = Math.floor(remains / (coinsDef.multiplier * this.multiplier));
         const newRemains = Math.floor(remains % (coinsDef.multiplier * this.multiplier));
         return _.merge(newMoney, {
-          [coinsDef.name]: { count, label: coinsDef.label, multiplier: coinsDef.multiplier },
+          [coinsDef.name]: { amount, label: coinsDef.label, multiplier: coinsDef.multiplier },
           remains: newRemains,
         });
       },
       { remains: amount * this.multiplier },
     );
     return _(recalculated)
-      .toPairs()
-      .sortBy(([, elem]) => -elem.multiplier)
-      .fromPairs()
+      .mapValues((elem, key) => ({ ...elem, name: key }))
+      .sortBy((elem) => -elem.multiplier)
       .value();
   }
 
@@ -53,9 +52,7 @@ export class OQMoneyService {
     const recalculated = _(money)
       .mapValues((count, key) => {
         const ref = this.moneyConfig[key];
-        if (ref) {
-          return count * ref.multiplier;
-        }
+        return ref ? count * ref.multiplier : 0;
       })
       .values()
       .reduce((left, right) => left + right);

@@ -82,28 +82,34 @@ describe('money.js', function () {
       expect(moneyService.multiplier).to.eql(100);
     });
 
-    const makeExpected = (gold, silver, copper, lead) => ({
-      GD: {
-        count: gold,
-        label: 'Gold Ducats',
-        multiplier: 20,
-      },
-      SP: {
-        count: silver,
-        label: 'Silver Pieces',
-        multiplier: 1,
-      },
-      CP: {
-        count: copper,
-        label: 'Copper Pennies',
-        multiplier: 0.1,
-      },
-      LB: {
-        count: lead,
-        label: 'Lead Bits',
-        multiplier: 0.02,
-      },
-    });
+    function makeExpected(gold, silver, copper, lead) {
+      return [
+        {
+          name: 'GD',
+          amount: gold,
+          label: 'Gold Ducats',
+          multiplier: 20,
+        },
+        {
+          name: 'SP',
+          amount: silver,
+          label: 'Silver Pieces',
+          multiplier: 1,
+        },
+        {
+          name: 'CP',
+          amount: copper,
+          label: 'Copper Pennies',
+          multiplier: 0.1,
+        },
+        {
+          name: 'LB',
+          amount: lead,
+          label: 'Lead Bits',
+          multiplier: 0.02,
+        },
+      ];
+    }
 
     const flatMoneyToConvert = [
       [100, makeExpected(5, 0, 0, 0)],
@@ -115,7 +121,7 @@ describe('money.js', function () {
     _.forEach(flatMoneyToConvert, ([flat, expected]) => {
       it(`Should properly convert ${flat}`, () => {
         const result = moneyService.consolidateFlat(flat);
-        expect(JSON.stringify(expected)).to.eql(JSON.stringify(result));
+        expect(expected).to.eql(result);
       });
     });
 
