@@ -1,6 +1,5 @@
 import _ from 'lodash-es';
 import { formatString } from '../utils/utils.js';
-import { rollDamageFromItem } from '../utils/oq-game.js';
 
 function findTargets() {
   const targetTokens = canvas.tokens.controlled;
@@ -76,9 +75,12 @@ async function adjustMagicPoints(event) {
 
 async function rollDamageFromChatMessage(event) {
   event.preventDefault();
-  const itemName = event.currentTarget.dataset.itemName;
-  if (itemName) {
-    rollDamageFromItem(itemName);
+  const uuid = event.currentTarget.dataset.itemUuid;
+  if (uuid) {
+    const item = await fromUuid(uuid);
+    if (item.parent && item.parent.isOwner) {
+      await item.rollItemDamage(false);
+    }
   }
 }
 
