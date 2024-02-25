@@ -220,6 +220,12 @@ OQ:
     defaultItemsCompendium:
       name: Default Items Compendium
       hint: Select the name of the compendium that contains default items for newly created characters.
+    coinsConfiguration:
+      name: Coins Configuration
+      hint: >-
+        Input coins in the format <CoinName> (<CoinAbbr>) = <Multiplier>. Each coin is separated by a comma. 
+        <CoinName> is the full name of the coin, <CoinAbbr> is the coin's abbreviation, and <Multiplier> is
+        the coin's value relative to the base coin. Ensure at least one coin has a multiplier of 1.
   SkillTypes:
     combat: Combat Skills
     custom: Custom Type

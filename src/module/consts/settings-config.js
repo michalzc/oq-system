@@ -6,6 +6,6 @@ export const SettingsConfig = {
   defaults: {
     characterItemsCompendium: 'oq.oq-system-basic-skills',
     defaultCoinsConfiguration:
-      'Gold Ducat (GD) = 20, Silver Piece (SP) = 1, Copper Penny (CP) = 0.1, Lead Bit (LB) = 0.02',
+      'Gold Ducats (GD) = 20, Silver Pieces (SP) = 1, Copper Pennies (CP) = 0.1, Lead Bits (LB) = 0.02',
   },
 };
