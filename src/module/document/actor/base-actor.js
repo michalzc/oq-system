@@ -1,5 +1,6 @@
 import _ from 'lodash-es';
-import { getDefaultItemsForActor } from '../../compendium-utils.js';
+import { getDefaultItemsForActor } from '../../utils/compendium-utils.js';
+import { log } from '../../utils/logger.js';
 
 export class OQBaseActor extends Actor {
   static otherSkillsTypes = ['knowledge', 'practical', 'custom'];
@@ -26,6 +27,7 @@ export class OQBaseActor extends Actor {
   }
 
   prepareBaseData() {
+    log('BaseActor#prepareBaseData', this.name);
     super.prepareBaseData();
     const system = this.system;
     const characteristics = _.mapValues(system.characteristics, (characteristic) => {
@@ -41,6 +43,7 @@ export class OQBaseActor extends Actor {
   }
 
   prepareDerivedData() {
+    log('BaseActor#prepareDerivedData', this.name);
     super.prepareDerivedData();
     const skillsBySlug = this.getSkillsBySlug();
 

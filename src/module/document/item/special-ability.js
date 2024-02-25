@@ -1,6 +1,6 @@
 import { OQBaseItem } from './base-item.js';
 import _ from 'lodash-es';
-import { minMaxValue } from '../../utils.js';
+import { minMaxValue } from '../../utils/utils.js';
 
 export class OQSpecialAbility extends OQBaseItem {
   static getDefaultArtwork() {

@@ -1,5 +1,5 @@
-import { log } from '../utils.js';
 import _ from 'lodash-es';
+import { log } from '../utils/logger.js';
 
 export class AttributesDialog extends FormApplication {
   static get defaultOptions() {

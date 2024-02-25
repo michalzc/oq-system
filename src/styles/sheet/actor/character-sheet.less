@@ -23,6 +23,53 @@
           flex-grow: 1;
         }
       }
+
+      .items {
+        .item-row {
+          display: flex;
+          justify-content: stretch;
+          gap: 2em;
+          margin-top: 0.5em;
+
+          .item {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            flex: 1 1 0;
+            align-items: center;
+            gap: 1em;
+            justify-content: space-between;
+
+            .money {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              gap: 1em;
+              align-items: baseline;
+
+              .coins {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: baseline;
+                gap: 0.2em;
+
+                label {
+                  font-size: var(--font-size-14);
+                  .main-font();
+                }
+
+                input {
+                  text-align: center;
+                  font-size: var(--font-size-14);
+                  border: 0;
+                  width: 2em;
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

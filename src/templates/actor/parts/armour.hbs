@@ -10,7 +10,7 @@
        data-tooltip="{{ localize (concat 'OQ.Labels.ItemStates.' system.state) }}">
       {{itemState system.state}}
     </a>
-    <div class="cost-value" data-tooltip="{{ localize 'OQ.Labels.Cost' }}"> {{ system.cost }}</div>
+    <div class="cost-value" data-tooltip="{{ localize 'OQ.Labels.Cost' }}"> {{ consolidateFlat system.cost }}</div>
     <div class="short-value" data-tooltip="{{ localize 'OQ.Labels.Encumbrance' }}"> {{ system.encumbrance }}</div>
   {{/if}}
   <a class="item-edit"><i class="fas fa-edit"></i></a>

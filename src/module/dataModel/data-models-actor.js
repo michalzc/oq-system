@@ -118,6 +118,7 @@ function characterPersonalModel() {
     rank: new fields.StringField({ trim: true, initial: '' }),
     organisation: new fields.StringField({ trim: true, initial: '' }),
     notes: new fields.HTMLField({ trim: true, initial: '' }),
+    money: new fields.ObjectField({ required: false, initial: {} }),
   });
 }
 

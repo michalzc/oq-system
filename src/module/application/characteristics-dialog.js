@@ -1,5 +1,5 @@
-import { logError } from '../utils.js';
 import _ from 'lodash-es';
+import { logError } from '../utils/logger.js';
 
 const mergeObject = foundry.utils.mergeObject;
 export class CharacteristicsDialog extends FormApplication {

@@ -23,6 +23,5 @@ export async function getDefaultItemsForActor(actorType) {
       }
     }
   }
-
   return [];
 }

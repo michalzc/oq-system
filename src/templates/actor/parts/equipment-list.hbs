@@ -1,9 +1,28 @@
+{{ log money }}
 <div class="items equipment">
-  <div class="item-group">
+  <div class="item-row">
+
+    <div class="item">
+      <label>{{ localize 'OQ.Labels.Money' }}</label>
+
+      <div class="money">
+        {{#each money as |coins|}}
+          <div class="coins">
+            <label for="{{coins.name}}" data-tooltip="{{coins.label}}">{{coins.name}}</label>
+            <input id="{{coins.name}}" class="mod-value" type="number" data-dtype="Number"
+                   name="system.personal.money.{{coins.name}}" value="{{coins.amount}}">
+          </div>
+        {{/each}}
+        <a class="consolidate-money" data-tooltip="{{ localize 'OQ.Labels.ConsolidateMoney' }}"><i class="fa fa-coins"></i></a>
+      </div>
+
+    </div>
+
     <div class="item">
       <label>{{ localize 'OQ.Labels.TotalEncumbrance' }}</label>
       <div>{{formatNumber system.enc.totalEncumbrance decimals=0}} / {{system.enc.maxEncumbrance}}</div>
     </div>
+
   </div>
   <div class="item-group">
     <div class="item label">

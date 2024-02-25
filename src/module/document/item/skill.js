@@ -1,6 +1,6 @@
 import { OQBaseItem } from './base-item.js';
 import _ from 'lodash-es';
-import { makeSlug, minMaxValue } from '../../utils.js';
+import { makeSlug, minMaxValue } from '../../utils/utils.js';
 
 export class OQSkill extends OQBaseItem {
   static getDefaultArtwork() {
