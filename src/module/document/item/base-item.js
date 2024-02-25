@@ -11,6 +11,9 @@ import { OQDamageRollDialog } from '../../application/damage-roll-dialog.js';
  * @property {number|undefined} rollValueWithMod
  */
 export class OQBaseItem extends Item {
+  getRollData() {
+    return super.getRollData();
+  }
   async prepareDerivedData() {
     super.prepareDerivedData();
     const tooltip = await this.getTooltipWithTraits();
@@ -87,6 +90,7 @@ export class OQBaseItem extends Item {
       ...this.getBaseRollData(),
       ...this.getRollValues(),
       hasDamage: this.hasDamage,
+      uuid: this.uuid,
     };
   }
 
