@@ -82,6 +82,7 @@ export class OQCharacterSheet extends OQActorBaseSheet {
       type: groupName,
       label: `OQ.SkillTypes.${groupName}`,
       skills: elements,
+      totalAdvancements: elements.map((skill) => skill.system.advancement ?? 0).reduce((l, r) => l + r),
     });
 
     const skillGroups = CONFIG.OQ.ItemConfig.skillTypes;
