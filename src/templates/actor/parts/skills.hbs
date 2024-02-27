@@ -3,7 +3,7 @@
     {{#each groupedItems.skillsTabContent.left as |skillGroup|}}
       <div class="item-group">
         <div class="item label">
-          <div>{{ localize skillGroup.label }}</div>
+          <div>{{ localize skillGroup.label }}{{#if skillGroup.totalAdvancements}} ({{skillGroup.totalAdvancements}}){{/if}}</div>
           <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize skillGroup.label }}"
              data-type="skill" data-system-type="{{ skillGroup.type }}" data-custom-type-name="{{ skillGroup.label }}">
             <i class="fas fa-plus"></i></a>
@@ -19,7 +19,7 @@
     {{#each groupedItems.skillsTabContent.right as |skillGroup|}}
       <div class="item-group">
         <div class="item label">
-          <div>{{ localize skillGroup.label }}</div>
+          <div>{{ localize skillGroup.label }}{{#if skillGroup.totalAdvancements}} ({{skillGroup.totalAdvancements}}){{/if}}</div>
           <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize skillGroup.label }}"
              data-type="skill" data-system-type="{{ skillGroup.type }}" data-custom-type-name="{{ skillGroup.label }}">
             <i class="fas fa-plus"></i></a>

@@ -59,7 +59,7 @@ export class OQActorBaseSheet extends ActorSheet {
     html.find('a.item-edit').on('click', this.onModifyItem.bind(this));
     html.find('a.item-delete').on('click', this.onDeleteItem.bind(this));
 
-    html.find('.item-mod').on('change', this.onUpdateItemMod.bind(this));
+    html.find('.item-adv').on('change', this.onUpdateItemAdv.bind(this));
 
     html.find('.item-quantity-value').on('change', this.onItemUpdateQuantity.bind(this));
     html.find('.item-quantity-update').on('click', this.onItemQuantityIncreaseDecrease.bind(this));
@@ -167,13 +167,14 @@ export class OQActorBaseSheet extends ActorSheet {
     attributesDialog.render(true);
   }
 
-  async onUpdateItemMod(event) {
+  async onUpdateItemAdv(event) {
     event.preventDefault();
-    // const dataset = event.currentTarget.dataset;
-    const itemContainer = event.currentTarget.closest('.item');
+
+    const targetElem = event.currentTarget;
+    const itemContainer = targetElem.closest('.item');
     const item = this.actor.items.get(itemContainer?.dataset?.itemId);
     if (item) {
-      const value = event.currentTarget.value;
+      const value = targetElem.value;
       await item.update({ 'system.advancement': value });
     }
   }
@@ -284,7 +285,6 @@ export class OQActorBaseSheet extends ActorSheet {
   }
 
   prepareGroupedItems() {
-    //FIXME: Move to sheet
     const allItems = _.sortBy([...this.actor.items], (item) => item.name);
     const groupedItems = _.groupBy(allItems, (item) => item.type);
     const skills = groupedItems.skill ?? [];

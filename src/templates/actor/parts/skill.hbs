@@ -10,7 +10,7 @@
       <span data-tooltip="{{localize 'OQ.Labels.SkillMastered'}}"><i class="fa fa-badge-check"></i></span>
     {{/if}}
   </div>
-  <input name="item.mod" class="item-mod mod-value" type="number" data-dtype="Number"
+  <input name="item-adv-{{id}}" class="item-adv mod-value" type="number" data-dtype="Number"
          value="{{system.advancement}}" data-tooltip="{{ localize 'OQ.Labels.Advances' }}">
   <a class="item-roll total-value"
      data-tooltip="{{localize 'OQ.Labels.Roll'}} {{name}}">{{system.rollValues.value}} {{#if
