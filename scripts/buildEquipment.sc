@@ -1,17 +1,14 @@
-import $ivy.`com.github.tototoshi::scala-csv:1.3.10`
-import $ivy.`io.circe::circe-yaml:0.14.2`
-import $ivy.`io.circe::circe-generic:0.14.6`
 import $ivy.`com.github.slugify:slugify:3.0.6`
+import $ivy.`com.github.tototoshi::scala-csv:1.3.10`
+import $ivy.`io.circe::circe-generic:0.14.6`
+import $ivy.`io.circe::circe-yaml:0.14.2`
 
-import com.github.tototoshi.csv.{ CSVReader, defaultCSVFormat }
-import cats.syntax.option._
-import io.circe.generic.auto._
-import io.circe.syntax._
-import io.circe.yaml.syntax._
-import io.circe.yaml.Printer
 import com.github.slugify.Slugify
-
-import java.nio.file.Files
+import com.github.tototoshi.csv.{CSVReader, defaultCSVFormat}
+import io.circe.generic.auto.*
+import io.circe.syntax.*
+import io.circe.yaml.Printer
+import io.circe.yaml.syntax.*
 
 import scala.util.Random
 
