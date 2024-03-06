@@ -1,9 +1,12 @@
 Name,Image,Folder,STR,CON,DEX,SIZ,INT,POW,CHA,Move,Items
-Giant Ant,,Animals,4d6,3d6+6,2d6+6,2d6,2,1d6+3,5,15,"50% Bite 1d6
-Chitin (5AP)"
-Bear,,Animals,3d6+15,2d6+6,3d6,3d6+15,5,3d6,5,20,"60% Bite 1d8
-60% Claw 1d6
-Tough Hide (3AP)"
-Lion,,Animals,3d6+12,3d6,3d6+6,2d6+12,5,3d6,5,20,"Hide (2AP)
-60% Bite 1d8
-60% Claw 1d6"
+Giant Ant,,Animals,4d6,3d6+6,2d6+6,2d6,2,1d6+3,5,15,"S: unarmed: 50%
+W: Bite [unarmed] 1d6
+A: Chitin (5AP)"
+Bear,,Animals,3d6+15,2d6+6,3d6,3d6+15,5,3d6,5,20,"S: unarmed: 60%
+WN: Bite [unarmed] 1d8
+WN: Claw [unarmed] 1d6
+A: Tough Hide (3AP)"
+Lion,,Animals,3d6+12,3d6,3d6+6,2d6+12,5,3d6,5,20,"S: unarmed: 60%
+A: Hide (2AP)
+WN: Bite [unarmed] 1d8
+WN: Claw [unarmed] 1d6"
