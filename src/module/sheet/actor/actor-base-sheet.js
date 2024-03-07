@@ -174,8 +174,16 @@ export class OQActorBaseSheet extends ActorSheet {
     const itemContainer = targetElem.closest('.item');
     const item = this.actor.items.get(itemContainer?.dataset?.itemId);
     if (item) {
-      const value = targetElem.value;
-      await item.update({ 'system.advancement': value });
+      const value = parseInt(targetElem.value) ?? 0;
+      if (!isNaN(value)) {
+        if (value < 0) {
+          const rollData = item.getTestRollData();
+          const advancement = -value - (rollData.baseValue ?? 0);
+          await item.update({ 'system.advancement': advancement });
+        } else {
+          await item.update({ 'system.advancement': value });
+        }
+      }
     }
   }
 
