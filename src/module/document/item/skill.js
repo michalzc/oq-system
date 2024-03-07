@@ -33,14 +33,15 @@ export class OQSkill extends OQBaseItem {
       const { formula, advancement, mod } = this.system;
       const finalMod = mod ?? 0;
       const rollData = this.parent.getRollData();
-      const rollFormula = `${formula} + ${advancement}`;
-      const total = new Roll(rollFormula, rollData).roll({ async: false }).total;
+      const baseValue = new Roll(formula, rollData).roll({ async: false }).total;
+      const total = baseValue + advancement;
       const value = minMaxValue(total);
       const valueWithMod = mod && minMaxValue(value + mod);
       const mastered = value >= 100;
 
       return {
         value,
+        baseValue,
         mod: finalMod,
         valueWithMod,
         mastered,
