@@ -7,6 +7,28 @@ export class OQSpell extends OQBaseItem {
       img: CONFIG.OQ.ItemConfig.defaultIcons.spell,
     };
   }
+
+  async _preUpdate(changed, options, user) {
+    //FIXME: refactor to common utility
+    await super._preUpdate(changed, options, user);
+
+    const changedSpellType = changed.system?.type;
+    const currentImage = this.img;
+    const spellIcons = CONFIG.OQ.ItemConfig.spellIcons;
+    const newImage = spellIcons[changedSpellType];
+
+    if (
+      changedSpellType &&
+      changedSpellType !== this.system.type &&
+      _.includes(_.values(spellIcons), currentImage) &&
+      newImage
+    ) {
+      _.merge(changed, {
+        img: spellIcons[changedSpellType],
+      });
+    }
+  }
+
   async prepareDerivedData() {
     super.prepareDerivedData();
     this.system.tooltip = await this.getTooltipWithTraits();

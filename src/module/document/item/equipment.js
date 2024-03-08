@@ -12,6 +12,7 @@ export class OQEquipment extends OQBaseItem {
   }
 
   async _preUpdate(changed, options, user) {
+    //FIXME: refactor to common utility
     await super._preUpdate(changed, options, user);
 
     const changedEquipmentType = changed.system?.type;

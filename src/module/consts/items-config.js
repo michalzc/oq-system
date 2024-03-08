@@ -78,6 +78,11 @@ export const ItemConfig = {
     ammunition: 'systems/oq/assets/icons/quiver.svg',
     unused: 'systems/oq/assets/icons/toolbox.svg',
   },
+  spellIcons: {
+    personal: 'systems/oq/assets/icons/magic-swirl.svg',
+    divine: 'systems/oq/assets/icons/divided-spiral.svg',
+    sorcery: 'systems/oq/assets/icons/ink-swirl.svg',
+  },
   skillTypes: {
     resistance: 'resistance',
     combat: 'combat',
