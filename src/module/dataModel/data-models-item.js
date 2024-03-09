@@ -153,6 +153,7 @@ export class SpellDataModel extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       magnitude: positiveNumberModel(),
+      remainingMagnitude: positiveNumberModel(),
       nonVariant: new fields.BooleanField({ required: true, initial: false }),
       type: new fields.StringField({
         required: true,
@@ -167,6 +168,18 @@ export class SpellDataModel extends foundry.abstract.DataModel {
       }),
       description: htmlFieldModel(),
     };
+  }
+
+  get isDivine() {
+    return this.type === ItemConfig.spellsTypes.divine;
+  }
+
+  get hasSplitDivineCasting() {
+    return this.isDivine && !this.nonVariant;
+  }
+
+  get casted() {
+    return this.isDivine && this.remainingMagnitude === 0;
   }
 }
 

@@ -73,6 +73,7 @@ OQ:
       mr:
         abbr: MR
         label: Movement Rate
+    Casted: Casted
     Characteristics: Characteristics
     CharacteristicsNames:
       cha:
@@ -146,6 +147,7 @@ OQ:
     New: New
     NonVariable: Non-Variable
     Notes: Notes
+    of: of
     Organisation: Organisation
     OtherMods: Other Mods
     Protection: Protection
@@ -153,6 +155,7 @@ OQ:
     Range: Range
     Rank: Rank
     Reference: Reference
+    RemainingMagnitude: Remaining Magnitude
     Roll: Roll
     RollFormula: Roll Formula
     Skill: Skill
@@ -225,7 +228,7 @@ OQ:
     coinsConfiguration:
       name: Coins Configuration
       hint: >-
-        Input coins in the format <CoinName> (<CoinAbbr>) = <Multiplier>. Each coin is separated by a comma. 
+        Input coins in the format <CoinName> (<CoinAbbr>) = <Multiplier>. Each coin is separated by a comma.
         <CoinName> is the full name of the coin, <CoinAbbr> is the coin's abbreviation, and <Multiplier> is
         the coin's value relative to the base coin. Ensure at least one coin has a multiplier of 1.
   SkillTypes:

@@ -51,9 +51,24 @@ export class OQSpell extends OQBaseItem {
 
   getTraits() {
     const constTraits = [
+      this.hasSplitDivineCasting &&
+        `${game.i18n.localize('OQ.Labels.RemainingMagnitude')}(${this.system.remainingMagnitude})`,
       this.system.magnitude && `${game.i18n.localize('OQ.Labels.Magnitude')}(${this.system.magnitude})`,
+      this.system.casted && game.i18n.localize('OQ.Labels.Casted'),
       this.system.nonVariant && game.i18n.localize('OQ.Labels.NonVariable'),
     ].filter((trait) => !!trait);
     return _.concat(constTraits, this.system.traits ?? []);
+  }
+
+  get hasSplitDivineCasting() {
+    return this.system.hasSplitDivineCasting;
+  }
+
+  get casted() {
+    return this.system.casted;
+  }
+
+  get isDivine() {
+    return this.system.isDivine;
   }
 }
