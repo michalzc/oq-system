@@ -1,7 +1,5 @@
-name: Multimissile
-type: spell
-fileType: items
 system:
+  magnitude: 1
   nonVariant: false
   type: personal
   traits:
@@ -16,6 +14,9 @@ system:
     Magical missiles created through Multimissile will not cause critical hits,
     though the original missile can. Magical missiles created through Multimissile
     will affect creatures that can only be hurt by magic.</p>
+name: Multimissile
+type: spell
+fileType: items
 _id: xVKWKkfGPhkiTeHo
 img: systems/oq/assets/icons/magic-swirl.svg
 folder: PmL84WZU2luOrJSw

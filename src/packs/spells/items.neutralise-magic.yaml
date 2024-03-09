@@ -1,9 +1,5 @@
-_id: 3QoWPalsZ3pHGwai
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Neutralise Magic
 system:
+  magnitude: 1
   description: |-
     <p>This spell allows a caster to neutralise other spells. Neutralise Magic will
     eliminate a combined magnitude of spells equal to its own magnitude, starting
@@ -20,4 +16,9 @@ system:
   traits:
   - Instant
   type: sorcery
+_id: 3QoWPalsZ3pHGwai
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Neutralise Magic
 type: spell

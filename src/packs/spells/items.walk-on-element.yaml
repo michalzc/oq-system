@@ -1,7 +1,3 @@
-fileType: items
-type: spell
-folder: PmL84WZU2luOrJSw
-_id: UZxbpl0Ii2BbrGUs
 system:
   type: personal
   magnitude: 3
@@ -12,5 +8,9 @@ system:
     spell’s duration. With this spell for the appropriate element, the caster can
     walk across lava, quicksand, water, or even through the air. Each additional
     point of magnitude increases the duration of the spell by 1 minute.</p>
+fileType: items
+type: spell
+folder: PmL84WZU2luOrJSw
+_id: UZxbpl0Ii2BbrGUs
 name: Walk on (Element)
 img: systems/oq/assets/icons/magic-swirl.svg

@@ -1,9 +1,5 @@
-_id: zfWT49tSe3dDtjkP
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Damage Boosting
 system:
+  magnitude: 1
   description: |-
     <p>This spell can be cast upon any weapon up to 5 ENC. Each point of magnitude
     adds one point to the weapon’s damage (e.g. the basic spell will increase a
@@ -12,4 +8,9 @@ system:
   traits:
   - Touch
   type: sorcery
+_id: zfWT49tSe3dDtjkP
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Damage Boosting
 type: spell

@@ -1,9 +1,5 @@
-_id: T5SGHWVvsbIRpAQr
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Holdfast
 system:
+  magnitude: 1
   description: |-
     <p>This spell causes two adjacent ten centimetres by ten centimetre surfaces
     (roughly the size of a person’s palm) to commingle into one. The basic bond has
@@ -15,4 +11,9 @@ system:
   traits:
   - Touch
   type: sorcery
+_id: T5SGHWVvsbIRpAQr
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Holdfast
 type: spell

@@ -1,5 +1,5 @@
-_id: cz1SqNZ0UbkCv086
 system:
+  magnitude: 1
   description: |-
     <p>Each point of this spell extends the caster’s field of vision by twenty
     metres as long as they maintain their concentration.  Although they can see
@@ -9,6 +9,7 @@ system:
   - Concentration
   type: personal
   nonVariant: false
+_id: cz1SqNZ0UbkCv086
 img: systems/oq/assets/icons/magic-swirl.svg
 type: spell
 name: Farsight

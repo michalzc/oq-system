@@ -1,9 +1,5 @@
-_id: QTadCqCvts21QBPg
-fileType: items
-folder: PmL84WZU2luOrJSw
-type: spell
-img: systems/oq/assets/icons/magic-swirl.svg
 system:
+  magnitude: 1
   traits:
   - Area
   - Concentration
@@ -15,4 +11,9 @@ system:
     per point of magnitude and moves at twice the magnitude in metres per combat
     round.</p> <p><i>For example,</i> a Levitating Disc with magnitude 3 can carry 3
     people, is 3m in diameter, and moves at a rate of 6m per combat round.</p>
+_id: QTadCqCvts21QBPg
+fileType: items
+folder: PmL84WZU2luOrJSw
+type: spell
+img: systems/oq/assets/icons/magic-swirl.svg
 name: Levitating Disc

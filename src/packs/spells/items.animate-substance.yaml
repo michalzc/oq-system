@@ -1,9 +1,5 @@
-_id: oxkr594sSiIhxz8u
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Animate (Substance)
 system:
+  magnitude: 1
   description: |-
     <p>This spell allows the sorcerer to animate the substance indicated, up to one
     SIZ for every point of magnitude. The sorcerer can cause it to move about and
@@ -19,4 +15,9 @@ system:
   traits:
   - Concentration
   type: sorcery
+_id: oxkr594sSiIhxz8u
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Animate (Substance)
 type: spell

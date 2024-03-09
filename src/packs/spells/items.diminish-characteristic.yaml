@@ -1,9 +1,5 @@
-_id: hx0NVLA3ztZSG9t2
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Diminish (characteristic)
 system:
+  magnitude: 1
   description: |-
     <p>There are seven Diminish spells, one for each characteristic. The spell will
     temporarily apply a penalty to the specified characteristic equal to the
@@ -20,4 +16,9 @@ system:
   - Resist (Persistence/Resilience)
   - Touch
   type: sorcery
+_id: hx0NVLA3ztZSG9t2
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Diminish (characteristic)
 type: spell

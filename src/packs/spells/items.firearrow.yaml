@@ -1,4 +1,3 @@
-img: systems/oq/assets/icons/magic-swirl.svg
 system:
   magnitude: 2
   nonVariant: true
@@ -14,6 +13,7 @@ system:
     A missile weapon under the effects of Firearrow cannot benefit from Multimissile
     or Speedart</p>
   type: personal
+img: systems/oq/assets/icons/magic-swirl.svg
 name: Firearrow
 fileType: items
 _id: QXXWPPq6r9zVf8ix

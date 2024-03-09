@@ -1,9 +1,5 @@
-_id: pBDrbl6FxOQLdXCr
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Dominate (Species)
 system:
+  magnitude: 1
   description: |-
     <p>This spell allows the caster to gain control over a creature belonging to a
     specific species. If the target fails to resist the spell, it must obey the
@@ -16,4 +12,9 @@ system:
   traits:
   - Resist (Persistence)
   type: sorcery
+_id: pBDrbl6FxOQLdXCr
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Dominate (Species)
 type: spell

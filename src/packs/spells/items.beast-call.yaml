@@ -1,9 +1,3 @@
-_id: iwKYAf5tMHlh3eaB
-fileType: items
-folder: PmL84WZU2luOrJSw
-img: systems/oq/assets/icons/magic-swirl.svg
-name: Beast Call
-type: spell
 system:
   magnitude: 2
   nonVariant: true
@@ -19,3 +13,9 @@ system:
     <p><i>For example</i>, the Beast Call spell might cause a horse to turn and walk
     towards the spell, but a single yank of its reins by the rider would end the spell’s
     effect.</p> <p>This spell is a potent aid to hunters and herders.</p>
+_id: iwKYAf5tMHlh3eaB
+fileType: items
+folder: PmL84WZU2luOrJSw
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Beast Call
+type: spell

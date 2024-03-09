@@ -1,9 +1,5 @@
-_id: mJQ9Om9YPEZbkkwa
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Spirit Resistance
 system:
+  magnitude: 1
   description: |-
     <p>This spell matches its magnitude against the POW of any spirit that comes
     into contact with the recipient. If the recipient of the caster’s  POW  the
@@ -14,4 +10,9 @@ system:
     the Spirit Resistance’s magnitude.</p>
   nonVariant: false
   type: sorcery
+_id: mJQ9Om9YPEZbkkwa
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Spirit Resistance
 type: spell

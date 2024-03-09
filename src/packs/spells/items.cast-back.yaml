@@ -1,9 +1,5 @@
-_id: kN1GsbUG1kb4i6o2
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Cast Back
 system:
+  magnitude: 1
   description: |-
     <p>This protective spell shields the caster from hostile magic and has a chance
     of sending it back to the attacking spell caster.</p> <p>Cast Back only affects
@@ -13,4 +9,9 @@ system:
     than the Cast Back’s magnitude.</p>
   nonVariant: false
   type: sorcery
+_id: kN1GsbUG1kb4i6o2
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Cast Back
 type: spell

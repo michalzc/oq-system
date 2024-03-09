@@ -28,21 +28,33 @@ def isSpell(filePath: os.Path, json: Json): Boolean = json
 def updateSpell(filePath: os.Path, json: Json): (os.Path, Json) =
   val spellType = json.hcursor.downField("system").downField("type").as[String].toOption
   val spellIcon = spellType.map(SpellIcons.apply)
-  val isDivine = spellType.map(_ == "divine")
+  val isDivine  = spellType.map(_ == "divine")
 
   val result =
     for {
-      newIcon     <- spellIcon
-      updatedJson <- json.hcursor.downField("img").set(newIcon.asJson).top
-      divine      <- isDivine
-      magnitude   <- updatedJson.hcursor.downField("system").downField("magnitude").as[Int].toOption
-      update = Map("system" -> Map("remainingMagnitude" -> magnitude.asJson)).asJson
-    } yield if divine then updatedJson.deepMerge(update) else updatedJson
+      newIcon   <- spellIcon
+      divine    <- isDivine
+      magnitude = json.hcursor.downField("system").downField("magnitude").as[Int].toOption.getOrElse(0)
+      updatedMagnitude =
+        if magnitude == 0 then
+          1
+        else
+          magnitude
+      updatedJson <-
+        json
+          .hcursor
+          .downField("img")
+          .set(newIcon.asJson)
+          .top
+      system = if magnitude != updatedMagnitude then Map("magnitude" -> updatedMagnitude.asJson) else Map.empty[String, Json]
+      divSystem = if divine then system + ("remainingMagnitude" -> updatedMagnitude.asJson) else system
+      update = Map("system" -> system.asJson).asJson
+    } yield updatedJson.deepMerge(update)
 
   filePath -> result.getOrElse(json)
 
 def makeString(file: os.Path, json: Json): (os.Path, String) = file -> YamlPrinter.pretty(json)
-def writeContent(file: os.Path, content: String) = os.write.over(file, content)
+def writeContent(file: os.Path, content: String)             = os.write.over(file, content)
 
 @main
 def updateSpells(packsPath: os.Path): Unit = os

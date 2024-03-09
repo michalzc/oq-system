@@ -1,9 +1,5 @@
-img: systems/oq/assets/icons/magic-swirl.svg
-folder: PmL84WZU2luOrJSw
-name: Vigour
-_id: bl6L0iB5JANGwvxH
-type: spell
 system:
+  magnitude: 1
   nonVariant: false
   description: |-
     <p>For every point of the magnitude of this spell, the target’s hit points
@@ -14,4 +10,9 @@ system:
   type: personal
   traits:
   - Touch
+img: systems/oq/assets/icons/magic-swirl.svg
+folder: PmL84WZU2luOrJSw
+name: Vigour
+_id: bl6L0iB5JANGwvxH
+type: spell
 fileType: items

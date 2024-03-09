@@ -1,4 +1,3 @@
-img: systems/oq/assets/icons/magic-swirl.svg
 system:
   type: personal
   magnitude: 2
@@ -6,6 +5,7 @@ system:
   description: |-
     <p>This spell allows the recipient to speak another language perfectly for its
     duration.</p>
+img: systems/oq/assets/icons/magic-swirl.svg
 _id: l6xH28jDM3a2mX8k
 type: spell
 fileType: items

@@ -1,4 +1,5 @@
 system:
+  magnitude: 1
   description: |-
     <p>Like Detect (Type), this includes several different spells, each of which
     affects a different non-combat skill.  For each point of magnitude, the

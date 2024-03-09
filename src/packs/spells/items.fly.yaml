@@ -1,9 +1,5 @@
-_id: l7uJhOIwudd1OKKq
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Fly
 system:
+  magnitude: 1
   description: |-
     <p>Using this spell allows the caster (or whomever or whatever they target with
     the spell) to fly.  The caster may levitate objects or characters (the caster
@@ -23,4 +19,9 @@ system:
   - Concentration
   - Resist (Persistence)
   type: sorcery
+_id: l7uJhOIwudd1OKKq
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Fly
 type: spell

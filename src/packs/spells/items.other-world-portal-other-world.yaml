@@ -1,9 +1,5 @@
-_id: gbeRoZYWjkwrJmlU
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Other World Portal (Other World)
 system:
+  magnitude: 1
   description: |-
     <p>This spell creates a portal to a named Other World. The magnitude of the
     spell is the number of creatures (of SIZ range 12-18) who can use the portal
@@ -20,4 +16,9 @@ system:
     barrier that lets things into the beachhead but not out.</p>
   nonVariant: false
   type: sorcery
+_id: gbeRoZYWjkwrJmlU
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Other World Portal (Other World)
 type: spell

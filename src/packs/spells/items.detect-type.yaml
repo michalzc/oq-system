@@ -1,9 +1,3 @@
-name: Detect (Type)
-type: spell
-folder: PmL84WZU2luOrJSw
-_id: qw1qjNPrcxtU5j6k
-img: systems/oq/assets/icons/magic-swirl.svg
-fileType: items
 system:
   description: |-
     <p>This description covers a family of spells that all operate similarly,
@@ -26,3 +20,9 @@ system:
   - Concentration
   type: personal
   magnitude: 1
+name: Detect (Type)
+type: spell
+folder: PmL84WZU2luOrJSw
+_id: qw1qjNPrcxtU5j6k
+img: systems/oq/assets/icons/magic-swirl.svg
+fileType: items

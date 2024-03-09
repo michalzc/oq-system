@@ -1,4 +1,5 @@
 system:
+  magnitude: 1
   nonVariant: false
   type: personal
   traits:

@@ -1,5 +1,5 @@
-folder: PmL84WZU2luOrJSw
 system:
+  magnitude: 1
   type: personal
   description: |-
     <p>This spell grants the caster a +10% bonus per point of magnitude to their
@@ -8,6 +8,7 @@ system:
   nonVariant: false
   traits:
   - Instant
+folder: PmL84WZU2luOrJSw
 img: systems/oq/assets/icons/magic-swirl.svg
 fileType: items
 _id: jrIlieYWs3qS4qGA

@@ -1,9 +1,5 @@
-_id: fwZelUXJzFIbI570
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Spell Resistance
 system:
+  magnitude: 1
   description: |-
     <p>This spell matches its magnitude against the magnitude of any incoming spell.
     If Spell Resistance’s magnitude is greater than the incoming spell’s, then the
@@ -16,4 +12,9 @@ system:
     Resistance must overcome it in order to successfully use a healing spell.</p>
   nonVariant: false
   type: sorcery
+_id: fwZelUXJzFIbI570
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Spell Resistance
 type: spell

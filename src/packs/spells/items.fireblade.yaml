@@ -1,9 +1,3 @@
-folder: PmL84WZU2luOrJSw
-name: Fireblade
-type: spell
-img: systems/oq/assets/icons/magic-swirl.svg
-_id: 6MGL5vr5eJyzrelJ
-fileType: items
 system:
   nonVariant: true
   type: personal
@@ -18,3 +12,9 @@ system:
     to normal damage.”</p>
   traits:
   - Touch
+folder: PmL84WZU2luOrJSw
+name: Fireblade
+type: spell
+img: systems/oq/assets/icons/magic-swirl.svg
+_id: 6MGL5vr5eJyzrelJ
+fileType: items

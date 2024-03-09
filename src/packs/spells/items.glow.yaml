@@ -1,9 +1,5 @@
-_id: d9SqAdCwDo8tiX3O
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Glow
 system:
+  magnitude: 1
   description: |-
     <p>This spell causes a glowing point of light to appear on a solid substance. At
     its base, the spell creates an area of light one metre in radius, giving off the
@@ -18,4 +14,9 @@ system:
     ends or is dispelled.</p>
   nonVariant: false
   type: sorcery
+_id: d9SqAdCwDo8tiX3O
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Glow
 type: spell

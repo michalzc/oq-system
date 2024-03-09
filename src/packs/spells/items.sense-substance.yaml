@@ -1,9 +1,5 @@
-_id: qiZf4e4diMqWnepo
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Sense (Substance)
 system:
+  magnitude: 1
   description: |-
     <p>Eminently useful for finding valuables from afar, this spell has a variation
     for every substance imaginable. Sense (Substance) will cause all sources of the
@@ -17,4 +13,9 @@ system:
   traits:
   - Concentration
   type: sorcery
+_id: qiZf4e4diMqWnepo
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Sense (Substance)
 type: spell

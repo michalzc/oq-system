@@ -1,9 +1,5 @@
-_id: UpX9ItK8A2jRV0A0
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Create Godform (Deity)
 system:
+  magnitude: 1
   description: |-
     <p>This spell can be cast on a recipient other than the caster. It allows the
     recipient to assume the magical form of the deity for the duration of the spell.
@@ -28,4 +24,9 @@ system:
   traits:
   - Touch
   type: sorcery
+_id: UpX9ItK8A2jRV0A0
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Create Godform (Deity)
 type: spell

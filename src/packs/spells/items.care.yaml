@@ -1,5 +1,3 @@
-name: Care
-type: spell
 system:
   nonVariant: true
   type: personal
@@ -10,6 +8,8 @@ system:
     effects of the Care spell also benefits from the effects of these spells.</p>
   traits:
   - Touch
+name: Care
+type: spell
 folder: PmL84WZU2luOrJSw
 _id: vki0TblIDyvLzexW
 img: systems/oq/assets/icons/magic-swirl.svg

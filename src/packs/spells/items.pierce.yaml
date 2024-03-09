@@ -1,8 +1,5 @@
-name: Pierce
-img: systems/oq/assets/icons/magic-swirl.svg
-type: spell
-folder: PmL84WZU2luOrJSw
 system:
+  magnitude: 1
   type: personal
   description: |-
     <p>This spell affects any weapon with a blade or point. For every point of
@@ -11,5 +8,9 @@ system:
   traits:
   - Touch
   nonVariant: false
+name: Pierce
+img: systems/oq/assets/icons/magic-swirl.svg
+type: spell
+folder: PmL84WZU2luOrJSw
 fileType: items
 _id: WvwDHB2bmQwD4aMd

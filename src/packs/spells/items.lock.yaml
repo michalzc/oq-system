@@ -1,5 +1,5 @@
-name: Lock
 system:
+  magnitude: 1
   nonVariant: false
   traits:
   - Permanent
@@ -10,6 +10,7 @@ system:
     magnitude x 10%. The item must have a lock, such as might be found on a door or
     a chest, as a focus for the spell. Once the lock has been forced/picked, the
     spell ends.</p>
+name: Lock
 img: systems/oq/assets/icons/magic-swirl.svg
 _id: ehBwQ8Ste0WUgvLs
 folder: PmL84WZU2luOrJSw

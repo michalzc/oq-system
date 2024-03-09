@@ -1,5 +1,3 @@
-name: Second Sight
-_id: 4Y6au3m7arIgydU4
 system:
   nonVariant: true
   magnitude: 3
@@ -13,6 +11,8 @@ system:
     notice hidden magical items or hiding people or creatures. Second Sight will
     also reveal invisible entities, though only a hazy image will show (treat such
     targets as partially obscured).</p>
+name: Second Sight
+_id: 4Y6au3m7arIgydU4
 type: spell
 folder: PmL84WZU2luOrJSw
 img: systems/oq/assets/icons/magic-swirl.svg

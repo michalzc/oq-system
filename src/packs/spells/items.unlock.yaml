@@ -1,7 +1,5 @@
-folder: PmL84WZU2luOrJSw
-fileType: items
-type: spell
 system:
+  magnitude: 1
   type: personal
   traits:
   - Instant
@@ -12,6 +10,9 @@ system:
     20%, minus any modifiers due to the intricacy of the lock. If cast on a lock
     that has had a Lock spell cast on it, the test is an opposed test vs. the
     magnitude x 20% of the Lock spell.</p>
+folder: PmL84WZU2luOrJSw
+fileType: items
+type: spell
 img: systems/oq/assets/icons/magic-swirl.svg
 _id: JcLmy8uLAvjBTfGm
 name: Unlock

@@ -1,6 +1,5 @@
-_id: dYIe4pVDjD4Iy9so
-name: Create Potion
 system:
+  magnitude: 1
   type: personal
   description: |-
     <p>Potions are liquids that store one or more Personal Magic spells.  The
@@ -21,6 +20,8 @@ system:
   nonVariant: false
   traits:
   - Permanent
+_id: dYIe4pVDjD4Iy9so
+name: Create Potion
 fileType: items
 folder: PmL84WZU2luOrJSw
 type: spell

@@ -1,9 +1,5 @@
-_id: 0U6PN7RfN37vy82Q
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Make Spell Matrix
 system:
+  magnitude: 1
   description: |-
     <p>This spell creates items that store Sorcery spells.</p> <p>All spell matrices
     have an attached cost of 10 Gold Ducats per spell in special materials.</p>
@@ -18,4 +14,9 @@ system:
   traits:
   - Permanent
   type: sorcery
+_id: 0U6PN7RfN37vy82Q
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Make Spell Matrix
 type: spell

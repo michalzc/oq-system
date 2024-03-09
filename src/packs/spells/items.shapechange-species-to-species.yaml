@@ -1,9 +1,5 @@
-_id: xszcrH50hk7d1KsK
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Shapechange (Species) to (Species)
 system:
+  magnitude: 1
   description: |-
     <p>Each Shapechange spell is a separate spell. Of all the spells with multiple
     variations, the Shapechange spell has the most, comprising a new spell for
@@ -21,4 +17,9 @@ system:
   - Resist (Resilience)
   - Touch
   type: sorcery
+_id: xszcrH50hk7d1KsK
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Shapechange (Species) to (Species)
 type: spell

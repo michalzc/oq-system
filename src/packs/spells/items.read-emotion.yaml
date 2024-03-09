@@ -1,5 +1,3 @@
-folder: PmL84WZU2luOrJSw
-img: systems/oq/assets/icons/magic-swirl.svg
 system:
   description: |-
     <p>This spell, when cast, tells you what the true emotional state of the target
@@ -10,6 +8,8 @@ system:
   magnitude: 1
   nonVariant: true
   type: personal
+folder: PmL84WZU2luOrJSw
+img: systems/oq/assets/icons/magic-swirl.svg
 type: spell
 name: Read Emotion
 fileType: items

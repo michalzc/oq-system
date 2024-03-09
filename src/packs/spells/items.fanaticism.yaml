@@ -1,8 +1,3 @@
-name: Fanaticism
-type: spell
-fileType: items
-img: systems/oq/assets/icons/magic-swirl.svg
-_id: 8Gfm6mER1EmtGt88
 system:
   description: |-
     <p>The target of this spell will have close combat and unarmed combat skills
@@ -13,4 +8,9 @@ system:
   nonVariant: true
   type: personal
   magnitude: 2
+name: Fanaticism
+type: spell
+fileType: items
+img: systems/oq/assets/icons/magic-swirl.svg
+_id: 8Gfm6mER1EmtGt88
 folder: PmL84WZU2luOrJSw

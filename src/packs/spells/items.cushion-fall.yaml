@@ -1,4 +1,3 @@
-img: systems/oq/assets/icons/magic-swirl.svg
 system:
   magnitude: 2
   description: |-
@@ -6,6 +5,7 @@ system:
     recipient for the duration of the spell.</p>
   type: personal
   nonVariant: true
+img: systems/oq/assets/icons/magic-swirl.svg
 fileType: items
 folder: PmL84WZU2luOrJSw
 _id: A2H5Z7m0fHwHbE9O

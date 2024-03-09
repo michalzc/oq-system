@@ -1,5 +1,5 @@
-_id: HVxhfYTp8OK3Nfig
 system:
+  magnitude: 1
   type: personal
   nonVariant: false
   description: |-
@@ -13,6 +13,7 @@ system:
   traits:
   - Area
   - Touch
+_id: HVxhfYTp8OK3Nfig
 folder: PmL84WZU2luOrJSw
 img: systems/oq/assets/icons/magic-swirl.svg
 name: Glue
