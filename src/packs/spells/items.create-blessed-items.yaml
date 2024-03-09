@@ -1,9 +1,5 @@
-_id: NRAM5ojrX8HG1iSe
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Create Blessed Items
 system:
+  remainingMagnitude: 1
   description: |-
     <p>This spell allows the caster to create items which store Divine Magic
     spell(s) that are blessed by a Priest with power from the religion’s deity.</p>
@@ -25,4 +21,9 @@ system:
   - Permanent
   - Progressive
   type: divine
+_id: NRAM5ojrX8HG1iSe
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Create Blessed Items
 type: spell

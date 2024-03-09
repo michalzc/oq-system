@@ -1,9 +1,5 @@
-_id: lj0twPzomiKt38zt
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Shield
 system:
+  remainingMagnitude: 1
   description: |-
     <p>This spell protects the caster from physical and magical attacks. Each point
     of magnitude gives the caster one Armour Point and provides a +10% bonus to any
@@ -18,4 +14,9 @@ system:
   - Duration (15)
   - Progressive
   type: divine
+_id: lj0twPzomiKt38zt
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Shield
 type: spell

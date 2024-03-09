@@ -1,9 +1,5 @@
-_id: lEgJonAZfQ3T4eUR
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Create Idol
 system:
+  remainingMagnitude: 4
   description: |-
     <p>This spell requires an image of the caster’s god worth 100 GD, specially
     consecrated by a Priest reading from the sacred texts of the deity telling the
@@ -17,4 +13,9 @@ system:
   - Common
   - Permanent
   type: divine
+_id: lEgJonAZfQ3T4eUR
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Create Idol
 type: spell

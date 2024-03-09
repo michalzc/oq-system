@@ -1,9 +1,5 @@
-_id: i3NHltbvhBHnbKkn
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Invisibility
 system:
+  remainingMagnitude: 4
   description: |-
     <p>For the duration of the spell, the recipient is entirely invisible to sight.
     They can still be heard, felt or smelled, with a -20% to Perception tests. Also,
@@ -18,4 +14,9 @@ system:
   - Personal
   - Touch
   type: divine
+_id: i3NHltbvhBHnbKkn
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Invisibility
 type: spell

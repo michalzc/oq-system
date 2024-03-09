@@ -1,9 +1,5 @@
-_id: brpMOooM5ZNOtkBv
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Resurrect
 system:
+  remainingMagnitude: 5
   description: |-
     <p>The body of the deceased must be present and must be whole. If the target
     died due to disease or poison, the recipient returns to life cured.</p> <p>This
@@ -21,4 +17,9 @@ system:
   - Instant
   - Touch
   type: divine
+_id: brpMOooM5ZNOtkBv
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Resurrect
 type: spell

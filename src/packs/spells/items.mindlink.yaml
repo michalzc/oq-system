@@ -1,9 +1,5 @@
-_id: Ihjzo7f8OtIbTkEL
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Mindlink
 system:
+  remainingMagnitude: 1
   description: |-
     <p>This spell allows the transmission of conscious thoughts, spell knowledge,
     runes and magic points between participants.</p> <p>Additional points of
@@ -32,4 +28,9 @@ system:
   - Progressive
   - Ranged
   type: divine
+_id: Ihjzo7f8OtIbTkEL
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Mindlink
 type: spell

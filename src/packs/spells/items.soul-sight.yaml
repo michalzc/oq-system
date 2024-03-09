@@ -1,9 +1,5 @@
-_id: 6CKcTOlbUpjq2neF
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Soul Sight
 system:
+  remainingMagnitude: 1
   description: |-
     <p>This spell allows the recipient to see the POW aura of anyone they looks at,
     enabling them to discern that creature’s current magic points, as well as the
@@ -16,4 +12,9 @@ system:
   - Duration (15)
   - Touch
   type: divine
+_id: 6CKcTOlbUpjq2neF
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Soul Sight
 type: spell

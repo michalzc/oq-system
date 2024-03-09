@@ -1,9 +1,5 @@
-_id: eF8YF44A5Tii0B5n
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Divine Heal
 system:
+  remainingMagnitude: 2
   description: |-
     <p>This powerful spell instantly heals any lost hit points, even if the
     character is mortally wounded, back to their full total. It also cures any
@@ -16,4 +12,9 @@ system:
   - Instant
   - Touch
   type: divine
+_id: eF8YF44A5Tii0B5n
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Divine Heal
 type: spell

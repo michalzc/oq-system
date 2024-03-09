@@ -1,9 +1,5 @@
-_id: XLCdMS05SHjLhyv5
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Sureshot
 system:
+  remainingMagnitude: 1
   description: |-
     <p>When cast on a missile weapon (such as a knife, arrow, javelin or rock),
     firing it triggers the spell. Unless the wielder of the weapon rolls an
@@ -19,4 +15,9 @@ system:
   - Duration (15)
   - Ranged
   type: divine
+_id: XLCdMS05SHjLhyv5
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Sureshot
 type: spell

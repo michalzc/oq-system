@@ -1,9 +1,5 @@
-_id: CmFKFlpiVh97mWOs
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Mischief
 system:
+  remainingMagnitude: 2
   description: |-
     <p>Mischief is a minor trickster’s spell which afflicts its target with a small
     irritating curse.</p> <p>Roll 1D20 on the following list for a result, which
@@ -16,4 +12,9 @@ system:
   - Resist (Persistence)
   - Touch
   type: divine
+_id: CmFKFlpiVh97mWOs
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Mischief
 type: spell

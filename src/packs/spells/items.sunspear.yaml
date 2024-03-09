@@ -1,9 +1,5 @@
-_id: qMmMlJb18wsdBDrT
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Sunspear
 system:
+  remainingMagnitude: 4
   description: |-
     <p>This spell will only function in direct sunlight. When cast, a shaft of light
     two metres wide streaks from the sky to blast a single target, who must be
@@ -16,4 +12,9 @@ system:
   - Ranged
   - Resist (Dodge)
   type: divine
+_id: qMmMlJb18wsdBDrT
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Sunspear
 type: spell

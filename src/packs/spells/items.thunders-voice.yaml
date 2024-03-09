@@ -1,13 +1,14 @@
-_id: r1E6HrbwbRz0cwwL
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Thunder’s Voice
 system:
+  remainingMagnitude: 2
   description: |-
     <p>This spell grants the caster a loud voice of command which gives the caster
     +20% added to their Influence skill, heard at up to 200 metres.</p>
   magnitude: 2
   nonVariant: true
   type: divine
+_id: r1E6HrbwbRz0cwwL
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Thunder’s Voice
 type: spell

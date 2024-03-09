@@ -1,9 +1,5 @@
-_id: oYARj64dcsEfXsDl
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Illusion
 system:
+  remainingMagnitude: 1
   description: |-
     <p>This spell creates an illusion based on all five senses. The illusion will
     seem real and solid unless the person looking at it succeeds in a Perception
@@ -23,4 +19,9 @@ system:
   - Progressive
   - Ranged
   type: divine
+_id: oYARj64dcsEfXsDl
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Illusion
 type: spell

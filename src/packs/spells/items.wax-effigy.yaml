@@ -1,9 +1,5 @@
-_id: K3SLpM6iCLCCahbF
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Wax Effigy
 system:
+  remainingMagnitude: 4
   description: |-
     <p>This spell enchants a small wax representation of the intended victim. Spells
     can be cast at the effigy and affect the victim, despite the distance between
@@ -19,4 +15,9 @@ system:
   traits:
   - Resist (Persistence)
   type: divine
+_id: K3SLpM6iCLCCahbF
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Wax Effigy
 type: spell

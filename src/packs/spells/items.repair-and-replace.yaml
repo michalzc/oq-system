@@ -1,9 +1,5 @@
-_id: ms7fxNiZVU4hRqNm
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Repair and Replace
 system:
+  remainingMagnitude: 1
   description: |-
     <p>This spell repairs broken crafted items. It also replaces missing parts of an
     item.</p> <p>The size of the item depends on the magnitude of the spell.</p>
@@ -15,4 +11,9 @@ system:
   - Instant
   - Progressive
   type: divine
+_id: ms7fxNiZVU4hRqNm
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Repair and Replace
 type: spell

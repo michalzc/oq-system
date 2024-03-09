@@ -7,6 +7,8 @@ import io.circe.Json
 import io.circe.syntax._
 import io.circe.yaml.Printer
 
+import cats.syntax.option._
+
 val SpellIcons = Map(
   "personal" -> "systems/oq/assets/icons/magic-swirl.svg",
   "divine"   -> "systems/oq/assets/icons/divided-spiral.svg",
@@ -24,12 +26,18 @@ def isSpell(filePath: os.Path, json: Json): Boolean = json
   .getOrElse(false)
 
 def updateSpell(filePath: os.Path, json: Json): (os.Path, Json) =
-  val spellIcon = json.hcursor.downField("system").downField("type").as[String].toOption.map(SpellIcons.apply)
+  val spellType = json.hcursor.downField("system").downField("type").as[String].toOption
+  val spellIcon = spellType.map(SpellIcons.apply)
+  val isDivine = spellType.map(_ == "divine")
+
   val result =
     for {
       newIcon     <- spellIcon
       updatedJson <- json.hcursor.downField("img").set(newIcon.asJson).top
-    } yield updatedJson
+      divine      <- isDivine
+      magnitude   <- updatedJson.hcursor.downField("system").downField("magnitude").as[Int].toOption
+      update = Map("system" -> Map("remainingMagnitude" -> magnitude.asJson)).asJson
+    } yield if divine then updatedJson.deepMerge(update) else updatedJson
 
   filePath -> result.getOrElse(json)
 

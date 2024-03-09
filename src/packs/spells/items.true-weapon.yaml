@@ -1,9 +1,5 @@
-_id: rMuHpVgIkmWZCJBV
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: True (Weapon)
 system:
+  remainingMagnitude: 3
   description: |-
     <p>When cast on the specified type of weapon, this spell doubles that weapon’s
     normal damage dice. Other modifiers, such as Damage Modifier, are not affected.
@@ -15,4 +11,9 @@ system:
   - Duration (8h)
   - Ranged
   type: divine
+_id: rMuHpVgIkmWZCJBV
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: True (Weapon)
 type: spell
