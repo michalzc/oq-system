@@ -178,7 +178,7 @@ export class SpellDataModel extends foundry.abstract.DataModel {
     return this.isDivine && !this.nonVariant;
   }
 
-  get casted() {
+  get expended() {
     return this.isDivine && this.remainingMagnitude === 0;
   }
 }

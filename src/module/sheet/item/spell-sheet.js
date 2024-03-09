@@ -12,7 +12,20 @@ export class OQSpellSheet extends OQBaseItemSheet {
       spellTypes,
       hasSplitDivineCasting: this.item.hasSplitDivineCasting,
       isDivine: this.item.isDivine,
-      casted: this.item.casted,
+      expended: this.item.expended,
     });
+  }
+
+  activateListeners(html) {
+    super.activateListeners(html);
+
+    html.find('.expended-spell').on('click', this.onChangeCastedSpell.bind(this));
+  }
+
+  async onChangeCastedSpell(event) {
+    const target = event.currentTarget;
+    const checked = target.checked;
+    if (checked) this.item.castDivineSpell();
+    else this.item.regainDivineSpell();
   }
 }

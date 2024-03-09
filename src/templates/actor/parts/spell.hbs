@@ -2,7 +2,7 @@
   <a class="item-to-chat">
     <img class="item-icon" src="{{img}}" data-tooltip="{{localize 'OQ.Tooltips.SendToChat'}}" alt="{{name}}">
   </a>
-  <a class="item-roll" data-tooltip="{{system.tooltip}}" data-tooltip-direction="LEFT">
+  <a class="item-roll spell{{#if this.expended}}-expanded{{/if}}" data-tooltip="{{system.tooltip}}" data-tooltip-direction="LEFT">
     {{name}}
     {{#unless system.nonVariant}}
       [{{#if hasSplitDivineCasting}}{{system.remainingMagnitude}}/{{/if}}{{system.magnitude}}]

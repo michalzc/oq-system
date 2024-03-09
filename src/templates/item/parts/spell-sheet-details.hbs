@@ -1,4 +1,3 @@
-{{ log this }}
 <div class="item-details">
   <label for="type">{{ localize 'OQ.Labels.SpellType' }}</label>
   <select id="type" name="system.type">
@@ -12,8 +11,8 @@
         <input id="remainingMagnitude" type="number" data-dtype="Number" name="system.remainingMagnitude" value="{{ system.remainingMagnitude }}">
         <label>{{ localize 'OQ.Labels.of' }}</label>
       {{else}}
-        <label for="casted">{{ localize 'OQ.Labels.Casted' }}</label>
-        <input id="casted" type="checkbox" name="casted" {{ checked casted }}>
+        <label for="expended">{{ localize 'OQ.Labels.Expended' }}</label>
+        <input id="expended" class="expended-spell" type="checkbox" name="expended" {{ checked expended }}>
       {{/if}}
 
     {{/if}}

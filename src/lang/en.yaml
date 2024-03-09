@@ -73,7 +73,7 @@ OQ:
       mr:
         abbr: MR
         label: Movement Rate
-    Casted: Casted
+    Expended: Expended
     Characteristics: Characteristics
     CharacteristicsNames:
       cha:
