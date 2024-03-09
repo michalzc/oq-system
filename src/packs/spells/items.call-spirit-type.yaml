@@ -1,6 +1,3 @@
-folder: PmL84WZU2luOrJSw
-fileType: items
-_id: Guze8QoPo8pHfNAE
 system:
   nonVariant: true
   magnitude: 3
@@ -21,6 +18,9 @@ system:
   traits:
   - Resist (Persistence)
   type: personal
+folder: PmL84WZU2luOrJSw
+fileType: items
+_id: Guze8QoPo8pHfNAE
 type: spell
 img: systems/oq/assets/icons/magic-swirl.svg
 name: Call Spirit (Type)

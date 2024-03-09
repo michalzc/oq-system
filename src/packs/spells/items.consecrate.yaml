@@ -1,9 +1,5 @@
-_id: I4Ak2ANGvQbQ6NqQ
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Consecrate
 system:
+  remainingMagnitude: 1
   description: |-
     <p>This spell is as much a part of a temple’s foundation as is its cornerstone.
     It creates a sphere with a radius of ten metres per point of magnitude. The
@@ -19,4 +15,9 @@ system:
   - Permanent
   - Progressive
   type: divine
+_id: I4Ak2ANGvQbQ6NqQ
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Consecrate
 type: spell

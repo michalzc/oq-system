@@ -1,9 +1,5 @@
-_id: KHy3APO0uTzRw2ey
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Poison Antidote
 system:
+  magnitude: 1
   description: |-
     <p>This spell counteracts an antidote to any poison. For the duration of the
     spell, it reduces any poison’s potency by its magnitude X 5. This is for the
@@ -13,4 +9,9 @@ system:
     the poison.</p>
   nonVariant: false
   type: sorcery
+_id: KHy3APO0uTzRw2ey
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Poison Antidote
 type: spell

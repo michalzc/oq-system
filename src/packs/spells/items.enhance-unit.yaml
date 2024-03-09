@@ -1,9 +1,5 @@
-_id: GV7xvej6LIirtfi4
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Enhance Unit
 system:
+  remainingMagnitude: 3
   description: |-
     <p>For the duration of this spell, a troop of up to thirty soldiers gain +1D6
     damage.  Also, they cannot be routed or affected by any mind control magic (such
@@ -13,4 +9,9 @@ system:
   traits:
   - Duration (6h)
   type: divine
+_id: GV7xvej6LIirtfi4
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Enhance Unit
 type: spell

@@ -1,9 +1,5 @@
-_id: pXl21cEIqPk4aNWr
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Madness
 system:
+  remainingMagnitude: 1
   description: |-
     <p>This spell causes the target to lose contact with reality and become a
     gibbering loon. Madness does not affect unconscious targets, those without an
@@ -18,4 +14,9 @@ system:
   - Ranged
   - Resist (Persistence)
   type: divine
+_id: pXl21cEIqPk4aNWr
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Madness
 type: spell

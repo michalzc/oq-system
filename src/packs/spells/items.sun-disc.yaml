@@ -1,9 +1,5 @@
-_id: 4rqfsDSILFs1UCyl
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Sun Disc
 system:
+  remainingMagnitude: 1
   description: |-
     <p>Upon casting this spell, the Caster projects a disc of blinding light from
     their hand. Targets in the path of the disc are blinded for 1D4 hours, unless
@@ -16,4 +12,9 @@ system:
   - Ranged
   - Resist (Dodge)
   type: divine
+_id: 4rqfsDSILFs1UCyl
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Sun Disc
 type: spell

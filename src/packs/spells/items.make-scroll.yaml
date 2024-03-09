@@ -1,9 +1,5 @@
-_id: YEDpGZAgk0HDBDZD
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Make Scroll
 system:
+  magnitude: 1
   description: |-
     <p>Magical scrolls are written items that store Sorcery spells. All scrolls have
     an attached cost of 1 Gold Ducat per magnitude of spell in ingredients (for
@@ -21,4 +17,9 @@ system:
   traits:
   - Permanent
   type: sorcery
+_id: YEDpGZAgk0HDBDZD
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Make Scroll
 type: spell

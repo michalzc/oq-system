@@ -1,9 +1,5 @@
-_id: gzeRlysv5hgRjKET
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Fear
 system:
+  remainingMagnitude: 1
   description: |-
     <p>This spell causes the target to become overwhelmed with fear. Fear does not
     affect unconscious targets, those without an INT characteristic or those that
@@ -17,4 +13,9 @@ system:
   - Ranged
   - Resist (Persistence)
   type: divine
+_id: gzeRlysv5hgRjKET
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Fear
 type: spell

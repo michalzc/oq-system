@@ -1,9 +1,5 @@
-_id: pIXIOsw0SMWdYSbM
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Remove Disease
 system:
+  magnitude: 1
   description: |-
     <p>This spell purges the recipient of any disease that is currently afflicting
     them. Make an opposed roll of the spell’s magnitude vs. the disease’s potency.
@@ -12,4 +8,9 @@ system:
     disease are regained.</p>
   nonVariant: false
   type: sorcery
+_id: pIXIOsw0SMWdYSbM
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Remove Disease
 type: spell

@@ -1,9 +1,5 @@
-_id: frJm16WSd9AIPXuZ
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Mystic Vision
 system:
+  magnitude: 1
   description: |-
     <p>This spell allows the recipient to literally see magic. By augmenting the
     recipient’s natural vision, the spell allows them to see a creature’s magic
@@ -31,4 +27,9 @@ system:
   traits:
   - Concentration
   type: sorcery
+_id: frJm16WSd9AIPXuZ
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Mystic Vision
 type: spell

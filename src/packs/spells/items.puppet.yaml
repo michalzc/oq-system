@@ -1,9 +1,5 @@
-_id: B4ngnK4ax4P6IJFJ
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Puppet
 system:
+  remainingMagnitude: 3
   description: |-
     <p>The caster uses this spell to enchant a puppet, which is the focus of the
     spell and the stand-in for the victim. The victim can use Persistence to resist
@@ -20,4 +16,9 @@ system:
   - Duration (6h)
   - Resist (Persistence)
   type: divine
+_id: B4ngnK4ax4P6IJFJ
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Puppet
 type: spell

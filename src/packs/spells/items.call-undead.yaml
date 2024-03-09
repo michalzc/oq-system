@@ -1,9 +1,5 @@
-_id: 05bkzEpg5cvTlJHr
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Call (Undead)
 system:
+  remainingMagnitude: 1
   description: |-
     <p>This spell reanimates a dead human corpse and turns it into an undead
     creature, of a type determined by the magnitude of the spell.</p> <p>1 =
@@ -15,4 +11,9 @@ system:
   - Permanent
   - Progressive
   type: divine
+_id: 05bkzEpg5cvTlJHr
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Call (Undead)
 type: spell

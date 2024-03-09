@@ -1,9 +1,5 @@
-_id: zRAyfvMbDv4twIac
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Skin of Life
 system:
+  magnitude: 1
   description: |-
     <p>This spell protects the recipient from suffocation by air deprivation, due to
     such factors as drowning or the Smother spell. Each point of magnitude will
@@ -13,4 +9,9 @@ system:
   traits:
   - Touch
   type: sorcery
+_id: zRAyfvMbDv4twIac
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Skin of Life
 type: spell

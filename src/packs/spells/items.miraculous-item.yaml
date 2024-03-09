@@ -1,9 +1,5 @@
-_id: Nn4TpYbm4WEWreG9
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Miraculous Item
 system:
+  remainingMagnitude: 1
   description: |-
     <p>This spell allows the Caster to create items literally from nowhere. The size
     of the item depends upon the magnitude of the spell.</p> <table>
@@ -26,4 +22,9 @@ system:
   - Duration (1h)
   - Progressive
   type: divine
+_id: Nn4TpYbm4WEWreG9
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Miraculous Item
 type: spell

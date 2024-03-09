@@ -1,4 +1,5 @@
 system:
+  magnitude: 1
   type: personal
   traits:
   - Permanent

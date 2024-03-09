@@ -7,6 +7,8 @@ import io.circe.Json
 import io.circe.syntax._
 import io.circe.yaml.Printer
 
+import cats.syntax.option._
+
 val SpellIcons = Map(
   "personal" -> "systems/oq/assets/icons/magic-swirl.svg",
   "divine"   -> "systems/oq/assets/icons/divided-spiral.svg",
@@ -24,17 +26,35 @@ def isSpell(filePath: os.Path, json: Json): Boolean = json
   .getOrElse(false)
 
 def updateSpell(filePath: os.Path, json: Json): (os.Path, Json) =
-  val spellIcon = json.hcursor.downField("system").downField("type").as[String].toOption.map(SpellIcons.apply)
+  val spellType = json.hcursor.downField("system").downField("type").as[String].toOption
+  val spellIcon = spellType.map(SpellIcons.apply)
+  val isDivine  = spellType.map(_ == "divine")
+
   val result =
     for {
-      newIcon     <- spellIcon
-      updatedJson <- json.hcursor.downField("img").set(newIcon.asJson).top
-    } yield updatedJson
+      newIcon   <- spellIcon
+      divine    <- isDivine
+      magnitude = json.hcursor.downField("system").downField("magnitude").as[Int].toOption.getOrElse(0)
+      updatedMagnitude =
+        if magnitude == 0 then
+          1
+        else
+          magnitude
+      updatedJson <-
+        json
+          .hcursor
+          .downField("img")
+          .set(newIcon.asJson)
+          .top
+      system = if magnitude != updatedMagnitude then Map("magnitude" -> updatedMagnitude.asJson) else Map.empty[String, Json]
+      divSystem = if divine then system + ("remainingMagnitude" -> updatedMagnitude.asJson) else system
+      update = Map("system" -> system.asJson).asJson
+    } yield updatedJson.deepMerge(update)
 
   filePath -> result.getOrElse(json)
 
 def makeString(file: os.Path, json: Json): (os.Path, String) = file -> YamlPrinter.pretty(json)
-def writeContent(file: os.Path, content: String) = os.write.over(file, content)
+def writeContent(file: os.Path, content: String)             = os.write.over(file, content)
 
 @main
 def updateSpells(packsPath: os.Path): Unit = os

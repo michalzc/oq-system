@@ -1,9 +1,5 @@
-_id: FAn7AP1r45hPJmtb
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Summon (Other World creature)
 system:
+  magnitude: 1
   description: |-
     <p>This spell allows the sorcerer to summon one Other World creature, per
     casting, to the mundane world. The creature is not automatically under the
@@ -17,4 +13,9 @@ system:
   traits:
   - Resist (Persistence)
   type: sorcery
+_id: FAn7AP1r45hPJmtb
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Summon (Other World creature)
 type: spell

@@ -1,9 +1,5 @@
-_id: 0mhbcAktVEx4tvcJ
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Enhance (characteristic)
 system:
+  magnitude: 1
   description: |-
     <p>There are seven Enhance spells, one for each characteristic. Essentially the
     reverse of the Diminish spell, Enhance allows the Sorcerer to temporarily apply
@@ -15,4 +11,9 @@ system:
   traits:
   - Touch
   type: sorcery
+_id: 0mhbcAktVEx4tvcJ
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Enhance (characteristic)
 type: spell

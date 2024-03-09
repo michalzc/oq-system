@@ -1,9 +1,5 @@
-_id: lEecNAFaJ4SaFTQB
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Palsy
 system:
+  magnitude: 1
   description: |-
     <p>If the caster is able to overcome their Target with this spell, they can turn
     the victim’s own nervous system against them. The spell will paralyse the
@@ -13,4 +9,9 @@ system:
   traits:
   - Resist (Resilience)
   type: sorcery
+_id: lEecNAFaJ4SaFTQB
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Palsy
 type: spell

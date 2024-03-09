@@ -1,9 +1,5 @@
-_id: WUXAmrHElifNImVK
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Call (Elemental)
 system:
+  remainingMagnitude: 1
   description: |-
     <p>This spell summons and binds to the service of the caster an elemental from
     another plane of existence, of size dependent on the magnitude of the spell.</p>
@@ -19,4 +15,9 @@ system:
   - Permanent
   - Progressive
   type: divine
+_id: WUXAmrHElifNImVK
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Call (Elemental)
 type: spell

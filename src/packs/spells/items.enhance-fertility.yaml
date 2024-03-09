@@ -1,9 +1,5 @@
-_id: jK7gGWc2bUFrc6x8
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Enhance Fertility
 system:
+  remainingMagnitude: 3
   description: |-
     <p>This spell makes any one creature more fertile than normal. If it is an
     animal that has multiple offspring, then it doubles the number. For creatures
@@ -15,4 +11,9 @@ system:
   traits:
   - Permanent
   type: divine
+_id: jK7gGWc2bUFrc6x8
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Enhance Fertility
 type: spell

@@ -1,9 +1,5 @@
-_id: 98aCb2Pi67dGoeqr
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Tap (characteristic)
 system:
+  magnitude: 1
   description: |-
     <p>There are actually seven Tap spells, one for each characteristic. These
     devastating spells allow the caster to permanently strip a target of
@@ -31,4 +27,9 @@ system:
   - Resist (Persistence)
   - Touch
   type: sorcery
+_id: 98aCb2Pi67dGoeqr
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Tap (characteristic)
 type: spell

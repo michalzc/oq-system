@@ -1,9 +1,5 @@
-_id: rPeODzETP0RADKM7
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Mindblast
 system:
+  remainingMagnitude: 1
   description: |-
     <p>This spell applies a penalty to the victim’s INT equal to the magnitude of
     the spell. The effect lasts days equal to the Caster’s current CHA.</p>
@@ -15,4 +11,9 @@ system:
   - Ranged
   - Resist (Persistence)
   type: divine
+_id: rPeODzETP0RADKM7
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Mindblast
 type: spell

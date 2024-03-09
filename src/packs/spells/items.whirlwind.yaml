@@ -1,9 +1,5 @@
-_id: irpNqiEPzbwLN8G1
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Whirlwind
 system:
+  remainingMagnitude: 1
   description: |-
     <p>Each point of magnitude of this spell whips up a whirlwind capable of
     carrying 20 SIZ in its whirling vortex. Each round the whirlwind moves ten
@@ -21,4 +17,9 @@ system:
   - Duration (15m)
   - Progressive
   type: divine
+_id: irpNqiEPzbwLN8G1
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Whirlwind
 type: spell

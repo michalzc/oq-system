@@ -1,8 +1,5 @@
-fileType: items
-folder: PmL84WZU2luOrJSw
-name: Create Scroll
-_id: IYC4DNTyAzPBr2ox
 system:
+  magnitude: 1
   traits:
   - Permanent
   description: |-
@@ -28,5 +25,9 @@ system:
     reusable, the ink fades, and the scroll crumbles to dust.</p>
   type: personal
   nonVariant: false
+fileType: items
+folder: PmL84WZU2luOrJSw
+name: Create Scroll
+_id: IYC4DNTyAzPBr2ox
 img: systems/oq/assets/icons/magic-swirl.svg
 type: spell

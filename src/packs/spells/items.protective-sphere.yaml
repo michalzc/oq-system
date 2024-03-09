@@ -1,9 +1,5 @@
-_id: CruUt8ITSuMD3rJU
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Protective Sphere
 system:
+  magnitude: 1
   description: |-
     <p>When completed, the Protective Sphere will create a sphere-shaped area of
     protection with a radius in metres equal to the spell’s magnitude. If this spell
@@ -23,4 +19,9 @@ system:
     within the sphere (including attacks targeting those outside the sphere).</p>
   nonVariant: false
   type: sorcery
+_id: CruUt8ITSuMD3rJU
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Protective Sphere
 type: spell

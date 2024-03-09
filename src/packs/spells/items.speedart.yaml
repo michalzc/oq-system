@@ -1,5 +1,3 @@
-fileType: items
-name: Speedart
 system:
   magnitude: 2
   description: |-
@@ -10,6 +8,8 @@ system:
   - Touch
   nonVariant: true
   type: personal
+fileType: items
+name: Speedart
 img: systems/oq/assets/icons/magic-swirl.svg
 type: spell
 _id: 4C94G7NBZiO28ovx

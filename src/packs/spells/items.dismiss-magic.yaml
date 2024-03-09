@@ -1,9 +1,5 @@
-_id: nC5HcRYq2YI5O4Ku
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Dismiss Magic
 system:
+  remainingMagnitude: 1
   description: |-
     <p>Dismiss Magic is used either against a general target or a specific spell and
     as a reaction when attacked with magic.</p> <p>When used against a general
@@ -24,4 +20,9 @@ system:
   - Progressive
   - Ranged
   type: divine
+_id: nC5HcRYq2YI5O4Ku
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Dismiss Magic
 type: spell

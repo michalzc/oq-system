@@ -1,9 +1,5 @@
-_id: 1D8E2p8uLU78BcO3
-fileType: items
-name: Clear Path
-folder: PmL84WZU2luOrJSw
-img: systems/oq/assets/icons/magic-swirl.svg
 system:
+  magnitude: 1
   nonVariant: false
   traits:
   - Touch
@@ -12,4 +8,9 @@ system:
     brush as if they were on an open road. For each additional point of magnitude,
     an additional person can accompany them.</p>
   type: personal
+_id: 1D8E2p8uLU78BcO3
+fileType: items
+name: Clear Path
+folder: PmL84WZU2luOrJSw
+img: systems/oq/assets/icons/magic-swirl.svg
 type: spell

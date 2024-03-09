@@ -1,9 +1,5 @@
-_id: FSUyJvSSGKPldst4
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Absorption
 system:
+  remainingMagnitude: 1
   description: |-
     <p>This spell absorbs incoming spells aimed at the target or their equipment,
     converting their magical energy into magic points which are then available to
@@ -25,4 +21,9 @@ system:
   - Progressive
   - Touch
   type: divine
+_id: FSUyJvSSGKPldst4
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Absorption
 type: spell

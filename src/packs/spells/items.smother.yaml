@@ -1,9 +1,5 @@
-_id: pY1D1sV4kBV50hvm
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Smother
 system:
+  magnitude: 1
   description: |-
     <p>If successful, this spell neutralises the air surrounding the target, making
     each breath stale and worthless, depriving it of oxygen. The caster must
@@ -23,4 +19,9 @@ system:
   - Concentration
   - Resist (Resilience Special)
   type: sorcery
+_id: pY1D1sV4kBV50hvm
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Smother
 type: spell

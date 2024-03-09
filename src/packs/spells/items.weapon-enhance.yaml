@@ -1,10 +1,5 @@
-folder: PmL84WZU2luOrJSw
-_id: eHXXJHdIh2BD67eD
-fileType: items
-img: systems/oq/assets/icons/magic-swirl.svg
-name: Weapon Enhance
-type: spell
 system:
+  magnitude: 1
   traits:
   - Touch
   description: |-
@@ -16,3 +11,9 @@ system:
     Fireblade.</p>
   nonVariant: false
   type: personal
+folder: PmL84WZU2luOrJSw
+_id: eHXXJHdIh2BD67eD
+fileType: items
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Weapon Enhance
+type: spell

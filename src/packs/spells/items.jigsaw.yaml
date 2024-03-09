@@ -1,9 +1,5 @@
-_id: NeA6bNptFoxI3HOc
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Jigsaw
 system:
+  remainingMagnitude: 4
   description: |-
     <p>This spell causes the target to fall to pieces upon a failed Persistence
     roll.  The victim will still be alive but will not require food or water during
@@ -15,4 +11,9 @@ system:
   traits:
   - Duration (6h)
   type: divine
+_id: NeA6bNptFoxI3HOc
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Jigsaw
 type: spell

@@ -1,9 +1,5 @@
-_id: bh52vvlzWkhauQsG
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Rout
 system:
+  remainingMagnitude: 3
   description: |-
     <p>When aimed at a body of warriors, of no more than one hundred persons, they
     must make a Persistence roll or immediately lose all cohesion as a unit and
@@ -13,4 +9,9 @@ system:
   magnitude: 3
   nonVariant: true
   type: divine
+_id: bh52vvlzWkhauQsG
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Rout
 type: spell

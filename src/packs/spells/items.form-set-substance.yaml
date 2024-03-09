@@ -1,9 +1,5 @@
-_id: Ajwf99HqefYE4EH7
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Form/Set (Substance)
 system:
+  magnitude: 1
   description: |-
     <p>There is an unlimited number of Form/Set spells in existence, one for every
     substance imaginable, from steel to smoke to water.</p> <p>Each point of
@@ -21,4 +17,9 @@ system:
   traits:
   - Instant
   type: sorcery
+_id: Ajwf99HqefYE4EH7
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Form/Set (Substance)
 type: spell

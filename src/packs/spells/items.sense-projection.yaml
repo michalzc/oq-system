@@ -1,9 +1,5 @@
-_id: rzUkvxkHaMuRixJq
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: (Sense) Projection
 system:
+  magnitude: 1
   description: |-
     <p>Each (Sense) Projection spell is a separate spell. These spells encompass the
     five base senses, but there are also variants for any unusual sensory mechanisms
@@ -25,4 +21,9 @@ system:
   traits:
   - Concentration
   type: sorcery
+_id: rzUkvxkHaMuRixJq
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: (Sense) Projection
 type: spell

@@ -1,7 +1,5 @@
-_id: cp8ivAlWQwPKvOmS
-folder: PmL84WZU2luOrJSw
-type: spell
 system:
+  magnitude: 1
   traits:
   - Instant
   - Touch
@@ -10,6 +8,9 @@ system:
   description: |-
     <p>Each point of this spell’s magnitude instantly removes one fatigue level from
     the recipient.</p>
+_id: cp8ivAlWQwPKvOmS
+folder: PmL84WZU2luOrJSw
+type: spell
 fileType: items
 img: systems/oq/assets/icons/magic-swirl.svg
 name: Restore Energy

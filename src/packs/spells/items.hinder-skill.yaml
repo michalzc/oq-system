@@ -1,8 +1,5 @@
-type: spell
-_id: YEaEdiMtDpvGDU9H
-img: systems/oq/assets/icons/magic-swirl.svg
-name: Hinder (Skill)
 system:
+  magnitude: 1
   nonVariant: false
   type: personal
   traits:
@@ -22,5 +19,9 @@ system:
     <li><i>Hinder (Trade),</i> used by the nastier traders.</li> <li><i>Hinder
     (Persistence),</i> used by magicians against enemy spellcasters before casting
     spells upon them.</li> </ul>
+type: spell
+_id: YEaEdiMtDpvGDU9H
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Hinder (Skill)
 folder: PmL84WZU2luOrJSw
 fileType: items

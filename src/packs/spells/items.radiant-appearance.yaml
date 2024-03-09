@@ -1,9 +1,5 @@
-_id: SF096BXtZL46OCiU
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Radiant Appearance
 system:
+  remainingMagnitude: 2
   description: |-
     <p>The recipient of this spell glows with light and power. They gain +50% to any
     Influence rolls for the duration of the spell.  Also, any light-hating creatures
@@ -13,4 +9,9 @@ system:
   traits:
   - Duration (1d)
   type: divine
+_id: SF096BXtZL46OCiU
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Radiant Appearance
 type: spell

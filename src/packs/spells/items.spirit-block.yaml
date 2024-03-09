@@ -1,9 +1,5 @@
-_id: wyfZN6Mp8YX96YHx
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Spirit Block
 system:
+  remainingMagnitude: 1
   description: |-
     <p>Spirits may only touch the recipient of Spirit Block with a POW high enough
     to break through the spell’s magnitude (see table).</p>
@@ -22,4 +18,9 @@ system:
   - Progressive
   - Touch
   type: divine
+_id: wyfZN6Mp8YX96YHx
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Spirit Block
 type: spell

@@ -1,9 +1,5 @@
-_id: 6NoxXlRBK74V7iZO
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Extension
 system:
+  remainingMagnitude: 1
   description: |-
     <p>This spell lengthens the duration of any Divine Magic spell with the Duration
     trait. Extension, and the spell it is extending, are cast simultaneously by the
@@ -20,4 +16,9 @@ system:
   - Duration (Special)
   - Progressive
   type: divine
+_id: 6NoxXlRBK74V7iZO
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Extension
 type: spell

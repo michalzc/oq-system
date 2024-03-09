@@ -1,7 +1,3 @@
-folder: PmL84WZU2luOrJSw
-name: Darkwall
-fileType: items
-type: spell
 system:
   description: |-
     <p>Light sources within a Darkwall area shed no light, and normal sight ceases
@@ -13,5 +9,9 @@ system:
   nonVariant: true
   traits:
   - Area (5m)
+folder: PmL84WZU2luOrJSw
+name: Darkwall
+fileType: items
+type: spell
 img: systems/oq/assets/icons/magic-swirl.svg
 _id: KTbOwmCnqkPx0qDP

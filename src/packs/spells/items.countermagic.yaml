@@ -1,5 +1,5 @@
-folder: PmL84WZU2luOrJSw
 system:
+  magnitude: 1
   description: |-
     <p>This spell is cast in advance and sits dormant until a hostile spell attacks
     the recipient. At this point, the Countermagic spell fires off. As long as
@@ -10,6 +10,7 @@ system:
   traits:
   - Instant
   nonVariant: false
+folder: PmL84WZU2luOrJSw
 fileType: items
 name: Countermagic
 img: systems/oq/assets/icons/magic-swirl.svg

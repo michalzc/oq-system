@@ -1,9 +1,5 @@
-_id: wpXN1hHb7y3KaOGf
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Exorcism
 system:
+  remainingMagnitude: 3
   description: |-
     <p>A Divine Magic caster can draw out a spirit currently possessing a mortal
     being by using this spell. Whether the possession is dominant or covert is
@@ -18,4 +14,9 @@ system:
   - Common
   - Concentration
   type: divine
+_id: wpXN1hHb7y3KaOGf
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Exorcism
 type: spell

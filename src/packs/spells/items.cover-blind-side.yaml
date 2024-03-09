@@ -1,6 +1,3 @@
-type: spell
-name: Cover Blind Side
-_id: ZOJzXJBKf49TXjrC
 system:
   nonVariant: true
   magnitude: 1
@@ -9,6 +6,9 @@ system:
     flank attacks as if they were a normal attack from the front. It does not confer
     any additional reactions.</p>
   type: personal
+type: spell
+name: Cover Blind Side
+_id: ZOJzXJBKf49TXjrC
 fileType: items
 folder: PmL84WZU2luOrJSw
 img: systems/oq/assets/icons/magic-swirl.svg

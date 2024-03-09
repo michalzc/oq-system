@@ -1,9 +1,5 @@
-_id: WsJbrecvFpTTVJws
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Quicksand
 system:
+  remainingMagnitude: 2
   description: |-
     <p>This spell creates a patch of quicksand 10m square. The earth in the area
     becomes boggy and saturated with water. On a failed Persistence roll, any
@@ -17,4 +13,9 @@ system:
   traits:
   - Area
   type: divine
+_id: WsJbrecvFpTTVJws
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Quicksand
 type: spell

@@ -1,9 +1,5 @@
-_id: mPyPzBjMwJFt18Xd
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Create the Crystal Ship
 system:
+  remainingMagnitude: 4
   description: |-
     <p>From out of the air coalesces the Crystal Ship, a magical vessel that sails
     through the air to a single destination preordained by the caster. The caster
@@ -16,4 +12,9 @@ system:
   traits:
   - Duration (the length of the voyage)
   type: divine
+_id: mPyPzBjMwJFt18Xd
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Create the Crystal Ship
 type: spell

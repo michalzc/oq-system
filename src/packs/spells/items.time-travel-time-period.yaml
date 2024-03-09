@@ -1,9 +1,5 @@
-_id: 2dXZTpCS4KHppGhm
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Time Travel (Time Period)
 system:
+  magnitude: 1
   description: |-
     <p>This spell transports the caster and creatures (of SIZ 12-18) equal to the
     magnitude of the spell to a named time era via a time tunnel that opens up and
@@ -33,4 +29,9 @@ system:
   traits:
   - Instant
   type: sorcery
+_id: 2dXZTpCS4KHppGhm
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Time Travel (Time Period)
 type: spell

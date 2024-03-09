@@ -1,9 +1,5 @@
-_id: Jz12EtbfmaTLP74x
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Reflection
 system:
+  remainingMagnitude: 1
   description: |-
     <p>This spell reflects incoming spells aimed at the target or his equipment,
     redirecting the spell back at the original caster. Once cast on a subject,
@@ -21,4 +17,9 @@ system:
   - Progressive
   - Ranged
   type: divine
+_id: Jz12EtbfmaTLP74x
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Reflection
 type: spell

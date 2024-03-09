@@ -1,9 +1,5 @@
-fileType: items
-type: spell
-folder: PmL84WZU2luOrJSw
-name: Heal
-_id: VNQBunIs7U7XwhvY
 system:
+  magnitude: 1
   type: personal
   traits:
   - Instant
@@ -19,4 +15,9 @@ system:
     the poison or disease, such as characteristic loss, will not be restored.</p>
     <p>This spell can not be used to bring characters who are dead back to life.</p>
   nonVariant: false
+fileType: items
+type: spell
+folder: PmL84WZU2luOrJSw
+name: Heal
+_id: VNQBunIs7U7XwhvY
 img: systems/oq/assets/icons/magic-swirl.svg

@@ -1,9 +1,5 @@
-_id: VsLsqVQWZzAAE3K1
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Energy Projection (Type)
 system:
+  magnitude: 1
   description: |-
     <p>Energy is either projected as a beam or a ball towards the target, who can
     avoid the attack by Dodging.</p> <p>If the spell takes effect, the target takes
@@ -17,4 +13,9 @@ system:
   - Instant
   - Resist (Dodge)
   type: sorcery
+_id: VsLsqVQWZzAAE3K1
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Energy Projection (Type)
 type: spell

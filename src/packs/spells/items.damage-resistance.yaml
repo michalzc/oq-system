@@ -1,9 +1,5 @@
-_id: qn7ln67EwnxwPJYt
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Damage Resistance
 system:
+  magnitude: 1
   description: |-
     <p>This spell protects the body of the recipient. Any incoming attack dealing
     damage equal to or less than the magnitude of the spell is ignored. Any incoming
@@ -17,4 +13,9 @@ system:
   traits:
   - Touch
   type: sorcery
+_id: qn7ln67EwnxwPJYt
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Damage Resistance
 type: spell

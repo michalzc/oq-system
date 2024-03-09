@@ -1,9 +1,5 @@
-_id: HXxuHDJlbvYVhG3t
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Hamper
 system:
+  magnitude: 1
   description: |-
     <p>Each point of magnitude of Hamper subtracts 1m from the Movement rate of the
     target. Every two points of magnitude also subtract -10% from a recipient’s
@@ -12,4 +8,9 @@ system:
   traits:
   - Resist (Resilience)
   type: sorcery
+_id: HXxuHDJlbvYVhG3t
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Hamper
 type: spell

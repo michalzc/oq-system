@@ -1,8 +1,3 @@
-_id: it9tKtGRVyEW7scj
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Mirage
 system:
   description: |-
     <p>This is the Sorcerers’ version of Illusion.</p> <p>This spell creates an
@@ -19,4 +14,9 @@ system:
   nonVariant: false
   magnitude: 1
   type: sorcery
+_id: it9tKtGRVyEW7scj
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Mirage
 type: spell

@@ -1,5 +1,3 @@
-type: spell
-_id: 2iuxEOg9k5rqfARf
 system:
   description: |-
     <p>This spell makes a target item unbreakable for the duration of the spell.
@@ -11,6 +9,8 @@ system:
   - Touch
   magnitude: 1
   nonVariant: true
+type: spell
+_id: 2iuxEOg9k5rqfARf
 fileType: items
 img: systems/oq/assets/icons/magic-swirl.svg
 folder: PmL84WZU2luOrJSw

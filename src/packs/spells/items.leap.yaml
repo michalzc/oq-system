@@ -1,8 +1,5 @@
-_id: gk05aa2CD9elc0eZ
-img: systems/oq/assets/icons/magic-swirl.svg
-type: spell
-folder: PmL84WZU2luOrJSw
 system:
+  magnitude: 1
   traits:
   - Touch
   - Resist (Dodge)
@@ -12,5 +9,9 @@ system:
     falling damage on failure.</p>
   type: personal
   nonVariant: false
+_id: gk05aa2CD9elc0eZ
+img: systems/oq/assets/icons/magic-swirl.svg
+type: spell
+folder: PmL84WZU2luOrJSw
 name: Leap
 fileType: items

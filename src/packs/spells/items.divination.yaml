@@ -1,9 +1,5 @@
-_id: GavvbZLlG1uqC0Aq
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Divination
 system:
+  remainingMagnitude: 1
   description: |-
     <p>For each point of the magnitude of this spell, the caster can ask one
     question of their deity, which they must answer to the best of their ability.  A
@@ -22,4 +18,9 @@ system:
   - Instant
   - Progressive
   type: divine
+_id: GavvbZLlG1uqC0Aq
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Divination
 type: spell

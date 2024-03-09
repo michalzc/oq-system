@@ -1,9 +1,5 @@
-_id: oBSpMm16611Z84Ye
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Find (Type)
 system:
+  remainingMagnitude: 1
   description: |-
     <p>This spell is several spells, though they all operate in a similar fashion,
     which allows the caster to locate the closest target of the spell within its
@@ -29,4 +25,9 @@ system:
   - Duration (15)
   - Ranged
   type: divine
+_id: oBSpMm16611Z84Ye
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Find (Type)
 type: spell

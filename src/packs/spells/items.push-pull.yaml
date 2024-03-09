@@ -1,6 +1,5 @@
-folder: PmL84WZU2luOrJSw
-_id: ISkvUuoIXNJRrhS8
 system:
+  magnitude: 1
   description: |-
     <p>This spell allows the caster to move an item of up to 3 SIZ or ENC per point
     of magnitude either towards or away from them in a straight line as if pushed
@@ -15,6 +14,8 @@ system:
   - Instant
   - Resist (Resilience)
   type: personal
+folder: PmL84WZU2luOrJSw
+_id: ISkvUuoIXNJRrhS8
 name: Push/Pull
 fileType: items
 type: spell

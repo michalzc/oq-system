@@ -1,9 +1,5 @@
-_id: T4a0AiQ0Xc1hIUhA
-fileType: items
-folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
-name: Make Potion
 system:
+  magnitude: 1
   description: |-
     <p>Using the arts of alchemy, Sorcerers can store Sorcery spells in a liquid
     known as a Potion.</p> <p>All potions have an attached cost of 1 Gold Ducat per
@@ -14,4 +10,9 @@ system:
   traits:
   - Permanent
   type: sorcery
+_id: T4a0AiQ0Xc1hIUhA
+fileType: items
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Make Potion
 type: spell

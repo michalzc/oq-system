@@ -1,4 +1,3 @@
-name: Ignite
 system:
   description: |-
     <p>Ignite will set fire to anything flammable within range, creating a flame. If
@@ -9,6 +8,7 @@ system:
   - Instant
   magnitude: 1
   nonVariant: true
+name: Ignite
 type: spell
 _id: neD6x5aAxSJK0TM1
 img: systems/oq/assets/icons/magic-swirl.svg

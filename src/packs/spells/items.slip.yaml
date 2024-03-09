@@ -1,6 +1,3 @@
-_id: bh5Ja3uvvmwA9oDu
-name: Slip
-folder: PmL84WZU2luOrJSw
 system:
   type: personal
   nonVariant: true
@@ -10,6 +7,9 @@ system:
   traits:
   - Resist (Dodge)
   magnitude: 1
+_id: bh5Ja3uvvmwA9oDu
+name: Slip
+folder: PmL84WZU2luOrJSw
 img: systems/oq/assets/icons/magic-swirl.svg
 type: spell
 fileType: items

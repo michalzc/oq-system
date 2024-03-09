@@ -6,6 +6,16 @@
 
   <label for="magnitude">{{ localize 'OQ.Labels.Magnitude'}}</label>
   <div class="input-with-checkbox">
+    {{#if isDivine}}
+      {{#if hasSplitDivineCasting}}
+        <input id="remainingMagnitude" type="number" data-dtype="Number" name="system.remainingMagnitude" value="{{ system.remainingMagnitude }}">
+        <label>{{ localize 'OQ.Labels.of' }}</label>
+      {{else}}
+        <label for="expended">{{ localize 'OQ.Labels.Expended' }}</label>
+        <input id="expended" class="expended-spell" type="checkbox" name="expended" {{ checked expended }}>
+      {{/if}}
+
+    {{/if}}
     <input id="magnitude" type="number" data-dtype="Number" name="system.magnitude" value="{{ system.magnitude }}">
     <label for="nonVariable">{{ localize 'OQ.Labels.NonVariable' }}</label>
     <input id="nonVariable" type="checkbox" name="system.nonVariant" {{checked system.nonVariant }}>

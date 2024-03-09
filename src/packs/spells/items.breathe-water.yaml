@@ -1,9 +1,5 @@
-_id: 8j11rODY3T0YW7BA
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Breathe Water
 system:
+  remainingMagnitude: 2
   description: |-
     <p>This spell allows an air-breathing creature to breathe water for the spell’s
     duration (the subject will still be able to breathe air as well). It may also be
@@ -14,4 +10,9 @@ system:
   - Duration (15)
   - Touch
   type: divine
+_id: 8j11rODY3T0YW7BA
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Breathe Water
 type: spell

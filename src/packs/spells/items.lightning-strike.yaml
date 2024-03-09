@@ -1,9 +1,5 @@
-_id: ePuLxQCaEbpPAvZL
-fileType: items
-folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
-name: Lightning Strike
 system:
+  remainingMagnitude: 1
   description: |-
     <p>This spell causes a sizzling bolt of lightning to streak from the hand of the
     caster toward the target. If the bolt hits, each point of magnitude of the spell
@@ -17,4 +13,9 @@ system:
   - Ranged
   - Resist (Dodge)
   type: divine
+_id: ePuLxQCaEbpPAvZL
+fileType: items
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Lightning Strike
 type: spell
