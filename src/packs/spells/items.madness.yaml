@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>This spell causes the target to lose contact with reality and become a
     gibbering loon. Madness does not affect unconscious targets, those without an

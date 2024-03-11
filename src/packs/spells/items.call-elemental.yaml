@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>This spell summons and binds to the service of the caster an elemental from
     another plane of existence, of size dependent on the magnitude of the spell.</p>

@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>This spell allows the caster to create items which store Divine Magic
     spell(s) that are blessed by a Priest with power from the religion’s deity.</p>

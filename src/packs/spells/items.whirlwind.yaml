@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>Each point of magnitude of this spell whips up a whirlwind capable of
     carrying 20 SIZ in its whirling vortex. Each round the whirlwind moves ten

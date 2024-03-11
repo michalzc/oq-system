@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 2
+  noMagicPoints: true
   description: |-
     <p>This spell allows an air-breathing creature to breathe water for the spell’s
     duration (the subject will still be able to breathe air as well). It may also be

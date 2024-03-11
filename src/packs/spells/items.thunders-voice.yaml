@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 2
+  noMagicPoints: true
   description: |-
     <p>This spell grants the caster a loud voice of command which gives the caster
     +20% added to their Influence skill, heard at up to 200 metres.</p>

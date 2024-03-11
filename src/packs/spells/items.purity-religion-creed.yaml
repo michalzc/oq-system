@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 2
+  noMagicPoints: true
   description: |-
     <p>This spell removes a perceived sin according to a particular religion. If the
     caster is out of favour because of said sin, all is forgotten and forgiven.</p>

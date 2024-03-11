@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 3
+  noMagicPoints: true
   description: |-
     <p>A Divine Magic caster can draw out a spirit currently possessing a mortal
     being by using this spell. Whether the possession is dominant or covert is

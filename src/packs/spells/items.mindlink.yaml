@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>This spell allows the transmission of conscious thoughts, spell knowledge,
     runes and magic points between participants.</p> <p>Additional points of

@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 4
+  noMagicPoints: true
   description: |-
     <p>For the duration of the spell, the recipient is entirely invisible to sight.
     They can still be heard, felt or smelled, with a -20% to Perception tests. Also,

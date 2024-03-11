@@ -155,6 +155,7 @@ export class SpellDataModel extends foundry.abstract.DataModel {
       magnitude: positiveNumberModel(),
       remainingMagnitude: positiveNumberModel(),
       nonVariant: new fields.BooleanField({ required: true, initial: false }),
+      noMagicPoints: new fields.BooleanField({ required: true, initial: false }),
       type: new fields.StringField({
         required: true,
         trim: true,
@@ -170,16 +171,12 @@ export class SpellDataModel extends foundry.abstract.DataModel {
     };
   }
 
-  get isDivine() {
-    return this.type === ItemConfig.spellsTypes.divine;
-  }
-
   get hasSplitDivineCasting() {
-    return this.isDivine && !this.nonVariant;
+    return this.noMagicPoints && !this.nonVariant;
   }
 
   get expended() {
-    return this.isDivine && this.remainingMagnitude === 0;
+    return this.noMagicPoints && this.remainingMagnitude === 0;
   }
 }
 

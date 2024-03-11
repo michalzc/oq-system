@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 2
+  noMagicPoints: true
   description: |-
     <p>The recipient of this spell is overcome with blood-lust, causing them to
     disregard their safety and loyalties but imbuing them with tremendous stamina

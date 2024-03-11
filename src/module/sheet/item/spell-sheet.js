@@ -11,7 +11,6 @@ export class OQSpellSheet extends OQBaseItemSheet {
     return _.merge(context, {
       spellTypes,
       hasSplitDivineCasting: this.item.hasSplitDivineCasting,
-      isDivine: this.item.isDivine,
       expended: this.item.expended,
     });
   }

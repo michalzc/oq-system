@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>This spell is several spells, though they all operate in a similar fashion,
     which allows the caster to locate the closest target of the spell within its

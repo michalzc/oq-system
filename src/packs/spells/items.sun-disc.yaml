@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>Upon casting this spell, the Caster projects a disc of blinding light from
     their hand. Targets in the path of the disc are blinded for 1D4 hours, unless

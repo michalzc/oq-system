@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>When cast on a missile weapon (such as a knife, arrow, javelin or rock),
     firing it triggers the spell. Unless the wielder of the weapon rolls an

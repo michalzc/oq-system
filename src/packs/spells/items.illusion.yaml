@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>This spell creates an illusion based on all five senses. The illusion will
     seem real and solid unless the person looking at it succeeds in a Perception

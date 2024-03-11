@@ -4,9 +4,17 @@
     {{selectOptions spellTypes selected=system.type localize=true }}
   </select>
 
+  <label></label>
+  <div class="input-with-checkbox">
+    <label for="nonVariable">{{ localize 'OQ.Labels.NonVariable' }}</label>
+    <input id="nonVariable" type="checkbox" name="system.nonVariant" {{checked system.nonVariant }}>
+
+    <label for="noMagicPoints">{{ localize 'OQ.Labels.NoMagicPoints' }}</label>
+    <input id="noMagicPoints" type="checkbox" name="system.noMagicPoints" {{checked system.noMagicPoints}}>
+  </div>
   <label for="magnitude">{{ localize 'OQ.Labels.Magnitude'}}</label>
   <div class="input-with-checkbox">
-    {{#if isDivine}}
+    {{#if system.noMagicPoints}}
       {{#if hasSplitDivineCasting}}
         <input id="remainingMagnitude" type="number" data-dtype="Number" name="system.remainingMagnitude" value="{{ system.remainingMagnitude }}">
         <label>{{ localize 'OQ.Labels.of' }}</label>
@@ -17,8 +25,7 @@
 
     {{/if}}
     <input id="magnitude" type="number" data-dtype="Number" name="system.magnitude" value="{{ system.magnitude }}">
-    <label for="nonVariable">{{ localize 'OQ.Labels.NonVariable' }}</label>
-    <input id="nonVariable" type="checkbox" name="system.nonVariant" {{checked system.nonVariant }}>
+
   </div>
 
   {{> systems/oq/templates/item/parts/traits.hbs }}

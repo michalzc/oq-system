@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>This spell is as much a part of a temple’s foundation as is its cornerstone.
     It creates a sphere with a radius of ten metres per point of magnitude. The

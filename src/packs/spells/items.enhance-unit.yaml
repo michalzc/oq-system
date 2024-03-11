@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 3
+  noMagicPoints: true
   description: |-
     <p>For the duration of this spell, a troop of up to thirty soldiers gain +1D6
     damage.  Also, they cannot be routed or affected by any mind control magic (such

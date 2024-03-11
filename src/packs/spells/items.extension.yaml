@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>This spell lengthens the duration of any Divine Magic spell with the Duration
     trait. Extension, and the spell it is extending, are cast simultaneously by the

@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>For each point of the magnitude of this spell, the caster can ask one
     question of their deity, which they must answer to the best of their ability.  A

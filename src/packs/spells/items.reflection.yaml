@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>This spell reflects incoming spells aimed at the target or his equipment,
     redirecting the spell back at the original caster. Once cast on a subject,

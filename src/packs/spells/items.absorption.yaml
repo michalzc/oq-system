@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>This spell absorbs incoming spells aimed at the target or their equipment,
     converting their magical energy into magic points which are then available to

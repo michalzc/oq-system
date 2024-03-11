@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 2
+  noMagicPoints: true
   description: |-
     <p>Mischief is a minor trickster’s spell which afflicts its target with a small
     irritating curse.</p> <p>Roll 1D20 on the following list for a result, which

@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 4
+  noMagicPoints: true
   description: |-
     <p>The caster must touch their victim, and on a failed Persistence test, the
     victim falls dead. This incredibly powerful spell is available to only members

@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 3
+  noMagicPoints: true
   description: |-
     <p>The caster uses this spell to enchant a puppet, which is the focus of the
     spell and the stand-in for the victim. The victim can use Persistence to resist

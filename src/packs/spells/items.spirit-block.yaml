@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>Spirits may only touch the recipient of Spirit Block with a POW high enough
     to break through the spell’s magnitude (see table).</p>
