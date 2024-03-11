@@ -8,4 +8,5 @@ export const SettingsConfig = {
     defaultCoinsConfiguration:
       'Gold Ducats (GD) = 20, Silver Pieces (SP) = 1, Copper Pennies (CP) = 0.1, Lead Bits (LB) = 0.02',
   },
+  noDefaultCompendium: 'noDefaultCompendium',
 };

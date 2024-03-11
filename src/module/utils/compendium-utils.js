@@ -2,7 +2,9 @@ import _ from 'lodash-es';
 
 export const getCompendiumList = () =>
   _.fromPairs(
-    game.packs.filter((pack) => pack.documentName === 'Item').map((pack) => [pack.metadata.id, pack.metadata.label]),
+    [[CONFIG.OQ.SettingsConfig.noDefaultCompendium, game.i18n.localize('OQ.Labels.NoDefaultCompendium')]].concat(
+      game.packs.filter((pack) => pack.documentName === 'Item').map((pack) => [pack.metadata.id, pack.metadata.label]),
+    ),
   );
 
 export async function getDefaultItemsForActor(actorType) {
@@ -11,7 +13,7 @@ export async function getDefaultItemsForActor(actorType) {
     CONFIG.OQ.SettingsConfig.keys.defaultItemsCompendium,
   );
 
-  if (defaultItemsCompendium) {
+  if (defaultItemsCompendium && defaultItemsCompendium !== CONFIG.OQ.SettingsConfig.noDefaultCompendium) {
     const compendium = game.packs.get(defaultItemsCompendium);
     if (compendium) {
       const documents = await compendium.getDocuments({});
