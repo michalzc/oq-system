@@ -82,15 +82,12 @@ export class OQCharacterSheet extends OQActorBaseSheet {
       type: groupName,
       label: `OQ.SkillTypes.${groupName}`,
       skills: elements,
-      totalAdvancements: elements.map((skill) => skill.system.advancement ?? 0).reduce((l, r) => l + r),
+      totalAdvancements: elements.map((skill) => skill.system.advancement ?? 0).reduce((l, r) => l + r, 0),
     });
 
     const skillGroups = CONFIG.OQ.ItemConfig.skillTypes;
     const leftKeys = [skillGroups.resistance, skillGroups.combat, skillGroups.knowledge, skillGroups.magic];
-    const left = _.map(
-      _.filter(_.toPairs(groupedSkills), ([key]) => leftKeys.includes(key)),
-      makeGroup,
-    );
+    const left = leftKeys.map((key) => [key, groupedSkills[key] ?? []]).map(makeGroup);
 
     const customSkills = _.map(
       _.groupBy(groupedSkills.custom, (skill) => skill.system.customTypeName),
@@ -101,7 +98,7 @@ export class OQCharacterSheet extends OQActorBaseSheet {
         skills: skills,
       }),
     );
-    const right = _.concat([makeGroup([skillGroups.practical, groupedSkills.practical])], customSkills);
+    const right = [makeGroup([skillGroups.practical, groupedSkills.practical ?? []])].concat(customSkills);
 
     return {
       left,
