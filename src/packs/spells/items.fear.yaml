@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>This spell causes the target to become overwhelmed with fear. Fear does not
     affect unconscious targets, those without an INT characteristic or those that

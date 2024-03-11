@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 2
+  noMagicPoints: true
   description: |-
     <p>This spell protects a camp with an area of 50 meters squared.  Anyone
     crossing the invisible boundary of the spell takes 1D10 damage and sets off a

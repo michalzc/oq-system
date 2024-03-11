@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>This spell reanimates a dead human corpse and turns it into an undead
     creature, of a type determined by the magnitude of the spell.</p> <p>1 =

@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 4
+  noMagicPoints: true
   description: |-
     <p>This spell opens a gate to a place in the Houses of the Holy associated most
     closely with the worshipper’s deity or pantheon. The worshipper may take any

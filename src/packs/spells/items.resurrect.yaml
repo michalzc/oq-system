@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 5
+  noMagicPoints: true
   description: |-
     <p>The body of the deceased must be present and must be whole. If the target
     died due to disease or poison, the recipient returns to life cured.</p> <p>This

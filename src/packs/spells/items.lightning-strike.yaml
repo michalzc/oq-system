@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>This spell causes a sizzling bolt of lightning to streak from the hand of the
     caster toward the target. If the bolt hits, each point of magnitude of the spell

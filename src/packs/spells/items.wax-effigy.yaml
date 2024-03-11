@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 4
+  noMagicPoints: true
   description: |-
     <p>This spell enchants a small wax representation of the intended victim. Spells
     can be cast at the effigy and affect the victim, despite the distance between

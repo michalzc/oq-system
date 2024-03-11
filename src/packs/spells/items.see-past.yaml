@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 2
+  noMagicPoints: true
   description: |-
     <p>When cast on a 10m area, the caster, as long as they concentrate, can see the
     area as it was in any past point of time they wish.  They still need to make

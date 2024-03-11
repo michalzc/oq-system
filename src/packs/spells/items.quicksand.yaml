@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 2
+  noMagicPoints: true
   description: |-
     <p>This spell creates a patch of quicksand 10m square. The earth in the area
     becomes boggy and saturated with water. On a failed Persistence roll, any

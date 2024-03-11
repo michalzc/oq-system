@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 2
+  noMagicPoints: true
   description: |-
     <p>The recipient of this spell glows with light and power. They gain +50% to any
     Influence rolls for the duration of the spell.  Also, any light-hating creatures

@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 4
+  noMagicPoints: true
   description: |-
     <p>This spell causes the target to fall to pieces upon a failed Persistence
     roll.  The victim will still be alive but will not require food or water during

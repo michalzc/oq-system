@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 3
+  noMagicPoints: true
   description: |-
     <p>When aimed at a body of warriors, of no more than one hundred persons, they
     must make a Persistence roll or immediately lose all cohesion as a unit and

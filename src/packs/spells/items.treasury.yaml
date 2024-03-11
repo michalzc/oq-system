@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 4
+  noMagicPoints: true
   description: |-
     <p>This spell creates a secure room, for one day, to store valuables.  All the
     entrances are locked and only the caster can come in and out without setting off

@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>Dismiss Magic is used either against a general target or a specific spell and
     as a reaction when attacked with magic.</p> <p>When used against a general

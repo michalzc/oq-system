@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>This spell repairs broken crafted items. It also replaces missing parts of an
     item.</p> <p>The size of the item depends on the magnitude of the spell.</p>

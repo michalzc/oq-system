@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>Upon being targeted by this spell, the victim becomes covered in a tightly
     fitting cloak of noxious smelling gas for 1D6 rounds. Each round the victim must

@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 3
+  noMagicPoints: true
   description: |-
     <p>When cast on the specified type of weapon, this spell doubles that weapon’s
     normal damage dice. Other modifiers, such as Damage Modifier, are not affected.

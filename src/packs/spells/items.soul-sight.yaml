@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 1
+  noMagicPoints: true
   description: |-
     <p>This spell allows the recipient to see the POW aura of anyone they looks at,
     enabling them to discern that creature’s current magic points, as well as the

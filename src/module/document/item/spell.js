@@ -57,6 +57,7 @@ export class OQSpell extends OQBaseItem {
       this.system.magnitude && `${game.i18n.localize('OQ.Labels.Magnitude')}(${this.system.magnitude})`,
       this.system.expended && game.i18n.localize('OQ.Labels.Expended'),
       this.system.nonVariant && game.i18n.localize('OQ.Labels.NonVariable'),
+      this.system.noMagicPoints && game.i18n.localize('OQ.Labels.NoMagicPoints'),
     ].filter((trait) => !!trait);
     return _.concat(constTraits, this.system.traits ?? []);
   }
@@ -69,19 +70,19 @@ export class OQSpell extends OQBaseItem {
     return this.system.expended;
   }
 
-  get isDivine() {
-    return this.system.isDivine;
+  get noMagicPoints() {
+    return this.system.noMagicPoints;
   }
 
   async castDivineSpell(magnitude = 0) {
-    if (this.isDivine) {
+    if (this.noMagicPoints) {
       const update = inRangeValue(0, this.system.magnitude, magnitude);
       return this.update({ 'system.remainingMagnitude': update });
     }
   }
 
   async regainDivineSpell() {
-    if (this.isDivine) {
+    if (this.noMagicPoints) {
       return this.update({ 'system.remainingMagnitude': this.system.magnitude });
     }
   }

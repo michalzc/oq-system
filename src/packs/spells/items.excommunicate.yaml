@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 5
+  noMagicPoints: true
   description: |-
     <p>This spell severs the mystical link an Initiate enjoys with their god,
     causing the target of the spell to immediately and permanently lose all Divine

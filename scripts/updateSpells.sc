@@ -47,8 +47,9 @@ def updateSpell(filePath: os.Path, json: Json): (os.Path, Json) =
           .set(newIcon.asJson)
           .top
       system = if magnitude != updatedMagnitude then Map("magnitude" -> updatedMagnitude.asJson) else Map.empty[String, Json]
-      divSystem = if divine then system + ("remainingMagnitude" -> updatedMagnitude.asJson) else system
-      update = Map("system" -> system.asJson).asJson
+      divSystem = if divine then system ++ Map("remainingMagnitude" -> updatedMagnitude.asJson, "noMagicPoints" -> true.asJson) else system
+      _ = println(s"Div: ${divine}")
+      update = Map("system" -> divSystem.asJson).asJson
     } yield updatedJson.deepMerge(update)
 
   filePath -> result.getOrElse(json)

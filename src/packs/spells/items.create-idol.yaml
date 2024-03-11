@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 4
+  noMagicPoints: true
   description: |-
     <p>This spell requires an image of the caster’s god worth 100 GD, specially
     consecrated by a Priest reading from the sacred texts of the deity telling the

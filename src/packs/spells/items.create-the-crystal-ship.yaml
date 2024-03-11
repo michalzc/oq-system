@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 4
+  noMagicPoints: true
   description: |-
     <p>From out of the air coalesces the Crystal Ship, a magical vessel that sails
     through the air to a single destination preordained by the caster. The caster

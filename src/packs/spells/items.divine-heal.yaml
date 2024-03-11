@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 2
+  noMagicPoints: true
   description: |-
     <p>This powerful spell instantly heals any lost hit points, even if the
     character is mortally wounded, back to their full total. It also cures any

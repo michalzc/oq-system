@@ -1,5 +1,6 @@
 system:
   remainingMagnitude: 3
+  noMagicPoints: true
   description: |-
     <p>While this spell is in place, the recipient is unable to conceive. Depending
     on the view of the recipient, this is a blessing or a curse. The spell can be
