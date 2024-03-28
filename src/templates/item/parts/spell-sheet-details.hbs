@@ -1,3 +1,4 @@
+{{ log this }}
 <div class="item-details">
   <label for="type">{{ localize 'OQ.Labels.SpellType' }}</label>
   <select id="type" name="system.type">
@@ -27,6 +28,17 @@
     <input id="magnitude" type="number" data-dtype="Number" name="system.magnitude" value="{{ system.magnitude }}">
 
   </div>
+  <label for="skillReference">{{localize 'OQ.Labels.Skill'}}</label>
+  {{#if this.item.parent}}
+    <select id="skillReference" class="skill-reference-slug" name="system.skillReference">
+      {{ selectOptions parentSkills
+                       selected=system.skillReference blank='' sort=true }}
+    </select>
+
+  {{else}}
+    <input id="skillReference" class="skill-reference-slug" type="text" data-dtype="String"
+           name="system.correspondingSkill.skillReference" value="{{ system.skillReference }}">
+  {{/if}}
 
   {{> systems/oq/templates/item/parts/traits.hbs }}
 

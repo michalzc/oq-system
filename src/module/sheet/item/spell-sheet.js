@@ -7,9 +7,16 @@ export class OQSpellSheet extends OQBaseItemSheet {
     const itemConfig = CONFIG.OQ.ItemConfig;
 
     const spellTypes = _.mapValues(itemConfig.spellsTypes, (value, key) => `OQ.Labels.SpellTypes.${key}`);
+    const parentSkills = _(this.item.parent?.system.skillsBySlug ?? {})
+      .toPairs()
+      .filter(([, skill]) => skill.system.type === CONFIG.OQ.ItemConfig.skillTypes.magic)
+      .map(([slug, skill]) => [slug, skill.name])
+      .fromPairs()
+      .value();
 
     return _.merge(context, {
       spellTypes,
+      parentSkills,
       hasSplitDivineCasting: this.item.hasSplitDivineCasting,
       expended: this.item.expended,
     });

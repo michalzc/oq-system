@@ -168,6 +168,7 @@ export class SpellDataModel extends foundry.abstract.DataModel {
         initial: [],
       }),
       description: htmlFieldModel(),
+      skillReference: new fields.StringField({ required: false, trim: true }),
     };
   }
 
