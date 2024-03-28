@@ -1,4 +1,5 @@
 system:
+  skillReference: personal-magic-casting
   description: |-
     <p>With this spell, the recipient can talk to any beast within ten metres of
     them. This communication is verbal; therefore, the recipient must be able to

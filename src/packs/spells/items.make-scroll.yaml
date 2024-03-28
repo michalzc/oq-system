@@ -1,4 +1,5 @@
 system:
+  skillReference: sorcery-casting
   magnitude: 1
   description: |-
     <p>Magical scrolls are written items that store Sorcery spells. All scrolls have

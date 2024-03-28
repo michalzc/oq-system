@@ -1,4 +1,5 @@
 system:
+  skillReference: sorcery-casting
   magnitude: 1
   description: |-
     <p>If the caster is able to overcome their Target with this spell, they can turn

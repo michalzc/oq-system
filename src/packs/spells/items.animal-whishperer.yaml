@@ -1,4 +1,5 @@
 system:
+  skillReference: personal-magic-casting
   description: <p>The caster whispers into the ear of a distressed animal, calming
     it. If the distressed animal is under the influence of a spell such as Fear (see
     page 120 in Divine Magic) or Scare (see page 101), then it gets another Persistence

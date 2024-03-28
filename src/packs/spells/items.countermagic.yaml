@@ -1,4 +1,5 @@
 system:
+  skillReference: personal-magic-casting
   magnitude: 1
   description: |-
     <p>This spell is cast in advance and sits dormant until a hostile spell attacks

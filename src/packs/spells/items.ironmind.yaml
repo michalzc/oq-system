@@ -1,4 +1,5 @@
 system:
+  skillReference: personal-magic-casting
   type: personal
   description: |-
     <p>This spell hardens the resolve of the recipient for its duration. The spell

@@ -1,4 +1,5 @@
 system:
+  skillReference: sorcery-casting
   magnitude: 1
   description: |-
     <p>This spell can be cast upon any weapon up to 5 ENC. Each point of magnitude

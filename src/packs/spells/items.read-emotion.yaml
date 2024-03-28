@@ -1,4 +1,5 @@
 system:
+  skillReference: personal-magic-casting
   description: |-
     <p>This spell, when cast, tells you what the true emotional state of the target
     is if they fail a Persistence roll.</p>

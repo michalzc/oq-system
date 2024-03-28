@@ -1,4 +1,5 @@
 system:
+  skillReference: personal-magic-casting
   nonVariant: true
   magnitude: 2
   traits:
