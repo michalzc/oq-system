@@ -1,4 +1,5 @@
 system:
+  skillReference: sorcery-casting
   magnitude: 1
   description: |-
     <p>When completed, the Protective Sphere will create a sphere-shaped area of

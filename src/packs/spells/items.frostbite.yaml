@@ -1,4 +1,5 @@
 system:
+  skillReference: personal-magic-casting
   magnitude: 2
   traits:
   - Instant

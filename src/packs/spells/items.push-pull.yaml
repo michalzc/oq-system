@@ -1,4 +1,5 @@
 system:
+  skillReference: personal-magic-casting
   magnitude: 1
   description: |-
     <p>This spell allows the caster to move an item of up to 3 SIZ or ENC per point

@@ -1,4 +1,5 @@
 system:
+  skillReference: personal-magic-casting
   magnitude: 1
   description: |-
     <p>This spell increases resistance against hostile effects, magic or otherwise,

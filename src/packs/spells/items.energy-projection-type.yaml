@@ -1,4 +1,5 @@
 system:
+  skillReference: sorcery-casting
   magnitude: 1
   description: |-
     <p>Energy is either projected as a beam or a ball towards the target, who can

@@ -1,4 +1,5 @@
 system:
+  skillReference: sorcery-casting
   magnitude: 1
   description: |-
     <p>Each point of magnitude of Haste adds 1m to the Movement rate of the

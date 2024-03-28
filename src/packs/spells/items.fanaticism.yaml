@@ -1,4 +1,5 @@
 system:
+  skillReference: personal-magic-casting
   description: |-
     <p>The target of this spell will have close combat and unarmed combat skills
     increased by +20% but may not attempt  to  cast spells. Also, for the duration

@@ -1,4 +1,5 @@
 system:
+  skillReference: sorcery-casting
   magnitude: 1
   description: |-
     <p>Each Shapechange spell is a separate spell. Of all the spells with multiple

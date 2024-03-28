@@ -1,4 +1,5 @@
 system:
+  skillReference: personal-magic-casting
   magnitude: 1
   description: |-
     <p>This spell excommunicates a spirit that is either covertly or dominantly,

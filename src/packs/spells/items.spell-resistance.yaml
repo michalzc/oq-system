@@ -1,4 +1,5 @@
 system:
+  skillReference: sorcery-casting
   magnitude: 1
   description: |-
     <p>This spell matches its magnitude against the magnitude of any incoming spell.

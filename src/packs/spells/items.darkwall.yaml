@@ -1,4 +1,5 @@
 system:
+  skillReference: personal-magic-casting
   description: |-
     <p>Light sources within a Darkwall area shed no light, and normal sight ceases
     to function. Other senses such as a bat’s sonar and night vision (see chapter 11

@@ -1,4 +1,5 @@
 system:
+  skillReference: personal-magic-casting
   description: |-
     <p>This description covers a family of spells that all operate similarly,
     allowing the caster to locate the closest target of the spell within its range.

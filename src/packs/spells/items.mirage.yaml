@@ -1,4 +1,5 @@
 system:
+  skillReference: sorcery-casting
   description: |-
     <p>This is the Sorcerers’ version of Illusion.</p> <p>This spell creates an
     illusion based on all five senses. The illusion will seem real and solid unless

@@ -1,4 +1,5 @@
 system:
+  skillReference: personal-magic-casting
   traits:
   - Resist (Persistence)
   description: |-

@@ -1,4 +1,5 @@
 system:
+  skillReference: personal-magic-casting
   magnitude: 2
   description: |-
     <p>This spell is cast on a missile weapon and triggers when fired. It gives a

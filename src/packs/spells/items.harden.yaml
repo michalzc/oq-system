@@ -1,4 +1,5 @@
 system:
+  skillReference: personal-magic-casting
   description: |-
     <p>This spell makes a target item unbreakable for the duration of the spell.
     Therefore, weapons with this spell cast on them will not break when a fumble

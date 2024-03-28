@@ -1,4 +1,5 @@
 system:
+  skillReference: sorcery-casting
   magnitude: 1
   description: |-
     <p>Each (Sense) Projection spell is a separate spell. These spells encompass the

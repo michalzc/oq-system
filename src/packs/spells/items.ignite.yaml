@@ -1,4 +1,5 @@
 system:
+  skillReference: personal-magic-casting
   description: |-
     <p>Ignite will set fire to anything flammable within range, creating a flame. If
     the target is attached to a living being (such as hair, fur or clothes), then
