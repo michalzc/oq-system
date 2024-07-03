@@ -1,0 +1,47 @@
+_id: nBjdZZIPTXKLgW7C
+fileType: journal.pages
+flags: {}
+image: {}
+name: Gargoyle
+ownership:
+  default: -1
+parentId: MMv6Yudtc0CCb7OU
+sort: 0
+system: {}
+text:
+  content: <table><caption>Characteristics</caption><colgroup><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col></colgroup><thead><tr><th
+    style="text-align:center">STR</th><th style="text-align:center">CON</th><th style="text-align:center">DEX</th><th
+    style="text-align:center">SIZ</th><th style="text-align:center">INT</th><th style="text-align:center">CHA</th><th
+    style="text-align:center">POW</th></tr></thead><tbody><tr><td style="text-align:center">[[/gmr
+    5D6+12]]{5D6+12}</td><td style="text-align:center">[[/gmr 3D6]]{3D6}</td><td style="text-align:center">[[/gmr
+    3D6]]{3D6}</td><td style="text-align:center">[[/gmr 5D6]]{5D6}</td><td style="text-align:center">[[/gmr
+    1D6]]{1D6}</td><td style="text-align:center">[[/gmr 1D6]]{1D6}</td><td style="text-align:center">[[/gmr
+    3D6]]{3D6}</td></tr><tr><td style="text-align:center">29</td><td style="text-align:center">11</td><td
+    style="text-align:center">11</td><td style="text-align:center">17</td><td style="text-align:center">4</td><td
+    style="text-align:center">4</td><td style="text-align:center">11</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+    style="width:10%"></col><col style="width:16%"></col><col style="width:16%"></col><col
+    style="width:33%"></col><col style="width:18%"></col><col style="width:4%"></col></colgroup><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points 11</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">14</td><td style="text-align:center">+2D6</td><td style="text-align:center">11</td><td
+    style="text-align:center"><p>15m<br />20m flying if have wings</p></td><td style="text-align:center">Tough
+    Hide (AP 6)</td><td style="text-align:center">0</td></tr></tbody></table><h2 id="skills-9">Skills</h2><ul><li><strong>Resistances:</strong>
+    Dodge [[/r 1d100]]{25%}, Persistence [[/r 1d100]]{40%}, Resilience [[/r 1d100]]{40%}.</li><li><strong>Knowledge:</strong>
+    Natural Lore [[/r 1d100]]{40%}.</li><li><strong>Practical:</strong> Athletics
+    [[/r 1d100]]{40%}, Deception [[/r 1d100]]{30%}, Perception [[/r 1d100]]{40%}.</li></ul><h2
+    id="combat-9">Combat</h2><ul><li><strong>Unarmed Combat [[/r 1d100]]{50%}:</strong>
+    Claw ([[/r 1D6+2D6]]{1D6+2D6}).</li></ul><h2 id="magic-8">Magic</h2><p>Gargoyles
+    do not learn magic.</p><h2 id="special-rules-5">Special Rules</h2><h3 id="statue-like-stillness">Statue-Like
+    Stillness</h3><p>The Gargoyle has a [[/r 1d100]]{50%} modifier when using Deception
+    to appear like a statue upon inspection.</p>
+  format: 1
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5

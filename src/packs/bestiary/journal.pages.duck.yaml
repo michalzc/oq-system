@@ -1,0 +1,53 @@
+_id: tKYYrbqESfTYGEkV
+fileType: journal.pages
+flags: {}
+image: {}
+name: Duck
+ownership:
+  default: -1
+parentId: MMv6Yudtc0CCb7OU
+sort: 0
+system: {}
+text:
+  content: '<table><caption>Characteristics</caption><colgroup><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col></colgroup><thead><tr><th
+    style="text-align:center">STR</th><th style="text-align:center">CON</th><th style="text-align:center">DEX</th><th
+    style="text-align:center">SIZ</th><th style="text-align:center">INT</th><th style="text-align:center">POW</th><th
+    style="text-align:center">CHA</th></tr></thead><tbody><tr><td style="text-align:center">[[/gmr
+    2D6+3]]{2D6+3}</td><td style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+    style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td style="text-align:center">[[/gmr
+    1D6+6]]{1D6+6}</td><td style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+    style="text-align:center">[[/gmr 3D6]]{3D6}</td><td style="text-align:center">[[/gmr
+    2D6]]{2D6}</td></tr><tr><td style="text-align:center">10</td><td style="text-align:center">13</td><td
+    style="text-align:center">13</td><td style="text-align:center">9</td><td style="text-align:center">13</td><td
+    style="text-align:center">10</td><td style="text-align:center">7</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+    style="width:17%"></col><col style="width:24%"></col><col style="width:20%"></col><col
+    style="width:7%"></col><col style="width:22%"></col><col style="width:8%"></col></colgroup><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">11</td><td style="text-align:center">0</td><td style="text-align:center">10</td><td
+    style="text-align:center">10m</td><td style="text-align:center">Leather (AP 2)</td><td
+    style="text-align:center">2</td></tr></tbody></table><h2 id="skills-6">Skills</h2><ul><li><strong>Resistances:</strong>
+    Dodge [[/r 1d100]]{60%}, Persistence [[/r 1d100]]{50%}, Resilience [[/r 1d100]]{50%}.</li><li><strong>Knowledge:</strong>
+    Natural Lore [[/r 1d100]]{70%}.</li><li><strong>Practical:</strong> Athletics:
+    [[/r 1d100]]{40%}<sup>*</sup> Deception [[/r 1d100]]{50%}, Perception [[/r 1d100]]{40%},
+    Sailing [[/r 1d100]]{50%}.</li></ul><h2 id="combat-6">Combat</h2><ul><li><strong>Close
+    Combat [[/r 1d100]]{50%}:</strong> Short Sword ([[/r 1D6]]{1D6}), Buckler ([[/r
+    1D4]]{1D4}).</li><li><strong>Ranged Combat [[/r 1d100]]{60%}:</strong> Sling ([[/r
+    1D6]]{1D6}, 1 CR, 50m).</li></ul><h2 id="magic-5">Magic</h2><p>Ducks usually worship
+    a River Deity who protects their home settlements.</p><h3 id="initiate-of-the-river-deity">Initiate
+    of the River Deity</h3><ul><li><strong>Personal Magic [[/r 1d100]]{30%}:</strong>
+    Weapon Enhance, Walk on Water, Water Breathe.</li><li><strong>Divine Magic:</strong>
+    Call Small Undine 1</li></ul><h2 id="special-rules-3">Special Rules</h2><p>Ducks
+    are masters of swimming, which is normally measured by the Athletics skill, is
+    considered to be at [[/r 1d100]]{100%} for any skill test.</p>'
+  format: 1
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5

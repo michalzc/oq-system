@@ -1,0 +1,71 @@
+_id: JWYR9hNzm4xRC0UX
+fileType: journal.pages
+flags: {}
+image: {}
+name: Werewolf
+ownership:
+  default: -1
+parentId: MMv6Yudtc0CCb7OU
+sort: 0
+system: {}
+text:
+  content: '<p>This being is human by day, but when the rage takes them, or under
+    a full moon, they transform into a giant savage wolf. Werewolves are the very
+    embodiment of nature or the bane of humanity, depending on your viewpoint.</p><table><caption>Characteristics</caption><colgroup><col
+    style="width:7em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:6em"></col><col style="width:4em"></col><col
+    style="width:4em"></col></colgroup><thead><tr><th style="text-align:center">STR</th><th
+    style="text-align:center">CON</th><th style="text-align:center">DEX</th><th style="text-align:center">SIZ</th><th
+    style="text-align:center">INT</th><th style="text-align:center">POW</th><th style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+    style="text-align:center"><p>[[/gmr 3D6]]{3D6}<br />(×2 as wolf)</p></td><td style="text-align:center">[[/gmr
+    3D6]]{3D6}</td><td style="text-align:center">[[/gmr 3D6]]{3D6}</td><td style="text-align:center">[[/gmr
+    2D6+6]]{2D6+6}</td><td style="text-align:center"><p>[[/gmr 2D6+6]]{2D6+6}<br />(×0.5
+    as wolf)</p></td><td style="text-align:center">[[/gmr 3D6]]{3D6}</td><td style="text-align:center">[[/gmr
+    3D6]]{3D6}</td></tr><tr><td style="text-align:center">11 (22 as wolf)</td><td
+    style="text-align:center">11</td><td style="text-align:center">11</td><td style="text-align:center">13</td><td
+    style="text-align:center">13 (6 as wolf)</td><td style="text-align:center">11</td><td
+    style="text-align:center">11</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+    style="width:11%"></col><col style="width:20%"></col><col style="width:14%"></col><col
+    style="width:35%"></col><col style="width:13%"></col><col style="width:4%"></col></colgroup><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th>MR</th><th style="text-align:center">Armour</th><th
+    style="text-align:center">Loot</th></tr></thead><tbody><tr><td style="text-align:center">12</td><td
+    style="text-align:center">+1D6 in wolf form</td><td style="text-align:center">11</td><td><p>15m
+    as man<br />30m in wolf form</p></td><td style="text-align:center">Hide (AP 1)</td><td
+    style="text-align:center">0</td></tr></tbody></table><h2 id="skills-40">Skills</h2><ul><li><strong>Resistances:</strong>
+    Dodge [[/r 1d100]]{60%}, Persistence [[/r 1d100]]{60%}, Resilience [[/r 1d100]]{60%}.</li><li><strong>Knowledge:</strong>
+    Natural Lore [[/r 1d100]]{80%}.</li><li><strong>Practical:</strong> Athletics
+    [[/r 1d100]]{60%}, Deception [[/r 1d100]]{60%}, Perception [[/r 1d100]]{60%}.</li></ul><h2
+    id="combat-36">Combat</h2><ul><li><strong>Close Combat [[/r 1d100]]{35%}:</strong>
+    (as human): Longsword ([[/r 1D8]]{1D8}).</li><li><strong>Ranged Combat [[/r 1d100]]{25%}:</strong>
+    (as human): Short Bow ([[/r 1D8]]{1D8}, 1 CR, 75m).</li><li><strong>Unarmed Combat
+    [[/r 1d100]]{60%}:</strong> (as wolf): Bite ([[/r 1D8+1D4]]{1D8+1D4}), Claw ([[/r
+    1D6+1D4]]{1D6+1D4}).</li></ul><h2 id="magic-34">Magic</h2><p>Werewolves either
+    learn Personal Magic handed down from their ancestors to their family, a grouping
+    known as the pack, or join an Earth religion of a particularly rough and savage
+    nature.</p><h3 id="initiate-of-the-wolf-lord">Initiate of the Wolf Lord</h3><ul><li><strong>Personal
+    Magic:</strong> Beast Call [2], Fanaticism [2], Coordination 3, Healing 3.</li><li><strong>Divine
+    Magic:</strong> Berserk.</li></ul><h2 id="special-rules-24">Special Rules</h2><h3
+    id="night-vision-1">Night Vision</h3><p>Werewolves have night vision, and at night
+    they can see as well as they can during the day.</p><h3 id="shape-shifting">Shape-Shifting</h3><p>Werewolves
+    can change form at will, an act that requires a Combat Round to complete. On nights
+    of a full moon, werewolves have no choice but to assume beast form.</p><p>While
+    in wolf form, werewolves are immune to most damage. Only magic, fire or weapons
+    made of pure silver will harm them – all other blows simply bounce off harmlessly.
+    If a normal sword with a Weapon Enhance 3 spell cast on it is used against a werewolf,
+    only the three points of damage from the spell will affect the creature; the weapon’s
+    normal damage, as well as the attacker’s Damage Modifier, do not count. The werewolf’s
+    thick skin, which grants the beast one point of armour, would reduce the Weapon
+    Enhance spell’s damage to two. If the entire weapon is enchanted, such as with
+    a Fireblade spell, the entire damage rolled will count, though the wielder’s Damage
+    Modifier will still be ignored.</p><p>Werewolves can be poisoned, so long as the
+    poison can be introduced to the creature’s body. They are living entities who
+    require oxygen and thus may be asphyxiated or drowned.</p>'
+  format: 1
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5

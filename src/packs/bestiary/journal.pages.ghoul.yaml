@@ -1,0 +1,56 @@
+_id: 43hyyPIFQRWA6kLY
+fileType: journal.pages
+flags: {}
+image: {}
+name: Ghoul
+ownership:
+  default: -1
+parentId: MMv6Yudtc0CCb7OU
+sort: 0
+system: {}
+text:
+  content: '<table><caption>Characteristics</caption><colgroup><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col></colgroup><thead><tr><th
+    style="text-align:center">STR</th><th style="text-align:center">CON</th><th style="text-align:center">DEX</th><th
+    style="text-align:center">SIZ</th><th style="text-align:center">POW</th><th style="text-align:center">INT</th><th
+    style="text-align:center">CHA</th></tr></thead><tbody><tr><td style="text-align:center">[[/gmr
+    4D6]]{4D6}</td><td style="text-align:center">[[/gmr 3D6]]{3D6}</td><td style="text-align:center">[[/gmr
+    3D6]]{3D6}</td><td style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td style="text-align:center">[[/gmr
+    3D6]]{3D6}</td><td style="text-align:center">[[/gmr 3D6]]{3D6}</td><td style="text-align:center">[[/gmr
+    1D6]]{1D6}</td></tr><tr><td style="text-align:center">14</td><td style="text-align:center">11</td><td
+    style="text-align:center">11</td><td style="text-align:center">13</td><td style="text-align:center">11</td><td
+    style="text-align:center">11</td><td style="text-align:center">4</td></tr></tbody></table><table><caption>Attributes</caption><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">12</td><td style="text-align:center">+1D4</td><td style="text-align:center">11</td><td
+    style="text-align:center">15m</td><td style="text-align:center">None</td><td style="text-align:center">1</td></tr></tbody></table><h2
+    id="skills-10">Skills</h2><ul><li><strong>Resistances:</strong> Dodge [[/r 1d100]]{40%},
+    Persistence [[/r 1d100]]{30%}, Resilience [[/r 1d100]]{40%}.</li><li><strong>Knowledge:</strong>
+    Lore (Undead) [[/r 1d100]]{75%}.</li><li><strong>Practical:</strong> Athletics
+    [[/r 1d100]]{40%}, Deception [[/r 1d100]]{60%}, Perception [[/r 1d100]]{30%}.</li></ul><h2
+    id="combat-10">Combat</h2><p>Ranged Combat special see below: Howl (see Demoralise
+    below).</p><ul><li><strong>Unarmed Combat [[/r 1d100]]{60%}:</strong> Claw ([[/r
+    1D4+1D4]]{1D4+1D4}), Bite ([[/r 1D6+1D4]]{1D6+1D4}+poison).</li></ul><p>A ghoul
+    is able to use its howl once per combat round, in addition to either a Claw or
+    Bite attack.</p><h2 id="magic-9">Magic</h2><p>Ghouls learn Personal Magic from
+    each-other, with the occasional powerful leader becoming a shaman or priest of
+    some evil cannibal religion.</p><ul><li><strong>Personal Magic [[/r 1d100]]{40%}:</strong>
+    Sap Energy, Scare.</li></ul><h2 id="special-rules-6">Special Rules</h2><h3 id="ghoul-venom">Ghoul
+    Venom</h3><ul><li><strong>Type:</strong> Ingested or smeared.</li><li><strong>Delay:</strong>
+    [[/gmr 1D3]]{1D3} Combat Rounds.</li><li><strong>Potency:</strong> 22.</li><li><strong>Full
+    Effect:</strong> Paralysis.</li><li><strong>Duration:</strong> [[/gmr 1D10]]{1D10}
+    hours or until healing is administered that restores at least 1 Hit Point.</li></ul><h3
+    id="ghoul-howl">Ghoul Howl</h3><p>Ghouls employ a blood-chilling howl in combat.
+    When a ghoul howls, every creature in a radius equal to the ghoul’s POW in metres
+    becomes Demoralised (as the Personal Magic spell). This costs the ghoul no magic
+    points and does not require a skill test to use successfully.</p>'
+  format: 1
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5

@@ -1,0 +1,92 @@
+_id: U8JziFthZOq97rR0
+fileType: journal.pages
+flags: {}
+image: {}
+name: Vampire
+ownership:
+  default: -1
+parentId: MMv6Yudtc0CCb7OU
+sort: 0
+system: {}
+text:
+  content: '<table><caption>Characteristics</caption><colgroup><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col></colgroup><thead><tr><th
+    style="text-align:center">STR</th><th style="text-align:center">CON</th><th style="text-align:center">DEX</th><th
+    style="text-align:center">SIZ</th><th style="text-align:center">INT</th><th style="text-align:center">POW</th><th
+    style="text-align:center">CHA</th></tr></thead><tbody><tr><td style="text-align:center">[[/gmr
+    3D6+12]]{3D6+12}</td><td style="text-align:center">[[/gmr 3D6+12]]{3D6+12}</td><td
+    style="text-align:center">[[/gmr 3D6]]{3D6}</td><td style="text-align:center">[[/gmr
+    2D6+6]]{2D6+6}</td><td style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+    style="text-align:center">0</td><td style="text-align:center">[[/gmr 3D6]]{3D6}</td></tr><tr><td
+    style="text-align:center">23</td><td style="text-align:center">23</td><td style="text-align:center">11</td><td
+    style="text-align:center">13</td><td style="text-align:center">13</td><td style="text-align:center">0</td><td
+    style="text-align:center">11</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+    style="width:16%"></col><col style="width:23%"></col><col style="width:20%"></col><col
+    style="width:6%"></col><col style="width:24%"></col><col style="width:8%"></col></colgroup><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">18</td><td style="text-align:center">+1D6</td><td style="text-align:center">0
+    (see below)</td><td style="text-align:center">15m</td><td style="text-align:center">Chainmail
+    (AP 5)</td><td style="text-align:center">4</td></tr></tbody></table><h2 id="skills-39">Skills</h2><ul><li><strong>Resistances:</strong>
+    Dodge [[/r 1d100]]{40%}, Persistence [[/r 1d100]]{80%}, Resilience [[/r 1d100]]{80%}.</li><li><strong>Knowledge:</strong>
+    Culture (Local) [[/r 1d100]]{80%}.</li><li><strong>Practical:</strong> Athletics
+    [[/r 1d100]]{50%}, Deception [[/r 1d100]]{80%}, Perception [[/r 1d100]]{80%}.</li></ul><h2
+    id="combat-35">Combat</h2><ul><li><strong>Close Combat [[/r 1d100]]{50%}:</strong>
+    Longsword ([[/r 1D8+1D6]]{1D8+1D6}), Target Shield ([[/r 1D6+1D6]]{1D6+1D6}).</li><li><strong>Unarmed
+    Combat [[/r 1d100]]{60%}:</strong> Bite ([[/r 1D6]]{1D6} + Magic Point drain,
+    see below).</li></ul><h2 id="magic-33">Magic</h2><p>Some Vampires are highly magical
+    and will either be a priest of an appropriate death religion or make use of sorcery.
+    Priests will have at least 10 points of magnitude of spells and Sorcerers will
+    know at least five spells</p><h3 id="vampire-lord-priest">Vampire Lord Priest</h3><ul><li><strong>Personal
+    Magic Casting [[/r 1d100]]{75%}:</strong> Darkwall, Tongues.</li><li><strong>Divine
+    Magic:</strong> Fear, Touch of Death.</li></ul><h3 id="vampire-lord-sorcerer">Vampire
+    Lord Sorcerer</h3><p>Sorcery Casting [[/r 1d100]]{75%}: Dominate Humans, Energy
+    Projection (Cold), Mystic Vision, Neutralise Magic, Venom.</p><h2 id="special-rules-23">Special
+    rules</h2><h3 id="night-vision">Night vision</h3><p>Vampires can see in the dark
+    and at night as if it were day by sensing life energy.</p><h3 id="magic-point-drain">Magic
+    Point Drain</h3><p>A vampire does not regenerate Hit Points or Magic Points normally.
+    Instead, they must take them from other beings by draining their blood. On a successful
+    bite attack, the vampire will hang on and drain D6 Magic Points from the victim
+    every round. Each drained Magic Point gives the vampire one Hit Point or Magic
+    Point (vampire’s choice). When the Vampire drains the victim’s Magic Points to
+    0, the victim falls unconscious, as normal, and the vampire can choose to carry
+    on draining blood, except now it’s the victim’s permanent POW that is drained.</p><h3
+    id="shapeshifting">Shapeshifting</h3><p>Vampires have the ability to shapeshift
+    into mist at will. As a single Combat Action, the vampire (and every non-living
+    item on his person) dissolves into a thin greenish fog, approximately the same
+    SIZ as they were in the flesh. As a mist, the vampire is immune to all types of
+    physical damage, but cannot take any action except moving up to their MR. In mist
+    form, a vampire moves at the same speed as they would normally and is unaffected
+    by strong winds. Additionally, vampires still take damage from sunlight in mist
+    form.</p><p>As well as the ability to transform into mist, some vampires manifest
+    the ability to shapeshift into wolves and bats as well. As with the mist transformation,
+    such changes take a Combat Action to perform.</p><p>Upon death, the vampire collapses
+    to the ground and turns to mist at the beginning of the next Combat Round. Before
+    then, it can be destroyed permanently by driving a stake through its heart (the
+    only way to prevent it from turning to mist) and decapitating it.</p><h3 id="vampires-and-sunlight">Vampires
+    and Sunlight</h3><p>As creatures of the night, vampires cannot stand the touch
+    of natural sunlight. They take one point of damage to every hit location per round
+    that they are exposed to the sun, though some will risk travelling in the daylight
+    hours by wearing layers of clothing and a hood to cover as much of their body
+    as possible.</p><h3 id="holy-symbols">Holy symbols</h3><p>In the past, the holy
+    icons of some religion have proved effective against vampires. Those that focus
+    their energies against the undead are the most likely to be effective. It is down
+    to the Referee to decide what supernaturally offends any particular vampire. An
+    elven vampire, for example, might be repelled by symbols of nature gods, rather
+    than by human symbols of holiness. Any character presenting a holy symbol to a
+    vampire as a Combat Action matches their Persistence against the vampire’s Resilience
+    in an opposed check. They will receive bonuses or penalties at the Referee’s discretion,
+    based on the appropriateness of the symbol being displayed. On a successful test,
+    the vampire loses [[/gmr 1D4]]{1D4} Hit Points (unaffected by armour or any of
+    the vampire’s magic) and may not attack that character or any other character
+    under the protection of Holy Symbol.</p>'
+  format: 1
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5

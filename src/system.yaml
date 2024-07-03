@@ -43,11 +43,20 @@ packs:
     ownership:
       PLAYER: OBSERVER
       ASSISTANT: OWNER
-  
+
   - name: oq-system-equipment
     label: Equipment
     path: packs/equipment
     type: Item
+    system: oq
+    ownership:
+      PLAYER: OBSERVER
+      ASSISTANT: OWNER
+
+  - name: oq-system-bestiary-journal
+    label: SRD Bestiary
+    path: packs/bestiary
+    type: JournalEntry
     system: oq
     ownership:
       PLAYER: OBSERVER
@@ -61,6 +70,7 @@ packFolders:
       - oq-system-documentation
       - oq-system-spells
       - oq-system-equipment
+      - oq-system-bestiary-journal
 languages:
   - lang: en
     name: English

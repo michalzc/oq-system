@@ -1,0 +1,49 @@
+_id: A9lOntvfHS5cUzSn
+fileType: journal.pages
+flags: {}
+image: {}
+name: Manticore
+ownership:
+  default: -1
+parentId: MMv6Yudtc0CCb7OU
+sort: 0
+system: {}
+text:
+  content: <table><caption>Characteristics</caption><colgroup><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col></colgroup><thead><tr><th
+    style="text-align:center">STR</th><th style="text-align:center">CON</th><th style="text-align:center">DEX</th><th
+    style="text-align:center">SIZ</th><th style="text-align:center">INT</th><th style="text-align:center">POW</th><th
+    style="text-align:center">CHA</th></tr></thead><tbody><tr><td style="text-align:center">[[/gmr
+    4D6+12]]{4D6+12}</td><td style="text-align:center">[[/gmr 4D6+6]]{4D6+6}</td><td
+    style="text-align:center">[[/gmr 3D6]]{3D6}</td><td style="text-align:center">[[/gmr
+    4D6+12]]{4D6+12}</td><td style="text-align:center">[[/gmr 3D6]]{3D6}</td><td style="text-align:center">[[/gmr
+    3D6]]{3D6}</td><td style="text-align:center">7</td></tr><tr><td style="text-align:center">26</td><td
+    style="text-align:center">20</td><td style="text-align:center">11</td><td style="text-align:center">26</td><td
+    style="text-align:center">11</td><td style="text-align:center">11</td><td style="text-align:center">7</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+    style="width:17%"></col><col style="width:25%"></col><col style="width:20%"></col><col
+    style="width:7%"></col><col style="width:19%"></col><col style="width:8%"></col></colgroup><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">23</td><td style="text-align:center">+2D6</td><td style="text-align:center">11</td><td
+    style="text-align:center">20m</td><td style="text-align:center">Hide (AP 1)</td><td
+    style="text-align:center">4</td></tr></tbody></table><h2 id="skills-17">Skills</h2><ul><li><strong>Resistances:</strong>
+    Dodge [[/r 1d100]]{25%}, Persistence [[/r 1d100]]{65%}, Resilience [[/r 1d100]]{45%}.</li><li><strong>Practical:</strong>
+    Athletics [[/r 1d100]]{25%}, Deception [[/r 1d100]]{50%}, Perception [[/r 1d100]]{60%}.</li></ul><h2
+    id="combat-17">Combat</h2><ul><li><strong>Unarmed Combat [[/r 1d100]]{75%}:</strong>
+    Claw ([[/r 1D6+2D6]]{1D6+2D6}), Gore ([[/r 1D8+2D6]]{1D8+2D6}), Poison Sting ([[/r
+    1D6+2D6]]{1D6+2D6+poison}).</li></ul><h2 id="magic-14">Magic</h2><p>Only if someone
+    has been stupid enough to teach it some.</p><h2 id="special-rules-9">Special Rules</h2><h3
+    id="manticore-poison">Manticore poison</h3><ul><li><strong>Type:</strong> Ingested.</li><li><strong>Delay:</strong>
+    [[/gmr 1D3]]{1D3} Combat Rounds.</li><li><strong>Potency:</strong> 50.</li><li><strong>Full
+    Effect:</strong> [[/gmr 1D4]]{1D4} Hit Point damage, applies -3 penalty to victim’s
+    CON.</li><li><strong>Duration:</strong> [[/gmr 5D10]]{5D10} minutes.</li></ul>
+  format: 1
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5

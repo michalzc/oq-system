@@ -1,0 +1,51 @@
+_id: 5SlHbFWJdq1nXCOj
+fileType: journal.pages
+flags: {}
+image: {}
+name: Elf
+ownership:
+  default: -1
+parentId: MMv6Yudtc0CCb7OU
+sort: 0
+system: {}
+text:
+  content: <table style="width:100%"><caption>Characteristics</caption><colgroup><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col></colgroup><thead><tr><th style="text-align:center">STR</th><th
+    style="text-align:center">CON</th><th style="text-align:center">DEX</th><th style="text-align:center">SIZ</th><th
+    style="text-align:center">INT</th><th style="text-align:center">POW</th><th style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+    style="text-align:center">[[/gmr 2D6+3]]{2D6+3}</td><td style="text-align:center">[[/gmr
+    3D6]]{3D6}</td><td style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td style="text-align:center">[[/gmr
+    2D6+3]]{2D6+3}</td><td style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td
+    style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td style="text-align:center">[[/gmr
+    3D6]]{3D6}</td></tr><tr><td style="text-align:center">10</td><td style="text-align:center">11</td><td
+    style="text-align:center">17</td><td style="text-align:center">10</td><td style="text-align:center">17</td><td
+    style="text-align:center">13</td><td style="text-align:center">11</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+    style="width:17%"></col><col style="width:24%"></col><col style="width:20%"></col><col
+    style="width:7%"></col><col style="width:22%"></col><col style="width:8%"></col></colgroup><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">11</td><td style="text-align:center">0</td><td style="text-align:center">13</td><td
+    style="text-align:center">15m</td><td style="text-align:center">Leather (AP 2)</td><td
+    style="text-align:center">1</td></tr></tbody></table><h2 id="skills-8">Skills</h2><ul><li><strong>Resistances:</strong>
+    Dodge [[/r 1d100]]{55%}, Persistence [[/r 1d100]]{55%}, Resilience [[/r 1d100]]{20%}.</li><li><strong>Knowledge:</strong>
+    Natural lore [[/r 1d100]]{80%}.</li><li><strong>Practical:</strong> Athletics
+    [[/r 1d100]]{55%}, Deception [[/r 1d100]]{55%}, Perception [[/r 1d100]]{30%},
+    Healing [[/r 1d100]]{50%} .</li></ul><h2 id="combat-8">Combat</h2><ul><li><strong>Close
+    Combat [[/r 1d100]]{60%}:</strong> Long spear ([[/r 1D8]]{1D8}).</li><li><strong>Ranged
+    Combat [[/r 1d100]]{80%}:</strong> Short Bow ([[/r 1D8]]{1D8}, 1 CR, 75m).</li></ul><h2
+    id="magic-7">Magic</h2><p>Elves are usually at least Initiates in an Earth or
+    similar nature-based religion. Their leaders tend to be Priests in such religions.</p><h3
+    id="initiate-of-the-earth-mother-2">Initiate of the Earth Mother</h3><ul><li><strong>Personal
+    Magic [[/r 1d100]]{40%}:</strong> Heal 5, Multi-missile 4, Protection 3, Weapon
+    Enhance 3</li></ul>
+  format: 1
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5

@@ -1,0 +1,51 @@
+_id: kRPZ5ZbCD4wRfKEY
+fileType: journal.pages
+flags: {}
+image: {}
+name: Wyvern
+ownership:
+  default: -1
+parentId: MMv6Yudtc0CCb7OU
+sort: 0
+system: {}
+text:
+  content: <p>These giant slender green reptiles are akin to dragons but with no forelegs
+    and animal intelligence.</p><table><caption>Characteristics</caption><colgroup><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col></colgroup><thead><tr><th style="text-align:center">STR</th><th
+    style="text-align:center">CON</th><th style="text-align:center">DEX</th><th style="text-align:center">SIZ</th><th
+    style="text-align:center">INT</th><th style="text-align:center">POW</th><th style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+    style="text-align:center">[[/gmr 4D6+12]]{4D6+12}</td><td style="text-align:center">[[/gmr
+    2D6+12]]{2D6+12}</td><td style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+    style="text-align:center">[[/gmr 4D6+12]]{4D6+12}</td><td style="text-align:center">7</td><td
+    style="text-align:center">[[/gmr 3D6]]{3D6}</td><td style="text-align:center">6</td></tr><tr><td
+    style="text-align:center">26</td><td style="text-align:center">19</td><td style="text-align:center">13</td><td
+    style="text-align:center">26</td><td style="text-align:center">7</td><td style="text-align:center">11</td><td
+    style="text-align:center">6</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+    style="width:11%"></col><col style="width:17%"></col><col style="width:14%"></col><col
+    style="width:35%"></col><col style="width:15%"></col><col style="width:4%"></col></colgroup><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">23</td><td style="text-align:center">+2D6</td><td style="text-align:center">10</td><td
+    style="text-align:center"><p>20m on land<br />30m when flying</p></td><td style="text-align:center">Scales
+    (AP 5)</td><td style="text-align:center">1</td></tr></tbody></table><h2 id="skills-41">Skills</h2><ul><li><strong>Resistances:</strong>
+    Dodge [[/r 1d100]]{50%}, Persistence [[/r 1d100]]{35%}, Resilience [[/r 1d100]]{50%}.</li><li><strong>Practical:</strong>
+    Athletics [[/r 1d100]]{50%}, Deception [[/r 1d100]]{10%}, Perception [[/r 1d100]]{60%}.</li></ul><h2
+    id="combat-37">Combat</h2><ul><li><strong>Unarmed Combat [[/r 1d100]]{60%}:</strong>
+    Bite ([[/r 1D10+2D6]]{1D10+2D6}), Sting ([[/r 1D6+2D6]]{1D6+2D6}+poison), Claw
+    ([[/r 1D6+2D6]]{1D6+2D6}).</li></ul><h2 id="magic-35">Magic</h2><p>None.</p><h2
+    id="special-rules-25">Special Rules</h2><h3 id="wyvern-sting-poison">Wyvern Sting
+    Poison</h3><ul><li><strong>Type:</strong> Ingested.</li><li><strong>Delay:</strong>
+    [[/gmr 1D2]]{1D2} Combat Rounds.</li><li><strong>Potency:</strong> 60.</li><li><strong>Full
+    Effect:</strong> [[/gmr 1D6]]{1D6} Hit Point damage, applies -4 penalty to victim’s
+    CON.</li><li><strong>Duration:</strong> [[/gmr 6D10]]{6D10} minutes.</li></ul>
+  format: 1
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5

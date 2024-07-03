@@ -1,0 +1,63 @@
+_id: ZHk6iuYlqedodMho
+fileType: journal.pages
+flags: {}
+image: {}
+name: Basilisk
+ownership:
+  default: -1
+parentId: MMv6Yudtc0CCb7OU
+sort: 0
+system: {}
+text:
+  content: '<table><caption>Characteristics</caption><colgroup><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col></colgroup><thead><tr><th
+    style="text-align:center">STR</th><th style="text-align:center">CON</th><th style="text-align:center">DEX</th><th
+    style="text-align:center">SIZ</th><th style="text-align:center">INT</th><th style="text-align:center">POW</th><th
+    style="text-align:center">CHA</th></tr></thead><tbody><tr><td style="text-align:center">[[/gmr
+    2D3]]{2D3}</td><td style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td style="text-align:center">[[/gmr
+    2D6]]{2D6}</td><td style="text-align:center">[[/gmr 1D3]]{1D3}</td><td style="text-align:center">3</td><td
+    style="text-align:center">[[/gmr 1D6+12]]{1D6+12}</td><td style="text-align:center">3</td></tr><tr><td
+    style="text-align:center">4</td><td style="text-align:center">13</td><td style="text-align:center">7</td><td
+    style="text-align:center">2</td><td style="text-align:center">3</td><td style="text-align:center">16</td><td
+    style="text-align:center">3</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+    style="width:17%"></col><col style="width:26%"></col><col style="width:21%"></col><col
+    style="width:5%"></col><col style="width:21%"></col><col style="width:7%"></col></colgroup><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">8</td><td style="text-align:center">-1D6</td><td style="text-align:center">16</td><td
+    style="text-align:center">15m</td><td style="text-align:center">Scales (2pt)</td><td
+    style="text-align:center">5</td></tr></tbody></table><h2 id="skills">Skills</h2><ul><li><strong>Resistances:</strong>
+    Dodge [[/r 1d100]]{30%}, Persistence [[/r 1d100]]{50%}, Resilience [[/r 1d100]]{70%}.</li><li><strong>Practical:</strong>
+    Athletics [[/r 1d100]]{60%}, Deception [[/r 1d100]]{40%}.</li><li><strong>Knowledge:</strong>
+    Natural lore [[/r 1d100]]{40%}.</li></ul><h2 id="combat">Combat</h2><ul><li><strong>Ranged
+    Combat [[/r 1d100]]{100%}:</strong> Gaze (Death, 1 CR, Range: POW in metres).</li><li><strong>Unarmed
+    Combat [[/r 1d100]]{30%}:</strong> Bite ([[/r {1D6-1D6,1}kh]]{1D6-1D6+poison}).</li></ul><p>Note:
+    The basilisk can attack with both gaze and bite simultaneously in the same action.</p><h2
+    id="magic">Magic</h2><p>Basilisks do not learn magic.</p><h2 id="special-rules">Special
+    Rules</h2><h3 id="corrosive-blood">Corrosive Blood</h3><p>Any non-magical weapon
+    hitting the basilisk corrodes in the creature’s blood, completely disintegrating
+    after [[/gmr 1D4]]{1D4} rounds.</p><p>The basilisk’s poison and corrosive blood
+    are magical effects, which lose their special properties a few minutes after leaving
+    the basilisk’s body, making it virtually impossible to use the creature as a source
+    for making lethal compounds.</p><h3 id="basilisk-venom">Basilisk Venom</h3><ul><li><strong>Type:</strong>
+    Ingested or smeared.</li><li><strong>Delay:</strong> Immediate.</li><li><strong>Potency:</strong>
+    65.</li><li><strong>Full Effect:</strong> [[/gmr 1D4]]{1D4} Hit Point damage,
+    applies -6 penalty to victim’s CON.</li><li><strong>Duration:</strong> [[/gmr
+    6D10]]{6D10} minutes.</li></ul><h3 id="death-gaze">Death Gaze</h3><p>A basilisk
+    can kill with a glance. In combat, the basilisk glares at a single opponent each
+    round. If the basilisk overcomes the target in an opposed test of its Persistence
+    against the target’s Resilience, the target dies instantly. Using the gaze attack
+    costs no magic points, and the basilisk may normally attack in any round in which
+    it uses the gaze attack. This attack penetrates magical defences as if it were
+    a Magnitude 6 Personal Magic spell. If the target successfully resists the gaze
+    attack, they are unharmed, though they may be targeted again.</p>'
+  format: 1
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5

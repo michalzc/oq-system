@@ -1,0 +1,62 @@
+_id: U5sS5YrljcnA4isd
+fileType: journal.pages
+flags: {}
+image: {}
+name: Mummy
+ownership:
+  default: -1
+parentId: MMv6Yudtc0CCb7OU
+sort: 0
+system: {}
+text:
+  content: '<table><caption>Characteristics</caption><colgroup><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col></colgroup><thead><tr><th
+    style="text-align:center">STR</th><th style="text-align:center">CON</th><th style="text-align:center">DEX</th><th
+    style="text-align:center">SIZ</th><th style="text-align:center">INT</th><th style="text-align:center">POW</th><th
+    style="text-align:center">CHA</th></tr></thead><tbody><tr><td style="text-align:center">[[/gmr
+    3D6+12]]{3D6+12}</td><td style="text-align:center">[[/gmr 3D6+12]]{3D6+12}</td><td
+    style="text-align:center">[[/gmr 2D6]]{2D6}</td><td style="text-align:center">[[/gmr
+    2D6+6]]{2D6+6}</td><td style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+    style="text-align:center">0</td><td style="text-align:center">1</td></tr><tr><td
+    style="text-align:center">23</td><td style="text-align:center">23</td><td style="text-align:center">7</td><td
+    style="text-align:center">13</td><td style="text-align:center">13</td><td style="text-align:center">0</td><td
+    style="text-align:center">1</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+    style="width:16%"></col><col style="width:22%"></col><col style="width:20%"></col><col
+    style="width:6%"></col><col style="width:25%"></col><col style="width:8%"></col></colgroup><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">18</td><td style="text-align:center">+1D6</td><td style="text-align:center">0
+    (See below)</td><td style="text-align:center">15m</td><td style="text-align:center">Tough
+    Skin (AP 2)</td><td style="text-align:center">4</td></tr></tbody></table><h2 id="skills-20">Skills</h2><ul><li><strong>Resistances:</strong>
+    Dodge [[/r 1d100]]{30%}, Persistence [[/r 1d100]]{80%} (+immune to mind control
+    magic), Resilience [[/r 1d100]]{50%} (+ mummies are immune to natural Disease
+    and Poison).</li><li><strong>Knowledge:</strong> Lore (Undead) [[/r 1d100]]{65%}.</li><li><strong>Practical:</strong>
+    Athletics [[/r 1d100]]{10%}, Deception [[/r 1d100]]{10%}, Perception [[/r 1d100]]{40%}.</li></ul><h2
+    id="combat-20">Combat</h2><ul><li><strong>Close Combat [[/r 1d100]]{80%}:</strong>
+    War Maul ([[/r 2D8+1D6]]{2D8+1D6}).</li><li><strong>Unarmed Combat [[/r 1d100]]{60%}:</strong>
+    Fist ([[/r 1D6+1D6]]{1D6+1D6}).</li></ul><h2 id="magic-17">Magic</h2><p>Since
+    mummies are POW-less, they never have Personal Magic. Mummies who were priests
+    in their previous lives may have Divine Magic, and mummies who know sorcery will
+    always know at least one Tap spell to gain Magic Points to fuel their spells.</p><h3
+    id="undead-sorcerer">Undead Sorcerer</h3><p>. Sorcery Casting [[/r 1d100]]{75%}:
+    Tap POW, Mirage, Neutralise Magic, Venom.</p><h2 id="special-rules-11">Special
+    Rules</h2><p>An Ignite spell will work on a mummy’s body. A strike with a fiery
+    weapon, such as a sword with a Fireblade spell on it, or even a torch, will ignite
+    the mummy if the hit causes damage. The damage done by the initial hit is taken
+    each combat round as fire damage unless the fire is put out. To put out a fire,
+    the mummy must take one combat round to roll on the ground or immerse itself in
+    water. During this time, it may not make any other actions or reactions.</p><p>Healing
+    spells are ineffective on mummies, though a Repair spell will fix any damage done
+    (in [[/gmr 1D10]]{1D10} hit point increments).</p><p>When a creature becomes a
+    mummy, its STR and CON are doubled. The statistics above represent a human mummy,
+    though any sentient creature willing to undergo the process may become a mummy.</p>'
+  format: 1
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5

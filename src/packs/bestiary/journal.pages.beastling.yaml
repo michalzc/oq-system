@@ -1,0 +1,51 @@
+_id: oUyaVZd110SJ6Njl
+fileType: journal.pages
+flags: {}
+image: {}
+name: Beastling
+ownership:
+  default: -1
+parentId: MMv6Yudtc0CCb7OU
+sort: 0
+system: {}
+text:
+  content: <table><caption>Characteristics</caption><colgroup><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col></colgroup><thead><tr><th
+    style="text-align:center">STR</th><th style="text-align:center">CON</th><th style="text-align:center">DEX</th><th
+    style="text-align:center">SIZ</th><th style="text-align:center">INT</th><th style="text-align:center">POW</th><th
+    style="text-align:center">CHA</th></tr></thead><tbody><tr><td style="text-align:center">[[/gmr
+    2D6+6]]{2D6+6}</td><td style="text-align:center">[[/gmr 1D6+12]]{1D6+12}</td><td
+    style="text-align:center">[[/gmr 3D6]]{3D6}</td><td style="text-align:center">[[/gmr
+    1D6+12]]{1D6+12}</td><td style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+    style="text-align:center">[[/gmr 3D6]]{3D6}</td><td style="text-align:center">[[/gmr
+    2D6]]{2D6}</td></tr><tr><td style="text-align:center">13</td><td style="text-align:center">16</td><td
+    style="text-align:center">11</td><td style="text-align:center">16</td><td style="text-align:center">13</td><td
+    style="text-align:center">11</td><td style="text-align:center">7</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+    style="width:17%"></col><col style="width:24%"></col><col style="width:20%"></col><col
+    style="width:7%"></col><col style="width:22%"></col><col style="width:8%"></col></colgroup><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">16</td><td style="text-align:center">+1D4</td><td style="text-align:center">11</td><td
+    style="text-align:center">15m</td><td style="text-align:center">Leather (AP 2)</td><td
+    style="text-align:center">2</td></tr></tbody></table><h2 id="skills-1">Skills</h2><ul><li><strong>Resistances:</strong>
+    Dodge [[/r 1d100]]{40%}, Persistence [[/r 1d100]]{30%}, Resilience [[/r 1d100]]{30%}.</li><li><strong>Knowledge:</strong>
+    Natural Lore [[/r 1d100]]{70%}.</li><li><strong>Practical:</strong> Deception
+    [[/r 1d100]]{40%}.</li></ul><h2 id="combat-1">Combat</h2><ul><li><strong>Close
+    Combat [[/r 1d100]]{50%}:</strong> Club ([[/r 1D6+1D4]]{1D6+1D4}), Short spear
+    ([[/r 1D6+1D4]]{1D6+1D4}), Target Shield ([[/r 1D6+1D4]]{1D6+1D4}).</li><li><strong>Ranged
+    Combat [[/r 1d100]]{50%}:</strong> Sling ([[/r 1D6+1D4]]{1D6+1D4}, 1 CR, 50m).</li><li><strong>Unarmed
+    Combat [[/r 1d100]]{60%}:</strong> Head Butt ([[/r 1D6+1D4]]{1D6+1D4}).</li></ul><h2
+    id="magic-1">Magic</h2><p>Beastlings are usually members of a Nature religion.</p><h3
+    id="initiate-of-the-earth-mother">Initiate of the Earth Mother</h3><ul><li><strong>Personal
+    Magic [[/r 1d100]]{33%}:</strong> Heal 2, Protection 2.</li><li><strong>Divine
+    Magic:</strong> Berserk.</li></ul>
+  format: 1
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5
