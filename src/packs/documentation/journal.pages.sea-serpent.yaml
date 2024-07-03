@@ -1,0 +1,43 @@
+_id: etmtd8CkyShm2kfu
+fileType: journal.pages
+flags: {}
+image: {}
+name: Sea Serpent
+ownership:
+  default: -1
+parentId: MMv6Yudtc0CCb7OU
+sort: 0
+system: {}
+text:
+  content: <table style="width:100%"><caption>Characteristics</caption><colgroup><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col></colgroup><thead><tr><th style="text-align:center">STR</th><th
+    style="text-align:center">CON</th><th style="text-align:center">DEX</th><th style="text-align:center">SIZ</th><th
+    style="text-align:center">INT</th><th style="text-align:center">POW</th><th style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+    style="text-align:center">[[/gmr 8D6+30]]{8D6+30}</td><td style="text-align:center">[[/gmr
+    4D6+21]]{4D6+21}</td><td style="text-align:center">[[/gmr 2D6]]{2D6}</td><td style="text-align:center">[[/gmr
+    6D6+15]]{6D6+15}</td><td style="text-align:center">3</td><td style="text-align:center">[[/gmr
+    6D6]]{6D6}</td><td style="text-align:center">3</td></tr><tr><td style="text-align:center">58</td><td
+    style="text-align:center">35</td><td style="text-align:center">7</td><td style="text-align:center">36</td><td
+    style="text-align:center">3</td><td style="text-align:center">21</td><td style="text-align:center">3</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+    style="width:13%"></col><col style="width:20%"></col><col style="width:16%"></col><col
+    style="width:28%"></col><col style="width:17%"></col><col style="width:5%"></col></colgroup><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">36</td><td style="text-align:center">+5D6</td><td style="text-align:center">21</td><td
+    style="text-align:center"><p>20m swim<br />0 on land</p></td><td style="text-align:center">Scales
+    (AP 5)</td><td style="text-align:center">3</td></tr></tbody></table><h2 id="skills-30">Skills</h2><ul><li><strong>Resistances:</strong>
+    Dodge [[/r 1d100]]{40%}, Persistence [[/r 1d100]]{40%}, Resilience [[/r 1d100]]{80%}.</li><li><strong>Practical:</strong>
+    Athletics [[/r 1d100]]{60%}, Deception [[/r 1d100]]{65%}.</li></ul><h2 id="combat-30">Combat</h2><ul><li><strong>Unarmed
+    Combat [[/r 1d100]]{60%}:</strong> Bite ([[/r 1D6+5D6]]{1D6+5D6}).</li></ul><h2
+    id="magic-26">Magic</h2><p>Sea Serpents do not learn magic.</p>
+  format: 1
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5

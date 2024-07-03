@@ -1,0 +1,42 @@
+_id: 9OW2eUAFzG7BsOMq
+fileType: journal.pages
+flags: {}
+image: {}
+name: Zombie
+ownership:
+  default: -1
+parentId: MMv6Yudtc0CCb7OU
+sort: 0
+system: {}
+text:
+  content: <table><caption>Characteristics</caption><colgroup><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col></colgroup><thead><tr><th
+    style="text-align:center">STR</th><th style="text-align:center">CON</th><th style="text-align:center">DEX</th><th
+    style="text-align:center">SIZ</th><th style="text-align:center">INT</th><th style="text-align:center">POW</th><th
+    style="text-align:center">CHA</th></tr></thead><tbody><tr><td style="text-align:center">[[/gmr
+    3D6+12]]{3D6+12}</td><td style="text-align:center">[[/gmr 1D6]]{1D6}</td><td style="text-align:center">[[/gmr
+    1D6+3]]{1D6+3}</td><td style="text-align:center">[[/gmr 3D6]]{3D6}</td><td style="text-align:center">[[/gmr
+    1D3]]{1D3}</td><td style="text-align:center">0</td><td style="text-align:center">[[/gmr
+    1D3]]{1D3}</td></tr><tr><td style="text-align:center">23</td><td style="text-align:center">4</td><td
+    style="text-align:center">7</td><td style="text-align:center">10</td><td style="text-align:center">2</td><td
+    style="text-align:center">0</td><td style="text-align:center">2</td></tr></tbody></table><table><caption>Attributes</caption><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">7</td><td style="text-align:center">+1D6</td><td style="text-align:center">0</td><td
+    style="text-align:center">7m</td><td style="text-align:center">None</td><td style="text-align:center">0</td></tr></tbody></table><h2
+    id="skills-42">Skills</h2><ul><li><strong>Resistances:</strong> Dodge [[/r 1d100]]{0%},
+    Persistence (see Special Rules below), Resilience (see Special Rules below).</li></ul><h2
+    id="combat-38">Combat</h2><ul><li><strong>Unarmed Combat [[/r 1d100]]{50%}:</strong>
+    Fist ([[/r 1D4+1D6]]{1D4+1D6}).</li></ul><h2 id="magic-36">Magic</h2><p>None.</p><h2
+    id="special-rules-26">Special Rules</h2><p>Zombies are immune to fatigue, disease,
+    poisons and mind control.</p>
+  format: 1
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5

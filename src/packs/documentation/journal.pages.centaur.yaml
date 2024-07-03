@@ -1,0 +1,52 @@
+_id: SLqxOZanBOZG0URE
+fileType: journal.pages
+flags: {}
+image: {}
+name: Centaur
+ownership:
+  default: -1
+parentId: MMv6Yudtc0CCb7OU
+sort: 0
+system: {}
+text:
+  content: <table><caption>Characteristics</caption><colgroup><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col></colgroup><thead><tr><th
+    style="text-align:center">STR</th><th style="text-align:center">CON</th><th style="text-align:center">DEX</th><th
+    style="text-align:center">SIZ</th><th style="text-align:center">INT</th><th style="text-align:center">POW</th><th
+    style="text-align:center">CHA</th></tr></thead><tbody><tr><td style="text-align:center">[[/gmr
+    3D6+6]]{3D6+6}</td><td style="text-align:center">[[/gmr 3D6]]{3D6}</td><td style="text-align:center">[[/gmr
+    3D6+3]]{3D6+3}</td><td style="text-align:center">[[/gmr 4D6+12]]{4D6+12}</td><td
+    style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td style="text-align:center">[[/gmr
+    3D6]]{3D6}</td><td style="text-align:center">[[/gmr 3D6]]{3D6}</td></tr><tr><td
+    style="text-align:center">17</td><td style="text-align:center">11</td><td style="text-align:center">14</td><td
+    style="text-align:center">26</td><td style="text-align:center">13</td><td style="text-align:center">11</td><td
+    style="text-align:center">11</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+    style="width:17%"></col><col style="width:24%"></col><col style="width:20%"></col><col
+    style="width:7%"></col><col style="width:22%"></col><col style="width:8%"></col></colgroup><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">19</td><td style="text-align:center">+1D6</td><td style="text-align:center">11</td><td
+    style="text-align:center">20m</td><td style="text-align:center">Leather (AP 2)</td><td
+    style="text-align:center">2</td></tr></tbody></table><h2 id="skills-3">Skills</h2><ul><li><strong>Resistances:</strong>
+    Dodge [[/r 1d100]]{30%}, Persistence [[/r 1d100]]{45%}, Resilience [[/r 1d100]]{60%}.</li><li><strong>Knowledge:</strong>
+    Natural lore [[/r 1d100]]{60%}.</li><li><strong>Practical:</strong> Athletics
+    [[/r 1d100]]{60%}, Performance [[/r 1d100]]{50%}, Deception [[/r 1d100]]{30%},
+    Perception [[/r 1d100]]{40%}.</li></ul><h2 id="combat-3">Combat</h2><ul><li><strong>Ranged
+    Combat [[/r 1d100]]{70%}:</strong> Long Bow ([[/r 2D8+1D6]]{2D8+1D6}, 1 CR, 150m).</li><li><strong>Close
+    Combat [[/r 1d100]]{40%}:</strong> Lance ([[/r 1D10+1D6]]{1D10+1D6}), Target Shield
+    ([[/r 1D6+1D6]]{1D6+1D6}), War Sword ([[/r 2D8+1D6]]{2D8+1D6}).</li><li><strong>Unarmed
+    Combat [[/r 1d100]]{40%}:</strong> Kick ([[/r 1D6+1D6]]{1D6+1D6}).</li></ul><h2
+    id="magic-2">Magic</h2><p>Centaurs are usually members of Earth and Nature religion
+    and learn Personal Magic and Divine Magic from these.</p><h3 id="initiate-of-the-earth-mother-1">Initiate
+    of the Earth Mother</h3><ul><li><strong>Personal Magic [[/r 1d100]]{40%}:</strong>
+    Heal 4, Protection 2.</li><li><strong>Divine Magic:</strong> Berserk.</li></ul>
+  format: 1
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5

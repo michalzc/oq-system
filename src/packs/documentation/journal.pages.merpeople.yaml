@@ -1,0 +1,52 @@
+_id: LkMx3qg22bruTcKa
+fileType: journal.pages
+flags: {}
+image: {}
+name: Merpeople
+ownership:
+  default: -1
+parentId: MMv6Yudtc0CCb7OU
+sort: 0
+system: {}
+text:
+  content: <table style="width:100%"><caption>Characteristics</caption><colgroup><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col></colgroup><thead><tr><th style="text-align:center">STR</th><th
+    style="text-align:center">CON</th><th style="text-align:center">DEX</th><th style="text-align:center">SIZ</th><th
+    style="text-align:center">INT</th><th style="text-align:center">POW</th><th style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+    style="text-align:center">[[/gmr 3D6+3]]{3D6+3}</td><td style="text-align:center">[[/gmr
+    3D6]]{3D6}</td><td style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td style="text-align:center">[[/gmr
+    3D6+6]]{3D6+6}</td><td style="text-align:center">[[/gmr 3D6]]{3D6}</td><td style="text-align:center">[[/gmr
+    3D6]]{3D6}</td><td style="text-align:center">[[/gmr 3D6]]{3D6}</td></tr><tr><td
+    style="text-align:center">14</td><td style="text-align:center">11</td><td style="text-align:center">13</td><td
+    style="text-align:center">17</td><td style="text-align:center">11</td><td style="text-align:center">11</td><td
+    style="text-align:center">11</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+    style="width:10%"></col><col style="width:16%"></col><col style="width:12%"></col><col
+    style="width:49%"></col><col style="width:6%"></col><col style="width:4%"></col></colgroup><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">14</td><td style="text-align:center">+1D6</td><td style="text-align:center">11</td><td
+    style="text-align:center"><p>20m Swimming<br />7m on land as it crawls along.</p></td><td
+    style="text-align:center">None</td><td style="text-align:center">1</td></tr></tbody></table><h2
+    id="skills-18">Skills</h2><ul><li><strong>Resistances:</strong> Dodge [[/r 1d100]]{30%},
+    Persistence [[/r 1d100]]{30%}, Resilience [[/r 1d100]]{30%}.</li><li><strong>Knowledge:</strong>
+    Natural Lore [[/r 1d100]]{80%}.</li><li><strong>Practical:</strong> Athletics
+    [[/r 1d100]]{60%}, Deception [[/r 1d100]]{30%}, Perception [[/r 1d100]]{50%}.</li></ul><h2
+    id="combat-18">Combat</h2><ul><li><strong>Close Combat [[/r 1d100]]{35%}:</strong>
+    Long spear ([[/r 1D8+1D6]]{1D8+1D6}), Dagger ([[/r 1D4+1]]{1D4+1}+[[/r 1D6]]{1D6}).</li></ul><h2
+    id="magic-15">Magic</h2><p>Merpeople typically join the religion of the Sea Goddess.</p><h3
+    id="initiate-of-the-sea-goddess">Initiate of the Sea Goddess</h3><ul><li><strong>Personal
+    Magic [[/r 1d100]]{33%}:</strong> Beast Call [2], Weapon Enhance 3</li><li><strong>Divine
+    Magic:</strong> Call Small Undine 1</li></ul><h2 id="special-rules-10">Special
+    Rules</h2><p>Merpeople can breathe underwater as well as in the air when they
+    surface.</p>
+  format: 1
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5

@@ -1,0 +1,45 @@
+_id: hXBEl6WdCQxPePXf
+fileType: journal.pages
+flags: {}
+image: {}
+name: Hippogriff
+ownership:
+  default: -1
+parentId: MMv6Yudtc0CCb7OU
+sort: 0
+system: {}
+text:
+  content: <table style="width:100%"><caption>Characteristics</caption><colgroup><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col></colgroup><thead><tr><th style="text-align:center">STR</th><th
+    style="text-align:center">CON</th><th style="text-align:center">DEX</th><th style="text-align:center">SIZ</th><th
+    style="text-align:center">INT</th><th style="text-align:center">POW</th><th style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+    style="text-align:center">[[/gmr 4D6+24]]{4D6+24}</td><td style="text-align:center">[[/gmr
+    3D6+6]]{3D6+6}</td><td style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td
+    style="text-align:center">[[/gmr 4D6+18]]{4D6+18}</td><td style="text-align:center">7</td><td
+    style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td style="text-align:center">5</td></tr><tr><td
+    style="text-align:center">38</td><td style="text-align:center">17</td><td style="text-align:center">17</td><td
+    style="text-align:center">32</td><td style="text-align:center">7</td><td style="text-align:center">13</td><td
+    style="text-align:center">5</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+    style="width:12%"></col><col style="width:18%"></col><col style="width:14%"></col><col
+    style="width:36%"></col><col style="width:13%"></col><col style="width:4%"></col></colgroup><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">25</td><td style="text-align:center">+3D6</td><td style="text-align:center">13</td><td
+    style="text-align:center"><p>20m on land<br />37m when flying</p></td><td style="text-align:center">Hide
+    (AP 1)</td><td style="text-align:center">0</td></tr></tbody></table><h2 id="skills-15">Skills</h2><ul><li><strong>Resistances:</strong>
+    Dodge [[/r 1d100]]{40%}, Persistence [[/r 1d100]]{40%}, Resilience [[/r 1d100]]{50%}.</li><li><strong>Knowledge:</strong>
+    Natural lore [[/r 1d100]]{60%}.</li><li><strong>Practical:</strong> Athletics
+    [[/r 1d100]]{50%}, Deception [[/r 1d100]]{10%}, Perception [[/r 1d100]]{60%}.</li></ul><h2
+    id="combat-15">Combat</h2><ul><li><strong>Unarmed Combat [[/r 1d100]]{60%}:</strong>
+    Fore claw ([[/r 2D6]]{2D6} +3D6), Bite ([[/r 1D8]]{1D8} +3D6).</li></ul>
+  format: 1
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5

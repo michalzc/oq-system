@@ -1,0 +1,196 @@
+_id: BX0MvdxMvLhHqoP2
+fileType: journal.pages
+flags: {}
+image: {}
+name: Spirits
+ownership:
+  default: -1
+parentId: MMv6Yudtc0CCb7OU
+sort: 0
+system: {}
+text:
+  content: '<p>Spirits can engage in Spirit Combat with living creatures that have
+    a POW characteristic. If they win the combat, they possess the loser, since spirits
+    crave a physical body for a variety of reasons, depending on their type. For example,
+    disease spirits possess their victims and riddle their bodies with foul disease.
+    See Spirit Possession in Combat chapter for more information.</p><p>Spirits lack
+    a physical presence, due to lack of STR, CON and DEX.</p><h2 id="disease-spirit">Disease
+    Spirit</h2><table><caption>Characteristics</caption><colgroup><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col></colgroup><thead><tr><th
+    style="text-align:center">STR</th><th style="text-align:center">CON</th><th style="text-align:center">DEX</th><th
+    style="text-align:center">SIZ</th><th style="text-align:center">INT</th><th style="text-align:center">POW</th><th
+    style="text-align:center">CHA</th></tr></thead><tbody><tr><td style="text-align:center">–</td><td
+    style="text-align:center">–</td><td style="text-align:center">–</td><td style="text-align:center">–</td><td
+    style="text-align:center">[[/gmr 2D6]]{2D6}</td><td style="text-align:center">[[/gmr
+    3D6+6]]{3D6+6}</td><td style="text-align:center">[[/gmr 3D6]]{3D6}</td></tr><tr><td
+    style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td
+    style="text-align:center"></td><td style="text-align:center">7</td><td style="text-align:center">17</td><td
+    style="text-align:center">11</td></tr></tbody></table><table><caption>Attributes</caption><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">N/A</td><td style="text-align:center">N/A</td><td style="text-align:center">17</td><td
+    style="text-align:center">30m</td><td style="text-align:center">None</td><td style="text-align:center">0</td></tr></tbody></table><h2
+    id="skills-33">Skills</h2><ul><li><strong>Resistances:</strong> Dodge [[/r 1d100]]{40%},
+    Persistence [[/r 1d100]]{50%}.</li><li><strong>Knowledge:</strong> Lore (Disease)
+    [[/r 1d100]]{100%}, Lore (Spirit World) [[/r 1d100]]{40%}.</li><li><strong>Practical:</strong>
+    Deception [[/r 1d100]]{30%}.</li><li><strong>Spirit Combat [[/r 1d100]]{50%}:</strong>
+    Spectral Claw ([[/r 1D6]]{1D6}).</li></ul><h2 id="special-rules-20">Special Rules</h2><p>A
+    disease spirit is, in essence, a disease, either mundane or magical. After covertly
+    possessing its victim, the possessed one will be forced to make Resilience tests
+    to resist the effects of the disease. The disease cannot be thrown off until the
+    disease spirit is ousted. Also, the spirit will nearly always choose to apply
+    its POW as a penalty to the possessed one’s Resilience tests.</p><p>If the possessed
+    one dies while being possessed by a disease spirit, there is a percentage chance
+    equal to the spirit’s POW that they will arise as a new disease spirit in [[/gmr
+    2D6]]{2D6} hours.</p><h2 id="ghost">Ghost</h2><p>Those that should have passed
+    into the afterlife, but who have not found peace, remain to haunt the living as
+    ghosts. Jealous and mean, they seek to do harm to the living and often will try
+    to possess a victim to experience the joys of living once again.</p><table><caption>Characteristics</caption><colgroup><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col></colgroup><thead><tr><th style="text-align:center">STR</th><th
+    style="text-align:center">CON</th><th style="text-align:center">DEX</th><th style="text-align:center">SIZ</th><th
+    style="text-align:center">INT</th><th style="text-align:center">POW</th><th style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+    style="text-align:center">–</td><td style="text-align:center">–</td><td style="text-align:center">–</td><td
+    style="text-align:center">–</td><td style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+    style="text-align:center">[[/gmr 3D6]]{3D6}</td><td style="text-align:center">[[/gmr
+    3D6]]{3D6}</td></tr><tr><td style="text-align:center">–</td><td style="text-align:center">–</td><td
+    style="text-align:center">–</td><td style="text-align:center">–</td><td style="text-align:center">11</td><td
+    style="text-align:center">11</td><td style="text-align:center">11</td></tr></tbody></table><table><caption>Attributes</caption><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">N/A</td><td style="text-align:center">N/A</td><td style="text-align:center">11</td><td
+    style="text-align:center">20m</td><td style="text-align:center">None</td><td style="text-align:center">0
+    or 5</td></tr></tbody></table><h2 id="skills-34">Skills</h2><ul><li><strong>Resistances:</strong>
+    Dodge [[/r 1d100]]{40%}, Persistence [[/r 1d100]]{50%}, Resilience N/A.</li><li><strong>Knowledge:</strong>
+    Lore (Spirit World) [[/r 1d100]]{30%}.</li><li><strong>Practical:</strong> Deception
+    [[/r 1d100]]{50%}, Perception [[/r 1d100]]{40%}.</li></ul><h2 id="combat-33">Combat</h2><ul><li><strong>Spirit
+    Combat [[/r 1d100]]{40%}:</strong> Dominant Possession ([[/r 1D6]]{1D6}).</li></ul><h2
+    id="magic-29">Magic</h2><p>Ghosts typically gain the ability to cast Personal
+    Magic that helps them as ghosts. Some may remember magic from their former lives.</p><p>Personal
+    Magic Casting [[/r 1d100]]{65%}: Befuddle, Demoralise, Scare 4</p><h2 id="special-rules-21">Special
+    Rules</h2><p>Ghosts can only be affected by magic spells which either dominate
+    or drive them off, or by characters who can engage in Spirit Combat.</p><h2 id="healing-spirit">Healing
+    Spirit</h2><p>The nemesis of the disease spirit, this spirit appears as a happy
+    bright glowing orb. They are typically summoned to help heal the sick and wounded.</p><table><caption>Characteristics</caption><colgroup><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col></colgroup><thead><tr><th style="text-align:center">STR</th><th
+    style="text-align:center">CON</th><th style="text-align:center">DEX</th><th style="text-align:center">SIZ</th><th
+    style="text-align:center">INT</th><th style="text-align:center">POW</th><th style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+    style="text-align:center">–</td><td style="text-align:center">–</td><td style="text-align:center">–</td><td
+    style="text-align:center">–</td><td style="text-align:center">[[/gmr 2D6]]{2D6}</td><td
+    style="text-align:center">[[/gmr 4D6]]{4D6}</td><td style="text-align:center">[[/gmr
+    3D6]]{3D6}</td></tr><tr><td style="text-align:center"></td><td style="text-align:center"></td><td
+    style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center">7</td><td
+    style="text-align:center">14</td><td style="text-align:center">11</td></tr></tbody></table><table><caption>Attributes</caption><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">N/A</td><td style="text-align:center">N/A</td><td style="text-align:center">14</td><td
+    style="text-align:center">30m</td><td style="text-align:center">None</td><td style="text-align:center">0</td></tr></tbody></table><h2
+    id="magic-30">Magic</h2><ul><li><strong>Personal Magic [[/r 1d100]]{100%}:</strong>
+    Heal 6.</li></ul><h2 id="skills-35">Skills</h2><ul><li><strong>Resistances:</strong>
+    Dodge [[/r 1d100]]{40%}, Persistence [[/r 1d100]]{50%}.</li><li><strong>Knowledge:</strong>
+    Lore (Disease) [[/r 1d100]]{100%}, Lore (Spirit World) [[/r 1d100]]{60%}.</li><li><strong>Spirit
+    Combat [[/r 1d100]]{50%}:</strong> Spiritual Blast [[/r 1D6]]{1D6}.</li></ul><h2
+    id="special-rules-22">Special Rules</h2><p>The natural enemy of disease spirits,
+    a healing spirit is only capable of entering Spirit Combat with a disease spirit
+    already covertly possessing a creature. If the healing spirit can bring the disease
+    spirit to zero Hit Points, it will force it to leave its host. The healing spirit
+    will then depart as well, for it cannot permanently possess any creature.</p><p>If
+    a healing spirit is used on an individual who is sick from a mundane illness (rather
+    than from a disease spirit), it will add its POW as a percentage bonus to the
+    individual’s chance of success on their next Resilience test to throw off the
+    effects of the disease.</p><h2 id="magic-spirit">Magic Spirit</h2><p>Magic spirits
+    are spirits that have mastery of one or more spells. If bound, the holder of the
+    spirit may use the spirit’s Magic Points for casting spells.</p><p>Magic spirits
+    may not initiate spirit combat but may use the spells it knows to attack or defend
+    itself.</p><p>They appear as a series of multi-coloured orbs, equal in number
+    to the number of spells they know.</p><table><caption>Characteristics</caption><colgroup><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col></colgroup><thead><tr><th style="text-align:center">STR</th><th
+    style="text-align:center">CON</th><th style="text-align:center">DEX</th><th style="text-align:center">SIZ</th><th
+    style="text-align:center">INT</th><th style="text-align:center">POW</th><th style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+    style="text-align:center">–</td><td style="text-align:center">–</td><td style="text-align:center">–</td><td
+    style="text-align:center">–</td><td style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+    style="text-align:center">[[/gmr 3D6+3]]{3D6+3}</td><td style="text-align:center">[[/gmr
+    1D6]]{1D6}</td></tr><tr><td style="text-align:center"></td><td style="text-align:center"></td><td
+    style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center">11</td><td
+    style="text-align:center">14</td><td style="text-align:center">4</td></tr></tbody></table><table><caption>Attributes</caption><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">N/A</td><td style="text-align:center">N/A</td><td style="text-align:center">14</td><td
+    style="text-align:center">30m</td><td style="text-align:center">None</td><td style="text-align:center">0</td></tr></tbody></table><h2
+    id="magic-31">Magic</h2><p>A magic spirit knows [[/gmr 1D6]]{1D6} Personal Magic,
+    Divine Magic or Sorcery spells. These spirits will only know one spell type. For
+    example, a magic spirit will not have both Divine and Sorcery spells, nor may
+    it ever learn spells of another type. If the spirit casts Divine Magic, it must
+    regain the use of spent spells in the same way a priest does. If casting Sorcery
+    or Personal Magic, it has a casting skill equal to its POW×5.</p><h2 id="skills-36">Skills</h2><ul><li><strong>Resistances:</strong>
+    Dodge [[/r 1d100]]{40%}, Persistence [[/r 1d100]]{50%}.</li><li><strong>Knowledge:</strong>
+    Lore (Spirit World) [[/r 1d100]]{60%}.</li><li><strong>Spirit Combat [[/r 1d100]]{50%}:</strong>
+    Spiritual Blast ([[/r 1D6]]{1D6}).</li></ul><h2 id="passion-spirits-fear-madness-pain">Passion
+    Spirits (Fear, Madness, Pain)</h2><h3 id="fear-spirit">Fear Spirit</h3><p>If a
+    fear spirit covertly possesses a host, the host becomes permanently Demoralised
+    (as the spell), until the spirit is cast out.</p><h3 id="madness-spirit">Madness
+    Spirit</h3><p>If a madness spirit succeeds in covertly possessing a victim, it
+    will manifest itself in daily bouts of insanity. At least once per day, the madness
+    spirit will attempt to cause an insane fit in its host. It matches its Persistence
+    against the host’s Resilience in a standard opposed test. If the host succeeds,
+    the madness spirit will be quiescent for at least a number of hours equal to the
+    host’s POW.</p><p>If the host fails, he becomes incapacitated for [[/gmr 1D20]]{1D20}
+    hours – screaming madly, giggling incoherently or simply becoming catatonic for
+    the duration of the effect. The madness spirit chooses the manner of madness,
+    though most are partial to a single effect. The madness spirit will also attempt
+    to assert itself whenever its host is in a stressful situation. Combat is an obvious
+    example, but these spirits also delight in affecting their hosts in a variety
+    of other stressful, important situations – collapsing into a fit of mad giggling
+    while petitioning an unfriendly king for a boon is exactly the kind of thing madness
+    spirits enjoy. Note, if the stressful situation occurs during a period of forced
+    quiescence on the part of the spirit, it will be unable to manifest itself.</p><h3
+    id="pain-spirit">Pain Spirit</h3><p>If a pain spirit manages to possess its target
+    covertly, the victim will be overcome with a sudden burst of pain. From that point
+    on, until the spirit is cast out, the victim will always be conscious of a dull
+    ache in his joints or a twinge in his muscles. Whenever the host acts quickly
+    (as in combat) or concentrates (as in spell casting), and sometimes purely at
+    random intervals, he is struck by a sudden spasm of pain. This pain reduces all
+    the host’s skill tests by a penalty equal to the spirit’s POW.</p><p>For example,
+    if a pain spirit with a POW of 17 possesses a victim, that victim loses [[/r 1d100]]{17%}
+    from all skill tests so long as the spirit possesses him. If they had an Athletics
+    skill of [[/r 1d100]]{90%}, were attempting to climb a cliff and rolled an 80,
+    the test would be a failure as the pain spirit effectively reduces their skill
+    to [[/r 1d100]]{73%}.</p><table><caption>Characteristics</caption><colgroup><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col></colgroup><thead><tr><th style="text-align:center">STR</th><th
+    style="text-align:center">CON</th><th style="text-align:center">DEX</th><th style="text-align:center">SIZ</th><th
+    style="text-align:center">INT</th><th style="text-align:center">POW</th><th style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+    style="text-align:center">–</td><td style="text-align:center">–</td><td style="text-align:center">–</td><td
+    style="text-align:center">–</td><td style="text-align:center">[[/gmr 2D6+3]]{2D6+3}</td><td
+    style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td style="text-align:center">[[/gmr
+    4D6]]{4D6}</td></tr><tr><td style="text-align:center"></td><td style="text-align:center"></td><td
+    style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center">10</td><td
+    style="text-align:center">17</td><td style="text-align:center">14</td></tr></tbody></table><table><caption>Attributes</caption><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">N/A</td><td style="text-align:center">N/A</td><td style="text-align:center">17</td><td
+    style="text-align:center">30m</td><td style="text-align:center">None</td><td style="text-align:center">0</td></tr></tbody></table><h2
+    id="skills-37">Skills</h2><ul><li><strong>Spirit Combat [[/r 1d100]]{55%}:</strong>
+    Spectral Claw ([[/r 1D6]]{1D6}).</li><li><strong>Resistances:</strong> Dodge [[/r
+    1d100]]{40%}, Persistence [[/r 1d100]]{50%}.</li><li><strong>Knowledge:</strong>
+    Lore (Spirit World) [[/r 1d100]]{60%} .</li></ul>'
+  format: 1
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5

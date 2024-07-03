@@ -1,0 +1,59 @@
+_id: xtJtu1PG98K9dbQx
+fileType: journal.pages
+flags: {}
+image: {}
+name: Gorgon
+ownership:
+  default: -1
+parentId: MMv6Yudtc0CCb7OU
+sort: 0
+system: {}
+text:
+  content: '<table><caption>Characteristics</caption><colgroup><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col><col
+    style="width:4em"></col><col style="width:4em"></col><col style="width:4em"></col></colgroup><thead><tr><th
+    style="text-align:center">STR</th><th style="text-align:center">CON</th><th style="text-align:center">DEX</th><th
+    style="text-align:center">SIZ</th><th style="text-align:center">INT</th><th style="text-align:center">POW</th><th
+    style="text-align:center">CHA</th></tr></thead><tbody><tr><td style="text-align:center">[[/gmr
+    4D6]]{4D6}</td><td style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td style="text-align:center">[[/gmr
+    3D6+6]]{3D6+6}</td><td style="text-align:center">[[/gmr 4D6]]{4D6}</td><td style="text-align:center">[[/gmr
+    3D6]]{3D6}</td><td style="text-align:center">[[/gmr 1D6+12]]{1D6+12}</td><td style="text-align:center">[[/gmr
+    1D6]]{1D6}</td></tr><tr><td style="text-align:center">14</td><td style="text-align:center">17</td><td
+    style="text-align:center">17</td><td style="text-align:center">14</td><td style="text-align:center">11</td><td
+    style="text-align:center">16</td><td style="text-align:center">4</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+    style="width:11%"></col><col style="width:17%"></col><col style="width:14%"></col><col
+    style="width:35%"></col><col style="width:15%"></col><col style="width:4%"></col></colgroup><thead><tr><th
+    style="text-align:center">Hit Points</th><th style="text-align:center">Damage
+    Modifier</th><th style="text-align:center">Magic Points</th><th style="text-align:center">MR</th><th
+    style="text-align:center">Armour</th><th style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+    style="text-align:center">16</td><td style="text-align:center">+1D4</td><td style="text-align:center">16</td><td
+    style="text-align:center"><p>15m on land<br />20m when flying</p></td><td style="text-align:center">Scales
+    (AP 8)</td><td style="text-align:center">5</td></tr></tbody></table><h2 id="skills-13">Skills</h2><ul><li><strong>Resistances:</strong>
+    Dodge [[/r 1d100]]{50%}, Persistence [[/r 1d100]]{35%}, Resilience [[/r 1d100]]{45%}.</li><li><strong>Knowledge:</strong>
+    N/A.</li><li><strong>Practical:</strong> Athletics [[/r 1d100]]{65%}, Deception
+    [[/r 1d100]]{60%}, Perception [[/r 1d100]]{50%}.</li></ul><h2 id="combat-13">Combat</h2><p>Ranged
+    Combat Special see below: Gaze attack (Petrification).</p><ul><li><strong>Unarmed
+    Combat [[/r 1d100]]{75%}:</strong> Talons ([[/r 1D6+1D4]]{1D6+1D4}), Serpent hair
+    ([[/r 1D4]]{1D4+poison}).</li></ul><p>Gorgons attack using their gaze at the beginning
+    of the combat round (see below) and then have one combat attack (either Talon
+    or Serpents) as usual.</p><h2 id="magic-12">Magic</h2><p>Gorgons have at least
+    10 magnitude of Personal Magic or Sorcery or Divine Magic. They are usually Priestesses
+    or Adepts, with a casting skill of [[/r 1d100]]{75%}.</p><h3 id="priestess-of-the-serpent-religion">Priestess
+    of the Serpent Religion</h3><ul><li><strong>Personal Magic [[/r 1d100]]{75%}:</strong>
+    Weapon Enhance 4, Heal 5.</li><li><strong>Divine Magic:</strong> Absorption 3,
+    Fear, Heal Body.</li></ul><h2 id="special-rules-8">Special Rules</h2><h3 id="petrifying-gaze-attack">Petrifying
+    Gaze Attack</h3><p>The Gorgon’s gaze attack is an automatic attack at the beginning
+    of every round. Every susceptible creature must make an opposed Resilience test
+    against the Gorgon’s Persistence or be turned to stone.</p><h3 id="gorgon-serpent-venom">Gorgon
+    Serpent Venom</h3><ul><li><strong>Type:</strong> Ingested or smeared.</li><li><strong>Delay:</strong>
+    [[/gmr 1D3]]{1D3} Combat Rounds.</li><li><strong>Potency:</strong> 34.</li><li><strong>Full
+    Effect:</strong> [[/gmr 1D3]]{1D3} Hit Point damage, applies -3 penalty to victim’s
+    CON.</li><li><strong>Duration:</strong> [[/gmr 6D10]]{6D10} minutes.</li></ul>'
+  format: 1
+title:
+  level: 1
+  show: true
+type: text
+video:
+  controls: true
+  volume: 0.5
