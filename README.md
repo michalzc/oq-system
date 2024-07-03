@@ -8,7 +8,7 @@ Beta
 
 ## Contributors
 
-@tuirgin - SRD Bestiary as journal pages.
+[tuirgin](https://github.com/tuirgin) - SRD Bestiary as journal pages.
 
 ## Roadmap
 
