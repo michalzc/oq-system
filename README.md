@@ -6,6 +6,10 @@ OpenQuest SRD system for Foundry VTT
 
 Beta
 
+## Contributors
+
+@tuirgin - SRD Bestiary as journal pages.
+
 ## Roadmap
 
 * v1.0 - https://github.com/michalzc/oq-system/milestone/4. Support for active effects, customized Combat Tracker, SRD Bestiary in compendium.
