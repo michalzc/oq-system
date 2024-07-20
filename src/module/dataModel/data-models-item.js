@@ -63,7 +63,7 @@ export class WeaponDataModel extends foundry.abstract.DataModel {
       }),
       encumbrance: encumbranceModel(),
       rangeFormula: commonStringModel(false),
-      rate: positiveNumberModel(false, undefined),
+      rate: new fields.StringField({ required: false, trim: true }),
       cost: positiveNumberModel(),
       state: new fields.StringField({
         required: true,
