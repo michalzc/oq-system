@@ -4,10 +4,8 @@ system:
   nonVariant: false
   type: personal
   description: |-
-    <p>Each point of magnitude allows the caster to make one extra unarmed attack.
-    These attacks happen in a blur of motion as soon as the spell fires (i.e. when
-    the spell takes effect), instead of the normal combat order that the character’s
-    attacks happen on. An attack roll is made separately for each attack.</p>
+    <p>This spell creates a minor illusion of 1D10 Gold Ducats per level of
+    magnitude that persists for the duration of the spell.</p>
 fileType: items
 _id: 7DsZL0kXlZPwQRZF
 type: spell
