@@ -8,6 +8,8 @@ OQ:
       {0} has spent {1} magic points.
     gainMagicPoints: >-
       {0} has gained {1} magic points.
+    damageSoaked: >-
+      {0} soaked all damage.
 
   Dialog:
     AllPoints: All

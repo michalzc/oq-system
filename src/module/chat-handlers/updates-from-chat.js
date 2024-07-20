@@ -7,14 +7,13 @@ function findTargets() {
 }
 
 const nameFromActor = (actor) => actor?.parent?.name ?? actor.name;
+
 async function sendMessage(messageKey, actor, delta) {
-  if (delta) {
-    await ChatMessage.create({
-      speaker: ChatMessage.getSpeaker(),
-      type: CONST.CHAT_MESSAGE_TYPES.OOC,
-      content: formatString(game.i18n.localize(messageKey), nameFromActor(actor), delta),
-    });
-  }
+  await ChatMessage.create({
+    speaker: ChatMessage.getSpeaker(),
+    type: CONST.CHAT_MESSAGE_TYPES.OOC,
+    content: formatString(game.i18n.localize(messageKey), nameFromActor(actor), delta),
+  });
 }
 
 async function applyDamage(event) {
@@ -28,10 +27,14 @@ async function applyDamage(event) {
     const { hp, ap } = actor.system.attributes;
     const hpDelta = Math.max(0, type === 'normal' ? value - (ap.value ?? 0) : value);
     const updatedHpValue = Math.max(0, hp.value - hpDelta);
-    await sendMessage('OQ.Chat.damageMessage', actor, Math.min(hp.value, hpDelta));
-    return await actor.update({
-      'system.attributes.hp.value': updatedHpValue,
-    });
+    if (hpDelta > 0) {
+      await sendMessage('OQ.Chat.damageMessage', actor, Math.min(hp.value, hpDelta));
+      return await actor.update({
+        'system.attributes.hp.value': updatedHpValue,
+      });
+    } else {
+      return sendMessage('OQ.Chat.damageSoaked', actor);
+    }
   });
   await Promise.all(updates);
 }
