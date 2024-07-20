@@ -9,7 +9,7 @@ system:
   hands: two
   encumbrance: 2
   rangeFormula: 150m
-  rate: 3
+  rate: 1/3
   cost: 350
   state: carried
   type: ranged
