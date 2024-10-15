@@ -1,7 +1,8 @@
 import _ from 'lodash-es';
-import { logError } from '../utils/logger.js';
+import { log, logError } from '../utils/logger.js';
 
 const mergeObject = foundry.utils.mergeObject;
+
 export class CharacteristicsDialog extends FormApplication {
   static get defaultOptions() {
     const options = super.defaultOptions;
@@ -157,7 +158,8 @@ export class CharacteristicsDialog extends FormApplication {
   }
 
   async _updateObject(event, formData) {
-    await this.object.update({ data: formData });
+    log('Got data', formData);
+    await this.object.update({ system: formData });
     this.object.sheet?.render(true);
   }
 }

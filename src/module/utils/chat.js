@@ -32,7 +32,7 @@ export async function displayItem(itemData) {
     }),
   );
   await ChatMessage.create({
-    type: CONST.CHAT_MESSAGE_TYPES.IC,
+    style: CONST.CHAT_MESSAGE_STYLES.IC,
     content,
   });
 }

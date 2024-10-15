@@ -14,7 +14,6 @@ async function sendAdjustMessage(rollString, type, chatData) {
   const content = await renderTemplate(CONFIG.OQ.ChatConfig.adjustmentTemplate, { roll, renderedRoll, type });
   await ChatMessage.create({
     ...chatData,
-    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
     rolls: [roll],
     content,
     flags: {

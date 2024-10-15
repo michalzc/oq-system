@@ -25,21 +25,6 @@ export class OQBaseActor extends Actor {
     }
   }
 
-  prepareBaseData() {
-    super.prepareBaseData();
-    const system = this.system;
-    const characteristics = _.mapValues(system.characteristics, (characteristic) => {
-      const value = characteristic.base + characteristic.mod;
-      return {
-        ...characteristic,
-        value,
-      };
-    });
-    _.merge(this.system, {
-      characteristics,
-    });
-  }
-
   prepareDerivedData() {
     super.prepareDerivedData();
     const skillsBySlug = this.getSkillsBySlug();
