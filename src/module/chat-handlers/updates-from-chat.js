@@ -11,7 +11,7 @@ const nameFromActor = (actor) => actor?.parent?.name ?? actor.name;
 async function sendMessage(messageKey, actor, delta) {
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker(),
-    type: CONST.CHAT_MESSAGE_TYPES.OOC,
+    style: CONST.CHAT_MESSAGE_STYLES.OOC,
     content: formatString(game.i18n.localize(messageKey), nameFromActor(actor), delta),
   });
 }

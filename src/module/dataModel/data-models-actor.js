@@ -129,7 +129,19 @@ function npcPersonalModel() {
   });
 }
 
-export class CharacterDataModel extends foundry.abstract.DataModel {
+class OQActorDataModel extends foundry.abstract.TypeDataModel {
+  /* override */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    const characteristics = _.mapValues(this.characteristics, (characteristic) => ({
+      ...characteristic,
+      value: characteristic.base + characteristic.mod,
+    }));
+    _.merge(this, { characteristics });
+  }
+}
+
+export class CharacterDataModel extends OQActorDataModel {
   static defineSchema() {
     return {
       characteristics: characteristicsModel(pcCharacteristics),
@@ -139,7 +151,7 @@ export class CharacterDataModel extends foundry.abstract.DataModel {
   }
 }
 
-export class NpcDataModel extends foundry.abstract.DataModel {
+export class NpcDataModel extends OQActorDataModel {
   static defineSchema() {
     return {
       characteristics: characteristicsModel(npcCharacteristics),

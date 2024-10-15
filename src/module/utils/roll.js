@@ -34,7 +34,7 @@ const TestRollTemplates = {
  * @returns {Promise<void>}
  */
 export async function testRoll(rollData) {
-  const roll = await new Roll(CONFIG.OQ.RollConfig.baseRollFormula).roll({ async: true });
+  const roll = await new Roll(CONFIG.OQ.RollConfig.baseRollFormula).roll();
   const resultFeatures = getResultFeatures(roll);
   const totalValue = minMaxValue((rollData.value ?? 0) + (rollData.difficulty?.value ?? 0) + (rollData?.mod ?? 0));
 
@@ -58,7 +58,6 @@ export async function testRoll(rollData) {
   const messageContent = await renderTemplate(template, renderData);
   const flags = showDamageButton && { oqMessageType: CONFIG.OQ.ChatConfig.MessageFlags.hasRollDamage };
   const messageData = {
-    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
     speaker: rollData.speaker,
     rolls: [roll],
     content: messageContent,
@@ -150,7 +149,6 @@ export async function damageRoll(rollData) {
   const messageData = {
     speaker: rollData.speaker,
     content: content,
-    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
     rolls: [roll],
     flags: {
       oqMessageType: CONFIG.OQ.ChatConfig.MessageFlags.updateFromChat,
