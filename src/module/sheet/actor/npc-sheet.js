@@ -28,12 +28,12 @@ export class OQNpcSheet extends OQActorBaseSheet {
   async onRollCharacteristics(event) {
     event.preventDefault();
     const characteristics = this.actor.system.characteristics;
-    const rollsWithKey = _.toPairs(characteristics)
-      .map(([key, characteristic]) => [
-        key,
-        characteristic.roll ? new Roll(characteristic.roll).roll({ async: false }) : null,
-      ])
-      .filter(([, roll]) => !!roll);
+    const asyncRolls = _.toPairs(characteristics).map(([key, characteristic]) => {
+      const rollPromise = characteristic.roll ? new Roll(characteristic.roll).evaluate() : Promise.resolve(null);
+      return rollPromise.then((rollResult) => [key, rollResult]);
+    });
+    const rolls = Promise.all(asyncRolls);
+    const rollsWithKey = (await rolls).filter(([, roll]) => !!roll);
     const characteristicsToUpdate = {
       system: {
         characteristics: _.fromPairs(rollsWithKey.map(([key, roll]) => [key, { base: roll.total }])),
