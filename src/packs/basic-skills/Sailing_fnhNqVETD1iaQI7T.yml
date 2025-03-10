@@ -1,0 +1,28 @@
+_id: fnhNqVETD1iaQI7T
+_stats: null
+effects: []
+flags:
+  oq:
+    newActor:
+      - character
+folder: szWzZEdK1HVFTQEr
+img: systems/oq/assets/icons/skills.svg
+name: Sailing
+ownership:
+  KsTXxaVKKsCmFqBq: 3
+  default: 0
+sort: 0
+system:
+  advancement: 0
+  customGroupName: ''
+  description: >-
+    <p>This skill covers small water-borne craft propelled manually by oars or
+    paddles, commonly known as boats, and larger craft powered by sail or rows
+    of oars. Travelling across calm water does not usually require a skill test,
+    but adverse conditions such as currents and weather can bestow
+    penalties.</p>
+  formula: '@dex+@int'
+  group: practical
+  mod: 0
+type: skill
+_key: '!items!fnhNqVETD1iaQI7T'

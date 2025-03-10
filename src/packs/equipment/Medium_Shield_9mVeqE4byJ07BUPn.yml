@@ -1,0 +1,22 @@
+_id: 9mVeqE4byJ07BUPn
+folder: jAyxhFenHEzNz83C
+img: systems/oq/assets/icons/viking-shield.svg
+name: Medium Shield
+system:
+  correspondingSkill:
+    skillReference: close-combat
+  hands: one
+  encumbrance: 2
+  cost: 150
+  state: carried
+  type: shield
+  traits:
+    - Parry Thrown Missiles
+    - Cover against missile attacks -20%
+    - Shield Defence
+  damage:
+    damageFormula: 1d6
+    includeDamageMod: true
+type: weapon
+_key: '!items!9mVeqE4byJ07BUPn'
+effects: []

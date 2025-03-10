@@ -1,0 +1,34 @@
+system:
+  skillReference: personal-magic-casting
+  magnitude: 1
+  type: personal
+  nonVariant: false
+  description: >-
+    <p>This spell covers an area of one centimetre square for each magnitude
+    with
+
+    extremely sticky glue. If a creature steps on the glue, it must make an
+
+    Athletics roll vs. the magnitude x 10% to avoid being stuck for one round.
+    On
+
+    subsequent rounds, it must make the same roll to break free. This spell can
+    also
+
+    make conventional repairs, for example repairing a broken sword, with
+    magnitude
+
+    x 10% being the chance that the item won’t break again if used in
+    circumstances
+
+    that would cause it to.</p>
+  traits:
+    - Area
+    - Touch
+_id: HVxhfYTp8OK3Nfig
+folder: PmL84WZU2luOrJSw
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Glue
+type: spell
+_key: '!items!HVxhfYTp8OK3Nfig'
+effects: []

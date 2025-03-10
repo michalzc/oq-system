@@ -1,0 +1,45 @@
+system:
+  skillReference: sorcery-casting
+  magnitude: 1
+  description: >-
+    <p>Magical scrolls are written items that store Sorcery spells. All scrolls
+    have
+
+    an attached cost of 1 Gold Ducat per magnitude of spell in ingredients (for
+
+    special inks/parchments, etc.).</p> <p>The resulting scroll is a one-use
+    item
+
+    which, upon a successful Sorcery Casting test, casts the spell(s) with any
+
+    included manipulations at the magnitude that was cast on the scroll.</p>
+
+    <p>Alternatively, upon a successful Sorcery Casting skill test, the reader
+    of
+
+    the scroll can learn the spell by spending the appropriate number of
+    <i>Growth
+
+    points</i>.</p> <p>Either way, upon the successful use of the scroll, the
+    spell
+
+    fades from the scroll. If the casting roll merely fails, the spell remains,
+    but
+
+    the reader cannot attempt to use the scroll until their Sorcery Casting
+    skill
+
+    increases. If the casting roll is fumbled, the spell fades from the scroll,
+
+    without any benefit to the reader.</p>
+  nonVariant: false
+  traits:
+    - Permanent
+  type: sorcery
+_id: YEDpGZAgk0HDBDZD
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Make Scroll
+type: spell
+_key: '!items!YEDpGZAgk0HDBDZD'
+effects: []

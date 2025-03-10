@@ -1,0 +1,21 @@
+system:
+  skillReference: sorcery-casting
+  magnitude: 1
+  description: >-
+    <p>Each point of magnitude of Hamper subtracts 1m from the Movement rate of
+    the
+
+    target. Every two points of magnitude also subtract -10% from a recipient’s
+
+    skills for the purposes of determining the order in combat.</p>
+  nonVariant: false
+  traits:
+    - Resist (Resilience)
+  type: sorcery
+_id: HXxuHDJlbvYVhG3t
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Hamper
+type: spell
+_key: '!items!HXxuHDJlbvYVhG3t'
+effects: []

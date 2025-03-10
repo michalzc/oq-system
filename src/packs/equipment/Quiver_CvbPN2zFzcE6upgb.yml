@@ -1,0 +1,13 @@
+_id: CvbPN2zFzcE6upgb
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/quiver.svg
+name: Quiver
+system:
+  description: ''
+  cost: 2
+  quantity: 1
+  state: carried
+  type: single
+type: equipment
+_key: '!items!CvbPN2zFzcE6upgb'
+effects: []

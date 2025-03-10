@@ -1,0 +1,26 @@
+_id: 4Bp20nJBbSd8zbTB
+_stats: null
+effects: []
+flags:
+  oq:
+    newActor:
+      - character
+folder: FG6ln8k3Rk5vyfJY
+img: systems/oq/assets/icons/skills.svg
+name: Unarmed Combat
+ownership:
+  KsTXxaVKKsCmFqBq: 3
+  default: 0
+sort: 0
+system:
+  advancement: 0
+  customGroupName: ''
+  description: >-
+    <p>This skill covers the use of natural attacks. For humans, this is
+    punching, kicking, and grappling. Non-human characters may also have bite,
+    horn, claw and tail attacks.</p>
+  formula: '@dex+@str'
+  group: combat
+  mod: 0
+type: skill
+_key: '!items!4Bp20nJBbSd8zbTB'

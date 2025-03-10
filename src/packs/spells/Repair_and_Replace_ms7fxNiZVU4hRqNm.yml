@@ -1,0 +1,25 @@
+system:
+  remainingMagnitude: 1
+  noMagicPoints: true
+  description: >-
+    <p>This spell repairs broken crafted items. It also replaces missing parts
+    of an
+
+    item.</p> <p>The size of the item depends on the magnitude of the spell.</p>
+
+    <p>@UUID[Compendium.oq.oq-system-documentation.JournalEntry.tQAx53vXPFGozPEk.JournalEntryPage.xKi8bjZoCdynKjIv]{Size
+
+    of Item vs Magnitude}</p>
+  magnitude: 1
+  nonVariant: false
+  traits:
+    - Instant
+    - Progressive
+  type: divine
+_id: ms7fxNiZVU4hRqNm
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Repair and Replace
+type: spell
+_key: '!items!ms7fxNiZVU4hRqNm'
+effects: []

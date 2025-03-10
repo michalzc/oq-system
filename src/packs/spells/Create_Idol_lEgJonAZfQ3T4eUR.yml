@@ -1,0 +1,32 @@
+system:
+  remainingMagnitude: 4
+  noMagicPoints: true
+  description: >-
+    <p>This spell requires an image of the caster’s god worth 100 GD, specially
+
+    consecrated by a Priest reading from the sacred texts of the deity telling
+    the
+
+    tales and myths. The idol stores the god’s spells and can be used by Priest
+    and
+
+    Initiates to regain spells. It can be used by Lay Members to receive
+    ‘lessons’,
+
+    via visions, upon touching the idol.  Such visions will increase the
+    Religion
+
+    skill of a Lay Member by 1D10% when exposed to them.</p>
+  magnitude: 4
+  nonVariant: true
+  traits:
+    - Common
+    - Permanent
+  type: divine
+_id: lEgJonAZfQ3T4eUR
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Create Idol
+type: spell
+_key: '!items!lEgJonAZfQ3T4eUR'
+effects: []

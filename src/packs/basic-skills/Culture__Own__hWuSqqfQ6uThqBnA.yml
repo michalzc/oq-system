@@ -1,0 +1,30 @@
+_id: hWuSqqfQ6uThqBnA
+_stats: null
+effects: []
+flags:
+  oq:
+    newActor:
+      - character
+folder: JvpDkeDs9DS0MQBD
+img: systems/oq/assets/icons/skills.svg
+name: Culture (Own)
+ownership:
+  KsTXxaVKKsCmFqBq: 3
+  default: 0
+sort: 0
+system:
+  advancement: 0
+  customGroupName: ''
+  description: >-
+    <p>Each Culture skill provides information about the prevailing worldview of
+    that group of people (or creatures), which includes history, politics,
+    weather cycles, geography, superstitions, and popular
+    mythology.</p><p>Culture (Own) is the worldview of the people by whom the
+    character is raised. All other foreign or alien cultures are Culture
+    (Other). Culture (Other) is a collection of skills, one for each
+    culture.</p>
+  formula: '@int+10'
+  group: knowledge
+  mod: 0
+type: skill
+_key: '!items!hWuSqqfQ6uThqBnA'

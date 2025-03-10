@@ -1,0 +1,16 @@
+_id: bxUmCCP8Gg08pJWt
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/spade.svg
+name: Spade
+system:
+  description: |-
+    <p>If used as a weapon, it is considered a club (wielded with a –20%
+    penalty).</p>
+  cost: 25
+  encumbrance: 1
+  quantity: 1
+  state: carried
+  type: single
+type: equipment
+_key: '!items!bxUmCCP8Gg08pJWt'
+effects: []

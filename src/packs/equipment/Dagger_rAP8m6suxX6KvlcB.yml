@@ -1,0 +1,17 @@
+_id: rAP8m6suxX6KvlcB
+folder: VlZllXyyJC54uoOE
+img: systems/oq/assets/icons/broad-dagger.svg
+name: Dagger
+system:
+  correspondingSkill:
+    skillReference: close-combat
+  hands: one
+  cost: 20
+  state: carried
+  type: melee
+  damage:
+    damageFormula: 1d4+1
+    includeDamageMod: true
+type: weapon
+_key: '!items!rAP8m6suxX6KvlcB'
+effects: []

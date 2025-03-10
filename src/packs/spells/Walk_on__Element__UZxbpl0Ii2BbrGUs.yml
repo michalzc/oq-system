@@ -1,0 +1,23 @@
+system:
+  skillReference: personal-magic-casting
+  type: personal
+  magnitude: 3
+  nonVariant: true
+  description: >-
+    <p>This spell allows the recipient to walk on the specified element
+
+    (Air/Darkness/Earth/Fire/Water) without sinking or taking any harm for the
+
+    spell’s duration. With this spell for the appropriate element, the caster
+    can
+
+    walk across lava, quicksand, water, or even through the air. Each additional
+
+    point of magnitude increases the duration of the spell by 1 minute.</p>
+type: spell
+folder: PmL84WZU2luOrJSw
+_id: UZxbpl0Ii2BbrGUs
+name: Walk on (Element)
+img: systems/oq/assets/icons/magic-swirl.svg
+_key: '!items!UZxbpl0Ii2BbrGUs'
+effects: []

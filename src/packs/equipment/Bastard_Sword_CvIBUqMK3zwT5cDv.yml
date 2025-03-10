@@ -1,0 +1,20 @@
+_id: CvIBUqMK3zwT5cDv
+folder: VlZllXyyJC54uoOE
+img: systems/oq/assets/icons/broadsword.svg
+name: Bastard Sword
+system:
+  correspondingSkill:
+    skillReference: close-combat
+  hands: oneAndTwo
+  encumbrance: 3
+  cost: 250
+  state: carried
+  type: melee
+  traits:
+    - Enc 2 or 3
+  damage:
+    damageFormula: 1d10
+    includeDamageMod: true
+type: weapon
+_key: '!items!CvIBUqMK3zwT5cDv'
+effects: []

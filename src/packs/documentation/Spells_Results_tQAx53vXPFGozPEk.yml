@@ -1,0 +1,252 @@
+_id: tQAx53vXPFGozPEk
+name: Spells Results
+pages:
+  - _id: Htd9v5uqon9218OW
+    name: Absorption Results
+    text:
+      content: >-
+        <table> <caption>Absorption Results</caption> <thead> <tr> <th>Incoming
+        Spell’s Magnitude is</th> <th>Effect</th> </tr> </thead> <tbody> <tr>
+        <td>Equal to or weaker than Absorption’s magnitude.</td> <td>Incoming
+        spell absorbed and Absorption remains.</td> </tr> <tr> <td>1 or more
+        points stronger than Absorption’s magnitude.</td> <td>Absorption
+        eliminated and incoming spell takes effect.</td> </tr> </tbody> </table>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    _key: '!journal.pages!tQAx53vXPFGozPEk.Htd9v5uqon9218OW'
+  - _id: BtUWbrm2MnIgc5Sf
+    name: Fear Effects
+    text:
+      content: >-
+        <table> <caption>Fear Effects</caption> <thead> <tr> <th>Target’s
+        Persistence Test</th> <th>Effect</th> </tr> </thead> <tbody> <tr>
+        <td>Target fumbles Persistence test</td> <td>The victim instantly loses
+        half original hit points damage, as its heart falters. Falls into a coma
+        for 1D12 hours.</td> </tr> <tr> <td>Target fails Persistence test</td>
+        <td>The victim flees in screaming terror for combat rounds equal to 20
+        minus its POW (minimum of one combat round). The victim will not engage
+        in combat unless forced to and will use the Run combat action whenever
+        possible (unless a faster mode of egress is available).</td> </tr> <tr>
+        <td>Target succeeds Persistence test</td> <td>The victim is shaken and
+        disturbed, suffering a –20% penalty to all skill tests for combat rounds
+        equal to 20 minus its POW (minimum of one combat round).</td> </tr> <tr>
+        <td>Target critically succeeds Persistence test</td> <td>The victim is
+        unaffected by the spell and cannot be affected by further Fear spells
+        for combat rounds equal to its POW.</td> </tr> </tbody> </table>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    _key: '!journal.pages!tQAx53vXPFGozPEk.BtUWbrm2MnIgc5Sf'
+  - _id: 37flmpgK5hYiwE8h
+    name: Illusions
+    text:
+      content: >-
+        <table> <caption>Illusions</caption> <thead> <tr> <th>Magnitude</th>
+        <th>Modifier to Perception test</th> <th>Type of illusion possible</th>
+        </tr> </thead> <tbody> <tr> <td>1</td> <td>+50 %</td> <td>Not capable of
+        motion or causing damage. Slightly fuzzy and unreal round the edges.
+        Limit of SIZ 10.</td> </tr> <tr> <td>2</td> <td>+25 %</td> <td>Some
+        minor discrepancies. Capable of motion, but not of damage. Limit of SIZ
+        15.</td> </tr> <tr> <td>3</td> <td>0</td> <td>Capable of motion and
+        causing damage. Limit of SIZ 20.</td> </tr> <tr> <td>4</td> <td>-25
+        %</td> <td>Capable of motion and causing damage. Limit of SIZ 30.</td>
+        </tr> <tr> <td>5</td> <td>-50 %</td> <td>Indistinguishable from the real
+        thing, capable of motion and damage. Limit of SIZ 40.</td> </tr> <tr>
+        <td>+1</td> <td>-50%</td> <td>+10 SIZ per magnitude.</td> </tr> </tbody>
+        </table>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    _key: '!journal.pages!tQAx53vXPFGozPEk.37flmpgK5hYiwE8h'
+  - _id: uVCGEbKPd3cNW2pB
+    name: Madness Effects
+    text:
+      content: >-
+        <table> <caption>Madness Effects</caption> <thead> <tr> <th>Target’s
+        Persistence Test</th> <th>Effect</th> </tr> </thead> <tbody> <tr>
+        <td>Target fumbles Persistence test</td> <td>Victim instantly loses 1D4
+        INT permanently and lapses into a catatonic state for minutes equal to
+        20 minus its POW (minimum of one combat round).</td> </tr> <tr>
+        <td>Target fails Persistence test</td> <td> <p>Victim gibbers and raves
+        uncontrollably for combat rounds equal to 20 minus its POW (minimum of
+        one combat round).</p> <p>The victim will perform random combat actions
+        during this period.</p> <p>Roll 1D6.</p> <ul> <ol>Move to close combat
+        attack a random target.</ol> <ol>Run in a random direction (Roll 1D12 as
+        clock face to determine direction).</ol> <ol>Cast a spell at a random
+        target.</ol> <ol>Use ranged attack against a random target.</ol>
+        <ol>Shout at a random target.</ol> <ol>Change stance.</ol> </ul> </td>
+        </tr> <tr> <td>Target succeeds Persistence test</td> <td>The victim is
+        shaken and disturbed, suffering a –20% penalty to all skill tests for
+        combat rounds equal to 20 minus its POW (minimum of one combat
+        round).</td> </tr> <tr> <td>Target critically succeeds Persistence
+        test</td> <td>The victim is unaffected by the spell and cannot be
+        affected by further Madness spells for combat rounds equal to its
+        POW.</td> </tr> </tbody> </table>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    _key: '!journal.pages!tQAx53vXPFGozPEk.uVCGEbKPd3cNW2pB'
+  - _id: 1thpcZxPajxkk1dG
+    name: Magnitude vs. Size of Miraculous Item
+    text:
+      content: >-
+        <table> <caption>Magnitude vs. Size of Miraculous Item</caption> <thead>
+        <tr> <th>Magnitude</th> <th>Size of item</th> </tr> </thead> <tbody>
+        <tr> <td>1</td> <td>Small items. Such as pots, plates, knives, and a
+        defaced detail on a stone fresco, etc.</td> </tr> <tr> <td>2</td>
+        <td>Medium. Large containers such as wine amphorae, target shields, long
+        swords, human-sized armour, a missing arm on a broken statue.</td> </tr>
+        <tr> <td>3</td> <td>Large. Tower shields, broken doors, a missing
+        masonry feature such as a column.</td> </tr> <tr> <td>4</td> <td>Huge.
+        Giant armour, ruined houses, shattered towers.</td> </tr> <tr>
+        <td>5</td> <td>Enormous. The broken parts of a walking castle, the
+        ruined walls of a city.</td> </tr> </tbody> </table>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    _key: '!journal.pages!tQAx53vXPFGozPEk.1thpcZxPajxkk1dG'
+  - _id: wWCRB02MMRERgevu
+    name: Type of Mischief
+    text:
+      content: >-
+        <table> <caption>Type of Mischief</caption> <thead> <tr> <th>Roll
+        1D20</th> <th>Result</th> </tr> </thead> <tbody> <tr> <td>1</td>
+        <td>Clothes disappear.</td> </tr> <tr> <td>2</td> <td>Hair goes
+        green.</td> </tr> <tr> <td>3</td> <td>Hair drops out.</td> </tr> <tr>
+        <td>4</td> <td>Grows beard regardless of sex.</td> </tr> <tr> <td>5</td>
+        <td>The target’s weapon becomes a bunch of flowers.</td> </tr> <tr>
+        <td>6</td> <td>Armour becomes the festive dress of the opposite
+        sex.</td> </tr> <tr> <td>7</td> <td>Feet become duck feet.</td> </tr>
+        <tr> <td>8</td> <td>Head becomes that of a domestic animal (cow, pig,
+        sheep, etc.).</td> </tr> <tr> <td>9</td> <td>Victim smells of excrement
+        (-20% to any Deception or Influence rolls).</td> </tr> <tr> <td>10</td>
+        <td>Wobbles uncontrollably, -20% to attacks, Athletics and any other
+        roll involving dexterity.</td> </tr> <tr> <td>11</td> <td>The victim can
+        only speak gibberish.</td> </tr> <tr> <td>12</td> <td>The victim says
+        the most inappropriate things at the most socially awkward times. -20%
+        to any Influence rolls.</td> </tr> <tr> <td>13</td> <td>The victim falls
+        asleep for 1D6 rounds on failed Persistence roll whenever they enter
+        combat.</td> </tr> <tr> <td>14</td> <td>Makes loud flatulent noises
+        whenever they move; -25 to any Deception rolls.</td> </tr> <tr>
+        <td>15</td> <td>The victim is compelled to tell the truth at all
+        times.</td> </tr> <tr> <td>16</td> <td>No one ever takes the character
+        seriously. Always has to make an Influence roll at -20% to convince
+        others.</td> </tr> <tr> <td>17</td> <td>Turns into a dog.</td> </tr>
+        <tr> <td>18</td> <td>Arms turn to rubber, unable to hold anything.</td>
+        </tr> <tr> <td>19</td> <td>The victim becomes short, half SIZ.</td>
+        </tr> <tr> <td>20</td> <td>Roll twice.</td> </tr> </tbody> </table>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    _key: '!journal.pages!tQAx53vXPFGozPEk.wWCRB02MMRERgevu'
+  - _id: xKi8bjZoCdynKjIv
+    name: 'Repair and Replace: Size of Item vs Magnitude'
+    text:
+      content: >-
+        <table> <caption>Size of Item vs Magnitude</caption> <thead> <tr>
+        <th>Magnitude</th> <th>Size of Item</th> </tr> </thead> <tbody> <tr>
+        <td>1</td> <td>Small items, such as pots, plates, knives, a defaced
+        detail on a stone fresco, etc.</td> </tr> <tr> <td>2</td> <td>Medium.
+        Large containers, such as wine amphorae, target shields, long swords,
+        human-sized armour, a missing arm on a broken statue.</td> </tr> <tr>
+        <td>3</td> <td>Large. Tower shields, broken doors, a missing masonry
+        feature such as a column.</td> </tr> <tr> <td>4</td> <td>Huge. Giant
+        armour, ruined houses, shattered towers.</td> </tr> <tr> <td>5</td>
+        <td>Enormous. The broken parts of a walking castle, the ruined walls of
+        a city.</td> </tr> </tbody> </table>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    _key: '!journal.pages!tQAx53vXPFGozPEk.xKi8bjZoCdynKjIv'
+  - _id: B11Ii3ssupRu3Yny
+    name: Reflection Results
+    text:
+      content: >-
+        <table> <caption>Reflection Results</caption> <thead> <tr> <th>Incoming
+        Spell’s Magnitude is...</th> <th>Effect</th> </tr> </thead> <tbody> <tr>
+        <td>Equal to or weaker than Reflection’s magnitude.</td> <td>Incoming
+        spell reflected and Reflection remains.</td> </tr> <tr> <td>1 or more
+        points stronger than Reflection’s magnitude.</td> <td>Reflection is
+        eliminated and the incoming spell takes effect.</td> </tr> </tbody>
+        </table>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    _key: '!journal.pages!tQAx53vXPFGozPEk.B11Ii3ssupRu3Yny'
+  - _id: qKW313w78WHd3It7
+    name: Spirit Block Effectiveness
+    text:
+      content: >-
+        <table> <caption>Spirit Block Effectiveness</caption> <thead> <tr>
+        <th>Spirit Block’s Magnitude</th> <th>Recipient May Only Be Harmed By
+        Spirits With…</th> </tr> </thead> <tbody> <tr> <td>1</td> <td>POW 10 or
+        higher</td> </tr> <tr> <td>2</td> <td>POW 17 or higher</td> </tr> <tr>
+        <td>3</td> <td>POW 26 or higher</td> </tr> <tr> <td>4</td> <td>POW 37 or
+        higher</td> </tr> <tr> <td>5</td> <td>POW 50 or higher</td> </tr> <tr>
+        <td>6</td> <td>POW 65 or higher</td> </tr> <tr> <td>7</td> <td>POW 82 or
+        higher</td> </tr> <tr> <td>8</td> <td>POW 101 or higher</td> </tr>
+        </tbody> </table>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    _key: '!journal.pages!tQAx53vXPFGozPEk.qKW313w78WHd3It7'
+  - _id: 4VGYVzvW6Dti0GRW
+    name: Whirlwind Results
+    text:
+      content: >-
+        <table> <caption>Whirlwind Results</caption> <thead> <tr> <th>Roll
+        1D6</th> <th>Result</th> </tr> </thead> <tbody> <tr> <td>1-2</td>
+        <td>The character is carried up 1D10 metres (if already at the top),
+        blown out of the whirlwind the additional height before falling to earth
+        (taking damage).</td> </tr> <tr> <td>3-4</td> <td>Stay at the height
+        they are.</td> </tr> <tr> <td>5-6</td> <td>Fall 1D6 down in the vortex.
+        If this takes them to the ground, they take falling damage.</td> </tr>
+        </tbody> </table>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    _key: '!journal.pages!tQAx53vXPFGozPEk.4VGYVzvW6Dti0GRW'
+  - _id: lNGpuk8jNUwoBXEY
+    name: Mirage
+    text:
+      content: >-
+        <table> <thead> <tr> <th>Magnitude</th> <th>Modifier to Perception
+        test</th> <th>Type of illusion possible</th> </tr> </thead> <tbody> <tr>
+        <td>1</td> <td>+50 %</td> <td>Not capable of motion or causing damage.
+        Slightly fuzzy and unreal around the edges. Limit of SIZ 10.</td> </tr>
+        <tr> <td>2</td> <td>+25 %</td> <td>Some minor discrepancies. Capable of
+        motion, but not of damage. Limit of SIZ 15.</td> </tr> <tr> <td>3</td>
+        <td>0</td> <td>Capable of motion and causing damage. Limit of SIZ
+        20.</td> </tr> <tr> <td>4</td> <td>-25 %</td> <td>Capable of motion and
+        causing damage. Limit of SIZ 30.</td> </tr> <tr> <td>5</td> <td>-50
+        %</td> <td>Indistinguishable from the real thing, capable of motion and
+        damage. Limit of SIZ 40.</td> </tr> <tr> <td>+1</td> <td>-50%</td>
+        <td>+10 SIZ per magnitude.</td> </tr> </tbody> </table>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    _key: '!journal.pages!tQAx53vXPFGozPEk.lNGpuk8jNUwoBXEY'
+_key: '!journal!tQAx53vXPFGozPEk'

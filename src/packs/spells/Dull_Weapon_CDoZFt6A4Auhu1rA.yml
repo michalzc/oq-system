@@ -1,0 +1,20 @@
+system:
+  skillReference: personal-magic-casting
+  magnitude: 1
+  type: personal
+  nonVariant: false
+  description: >-
+    <p>This spell works on any weapon. For every point of magnitude, it reduces
+    the
+
+    damage dealt by the target weapon by two points. This spell does not affect
+    the
+
+    damage inflicted by the damage bonus of the user.</p>
+_id: CDoZFt6A4Auhu1rA
+type: spell
+img: systems/oq/assets/icons/magic-swirl.svg
+folder: PmL84WZU2luOrJSw
+name: Dull Weapon
+_key: '!items!CDoZFt6A4Auhu1rA'
+effects: []

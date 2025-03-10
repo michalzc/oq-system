@@ -1,0 +1,20 @@
+_id: E1Dbwru0wWWVDIyW
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/3d-hammer.svg
+name: Hammer
+system:
+  description: >-
+    <p>If used as a weapon, it is treated as a club (wielded with a –20%
+    penalty).
+
+    Hammers may be used on inanimate objects without being destroyed.</p>
+  cost: 1
+  quantity: 1
+  state: carried
+  type: single
+  traits:
+    - Improvised Weapon (-20%)
+    - Damage (1d6)
+type: equipment
+_key: '!items!E1Dbwru0wWWVDIyW'
+effects: []

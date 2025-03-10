@@ -1,0 +1,14 @@
+_id: i2eT2RpxuB4BVdH5
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/swap-bag.svg
+name: Slingbag
+system:
+  description: <p>It can carry 15 ENC of equipment.</p>
+  cost: 0.5
+  encumbrance: 1
+  quantity: 1
+  state: carried
+  type: single
+type: equipment
+_key: '!items!i2eT2RpxuB4BVdH5'
+effects: []

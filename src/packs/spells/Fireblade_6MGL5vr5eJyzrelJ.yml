@@ -1,0 +1,31 @@
+system:
+  skillReference: personal-magic-casting
+  nonVariant: true
+  type: personal
+  magnitude: 4
+  description: >-
+    <p>For the duration of the spell, the target weapon deals an additional 1D10
+
+    magical fire damage as well as its normal damage. One struck by the weapon
+
+    remains on fire, taking 1D10 damage per round in subsequent rounds, until
+    they
+
+    spend a combat action putting out the flames or someone successfully casts
+
+    Extinguish on them. A weapon under the effects of Fireblade cannot benefit
+    from
+
+    Weapon Enhance. Since Fireblade does magical damage, it damages creatures
+    immune
+
+    to normal damage.”</p>
+  traits:
+    - Touch
+folder: PmL84WZU2luOrJSw
+name: Fireblade
+type: spell
+img: systems/oq/assets/icons/magic-swirl.svg
+_id: 6MGL5vr5eJyzrelJ
+_key: '!items!6MGL5vr5eJyzrelJ'
+effects: []

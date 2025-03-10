@@ -1,0 +1,20 @@
+system:
+  skillReference: personal-magic-casting
+  magnitude: 1
+  nonVariant: false
+  description: |-
+    <p>For every point of the magnitude of this spell, the target’s hit points
+    increase by +2. A target cannot have its hit points increased in this way to
+    more than twice its original score.  Damage is taken from the ‘magical’ hit
+    points first, so when the spell dissipates the inflicted damage taken on the
+    magical hit points disappears too</p>
+  type: personal
+  traits:
+    - Touch
+img: systems/oq/assets/icons/magic-swirl.svg
+folder: PmL84WZU2luOrJSw
+name: Vigour
+_id: bl6L0iB5JANGwvxH
+type: spell
+_key: '!items!bl6L0iB5JANGwvxH'
+effects: []

@@ -1,0 +1,27 @@
+_id: 9cel5pTBK8ADGBYJ
+_stats: null
+effects: []
+flags:
+  oq:
+    newActor:
+      - character
+folder: szWzZEdK1HVFTQEr
+img: systems/oq/assets/icons/skills.svg
+name: Craft
+ownership:
+  KsTXxaVKKsCmFqBq: 3
+  default: 0
+sort: 0
+system:
+  advancement: 0
+  customGroupName: ''
+  description: >-
+    <p>This skill is a grouping of several disciplines, that measures the
+    character’s ability to make and repair items.</p><p>As a very rough guide,
+    it takes one day per 50 SP to produce an item. The base cost of the article
+    in materials needed is 50% of the listed finished value.</p>
+  formula: '@int+10'
+  group: practical
+  mod: 0
+type: skill
+_key: '!items!9cel5pTBK8ADGBYJ'

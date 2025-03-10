@@ -1,0 +1,51 @@
+system:
+  skillReference: personal-magic-casting
+  magnitude: 1
+  description: >-
+    <p>Like Detect (Type), this includes several different spells, each of which
+
+    affects a different non-combat skill.  For each point of magnitude, the
+
+    recipient gains +10% to any skill test using the Enhanced skill. 
+    Alternatively,
+
+    for each additional point of magnitude of the spell, the caster can affect
+    one
+
+    more target.  How the caster allocates this magnitude between bonuses and
+
+    targets is up to the caster, providing each bonus are in multiples of 10%,
+    and
+
+    the total of bonuses equals the spells magnitude x 10%.</p> <p>For example,
+
+    Ethelred may have Enhance (Deception) 5.  He could cast it all on himself to
+
+    give a whopping +50% to their Deception or could cast it on himself and an
+    ally,
+
+    giving himself +30% and their ally +20%. If in a larger group, he could even
+
+    cast it on 5 allies, each of whom would gain +10% to their Deception
+    skill.</p>
+
+    <p>The most common spells of this type are:</p> <ul> <li><i>Enhance
+
+    (Deception)</i>, often used by thieves.</li> <li><i>Enhance (Trade)</i>,
+    used by
+
+    merchants.</li> <li><i>Enhance (Influence)</i>, used by lawyers, con-artists
+    and
+
+    officers.</li> <li><i>Enhance (Resilience)</i>, used by warriors.</li>
+
+    <li><i>Enhance (Persistence)</i>, used by magicians.</li> </ul>
+  nonVariant: false
+  type: personal
+folder: PmL84WZU2luOrJSw
+name: Enhance (Skill)
+type: spell
+_id: mwsxUWy7n0yQbcYH
+img: systems/oq/assets/icons/magic-swirl.svg
+_key: '!items!mwsxUWy7n0yQbcYH'
+effects: []

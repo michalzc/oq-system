@@ -1,0 +1,35 @@
+system:
+  remainingMagnitude: 1
+  noMagicPoints: true
+  description: >-
+    <p>This spell lengthens the duration of any Divine Magic spell with the
+    Duration
+
+    trait. Extension, and the spell it is extending, are cast simultaneously by
+    the
+
+    caster – this is an exception to the normal rule that only one Divine Magic
+
+    spell is cast during a combat round.</p> <p>Each point of magnitude of the
+
+    Extension spell doubles the target spell’s duration. Thus, a magnitude 1
+
+    Extension increases Breathe Water’s Duration to 30 minutes, a magnitude 2
+
+    increases it to one hour, magnitude 3 increases it to two hours, magnitude 4
+
+    increases it to four hours, and so on.</p>
+  magnitude: 1
+  nonVariant: false
+  traits:
+    - Common
+    - Duration (Special)
+    - Progressive
+  type: divine
+_id: 6NoxXlRBK74V7iZO
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Extension
+type: spell
+_key: '!items!6NoxXlRBK74V7iZO'
+effects: []

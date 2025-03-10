@@ -1,0 +1,63 @@
+system:
+  skillReference: personal-magic-casting
+  magnitude: 1
+  traits:
+    - Permanent
+  description: >-
+    <p>This spell allows the caster to create a written version of the spell for
+    use
+
+    later. Either to impart knowledge of the spell to a trainee or as a
+    reference
+
+    when casting the spell in the field.</p> <p>The caster must be able to read
+    and
+
+    write in some form of written language, which is represented by having a
+
+    Language skill of over 80%.  They must also pay for the special inks and
+    scroll
+
+    paper (1 Gold Ducat per point of magnitude).</p> <p>The trainee must be able
+    to
+
+    read the language that the scroll uses. Once every three months they may
+    study
+
+    the scroll, which takes one day per point of spell, and then make a Language
+
+    skill test. If successful, they spend the normal growth cost to learn the
+    spell.
+
+    If they roll a critical they half that cost, to the nearest whole unit. If
+    they
+
+    fumble, they can never learn the spell from that scroll, it is beyond their
+
+    understanding.</p> <p>To directly cast a spell from the scroll, the caster
+    must
+
+    be able to read the language the scroll uses. Then cast the spell as normal.
+
+    Casting is much slower than if the caster is casting the spell from memory.
+
+    First, the caster reads the spell out loud and then harnesses and shapes the
+
+    magical energies. Therefore, no matter what their normal casting skill, the
+
+    spell takes an entire combat round to cast, and fires off at the end of the
+
+    combat round.</p> <p>In both cases, once learnt or cast, unless the original
+
+    writer spends one growth point at the time of creation to make the scroll
+
+    reusable, the ink fades, and the scroll crumbles to dust.</p>
+  type: personal
+  nonVariant: false
+folder: PmL84WZU2luOrJSw
+name: Create Scroll
+_id: IYC4DNTyAzPBr2ox
+img: systems/oq/assets/icons/magic-swirl.svg
+type: spell
+_key: '!items!IYC4DNTyAzPBr2ox'
+effects: []

@@ -1,0 +1,35 @@
+system:
+  skillReference: personal-magic-casting
+  magnitude: 1
+  description: >-
+    <p>This spell allows the caster to move an item of up to 3 SIZ or ENC per
+    point
+
+    of magnitude either towards or away from them in a straight line as if
+    pushed
+
+    suddenly from one direction or the other. The item does not move with
+
+    significant enough force to inflict damage unless it is naturally damaging
+    (a
+
+    bottle of acid, for instance). The caster has no control over the distance
+
+    pushed or pulled, as this depends on the location of the item and/or the
+    surface
+
+    on which it rests. Living creatures targeted by this spell are allowed a
+
+    Resilience roll to resist.</p>
+  nonVariant: false
+  traits:
+    - Instant
+    - Resist (Resilience)
+  type: personal
+folder: PmL84WZU2luOrJSw
+_id: ISkvUuoIXNJRrhS8
+name: Push/Pull
+type: spell
+img: systems/oq/assets/icons/magic-swirl.svg
+_key: '!items!ISkvUuoIXNJRrhS8'
+effects: []

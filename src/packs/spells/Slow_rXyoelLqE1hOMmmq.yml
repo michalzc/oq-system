@@ -1,0 +1,22 @@
+system:
+  skillReference: personal-magic-casting
+  magnitude: 1
+  type: personal
+  traits:
+    - Resist (Resilience)
+  nonVariant: false
+  description: >-
+    <p>For every point of the magnitude of this spell, decrease target’s
+    movement
+
+    rate by 2m. A target’s movement may not go below one metre through use of
+    this
+
+    spell.</p>
+img: systems/oq/assets/icons/magic-swirl.svg
+type: spell
+folder: PmL84WZU2luOrJSw
+name: Slow
+_id: rXyoelLqE1hOMmmq
+_key: '!items!rXyoelLqE1hOMmmq'
+effects: []

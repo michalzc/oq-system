@@ -1,0 +1,23 @@
+_id: ISFPkEAb8sXmadb7
+folder: jAyxhFenHEzNz83C
+img: systems/oq/assets/icons/roman-shield.svg
+name: Large Shield
+system:
+  correspondingSkill:
+    skillReference: close-combat
+  hands: one
+  encumbrance: 3
+  cost: 300
+  state: carried
+  type: shield
+  traits:
+    - Parry Thrown Missiles
+    - Cover against missile attacks -50%
+    - Fighting Retreat +50%
+    - Shield Defence.
+  damage:
+    damageFormula: 1d8
+    includeDamageMod: true
+type: weapon
+_key: '!items!ISFPkEAb8sXmadb7'
+effects: []

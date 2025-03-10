@@ -1,0 +1,24 @@
+system:
+  skillReference: sorcery-casting
+  magnitude: 1
+  description: >-
+    <p>This spell protects the recipient from suffocation by air deprivation,
+    due to
+
+    such factors as drowning or the Smother spell. Each point of magnitude will
+
+    cover three points of SIZ – thus a magnitude 4 Skin of Life spell would
+    sustain
+
+    a SIZ 12 creature.</p>
+  nonVariant: false
+  traits:
+    - Touch
+  type: sorcery
+_id: zRAyfvMbDv4twIac
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Skin of Life
+type: spell
+_key: '!items!zRAyfvMbDv4twIac'
+effects: []

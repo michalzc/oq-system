@@ -1,0 +1,37 @@
+system:
+  skillReference: sorcery-casting
+  magnitude: 1
+  description: >-
+    <p>Eminently useful for finding valuables from afar, this spell has a
+    variation
+
+    for every substance imaginable. Sense (Substance) will cause all sources of
+    the
+
+    substance within range of the spell to glow an appropriate colour, visible
+    only
+
+    to the caster – diamonds will gleam like ice, amber will shine like a
+    camp-fire
+
+    and so on. Each point of this spell’s magnitude allows it to penetrate one
+    metre
+
+    of rock, wood or dirt. If the source is concealed behind such a material,
+    the
+
+    surface nearest the caster will glow for a moment. The spell cannot
+    penetrate
+
+    refined metal, though it can penetrate ore.</p>
+  nonVariant: false
+  traits:
+    - Concentration
+  type: sorcery
+_id: qiZf4e4diMqWnepo
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Sense (Substance)
+type: spell
+_key: '!items!qiZf4e4diMqWnepo'
+effects: []

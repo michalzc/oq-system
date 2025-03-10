@@ -1,0 +1,18 @@
+_id: 8YTiq2BkPyjIH5KZ
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/rope-coil.svg
+name: Rope
+system:
+  description: |-
+    <p>A standard rope can support the weight of 50 ENC or 50 SIZ, or any
+    combination thereof.</p>
+  cost: 10
+  encumbrance: 2
+  quantity: 1
+  state: carried
+  type: single
+  traits:
+    - Length (10m)
+type: equipment
+_key: '!items!8YTiq2BkPyjIH5KZ'
+effects: []

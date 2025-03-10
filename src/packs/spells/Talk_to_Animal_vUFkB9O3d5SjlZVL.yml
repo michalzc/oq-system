@@ -1,0 +1,16 @@
+system:
+  skillReference: personal-magic-casting
+  description: |-
+    <p>With this spell, the recipient can talk to any beast within ten metres of
+    them. This communication is verbal; therefore, the recipient must be able to
+    speak and be heard by the target animal.</p>
+  magnitude: 3
+  type: personal
+  nonVariant: true
+name: Talk to Animal
+folder: PmL84WZU2luOrJSw
+img: systems/oq/assets/icons/magic-swirl.svg
+type: spell
+_id: vUFkB9O3d5SjlZVL
+_key: '!items!vUFkB9O3d5SjlZVL'
+effects: []

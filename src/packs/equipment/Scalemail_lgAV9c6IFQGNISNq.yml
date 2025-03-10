@@ -1,0 +1,13 @@
+_id: lgAV9c6IFQGNISNq
+name: Scalemail
+folder: 1LSg8TGkuL3Z4Wyx
+img: systems/oq/assets/icons/scale-mail.svg
+type: armour
+system:
+  ap: 4
+  encumbrance: 7
+  cost: 1500
+  state: worn
+  description: <p>Metal scales sewn on to a padded leather suit.</p>
+_key: '!items!lgAV9c6IFQGNISNq'
+effects: []

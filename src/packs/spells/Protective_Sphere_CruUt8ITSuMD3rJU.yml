@@ -1,0 +1,50 @@
+system:
+  skillReference: sorcery-casting
+  magnitude: 1
+  description: >-
+    <p>When completed, the Protective Sphere will create a sphere-shaped area of
+
+    protection with a radius in metres equal to the spell’s magnitude. If this
+    spell
+
+    is cast on the ground (or another immovable place), it cannot be moved. If
+    cast
+
+    on a vehicle (such as the bed of a wagon) or a person, it will move with the
+
+    target.  After the sphere has been completed any one or all of the following
+
+    spells can be added to provide the defensive capacities of the Sphere during
+    the
+
+    duration of the Sphere. The Sphere on its own provides no protection, that
+    is
+
+    down to the Resistance spells.</p> <p>Damage Resistance, Spell Resistance,
+
+    Spirit Resistance.</p> <p>The Protective Sphere’s perimeter contains the
+
+    benefits of its combined Resistance spell(s). The Protective Sphere only
+
+    inhibits spells or attacks entering the circle from the outside – attacks or
+
+    spells originating within the circle are unaffected. Thus, a Protective
+    Sphere
+
+    against spirits would block out outside spirits but have no effect on those
+
+    already inside its perimeter.  A Protective Sphere against damage or spells
+
+    would block out incoming attacks/spells but have no effect on attacks made
+
+    within the sphere (including attacks targeting those outside the
+    sphere).</p>
+  nonVariant: false
+  type: sorcery
+_id: CruUt8ITSuMD3rJU
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Protective Sphere
+type: spell
+_key: '!items!CruUt8ITSuMD3rJU'
+effects: []

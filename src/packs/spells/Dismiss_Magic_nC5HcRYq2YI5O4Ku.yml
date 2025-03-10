@@ -1,0 +1,45 @@
+system:
+  remainingMagnitude: 1
+  noMagicPoints: true
+  description: >-
+    <p>Dismiss Magic is used either against a general target or a specific spell
+    and
+
+    as a reaction when attacked with magic.</p> <p>When used against a general
+
+    target, Dismiss Magic will eliminate a combined magnitude of spells equal to
+    its
+
+    magnitude, starting with the most powerful affecting the target. If it fails
+    to
+
+    eliminate any spell (because the spell’s magnitude is too high), then its
+
+    effects immediately end and it will dispel no more spells.</p> <p>The caster
+    can
+
+    also target Dismiss Magic against a single specific spell. It will work
+
+    successfully as long as Dismiss Magic’s magnitude equals or exceeds the
+    target
+
+    spell’s magnitude.</p> <p>When used as a defensive reaction against incoming
+
+    magic, as long as the attacking caster is within Dismiss Magic’s range, a
+
+    successful Dismiss Magic disrupts the other spell and nullifies it.</p>
+  magnitude: 1
+  nonVariant: false
+  traits:
+    - Common
+    - Instant
+    - Progressive
+    - Ranged
+  type: divine
+_id: nC5HcRYq2YI5O4Ku
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Dismiss Magic
+type: spell
+_key: '!items!nC5HcRYq2YI5O4Ku'
+effects: []

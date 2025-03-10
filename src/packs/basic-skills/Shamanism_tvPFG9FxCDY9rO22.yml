@@ -1,0 +1,38 @@
+_id: tvPFG9FxCDY9rO22
+folder: QTKeyS3tL0LjreJG
+img: systems/oq/assets/icons/skills.svg
+name: Shamanism
+system:
+  description: >-
+    <p>This skill provides several spiritual abilities. These abilities,
+    although magical in origin, are always on or, in the case of Disassociate
+    from Body, can be instantly called on. No magic point spend is needed.</p>
+    <p><i>Disassociate from Body.</i> The Shaman can put their body into a deep
+    sleep, while their spirit travels the Spirit World. A slender silver cord
+    connects the two. If the physical body suffers death, their spirit becomes
+    trapped in the Spirit World. While in the Spirit World, if the Shaman
+    reaches 1 or 0 magic points, their Spirit returns to their body immediately.
+    In this ‘dissociated’ form, the Shaman can engage in Spirit Combat with an
+    attack equal to their Shamanism score.  During their time in the Spirit
+    World, the Shaman has no physical body, therefore is considered STR, CON,
+    DEX and SIZless. They cannot use any skills that are based upon those
+    Characteristics or require a physical presence. The only way that a
+    dissociated shaman can interact with the physical world is through casting
+    spells or spiritually attacking. While disassociated, the Shaman is
+    invisible to the physical world.</p> <p><i>See into the Spirit World.</i>
+    The Shaman can always see what is happening in the Spirit World and
+    therefore detect spirits that are invisible to non-Shamans.</p> <p><i>Assess
+    the Harmony of the Spirit World.</i> This ability allows the Shaman to sense
+    if something is wrong with the immediate Spirit World to a range of POW in
+    kilometers.</p> <p><i>Spirit World Knowledge.</i> The Shaman learns about
+    the geography of the Spirit World and the cultures of its inhabitants.</p>
+    <p><i>Able to Initiate Spirit Combat.</i> Unlike untrained characters,
+    Shamans can engage spirits in Spirit Combat, without having to cast any
+    extra magic spells. See the Spirit Combat section, under Magical Combat, in
+    the Combat chapter for more details.</p>
+  formula: '@int+@pow'
+  type: magic
+  mod: 0
+type: skill
+_key: '!items!tvPFG9FxCDY9rO22'
+effects: []

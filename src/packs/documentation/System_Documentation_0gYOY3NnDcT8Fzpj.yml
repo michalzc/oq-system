@@ -1,0 +1,205 @@
+_id: 0gYOY3NnDcT8Fzpj
+_stats: null
+flags:
+  core: {}
+folder: null
+image: null
+name: System Documentation
+ownership:
+  default: 0
+  jzN44THfEHA8DC8v: 3
+pages:
+  - _id: UTjphPIpYI0hCNn0
+    _stats: null
+    flags: {}
+    image: null
+    name: Actors
+    ownership:
+      default: -1
+      jzN44THfEHA8DC8v: 3
+    sort: 100000
+    src: null
+    system: {}
+    text:
+      content: >-
+        <h2>Character</h2><h3>Character creation</h3><p>When a new Character
+        actor is created, all the skills from the Basic Skills compendium are
+        copied.</p><h4>Characteristics</h4><p>Characteristics can be updated
+        using the Characteristics dialogue box, the 'cog' icon on the
+        Characteristics panel. It calculates the points, as described in the
+        rules. Characteristics can be rolled, all or
+        individual.</p><h5>Mod</h5><p>Mod is a workaround for tracking temporary
+        modifications. For characteristics it is simply added to the final
+        value.</p><h4>Attributes</h4><p>Attributes are calculated from
+        characteristics. Only mods can be updated in the attributes dialogue. It
+        works in the same way as above.</p><header class="journal-page-header"
+        style="box-sizing:border-box;user-select:text;color:rgb(25, 24,
+        19);font-family:Merriweather,
+        serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial"><h2><span
+        style="font-family:Merriweather, serif">NPC</span></h2></header><section
+        class="journal-page-content"
+        style="box-sizing:border-box;user-select:text;color:rgb(25, 24,
+        19);font-family:Merriweather,
+        serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial"><h3><span
+        style="font-family:Merriweather, serif">NPC
+        Creation</span></h3><h4>Characteristics</h4><p><span
+        style="font-family:Merriweather, serif">All characteristics possess
+        default values corresponding to those of an average human and are
+        editable directly on the NPC sheet. Beneath each value lies a roll
+        formula representing the average human defaults.</span></p><p><span
+        style="font-family:Merriweather, serif">The dice icon located at the
+        bottom of the panel initiates a dice roll for all characteristics based
+        on their respective formulas and subsequently updates the
+        values.</span></p><h4><span style="font-family:Merriweather,
+        serif">Attributes</span></h4><p><span style="font-family:Merriweather,
+        serif">Similar to character attributes, NPCs possess the same
+        characteristics and functionalities.</span></p><h2><span
+        style="font-family:Merriweather, serif">Roll data</span></h2><p><span
+        style="font-family:Merriweather, serif">Actors furnish attribute values,
+        damage modifiers, and skills as 'roll data' for utilization in roll
+        formulas.</span></p><p><span style="font-family:Merriweather,
+        serif">Attributes are accessible by their abbreviations, such as
+        Strength represented by 'str'. Skills reside within the 'skills'
+        collection and can be accessed as 'skills.skill-slug.value' and
+        'skills.skill-slug.mod'. Damage modifiers are represented as
+        'dm'.</span></p><p><span style="font-family:Merriweather, serif">It's
+        worth noting that the damage modifier already incorporates the '+' or
+        '-' sign and hence should not be appended to the roll formula, for
+        instance, "/roll d6 @dm".</span></p></section>
+      format: 1
+      markdown: ''
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!0gYOY3NnDcT8Fzpj.UTjphPIpYI0hCNn0'
+  - _id: 7PhcLCq73tunH1S5
+    _stats: null
+    flags: {}
+    image: null
+    name: Items
+    ownership:
+      default: -1
+      jzN44THfEHA8DC8v: 3
+    sort: 200000
+    src: null
+    system: {}
+    text:
+      content: >-
+        <h1>Skills</h1><p>The skill sheet includes a 'skill formula' field that
+        utilizes the roll data provided by the actor to compute its total value
+        once assigned to the actor. For instance, '@str+@dex' would evaluate to
+        the sum of the Strength and Dexterity characteristics, which serve as
+        default values.</p><p>Upon assignment to an actor, the advancement field
+        becomes visible, allowing the user to input skill advancements. The
+        total value will then consist of the default value calculated from the
+        formula in addition to any advancements made by the user. The
+        advancement field is also visible on the actor sheet within the skills
+        listing. This allows for convenient access and modification of skill
+        advancements directly from the actor's skill section.</p><p>The 'mod'
+        field operates with a slight variation. Instead of being directly added
+        to the skill value, it functions as an additional modifier provided to
+        the roll dialog. This modifier can be adjusted before initiating the
+        roll.</p><p>Below the skill name, the skill's <em>slug</em> is visible.
+        This simplified name serves as a reference in rolls (accessible in the
+        <em>skills</em> collection) and can also be used as the value for the
+        corresponding skill field on the weapon
+        sheet.</p><h1>Weapons</h1><p>When a weapon is not attached to an actor,
+        the skill field appears as a text input for the skill <em>slug</em>.
+        Once attached to an actor, it transforms into a combo box displaying a
+        list of the actor's skills. If the actor possesses a skill with the
+        previously entered <em>slug</em>, that skill will be automatically
+        selected upon attachment to the actor.</p><p>The skill mod field
+        functions similarly to the skill mod. It does not directly augment the
+        weapon's skill value but is instead supplied to the roll dialog as an
+        extra modifier. If the corresponding skill's mod is also configured,
+        then the more significant modifier is selected, adhering to the rules of
+        the game.</p><p>The damage formula can be a roll formula and may include
+        the actor's roll data. It is unnecessary to directly incorporate the
+        actor's damage modifier, as it will be automatically included if the
+        'Include DM' checkbox is selected.</p><h1>Special Ability</h1><p>Similar
+        to skills, a special ability features a formula field where the actor's
+        roll data can be utilized. Unlike skills, it does not possess
+        advancements or mods. Additionally, it includes a damage formula akin to
+        weapons.</p><p>Primarily designed for use with NPCs, special abilities
+        can also be assigned to characters if needed.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!0gYOY3NnDcT8Fzpj.7PhcLCq73tunH1S5'
+  - _id: FYuMiDVbIhKCSKno
+    _stats: null
+    flags: {}
+    image: null
+    name: Chat Commands
+    ownership:
+      default: -1
+      jzN44THfEHA8DC8v: 3
+    sort: 300000
+    src: null
+    system: {}
+    text:
+      content: >-
+        <p>There are two distinctive chat commands
+        available:</p><ul><li><p>Adjust HP: Utilize <strong><code>/hp &lt;roll
+        formula&gt;</code></strong> to trigger a roll and present a chat message
+        featuring three buttons: "Apply as Damage", "Apply as Damage and Ignore
+        Armor", and "Heal".</p></li><li><p>Adjust MP: Similarly, with
+        <strong><code>/mp &lt;roll formula&gt;</code></strong>, evaluate the
+        roll formula and display a message with buttons to either add or
+        subtract Magic Points.</p></li></ul>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!0gYOY3NnDcT8Fzpj.FYuMiDVbIhKCSKno'
+  - _id: jSQ4r85hI4fk38lA
+    _stats: null
+    flags: {}
+    image: null
+    name: Combat
+    ownership:
+      default: -1
+      jzN44THfEHA8DC8v: 3
+    sort: 400000
+    src: null
+    system: {}
+    text:
+      content: >-
+        <h1>Initiative</h1><p>On the character sheet, within the 'Combat' tab,
+        and on the NPC sheet, located in the 'Combat' section, there is a combo
+        box containing a list of skills, weapons, and special abilities that can
+        be selected as a base for initiative during combat. Adjacent to this box
+        is a field designated for an additional modifier.</p><p>Initiative
+        calculations solely consider the values of the chosen skill or special
+        ability without incorporating mods. Any additional modifiers can be
+        specified in the corresponding field.</p><h1>Combat Tracker</h1><p>In
+        this version, the combat tracker requires manually rerolling initiative
+        every turn. At the end of each round, the Game Master (GM) must click
+        the 'Reset Initiative' button on the Combat Tracker. Subsequently, both
+        players and the GM (for monsters and NPCs) update their initiative
+        values, if necessary. Once completed, the GM can then click the 'Reroll
+        Initiative' button and proceed to the next round.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!0gYOY3NnDcT8Fzpj.jSQ4r85hI4fk38lA'
+sort: 0
+_key: '!journal!0gYOY3NnDcT8Fzpj'

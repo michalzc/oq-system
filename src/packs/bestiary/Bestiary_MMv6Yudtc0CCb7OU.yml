@@ -1,0 +1,3279 @@
+_id: MMv6Yudtc0CCb7OU
+flags:
+  core: {}
+folder: null
+image: null
+name: Bestiary
+ownership:
+  default: 0
+  jzN44THfEHA8DC8v: 3
+pages:
+  - _id: ZHk6iuYlqedodMho
+    flags: {}
+    image: {}
+    name: Basilisk
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 2D3]]{2D3}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 2D6]]{2D6}</td><td
+        style="text-align:center">[[/gmr 1D3]]{1D3}</td><td
+        style="text-align:center">3</td><td style="text-align:center">[[/gmr
+        1D6+12]]{1D6+12}</td><td style="text-align:center">3</td></tr><tr><td
+        style="text-align:center">4</td><td style="text-align:center">13</td><td
+        style="text-align:center">7</td><td style="text-align:center">2</td><td
+        style="text-align:center">3</td><td style="text-align:center">16</td><td
+        style="text-align:center">3</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:17%"></col><col style="width:26%"></col><col
+        style="width:21%"></col><col style="width:5%"></col><col
+        style="width:21%"></col><col
+        style="width:7%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">8</td><td
+        style="text-align:center">-1D6</td><td
+        style="text-align:center">16</td><td
+        style="text-align:center">15m</td><td style="text-align:center">Scales
+        (2pt)</td><td style="text-align:center">5</td></tr></tbody></table><h2
+        id="skills">Skills</h2><ul><li><strong>Resistances:</strong> Dodge [[/r
+        1d100]]{30%}, Persistence [[/r 1d100]]{50%}, Resilience [[/r
+        1d100]]{70%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{60%}, Deception [[/r
+        1d100]]{40%}.</li><li><strong>Knowledge:</strong> Natural lore [[/r
+        1d100]]{40%}.</li></ul><h2 id="combat">Combat</h2><ul><li><strong>Ranged
+        Combat [[/r 1d100]]{100%}:</strong> Gaze (Death, 1 CR, Range: POW in
+        metres).</li><li><strong>Unarmed Combat [[/r 1d100]]{30%}:</strong> Bite
+        ([[/r {1D6-1D6,1}kh]]{1D6-1D6+poison}).</li></ul><p>Note: The basilisk
+        can attack with both gaze and bite simultaneously in the same
+        action.</p><h2 id="magic">Magic</h2><p>Basilisks do not learn
+        magic.</p><h2 id="special-rules">Special Rules</h2><h3
+        id="corrosive-blood">Corrosive Blood</h3><p>Any non-magical weapon
+        hitting the basilisk corrodes in the creature’s blood, completely
+        disintegrating after [[/gmr 1D4]]{1D4} rounds.</p><p>The basilisk’s
+        poison and corrosive blood are magical effects, which lose their special
+        properties a few minutes after leaving the basilisk’s body, making it
+        virtually impossible to use the creature as a source for making lethal
+        compounds.</p><h3 id="basilisk-venom">Basilisk
+        Venom</h3><ul><li><strong>Type:</strong> Ingested or
+        smeared.</li><li><strong>Delay:</strong>
+        Immediate.</li><li><strong>Potency:</strong> 65.</li><li><strong>Full
+        Effect:</strong> [[/gmr 1D4]]{1D4} Hit Point damage, applies -6 penalty
+        to victim’s CON.</li><li><strong>Duration:</strong> [[/gmr 6D10]]{6D10}
+        minutes.</li></ul><h3 id="death-gaze">Death Gaze</h3><p>A basilisk can
+        kill with a glance. In combat, the basilisk glares at a single opponent
+        each round. If the basilisk overcomes the target in an opposed test of
+        its Persistence against the target’s Resilience, the target dies
+        instantly. Using the gaze attack costs no magic points, and the basilisk
+        may normally attack in any round in which it uses the gaze attack. This
+        attack penetrates magical defences as if it were a Magnitude 6 Personal
+        Magic spell. If the target successfully resists the gaze attack, they
+        are unharmed, though they may be targeted again.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.ZHk6iuYlqedodMho'
+  - _id: oUyaVZd110SJ6Njl
+    flags: {}
+    image: {}
+    name: Beastling
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 1D6+12]]{1D6+12}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 1D6+12]]{1D6+12}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 2D6]]{2D6}</td></tr><tr><td
+        style="text-align:center">13</td><td
+        style="text-align:center">16</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">16</td><td
+        style="text-align:center">13</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">7</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:17%"></col><col style="width:24%"></col><col
+        style="width:20%"></col><col style="width:7%"></col><col
+        style="width:22%"></col><col
+        style="width:8%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">16</td><td
+        style="text-align:center">+1D4</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">15m</td><td style="text-align:center">Leather
+        (AP 2)</td><td style="text-align:center">2</td></tr></tbody></table><h2
+        id="skills-1">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{40%}, Persistence [[/r 1d100]]{30%}, Resilience [[/r
+        1d100]]{30%}.</li><li><strong>Knowledge:</strong> Natural Lore [[/r
+        1d100]]{70%}.</li><li><strong>Practical:</strong> Deception [[/r
+        1d100]]{40%}.</li></ul><h2
+        id="combat-1">Combat</h2><ul><li><strong>Close Combat [[/r
+        1d100]]{50%}:</strong> Club ([[/r 1D6+1D4]]{1D6+1D4}), Short spear ([[/r
+        1D6+1D4]]{1D6+1D4}), Target Shield ([[/r
+        1D6+1D4]]{1D6+1D4}).</li><li><strong>Ranged Combat [[/r
+        1d100]]{50%}:</strong> Sling ([[/r 1D6+1D4]]{1D6+1D4}, 1 CR,
+        50m).</li><li><strong>Unarmed Combat [[/r 1d100]]{60%}:</strong> Head
+        Butt ([[/r 1D6+1D4]]{1D6+1D4}).</li></ul><h2
+        id="magic-1">Magic</h2><p>Beastlings are usually members of a Nature
+        religion.</p><h3 id="initiate-of-the-earth-mother">Initiate of the Earth
+        Mother</h3><ul><li><strong>Personal Magic [[/r 1d100]]{33%}:</strong>
+        Heal 2, Protection 2.</li><li><strong>Divine Magic:</strong>
+        Berserk.</li></ul>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.oUyaVZd110SJ6Njl'
+  - _id: AUxAVrV0B1ORJc5L
+    flags: {}
+    image: {}
+    name: Bloodweed
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <p>Fast-moving and agile, they either charge up to their victims or
+        creep up using plant overgrowth as cover (+25 to Deception if plant
+        cover is
+        available).</p><table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td
+        style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td
+        style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td
+        style="text-align:center">5</td><td style="text-align:center">[[/gmr
+        3D6]]{3D6}</td><td style="text-align:center">0</td></tr><tr><td
+        style="text-align:center">13</td><td
+        style="text-align:center">17</td><td
+        style="text-align:center">17</td><td
+        style="text-align:center">17</td><td style="text-align:center">5</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">0</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:16%"></col><col style="width:22%"></col><col
+        style="width:18%"></col><col style="width:6%"></col><col
+        style="width:28%"></col><col
+        style="width:8%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">17</td><td
+        style="text-align:center">+1D4</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">20m</td><td style="text-align:center">Tough
+        ‘bark’ (AP 4)</td><td
+        style="text-align:center">0</td></tr></tbody></table><h2
+        id="skills-2">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{90%}, Persistence [[/r 1d100]]{80%}, Resilience [[/r
+        1d100]]{90%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{90%}, Deception [[/r 1d100]]{90%}, Perception [[/r
+        1d100]]{35%}.</li></ul><h2
+        id="combat-2">Combat</h2><ul><li><strong>Unarmed Combat [[/r
+        1d100]]{90%}:</strong> Grapple, then inflict pain (Choke attack),
+        Bloodsucking bite ([[/r 1D4+1D4]]{1D4+1D4} + [[/r 1D6]]{1D6 Magic Point
+        drain}).</li></ul><h2 id="special-rules-1">Special
+        Rules</h2><p>Bloodsucking bite, the bloodweed’s bite causes blood loss
+        which also drains [[/gmr 1D6]]{1D6} Magic Points.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.AUxAVrV0B1ORJc5L'
+  - _id: SLqxOZanBOZG0URE
+    flags: {}
+    image: {}
+    name: Centaur
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 3D6+3]]{3D6+3}</td><td
+        style="text-align:center">[[/gmr 4D6+12]]{4D6+12}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td></tr><tr><td
+        style="text-align:center">17</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">14</td><td
+        style="text-align:center">26</td><td
+        style="text-align:center">13</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">11</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:17%"></col><col style="width:24%"></col><col
+        style="width:20%"></col><col style="width:7%"></col><col
+        style="width:22%"></col><col
+        style="width:8%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">19</td><td
+        style="text-align:center">+1D6</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">20m</td><td style="text-align:center">Leather
+        (AP 2)</td><td style="text-align:center">2</td></tr></tbody></table><h2
+        id="skills-3">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{30%}, Persistence [[/r 1d100]]{45%}, Resilience [[/r
+        1d100]]{60%}.</li><li><strong>Knowledge:</strong> Natural lore [[/r
+        1d100]]{60%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{60%}, Performance [[/r 1d100]]{50%}, Deception [[/r
+        1d100]]{30%}, Perception [[/r 1d100]]{40%}.</li></ul><h2
+        id="combat-3">Combat</h2><ul><li><strong>Ranged Combat [[/r
+        1d100]]{70%}:</strong> Long Bow ([[/r 2D8+1D6]]{2D8+1D6}, 1 CR,
+        150m).</li><li><strong>Close Combat [[/r 1d100]]{40%}:</strong> Lance
+        ([[/r 1D10+1D6]]{1D10+1D6}), Target Shield ([[/r 1D6+1D6]]{1D6+1D6}),
+        War Sword ([[/r 2D8+1D6]]{2D8+1D6}).</li><li><strong>Unarmed Combat [[/r
+        1d100]]{40%}:</strong> Kick ([[/r 1D6+1D6]]{1D6+1D6}).</li></ul><h2
+        id="magic-2">Magic</h2><p>Centaurs are usually members of Earth and
+        Nature religion and learn Personal Magic and Divine Magic from
+        these.</p><h3 id="initiate-of-the-earth-mother-1">Initiate of the Earth
+        Mother</h3><ul><li><strong>Personal Magic [[/r 1d100]]{40%}:</strong>
+        Heal 4, Protection 2.</li><li><strong>Divine Magic:</strong>
+        Berserk.</li></ul>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.SLqxOZanBOZG0URE'
+  - _id: aeqDdYolwxV0nh54
+    flags: {}
+    image: {}
+    name: Chreker
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table
+        style="width:100%"><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th>STR</th><th>DEX</th><th>CON</th><th>SIZ</th><th>INT</th><th>POW</th><th>CHA</th></tr></thead><tbody><tr><td>[[/gmr
+        2D6]]{2D6}</td><td>[[/gmr 4D6+6]]{4D6+6}</td><td>[[/gmr
+        2D6+3]]{2D6+3}</td><td>[[/gmr 2D6+3]]{2D6+3}</td><td>[[/gmr
+        3D6]]{3D6}</td><td>[[/gmr 3D6]]{3D6}</td><td>[[/gmr
+        2D6]]{2D6}</td></tr><tr><td>7</td><td>20</td><td>10</td><td>10</td><td>11</td><td>11</td><td>7</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:18%"></col><col style="width:25%"></col><col
+        style="width:21%"></col><col style="width:13%"></col><col
+        style="width:12%"></col><col
+        style="width:9%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">10</td><td style="text-align:center">0</td><td
+        style="text-align:center">11</td><td style="text-align:center">20m
+        Fly</td><td style="text-align:center">None</td><td
+        style="text-align:center">0</td></tr></tbody></table><h2
+        id="skills-4">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{85%}, Persistence [[/r 1d100]]{50%}, Resilience [[/r
+        1d100]]{50%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{90%}, Deception [[/r 1d100]]{90%}, Perception [[/r
+        1d100]]{50%}.</li></ul><h2
+        id="combat-4">Combat</h2><ul><li><strong>Unarmed Combat [[/r
+        1d100]]{50%}:</strong> Claws ([[/r 1D4]]{1D4}).</li></ul><h2
+        id="magic-3">Magic</h2><p>Normally none, but a chreker who is valued by
+        its master may be taught 1D6+3 magnitude of Personal Magic.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.aeqDdYolwxV0nh54'
+  - _id: X2abma9UksBUDRXw
+    flags: {}
+    image: {}
+    name: Dragon
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table
+        style="width:100%"><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 20D6]]{20D6}</td><td
+        style="text-align:center">[[/gmr 10D6]]{10D6}</td><td
+        style="text-align:center">[[/gmr 4D6]]{4D6}</td><td
+        style="text-align:center">[[/gmr 10D6+30]]{10D6+30}</td><td
+        style="text-align:center">[[/gmr 6D6]]{6D6}</td><td
+        style="text-align:center">[[/gmr 4D6+12]]{4D6+12}</td><td
+        style="text-align:center">[[/gmr 6D6]]{6D6}</td></tr><tr><td
+        style="text-align:center">70</td><td
+        style="text-align:center">35</td><td
+        style="text-align:center">14</td><td
+        style="text-align:center">65</td><td
+        style="text-align:center">21</td><td
+        style="text-align:center">26</td><td
+        style="text-align:center">21</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:7%"></col><col style="width:11%"></col><col
+        style="width:8%"></col><col style="width:22%"></col><col
+        style="width:17%"></col><col
+        style="width:32%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">50</td><td
+        style="text-align:center">+7D6</td><td
+        style="text-align:center">26</td><td style="text-align:center"><p>30m on
+        land<br />45m when flying</p></td><td
+        style="text-align:center"><p>Dragon Scales<br />(AP 12)</p></td><td
+        style="text-align:center">5 or 6 depending on the size of the
+        Dragon.</td></tr></tbody></table><h2
+        id="skills-5">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{30%}, Persistence [[/r 1d100]]{100%}, Resilience [[/r
+        1d100]]{100%}.</li><li><strong>Knowledge:</strong> Natural lore [[/r
+        1d100]]{100%}, Culture (local) [[/r
+        1d100]]{100%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{100%}, Influence [[/r 1d100]]{100%}, Perception [[/r
+        1d100]]{100%}.</li></ul><h2
+        id="combat-5">Combat</h2><ul><li><strong>Unarmed Combat [[/r
+        1d100]]{100%}:</strong> Bite ([[/r 1D10+7D6]]{1D10+7D6}), Claw ([[/r
+        1D8+7D6]]{1D8+7D6}), Tail ([[/r 1D20+7D6]]{1D20+7D6}).</li></ul><p>A
+        dragon can make either a single tail attack or two claw attacks or one
+        bite attack in a single Combat Round.</p><h2
+        id="magic-4">Magic</h2><p>Dragons are highly magical creatures and often
+        learn sorcery or Personal Magic.</p><p>Here’s an example of magic for a
+        wild dragon:</p><ul><li><strong>Personal Magic [[/r
+        1d100]]{85%}:</strong> Befuddle [2], Beast Call [2], Heal 6, Protection
+        5, Second Sight [3], Talk to Animals [3], Tongues
+        [2].</li></ul><p>Here’s an example of magic for a more civilized
+        dragon:</p><p>Sorcery [[/r 1d100]]{85%}: Damage Boosting, Damage
+        Resistance, Dominate Human, Shape change Dragon to Human, Mystic
+        Vision.</p><h2 id="special-rules-2">Special Rules</h2><h3
+        id="breathe-flame">Breathe Flame</h3><p>The dragon may breathe flame
+        over an area as a Combat Action. The flame will cover a cone in front of
+        the dragon, which stretches for its POW in metres. At its furthest
+        extent, the cone is equal to the creature’s POW in width.</p><p>Any
+        creature caught in the flame suffers [[/gmr 4D6]]{4D6} fire damage,
+        though on a successful Dodge roll a character may dive for cover to
+        halve this damage and AP counts as normal.</p><p>The dragon may only
+        breathe flame once per hour. Further attempts to breathe flame within
+        this time period require the creature to make a Resilience test, with a
+        cumulative <strong>-20% penalty</strong> for every attempt.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.X2abma9UksBUDRXw'
+  - _id: tKYYrbqESfTYGEkV
+    flags: {}
+    image: {}
+    name: Duck
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 2D6+3]]{2D6+3}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 1D6+6]]{1D6+6}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 2D6]]{2D6}</td></tr><tr><td
+        style="text-align:center">10</td><td
+        style="text-align:center">13</td><td
+        style="text-align:center">13</td><td style="text-align:center">9</td><td
+        style="text-align:center">13</td><td
+        style="text-align:center">10</td><td
+        style="text-align:center">7</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:17%"></col><col style="width:24%"></col><col
+        style="width:20%"></col><col style="width:7%"></col><col
+        style="width:22%"></col><col
+        style="width:8%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">11</td><td style="text-align:center">0</td><td
+        style="text-align:center">10</td><td
+        style="text-align:center">10m</td><td style="text-align:center">Leather
+        (AP 2)</td><td style="text-align:center">2</td></tr></tbody></table><h2
+        id="skills-6">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{60%}, Persistence [[/r 1d100]]{50%}, Resilience [[/r
+        1d100]]{50%}.</li><li><strong>Knowledge:</strong> Natural Lore [[/r
+        1d100]]{70%}.</li><li><strong>Practical:</strong> Athletics: [[/r
+        1d100]]{40%}<sup>*</sup> Deception [[/r 1d100]]{50%}, Perception [[/r
+        1d100]]{40%}, Sailing [[/r 1d100]]{50%}.</li></ul><h2
+        id="combat-6">Combat</h2><ul><li><strong>Close Combat [[/r
+        1d100]]{50%}:</strong> Short Sword ([[/r 1D6]]{1D6}), Buckler ([[/r
+        1D4]]{1D4}).</li><li><strong>Ranged Combat [[/r 1d100]]{60%}:</strong>
+        Sling ([[/r 1D6]]{1D6}, 1 CR, 50m).</li></ul><h2
+        id="magic-5">Magic</h2><p>Ducks usually worship a River Deity who
+        protects their home settlements.</p><h3
+        id="initiate-of-the-river-deity">Initiate of the River
+        Deity</h3><ul><li><strong>Personal Magic [[/r 1d100]]{30%}:</strong>
+        Weapon Enhance, Walk on Water, Water Breathe.</li><li><strong>Divine
+        Magic:</strong> Call Small Undine 1</li></ul><h2
+        id="special-rules-3">Special Rules</h2><p>Ducks are masters of swimming,
+        which is normally measured by the Athletics skill, is considered to be
+        at [[/r 1d100]]{100%} for any skill test.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.tKYYrbqESfTYGEkV'
+  - _id: 5mCgp8aM21VMpjWz
+    flags: {}
+    image: {}
+    name: Dwarf
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 4D6]]{4D6}</td><td
+        style="text-align:center">[[/gmr 2D6+12]]{2D6+12}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 1D6+6]]{1D6+6}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td></tr><tr><td
+        style="text-align:center">14</td><td
+        style="text-align:center">19</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">10</td><td
+        style="text-align:center">13</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">11</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:16%"></col><col style="width:23%"></col><col
+        style="width:19%"></col><col style="width:6%"></col><col
+        style="width:25%"></col><col
+        style="width:8%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">15</td><td style="text-align:center">0</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">15m</td><td
+        style="text-align:center">Chainmail (AP 5)</td><td
+        style="text-align:center">3</td></tr></tbody></table><h2
+        id="skills-7">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{20%}, Persistence [[/r 1d100]]{40%}, Resilience [[/r
+        1d100]]{55%}.</li><li><strong>Knowledge:</strong> Craft [[/r
+        1d100]]{70%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{50%}, Engineering [[/r 1d100]]{35%}, Mechanisms [[/r
+        1d100]]{40%}.</li></ul><h2
+        id="combat-7">Combat</h2><ul><li><strong>Close Combat [[/r
+        1d100]]{65%}:</strong> War Hammer ([[/r 1D8]]{1D8}), Battleaxe ([[/r
+        1D6]]{1D6}), Target Shield ([[/r 1D6]]{1D6}).</li><li><strong>Ranged
+        Combat [[/r 1d100]]{45%}:</strong> Light Crossbow ([[/r 1D8]]{1D8},1/2
+        CR, 125m).</li><li><strong>Unarmed Combat [[/r 1d100]]{35%}:</strong>
+        Fist/Kick ([[/r 1D4]]{1D4}).</li></ul><h2
+        id="magic-6">Magic</h2><p>Dwarves practice sorcery through their own
+        Schools of Sorcery</p><h3 id="apprentice-sorcerer">Apprentice
+        Sorcerer</h3><p>Sorcery [[/r 1d100]]{40%}: Damage Resistance, Damage
+        Boosting, Heal Wounds.</p><h2 id="special-rules-4">Special Rules</h2><h3
+        id="earth-sense">Earth Sense</h3><p>Dwarves can automatically sense how
+        deep they are underground and whether or not the tunnels or chambers
+        they are in are structurally sound.</p><h3 id="dark-sight">Dark
+        Sight</h3><p>Dwarves see in the dark as if it is the day.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.5mCgp8aM21VMpjWz'
+  - _id: XaqZeipXfuZ0DkUo
+    flags: {}
+    image: {}
+    name: Elemental
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <p>The only characteristic that an elemental has is SIZ; all of its
+        derived attributes and skills are based on
+        this.</p><table><caption>Elemental Scores</caption><colgroup><col
+        style="width:12%"></col><col style="width:2%"></col><col
+        style="width:11%"></col><col style="width:12%"></col><col
+        style="width:13%"></col><col style="width:16%"></col><col
+        style="width:2%"></col><col style="width:3%"></col><col
+        style="width:8%"></col><col
+        style="width:17%"></col></colgroup><thead><tr><th>Size of
+        Elemental</th><th style="text-align:center">SIZ</th><th
+        style="text-align:center">Damage</th><th style="text-align:center">Hit
+        Points (SIZ)</th><th style="text-align:center">Attack (SIZ×5)</th><th
+        style="text-align:center">Area of attack (SIZ÷3)</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Dodge</th><th
+        style="text-align:center">Persistence</th><th
+        style="text-align:center">Resilience<sup>*</sup></th></tr></thead><tbody><tr><td>Small</td><td
+        style="text-align:center">3</td><td style="text-align:center">[[/r
+        1D6]]{1D6}</td><td style="text-align:center">3</td><td
+        style="text-align:center">[[/r 1d100]]{25%}</td><td
+        style="text-align:center">1m</td><td
+        style="text-align:center">15m</td><td
+        style="text-align:center">100</td><td
+        style="text-align:center">30</td><td
+        style="text-align:center">100</td></tr><tr><td>Medium</td><td
+        style="text-align:center">9</td><td style="text-align:center">[[/r
+        2D6]]{2D6}</td><td style="text-align:center">9</td><td
+        style="text-align:center">[[/r 1d100]]{45%}</td><td
+        style="text-align:center">3m</td><td
+        style="text-align:center">20m</td><td
+        style="text-align:center">90</td><td
+        style="text-align:center">60</td><td
+        style="text-align:center">100</td></tr><tr><td>Large</td><td
+        style="text-align:center">21</td><td style="text-align:center">[[/r
+        3D6]]{3D6}</td><td style="text-align:center">21</td><td
+        style="text-align:center">[[/r 1d100]]{80%}</td><td
+        style="text-align:center">7m</td><td
+        style="text-align:center">30m</td><td
+        style="text-align:center">60</td><td
+        style="text-align:center">80</td><td
+        style="text-align:center">100</td></tr><tr><td>Huge</td><td
+        style="text-align:center">50</td><td style="text-align:center">[[/r
+        4D6]]{4D6}</td><td style="text-align:center">50</td><td
+        style="text-align:center">[[/r 1d100]]{100%}</td><td
+        style="text-align:center">16m</td><td
+        style="text-align:center">45m</td><td
+        style="text-align:center">30</td><td
+        style="text-align:center">100</td><td
+        style="text-align:center">100</td></tr></tbody></table><p><sup>*</sup>Elementals
+        are immune to disease and poison.</p><p>Elementals attack by engulfing
+        their enemies. All opponents within the area of attack are potential
+        targets. Elementals use their Attack percentage, which is equal to their
+        size times five, to hit the target, who then resists using the
+        resistance appropriate to the attack.</p><table><caption>Other Elemental
+        Abilities</caption><thead><tr><th
+        style="text-align:left">Elemental</th><th style="text-align:left">Type
+        of attack</th><th style="text-align:left">Resistance used</th><th
+        style="text-align:left">Attribute damage</th></tr></thead><tbody><tr><td
+        style="text-align:left">Undines</td><td
+        style="text-align:left">Drown</td><td
+        style="text-align:left">Resilience</td><td style="text-align:left">Hit
+        Points</td></tr><tr><td style="text-align:left">Shade</td><td
+        style="text-align:left">Fear</td><td
+        style="text-align:left">Persistence</td><td
+        style="text-align:left">Magic Points</td></tr><tr><td
+        style="text-align:left">Salamander</td><td
+        style="text-align:left">Burning</td><td
+        style="text-align:left">Resilience</td><td style="text-align:left">Hit
+        Points</td></tr><tr><td style="text-align:left">Gnome</td><td
+        style="text-align:left">Crush</td><td
+        style="text-align:left">Resilience</td><td style="text-align:left">Hit
+        Points</td></tr><tr><td style="text-align:left">Sylph</td><td
+        style="text-align:left">Bluster</td><td
+        style="text-align:left">Resilience</td><td style="text-align:left">Hit
+        Points</td></tr></tbody></table><p>Shades attack using Fear. When they
+        reduce their opponent’s Magic Point’s total to zero, they literally die
+        of shock.</p><ul><li><strong>See invisible:</strong> Elementals have
+        magical senses that allow them to ‘see’ invisible creatures, such as
+        immaterial spirits. They also gain a +[[/r 1d100]]{50%} when detecting
+        hidden characters.</li><li><strong>Almost invisible against the same
+        element:</strong> All elementals have the equivalent of a [[/r
+        1d100]]{90%} Deception when lying next to an environment of the same
+        element as themselves. For example, undines are nearly invisible when
+        lying in a pool of water and gnomes can curl up and blend into a
+        surrounding rocky area.</li></ul>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.XaqZeipXfuZ0DkUo'
+  - _id: 5SlHbFWJdq1nXCOj
+    flags: {}
+    image: {}
+    name: Elf
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table
+        style="width:100%"><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 2D6+3]]{2D6+3}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td
+        style="text-align:center">[[/gmr 2D6+3]]{2D6+3}</td><td
+        style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td></tr><tr><td
+        style="text-align:center">10</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">17</td><td
+        style="text-align:center">10</td><td
+        style="text-align:center">17</td><td
+        style="text-align:center">13</td><td
+        style="text-align:center">11</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:17%"></col><col style="width:24%"></col><col
+        style="width:20%"></col><col style="width:7%"></col><col
+        style="width:22%"></col><col
+        style="width:8%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">11</td><td style="text-align:center">0</td><td
+        style="text-align:center">13</td><td
+        style="text-align:center">15m</td><td style="text-align:center">Leather
+        (AP 2)</td><td style="text-align:center">1</td></tr></tbody></table><h2
+        id="skills-8">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{55%}, Persistence [[/r 1d100]]{55%}, Resilience [[/r
+        1d100]]{20%}.</li><li><strong>Knowledge:</strong> Natural lore [[/r
+        1d100]]{80%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{55%}, Deception [[/r 1d100]]{55%}, Perception [[/r 1d100]]{30%},
+        Healing [[/r 1d100]]{50%} .</li></ul><h2
+        id="combat-8">Combat</h2><ul><li><strong>Close Combat [[/r
+        1d100]]{60%}:</strong> Long spear ([[/r
+        1D8]]{1D8}).</li><li><strong>Ranged Combat [[/r 1d100]]{80%}:</strong>
+        Short Bow ([[/r 1D8]]{1D8}, 1 CR, 75m).</li></ul><h2
+        id="magic-7">Magic</h2><p>Elves are usually at least Initiates in an
+        Earth or similar nature-based religion. Their leaders tend to be Priests
+        in such religions.</p><h3 id="initiate-of-the-earth-mother-2">Initiate
+        of the Earth Mother</h3><ul><li><strong>Personal Magic [[/r
+        1d100]]{40%}:</strong> Heal 5, Multi-missile 4, Protection 3, Weapon
+        Enhance 3</li></ul>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.5SlHbFWJdq1nXCOj'
+  - _id: nBjdZZIPTXKLgW7C
+    flags: {}
+    image: {}
+    name: Gargoyle
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">CHA</th><th
+        style="text-align:center">POW</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 5D6+12]]{5D6+12}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 5D6]]{5D6}</td><td
+        style="text-align:center">[[/gmr 1D6]]{1D6}</td><td
+        style="text-align:center">[[/gmr 1D6]]{1D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td></tr><tr><td
+        style="text-align:center">29</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">17</td><td style="text-align:center">4</td><td
+        style="text-align:center">4</td><td
+        style="text-align:center">11</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:10%"></col><col style="width:16%"></col><col
+        style="width:16%"></col><col style="width:33%"></col><col
+        style="width:18%"></col><col
+        style="width:4%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points 11</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">14</td><td
+        style="text-align:center">+2D6</td><td
+        style="text-align:center">11</td><td style="text-align:center"><p>15m<br
+        />20m flying if have wings</p></td><td style="text-align:center">Tough
+        Hide (AP 6)</td><td
+        style="text-align:center">0</td></tr></tbody></table><h2
+        id="skills-9">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{25%}, Persistence [[/r 1d100]]{40%}, Resilience [[/r
+        1d100]]{40%}.</li><li><strong>Knowledge:</strong> Natural Lore [[/r
+        1d100]]{40%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{40%}, Deception [[/r 1d100]]{30%}, Perception [[/r
+        1d100]]{40%}.</li></ul><h2
+        id="combat-9">Combat</h2><ul><li><strong>Unarmed Combat [[/r
+        1d100]]{50%}:</strong> Claw ([[/r 1D6+2D6]]{1D6+2D6}).</li></ul><h2
+        id="magic-8">Magic</h2><p>Gargoyles do not learn magic.</p><h2
+        id="special-rules-5">Special Rules</h2><h3
+        id="statue-like-stillness">Statue-Like Stillness</h3><p>The Gargoyle has
+        a [[/r 1d100]]{50%} modifier when using Deception to appear like a
+        statue upon inspection.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.nBjdZZIPTXKLgW7C'
+  - _id: 43hyyPIFQRWA6kLY
+    flags: {}
+    image: {}
+    name: Ghoul
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 4D6]]{4D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 1D6]]{1D6}</td></tr><tr><td
+        style="text-align:center">14</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">13</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">4</td></tr></tbody></table><table><caption>Attributes</caption><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">12</td><td
+        style="text-align:center">+1D4</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">15m</td><td
+        style="text-align:center">None</td><td
+        style="text-align:center">1</td></tr></tbody></table><h2
+        id="skills-10">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{40%}, Persistence [[/r 1d100]]{30%}, Resilience [[/r
+        1d100]]{40%}.</li><li><strong>Knowledge:</strong> Lore (Undead) [[/r
+        1d100]]{75%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{40%}, Deception [[/r 1d100]]{60%}, Perception [[/r
+        1d100]]{30%}.</li></ul><h2 id="combat-10">Combat</h2><p>Ranged Combat
+        special see below: Howl (see Demoralise
+        below).</p><ul><li><strong>Unarmed Combat [[/r 1d100]]{60%}:</strong>
+        Claw ([[/r 1D4+1D4]]{1D4+1D4}), Bite ([[/r
+        1D6+1D4]]{1D6+1D4}+poison).</li></ul><p>A ghoul is able to use its howl
+        once per combat round, in addition to either a Claw or Bite
+        attack.</p><h2 id="magic-9">Magic</h2><p>Ghouls learn Personal Magic
+        from each-other, with the occasional powerful leader becoming a shaman
+        or priest of some evil cannibal religion.</p><ul><li><strong>Personal
+        Magic [[/r 1d100]]{40%}:</strong> Sap Energy, Scare.</li></ul><h2
+        id="special-rules-6">Special Rules</h2><h3 id="ghoul-venom">Ghoul
+        Venom</h3><ul><li><strong>Type:</strong> Ingested or
+        smeared.</li><li><strong>Delay:</strong> [[/gmr 1D3]]{1D3} Combat
+        Rounds.</li><li><strong>Potency:</strong> 22.</li><li><strong>Full
+        Effect:</strong> Paralysis.</li><li><strong>Duration:</strong> [[/gmr
+        1D10]]{1D10} hours or until healing is administered that restores at
+        least 1 Hit Point.</li></ul><h3 id="ghoul-howl">Ghoul Howl</h3><p>Ghouls
+        employ a blood-chilling howl in combat. When a ghoul howls, every
+        creature in a radius equal to the ghoul’s POW in metres becomes
+        Demoralised (as the Personal Magic spell). This costs the ghoul no magic
+        points and does not require a skill test to use successfully.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.43hyyPIFQRWA6kLY'
+  - _id: Eh9HwNtdg4dvLT1y
+    flags: {}
+    image: {}
+    name: Giant
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <p>The following Characteristics are for a giant that stands six metres
+        tall. For every additional two metres of height, a giant rolls an
+        additional [[/gmr 3D6+6]]{3D6+6} for STR, [[/gmr 2D6+6]]{2D6+6} for CON
+        and [[/gmr 3D6+6]]{3D6+6} for SIZ.</p><table
+        style="width:100%"><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 9D6+18]]{9D6+18}</td><td
+        style="text-align:center">[[/gmr 6D6+18]]{6D6+18}</td><td
+        style="text-align:center">[[/gmr 2D6+3]]{2D6+3}</td><td
+        style="text-align:center">[[/gmr 9D6+18]]{9D6+18}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 2D6]]{2D6}</td></tr><tr><td
+        style="text-align:center">49</td><td
+        style="text-align:center">39</td><td
+        style="text-align:center">10</td><td
+        style="text-align:center">49</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">7</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:16%"></col><col style="width:24%"></col><col
+        style="width:19%"></col><col style="width:4%"></col><col
+        style="width:27%"></col><col
+        style="width:6%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">44</td><td
+        style="text-align:center">+5D6</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">30m</td><td style="text-align:center">Tough
+        Hide (AP 3)</td><td
+        style="text-align:center">4</td></tr></tbody></table><h2
+        id="skills-11">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{10%}, Persistence [[/r 1d100]]{25%}, Resilience [[/r
+        1d100]]{80%}.</li><li><strong>Knowledge:</strong> Natural lore [[/r
+        1d100]]{20%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{50%}, Deception [[/r 1d100]]{5%}, Perception [[/r
+        1d100]]{40%}.</li></ul><h2
+        id="combat-11">Combat</h2><ul><li><strong>Close Combat [[/r
+        1d100]]{90%}:</strong> Huge Club ([[/r
+        2D6+5D6]]{2D6+5D6})</li></ul><p>Giants tend to use mighty clubs (and
+        sometimes even tree trunks that do [[/r 3d6]]{3d6} damage + damage
+        modifier) in battle.</p><ul><li><strong>Ranged Combat [[/r
+        1d100]]{35%}:</strong> Thrown Boulder ([[/r 2D6+5D6]]{2D6+5D6}, 1CR,
+        100m).</li><li><strong>Unarmed Combat [[/r 1d100]]{75%}:</strong> Stomp
+        ([[/r 1D6+5D6]]{1D6+5D6}).</li></ul><h2
+        id="magic-10">Magic</h2><p>Giants tend to learn the magic of those
+        Cultures nearest them. Giants who are isolated in the mountains learn
+        Personal Magic, with more powerful individuals becoming Shamans. There
+        is also the mysterious Builder Religion that some more intelligent
+        members of the species belong to.</p><h3
+        id="initiate-of-the-builder-religion">Initiate of the Builder
+        Religion</h3><p>Personal Magic Casting [[/r 1d100]]{33%}: Weapon Enhance
+        3, Strength 5.</p><ul><li><strong>Divine Magic:</strong> Quicksand,
+        Repair and Replace.</li></ul>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.Eh9HwNtdg4dvLT1y'
+  - _id: 7nH6A2K9s6lZ3usj
+    flags: {}
+    image: {}
+    name: Goblin
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table
+        style="width:100%"><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 2D6+3]]{2D6+3}</td><td
+        style="text-align:center">[[/gmr 2D6+3]]{2D6+3}</td><td
+        style="text-align:center">[[/gmr 5D6]]{5D6}</td><td
+        style="text-align:center">[[/gmr 2D6]]{2D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 2D6+3]]{2D6+3}</td><td
+        style="text-align:center">[[/gmr 2D6]]{2D6}</td></tr><tr><td
+        style="text-align:center">10</td><td
+        style="text-align:center">10</td><td
+        style="text-align:center">17</td><td style="text-align:center">7</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">10</td><td
+        style="text-align:center">7</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:17%"></col><col style="width:24%"></col><col
+        style="width:20%"></col><col style="width:7%"></col><col
+        style="width:22%"></col><col
+        style="width:8%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">9</td><td style="text-align:center">0</td><td
+        style="text-align:center">10</td><td
+        style="text-align:center">15m</td><td style="text-align:center">Leather
+        (AP 2)</td><td style="text-align:center">1</td></tr></tbody></table><h2
+        id="skills-12">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{50%}, Persistence [[/r 1d100]]{20%}, Resilience [[/r
+        1d100]]{35%}.</li><li><strong>Knowledge:</strong> Natural lore [[/r
+        1d100]]{50%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{50%}, Perception [[/r 1d100]]{35%}, Deception [[/r 1d100]]{75%},
+        Mechanisms [[/r 1d100]]{50%}.</li></ul><h2
+        id="combat-12">Combat</h2><ul><li><strong>Close Combat [[/r
+        1d100]]{40%}:</strong> Short spear ([[/r 1D6]]{1D6}), Buckler ([[/r
+        1D4]]{1D4}).</li><li><strong>Ranged Combat [[/r 1d100]]{50%}:</strong>
+        Sling ([[/r 1D6]]{1D6}, 1 CR, 50m).</li></ul><h2
+        id="magic-11">Magic</h2><p>None normally.</p><h2
+        id="special-rules-7">Special Rules</h2><p>Night Sight. Goblins can see
+        at night as if it was day.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.7nH6A2K9s6lZ3usj'
+  - _id: xtJtu1PG98K9dbQx
+    flags: {}
+    image: {}
+    name: Gorgon
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 4D6]]{4D6}</td><td
+        style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td
+        style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td
+        style="text-align:center">[[/gmr 4D6]]{4D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 1D6+12]]{1D6+12}</td><td
+        style="text-align:center">[[/gmr 1D6]]{1D6}</td></tr><tr><td
+        style="text-align:center">14</td><td
+        style="text-align:center">17</td><td
+        style="text-align:center">17</td><td
+        style="text-align:center">14</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">16</td><td
+        style="text-align:center">4</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:11%"></col><col style="width:17%"></col><col
+        style="width:14%"></col><col style="width:35%"></col><col
+        style="width:15%"></col><col
+        style="width:4%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">16</td><td
+        style="text-align:center">+1D4</td><td
+        style="text-align:center">16</td><td style="text-align:center"><p>15m on
+        land<br />20m when flying</p></td><td style="text-align:center">Scales
+        (AP 8)</td><td style="text-align:center">5</td></tr></tbody></table><h2
+        id="skills-13">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{50%}, Persistence [[/r 1d100]]{35%}, Resilience [[/r
+        1d100]]{45%}.</li><li><strong>Knowledge:</strong>
+        N/A.</li><li><strong>Practical:</strong> Athletics [[/r 1d100]]{65%},
+        Deception [[/r 1d100]]{60%}, Perception [[/r 1d100]]{50%}.</li></ul><h2
+        id="combat-13">Combat</h2><p>Ranged Combat Special see below: Gaze
+        attack (Petrification).</p><ul><li><strong>Unarmed Combat [[/r
+        1d100]]{75%}:</strong> Talons ([[/r 1D6+1D4]]{1D6+1D4}), Serpent hair
+        ([[/r 1D4]]{1D4+poison}).</li></ul><p>Gorgons attack using their gaze at
+        the beginning of the combat round (see below) and then have one combat
+        attack (either Talon or Serpents) as usual.</p><h2
+        id="magic-12">Magic</h2><p>Gorgons have at least 10 magnitude of
+        Personal Magic or Sorcery or Divine Magic. They are usually Priestesses
+        or Adepts, with a casting skill of [[/r 1d100]]{75%}.</p><h3
+        id="priestess-of-the-serpent-religion">Priestess of the Serpent
+        Religion</h3><ul><li><strong>Personal Magic [[/r 1d100]]{75%}:</strong>
+        Weapon Enhance 4, Heal 5.</li><li><strong>Divine Magic:</strong>
+        Absorption 3, Fear, Heal Body.</li></ul><h2 id="special-rules-8">Special
+        Rules</h2><h3 id="petrifying-gaze-attack">Petrifying Gaze
+        Attack</h3><p>The Gorgon’s gaze attack is an automatic attack at the
+        beginning of every round. Every susceptible creature must make an
+        opposed Resilience test against the Gorgon’s Persistence or be turned to
+        stone.</p><h3 id="gorgon-serpent-venom">Gorgon Serpent
+        Venom</h3><ul><li><strong>Type:</strong> Ingested or
+        smeared.</li><li><strong>Delay:</strong> [[/gmr 1D3]]{1D3} Combat
+        Rounds.</li><li><strong>Potency:</strong> 34.</li><li><strong>Full
+        Effect:</strong> [[/gmr 1D3]]{1D3} Hit Point damage, applies -3 penalty
+        to victim’s CON.</li><li><strong>Duration:</strong> [[/gmr 6D10]]{6D10}
+        minutes.</li></ul>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.xtJtu1PG98K9dbQx'
+  - _id: 2cikNPrdpE7IbJuH
+    flags: {}
+    image: {}
+    name: Griffin
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 8D6]]{8D6}</td><td
+        style="text-align:center">[[/gmr 3D6+12]]{3D6+12}</td><td
+        style="text-align:center">[[/gmr 3D6+12]]{3D6+12}</td><td
+        style="text-align:center">[[/gmr 8D6]]{8D6}</td><td
+        style="text-align:center">6</td><td style="text-align:center">[[/gmr
+        2D6+6]]{2D6+6}</td><td style="text-align:center">7</td></tr><tr><td
+        style="text-align:center">28</td><td
+        style="text-align:center">22</td><td
+        style="text-align:center">22</td><td
+        style="text-align:center">28</td><td style="text-align:center">6</td><td
+        style="text-align:center">13</td><td
+        style="text-align:center">7</td></tr></tbody></table><table
+        style="width:100%"><caption>Attributes</caption><colgroup><col
+        style="width:11%"></col><col style="width:17%"></col><col
+        style="width:13%"></col><col style="width:34%"></col><col
+        style="width:19%"></col><col
+        style="width:4%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">25</td><td
+        style="text-align:center">+2D6</td><td
+        style="text-align:center">13</td><td style="text-align:center"><p>20m on
+        land<br />30m when flying</p></td><td style="text-align:center">Tough
+        Hide (AP 3)</td><td
+        style="text-align:center">0</td></tr></tbody></table><h2
+        id="skills-14">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{40%}, Persistence [[/r 1d100]]{80%}, Resilience [[/r
+        1d100]]{70%}.</li><li><strong>Knowledge:</strong> Natural lore [[/r
+        1d100]]{60%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{80%}, Deception [[/r 1d100]]{30%}, Perception [[/r
+        1d100]]{50%}.</li></ul><h2
+        id="combat-14">Combat</h2><ul><li><strong>Unarmed Combat [[/r
+        1d100]]{70%}:</strong> Bite ([[/r 1D8+2D6]]{1D8+2D6}), Claw ([[/r
+        1D6+2D6]]{1D6+2D6}).</li></ul>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.2cikNPrdpE7IbJuH'
+  - _id: hXBEl6WdCQxPePXf
+    flags: {}
+    image: {}
+    name: Hippogriff
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table
+        style="width:100%"><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 4D6+24]]{4D6+24}</td><td
+        style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td
+        style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td
+        style="text-align:center">[[/gmr 4D6+18]]{4D6+18}</td><td
+        style="text-align:center">7</td><td style="text-align:center">[[/gmr
+        2D6+6]]{2D6+6}</td><td style="text-align:center">5</td></tr><tr><td
+        style="text-align:center">38</td><td
+        style="text-align:center">17</td><td
+        style="text-align:center">17</td><td
+        style="text-align:center">32</td><td style="text-align:center">7</td><td
+        style="text-align:center">13</td><td
+        style="text-align:center">5</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:12%"></col><col style="width:18%"></col><col
+        style="width:14%"></col><col style="width:36%"></col><col
+        style="width:13%"></col><col
+        style="width:4%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">25</td><td
+        style="text-align:center">+3D6</td><td
+        style="text-align:center">13</td><td style="text-align:center"><p>20m on
+        land<br />37m when flying</p></td><td style="text-align:center">Hide (AP
+        1)</td><td style="text-align:center">0</td></tr></tbody></table><h2
+        id="skills-15">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{40%}, Persistence [[/r 1d100]]{40%}, Resilience [[/r
+        1d100]]{50%}.</li><li><strong>Knowledge:</strong> Natural lore [[/r
+        1d100]]{60%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{50%}, Deception [[/r 1d100]]{10%}, Perception [[/r
+        1d100]]{60%}.</li></ul><h2
+        id="combat-15">Combat</h2><ul><li><strong>Unarmed Combat [[/r
+        1d100]]{60%}:</strong> Fore claw ([[/r 2D6]]{2D6} +3D6), Bite ([[/r
+        1D8]]{1D8} +3D6).</li></ul>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.hXBEl6WdCQxPePXf'
+  - _id: F3QFGf0FshH6knYy
+    flags: {}
+    image: {}
+    name: Lizardman
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 2D6+3]]{2D6+3}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 2D6]]{2D6}</td></tr><tr><td
+        style="text-align:center">17</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">10</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">13</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">7</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:17%"></col><col style="width:24%"></col><col
+        style="width:20%"></col><col style="width:7%"></col><col
+        style="width:21%"></col><col
+        style="width:8%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">11</td><td
+        style="text-align:center">+1D4</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">15m</td><td style="text-align:center">Scales
+        (AP 2)</td><td style="text-align:center">3</td></tr></tbody></table><h2
+        id="skills-16">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{45%} Persistence [[/r 1d100]]{25%} Resilience [[/r
+        1d100]]{30%}.</li><li><strong>Knowledge:</strong> Natural lore [[/r
+        1d100]]{45%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{45%}, Deception [[/r 1d100]]{35%}, Perception [[/r
+        1d100]]{35%}.</li></ul><h2
+        id="combat-16">Combat</h2><ul><li><strong>Close Combat [[/r
+        1d100]]{45%}:</strong> Battleaxe ([[/r
+        1D8+1D4]]{1D8+1D4}).</li><li><strong>Ranged Combat [[/r
+        1d100]]{35%}:</strong> Sling ([[/r 1D6+1D4]]{1D6+1D4}, 1 CR,
+        50m).</li><li><strong>Unarmed Combat [[/r 1d100]]{25%}:</strong> Bite
+        ([[/r 1D6+1D4]]{1D6+1D4}).</li></ul><h2 id="magic-13">Magic</h2><h3
+        id="initiate-of-the-crocodile-god">Initiate of the Crocodile
+        God</h3><ul><li><strong>Personal Magic [[/r 1d100]]{33%}:</strong> Heal
+        2, Weapon Enhance 2.</li></ul>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.F3QFGf0FshH6knYy'
+  - _id: A9lOntvfHS5cUzSn
+    flags: {}
+    image: {}
+    name: Manticore
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 4D6+12]]{4D6+12}</td><td
+        style="text-align:center">[[/gmr 4D6+6]]{4D6+6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 4D6+12]]{4D6+12}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">7</td></tr><tr><td
+        style="text-align:center">26</td><td
+        style="text-align:center">20</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">26</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">7</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:17%"></col><col style="width:25%"></col><col
+        style="width:20%"></col><col style="width:7%"></col><col
+        style="width:19%"></col><col
+        style="width:8%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">23</td><td
+        style="text-align:center">+2D6</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">20m</td><td style="text-align:center">Hide (AP
+        1)</td><td style="text-align:center">4</td></tr></tbody></table><h2
+        id="skills-17">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{25%}, Persistence [[/r 1d100]]{65%}, Resilience [[/r
+        1d100]]{45%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{25%}, Deception [[/r 1d100]]{50%}, Perception [[/r
+        1d100]]{60%}.</li></ul><h2
+        id="combat-17">Combat</h2><ul><li><strong>Unarmed Combat [[/r
+        1d100]]{75%}:</strong> Claw ([[/r 1D6+2D6]]{1D6+2D6}), Gore ([[/r
+        1D8+2D6]]{1D8+2D6}), Poison Sting ([[/r
+        1D6+2D6]]{1D6+2D6+poison}).</li></ul><h2 id="magic-14">Magic</h2><p>Only
+        if someone has been stupid enough to teach it some.</p><h2
+        id="special-rules-9">Special Rules</h2><h3
+        id="manticore-poison">Manticore
+        poison</h3><ul><li><strong>Type:</strong>
+        Ingested.</li><li><strong>Delay:</strong> [[/gmr 1D3]]{1D3} Combat
+        Rounds.</li><li><strong>Potency:</strong> 50.</li><li><strong>Full
+        Effect:</strong> [[/gmr 1D4]]{1D4} Hit Point damage, applies -3 penalty
+        to victim’s CON.</li><li><strong>Duration:</strong> [[/gmr 5D10]]{5D10}
+        minutes.</li></ul>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.A9lOntvfHS5cUzSn'
+  - _id: LkMx3qg22bruTcKa
+    flags: {}
+    image: {}
+    name: Merpeople
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table
+        style="width:100%"><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 3D6+3]]{3D6+3}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td></tr><tr><td
+        style="text-align:center">14</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">13</td><td
+        style="text-align:center">17</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">11</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:10%"></col><col style="width:16%"></col><col
+        style="width:12%"></col><col style="width:49%"></col><col
+        style="width:6%"></col><col
+        style="width:4%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">14</td><td
+        style="text-align:center">+1D6</td><td
+        style="text-align:center">11</td><td style="text-align:center"><p>20m
+        Swimming<br />7m on land as it crawls along.</p></td><td
+        style="text-align:center">None</td><td
+        style="text-align:center">1</td></tr></tbody></table><h2
+        id="skills-18">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{30%}, Persistence [[/r 1d100]]{30%}, Resilience [[/r
+        1d100]]{30%}.</li><li><strong>Knowledge:</strong> Natural Lore [[/r
+        1d100]]{80%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{60%}, Deception [[/r 1d100]]{30%}, Perception [[/r
+        1d100]]{50%}.</li></ul><h2
+        id="combat-18">Combat</h2><ul><li><strong>Close Combat [[/r
+        1d100]]{35%}:</strong> Long spear ([[/r 1D8+1D6]]{1D8+1D6}), Dagger
+        ([[/r 1D4+1]]{1D4+1}+[[/r 1D6]]{1D6}).</li></ul><h2
+        id="magic-15">Magic</h2><p>Merpeople typically join the religion of the
+        Sea Goddess.</p><h3 id="initiate-of-the-sea-goddess">Initiate of the Sea
+        Goddess</h3><ul><li><strong>Personal Magic [[/r 1d100]]{33%}:</strong>
+        Beast Call [2], Weapon Enhance 3</li><li><strong>Divine Magic:</strong>
+        Call Small Undine 1</li></ul><h2 id="special-rules-10">Special
+        Rules</h2><p>Merpeople can breathe underwater as well as in the air when
+        they surface.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.LkMx3qg22bruTcKa'
+  - _id: FwgLHQHeskuL30nC
+    flags: {}
+    image: {}
+    name: Minotaur
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table
+        style="width:100%"><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 3D6+12]]{3D6+12}</td><td
+        style="text-align:center">[[/gmr 1D6+12]]{1D6+12}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 3D6+12]]{3D6+12}</td><td
+        style="text-align:center">[[/gmr 2D6]]{2D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 2D6]]{2D6}</td></tr><tr><td
+        style="text-align:center">23</td><td
+        style="text-align:center">16</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">23</td><td style="text-align:center">7</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">7</td></tr></tbody></table><table
+        style="width:100%"><caption>Attributes</caption><colgroup><col
+        style="width:16%"></col><col style="width:23%"></col><col
+        style="width:19%"></col><col style="width:6%"></col><col
+        style="width:26%"></col><col
+        style="width:8%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">20</td><td
+        style="text-align:center">+2D6</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">20m</td><td style="text-align:center">Tough
+        hide (AP 3)</td><td
+        style="text-align:center">3</td></tr></tbody></table><h2
+        id="skills-19">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{60%}, Persistence [[/r 1d100]]{40%}, Resilience [[/r
+        1d100]]{75%}.</li><li><strong>Knowledge:</strong> Natural Lore [[/r
+        1d100]]{65%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{60%}, Deception [[/r 1d100]]{10%}, Perception [[/r
+        1d100]]{40%}.</li></ul><h2
+        id="combat-19">Combat</h2><ul><li><strong>Close Combat [[/r
+        1d100]]{60%}:</strong> Great Axe ([[/r
+        2D8+2D6]]{2D8+2D6}).</li><li><strong>Unarmed Combat [[/r
+        1d100]]{60%}:</strong> Gore ([[/r 1D6+2D6]]{1D6+2D6}), Head Butt ([[/r
+        1D6+2D6]]{1D6+2D6}).</li></ul><h2 id="magic-16">Magic</h2><p>Minotaurs
+        tend to join Earth or Nature religions and learn Battle and Divine magic
+        from them.</p><h3 id="initiate-of-the-bull-lord">Initiate of the Bull
+        Lord</h3><p>Personal Magic Casting [[/r 1d100]]{33%}: Beast Call [2],
+        Fanaticism [2].</p><ul><li><strong>Divine Magic:</strong>
+        Berserk.</li></ul>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.FwgLHQHeskuL30nC'
+  - _id: U5sS5YrljcnA4isd
+    flags: {}
+    image: {}
+    name: Mummy
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 3D6+12]]{3D6+12}</td><td
+        style="text-align:center">[[/gmr 3D6+12]]{3D6+12}</td><td
+        style="text-align:center">[[/gmr 2D6]]{2D6}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">0</td><td
+        style="text-align:center">1</td></tr><tr><td
+        style="text-align:center">23</td><td
+        style="text-align:center">23</td><td style="text-align:center">7</td><td
+        style="text-align:center">13</td><td
+        style="text-align:center">13</td><td style="text-align:center">0</td><td
+        style="text-align:center">1</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:16%"></col><col style="width:22%"></col><col
+        style="width:20%"></col><col style="width:6%"></col><col
+        style="width:25%"></col><col
+        style="width:8%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">18</td><td
+        style="text-align:center">+1D6</td><td style="text-align:center">0 (See
+        below)</td><td style="text-align:center">15m</td><td
+        style="text-align:center">Tough Skin (AP 2)</td><td
+        style="text-align:center">4</td></tr></tbody></table><h2
+        id="skills-20">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{30%}, Persistence [[/r 1d100]]{80%} (+immune to mind
+        control magic), Resilience [[/r 1d100]]{50%} (+ mummies are immune to
+        natural Disease and Poison).</li><li><strong>Knowledge:</strong> Lore
+        (Undead) [[/r 1d100]]{65%}.</li><li><strong>Practical:</strong>
+        Athletics [[/r 1d100]]{10%}, Deception [[/r 1d100]]{10%}, Perception
+        [[/r 1d100]]{40%}.</li></ul><h2
+        id="combat-20">Combat</h2><ul><li><strong>Close Combat [[/r
+        1d100]]{80%}:</strong> War Maul ([[/r
+        2D8+1D6]]{2D8+1D6}).</li><li><strong>Unarmed Combat [[/r
+        1d100]]{60%}:</strong> Fist ([[/r 1D6+1D6]]{1D6+1D6}).</li></ul><h2
+        id="magic-17">Magic</h2><p>Since mummies are POW-less, they never have
+        Personal Magic. Mummies who were priests in their previous lives may
+        have Divine Magic, and mummies who know sorcery will always know at
+        least one Tap spell to gain Magic Points to fuel their spells.</p><h3
+        id="undead-sorcerer">Undead Sorcerer</h3><p>. Sorcery Casting [[/r
+        1d100]]{75%}: Tap POW, Mirage, Neutralise Magic, Venom.</p><h2
+        id="special-rules-11">Special Rules</h2><p>An Ignite spell will work on
+        a mummy’s body. A strike with a fiery weapon, such as a sword with a
+        Fireblade spell on it, or even a torch, will ignite the mummy if the hit
+        causes damage. The damage done by the initial hit is taken each combat
+        round as fire damage unless the fire is put out. To put out a fire, the
+        mummy must take one combat round to roll on the ground or immerse itself
+        in water. During this time, it may not make any other actions or
+        reactions.</p><p>Healing spells are ineffective on mummies, though a
+        Repair spell will fix any damage done (in [[/gmr 1D10]]{1D10} hit point
+        increments).</p><p>When a creature becomes a mummy, its STR and CON are
+        doubled. The statistics above represent a human mummy, though any
+        sentient creature willing to undergo the process may become a mummy.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.U5sS5YrljcnA4isd'
+  - _id: qspIjC5WWazs74dY
+    flags: {}
+    image: {}
+    name: Nymphs
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <p>Killing a nymph’s physical body sends it back to the magic world to
+        regenerate. The nymph, if unmolested in the magic world, will form a new
+        body in her special place after [[/gmr 2D6]]{2D6} days, provided the
+        place remains intact.</p><h2 id="dryad">Dryad</h2><p>A dryad is a nymph
+        of a particular area of woodland, a grove of a radius in metres equal to
+        twice her POW. The dryad cannot leave this territory. If she does, her
+        physical body disintegrates into leaves and flowers, to reform in the
+        magic world as above. Within a dryad’s grove is a particular tree that
+        they are mystically linked to; they will endure for as long as their
+        personal tree endures, and no longer.</p><p>A dryad can form or dissolve
+        her body by stepping out of or into this tree, though if a dryad’s body
+        is destroyed, it takes her time (as for any nymph) to form
+        another.</p><table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 2D6]]{2D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 4D6]]{4D6}</td><td
+        style="text-align:center">[[/gmr 2D6+3]]{2D6+3}</td><td
+        style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td
+        style="text-align:center">[[/gmr 2D6+15]]{2D6+15}</td><td
+        style="text-align:center">[[/gmr 2D6+12]]{2D6+12}</td></tr><tr><td
+        style="text-align:center">7</td><td style="text-align:center">11</td><td
+        style="text-align:center">14</td><td
+        style="text-align:center">10</td><td
+        style="text-align:center">17</td><td
+        style="text-align:center">22</td><td
+        style="text-align:center">19</td></tr></tbody></table><table><caption>Attributes</caption><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">11</td><td style="text-align:center">0</td><td
+        style="text-align:center">22</td><td
+        style="text-align:center">15m</td><td
+        style="text-align:center">0</td><td
+        style="text-align:center">1</td></tr></tbody></table><h2
+        id="skills-21">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{50%}, Persistence [[/r 1d100]]{60%}, Resilience [[/r
+        1d100]]{40%}.</li><li><strong>Knowledge:</strong> Natural Lore [[/r
+        1d100]]{60%}.</li><li><strong>Practical:</strong> Perception [[/r
+        1d100]]{50%}, Performance [[/r 1d100]]{50%}, Deception [[/r
+        1d100]]{50%}.</li></ul><h2
+        id="combat-21">Combat</h2><ul><li><strong>Close Combat [[/r
+        1d100]]{40%}:</strong> Quarterstaff ([[/r 1D8]]{1D8}).</li></ul><h2
+        id="magic-18">Magic</h2><ul><li><strong>Personal Magic [[/r
+        1d100]]{60%}:</strong> Befuddle, Clear Path, Countermagic, Detect Magic,
+        Enhance Performance, Enhance Deception, Light</li></ul><h2
+        id="special-rules-12">Special Rules</h2><p>A dryad controls all of the
+        plants within her grove. She can cause them to move slowly, grow
+        surprisingly rapidly, or blossom or bear fruit out of season. This power
+        cannot be used as a direct attack.</p><h2 id="hag">Hag</h2><p>Hags
+        embody darkness and shadows. Hags are associated with caves and other
+        dark areas seldom exposed to direct sunlight. A hag can only leave her
+        domain when it is night and must return there before dawn; if she does
+        not, her physical body is destroyed.</p><p>A hag’s body is also
+        destroyed if she is struck by direct sunlight. A hag may form and
+        dissolve her body at will, although if her body is destroyed, it takes a
+        hag time (as for any nymph) to form another.</p><table
+        style="width:100%"><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 6D6]]{6D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 2D6+12]]{2D6+12}</td><td
+        style="text-align:center">[[/gmr 2D6+21]]{2D6+21}</td><td
+        style="text-align:center">[[/gmr 1D6]]{1D6}</td></tr><tr><td
+        style="text-align:center">21</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">19</td><td
+        style="text-align:center">28</td><td
+        style="text-align:center">3</td></tr></tbody></table><table><caption>Attributes</caption><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">11</td><td
+        style="text-align:center">+1D6</td><td
+        style="text-align:center">28</td><td
+        style="text-align:center">15m</td><td
+        style="text-align:center">0</td><td
+        style="text-align:center">3</td></tr></tbody></table><h2
+        id="skills-22">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{50%}, Persistence [[/r 1d100]]{60%}, Resilience [[/r
+        1d100]]{40%}.</li><li><strong>Knowledge:</strong> Lore (Magic) [[/r
+        1d100]]{40%}, Lore (Undead) [[/r 1d100]]{40%}, Natural Lore [[/r
+        1d100]]{40%}.</li><li><strong>Practical:</strong> Perception [[/r
+        1d100]]{50%}, Deception [[/r 1d100]]{110%}.</li></ul><h2
+        id="combat-22">Combat</h2><ul><li><strong>Close Combat [[/r
+        1d100]]{55%}:</strong> Claw ([[/r 2D6]]{2D6}).</li></ul><h2
+        id="magic-19">Magic</h2><ul><li><strong>Personal Magic [[/r
+        1d100]]{75%}:</strong> Befuddle, Countermagic, Darkwall, Detect Magic,
+        Disruption, Enhance Deception, Extinguish, Hinder
+        Perception</li></ul><h2 id="special-rules-13">Special Rules</h2><p>A hag
+        can create a shade out of the darkness of her lair. Doing this costs one
+        magic point per point of SIZ the shade has. A hag can only manifest one
+        shade at a time, though if it is destroyed she can create
+        another.</p><h2 id="naiad">Naiad</h2><p>Naiads are nymphs of the water,
+        whether a particular stream, stretch of river, lake, swamp or,
+        occasionally, a part of the coastline.</p><p>For every ten metres a
+        naiad moves from her body of water, she loses a magic point. If she
+        reaches zero magic points, her body collapses into a pool of water and
+        her spirit returns to her domain. A naiad can only regain magic points
+        when completely submerged in
+        water.</p><table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 4D6]]{4D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 4D6]]{4D6}</td><td
+        style="text-align:center">[[/gmr 2D6+3]]{2D6+3}</td><td
+        style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td
+        style="text-align:center">[[/gmr 2D6+18]]{2D6+18}</td><td
+        style="text-align:center">[[/gmr 2D6+12]]{2D6+12}</td></tr><tr><td
+        style="text-align:center">14</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">14</td><td style="text-align:center">9</td><td
+        style="text-align:center">17</td><td
+        style="text-align:center">25</td><td
+        style="text-align:center">19</td></tr></tbody></table><table><caption>Attributes</caption><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">10</td><td style="text-align:center">0</td><td
+        style="text-align:center">25</td><td
+        style="text-align:center">15m</td><td
+        style="text-align:center">0</td><td
+        style="text-align:center">1</td></tr></tbody></table><h2
+        id="skills-23">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{80%}, Persistence [[/r 1d100]]{70%}, Resilience [[/r
+        1d100]]{60%}.</li><li><strong>Knowledge:</strong> Natural Lore [[/r
+        1d100]]{40%}.</li><li><strong>Practical:</strong> Perception [[/r
+        1d100]]{40%}, Performance [[/r 1d100]]{40%}, Stealth [[/r
+        1d100]]{65%}.</li></ul><h2
+        id="combat-23">Combat</h2><ul><li><strong>Close Combat [[/r
+        1d100]]{40%}:</strong> Shortspear ([[/r
+        1D6]]{1D6}).</li><li><strong>Ranged Combat [[/r 1d100]]{40%}:</strong>
+        Javelin ([[/r 1D6]]{1D6}).</li></ul><h2
+        id="magic-20">Magic</h2><ul><li><strong>Personal Magic [[/r
+        1d100]]{60%}:</strong> Befuddle, Countermagic, Dull Weapon, Detect
+        Magic, Enhance Performance, Extinguish, Heal, Protection, Slow, Water
+        Breath</li></ul><h2 id="special-rules-14">Special Rules</h2><p>A naiad
+        can transform herself into an undine. Doing this takes a round and costs
+        one magic point per point of SIZ the undine has. If the undine is
+        destroyed, the naiad is unharmed but is immediately forced back to her
+        own body of water.</p><h2 id="oread">Oread</h2><p>An oread is a nymph
+        associated with a particular hill, mountain, or valley. For every ten
+        metres an oread moves from her domain, she loses a magic point. If she
+        reaches zero magic points, her body turns to stone and her spirit
+        returns home.</p><table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 2D6]]{2D6}</td><td
+        style="text-align:center">[[/gmr 3D6+3]]{3D6+3}</td><td
+        style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td
+        style="text-align:center">[[/gmr 2D6+3]]{2D6+3}</td><td
+        style="text-align:center">[[/gmr 3D6+3]]{3D6+3}</td><td
+        style="text-align:center">[[/gmr 2D6+15]]{2D6+15}</td><td
+        style="text-align:center">[[/gmr 2D6+9]]{2D6+9}</td></tr><tr><td
+        style="text-align:center">7</td><td style="text-align:center">12</td><td
+        style="text-align:center">17</td><td style="text-align:center">9</td><td
+        style="text-align:center">14</td><td
+        style="text-align:center">22</td><td
+        style="text-align:center">15</td></tr></tbody></table><table><caption>Attributes</caption><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">11</td><td style="text-align:center">0</td><td
+        style="text-align:center">25</td><td
+        style="text-align:center">15m</td><td
+        style="text-align:center">0</td><td
+        style="text-align:center">1</td></tr></tbody></table><h2
+        id="skills-24">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{40%}, Persistence [[/r 1d100]]{30%}, Resilience [[/r
+        1d100]]{50%}.</li><li><strong>Knowledge:</strong> Natural Lore [[/r
+        1d100]]{40%}.</li><li><strong>Practical:</strong> Perception [[/r
+        1d100]]{50%}, Performance [[/r 1d100]]{50%}, Deception [[/r
+        1d100]]{80%}.</li></ul><h2
+        id="combat-24">Combat</h2><ul><li><strong>Close Combat [[/r
+        1d100]]{35%}:</strong> Unarmed ([[/r 1D6]]{1D6}).</li><li><strong>Ranged
+        Combat [[/r 1d100]]{40%}:</strong> Rock ([[/r 1D4]]{1D4}).</li></ul><h2
+        id="magic-21">Magic</h2><ul><li><strong>Personal Magic [[/r
+        1d100]]{70%}:</strong> Countermagic, Dull Weapon, Detect Magic,
+        Extinguish, Pierce, Protection, Repair, Slow, Vigour, Weapon
+        Enhance</li></ul><h2 id="special-rules-15">Special Rules</h2><p>An oread
+        can transform herself into a gnome. Doing this takes a round and costs 1
+        magic point per point of SIZ the gnome has. If the gnome is destroyed,
+        the oread is unharmed but is immediately forced back to her own hill,
+        mountain or valley.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.qspIjC5WWazs74dY'
+  - _id: YPmOzJPSaiBC6gzl
+    flags: {}
+    image: {}
+    name: Orc
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table
+        style="width:100%"><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 4D6]]{4D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 4D6]]{4D6}</td><td
+        style="text-align:center">[[/gmr 2D6+3]]{2D6+3}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 2D6+3]]{2D6+3}</td><td
+        style="text-align:center">[[/gmr 2D6]]{2D6}</td></tr><tr><td
+        style="text-align:center">14</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">14</td><td
+        style="text-align:center">10</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">10</td><td
+        style="text-align:center">7</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:17%"></col><col style="width:24%"></col><col
+        style="width:20%"></col><col style="width:7%"></col><col
+        style="width:22%"></col><col
+        style="width:8%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">11</td><td style="text-align:center">0</td><td
+        style="text-align:center">10</td><td
+        style="text-align:center">15m</td><td style="text-align:center">Leather
+        (AP 2)</td><td style="text-align:center">2</td></tr></tbody></table><h2
+        id="skills-25">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{35%}, Persistence [[/r 1d100]]{35%}, Resilience [[/r
+        1d100]]{35%}.</li><li><strong>Knowledge:</strong> Craft [[/r
+        1d100]]{40%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{35%}, Deception [[/r 1d100]]{45%}, Perception [[/r
+        1d100]]{45%}.</li></ul><h2
+        id="combat-25">Combat</h2><ul><li><strong>Close Combat [[/r
+        1d100]]{40%}:</strong> Scimitar ([[/r 1D8]]{1D8}), Target Shield ([[/r
+        1D6]]{1D6}).</li><li><strong>Ranged Combat [[/r 1d100]]{50%}:</strong>
+        Short Bow ([[/r 1D8]]{1D8}, 1 CR, 75m).</li></ul><h2
+        id="magic-22">Magic</h2><p>Orcs usually worship evil or warlike deities
+        and are members of their cults.</p><p>They also have Night Vision so
+        they can see in the Dark as if it was the day.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.YPmOzJPSaiBC6gzl'
+  - _id: spjlGlE6DJouWU4r
+    flags: {}
+    image: {}
+    name: Pentaghast
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: "<table><caption>Characteristics</caption><colgroup><col style=\"width:4em\"></col><col style=\"width:4em\"></col><col style=\"width:4em\"></col><col style=\"width:4em\"></col><col style=\"width:4em\"></col><col style=\"width:4em\"></col><col style=\"width:4em\"></col></colgroup><thead><tr><th style=\"text-align:center\">STR</th><th style=\"text-align:center\">DEX</th><th style=\"text-align:center\">CON</th><th style=\"text-align:center\">SIZ</th><th style=\"text-align:center\">INT</th><th style=\"text-align:center\">POW</th><th style=\"text-align:center\">CHA</th></tr></thead><tbody><tr><td style=\"text-align:center\">[[/gmr 3D6+6]]{3D6+6}</td><td style=\"text-align:center\">[[/gmr 4D6+6]]{4D6+6}</td><td style=\"text-align:center\">[[/gmr 4D6+6]]{4D6+6}</td><td style=\"text-align:center\">[[/gmr 2D6+6]]{2D6+6}</td><td style=\"text-align:center\">[[/gmr 6D6]]{6D6}</td><td style=\"text-align:center\">[[/gmr 3D6+6]]{3D6+6}</td><td style=\"text-align:center\">[[/gmr 3D6+6]]{3D6+6}</td></tr><tr><td style=\"text-align:center\">17</td><td style=\"text-align:center\">20</td><td style=\"text-align:center\">20</td><td style=\"text-align:center\">13</td><td style=\"text-align:center\">21</td><td style=\"text-align:center\">20</td><td style=\"text-align:center\">20</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col style=\"width:11%\"></col><col style=\"width:17%\"></col><col style=\"width:14%\"></col><col style=\"width:3%\"></col><col style=\"width:48%\"></col><col style=\"width:4%\"></col></colgroup><thead><tr><th style=\"text-align:center\">Hit Points</th><th style=\"text-align:center\">Damage Modifier</th><th style=\"text-align:center\">Magic Points</th><th style=\"text-align:center\">MR</th><th style=\"text-align:center\">Armour</th><th style=\"text-align:center\">Loot</th></tr></thead><tbody><tr><td style=\"text-align:center\">17</td><td style=\"text-align:center\">+1D4</td><td style=\"text-align:center\">20</td><td style=\"text-align:center\">15m</td><td style=\"text-align:center\">Fur (AP 2) + immune to non-magical damage</td><td style=\"text-align:center\">0</td></tr></tbody></table><h2 id=\"skills-26\">Skills</h2><ul><li><strong>Resistances:</strong> Dodge [[/r 1d100]]{90%}, Persistence [[/r 1d100]]{100%}, Resilience [[/r 1d100]]{100%}.</li><li><strong>Practical:</strong> Athletics [[/r 1d100]]{100%}, Deception [[/r 1d100]]{100%}.</li><li><strong>Knowledge:</strong> Obscure Practical Jokes [[/r 1d100]]{100%}.</li></ul><h2 id=\"combat-26\">Combat</h2><ul><li><strong>Unarmed Combat [[/r 1d100]]{80%}:</strong> Kick ([[/r 1D6+1D4]]{1D6+1D4}), Bite ([[/r 1D8+1D4]]{1D8+1D4}).</li></ul><h2 id=\"special-rules-16\">Special Rules</h2><h3 id=\"scream\">Scream</h3><p>Anyone in an area of fifty meters who can hear the Pentaghast’s scream is subject to nausea and vomiting for [[/gmr 1D4]]{1D4} rounds on a failed Resilience roll. Once the targets have either successfully or unsuccessfully resisted the scream, they are no longer affected by it. Mocking laughter. Anyone who can hear the pentaghast’s terrible laughter is subject to a Demoralize spell. The demon can laugh once every two combat rounds.</p><h3 id=\"create-puppet\">Create Puppet</h3><p>Once per day a pentaghast is able to create a humanoid puppet out of dung. The puppet is guided by the pentaghast’s will. Use a standard species template (e.g.\_human, dwarf, elf, orc, etc..) to provide stats and base skills for the puppet, but use the knowledge skills of the demon. Such puppets tend to be heavily scented with perfume, to hide the smell of the dung, so are only detected on a successful Perception test.</p><h3 id=\"the-gift-of-tongues\">The Gift of Tongues</h3><p>The Pentaghast is able to speak all languages and mimic flawlessly the speech of any person it has previously heard.</p><h3 id=\"damage-immunity\">Damage Immunity</h3><p>The Pentaghast is only damaged by magic and is immune to non-magical poisons and disease.</p>"
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.spjlGlE6DJouWU4r'
+  - _id: pTcX1Uz1E4gZr6zS
+    flags: {}
+    image: {}
+    name: Pixie
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 2D3]]{2D3}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 4D6]]{4D6}</td><td
+        style="text-align:center">[[/gmr 1D6]]{1D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td></tr><tr><td
+        style="text-align:center">4</td><td style="text-align:center">11</td><td
+        style="text-align:center">14</td><td style="text-align:center">4</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">13</td><td
+        style="text-align:center">11</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:14%"></col><col style="width:21%"></col><col
+        style="width:17%"></col><col style="width:31%"></col><col
+        style="width:8%"></col><col
+        style="width:5%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">8</td><td
+        style="text-align:center">-1D6</td><td
+        style="text-align:center">13</td><td style="text-align:center"><p>15m<br
+        />30m when flying</p></td><td style="text-align:center">None</td><td
+        style="text-align:center">0</td></tr></tbody></table><h2
+        id="skills-27">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{60%}, Persistence [[/r 1d100]]{60%}, Resilience [[/r
+        1d100]]{20%}.</li><li><strong>Knowledge:</strong> Natural lore [[/r
+        1d100]]{80%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{60%}, Deception [[/r 1d100]]{60%}, Perception [[/r
+        1d100]]{60%}.</li></ul><h2
+        id="combat-27">Combat</h2><ul><li><strong>Close Combat [[/r
+        1d100]]{10%}:</strong> Dagger ([[/r 1D4+1]]{1D4+1}–[[/r
+        1D6]]{1D6}).</li><li><strong>Ranged Combat [[/r 1d100]]{25%}:</strong>
+        Sling ([[/r 1D6]]{1D6}).</li></ul><h2 id="magic-23">Magic</h2><p>Pixies
+        are highly magical and know at least ten magnitude points of Personal
+        Magic.</p><ul><li><strong>Personal Magic [[/r 1d100]]{85%}:</strong>
+        Befuddle, Babel, Demoralise, Fist of Gold, Glue</li></ul><p>In addition
+        they know the Divine Magic spell Mischief that they can cast at
+        will.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.pTcX1Uz1E4gZr6zS'
+  - _id: jRmuVrgmCOrrrWeh
+    flags: {}
+    image: {}
+    name: Troll
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 4D6+12]]{4D6+12}</td><td
+        style="text-align:center">[[/gmr 3D6+9]]{3D6+9}</td><td
+        style="text-align:center">[[/gmr 2D6]]{2D6}</td><td
+        style="text-align:center">[[/gmr 4D6+12]]{4D6+12}</td><td
+        style="text-align:center">[[/gmr 1D6+3]]{1D6+3}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 2D6]]{2D6}</td></tr><tr><td
+        style="text-align:center">26</td><td
+        style="text-align:center">20</td><td style="text-align:center">7</td><td
+        style="text-align:center">26</td><td style="text-align:center">6</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">7</td></tr></tbody></table><table
+        style="width:100%"><caption>Attributes</caption><colgroup><col
+        style="width:16%"></col><col style="width:23%"></col><col
+        style="width:19%"></col><col style="width:6%"></col><col
+        style="width:26%"></col><col
+        style="width:8%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">23</td><td
+        style="text-align:center">+2D6</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">23m</td><td style="text-align:center">Tough
+        hide (AP 3)</td><td
+        style="text-align:center">1</td></tr></tbody></table><h2
+        id="skills-28">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{25%}, Persistence [[/r 1d100]]{25%}, Resilience [[/r
+        1d100]]{60%}.</li><li><strong>Knowledge:</strong> Nature Lore [[/r
+        1d100]]{40%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{20%}, Deception [[/r 1d100]]{20%}, Perception [[/r
+        1d100]]{20%}.</li></ul><h2
+        id="combat-28">Combat</h2><ul><li><strong>Close Combat [[/r
+        1d100]]{40%}:</strong> Club ([[/r
+        1D6+2D6]]{1D6+2D6}).</li><li><strong>Unarmed Combat [[/r
+        1d100]]{40%}:</strong> Claw ([[/r 1D6+2D6]]{1D6+2D6}).</li></ul><p>The
+        troll may attack with either club or claw as its action during a combat
+        round, but not both.</p><h2 id="magic-24">Magic</h2><p>None.</p><h2
+        id="special-rules-17">Special Rules</h2><p>Trolls regenerate damage done
+        to them quite quickly. They heal [[/gmr 1D6]]{1D6} Hit Points per Combat
+        Round. This regeneration will not work on damage caused by
+        fire.</p><p>Trolls also have Night Vision so they can see in the Dark as
+        if it was the day.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.jRmuVrgmCOrrrWeh'
+  - _id: TNL2xuft3snVyGRm
+    flags: {}
+    image: {}
+    name: Satyr
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 5D6]]{5D6}</td><td
+        style="text-align:center">[[/gmr 4D6]]{4D6}</td><td
+        style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 4D6]]{4D6}</td><td
+        style="text-align:center">[[/gmr 2D6]]{2D6}</td></tr><tr><td
+        style="text-align:center">18</td><td
+        style="text-align:center">14</td><td
+        style="text-align:center">17</td><td
+        style="text-align:center">13</td><td
+        style="text-align:center">13</td><td
+        style="text-align:center">14</td><td
+        style="text-align:center">7</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:17%"></col><col style="width:24%"></col><col
+        style="width:20%"></col><col style="width:7%"></col><col
+        style="width:22%"></col><col
+        style="width:8%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">14</td><td
+        style="text-align:center">+1D6</td><td
+        style="text-align:center">14</td><td
+        style="text-align:center">15m</td><td style="text-align:center">Leather
+        (AP 2)</td><td style="text-align:center">1</td></tr></tbody></table><h2
+        id="skills-29">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{35%}, Persistence [[/r 1d100]]{50%}, Resilience [[/r
+        1d100]]{50%}.</li><li><strong>Knowledge:</strong> Natural Lore [[/r
+        1d100]]{75%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{45%}, Deception [[/r 1d100]]{60%}, Influence [[/r 1d100]]{75%},
+        Perception [[/r 1d100]]{60%}.</li></ul><h2
+        id="combat-29">Combat</h2><ul><li><strong>Close Combat [[/r
+        1d100]]{35%}:</strong> Short sword ([[/r
+        1D6+1D6]]{1D6+1D6}).</li><li><strong>Unarmed Combat [[/r
+        1d100]]{55%}:</strong> Head Butt ([[/r 1D6+1D6]]{1D6+1D6}).</li></ul><h2
+        id="magic-25">Magic</h2><p>Satyrs are naturally magical and know at
+        least five points of Personal Magic. They also tend to join an Earth or
+        Nature religion, or become Wises.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.TNL2xuft3snVyGRm'
+  - _id: etmtd8CkyShm2kfu
+    flags: {}
+    image: {}
+    name: Sea Serpent
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table
+        style="width:100%"><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 8D6+30]]{8D6+30}</td><td
+        style="text-align:center">[[/gmr 4D6+21]]{4D6+21}</td><td
+        style="text-align:center">[[/gmr 2D6]]{2D6}</td><td
+        style="text-align:center">[[/gmr 6D6+15]]{6D6+15}</td><td
+        style="text-align:center">3</td><td style="text-align:center">[[/gmr
+        6D6]]{6D6}</td><td style="text-align:center">3</td></tr><tr><td
+        style="text-align:center">58</td><td
+        style="text-align:center">35</td><td style="text-align:center">7</td><td
+        style="text-align:center">36</td><td style="text-align:center">3</td><td
+        style="text-align:center">21</td><td
+        style="text-align:center">3</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:13%"></col><col style="width:20%"></col><col
+        style="width:16%"></col><col style="width:28%"></col><col
+        style="width:17%"></col><col
+        style="width:5%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">36</td><td
+        style="text-align:center">+5D6</td><td
+        style="text-align:center">21</td><td style="text-align:center"><p>20m
+        swim<br />0 on land</p></td><td style="text-align:center">Scales (AP
+        5)</td><td style="text-align:center">3</td></tr></tbody></table><h2
+        id="skills-30">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{40%}, Persistence [[/r 1d100]]{40%}, Resilience [[/r
+        1d100]]{80%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{60%}, Deception [[/r 1d100]]{65%}.</li></ul><h2
+        id="combat-30">Combat</h2><ul><li><strong>Unarmed Combat [[/r
+        1d100]]{60%}:</strong> Bite ([[/r 1D6+5D6]]{1D6+5D6}).</li></ul><h2
+        id="magic-26">Magic</h2><p>Sea Serpents do not learn magic.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.etmtd8CkyShm2kfu'
+  - _id: RjpBIYu54ffnWJ4l
+    flags: {}
+    image: {}
+    name: Skeleton
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table
+        style="width:100%"><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 1D6]]{1D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">0</td><td style="text-align:center">0</td><td
+        style="text-align:center">0</td></tr><tr><td
+        style="text-align:center">13</td><td style="text-align:center">4</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">11</td><td style="text-align:center">0</td><td
+        style="text-align:center">0</td><td
+        style="text-align:center">0</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:17%"></col><col style="width:24%"></col><col
+        style="width:20%"></col><col style="width:7%"></col><col
+        style="width:22%"></col><col
+        style="width:8%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">8</td><td style="text-align:center">0</td><td
+        style="text-align:center">0</td><td
+        style="text-align:center">15m</td><td style="text-align:center">Leather
+        (AP 2)</td><td style="text-align:center">0</td></tr></tbody></table><h2
+        id="skills-31">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{10%}, Persistence [[/r 1d100]]{100%}, Resilience [[/r
+        1d100]]{100%}.</li></ul><p>Immune to all diseases, poisons and mind
+        control magic.</p><h2 id="combat-31">Combat</h2><ul><li><strong>Close
+        Combat [[/r 1d100]]{35%}:</strong> Sword ([[/r 1D8]]{1D8}), Medium
+        Shield ([[/r 1D6]]{1D6}).</li></ul><h2
+        id="magic-27">Magic</h2><p>None.</p><h2 id="special-rules-18">Special
+        Rules</h2><p>Skeletons have a score of 0 for INT, POW and CHA, as they
+        have no intelligence, will or personalities of their own. Skeletons are
+        also immune to disease, fatigue, poisons and mind control magic.</p><p>A
+        skeleton has the same MR the creature had in life but, as a skeleton, it
+        cannot fly or swim (if the creature had those abilities while alive).
+        Skeletons never suffer Fatigue.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.RjpBIYu54ffnWJ4l'
+  - _id: laE3h1VNoUQGAFY9
+    flags: {}
+    image: {}
+    name: Slime
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 1D6]]{1D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 1D6]]{1D6}</td><td
+        style="text-align:center">[[/gmr 6D6]]{6D6}</td><td
+        style="text-align:center">1</td><td style="text-align:center">[[/gmr
+        3D6]]{3D6}</td><td style="text-align:center">1</td></tr><tr><td
+        style="text-align:center">4</td><td style="text-align:center">11</td><td
+        style="text-align:center">4</td><td style="text-align:center">21</td><td
+        style="text-align:center">1</td><td style="text-align:center">11</td><td
+        style="text-align:center">1</td></tr></tbody></table><table><caption>Attributes</caption><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">16</td><td style="text-align:center">0</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">7m</td><td
+        style="text-align:center">None</td><td
+        style="text-align:center">1</td></tr></tbody></table><h2
+        id="skills-32">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{10%}, Persistence [[/r 1d100]]{40%}<sup>*</sup>, Resilience
+        [[/r 1d100]]{85%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{30%}, Perception [[/r 1d100]]{75%}, Deception [[/r
+        1d100]]{75%}.</li></ul><p><sup>*</sup>Immune to all mind control magic,
+        poison and disease.</p><h2
+        id="combat-32">Combat</h2><ul><li><strong>Unarmed Combat [[/r
+        1d100]]{75%}:</strong> Envelop (Acid damage equal to the Slime’s
+        SIZ).</li></ul><h2 id="magic-28">Magic</h2><p>Slimes do not learn
+        magic.</p><h2 id="special-rules-19">Special Rules</h2><p>A slime can
+        only be killed by fire or magic. Normal weapons merely pass through the
+        slime’s rancid tissue, without causing damage. Because of a slime’s
+        caustic nature, neither acid nor poison has any effect on it. Non-fiery
+        Weapon Enhance spells do no damage to a slime. Disruption and similar
+        spells have their normal effect.</p><p>A slime’s body retains its full
+        acidic properties for a number of days after death equal to the
+        creature’s CON.</p><p>It attacks by moving next to its intended victim
+        and attempting to envelop them. This attack has a base [[/r 1d100]]{75%}
+        chance of success, though the victim may use his Dodge skill or his
+        Athletics skill to jump out of the way. Using Athletics rather than
+        Dodge incurs a -[[/r 1d100]]{40%} penalty. A slime’s attack may not be
+        parried – the creature will simply slide around the parrying weapon to
+        engulf its foe.</p><p>Every round a creature is enmeshed by a slime,
+        that creature will take acid damage equal to the SIZ of the Slime.
+        Armour will protect against this damage for the first round, after which
+        it is dissolved by the Slime’s acid unless it is enchanted in some way
+        or another. A character caught by a slime may attempt to escape by
+        making another Dodge or Athletics skill test.</p><p>The slime can also
+        crawl up walls and hang from ceilings.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.laE3h1VNoUQGAFY9'
+  - _id: BX0MvdxMvLhHqoP2
+    flags: {}
+    image: {}
+    name: Spirits
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <p>Spirits can engage in Spirit Combat with living creatures that have a
+        POW characteristic. If they win the combat, they possess the loser,
+        since spirits crave a physical body for a variety of reasons, depending
+        on their type. For example, disease spirits possess their victims and
+        riddle their bodies with foul disease. See Spirit Possession in Combat
+        chapter for more information.</p><p>Spirits lack a physical presence,
+        due to lack of STR, CON and DEX.</p><h2 id="disease-spirit">Disease
+        Spirit</h2><table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">–</td><td style="text-align:center">–</td><td
+        style="text-align:center">–</td><td style="text-align:center">–</td><td
+        style="text-align:center">[[/gmr 2D6]]{2D6}</td><td
+        style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td></tr><tr><td
+        style="text-align:center"></td><td style="text-align:center"></td><td
+        style="text-align:center"></td><td style="text-align:center"></td><td
+        style="text-align:center">7</td><td style="text-align:center">17</td><td
+        style="text-align:center">11</td></tr></tbody></table><table><caption>Attributes</caption><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">N/A</td><td
+        style="text-align:center">N/A</td><td
+        style="text-align:center">17</td><td
+        style="text-align:center">30m</td><td
+        style="text-align:center">None</td><td
+        style="text-align:center">0</td></tr></tbody></table><h2
+        id="skills-33">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{40%}, Persistence [[/r
+        1d100]]{50%}.</li><li><strong>Knowledge:</strong> Lore (Disease) [[/r
+        1d100]]{100%}, Lore (Spirit World) [[/r
+        1d100]]{40%}.</li><li><strong>Practical:</strong> Deception [[/r
+        1d100]]{30%}.</li><li><strong>Spirit Combat [[/r 1d100]]{50%}:</strong>
+        Spectral Claw ([[/r 1D6]]{1D6}).</li></ul><h2
+        id="special-rules-20">Special Rules</h2><p>A disease spirit is, in
+        essence, a disease, either mundane or magical. After covertly possessing
+        its victim, the possessed one will be forced to make Resilience tests to
+        resist the effects of the disease. The disease cannot be thrown off
+        until the disease spirit is ousted. Also, the spirit will nearly always
+        choose to apply its POW as a penalty to the possessed one’s Resilience
+        tests.</p><p>If the possessed one dies while being possessed by a
+        disease spirit, there is a percentage chance equal to the spirit’s POW
+        that they will arise as a new disease spirit in [[/gmr 2D6]]{2D6}
+        hours.</p><h2 id="ghost">Ghost</h2><p>Those that should have passed into
+        the afterlife, but who have not found peace, remain to haunt the living
+        as ghosts. Jealous and mean, they seek to do harm to the living and
+        often will try to possess a victim to experience the joys of living once
+        again.</p><table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">–</td><td style="text-align:center">–</td><td
+        style="text-align:center">–</td><td style="text-align:center">–</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td></tr><tr><td
+        style="text-align:center">–</td><td style="text-align:center">–</td><td
+        style="text-align:center">–</td><td style="text-align:center">–</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">11</td></tr></tbody></table><table><caption>Attributes</caption><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">N/A</td><td
+        style="text-align:center">N/A</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">20m</td><td
+        style="text-align:center">None</td><td style="text-align:center">0 or
+        5</td></tr></tbody></table><h2
+        id="skills-34">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{40%}, Persistence [[/r 1d100]]{50%}, Resilience
+        N/A.</li><li><strong>Knowledge:</strong> Lore (Spirit World) [[/r
+        1d100]]{30%}.</li><li><strong>Practical:</strong> Deception [[/r
+        1d100]]{50%}, Perception [[/r 1d100]]{40%}.</li></ul><h2
+        id="combat-33">Combat</h2><ul><li><strong>Spirit Combat [[/r
+        1d100]]{40%}:</strong> Dominant Possession ([[/r
+        1D6]]{1D6}).</li></ul><h2 id="magic-29">Magic</h2><p>Ghosts typically
+        gain the ability to cast Personal Magic that helps them as ghosts. Some
+        may remember magic from their former lives.</p><p>Personal Magic Casting
+        [[/r 1d100]]{65%}: Befuddle, Demoralise, Scare 4</p><h2
+        id="special-rules-21">Special Rules</h2><p>Ghosts can only be affected
+        by magic spells which either dominate or drive them off, or by
+        characters who can engage in Spirit Combat.</p><h2
+        id="healing-spirit">Healing Spirit</h2><p>The nemesis of the disease
+        spirit, this spirit appears as a happy bright glowing orb. They are
+        typically summoned to help heal the sick and
+        wounded.</p><table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">–</td><td style="text-align:center">–</td><td
+        style="text-align:center">–</td><td style="text-align:center">–</td><td
+        style="text-align:center">[[/gmr 2D6]]{2D6}</td><td
+        style="text-align:center">[[/gmr 4D6]]{4D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td></tr><tr><td
+        style="text-align:center"></td><td style="text-align:center"></td><td
+        style="text-align:center"></td><td style="text-align:center"></td><td
+        style="text-align:center">7</td><td style="text-align:center">14</td><td
+        style="text-align:center">11</td></tr></tbody></table><table><caption>Attributes</caption><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">N/A</td><td
+        style="text-align:center">N/A</td><td
+        style="text-align:center">14</td><td
+        style="text-align:center">30m</td><td
+        style="text-align:center">None</td><td
+        style="text-align:center">0</td></tr></tbody></table><h2
+        id="magic-30">Magic</h2><ul><li><strong>Personal Magic [[/r
+        1d100]]{100%}:</strong> Heal 6.</li></ul><h2
+        id="skills-35">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{40%}, Persistence [[/r
+        1d100]]{50%}.</li><li><strong>Knowledge:</strong> Lore (Disease) [[/r
+        1d100]]{100%}, Lore (Spirit World) [[/r
+        1d100]]{60%}.</li><li><strong>Spirit Combat [[/r 1d100]]{50%}:</strong>
+        Spiritual Blast [[/r 1D6]]{1D6}.</li></ul><h2
+        id="special-rules-22">Special Rules</h2><p>The natural enemy of disease
+        spirits, a healing spirit is only capable of entering Spirit Combat with
+        a disease spirit already covertly possessing a creature. If the healing
+        spirit can bring the disease spirit to zero Hit Points, it will force it
+        to leave its host. The healing spirit will then depart as well, for it
+        cannot permanently possess any creature.</p><p>If a healing spirit is
+        used on an individual who is sick from a mundane illness (rather than
+        from a disease spirit), it will add its POW as a percentage bonus to the
+        individual’s chance of success on their next Resilience test to throw
+        off the effects of the disease.</p><h2 id="magic-spirit">Magic
+        Spirit</h2><p>Magic spirits are spirits that have mastery of one or more
+        spells. If bound, the holder of the spirit may use the spirit’s Magic
+        Points for casting spells.</p><p>Magic spirits may not initiate spirit
+        combat but may use the spells it knows to attack or defend
+        itself.</p><p>They appear as a series of multi-coloured orbs, equal in
+        number to the number of spells they
+        know.</p><table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">–</td><td style="text-align:center">–</td><td
+        style="text-align:center">–</td><td style="text-align:center">–</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 3D6+3]]{3D6+3}</td><td
+        style="text-align:center">[[/gmr 1D6]]{1D6}</td></tr><tr><td
+        style="text-align:center"></td><td style="text-align:center"></td><td
+        style="text-align:center"></td><td style="text-align:center"></td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">14</td><td
+        style="text-align:center">4</td></tr></tbody></table><table><caption>Attributes</caption><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">N/A</td><td
+        style="text-align:center">N/A</td><td
+        style="text-align:center">14</td><td
+        style="text-align:center">30m</td><td
+        style="text-align:center">None</td><td
+        style="text-align:center">0</td></tr></tbody></table><h2
+        id="magic-31">Magic</h2><p>A magic spirit knows [[/gmr 1D6]]{1D6}
+        Personal Magic, Divine Magic or Sorcery spells. These spirits will only
+        know one spell type. For example, a magic spirit will not have both
+        Divine and Sorcery spells, nor may it ever learn spells of another type.
+        If the spirit casts Divine Magic, it must regain the use of spent spells
+        in the same way a priest does. If casting Sorcery or Personal Magic, it
+        has a casting skill equal to its POW×5.</p><h2
+        id="skills-36">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{40%}, Persistence [[/r
+        1d100]]{50%}.</li><li><strong>Knowledge:</strong> Lore (Spirit World)
+        [[/r 1d100]]{60%}.</li><li><strong>Spirit Combat [[/r
+        1d100]]{50%}:</strong> Spiritual Blast ([[/r 1D6]]{1D6}).</li></ul><h2
+        id="passion-spirits-fear-madness-pain">Passion Spirits (Fear, Madness,
+        Pain)</h2><h3 id="fear-spirit">Fear Spirit</h3><p>If a fear spirit
+        covertly possesses a host, the host becomes permanently Demoralised (as
+        the spell), until the spirit is cast out.</p><h3
+        id="madness-spirit">Madness Spirit</h3><p>If a madness spirit succeeds
+        in covertly possessing a victim, it will manifest itself in daily bouts
+        of insanity. At least once per day, the madness spirit will attempt to
+        cause an insane fit in its host. It matches its Persistence against the
+        host’s Resilience in a standard opposed test. If the host succeeds, the
+        madness spirit will be quiescent for at least a number of hours equal to
+        the host’s POW.</p><p>If the host fails, he becomes incapacitated for
+        [[/gmr 1D20]]{1D20} hours – screaming madly, giggling incoherently or
+        simply becoming catatonic for the duration of the effect. The madness
+        spirit chooses the manner of madness, though most are partial to a
+        single effect. The madness spirit will also attempt to assert itself
+        whenever its host is in a stressful situation. Combat is an obvious
+        example, but these spirits also delight in affecting their hosts in a
+        variety of other stressful, important situations – collapsing into a fit
+        of mad giggling while petitioning an unfriendly king for a boon is
+        exactly the kind of thing madness spirits enjoy. Note, if the stressful
+        situation occurs during a period of forced quiescence on the part of the
+        spirit, it will be unable to manifest itself.</p><h3
+        id="pain-spirit">Pain Spirit</h3><p>If a pain spirit manages to possess
+        its target covertly, the victim will be overcome with a sudden burst of
+        pain. From that point on, until the spirit is cast out, the victim will
+        always be conscious of a dull ache in his joints or a twinge in his
+        muscles. Whenever the host acts quickly (as in combat) or concentrates
+        (as in spell casting), and sometimes purely at random intervals, he is
+        struck by a sudden spasm of pain. This pain reduces all the host’s skill
+        tests by a penalty equal to the spirit’s POW.</p><p>For example, if a
+        pain spirit with a POW of 17 possesses a victim, that victim loses [[/r
+        1d100]]{17%} from all skill tests so long as the spirit possesses him.
+        If they had an Athletics skill of [[/r 1d100]]{90%}, were attempting to
+        climb a cliff and rolled an 80, the test would be a failure as the pain
+        spirit effectively reduces their skill to [[/r
+        1d100]]{73%}.</p><table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">–</td><td style="text-align:center">–</td><td
+        style="text-align:center">–</td><td style="text-align:center">–</td><td
+        style="text-align:center">[[/gmr 2D6+3]]{2D6+3}</td><td
+        style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td><td
+        style="text-align:center">[[/gmr 4D6]]{4D6}</td></tr><tr><td
+        style="text-align:center"></td><td style="text-align:center"></td><td
+        style="text-align:center"></td><td style="text-align:center"></td><td
+        style="text-align:center">10</td><td
+        style="text-align:center">17</td><td
+        style="text-align:center">14</td></tr></tbody></table><table><caption>Attributes</caption><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">N/A</td><td
+        style="text-align:center">N/A</td><td
+        style="text-align:center">17</td><td
+        style="text-align:center">30m</td><td
+        style="text-align:center">None</td><td
+        style="text-align:center">0</td></tr></tbody></table><h2
+        id="skills-37">Skills</h2><ul><li><strong>Spirit Combat [[/r
+        1d100]]{55%}:</strong> Spectral Claw ([[/r
+        1D6]]{1D6}).</li><li><strong>Resistances:</strong> Dodge [[/r
+        1d100]]{40%}, Persistence [[/r
+        1d100]]{50%}.</li><li><strong>Knowledge:</strong> Lore (Spirit World)
+        [[/r 1d100]]{60%} .</li></ul>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.BX0MvdxMvLhHqoP2'
+  - _id: gMFR8sdkWofITNKc
+    flags: {}
+    image: {}
+    name: Unicorn
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 2D6+12]]{2D6+12}</td><td
+        style="text-align:center">[[/gmr 3D6+12]]{3D6+12}</td><td
+        style="text-align:center">[[/gmr 3D6+3]]{3D6+3}</td><td
+        style="text-align:center">[[/gmr 2D6+12]]{2D6+12}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 2D6+12]]{2D6+12}</td><td
+        style="text-align:center">[[/gmr 3D6+6]]{3D6+6}</td></tr><tr><td
+        style="text-align:center">19</td><td
+        style="text-align:center">22</td><td
+        style="text-align:center">13</td><td
+        style="text-align:center">19</td><td
+        style="text-align:center">13</td><td
+        style="text-align:center">19</td><td
+        style="text-align:center">17</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:17%"></col><col style="width:25%"></col><col
+        style="width:20%"></col><col style="width:7%"></col><col
+        style="width:19%"></col><col
+        style="width:8%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">21</td><td
+        style="text-align:center">+1D6</td><td
+        style="text-align:center">19</td><td
+        style="text-align:center">30m</td><td style="text-align:center">Hide (AP
+        1)</td><td style="text-align:center">0</td></tr></tbody></table><h2
+        id="skills-38">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{40%}, Persistence [[/r 1d100]]{60%}, Resilience [[/r
+        1d100]]{60%}.</li><li><strong>Knowledge:</strong> Natural Lore [[/r
+        1d100]]{40%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{60%}, Deception [[/r 1d100]]{30%}, Perception [[/r
+        1d100]]{60%}.</li></ul><h2
+        id="combat-34">Combat</h2><ul><li><strong>Unarmed Combat [[/r
+        1d100]]{60%}:</strong> Horn ([[/r 1D8+1D6]]{1D8+1D6}), Kick ([[/r
+        2D6+1D6]]{2D6+1D6}).</li></ul><h2 id="magic-32">Magic</h2><p>Unicorns
+        rarely learn magic.</p><h2 id="special-rule">Special Rule</h2><p>A
+        unicorn can heal wounds by touching them, exactly as the Heal 8 spell,
+        save that it costs the unicorn only 6 magic points and any requisite
+        casting tests automatically succeed.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.gMFR8sdkWofITNKc'
+  - _id: U8JziFthZOq97rR0
+    flags: {}
+    image: {}
+    name: Vampire
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 3D6+12]]{3D6+12}</td><td
+        style="text-align:center">[[/gmr 3D6+12]]{3D6+12}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">0</td><td style="text-align:center">[[/gmr
+        3D6]]{3D6}</td></tr><tr><td style="text-align:center">23</td><td
+        style="text-align:center">23</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">13</td><td
+        style="text-align:center">13</td><td style="text-align:center">0</td><td
+        style="text-align:center">11</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:16%"></col><col style="width:23%"></col><col
+        style="width:20%"></col><col style="width:6%"></col><col
+        style="width:24%"></col><col
+        style="width:8%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">18</td><td
+        style="text-align:center">+1D6</td><td style="text-align:center">0 (see
+        below)</td><td style="text-align:center">15m</td><td
+        style="text-align:center">Chainmail (AP 5)</td><td
+        style="text-align:center">4</td></tr></tbody></table><h2
+        id="skills-39">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{40%}, Persistence [[/r 1d100]]{80%}, Resilience [[/r
+        1d100]]{80%}.</li><li><strong>Knowledge:</strong> Culture (Local) [[/r
+        1d100]]{80%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{50%}, Deception [[/r 1d100]]{80%}, Perception [[/r
+        1d100]]{80%}.</li></ul><h2
+        id="combat-35">Combat</h2><ul><li><strong>Close Combat [[/r
+        1d100]]{50%}:</strong> Longsword ([[/r 1D8+1D6]]{1D8+1D6}), Target
+        Shield ([[/r 1D6+1D6]]{1D6+1D6}).</li><li><strong>Unarmed Combat [[/r
+        1d100]]{60%}:</strong> Bite ([[/r 1D6]]{1D6} + Magic Point drain, see
+        below).</li></ul><h2 id="magic-33">Magic</h2><p>Some Vampires are highly
+        magical and will either be a priest of an appropriate death religion or
+        make use of sorcery. Priests will have at least 10 points of magnitude
+        of spells and Sorcerers will know at least five spells</p><h3
+        id="vampire-lord-priest">Vampire Lord
+        Priest</h3><ul><li><strong>Personal Magic Casting [[/r
+        1d100]]{75%}:</strong> Darkwall, Tongues.</li><li><strong>Divine
+        Magic:</strong> Fear, Touch of Death.</li></ul><h3
+        id="vampire-lord-sorcerer">Vampire Lord Sorcerer</h3><p>Sorcery Casting
+        [[/r 1d100]]{75%}: Dominate Humans, Energy Projection (Cold), Mystic
+        Vision, Neutralise Magic, Venom.</p><h2 id="special-rules-23">Special
+        rules</h2><h3 id="night-vision">Night vision</h3><p>Vampires can see in
+        the dark and at night as if it were day by sensing life energy.</p><h3
+        id="magic-point-drain">Magic Point Drain</h3><p>A vampire does not
+        regenerate Hit Points or Magic Points normally. Instead, they must take
+        them from other beings by draining their blood. On a successful bite
+        attack, the vampire will hang on and drain D6 Magic Points from the
+        victim every round. Each drained Magic Point gives the vampire one Hit
+        Point or Magic Point (vampire’s choice). When the Vampire drains the
+        victim’s Magic Points to 0, the victim falls unconscious, as normal, and
+        the vampire can choose to carry on draining blood, except now it’s the
+        victim’s permanent POW that is drained.</p><h3
+        id="shapeshifting">Shapeshifting</h3><p>Vampires have the ability to
+        shapeshift into mist at will. As a single Combat Action, the vampire
+        (and every non-living item on his person) dissolves into a thin greenish
+        fog, approximately the same SIZ as they were in the flesh. As a mist,
+        the vampire is immune to all types of physical damage, but cannot take
+        any action except moving up to their MR. In mist form, a vampire moves
+        at the same speed as they would normally and is unaffected by strong
+        winds. Additionally, vampires still take damage from sunlight in mist
+        form.</p><p>As well as the ability to transform into mist, some vampires
+        manifest the ability to shapeshift into wolves and bats as well. As with
+        the mist transformation, such changes take a Combat Action to
+        perform.</p><p>Upon death, the vampire collapses to the ground and turns
+        to mist at the beginning of the next Combat Round. Before then, it can
+        be destroyed permanently by driving a stake through its heart (the only
+        way to prevent it from turning to mist) and decapitating it.</p><h3
+        id="vampires-and-sunlight">Vampires and Sunlight</h3><p>As creatures of
+        the night, vampires cannot stand the touch of natural sunlight. They
+        take one point of damage to every hit location per round that they are
+        exposed to the sun, though some will risk travelling in the daylight
+        hours by wearing layers of clothing and a hood to cover as much of their
+        body as possible.</p><h3 id="holy-symbols">Holy symbols</h3><p>In the
+        past, the holy icons of some religion have proved effective against
+        vampires. Those that focus their energies against the undead are the
+        most likely to be effective. It is down to the Referee to decide what
+        supernaturally offends any particular vampire. An elven vampire, for
+        example, might be repelled by symbols of nature gods, rather than by
+        human symbols of holiness. Any character presenting a holy symbol to a
+        vampire as a Combat Action matches their Persistence against the
+        vampire’s Resilience in an opposed check. They will receive bonuses or
+        penalties at the Referee’s discretion, based on the appropriateness of
+        the symbol being displayed. On a successful test, the vampire loses
+        [[/gmr 1D4]]{1D4} Hit Points (unaffected by armour or any of the
+        vampire’s magic) and may not attack that character or any other
+        character under the protection of Holy Symbol.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.U8JziFthZOq97rR0'
+  - _id: JWYR9hNzm4xRC0UX
+    flags: {}
+    image: {}
+    name: Werewolf
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <p>This being is human by day, but when the rage takes them, or under a
+        full moon, they transform into a giant savage wolf. Werewolves are the
+        very embodiment of nature or the bane of humanity, depending on your
+        viewpoint.</p><table><caption>Characteristics</caption><colgroup><col
+        style="width:7em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:6em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center"><p>[[/gmr 3D6]]{3D6}<br />(×2 as
+        wolf)</p></td><td style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center"><p>[[/gmr 2D6+6]]{2D6+6}<br />(×0.5 as
+        wolf)</p></td><td style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td></tr><tr><td
+        style="text-align:center">11 (22 as wolf)</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">13</td><td style="text-align:center">13 (6 as
+        wolf)</td><td style="text-align:center">11</td><td
+        style="text-align:center">11</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:11%"></col><col style="width:20%"></col><col
+        style="width:14%"></col><col style="width:35%"></col><col
+        style="width:13%"></col><col
+        style="width:4%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th>MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">12</td><td style="text-align:center">+1D6 in
+        wolf form</td><td style="text-align:center">11</td><td><p>15m as man<br
+        />30m in wolf form</p></td><td style="text-align:center">Hide (AP
+        1)</td><td style="text-align:center">0</td></tr></tbody></table><h2
+        id="skills-40">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{60%}, Persistence [[/r 1d100]]{60%}, Resilience [[/r
+        1d100]]{60%}.</li><li><strong>Knowledge:</strong> Natural Lore [[/r
+        1d100]]{80%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{60%}, Deception [[/r 1d100]]{60%}, Perception [[/r
+        1d100]]{60%}.</li></ul><h2
+        id="combat-36">Combat</h2><ul><li><strong>Close Combat [[/r
+        1d100]]{35%}:</strong> (as human): Longsword ([[/r
+        1D8]]{1D8}).</li><li><strong>Ranged Combat [[/r 1d100]]{25%}:</strong>
+        (as human): Short Bow ([[/r 1D8]]{1D8}, 1 CR,
+        75m).</li><li><strong>Unarmed Combat [[/r 1d100]]{60%}:</strong> (as
+        wolf): Bite ([[/r 1D8+1D4]]{1D8+1D4}), Claw ([[/r
+        1D6+1D4]]{1D6+1D4}).</li></ul><h2 id="magic-34">Magic</h2><p>Werewolves
+        either learn Personal Magic handed down from their ancestors to their
+        family, a grouping known as the pack, or join an Earth religion of a
+        particularly rough and savage nature.</p><h3
+        id="initiate-of-the-wolf-lord">Initiate of the Wolf
+        Lord</h3><ul><li><strong>Personal Magic:</strong> Beast Call [2],
+        Fanaticism [2], Coordination 3, Healing 3.</li><li><strong>Divine
+        Magic:</strong> Berserk.</li></ul><h2 id="special-rules-24">Special
+        Rules</h2><h3 id="night-vision-1">Night Vision</h3><p>Werewolves have
+        night vision, and at night they can see as well as they can during the
+        day.</p><h3 id="shape-shifting">Shape-Shifting</h3><p>Werewolves can
+        change form at will, an act that requires a Combat Round to complete. On
+        nights of a full moon, werewolves have no choice but to assume beast
+        form.</p><p>While in wolf form, werewolves are immune to most damage.
+        Only magic, fire or weapons made of pure silver will harm them – all
+        other blows simply bounce off harmlessly. If a normal sword with a
+        Weapon Enhance 3 spell cast on it is used against a werewolf, only the
+        three points of damage from the spell will affect the creature; the
+        weapon’s normal damage, as well as the attacker’s Damage Modifier, do
+        not count. The werewolf’s thick skin, which grants the beast one point
+        of armour, would reduce the Weapon Enhance spell’s damage to two. If the
+        entire weapon is enchanted, such as with a Fireblade spell, the entire
+        damage rolled will count, though the wielder’s Damage Modifier will
+        still be ignored.</p><p>Werewolves can be poisoned, so long as the
+        poison can be introduced to the creature’s body. They are living
+        entities who require oxygen and thus may be asphyxiated or drowned.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.JWYR9hNzm4xRC0UX'
+  - _id: kRPZ5ZbCD4wRfKEY
+    flags: {}
+    image: {}
+    name: Wyvern
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <p>These giant slender green reptiles are akin to dragons but with no
+        forelegs and animal
+        intelligence.</p><table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 4D6+12]]{4D6+12}</td><td
+        style="text-align:center">[[/gmr 2D6+12]]{2D6+12}</td><td
+        style="text-align:center">[[/gmr 2D6+6]]{2D6+6}</td><td
+        style="text-align:center">[[/gmr 4D6+12]]{4D6+12}</td><td
+        style="text-align:center">7</td><td style="text-align:center">[[/gmr
+        3D6]]{3D6}</td><td style="text-align:center">6</td></tr><tr><td
+        style="text-align:center">26</td><td
+        style="text-align:center">19</td><td
+        style="text-align:center">13</td><td
+        style="text-align:center">26</td><td style="text-align:center">7</td><td
+        style="text-align:center">11</td><td
+        style="text-align:center">6</td></tr></tbody></table><table><caption>Attributes</caption><colgroup><col
+        style="width:11%"></col><col style="width:17%"></col><col
+        style="width:14%"></col><col style="width:35%"></col><col
+        style="width:15%"></col><col
+        style="width:4%"></col></colgroup><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">23</td><td
+        style="text-align:center">+2D6</td><td
+        style="text-align:center">10</td><td style="text-align:center"><p>20m on
+        land<br />30m when flying</p></td><td style="text-align:center">Scales
+        (AP 5)</td><td style="text-align:center">1</td></tr></tbody></table><h2
+        id="skills-41">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{50%}, Persistence [[/r 1d100]]{35%}, Resilience [[/r
+        1d100]]{50%}.</li><li><strong>Practical:</strong> Athletics [[/r
+        1d100]]{50%}, Deception [[/r 1d100]]{10%}, Perception [[/r
+        1d100]]{60%}.</li></ul><h2
+        id="combat-37">Combat</h2><ul><li><strong>Unarmed Combat [[/r
+        1d100]]{60%}:</strong> Bite ([[/r 1D10+2D6]]{1D10+2D6}), Sting ([[/r
+        1D6+2D6]]{1D6+2D6}+poison), Claw ([[/r 1D6+2D6]]{1D6+2D6}).</li></ul><h2
+        id="magic-35">Magic</h2><p>None.</p><h2 id="special-rules-25">Special
+        Rules</h2><h3 id="wyvern-sting-poison">Wyvern Sting
+        Poison</h3><ul><li><strong>Type:</strong>
+        Ingested.</li><li><strong>Delay:</strong> [[/gmr 1D2]]{1D2} Combat
+        Rounds.</li><li><strong>Potency:</strong> 60.</li><li><strong>Full
+        Effect:</strong> [[/gmr 1D6]]{1D6} Hit Point damage, applies -4 penalty
+        to victim’s CON.</li><li><strong>Duration:</strong> [[/gmr 6D10]]{6D10}
+        minutes.</li></ul>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.kRPZ5ZbCD4wRfKEY'
+  - _id: 9OW2eUAFzG7BsOMq
+    flags: {}
+    image: {}
+    name: Zombie
+    ownership:
+      default: -1
+    sort: 0
+    system: {}
+    text:
+      content: >-
+        <table><caption>Characteristics</caption><colgroup><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col><col style="width:4em"></col><col
+        style="width:4em"></col></colgroup><thead><tr><th
+        style="text-align:center">STR</th><th
+        style="text-align:center">CON</th><th
+        style="text-align:center">DEX</th><th
+        style="text-align:center">SIZ</th><th
+        style="text-align:center">INT</th><th
+        style="text-align:center">POW</th><th
+        style="text-align:center">CHA</th></tr></thead><tbody><tr><td
+        style="text-align:center">[[/gmr 3D6+12]]{3D6+12}</td><td
+        style="text-align:center">[[/gmr 1D6]]{1D6}</td><td
+        style="text-align:center">[[/gmr 1D6+3]]{1D6+3}</td><td
+        style="text-align:center">[[/gmr 3D6]]{3D6}</td><td
+        style="text-align:center">[[/gmr 1D3]]{1D3}</td><td
+        style="text-align:center">0</td><td style="text-align:center">[[/gmr
+        1D3]]{1D3}</td></tr><tr><td style="text-align:center">23</td><td
+        style="text-align:center">4</td><td style="text-align:center">7</td><td
+        style="text-align:center">10</td><td style="text-align:center">2</td><td
+        style="text-align:center">0</td><td
+        style="text-align:center">2</td></tr></tbody></table><table><caption>Attributes</caption><thead><tr><th
+        style="text-align:center">Hit Points</th><th
+        style="text-align:center">Damage Modifier</th><th
+        style="text-align:center">Magic Points</th><th
+        style="text-align:center">MR</th><th
+        style="text-align:center">Armour</th><th
+        style="text-align:center">Loot</th></tr></thead><tbody><tr><td
+        style="text-align:center">7</td><td
+        style="text-align:center">+1D6</td><td
+        style="text-align:center">0</td><td style="text-align:center">7m</td><td
+        style="text-align:center">None</td><td
+        style="text-align:center">0</td></tr></tbody></table><h2
+        id="skills-42">Skills</h2><ul><li><strong>Resistances:</strong> Dodge
+        [[/r 1d100]]{0%}, Persistence (see Special Rules below), Resilience (see
+        Special Rules below).</li></ul><h2
+        id="combat-38">Combat</h2><ul><li><strong>Unarmed Combat [[/r
+        1d100]]{50%}:</strong> Fist ([[/r 1D4+1D6]]{1D4+1D6}).</li></ul><h2
+        id="magic-36">Magic</h2><p>None.</p><h2 id="special-rules-26">Special
+        Rules</h2><p>Zombies are immune to fatigue, disease, poisons and mind
+        control.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+    _key: '!journal.pages!MMv6Yudtc0CCb7OU.9OW2eUAFzG7BsOMq'
+sort: 0
+_key: '!journal!MMv6Yudtc0CCb7OU'

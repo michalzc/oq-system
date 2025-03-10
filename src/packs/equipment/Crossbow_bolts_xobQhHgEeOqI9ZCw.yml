@@ -1,0 +1,12 @@
+_id: xobQhHgEeOqI9ZCw
+folder: eOj8QOU9PQN1EJRx
+img: systems/oq/assets/icons/broadhead-arrow.svg
+name: Crossbow bolts
+type: equipment
+system:
+  cost: 2
+  quantity: 10
+  state: carried
+  type: ammunition
+_key: '!items!xobQhHgEeOqI9ZCw'
+effects: []

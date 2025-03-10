@@ -1,0 +1,40 @@
+system:
+  remainingMagnitude: 1
+  noMagicPoints: true
+  description: >-
+    <p>Each point of magnitude of this spell whips up a whirlwind capable of
+
+    carrying 20 SIZ in its whirling vortex. Each round the whirlwind moves ten
+
+    metres per point, in a random direction (use a D8 to determine the
+    direction,
+
+    with 1 being North and 5 being South, progressing clockwise around the
+
+    directions). For each point of magnitude the whirlwind is 10 metres
+    tall.</p>
+
+    <p>If the whirlwind hits a character, make a Dodge roll to avoid being
+    caught up
+
+    in it. Characters caught are whipped off their feet, 1D6 metres into the
+    vortex.
+
+    Each round roll a 1D6 and consult the following table.</p>
+
+    <p>@UUID[Compendium.oq.oq-system-documentation.JournalEntry.tQAx53vXPFGozPEk.JournalEntryPage.4VGYVzvW6Dti0GRW]{Whirlwind
+
+    Results}</p>
+  magnitude: 1
+  nonVariant: false
+  traits:
+    - Duration (15m)
+    - Progressive
+  type: divine
+_id: irpNqiEPzbwLN8G1
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Whirlwind
+type: spell
+_key: '!items!irpNqiEPzbwLN8G1'
+effects: []

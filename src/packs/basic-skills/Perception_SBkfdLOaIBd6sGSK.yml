@@ -1,0 +1,28 @@
+_id: SBkfdLOaIBd6sGSK
+_stats: null
+effects: []
+flags:
+  oq:
+    newActor:
+      - character
+      - npc
+folder: szWzZEdK1HVFTQEr
+img: systems/oq/assets/icons/skills.svg
+name: Perception
+ownership:
+  KsTXxaVKKsCmFqBq: 3
+  default: 0
+sort: 0
+system:
+  advancement: 0
+  customGroupName: ''
+  description: >-
+    <p>The Perception skill is used to represent the five senses of the
+    character when detecting objects or other characters. For example, a typical
+    use of the Perception skill is as a straight skill test to identify hidden
+    objects in a room or as an opposed test to discover a hidden character.</p>
+  formula: '@int+@pow'
+  group: practical
+  mod: 0
+type: skill
+_key: '!items!SBkfdLOaIBd6sGSK'

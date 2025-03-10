@@ -1,0 +1,19 @@
+system:
+  skillReference: personal-magic-casting
+  description: |-
+    <p>This spell makes a target item unbreakable for the duration of the spell.
+    Therefore, weapons with this spell cast on them will not break when a fumble
+    occurs in combat, and it allows items that are normally too brittle to be
+    wielded in combat to be used as improvised weapons.</p>
+  type: personal
+  traits:
+    - Touch
+  magnitude: 1
+  nonVariant: true
+type: spell
+_id: 2iuxEOg9k5rqfARf
+img: systems/oq/assets/icons/magic-swirl.svg
+folder: PmL84WZU2luOrJSw
+name: Harden
+_key: '!items!2iuxEOg9k5rqfARf'
+effects: []

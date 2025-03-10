@@ -1,0 +1,14 @@
+_id: 9l0n2frBUruxkGWT
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/sandwich.svg
+name: Trail Rations
+system:
+  cost: 0.5
+  quantity: 1
+  state: carried
+  type: consumable
+  traits:
+    - Duration (1d)
+type: equipment
+_key: '!items!9l0n2frBUruxkGWT'
+effects: []

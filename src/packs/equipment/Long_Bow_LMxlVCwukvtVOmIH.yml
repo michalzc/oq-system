@@ -1,0 +1,20 @@
+_id: LMxlVCwukvtVOmIH
+folder: 3XzLI3qEcMxeUqEk
+img: systems/oq/assets/icons/bow-arrow.svg
+name: Long Bow
+system:
+  correspondingSkill:
+    skillReference: ranged-combat
+  hands: two
+  encumbrance: 1
+  rangeFormula: 150m
+  rate: 1
+  cost: 150
+  state: carried
+  type: ranged
+  damage:
+    damageFormula: 1d10
+    includeDamageMod: true
+type: weapon
+_key: '!items!LMxlVCwukvtVOmIH'
+effects: []

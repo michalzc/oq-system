@@ -1,0 +1,26 @@
+system:
+  skillReference: sorcery-casting
+  magnitude: 1
+  description: >-
+    <p>This spell counteracts an antidote to any poison. For the duration of the
+
+    spell, it reduces any poison’s potency by its magnitude X 5. This is for the
+
+    chance to resist the poison initially. If that resistance test is failed, it
+
+    still reduces the poison’s effective potency by its magnitude X 5.   If cast
+    on
+
+    a person who is already affected by a poison, they get another chance to
+    resist
+
+    the poison.</p>
+  nonVariant: false
+  type: sorcery
+_id: KHy3APO0uTzRw2ey
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Poison Antidote
+type: spell
+_key: '!items!KHy3APO0uTzRw2ey'
+effects: []

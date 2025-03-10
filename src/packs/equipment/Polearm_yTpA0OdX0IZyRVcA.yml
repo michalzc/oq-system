@@ -1,0 +1,18 @@
+_id: yTpA0OdX0IZyRVcA
+folder: VlZllXyyJC54uoOE
+img: systems/oq/assets/icons/barbed-spear.svg
+name: Polearm
+system:
+  correspondingSkill:
+    skillReference: close-combat
+  hands: two
+  encumbrance: 3
+  cost: 200
+  state: carried
+  type: melee
+  damage:
+    damageFormula: 1d8
+    includeDamageMod: true
+type: weapon
+_key: '!items!yTpA0OdX0IZyRVcA'
+effects: []

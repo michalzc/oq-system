@@ -1,0 +1,20 @@
+_id: IiFGffYo5SeN27sW
+folder: 3XzLI3qEcMxeUqEk
+img: systems/oq/assets/icons/tomahawk.svg
+name: Throwing Hatchet
+system:
+  correspondingSkill:
+    skillReference: ranged-combat
+  hands: one
+  encumbrance: 1
+  rangeFormula: STR m
+  rate: 1
+  cost: 25
+  state: carried
+  type: ranged
+  damage:
+    damageFormula: 1d8
+    includeDamageMod: true
+type: weapon
+_key: '!items!IiFGffYo5SeN27sW'
+effects: []
