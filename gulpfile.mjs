@@ -14,7 +14,7 @@ import zip from 'gulp-zip';
 import jsonModify from 'gulp-json-modify';
 import rename from 'gulp-rename';
 import version from './version.mjs';
-import path from 'path';
+import path from 'node:path';
 import * as glob from 'glob';
 import { compilePack } from '@foundryvtt/foundryvtt-cli';
 
