@@ -1,0 +1,38 @@
+system:
+  remainingMagnitude: 1
+  noMagicPoints: true
+  description: >-
+    <p>This spell reflects incoming spells aimed at the target or his equipment,
+
+    redirecting the spell back at the original caster. Once cast on a subject,
+
+    Reflection will attempt to reflect any spells cast at the target. It will
+    not
+
+    have any effect on spells that are already affecting a character. The
+    effects of
+
+    Reflection depend on the relative magnitude of both itself and the incoming
+
+    spell – see the Reflection Results table for more details.</p> <p>Reflection
+    is
+
+    incompatible with Absorption, Shield and Spirit Block</p>
+
+    <p>@UUID[Compendium.oq.oq-system-documentation.JournalEntry.tQAx53vXPFGozPEk.JournalEntryPage.B11Ii3ssupRu3Yny]{Reflection
+
+    Results}</p>
+  magnitude: 1
+  nonVariant: false
+  traits:
+    - Duration (15)
+    - Progressive
+    - Ranged
+  type: divine
+_id: Jz12EtbfmaTLP74x
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Reflection
+type: spell
+_key: '!items!Jz12EtbfmaTLP74x'
+effects: []

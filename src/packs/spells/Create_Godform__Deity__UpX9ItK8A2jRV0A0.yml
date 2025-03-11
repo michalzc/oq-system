@@ -1,0 +1,65 @@
+system:
+  skillReference: sorcery-casting
+  magnitude: 1
+  description: >-
+    <p>This spell can be cast on a recipient other than the caster. It allows
+    the
+
+    recipient to assume the magical form of the deity for the duration of the
+    spell.
+
+    While not quite the same as becoming the god itself, it allows the recipient
+    to
+
+    assume some of the powers of the deity.</p> <p>While the spell is in
+    operation,
+
+    the recipient gains:</p> <ul> <li>+20% in all the skills that the deity
+
+    teaches.</li> <li>Each magnitude of the spell beyond the first allows the
+
+    recipient to learn and cast one point of the deity’s Divine or Personal
+    Magic
+
+    for the duration of the spell. Divine Magic is one use, and Personal Magic
+    must
+
+    be paid for from the recipients’ magic points. </li> <li>The recipient knows
+
+    anything the deity would know.</li> <li>This is an exceptionally powerful
+    spell,
+
+    whose use and knowledge automatically puts the sorcerer on the enemy list of
+    the
+
+    deity’s cult, should they find out that the sorcerer knows how to Godform
+    their
+
+    god.</li> </ul> <p>If the spell is fumbled, one of the following events, or
+    one
+
+    similar from the Referee’s fertile imagination, occurs: </p> <ul> <li>The
+    deity
+
+    sends one of its guardians, an Otherworld servant, to exact divine vengeance
+
+    upon the sorcerer.</li> <li>The deity transports the sorcerer and all
+    ‘helpers’
+
+    to their court in the Houses of the Holy to explain themselves.</li> <li>The
+
+    deity tells a local priest of the sorcerer’s heresy and makes it clear that
+    it
+
+    is their temple’s job to exact revenge on their deity’s behalf.</li> </ul>
+  nonVariant: false
+  traits:
+    - Touch
+  type: sorcery
+_id: UpX9ItK8A2jRV0A0
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Create Godform (Deity)
+type: spell
+_key: '!items!UpX9ItK8A2jRV0A0'
+effects: []

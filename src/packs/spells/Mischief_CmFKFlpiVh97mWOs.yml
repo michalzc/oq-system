@@ -1,0 +1,27 @@
+system:
+  remainingMagnitude: 2
+  noMagicPoints: true
+  description: >-
+    <p>Mischief is a minor trickster’s spell which afflicts its target with a
+    small
+
+    irritating curse.</p> <p>Roll 1D20 on the following list for a result, which
+
+    stays in place for the duration of the spell.</p>
+
+    <p>@UUID[Compendium.oq.oq-system-documentation.JournalEntry.tQAx53vXPFGozPEk.JournalEntryPage.wWCRB02MMRERgevu]{Type
+
+    of Mischief}</p>
+  magnitude: 2
+  nonVariant: true
+  traits:
+    - Resist (Persistence)
+    - Touch
+  type: divine
+_id: CmFKFlpiVh97mWOs
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Mischief
+type: spell
+_key: '!items!CmFKFlpiVh97mWOs'
+effects: []

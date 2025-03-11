@@ -1,0 +1,32 @@
+system:
+  remainingMagnitude: 2
+  noMagicPoints: true
+  description: >-
+    <p>This spell creates a patch of quicksand 10m square. The earth in the area
+
+    becomes boggy and saturated with water. On a failed Persistence roll, any
+
+    character standing on the patch will sink into the earth, at a rate of 1
+    metre a
+
+    combat round, The quicksand holds the victim firmly and only by dispelling
+    the
+
+    magic can they be rescued.</p> <p>Once the duration of the spell is over,
+    the
+
+    victim, if not on the surface, is buried under the now solid earth (see
+
+    Suffocation rules).</p>
+  magnitude: 2
+  nonVariant: true
+  traits:
+    - Area
+  type: divine
+_id: WsJbrecvFpTTVJws
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Quicksand
+type: spell
+_key: '!items!WsJbrecvFpTTVJws'
+effects: []

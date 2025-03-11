@@ -1,0 +1,15 @@
+_id: XqSf5E1nz8FJrDlq
+name: Leather
+folder: 1LSg8TGkuL3Z4Wyx
+img: systems/oq/assets/icons/leather-armor.svg
+type: armour
+system:
+  ap: 2
+  encumbrance: 3
+  cost: 500
+  state: worn
+  description: |-
+    <p>Either padded leather or boiled and
+    stiffened leather or linen armour.</p>
+_key: '!items!XqSf5E1nz8FJrDlq'
+effects: []

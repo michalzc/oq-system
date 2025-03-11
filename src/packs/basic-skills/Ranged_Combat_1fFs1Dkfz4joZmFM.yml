@@ -1,0 +1,26 @@
+_id: 1fFs1Dkfz4joZmFM
+_stats: null
+effects: []
+flags:
+  oq:
+    newActor:
+      - character
+folder: FG6ln8k3Rk5vyfJY
+img: systems/oq/assets/icons/skills.svg
+name: Ranged Combat
+ownership:
+  KsTXxaVKKsCmFqBq: 3
+  default: 0
+sort: 0
+system:
+  advancement: 0
+  customGroupName: ''
+  description: >-
+    <p>This skill covers the use of missile weapons, such as bows, crossbows,
+    thrown spears and thrown daggers. See the Combat chapter for more
+    detail.</p>
+  formula: '@dex+@int'
+  group: combat
+  mod: 0
+type: skill
+_key: '!items!1fFs1Dkfz4joZmFM'

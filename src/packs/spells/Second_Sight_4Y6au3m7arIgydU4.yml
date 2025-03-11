@@ -1,0 +1,32 @@
+system:
+  skillReference: personal-magic-casting
+  nonVariant: true
+  magnitude: 3
+  type: personal
+  description: >-
+    <p>Second Sight allows the caster to gauge the POW of every creature and
+    magic
+
+    item within the range. Anything that prevents normal vision stops the spell.
+    The
+
+    caster will know if each aura created by the illuminated POW is less than
+    their
+
+    POW, within three points of their POW, or greater than their POW.</p>
+
+    <p>Additionally, Second Sight provides a +20% bonus on Perception tests to
+
+    notice hidden magical items or hiding people or creatures. Second Sight will
+
+    also reveal invisible entities, though only a hazy image will show (treat
+    such
+
+    targets as partially obscured).</p>
+name: Second Sight
+_id: 4Y6au3m7arIgydU4
+type: spell
+folder: PmL84WZU2luOrJSw
+img: systems/oq/assets/icons/magic-swirl.svg
+_key: '!items!4Y6au3m7arIgydU4'
+effects: []

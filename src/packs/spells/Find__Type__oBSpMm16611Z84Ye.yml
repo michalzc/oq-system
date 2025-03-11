@@ -1,0 +1,60 @@
+system:
+  remainingMagnitude: 1
+  noMagicPoints: true
+  description: >-
+    <p>This spell is several spells, though they all operate in a similar
+    fashion,
+
+    which allows the caster to locate the closest target of the spell within its
+
+    range. This effect is stopped by a thick substance such as metal, earth or
+
+    stone, if it is at least one metre thick. It is also blocked by Absorption,
+
+    though the caster will know the target is somewhere within range (though not
+    its
+
+    precise location). The separate Find spells are listed below.</p> <p>Unlike
+    the
+
+    Personal Magic Detect spells, the Find spells do not require concentration
+    on
+
+    the part of the caster – they simply function and alert them to the presence
+    of
+
+    whatever they locate.</p> <p><i>Find Enemy:</i> Gives the location of one
+
+    creature who intends to harm the caster.</p> <p><i>Find Magic:</i> Gives the
+
+    location of the nearest magic item, magical creature, or active spell.</p>
+
+    <p><i>Find (Species):</i> Each Find Species spell will give the location of
+    the
+
+    nearest creature of the specified species. Examples of this spell include
+    Find
+
+    Goblin, Find Dwarf and Find Horse.</p> <p><i>Find Substance:</i> Each Find
+
+    Substance spell will give the location of the nearest substance of the
+    specified
+
+    type. Examples of this spell include Find Coal, Find Gold and Find Wood.</p>
+
+    <p>The Referee should provide the rough power of the detected subject (e.g.
+
+    ‘weak magic’ or ‘rich gold lode’).</p>
+  magnitude: 1
+  nonVariant: true
+  traits:
+    - Duration (15)
+    - Ranged
+  type: divine
+_id: oBSpMm16611Z84Ye
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Find (Type)
+type: spell
+_key: '!items!oBSpMm16611Z84Ye'
+effects: []

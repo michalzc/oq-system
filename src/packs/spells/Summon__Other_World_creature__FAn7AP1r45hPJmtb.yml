@@ -1,0 +1,34 @@
+system:
+  skillReference: sorcery-casting
+  magnitude: 1
+  description: >-
+    <p>This spell allows the sorcerer to summon one Other World creature, per
+
+    casting, to the mundane world. The creature is not automatically under the
+
+    sorcerer’s control. If the summoned creature succeeds its Persistence test,
+    it
+
+    is free of the sorcerer’s command and, if so inclined, may be hostile to the
+
+    sorcerer. Otherwise, it acts as if under the influence of a Dominate spell,
+    for
+
+    the duration of the spell.  The duration of the summon spell also determines
+    how
+
+    long the creature is trapped in the Mundane World.</p> <p>Example Other
+    World
+
+    creatures: Demons, Elementals, Spirits and Undead.</p>
+  nonVariant: false
+  traits:
+    - Resist (Persistence)
+  type: sorcery
+_id: FAn7AP1r45hPJmtb
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Summon (Other World creature)
+type: spell
+_key: '!items!FAn7AP1r45hPJmtb'
+effects: []

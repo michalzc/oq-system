@@ -1,0 +1,18 @@
+_id: qz13YQp6uztvT6jK
+folder: VlZllXyyJC54uoOE
+img: systems/oq/assets/icons/glaive.svg
+name: Glaive
+system:
+  correspondingSkill:
+    skillReference: close-combat
+  hands: two
+  encumbrance: 3
+  cost: 200
+  state: carried
+  type: melee
+  damage:
+    damageFormula: 1d8
+    includeDamageMod: true
+type: weapon
+_key: '!items!qz13YQp6uztvT6jK'
+effects: []

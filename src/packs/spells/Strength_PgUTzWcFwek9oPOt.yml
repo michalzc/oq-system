@@ -1,0 +1,21 @@
+system:
+  skillReference: personal-magic-casting
+  magnitude: 1
+  type: personal
+  nonVariant: false
+  traits:
+    - Touch
+  description: >-
+    <p>For every point of the magnitude of this spell, the target’s damage
+    increases
+
+    by +1 and strength-based athletics tests are +10% per magnitude.  Note, the
+
+    increased damage is not magical damage.</p>
+name: Strength
+folder: PmL84WZU2luOrJSw
+type: spell
+_id: PgUTzWcFwek9oPOt
+img: systems/oq/assets/icons/magic-swirl.svg
+_key: '!items!PgUTzWcFwek9oPOt'
+effects: []

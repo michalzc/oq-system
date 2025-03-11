@@ -1,0 +1,21 @@
+system:
+  remainingMagnitude: 1
+  noMagicPoints: true
+  description: |-
+    <p>This spell reanimates a dead human corpse and turns it into an undead
+    creature, of a type determined by the magnitude of the spell.</p> <p>1 =
+    Skeleton, 2 = Zombie, 5= Ghoul, 8= Vampire</p> <p>The undead creature stays
+    under the control of the Priest until killed.</p>
+  magnitude: 1
+  nonVariant: false
+  traits:
+    - Permanent
+    - Progressive
+  type: divine
+_id: 05bkzEpg5cvTlJHr
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Call (Undead)
+type: spell
+_key: '!items!05bkzEpg5cvTlJHr'
+effects: []

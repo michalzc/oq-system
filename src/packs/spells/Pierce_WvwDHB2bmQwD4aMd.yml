@@ -1,0 +1,21 @@
+system:
+  skillReference: personal-magic-casting
+  magnitude: 1
+  type: personal
+  description: >-
+    <p>This spell affects any weapon with a blade or point. For every point of
+
+    magnitude, it ignores one armour point when it strikes armour. Pierce can
+    bypass
+
+    magical armour as easily as normal armour.</p>
+  traits:
+    - Touch
+  nonVariant: false
+name: Pierce
+img: systems/oq/assets/icons/magic-swirl.svg
+type: spell
+folder: PmL84WZU2luOrJSw
+_id: WvwDHB2bmQwD4aMd
+_key: '!items!WvwDHB2bmQwD4aMd'
+effects: []

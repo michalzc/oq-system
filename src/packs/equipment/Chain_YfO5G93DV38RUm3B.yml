@@ -1,0 +1,16 @@
+_id: YfO5G93DV38RUm3B
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/crossed-chains.svg
+name: Chain
+system:
+  description: ''
+  cost: 40
+  encumbrance: 2
+  quantity: 1
+  state: carried
+  type: single
+  traits:
+    - Length (2m)
+type: equipment
+_key: '!items!YfO5G93DV38RUm3B'
+effects: []

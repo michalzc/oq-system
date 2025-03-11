@@ -1,0 +1,21 @@
+system:
+  skillReference: personal-magic-casting
+  magnitude: 1
+  type: personal
+  nonVariant: false
+  description: >-
+    <p>This spell forms a magical barrier that protects the caster from magic
+    point
+
+    loss as the result of a successful attack during spirit combat (see “Spirit
+
+    Combat” ). Each point of magnitude reduces the damage done by an attacking
+
+    spirit by one point.</p>
+_id: akhNtGzmNREsv40l
+img: systems/oq/assets/icons/magic-swirl.svg
+type: spell
+folder: PmL84WZU2luOrJSw
+name: Spirit Shield
+_key: '!items!akhNtGzmNREsv40l'
+effects: []

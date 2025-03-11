@@ -1,0 +1,22 @@
+system:
+  remainingMagnitude: 2
+  noMagicPoints: true
+  description: |-
+    <p>This powerful spell instantly heals any lost hit points, even if the
+    character is mortally wounded, back to their full total. It also cures any
+    natural disease, i.e. one not caused by a spirit; and any deadly poison is
+    purged instantly from the character. Any damage or effects caused by it are
+    removed.</p>
+  magnitude: 2
+  nonVariant: true
+  traits:
+    - Instant
+    - Touch
+  type: divine
+_id: eF8YF44A5Tii0B5n
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Divine Heal
+type: spell
+_key: '!items!eF8YF44A5Tii0B5n'
+effects: []

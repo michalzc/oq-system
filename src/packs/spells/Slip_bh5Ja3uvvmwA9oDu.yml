@@ -1,0 +1,17 @@
+system:
+  skillReference: personal-magic-casting
+  type: personal
+  nonVariant: true
+  description: |-
+    <p>The caster makes the ground under the target’s feet as slippery as black
+    sheet ice.  The target must make a Dodge roll or fall over prone.</p>
+  traits:
+    - Resist (Dodge)
+  magnitude: 1
+_id: bh5Ja3uvvmwA9oDu
+name: Slip
+folder: PmL84WZU2luOrJSw
+img: systems/oq/assets/icons/magic-swirl.svg
+type: spell
+_key: '!items!bh5Ja3uvvmwA9oDu'
+effects: []

@@ -1,0 +1,20 @@
+system:
+  skillReference: personal-magic-casting
+  magnitude: 1
+  nonVariant: false
+  type: personal
+  description: |-
+    <p>Each point of magnitude allows the caster to make one extra unarmed
+    attack. These attacks happen in a blur of motion as soon as the spell fires
+    (i.e. when the spell takes effect), instead of the normal combat order that
+    the character’s attacks happen on. An attack roll is made separately for
+    each attack.</p>
+  traits:
+    - Instant
+_id: zr5mLyRPWg3CK5dw
+type: spell
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Fist of Wind
+folder: PmL84WZU2luOrJSw
+_key: '!items!zr5mLyRPWg3CK5dw'
+effects: []

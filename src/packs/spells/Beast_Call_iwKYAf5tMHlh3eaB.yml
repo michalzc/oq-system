@@ -1,0 +1,25 @@
+system:
+  skillReference: personal-magic-casting
+  magnitude: 2
+  nonVariant: true
+  type: personal
+  traits:
+    - Instant
+    - Resist (Resilience)
+  description: >-
+    <p>The Beast Call serves to attract an animal within range. When the spell
+    is cast, it affects a targeted creature with a fixed INT of 7 or less. If it
+    fails to resist, the creature will go to the place where the caster stands,
+    and the spell effect terminates. Any barrier, immediate threat, or counter
+    control, also end the effects of the spell, leaving the creature to react
+    naturally.</p> <p><i>For example</i>, the Beast Call spell might cause a
+    horse to turn and walk towards the spell, but a single yank of its reins by
+    the rider would end the spell’s effect.</p> <p>This spell is a potent aid to
+    hunters and herders.</p>
+_id: iwKYAf5tMHlh3eaB
+folder: PmL84WZU2luOrJSw
+img: systems/oq/assets/icons/magic-swirl.svg
+name: Beast Call
+type: spell
+_key: '!items!iwKYAf5tMHlh3eaB'
+effects: []

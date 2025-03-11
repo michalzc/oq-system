@@ -1,0 +1,26 @@
+_id: stcTpUwokyoGV3dl
+_stats: null
+effects: []
+flags:
+  oq:
+    newActor:
+      - character
+folder: QTKeyS3tL0LjreJG
+img: systems/oq/assets/icons/skills.svg
+name: Personal Magic Casting
+ownership:
+  KsTXxaVKKsCmFqBq: 3
+  default: 0
+sort: 0
+system:
+  advancement: 0
+  customGroupName: ''
+  description: >-
+    <p>This skill represents the character’s ability to cast Personal Magic
+    spells. It also describes their knowledge about Personal Magic (see the
+    dedicated chapter for further details).</p>
+  formula: '@pow*3'
+  group: magic
+  mod: 0
+type: skill
+_key: '!items!stcTpUwokyoGV3dl'

@@ -1,0 +1,55 @@
+system:
+  remainingMagnitude: 1
+  noMagicPoints: true
+  description: >-
+    <p>This spell allows the Caster to create items literally from nowhere. The
+    size
+
+    of the item depends upon the magnitude of the spell.</p> <table>
+
+    <caption>Magnitude vs. Size of Miraculous Item</caption> <thead> <tr>
+
+    <th>Magnitude</th> <th>Size of item</th> </tr> </thead> <tbody> <tr>
+    <td>1</td>
+
+    <td>Small items. Such as pots, plates, knives, and a defaced detail on a
+    stone
+
+    fresco, etc.</td> </tr> <tr> <td>2</td> <td>Medium. Large containers such as
+
+    wine amphorae, target shields, long swords, human-sized armour, a missing
+    arm on
+
+    a broken statue.</td> </tr> <tr> <td>3</td> <td>Large. Tower shields, broken
+
+    doors, a missing masonry feature such as a column.</td> </tr> <tr>
+    <td>4</td>
+
+    <td>Huge. Giant armour, ruined houses, shattered towers.</td> </tr> <tr>
+
+    <td>5</td> <td>Enormous. The broken parts of a walking castle, the ruined
+    walls
+
+    of a city.</td> </tr> </tbody> </table> <p>Such items are always of the
+    finest
+
+    quality and do not break under any circumstance. For the cost of the
+    magnitude
+
+    in growth points, the item can last permanently. Otherwise, it disappears
+    after
+
+    one hour.</p>
+  magnitude: 1
+  nonVariant: false
+  traits:
+    - Duration (1h)
+    - Progressive
+  type: divine
+_id: Nn4TpYbm4WEWreG9
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Miraculous Item
+type: spell
+_key: '!items!Nn4TpYbm4WEWreG9'
+effects: []

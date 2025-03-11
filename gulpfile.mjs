@@ -14,9 +14,9 @@ import zip from 'gulp-zip';
 import jsonModify from 'gulp-json-modify';
 import rename from 'gulp-rename';
 import version from './version.mjs';
-import { ClassicLevel } from 'classic-level';
-import groupAggregate from 'gulp-group-aggregate';
 import path from 'path';
+import * as glob from 'glob';
+import { compilePack } from '@foundryvtt/foundryvtt-cli';
 
 import rollupStream from '@rollup/stream';
 
@@ -136,36 +136,11 @@ async function updateJson() {
 }
 
 export async function buildPacks() {
-  return gulp
-    .src(`${packsDirectory}/*/**.yaml`)
-    .pipe(yaml())
-    .pipe(
-      groupAggregate({
-        group: (file) => path.relative(packsDirectory, file.dirname),
-
-        aggregate: function (dbName, files) {
-          const dbPath = `${buildDirectory}/packs/${dbName}`;
-          const db = new ClassicLevel(dbPath, { valueEncoding: 'json' });
-          const batch = files
-            .map((file) => JSON.parse(file.contents.toString()))
-            .map((entry) => {
-              const { fileType, parentId, ...content } = entry;
-              const { _id } = content;
-              return {
-                type: 'put',
-                key: parentId ? `!${fileType}!${parentId}.${_id}` : `!${fileType}!${_id}`,
-                value: content,
-              };
-            });
-          db.batch(batch, { sync: true });
-          return {
-            path: `${dbName}.json`,
-            contents: new Buffer(JSON.stringify(batch.map((op) => op.value))),
-          };
-        },
-      }),
-    )
-    .pipe(gulp.dest(`temp/packs-json`)); //FIXME: find better termination
+  const packs = await glob.glob(`${packsDirectory}/*`);
+  const results = packs
+    .map((pack) => [pack, `${buildDirectory}/packs/${path.basename(pack)}`])
+    .map(([srcPath, dstPath]) => compilePack(srcPath, dstPath, { yaml: true }));
+  return Promise.all(results);
 }
 
 export const build = gulp.series(clean, gulp.parallel(buildCode, buildStyles, buildYaml, copyFiles, buildPacks));

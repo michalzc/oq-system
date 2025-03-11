@@ -1,0 +1,26 @@
+system:
+  remainingMagnitude: 3
+  noMagicPoints: true
+  description: >-
+    <p>While this spell is in place, the recipient is unable to conceive.
+    Depending
+
+    on the view of the recipient, this is a blessing or a curse. The spell can
+    be
+
+    dispelled by the caster whenever they want. Otherwise, the effects of the
+    spell
+
+    are permanent.</p>
+  magnitude: 3
+  nonVariant: true
+  traits:
+    - Permanent
+  type: divine
+_id: 0pmS2Susu2kHNEsR
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Block Fertility
+type: spell
+_key: '!items!0pmS2Susu2kHNEsR'
+effects: []

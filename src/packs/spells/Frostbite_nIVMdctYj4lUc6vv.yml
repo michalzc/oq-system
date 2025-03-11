@@ -1,0 +1,24 @@
+system:
+  skillReference: personal-magic-casting
+  magnitude: 2
+  traits:
+    - Instant
+    - Resist (Resilience)
+  description: >-
+    <p>This attack spell allows the caster to freeze their opponent, dealing 1D8
+
+    points of damage, ignoring any armour points. Magical protection that
+    protects
+
+    against cold damage can block this effect, but mundane items (such as severe
+
+    weather gear) are ineffective.</p>
+  nonVariant: true
+  type: personal
+_id: nIVMdctYj4lUc6vv
+folder: PmL84WZU2luOrJSw
+type: spell
+name: Frostbite
+img: systems/oq/assets/icons/magic-swirl.svg
+_key: '!items!nIVMdctYj4lUc6vv'
+effects: []

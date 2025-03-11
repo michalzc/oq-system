@@ -1,0 +1,15 @@
+system:
+  skillReference: personal-magic-casting
+  magnitude: 1
+  type: personal
+  nonVariant: false
+  description: |-
+    <p>For every point of the magnitude of this spell, the armour of the target
+    gains one additional armour point.</p>
+name: Protection
+folder: PmL84WZU2luOrJSw
+_id: g6dVEuxsN0egrt3O
+img: systems/oq/assets/icons/magic-swirl.svg
+type: spell
+_key: '!items!g6dVEuxsN0egrt3O'
+effects: []

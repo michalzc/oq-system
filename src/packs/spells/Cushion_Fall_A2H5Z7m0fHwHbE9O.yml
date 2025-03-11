@@ -1,0 +1,17 @@
+system:
+  skillReference: personal-magic-casting
+  magnitude: 2
+  description: >-
+    <p>The successful casting of this spell eliminates all falling damage for
+    the
+
+    recipient for the duration of the spell.</p>
+  type: personal
+  nonVariant: true
+img: systems/oq/assets/icons/magic-swirl.svg
+folder: PmL84WZU2luOrJSw
+_id: A2H5Z7m0fHwHbE9O
+name: Cushion Fall
+type: spell
+_key: '!items!A2H5Z7m0fHwHbE9O'
+effects: []

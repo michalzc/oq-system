@@ -1,0 +1,45 @@
+system:
+  skillReference: sorcery-casting
+  magnitude: 1
+  description: >-
+    <p>This spell allows a caster to neutralise other spells. Neutralise Magic
+    will
+
+    eliminate a combined magnitude of spells equal to its own magnitude,
+    starting
+
+    with the most powerful affecting the target. If it fails to eliminate the
+    most
+
+    powerful spell, then it will instead target the second-most powerful spell.
+    As
+
+    soon as Neutralise Magic can no longer dismiss a target’s spells, because
+    all
+
+    the remaining spell’s magnitudes are too high, its effects immediately
+    end.</p>
+
+    <p>Neutralise Magic can be fired as a Reaction, but only when another spell
+    that
+
+    the character wishes to counter is cast within Neutralise Magic’s range. A
+
+    successful Neutralise Magic disrupts the other spell and nullifies it. As
+    long
+
+    as Neutralise Magic’s magnitude equals or exceeds the target spell’s
+    magnitude,
+
+    the target spell is countered.</p>
+  nonVariant: false
+  traits:
+    - Instant
+  type: sorcery
+_id: 3QoWPalsZ3pHGwai
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Neutralise Magic
+type: spell
+_key: '!items!3QoWPalsZ3pHGwai'
+effects: []

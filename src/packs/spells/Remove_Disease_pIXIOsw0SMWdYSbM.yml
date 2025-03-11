@@ -1,0 +1,24 @@
+system:
+  skillReference: sorcery-casting
+  magnitude: 1
+  description: >-
+    <p>This spell purges the recipient of any disease that is currently
+    afflicting
+
+    them. Make an opposed roll of the spell’s magnitude vs. the disease’s
+    potency.
+
+    If successful the character is restored to full health, any penalties to
+
+    characteristics are removed and any hit points lost to the effects of the
+
+    disease are regained.</p>
+  nonVariant: false
+  type: sorcery
+_id: pIXIOsw0SMWdYSbM
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Remove Disease
+type: spell
+_key: '!items!pIXIOsw0SMWdYSbM'
+effects: []

@@ -1,0 +1,23 @@
+system:
+  skillReference: personal-magic-casting
+  magnitude: 1
+  type: personal
+  traits:
+    - Instant
+    - Resist (Resilience)
+  nonVariant: false
+  description: >-
+    <p>Disruption pulls a target’s body apart. On a failed Resilience skill
+    test,
+
+    the target will suffer 1D4 points of damage per point of magnitude, ignoring
+    any
+
+    armour points.</p>
+img: systems/oq/assets/icons/magic-swirl.svg
+folder: PmL84WZU2luOrJSw
+type: spell
+_id: BIGBwfiGy0G6H4TY
+name: Disruption
+_key: '!items!BIGBwfiGy0G6H4TY'
+effects: []

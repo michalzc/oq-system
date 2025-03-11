@@ -1,0 +1,18 @@
+_id: ZcrPy1erev9yorP9
+folder: 2cMno9TdAHHB1UkH
+img: systems/oq/assets/icons/magic-potion.svg
+name: Waterskin
+system:
+  description: >-
+    <p>A waterskin can hold enough water to sustain an adventurer for two
+    days.</p>
+  cost: 0.5
+  encumbrance: 1
+  quantity: 1
+  state: carried
+  type: single
+  traits:
+    - Duration (2d)
+type: equipment
+_key: '!items!ZcrPy1erev9yorP9'
+effects: []

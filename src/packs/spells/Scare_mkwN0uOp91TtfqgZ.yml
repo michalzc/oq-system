@@ -1,0 +1,21 @@
+system:
+  skillReference: personal-magic-casting
+  traits:
+    - Resist (Persistence)
+  description: >-
+    <p>On a failed resistance roll, the target is scared for 1D6 rounds. Scared
+
+    targets must withdraw from combat with the caster for the duration of the
+    spell,
+
+    and move as quickly as they are able, directly away from the caster.</p>
+  nonVariant: true
+  magnitude: 2
+  type: personal
+img: systems/oq/assets/icons/magic-swirl.svg
+_id: mkwN0uOp91TtfqgZ
+name: Scare
+folder: PmL84WZU2luOrJSw
+type: spell
+_key: '!items!mkwN0uOp91TtfqgZ'
+effects: []

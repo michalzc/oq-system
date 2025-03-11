@@ -1,0 +1,46 @@
+system:
+  skillReference: sorcery-casting
+  magnitude: 1
+  description: >-
+    <p>This spell creates a portal to a named Other World. The magnitude of the
+
+    spell is the number of creatures (of SIZ range 12-18) who can use the portal
+
+    simultaneously.  The portal exists as long as the spell is in effect. When
+    the
+
+    spell’s duration is reached, the portal closes instantly.</p> <p>If the
+    spell
+
+    casting is fumbled, catastrophic events occur.  Here are some example
+    events.
+
+    The creative Referee is encouraged to create more.</p> <p>A malignant
+    creature
+
+    from that Other World emerges and attacks the sorcerer in an attempt to
+    close
+
+    the portal.</p> <p>The sorcerer and all within 10m of them are sucked
+    through
+
+    the portal, which then promptly closes. Worse, the Sorcerer is so befuddled
+    that
+
+    they cannot remember this spell for D20+D4 hours.</p> <p>The Other World, to
+
+    which the portal is connected, invades the home reality in a 1D10 km
+    diameter
+
+    from the portal. The home reality protects itself by throwing up a magical
+
+    barrier that lets things into the beachhead but not out.</p>
+  nonVariant: false
+  type: sorcery
+_id: gbeRoZYWjkwrJmlU
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Other World Portal (Other World)
+type: spell
+_key: '!items!gbeRoZYWjkwrJmlU'
+effects: []

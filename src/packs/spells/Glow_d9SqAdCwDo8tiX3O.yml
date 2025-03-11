@@ -1,0 +1,41 @@
+system:
+  skillReference: sorcery-casting
+  magnitude: 1
+  description: >-
+    <p>This spell causes a glowing point of light to appear on a solid
+    substance. At
+
+    its base, the spell creates an area of light one metre in radius, giving off
+    the
+
+    same illumination as a candle. Each additional point of magnitude increases
+    the
+
+    radius of effect by one metre. At magnitude 3, the brightness of the spell
+
+    increases to that of a flaming brand at its centre. At magnitude 5, it
+    increases
+
+    to that of a camp-fire and at magnitude 10 to that of a bonfire.</p> <p>This
+
+    spell can be cast on an opponent’s eyes. If cast on a living being, the
+    spell
+
+    also gains the Resist (Dodge) trait. If the target fails to resist it, they
+    will
+
+    suffer a penalty to all attack, parry and Dodge tests, as well as any skills
+
+    relying upon vision, equal to five times the spell’s magnitude, until the
+    spell
+
+    ends or is dispelled.</p>
+  nonVariant: false
+  type: sorcery
+_id: d9SqAdCwDo8tiX3O
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Glow
+type: spell
+_key: '!items!d9SqAdCwDo8tiX3O'
+effects: []

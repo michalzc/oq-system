@@ -1,0 +1,35 @@
+_id: ujuyaWSPXeBH0eP3
+_stats: null
+effects: []
+flags:
+  oq:
+    newActor:
+      - character
+folder: szWzZEdK1HVFTQEr
+img: systems/oq/assets/icons/skills.svg
+name: Trade
+ownership:
+  KsTXxaVKKsCmFqBq: 3
+  default: 0
+sort: 0
+system:
+  advancement: 0
+  customGroupName: ''
+  description: >-
+    <p>This skill is used when characters trade, barter or otherwise negotiate
+    over the sale of goods. In such transactions, a successful opposed test
+    using the Trade of the buyer versus the Trade of the seller is needed for
+    the buyer to get the best deal.  If the buyer wins, they receive a discount,
+    -10% for success, -20% for a critical. If the seller wins, the price that
+    they can sell the item for increases by +10% for success and +20% for a
+    critical. If the opponent fumbles their roll, double the increase or
+    decrease.</p><p>The Trade skill also enables the character to determine the
+    value placed on something by others; by estimating its market value.
+    Everyday or obscure objects might give a bonus or penalty to the skill test.
+    Success will allow a character to guess the average monetary value of the
+    object, usually guessing accurately to within 10% of its actual value.</p>
+  formula: '@int+10'
+  group: practical
+  mod: 0
+type: skill
+_key: '!items!ujuyaWSPXeBH0eP3'

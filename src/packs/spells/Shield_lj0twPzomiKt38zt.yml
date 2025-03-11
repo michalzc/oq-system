@@ -1,0 +1,35 @@
+system:
+  remainingMagnitude: 1
+  noMagicPoints: true
+  description: >-
+    <p>This spell protects the caster from physical and magical attacks. Each
+    point
+
+    of magnitude gives the caster one Armour Point and provides a +10% bonus to
+    any
+
+    tests the caster may make to resist malign magical effects. A magnitude 4
+    Shield
+
+    spell provides the caster with +4 AP and a +40% bonus against malign spells,
+    for
+
+    instance. These effects are cumulative with other spells, as well as any
+
+    physical armour the caster is wearing. Shield is incompatible with
+    Absorption,
+
+    Reflection and Spirit Block.</p>
+  magnitude: 1
+  nonVariant: false
+  traits:
+    - Duration (15)
+    - Progressive
+  type: divine
+_id: lj0twPzomiKt38zt
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Shield
+type: spell
+_key: '!items!lj0twPzomiKt38zt'
+effects: []

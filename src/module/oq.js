@@ -40,7 +40,7 @@ async function setup() {
 Hooks.once('init', init);
 
 // Setup system
-Hooks.once('setup', ready);
+Hooks.once('setup', setup);
 
 // When ready
-Hooks.once('ready', setup);
+Hooks.once('ready', ready);

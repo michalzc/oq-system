@@ -1,0 +1,37 @@
+system:
+  remainingMagnitude: 3
+  noMagicPoints: true
+  description: >-
+    <p>The caster uses this spell to enchant a puppet, which is the focus of the
+
+    spell and the stand-in for the victim. The victim can use Persistence to
+    resist
+
+    the spell, and if they fail, their actions are controlled via the puppet by
+    the
+
+    caster, for the duration of the spell. The victim is aware of not being in
+
+    control of their body but is powerless to stop it. The exception to this
+    rule is
+
+    when the victim’s life or that of a friend is in danger because of the
+
+    Puppeteer’s commands. Then the victim is allowed another Persistence roll,
+    and,
+
+    if successful, break free of the spell’s control.</p>
+  magnitude: 3
+  nonVariant: true
+  traits:
+    - Concentration
+    - Duration (6h)
+    - Resist (Persistence)
+  type: divine
+_id: B4ngnK4ax4P6IJFJ
+folder: dbvkv9rUDY2YT8qS
+img: systems/oq/assets/icons/divided-spiral.svg
+name: Puppet
+type: spell
+_key: '!items!B4ngnK4ax4P6IJFJ'
+effects: []

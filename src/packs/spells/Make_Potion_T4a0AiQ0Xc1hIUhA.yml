@@ -1,0 +1,27 @@
+system:
+  skillReference: sorcery-casting
+  magnitude: 1
+  description: >-
+    <p>Using the arts of alchemy, Sorcerers can store Sorcery spells in a liquid
+
+    known as a Potion.</p> <p>All potions have an attached cost of 1 Gold Ducat
+    per
+
+    magnitude of spell in ingredients. Multiple spells may be stored in one
+    potion,
+
+    with the understanding that they will all be cast when the potion is drunk
+    at
+
+    the magnitude that the creator originally put into the potion.</p>
+  nonVariant: false
+  traits:
+    - Permanent
+  type: sorcery
+_id: T4a0AiQ0Xc1hIUhA
+folder: 9nSgoZ4l88FtYgms
+img: systems/oq/assets/icons/ink-swirl.svg
+name: Make Potion
+type: spell
+_key: '!items!T4a0AiQ0Xc1hIUhA'
+effects: []

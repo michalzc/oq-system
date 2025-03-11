@@ -1,0 +1,55 @@
+system:
+  skillReference: personal-magic-casting
+  magnitude: 1
+  nonVariant: false
+  type: personal
+  traits:
+    - Permanent
+  description: >-
+    <p>This spell allows the caster to create an item that has magic point
+    storing
+
+    capabilities. Magic Point Stores allow the owner to have a pool of magic
+    points
+
+    in addition to their own.</p> <p>Typically, crystals, due to their physical
+
+    toughness, make good stores. This spell can also be combined with an
+    existing
+
+    charm, such as a sword with Weapon Enhance 2 stored in it, to provide a pool
+    of
+
+    magic points to cast the spell from. In-game terms treat anything enchanted
+    with
+
+    this spell as unbreakable.</p> <p>Magic point stores take one hour per magic
+
+    point stored in them to create.</p> <p>The caster must fill the item with
+    their
+
+    magic points as part of the spell. The number of magic points put into the
+    item
+
+    at the time of casting becomes the maximum.</p> <p>By default, when used,
+    the
+
+    stored magic points do not regenerate and when all used up the spell ends.
+    If
+
+    the caster spends one growth point while creating the store, it is reusable,
+    and
+
+    the caster can refill the store using their magic points.</p> <p>If the item
+
+    containing the store becomes damaged or destroyed, the magic points are
+    released
+
+    harmlessly into the surrounding area.</p>
+img: systems/oq/assets/icons/magic-swirl.svg
+_id: 0PGqW5LIHcwCrtHb
+type: spell
+name: Create Magic Point Store
+folder: PmL84WZU2luOrJSw
+_key: '!items!0PGqW5LIHcwCrtHb'
+effects: []

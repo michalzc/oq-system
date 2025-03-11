@@ -1,0 +1,27 @@
+_id: sFgaH1FcZop3PuGs
+_stats: null
+effects: []
+flags:
+  oq:
+    newActor:
+      - character
+folder: szWzZEdK1HVFTQEr
+img: systems/oq/assets/icons/skills.svg
+name: Streetwise
+ownership:
+  KsTXxaVKKsCmFqBq: 3
+  default: 0
+sort: 0
+system:
+  advancement: 0
+  customGroupName: ''
+  description: >-
+    <p>Streetwise allows a character to find fences for stolen goods, black
+    markets and uncover general information in an urban setting. Such uses of
+    Streetwise usually require a minimum of [[/r 1D4]] hours. Streetwise also
+    covers following people down crowded city streets.</p>
+  formula: '@cha+@pow'
+  group: practical
+  mod: 0
+type: skill
+_key: '!items!sFgaH1FcZop3PuGs'

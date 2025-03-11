@@ -1,0 +1,21 @@
+system:
+  skillReference: personal-magic-casting
+  magnitude: 1
+  type: personal
+  nonVariant: false
+  traits:
+    - Instant
+  description: >-
+    <p>This spell instantly puts out fires. At magnitude 1 it can extinguish a
+
+    flame, magnitude 2 a small fire, magnitude 3 a large fire and magnitude 4
+    will
+
+    put out an inferno.</p>
+img: systems/oq/assets/icons/magic-swirl.svg
+type: spell
+_id: 8OrPsVhdGKtXNG9c
+folder: PmL84WZU2luOrJSw
+name: Extinguish
+_key: '!items!8OrPsVhdGKtXNG9c'
+effects: []
