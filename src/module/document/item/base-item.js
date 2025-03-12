@@ -11,6 +11,19 @@ import { OQDamageRollDialog } from '../../application/damage-roll-dialog.js';
  * @property {number|undefined} rollValueWithMod
  */
 export class OQBaseItem extends Item {
+  static getDefaultArtwork(itemData) {
+    const itemConfig = CONFIG.OQ.ItemConfig;
+    const img = itemConfig.defaultIcons[itemData.type];
+
+    if (img) {
+      return {
+        img,
+      };
+    } else {
+      return super.getDefaultArtwork(itemData);
+    }
+  }
+
   getRollData() {
     return super.getRollData();
   }

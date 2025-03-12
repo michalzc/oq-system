@@ -3,15 +3,6 @@ import _ from 'lodash-es';
 import { minMaxValue, mostSignificantModifier } from '../../utils/utils.js';
 
 export class OQWeapon extends OQBaseItem {
-  static getDefaultArtwork(itemData) {
-    const itemConfig = CONFIG.OQ.ItemConfig;
-    const img = itemConfig.weaponIcons[itemData.system?.type] ?? itemConfig.defaultIcons.weapon;
-
-    return {
-      img,
-    };
-  }
-
   async _preUpdate(changed, options, user) {
     //FIXME: refactor to common utility
     await super._preUpdate(changed, options, user);

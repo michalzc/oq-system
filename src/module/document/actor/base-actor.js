@@ -5,15 +5,22 @@ export class OQBaseActor extends Actor {
   static otherSkillsTypes = ['knowledge', 'practical', 'custom'];
   static combatItems = ['weapon', 'armour'];
 
+  static getDefaultArtwork(actorData) {
+    const actorConfig = CONFIG.OQ.ActorConfig;
+    const img = actorConfig.defaultIcons[actorData.type];
+
+    if (img) {
+      return {
+        img,
+        'prototypeToken.texture.src': img,
+      };
+    } else {
+      return super.getDefaultArtwork(actorData);
+    }
+  }
+
   async _preCreate(source, options, userId) {
     await super._preCreate(source, options, userId);
-    const newImage = CONFIG.OQ.ActorConfig.defaultIcons[source.type];
-    if (!source.img && newImage) {
-      this.updateSource({
-        img: newImage,
-        'prototypeToken.texture.src': newImage,
-      });
-    }
 
     if (!source.items) {
       const defaultItems = await getDefaultItemsForActor(source.type);
