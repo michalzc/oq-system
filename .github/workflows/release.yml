@@ -10,7 +10,7 @@ on:
 
 env:
   package_type: system
-  node_version: 18
+  node_version: 20
   YARN_CACHE_FOLDER: .yarn-cache
 
 jobs:
