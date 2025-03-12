@@ -3,12 +3,6 @@ import _ from 'lodash-es';
 import { inRangeValue } from '../../utils/utils.js';
 
 export class OQSpell extends OQBaseItem {
-  static getDefaultArtwork() {
-    return {
-      img: CONFIG.OQ.ItemConfig.defaultIcons.spell,
-    };
-  }
-
   async _preUpdate(changed, options, user) {
     //FIXME: refactor to common utility
     await super._preUpdate(changed, options, user);

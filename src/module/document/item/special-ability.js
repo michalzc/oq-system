@@ -3,12 +3,6 @@ import _ from 'lodash-es';
 import { minMaxValue } from '../../utils/utils.js';
 
 export class OQSpecialAbility extends OQBaseItem {
-  static getDefaultArtwork() {
-    return {
-      img: CONFIG.OQ.ItemConfig.defaultIcons.specialAbility,
-    };
-  }
-
   calculateDamageRollValues() {
     const finalDamageFormula = this.makeRollString(this.system.damageFormula);
 
