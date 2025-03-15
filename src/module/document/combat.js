@@ -1,15 +1,18 @@
 export class OQCombat extends Combat {
-  async _onStartRound() {
-    await this.resetInitiative();
-    setTimeout(() => this.update({ turn: 0 }), 50); //FIXME: Ugh ugly, find a better way later.
+  async startCombat() {
+    await Promise.all(this.combatants.map((combatant) => combatant.rollInitiative()));
+    return super.startCombat();
   }
 
-  async resetInitiative() {
-    this.combatants.map((combatant) => {
-      const newInitiative = combatant.actor?.system.attributes.initiative?.value;
-      if (newInitiative !== combatant.initiative) {
-        this.setInitiative(combatant.id, newInitiative);
-      }
-    });
+  async nextRound() {
+    const updates = this.combatants
+      .filter((combatant) => combatant.actor && combatant.actor.system.attributes?.initiative?.value != null)
+      .map((combatant) => {
+        const initiative = combatant.actor.system.attributes.initiative?.value;
+        return combatant.update({ initiative });
+      });
+
+    await Promise.all(updates);
+    return super.nextRound();
   }
 }
