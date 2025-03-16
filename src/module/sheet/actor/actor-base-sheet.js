@@ -263,7 +263,12 @@ export class OQActorBaseSheet extends ActorSheet {
     const itemTypes = CONFIG.OQ.ItemConfig.itemTypes;
     const initiativeTypes = [itemTypes.skill, itemTypes.specialAbility];
     const items = this.actor.items.filter((item) => initiativeTypes.includes(item.type) && item.system.formula);
-    return _.fromPairs(items.map((item) => [item.id, item.name]));
+    const makeName = (item) => {
+      const rollValues = item.getRollValues && item.getRollValues();
+      return (rollValues?.value && `${item.name} (${rollValues.value})`) || item.name;
+    };
+
+    return _.fromPairs(items.map((item) => [item.id, makeName(item)]));
   }
 
   updateCharacteristicsLabels(characteristics) {
