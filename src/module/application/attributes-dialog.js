@@ -1,5 +1,5 @@
 import _ from 'lodash-es';
-import { log } from '../utils/logger.js';
+
 const mergeObject = foundry.utils.mergeObject;
 
 export class AttributesDialog extends FormApplication {
@@ -36,7 +36,6 @@ export class AttributesDialog extends FormApplication {
   }
 
   async _updateObject(event, formData) {
-    log('Got data', formData);
     await this.object.update({ system: formData });
     this.object.sheet?.render(true);
   }

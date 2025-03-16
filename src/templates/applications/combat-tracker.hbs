@@ -60,7 +60,6 @@
 
     <ol id="combat-tracker" class="directory-list">
         {{#each turns}}
-        {{ log this }}
         <li class="combatant actor directory-item flexrow {{this.css}}" data-combatant-id="{{this.id}}">
             <img class="token-image" data-src="{{this.img}}" alt="{{this.name}}"/>
             <div class="token-name flexcol">

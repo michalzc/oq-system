@@ -77,7 +77,7 @@ export class OQBaseItem extends Item {
     if (this.parent && rollFormula) {
       const roll = new Roll(rollFormula, this.parent.getRollData());
       if (roll.isDeterministic) {
-        return roll.roll({ async: false }).total;
+        return roll.evaluateSync().total;
       } else {
         return roll.formula;
       }
