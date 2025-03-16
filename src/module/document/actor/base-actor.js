@@ -119,9 +119,7 @@ export class OQBaseActor extends Actor {
       ap: {
         value: apValue,
       },
-      initiative: {
-        value: this.calculateInitiative(),
-      },
+      initiative: this.calculateInitiative(),
     });
   }
 
@@ -131,9 +129,9 @@ export class OQBaseActor extends Actor {
     if (initiativeItem) {
       const { value } = initiativeItem.getRollValues();
 
-      return (value ?? 0) + (mod ?? 0);
+      return { value: (value ?? 0) + (mod ?? 0), name: initiativeItem.name };
     }
 
-    return mod ?? 0;
+    return { value: mod ?? 0 };
   }
 }

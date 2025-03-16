@@ -1,0 +1,37 @@
+.oq-token-name-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+}
+
+.combat-sidebar {
+  li.combatant {
+    .token-name {
+      h4.oq-token-name {
+        flex: 0 1 auto;
+      }
+    }
+  }
+
+  #combat-controls {
+    a.center.oq-combat-end {
+      font-size: var(--font-size-18);
+    }
+  }
+}
+
+.initiative-name {
+  line-height: 28px;
+  color: var(--color-text-dark-5);
+  flex: 0 1 auto;
+  text-wrap: nowrap;
+  font-size: var(--font-size-12);
+  align-self: flex-end;
+  justify-self: flex-end;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: right;
+  margin-left: 2px;
+}

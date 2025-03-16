@@ -1,11 +1,13 @@
 import { OQActorDocumentProxy, OQItemDocumentProxy } from '../document/document-proxy.js';
 import { OQItemDirectory } from '../document/item-directory.js';
 import { OQCombat } from '../document/combat.js';
+import { OQCombatTracker } from '../application/combat-tracker.js';
 
 export function registerDocuments() {
   CONFIG.Actor.documentClass = OQActorDocumentProxy;
   CONFIG.Item.documentClass = OQItemDocumentProxy;
   CONFIG.Combat.documentClass = OQCombat;
+  CONFIG.ui.combat = OQCombatTracker;
 
   const localizeActorPrefix = 'TYPES.Actor';
   Object.entries(CONFIG.OQ.ActorConfig.sheetClasses).forEach(([key, sheetClass]) => {

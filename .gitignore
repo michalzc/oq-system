@@ -36,3 +36,5 @@ temp/
 # vscode
 .vscode/
 .metals/
+.ammonite/
+.scala-build/
