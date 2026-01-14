@@ -128,6 +128,12 @@ async function updateJson() {
         value: `${downloadPath}/${packageId}-${version}.zip`,
       }),
     )
+    .pipe(
+      jsonModify({
+        key: 'version',
+        value: `${version}`,
+      }),
+    )
     .pipe(gulp.dest(buildDirectory))
     .pipe(rename(`${packageId}.json`))
     .pipe(gulp.dest(`${distDirectory}`))
