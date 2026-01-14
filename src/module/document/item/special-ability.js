@@ -14,13 +14,17 @@ export class OQSpecialAbility extends OQBaseItem {
 
   calculateRollValues() {
     if (this.parent && this.system.formula) {
-      const roll = new Roll(this.system.formula, this.parent.getRollData());
-      if (roll.isDeterministic) {
-        const value = minMaxValue(roll.evaluateSync().total);
+      try {
+        const roll = new Roll(this.system.formula, this.parent.getRollData());
+        if (roll.isDeterministic) {
+          const value = minMaxValue(roll.evaluateSync().total);
 
-        return {
-          value,
-        };
+          return {
+            value,
+          };
+        }
+      } catch (e) {
+        console.error(e);
       }
     }
 

@@ -350,6 +350,8 @@ export class OQActorBaseSheet extends ActorSheet {
       weapons: groupedWeapons[reference] ?? [],
     });
 
-    return _.map(_.sortedUniq(_.sortBy(_.concat(combatSkillsRefs ?? [], _.keys(groupedWeapons)))), buildEntity);
+    return _.map(_.sortedUniq(_.sortBy(_.concat(combatSkillsRefs ?? [], _.keys(groupedWeapons)))), buildEntity).filter(
+      (entity) => !!entity.skill,
+    );
   }
 }
