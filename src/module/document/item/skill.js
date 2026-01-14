@@ -23,12 +23,21 @@ export class OQSkill extends OQBaseItem {
     }
   }
 
+  evalRollSafe(formula, rollData) {
+    try {
+      return new Roll(formula, rollData).evaluateSync().total;
+    } catch (e) {
+      console.error(e);
+      return 0;
+    }
+  }
+
   calculateRollValues() {
     if (this.parent) {
       const { formula, advancement, mod } = this.system;
       const finalMod = mod ?? 0;
       const rollData = this.parent.getRollData();
-      const baseValue = new Roll(formula, rollData).evaluateSync().total;
+      const baseValue = this.evalRollSafe(formula, rollData);
       const total = baseValue + advancement;
       const value = minMaxValue(total);
       const valueWithMod = mod && minMaxValue(value + mod);
