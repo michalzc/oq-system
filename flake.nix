@@ -19,7 +19,7 @@
 
       start-foundry = pkgs.writeShellScriptBin "start-foundry" ''
         exec ${foundryvtt-13}/bin/foundryvtt-13 \
-          --port=31000 --world=mythras-test --dataPath=./foundryvtt-data "$@"
+          --port=32000 --world=oq-dev --dataPath=./foundryvtt-data "$@"
       '';
     in
     {

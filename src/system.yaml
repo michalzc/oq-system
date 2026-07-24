@@ -11,7 +11,7 @@ readme: README.md
 version: 0.1.0-SNAPSHOT
 compatibility:
   minimum: 12
-  verified: 12
+  verified: 13
 esmodules:
   - module/oq.js
 styles:
