@@ -27,16 +27,15 @@ export class OQBaseItem extends Item {
   getRollData() {
     return super.getRollData();
   }
-  async prepareDerivedData() {
+  prepareDerivedData() {
     super.prepareDerivedData();
-    const tooltip = await this.getTooltipWithTraits();
     const rollValues = this.calculateRollValues();
     const damageRollValues = this.calculateDamageRollValues();
 
     _.merge(this, {
       system: {
         rollValues,
-        tooltip,
+        tooltip: this.system.description,
         damageRollValues,
       },
     });

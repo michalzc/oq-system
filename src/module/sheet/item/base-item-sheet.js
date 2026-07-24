@@ -13,8 +13,9 @@ export class OQBaseItemSheet extends ItemSheet {
     const data = super.getData(options);
     const system = this.item.system;
     const enrichedDescription = await TextEditor.enrichHTML(system.description, { async: true });
+    const tooltip = await this.item.getTooltipWithTraits();
     return _.merge(data, {
-      system,
+      system: _.merge(system, { tooltip }),
       enrichedDescription,
     });
   }
