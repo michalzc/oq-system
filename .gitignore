@@ -38,3 +38,6 @@ temp/
 .metals/
 .ammonite/
 .scala-build/
+
+.direnv/
+foundryvtt-data/
