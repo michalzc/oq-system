@@ -28,6 +28,8 @@ const TestRollTemplates = {
   weapon: 'systems/oq/templates/chat/parts/weapon-roll.hbs',
 };
 
+const renderTemplate = foundry.applications.handlebars.renderTemplate;
+
 /**
  * Performs test roll
  * @param {RollData} rollData

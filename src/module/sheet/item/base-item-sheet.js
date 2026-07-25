@@ -1,6 +1,6 @@
 import _ from 'lodash-es';
 
-export class OQBaseItemSheet extends ItemSheet {
+export class OQBaseItemSheet extends foundry.appv1.sheets.ItemSheet {
   static get defaultOptions() {
     return _.merge(super.defaultOptions, {
       width: 640,

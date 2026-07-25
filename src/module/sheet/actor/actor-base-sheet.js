@@ -5,7 +5,7 @@ import { asyncFlattenItemsFromFolder } from '../../utils/utils.js';
 
 const mergeObject = foundry.utils.mergeObject;
 
-export class OQActorBaseSheet extends ActorSheet {
+export class OQActorBaseSheet extends foundry.appv1.sheets.ActorSheet {
   static get defaultOptions() {
     const baseOptions = super.defaultOptions;
 

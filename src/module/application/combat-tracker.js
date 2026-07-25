@@ -1,6 +1,6 @@
 import _ from 'lodash-es';
 
-export class OQCombatTracker extends CombatTracker {
+export class OQCombatTracker extends foundry.applications.sidebar.tabs.CombatTracker {
   get template() {
     return 'systems/oq/templates/applications/combat-tracker.hbs';
   }

@@ -1,6 +1,6 @@
 import _ from 'lodash-es';
 
-export class OQItemDirectory extends ItemDirectory {
+export class OQItemDirectory extends foundry.applications.sidebar.tabs.ItemDirectory {
   async _onDrop(event) {
     event.preventDefault();
 
