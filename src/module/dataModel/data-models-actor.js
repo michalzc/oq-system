@@ -78,13 +78,10 @@ function characterAdditionalAttributes() {
 }
 
 function initiative() {
-  return new fields.SchemaField(
-    {
-      reference: new fields.StringField({ required: true, trim: '' }),
-      mod: new fields.NumberField({ required: true, integer: true }),
-    },
-    { required: false },
-  );
+  return new fields.SchemaField({
+    reference: new fields.StringField({ required: true, trim: true, initial: '' }),
+    mod: new fields.NumberField({ required: true, integer: true, initial: 0 }),
+  });
 }
 
 function baseAttributesModel() {
