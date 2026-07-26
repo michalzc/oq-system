@@ -80,7 +80,9 @@ export class OQActorBaseSheet extends foundry.appv1.sheets.ActorSheet {
       })),
     );
 
-    new ContextMenu(element, selector, elems, { eventName: 'click' });
+    new foundry.applications.ux.ContextMenu.implementation(element, selector, elems, {
+      eventName: 'click',
+    });
   }
 
   async _onDrop(event) {

@@ -2,6 +2,8 @@ import { OQBaseItem } from './base-item.js';
 import _ from 'lodash-es';
 import { inRangeValue } from '../../utils/utils.js';
 
+const renderTemplate = foundry.applications.handlebars.renderTemplate;
+
 export class OQSpell extends OQBaseItem {
   async _preUpdate(changed, options, user) {
     //FIXME: refactor to common utility
@@ -39,7 +41,9 @@ export class OQSpell extends OQBaseItem {
   }
 
   async getTooltipWithTraits() {
-    const description = await TextEditor.enrichHTML(this.system.description, { async: true });
+    const description = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.system.description, {
+      async: true,
+    });
     const traits = this.getTraits().join(', ');
     return await renderTemplate('systems/oq/templates/tooltip.hbs', { description, traits });
   }

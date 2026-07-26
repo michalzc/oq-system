@@ -2,6 +2,7 @@ import _ from 'lodash-es';
 import { logError } from '../utils/logger.js';
 
 const mergeObject = foundry.utils.mergeObject;
+const renderTemplate = foundry.applications.handlebars.renderTemplate;
 
 export class CharacteristicsDialog extends FormApplication {
   static get defaultOptions() {

@@ -12,7 +12,9 @@ export class OQBaseItemSheet extends foundry.appv1.sheets.ItemSheet {
   async getData(options) {
     const data = super.getData(options);
     const system = this.item.system;
-    const enrichedDescription = await TextEditor.enrichHTML(system.description, { async: true });
+    const enrichedDescription = await foundry.applications.ux.TextEditor.implementation.enrichHTML(system.description, {
+      async: true,
+    });
     const tooltip = await this.item.getTooltipWithTraits();
     return _.merge(data, {
       system: _.merge(system, { tooltip }),

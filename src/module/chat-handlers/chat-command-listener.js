@@ -1,5 +1,7 @@
 import _ from 'lodash-es';
 
+const renderTemplate = foundry.applications.handlebars.renderTemplate;
+
 const commandRegex = /\/(?<command>[a-zA-Z]+)\s(?<param>.*)/;
 
 const Commands = {
