@@ -32,62 +32,125 @@ export class OQBaseActor extends Actor {
     }
   }
 
+  /**
+   * Level 1 - attributes derived from characteristics alone. Runs before the embedded items are
+   * prepared, so items may safely rely on everything published here through getDataForItems.
+   */
+  prepareBaseData() {
+    super.prepareBaseData();
+    _.merge(this.system.attributes, this.calculateBaseAttributes());
+  }
+
+  /**
+   * Level 2 - embedded items, prepared in dependency order. Weapons resolve their roll values from
+   * the skill they correspond to, so every skill has to be ready before the remaining items start.
+   */
+  prepareEmbeddedDocuments() {
+    const [skills, otherItems] = _.partition(this.items.contents, (item) => item.type === 'skill');
+
+    skills.forEach((skill) => skill._safePrepareData());
+    this.system.skillsBySlug = this.getSkillsBySlug();
+    otherItems.forEach((item) => item._safePrepareData());
+
+    // Actor#hierarchy covers items and effects - the latter have no ordering requirements.
+    this.effects.forEach((effect) => effect._safePrepareData());
+    this.applyActiveEffects();
+  }
+
+  /**
+   * Level 3 - attributes which need the prepared items.
+   */
   prepareDerivedData() {
     super.prepareDerivedData();
-    const skillsBySlug = this.getSkillsBySlug();
+    _.merge(this.system.attributes, this.calculateItemDependentAttributes());
+  }
 
-    _.merge(this.system, {
-      attributes: this.calculateAttributes(),
-      skillsBySlug,
-    });
+  /**
+   * Actor data an embedded item is allowed to read while it prepares itself. At that point the
+   * actor is only partially prepared, so this is deliberately limited to level 1 attributes plus
+   * the skills prepared so far - anything else does not exist yet and must not be reached for.
+   *
+   * @returns {object}
+   */
+  getDataForItems() {
+    const characteristics = _.mapValues(this.system.characteristics, (char) => char.value);
+
+    return {
+      ...characteristics,
+      dm: this.system.attributes.dm.value,
+      skills: this.getSkillsRollData(),
+    };
   }
 
   getRollData() {
-    const rollData = super.getRollData();
-    const charRollData = _.fromPairs(_.map(this.system.characteristics, (char, key) => [key, char.value]));
-    const skills = _.fromPairs(
-      this.items
-        .filter((i) => i.type === 'skill')
-        .map((skill) => [skill.system.slug, { value: skill.system.rollValue, mod: skill.system.rollMod }]),
-    );
-
-    const dm = this.system.attributes.dm.value;
-
-    const newRollData = {
-      ...charRollData,
-      skills,
-      dm,
+    return {
+      ...super.getRollData(),
+      ...this.getDataForItems(),
     };
+  }
 
-    return { ...rollData, ...newRollData };
+  getSkillsRollData() {
+    return _.mapValues(this.system.skillsBySlug ?? {}, (skill) => ({
+      value: skill.system.rollValues?.value,
+      mod: skill.system.rollValues?.mod,
+    }));
   }
 
   getSkillsBySlug() {
     return _.fromPairs(this.items.filter((item) => item.type === 'skill').map((skill) => [skill.system.slug, skill]));
   }
 
-  calculateAttributes() {
+  calculateBaseAttributes() {
     const attributes = this.system.attributes;
+    const characteristics = this.system.characteristics;
+
+    const hpMax = Math.round((characteristics.siz.value + characteristics.con.value) / 2) + attributes.hp.mod;
+    const mpMax = characteristics.pow.value + attributes.mp.mod;
+
+    return {
+      dm: {
+        value: this.calculateDamageModifier(),
+      },
+      hp: {
+        max: hpMax,
+        value: Math.min(attributes.hp.value, hpMax),
+      },
+      mp: {
+        max: mpMax,
+        value: Math.min(mpMax, attributes.mp.value),
+      },
+      mr: {
+        value: attributes.mr.base + attributes.mr.mod,
+      },
+    };
+  }
+
+  calculateItemDependentAttributes() {
+    const attributes = this.system.attributes;
+
+    return {
+      ap: {
+        value: attributes.ap.base + attributes.ap.mod + this.calculateArmourPoints(),
+      },
+      initiative: this.calculateInitiative(),
+    };
+  }
+
+  calculateDamageModifier() {
     const characteristics = this.system.characteristics;
     const defaults = CONFIG.OQ.ActorConfig.characteristicsParams;
 
     const baseDM = defaults.damageModifierFunction(characteristics.str.value + characteristics.siz.value);
-    const dmMod = attributes.dm.mod?.trim();
-    const dmValue = dmMod
-      ? dmMod.startsWith('+') || dmMod.startsWith('-')
-        ? `${baseDM} ${dmMod}`
-        : `${baseDM} + ${dmMod}`
-      : baseDM;
+    const dmMod = this.system.attributes.dm.mod?.trim();
 
-    const hpMax = Math.round((characteristics.siz.value + characteristics.con.value) / 2) + attributes.hp.mod;
-    const hpValue = Math.min(attributes.hp.value, hpMax);
+    if (!dmMod) return baseDM;
+    return dmMod.startsWith('+') || dmMod.startsWith('-') ? `${baseDM} ${dmMod}` : `${baseDM} + ${dmMod}`;
+  }
 
-    const mpMax = characteristics.pow.value + attributes.mp.mod;
-    const mpValue = Math.min(mpMax, attributes.mp.value);
-
+  calculateArmourPoints() {
     const armourStatuses = CONFIG.OQ.ItemConfig.armourStates;
 
-    const maxArmour = Math.max(
+    return Math.max(
       0,
       ...this.items
         .filter(
@@ -97,30 +160,6 @@ export class OQBaseActor extends Actor {
         )
         .map((armour) => armour.system.ap ?? 0),
     );
-
-    const mrValue = attributes.mr.base + attributes.mr.mod;
-    const apValue = attributes.ap.base + attributes.ap.mod + maxArmour;
-
-    return _.merge(attributes, {
-      dm: {
-        value: dmValue,
-      },
-      hp: {
-        max: hpMax,
-        value: hpValue,
-      },
-      mp: {
-        max: mpMax,
-        value: mpValue,
-      },
-      mr: {
-        value: mrValue,
-      },
-      ap: {
-        value: apValue,
-      },
-      initiative: this.calculateInitiative(),
-    });
   }
 
   calculateInitiative() {

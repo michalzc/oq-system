@@ -15,7 +15,7 @@ export class OQSpecialAbility extends OQBaseItem {
   calculateRollValues() {
     if (this.parent && this.system.formula) {
       try {
-        const roll = new Roll(this.system.formula, this.parent.getRollData());
+        const roll = new Roll(this.system.formula, this.parent.getDataForItems());
         if (roll.isDeterministic) {
           const value = minMaxValue(roll.evaluateSync().total);
 

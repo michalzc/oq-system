@@ -45,10 +45,10 @@ export class OQWeapon extends OQBaseItem {
   calculateRollValues() {
     const correspondingSkill = this.system.correspondingSkill;
     if (this.parent && correspondingSkill?.skillReference) {
-      const skills = this.parent.getSkillsBySlug();
-      const skill = skills && skills[correspondingSkill.skillReference];
+      // Skills are prepared before weapons, so their roll values can be read as they are.
+      const skill = this.parent.system.skillsBySlug?.[correspondingSkill.skillReference];
       if (skill) {
-        const skillRollValues = skill.getRollValues(true);
+        const skillRollValues = skill.getRollValues();
         const value = skillRollValues.value;
 
         const mod = mostSignificantModifier(skillRollValues.mod ?? 0, correspondingSkill?.skillMod ?? 0);

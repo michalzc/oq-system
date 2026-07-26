@@ -127,9 +127,14 @@ function npcPersonalModel() {
 }
 
 class OQActorDataModel extends foundry.abstract.TypeDataModel {
+  /**
+   * Characteristic values are the root of every other calculation, including the ones made by
+   * embedded items while they prepare themselves. They have to be ready before that happens,
+   * which means base data - items are prepared between base and derived data.
+   */
   /* override */
-  prepareDerivedData() {
-    super.prepareDerivedData();
+  prepareBaseData() {
+    super.prepareBaseData();
     const characteristics = _.mapValues(this.characteristics, (characteristic) => ({
       ...characteristic,
       value: characteristic.base + characteristic.mod,

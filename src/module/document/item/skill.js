@@ -36,7 +36,7 @@ export class OQSkill extends OQBaseItem {
     if (this.parent) {
       const { formula, advancement, mod } = this.system;
       const finalMod = mod ?? 0;
-      const rollData = this.parent.getRollData();
+      const rollData = this.parent.getDataForItems();
       const baseValue = this.evalRollSafe(formula, rollData);
       const total = baseValue + advancement;
       const value = minMaxValue(total);
