@@ -80,8 +80,12 @@ export class OQActorBaseSheet extends foundry.appv1.sheets.ActorSheet {
       })),
     );
 
-    new foundry.applications.ux.ContextMenu.implementation(element, selector, elems, {
+    // appv1 sheets hand activateListeners a jQuery object, ContextMenu wants the raw element.
+    const container = element instanceof HTMLElement ? element : element[0];
+
+    new foundry.applications.ux.ContextMenu.implementation(container, selector, elems, {
       eventName: 'click',
+      jQuery: false,
     });
   }
 
@@ -156,7 +160,7 @@ export class OQActorBaseSheet extends foundry.appv1.sheets.ActorSheet {
   }
 
   async onItemUpdateState(state, elem) {
-    const itemId = $(elem).closest('.item').data().itemId;
+    const itemId = elem.closest('.item')?.dataset?.itemId;
     const item = itemId && this.actor.items.get(itemId);
     if (item) {
       await item.update({ 'system.state': state });
