@@ -12,7 +12,9 @@ export class OQBaseActor extends Actor {
     if (img) {
       return {
         img,
-        'prototypeToken.texture.src': img,
+        texture: {
+          src: img,
+        },
       };
     } else {
       return super.getDefaultArtwork(actorData);
