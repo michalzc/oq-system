@@ -1,24 +1,20 @@
-import _ from 'lodash-es';
-
 export class OQCombatTracker extends foundry.applications.sidebar.tabs.CombatTracker {
-  get template() {
-    return 'systems/oq/templates/applications/combat-tracker.hbs';
-  }
+  static PARTS = {
+    header: {
+      template: 'systems/oq/templates/applications/combat-tracker/header.hbs',
+    },
+    tracker: {
+      template: 'systems/oq/templates/applications/combat-tracker/tracker.hbs',
+      scrollable: [''],
+    },
+    footer: {
+      template: 'templates/sidebar/tabs/combat/footer.hbs',
+    },
+  };
 
-  async getData(options = {}) {
-    const baseData = await super.getData(options);
-    const initiatives =
-      baseData.combat &&
-      _.fromPairs(baseData.combat.turns.map((elem) => [elem.id, elem.actor?.system.attributes?.initiative]));
-
-    if (initiatives) {
-      const turns = baseData.turns.map((turn) => {
-        const initiativeName = initiatives[turn.id]?.name;
-        return _.merge(turn, { initiativeName });
-      });
-      return _.merge(baseData, { turns });
-    } else {
-      return baseData;
-    }
+  async _prepareTurnContext(combat, combatant, index) {
+    const turn = await super._prepareTurnContext(combat, combatant, index);
+    turn.initiativeName = combatant.actor?.system.attributes?.initiative?.name;
+    return turn;
   }
 }
