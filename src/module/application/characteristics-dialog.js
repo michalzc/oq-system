@@ -111,7 +111,6 @@ export class CharacteristicsDialog extends foundry.appv1.api.FormApplication {
 
         const messageData = {
           content: content,
-          type: CONST.CHAT_MESSAGE_TYPES.ROLL,
           rolls: _.values(rolls),
           speaker: ChatMessage.getSpeaker(this.object),
         };
@@ -143,7 +142,6 @@ export class CharacteristicsDialog extends foundry.appv1.api.FormApplication {
           });
           const messageData = {
             content: content,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             rolls: [roll],
             class: ['oq'],
             speaker: ChatMessage.getSpeaker(this.object),
