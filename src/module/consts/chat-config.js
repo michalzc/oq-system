@@ -3,7 +3,8 @@ export const ChatConfig = {
   adjustmentTemplate: 'systems/oq/templates/chat/parts/adjustment-roll.hbs',
 
   MessageFlags: {
-    key: 'oqMessageType',
+    scope: 'oq',
+    key: 'messageType',
     updateFromChat: 'updateFromChat',
     hasRollDamage: 'hasRollDamage',
   },

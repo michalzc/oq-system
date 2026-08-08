@@ -88,14 +88,16 @@ async function rollDamageFromChatMessage(event) {
 }
 
 export function handleDamageRollChatMessage(chatMessage, html) {
-  const chatConfig = CONFIG.OQ.ChatConfig;
-  if (chatMessage.flags[chatConfig.MessageFlags.key] === chatConfig.MessageFlags.updateFromChat) {
+  const messageFlags = CONFIG.OQ.ChatConfig.MessageFlags;
+  const messageType = chatMessage.getFlag(messageFlags.scope, messageFlags.key);
+
+  if (messageType === messageFlags.updateFromChat) {
     html.find('.oq.roll .apply-damage').on('click', applyDamage);
     html.find('.oq.roll .apply-healing').on('click', applyHealing);
     html.find('.oq.roll .adjust-mp').on('click', adjustMagicPoints);
   }
 
-  if (chatMessage.flags[chatConfig.MessageFlags.key] === chatConfig.MessageFlags.hasRollDamage) {
+  if (messageType === messageFlags.hasRollDamage) {
     html.find('.oq.roll .roll-damage').on('click', rollDamageFromChatMessage);
   }
 }
