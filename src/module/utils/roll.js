@@ -28,7 +28,8 @@ const TestRollTemplates = {
   weapon: 'systems/oq/templates/chat/parts/weapon-roll.hbs',
 };
 
-const renderTemplate = foundry.applications.handlebars.renderTemplate;
+// Resolved at call time: `foundry` does not exist yet when this module is evaluated.
+const renderTemplate = (...args) => foundry.applications.handlebars.renderTemplate(...args);
 
 /**
  * Performs test roll
