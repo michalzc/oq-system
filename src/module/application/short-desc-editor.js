@@ -1,5 +1,5 @@
 import _ from 'lodash-es';
-export class OQNPCShortDescriptionEdit extends FormApplication {
+export class OQNPCShortDescriptionEdit extends foundry.appv1.api.FormApplication {
   static get defaultOptions() {
     const options = super.defaultOptions;
 

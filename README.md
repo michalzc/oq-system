@@ -13,7 +13,7 @@ Beta
 ## Roadmap
 
 * v1.0 - https://github.com/michalzc/oq-system/milestone/4. Support for active effects, ~~customized Combat Tracker~~, SRD Bestiary in compendium.
-* v0.5 - https://github.com/michalzc/oq-system/milestone/5. Quality of life improvements.
+* v0.5 - ~~https://github.com/michalzc/oq-system/milestone/5. Quality of life improvements.~~ 
 * ~~v0.4 - Update to FoundryVTT V12~~ **Done**
 * ~~v0.3 - https://github.com/michalzc/oq-system/milestone/3. SRD content (without bestiary) in compendiums and few QoL features.~~ **Done**
 * ~~v0.2 - https://github.com/michalzc/oq-system/milestone/2.~~ **Done**

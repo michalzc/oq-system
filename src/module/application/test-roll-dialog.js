@@ -1,7 +1,7 @@
 import _ from 'lodash-es';
 import { testRoll } from '../utils/roll.js';
 
-export class OQTestRollDialog extends FormApplication {
+export class OQTestRollDialog extends foundry.appv1.api.FormApplication {
   constructor(object, options) {
     super(object, options);
     this.difficultyLevels = CONFIG.OQ.RollConfig.difficultyLevels;

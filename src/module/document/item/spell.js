@@ -41,9 +41,7 @@ export class OQSpell extends OQBaseItem {
   }
 
   async getTooltipWithTraits() {
-    const description = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.system.description, {
-      async: true,
-    });
+    const description = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.system.description);
     const traits = this.getTraits().join(', ');
     return await renderTemplate('systems/oq/templates/tooltip.hbs', { description, traits });
   }

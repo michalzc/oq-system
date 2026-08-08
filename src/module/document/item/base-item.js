@@ -127,9 +127,7 @@ export class OQBaseItem extends Item {
 
   async getTooltipWithTraits() {
     if (this.system.traits && this.system.traits.length) {
-      const description = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.system.description, {
-        async: true,
-      });
+      const description = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.system.description);
       const traits = (this.system.traits ?? []).join(', ');
       return await renderTemplate('systems/oq/templates/tooltip.hbs', { description, traits });
     } else {
