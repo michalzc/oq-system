@@ -1,5 +1,4 @@
 _id: 0gYOY3NnDcT8Fzpj
-_stats: null
 flags:
   core: {}
 folder: null
@@ -10,7 +9,6 @@ ownership:
   jzN44THfEHA8DC8v: 3
 pages:
   - _id: UTjphPIpYI0hCNn0
-    _stats: null
     flags: {}
     image: null
     name: Actors
@@ -77,7 +75,6 @@ pages:
       volume: 0.5
     _key: '!journal.pages!0gYOY3NnDcT8Fzpj.UTjphPIpYI0hCNn0'
   - _id: 7PhcLCq73tunH1S5
-    _stats: null
     flags: {}
     image: null
     name: Items
@@ -136,7 +133,6 @@ pages:
       volume: 0.5
     _key: '!journal.pages!0gYOY3NnDcT8Fzpj.7PhcLCq73tunH1S5'
   - _id: FYuMiDVbIhKCSKno
-    _stats: null
     flags: {}
     image: null
     name: Chat Commands
@@ -166,7 +162,6 @@ pages:
       volume: 0.5
     _key: '!journal.pages!0gYOY3NnDcT8Fzpj.FYuMiDVbIhKCSKno'
   - _id: jSQ4r85hI4fk38lA
-    _stats: null
     flags: {}
     image: null
     name: Combat
