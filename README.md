@@ -13,7 +13,7 @@ Beta
 ## Roadmap
 
 * v0.6 - Support for V14
-* v0.5 - https://github.com/michalzc/oq-system/issues/138 - Support for V13
+* ~~v0.5 - https://github.com/michalzc/oq-system/issues/138 - Support for V13~~ **Done**
 * ~~v0.5 - https://github.com/michalzc/oq-system/milestone/5. Quality of life improvements.~~ _Postponed_
 * ~~v0.4 - Update to FoundryVTT V12~~ **Done**
 * ~~v0.3 - https://github.com/michalzc/oq-system/milestone/3. SRD content (without bestiary) in compendiums and few QoL features.~~ **Done**
