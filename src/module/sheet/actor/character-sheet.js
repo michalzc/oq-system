@@ -17,7 +17,9 @@ export class OQCharacterSheet extends OQActorBaseSheet {
 
   async getData(options) {
     const context = await super.getData(options);
-    const enrichedNotes = await TextEditor.enrichHTML(this.actor.system.personal.notes, { async: true });
+    const enrichedNotes = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+      this.actor.system.personal.notes,
+    );
     const spellsPerType = this.getSpellsPerType();
     const spellTypes = CONFIG.OQ.ItemConfig.spellsTypes;
     const skillsTabContent = this.splitSkills(context.groupedItems.groupedSkills, context.groupedItems.abilities);

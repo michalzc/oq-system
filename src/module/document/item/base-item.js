@@ -4,6 +4,8 @@ import { damageRoll, testRoll } from '../../utils/roll.js';
 import { OQTestRollDialog } from '../../application/test-roll-dialog.js';
 import { OQDamageRollDialog } from '../../application/damage-roll-dialog.js';
 
+const renderTemplate = foundry.applications.handlebars.renderTemplate;
+
 /**
  * @typedef {object} ItemRollValue
  * @property {number|undefined} rollValue
@@ -75,7 +77,7 @@ export class OQBaseItem extends Item {
   makeRollString(rollFormula) {
     if (this.parent && rollFormula) {
       try {
-        const roll = new Roll(rollFormula, this.parent.getRollData());
+        const roll = new Roll(rollFormula, this.parent.getDataForItems());
         if (roll.isDeterministic) {
           return roll.evaluateSync().total;
         } else {
@@ -125,7 +127,7 @@ export class OQBaseItem extends Item {
 
   async getTooltipWithTraits() {
     if (this.system.traits && this.system.traits.length) {
-      const description = await TextEditor.enrichHTML(this.system.description, { async: true });
+      const description = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.system.description);
       const traits = (this.system.traits ?? []).join(', ');
       return await renderTemplate('systems/oq/templates/tooltip.hbs', { description, traits });
     } else {

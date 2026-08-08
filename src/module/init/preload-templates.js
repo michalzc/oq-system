@@ -21,5 +21,7 @@ export async function preloadTemplates() {
     'systems/oq/templates/item/parts/traits.hbs',
   ];
 
-  return loadTemplates(_.concat(templatePaths, _.values(CONFIG.OQ.ItemConfig.itemSheetPartials)));
+  return foundry.applications.handlebars.loadTemplates(
+    _.concat(templatePaths, _.values(CONFIG.OQ.ItemConfig.itemSheetPartials)),
+  );
 }

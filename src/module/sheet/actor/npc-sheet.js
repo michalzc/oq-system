@@ -10,8 +10,12 @@ export class OQNpcSheet extends OQActorBaseSheet {
   async getData(options) {
     const context = await super.getData(options);
     const personal = this.actor.system.personal;
-    const enrichedDescription = await TextEditor.enrichHTML(personal.description, { async: true });
-    const enrichedShortDescription = await TextEditor.enrichHTML(personal.shortDescription, { async: true });
+    const enrichedDescription = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+      personal.description,
+    );
+    const enrichedShortDescription = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+      personal.shortDescription,
+    );
     return _.merge(context, {
       enrichedDescription,
       enrichedShortDescription,

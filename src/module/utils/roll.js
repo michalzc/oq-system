@@ -28,6 +28,8 @@ const TestRollTemplates = {
   weapon: 'systems/oq/templates/chat/parts/weapon-roll.hbs',
 };
 
+const renderTemplate = foundry.applications.handlebars.renderTemplate;
+
 /**
  * Performs test roll
  * @param {RollData} rollData
@@ -56,7 +58,8 @@ export async function testRoll(rollData) {
 
   const template = TestRollTemplates[rollData.rollType];
   const messageContent = await renderTemplate(template, renderData);
-  const flags = showDamageButton && { oqMessageType: CONFIG.OQ.ChatConfig.MessageFlags.hasRollDamage };
+  const messageFlags = CONFIG.OQ.ChatConfig.MessageFlags;
+  const flags = showDamageButton ? { [messageFlags.scope]: { [messageFlags.key]: messageFlags.hasRollDamage } } : {};
   const messageData = {
     speaker: rollData.speaker,
     rolls: [roll],
@@ -151,7 +154,9 @@ export async function damageRoll(rollData) {
     content: content,
     rolls: [roll],
     flags: {
-      oqMessageType: CONFIG.OQ.ChatConfig.MessageFlags.updateFromChat,
+      [CONFIG.OQ.ChatConfig.MessageFlags.scope]: {
+        [CONFIG.OQ.ChatConfig.MessageFlags.key]: CONFIG.OQ.ChatConfig.MessageFlags.updateFromChat,
+      },
     },
   };
   await ChatMessage.create(messageData);

@@ -78,13 +78,10 @@ function characterAdditionalAttributes() {
 }
 
 function initiative() {
-  return new fields.SchemaField(
-    {
-      reference: new fields.StringField({ required: true, trim: '' }),
-      mod: new fields.NumberField({ required: true, integer: true }),
-    },
-    { required: false },
-  );
+  return new fields.SchemaField({
+    reference: new fields.StringField({ required: true, trim: true, initial: '' }),
+    mod: new fields.NumberField({ required: true, integer: true, initial: 0 }),
+  });
 }
 
 function baseAttributesModel() {
@@ -130,9 +127,14 @@ function npcPersonalModel() {
 }
 
 class OQActorDataModel extends foundry.abstract.TypeDataModel {
+  /**
+   * Characteristic values are the root of every other calculation, including the ones made by
+   * embedded items while they prepare themselves. They have to be ready before that happens,
+   * which means base data - items are prepared between base and derived data.
+   */
   /* override */
-  prepareDerivedData() {
-    super.prepareDerivedData();
+  prepareBaseData() {
+    super.prepareBaseData();
     const characteristics = _.mapValues(this.characteristics, (characteristic) => ({
       ...characteristic,
       value: characteristic.base + characteristic.mod,

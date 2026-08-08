@@ -2,8 +2,9 @@ import _ from 'lodash-es';
 import { logError } from '../utils/logger.js';
 
 const mergeObject = foundry.utils.mergeObject;
+const renderTemplate = foundry.applications.handlebars.renderTemplate;
 
-export class CharacteristicsDialog extends FormApplication {
+export class CharacteristicsDialog extends foundry.appv1.api.FormApplication {
   static get defaultOptions() {
     const options = super.defaultOptions;
 
@@ -97,7 +98,7 @@ export class CharacteristicsDialog extends FormApplication {
           .filter(([, value]) => typeof value === 'string')
           .map(([key, value]) =>
             new Roll(value)
-              .roll({ async: true })
+              .roll()
               .then((result) => [key, result])
               .catch(() => undefined),
           );
@@ -110,7 +111,6 @@ export class CharacteristicsDialog extends FormApplication {
 
         const messageData = {
           content: content,
-          type: CONST.CHAT_MESSAGE_TYPES.ROLL,
           rolls: _.values(rolls),
           speaker: ChatMessage.getSpeaker(this.object),
         };
@@ -135,14 +135,13 @@ export class CharacteristicsDialog extends FormApplication {
         const selector = `input[name="characteristics.${key}.roll"]`;
         const rolls = charsTable.find(selector).val();
         if (typeof rolls === 'string') {
-          const roll = await new Roll(rolls).evaluate({ async: true });
+          const roll = await new Roll(rolls).evaluate();
 
           const content = await renderTemplate('systems/oq/templates/chat/parts/characteristics-roll.hbs', {
             rolls: { [key]: roll },
           });
           const messageData = {
             content: content,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
             rolls: [roll],
             class: ['oq'],
             speaker: ChatMessage.getSpeaker(this.object),

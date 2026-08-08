@@ -20,7 +20,6 @@ export async function getDefaultItemsForActor(actorType) {
       if (documents) {
         return documents
           .filter((item) => (item.flags?.oq?.newActor ?? []).includes(actorType))
-          .map((item) => item.toObject(true))
           .map((item) => game.items.fromCompendium(item));
       }
     }

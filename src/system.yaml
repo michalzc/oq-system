@@ -10,8 +10,8 @@ license: WTFPL – Do What the Fuck You Want to Public License
 readme: README.md
 version: 0.1.0-SNAPSHOT
 compatibility:
-  minimum: 12
-  verified: 12
+  minimum: 13
+  verified: 13
 esmodules:
   - module/oq.js
 styles:

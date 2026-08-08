@@ -1,6 +1,8 @@
 import _ from 'lodash-es';
 
-const commandRegex = /\/(?<command>[a-zA-Z]+)\s(?<param>.*)/;
+const renderTemplate = foundry.applications.handlebars.renderTemplate;
+
+const commandRegex = /^\/(?<command>[a-zA-Z]+)\s(?<param>.*)$/;
 
 const Commands = {
   hp: hpHandler,
@@ -12,12 +14,13 @@ async function sendAdjustMessage(rollString, type, chatData) {
   const roll = await new Roll(rollString, actor?.getRollData()).roll();
   const renderedRoll = await roll.render();
   const content = await renderTemplate(CONFIG.OQ.ChatConfig.adjustmentTemplate, { roll, renderedRoll, type });
+  const messageFlags = CONFIG.OQ.ChatConfig.MessageFlags;
   await ChatMessage.create({
     ...chatData,
     rolls: [roll],
     content,
     flags: {
-      oqMessageType: CONFIG.OQ.ChatConfig.MessageFlags.updateFromChat,
+      [messageFlags.scope]: { [messageFlags.key]: messageFlags.updateFromChat },
     },
   });
 }

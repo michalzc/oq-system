@@ -1,7 +1,7 @@
 import _ from 'lodash-es';
 import { damageRoll } from '../utils/roll.js';
 
-export class OQDamageRollDialog extends FormApplication {
+export class OQDamageRollDialog extends foundry.appv1.api.FormApplication {
   static get defaultOptions() {
     const options = super.defaultOptions;
 

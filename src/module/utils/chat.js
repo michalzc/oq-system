@@ -1,5 +1,7 @@
 import _ from 'lodash-es';
 
+const renderTemplate = foundry.applications.handlebars.renderTemplate;
+
 /**
  * @typedef {object} FieldData
  * @property {string} label

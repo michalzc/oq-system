@@ -11,7 +11,7 @@ export function registerDocuments() {
 
   const localizeActorPrefix = 'TYPES.Actor';
   Object.entries(CONFIG.OQ.ActorConfig.sheetClasses).forEach(([key, sheetClass]) => {
-    Actors.registerSheet(CONFIG.OQ.SYSTEM_ID, sheetClass, {
+    foundry.documents.collections.Actors.registerSheet(CONFIG.OQ.SYSTEM_ID, sheetClass, {
       types: [key],
       makeDefault: true,
       label: `${localizeActorPrefix}.${key}`,
@@ -20,7 +20,7 @@ export function registerDocuments() {
 
   const localizeItemPrefix = 'TYPES.Item';
   Object.entries(CONFIG.OQ.ItemConfig.sheetClasses).forEach(([key, sheetClass]) => {
-    Items.registerSheet(CONFIG.OQ.SYSTEM_ID, sheetClass, {
+    foundry.documents.collections.Items.registerSheet(CONFIG.OQ.SYSTEM_ID, sheetClass, {
       types: [key],
       makeDefault: true,
       label: `${localizeItemPrefix}.${key}`,

@@ -15,7 +15,7 @@ export async function createItemMacro(bar, data, slot) {
           type: 'script',
           img: data.img,
           command: command,
-          flags: { 'oq.itemMacro': true },
+          flags: { oq: { itemMacro: true } },
         });
     game.user.assignHotbarMacro(macro, slot);
   } else {

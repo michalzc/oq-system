@@ -1,5 +1,5 @@
 import _ from 'lodash-es';
-export class OQNPCShortDescriptionEdit extends FormApplication {
+export class OQNPCShortDescriptionEdit extends foundry.appv1.api.FormApplication {
   static get defaultOptions() {
     const options = super.defaultOptions;
 
@@ -29,7 +29,7 @@ export class OQNPCShortDescriptionEdit extends FormApplication {
 
   async getData() {
     const shortDescription = this.object.system.personal.shortDescription;
-    const enrichedDescription = await TextEditor.enrichHTML(shortDescription);
+    const enrichedDescription = await foundry.applications.ux.TextEditor.implementation.enrichHTML(shortDescription);
 
     return {
       enrichedDescription,

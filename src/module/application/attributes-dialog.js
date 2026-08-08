@@ -2,7 +2,7 @@ import _ from 'lodash-es';
 
 const mergeObject = foundry.utils.mergeObject;
 
-export class AttributesDialog extends FormApplication {
+export class AttributesDialog extends foundry.appv1.api.FormApplication {
   static get defaultOptions() {
     const options = super.defaultOptions;
 
