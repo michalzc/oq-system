@@ -27,7 +27,8 @@
     "lint:fix": "eslint --ext .js,.cjs,.mjs --fix .",
     "format": "prettier --write \"./**/*.(js|cjs|mjs|json|yml|less)\"",
     "postinstall": "husky install",
-    "test": "mocha"
+    "test": "mocha",
+    "dev": "vite"
   },
   "devDependencies": {
     "@foundryvtt/foundryvtt-cli": "^1.0.4",
