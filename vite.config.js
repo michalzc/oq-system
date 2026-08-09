@@ -1,5 +1,4 @@
 import { cp, readdir, readFile, rm } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { defineConfig } from 'vite';
 import less from 'less';
@@ -18,21 +17,11 @@ const packsDirectory = `${sourceDirectory}/packs`;
 const staticDirectories = ['assets', 'fonts', 'templates'];
 
 /**
- * Recursively collect files matching an extension (all of them when omitted), skipping the given
- * directories.
+ * Recursively collect the files under a directory, optionally filtered by extension.
  */
-async function findFiles(directory, extension = '', skip = []) {
-  const entries = await readdir(directory, { withFileTypes: true });
-  const files = await Promise.all(
-    entries.map((entry) => {
-      const entryPath = path.join(directory, entry.name);
-      if (entry.isDirectory()) {
-        return skip.includes(entryPath) ? [] : findFiles(entryPath, extension, skip);
-      }
-      return entry.name.endsWith(extension) ? [entryPath] : [];
-    }),
-  );
-  return files.flat();
+async function findFiles(directory, extension = '') {
+  const entries = await readdir(directory, { recursive: true });
+  return entries.filter((entry) => entry.endsWith(extension)).map((entry) => path.join(directory, entry));
 }
 
 /**
@@ -58,20 +47,24 @@ async function buildStyles(ctx) {
  * (`src/system.yaml` → `system.json`, `src/lang/en.yaml` → `lang/en.json`, …).
  */
 async function buildYaml(ctx) {
-  const files = await findFiles(sourceDirectory, '.yaml', [packsDirectory]);
+  const files = (await findFiles(sourceDirectory, '.yaml')).filter((file) => !file.startsWith(packsDirectory));
 
-  for (const file of files) {
-    ctx.addWatchFile(path.resolve(file));
-    ctx.emitFile({
-      type: 'asset',
-      fileName: path.relative(sourceDirectory, file).replace(/\.yaml$/, '.json'),
-      source: `${JSON.stringify(yaml.load(await readFile(file, 'utf8')), null, 2)}\n`,
-    });
-  }
+  await Promise.all(
+    files.map(async (file) => {
+      ctx.addWatchFile(path.resolve(file));
+      const contents = yaml.load(await readFile(file, 'utf8'));
+      ctx.emitFile({
+        type: 'asset',
+        fileName: path.relative(sourceDirectory, file).replace(/\.yaml$/, '.json'),
+        source: `${JSON.stringify(contents, null, 2)}\n`,
+      });
+    }),
+  );
 }
 
 /**
- * Compile the YAML pack sources into LevelDB compendia.
+ * Compile the YAML pack sources into LevelDB compendia. The target is dropped first so that entries
+ * deleted from the sources cannot survive in an incremental (`--watch`) rebuild.
  */
 async function buildPacks() {
   const packs = await readdir(packsDirectory, { withFileTypes: true });
@@ -91,11 +84,11 @@ async function buildPacks() {
  * Copy the directories that ship as-is.
  */
 async function copyStaticFiles() {
-  for (const directory of staticDirectories) {
-    if (existsSync(`${sourceDirectory}/${directory}`)) {
-      await cp(`${sourceDirectory}/${directory}`, `${outputDirectory}/${directory}`, { recursive: true });
-    }
-  }
+  await Promise.all(
+    staticDirectories.map((directory) =>
+      cp(path.join(sourceDirectory, directory), path.join(outputDirectory, directory), { recursive: true }),
+    ),
+  );
 }
 
 /**
@@ -104,8 +97,9 @@ async function copyStaticFiles() {
  * additions need a restart.
  */
 async function watchStaticSources(ctx) {
-  const directories = [packsDirectory, ...staticDirectories.map((directory) => `${sourceDirectory}/${directory}`)];
-  for (const directory of directories.filter((directory) => existsSync(directory))) {
+  const directories = [packsDirectory, ...staticDirectories.map((name) => path.join(sourceDirectory, name))];
+
+  for (const directory of directories) {
     ctx.addWatchFile(path.resolve(directory));
     (await findFiles(directory)).forEach((file) => ctx.addWatchFile(path.resolve(file)));
   }
@@ -116,10 +110,16 @@ async function watchStaticSources(ctx) {
  * static files.
  */
 function systemFiles() {
+  let watching = false;
+
   return {
     name: 'oq-system-files',
+    configResolved(config) {
+      watching = Boolean(config.build.watch);
+    },
     async buildStart() {
-      await Promise.all([buildStyles(this), buildYaml(this), watchStaticSources(this)]);
+      await Promise.all([buildStyles(this), buildYaml(this)]);
+      if (watching) await watchStaticSources(this);
     },
     async writeBundle() {
       await Promise.all([buildPacks(), copyStaticFiles()]);
@@ -129,19 +129,24 @@ function systemFiles() {
 
 export default defineConfig({
   publicDir: false,
-  esbuild: { keepNames: true },
   plugins: [systemFiles()],
   build: {
     outDir: outputDirectory,
     emptyOutDir: true,
     sourcemap: true,
+    // Ship readable code, as the rollup build did: Foundry resolves class names at runtime (sheet
+    // registration, data models), so enabling minification also means setting
+    // `rollupOptions.output.keepNames`.
     minify: false,
     target: 'esnext',
     lib: {
-      name: packageId,
       entry: path.resolve(sourceDirectory, 'module', `${packageId}.js`),
       formats: ['es'],
       fileName: () => `module/${packageId}.js`,
+    },
+    rollupOptions: {
+      // Keep any future code-split chunk next to the entry that imports it.
+      output: { chunkFileNames: 'module/[name]-[hash].js' },
     },
   },
 });
