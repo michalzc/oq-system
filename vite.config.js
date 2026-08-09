@@ -187,7 +187,7 @@ export default defineConfig(({ mode }) => ({
     // Ship readable code, as the rollup build did: Foundry resolves class names at runtime (sheet
     // registration, data models), so enabling minification also means setting
     // `rollupOptions.output.keepNames`.
-    minify: false,
+    minify: true,
     target: 'esnext',
     lib: {
       entry: entryPoint,
