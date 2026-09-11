@@ -23,7 +23,7 @@
     "build": "vite build",
     "build:watch": "vite build --watch",
     "clean": "node --input-type=module -e \"import { rm } from 'node:fs/promises'; await rm('dist', { recursive: true, force: true });\"",
-    "lint": "eslint --ext .js,.cjs,.mjs .; stylelint '**/*.less'",
+    "lint": "eslint --ext .js,.cjs,.mjs . && stylelint '**/*.less'",
     "lint:fix": "eslint --ext .js,.cjs,.mjs --fix .",
     "format": "prettier --write \"./**/*.(js|cjs|mjs|json|yml|less)\"",
     "postinstall": "husky install",

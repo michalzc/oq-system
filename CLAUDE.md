@@ -32,14 +32,14 @@ yarn mocha --grep 'getResult'
 
 ## Build pipeline (`vite.config.js`)
 
-Vite only bundles `src/module/oq.js` into `dist/module/oq.js` (ES lib build, minified). Foundry resolves class names at runtime (sheet registration, data models), so any change to the minifier settings has to keep `rollupOptions.output.keepNames` in mind. Everything else is done by the custom `oq-system-files` plugin:
+Vite only bundles `src/module/oq.js` into `dist/module/oq.js` (ES lib build, minified). Foundry resolves class names at runtime (sheet registration, data models), so preserve `rolldownOptions.output.keepNames: true`. Everything else is done by the custom `oq-system-files` plugin:
 
 - `src/styles/oq.less` → `dist/styles/oq.css`, compiled by `less` **outside** Vite's asset pipeline so that `url()`s pointing at `/systems/oq/…` survive verbatim.
 - every `src/**/*.yaml` outside `src/packs` → JSON at the same relative path (`src/system.yaml` → `dist/system.json`, `src/lang/en.yaml` → `dist/lang/en.json`, `src/template.yaml` → `dist/template.json`).
-- `src/packs/<pack>/*.yml` → LevelDB compendia via `@foundryvtt/foundryvtt-cli` `compilePack`; the target dir is deleted first so removed entries don't survive a watch rebuild.
+- `src/packs/<pack>/*.yml` → LevelDB compendia via `@foundryvtt/foundryvtt-cli` `compilePack` during full builds only; the target dir is deleted first so removed entries do not survive.
 - `src/public/` is Vite's `publicDir`, copied verbatim (templates, fonts, assets).
 
-**Edit the YAML sources, never `dist/`** — `dist/` is git-ignored generated output. New files added deep inside `src/packs` or `src/public` while `--watch` runs need a restart.
+**Edit the YAML sources, never `dist/`** — `dist/` is git-ignored generated output. Run `yarn build` with Foundry stopped before the first `yarn dev` or `yarn build:watch`. Watch mode preserves `dist/` and never rebuilds compendia. After changing `src/packs`, stop Foundry and the watcher, run `yarn build`, then restart both; browser reloads cannot reopen the server's databases. Stop Foundry before `yarn clean` as well. New files added deep inside `src/public` while watching need a watcher restart.
 
 Release: `.github/workflows/release.yml` runs on a published GitHub release, substitutes `version`/`url`/`manifest`/`download` into `src/system.yaml`, builds, and uploads `system.json` + `system.zip`.
 

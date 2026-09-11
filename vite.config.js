@@ -1,4 +1,4 @@
-import { readdir, readFile, rm } from 'node:fs/promises';
+import { access, readdir, readFile, rm } from 'node:fs/promises';
 import path from 'node:path';
 import { build, defineConfig } from 'vite';
 import less from 'less';
@@ -71,7 +71,7 @@ async function buildYaml(ctx) {
 
 /**
  * Compile the YAML pack sources into LevelDB compendia. The target is dropped first so that entries
- * deleted from the sources cannot survive in an incremental (`--watch`) rebuild.
+ * deleted from the sources cannot survive a full build. Foundry must be stopped first.
  */
 async function buildPacks() {
   const packs = await readdir(packsDirectory, { withFileTypes: true });
@@ -88,16 +88,14 @@ async function buildPacks() {
 }
 
 /**
- * Watch the sources that never enter the module graph, so that `--watch` rebuilds on them: the pack
- * sources, and `src/public` (Vite copies it verbatim on every build, but does not watch it). Files
+ * Watch `src/public`, which never enters the module graph (Vite copies it verbatim on every build).
+ * Compendia are only rebuilt by a full build with Foundry stopped. Files
  * added while `--watch` is running are only picked up when they land directly in a watched
  * directory; deeper additions need a restart.
  */
 async function watchExtraSources(ctx) {
-  for (const directory of [packsDirectory, publicDirectory]) {
-    ctx.addWatchFile(path.resolve(directory));
-    (await findFiles(directory)).forEach((file) => ctx.addWatchFile(path.resolve(file)));
-  }
+  ctx.addWatchFile(path.resolve(publicDirectory));
+  (await findFiles(publicDirectory)).forEach((file) => ctx.addWatchFile(path.resolve(file)));
 }
 
 /**
@@ -110,15 +108,29 @@ function systemFiles() {
   return {
     name: 'oq-system-files',
     apply: 'build',
+    config(config) {
+      // Foundry keeps compendium databases open. Preserve them even on the first watch build.
+      if (config.build?.watch) return { build: { emptyOutDir: false } };
+    },
     configResolved(config) {
       watching = Boolean(config.build.watch);
     },
     async buildStart() {
+      if (watching) {
+        const packs = await readdir(packsDirectory, { withFileTypes: true });
+        for (const pack of packs.filter((entry) => entry.isDirectory())) {
+          try {
+            await access(path.join(outputDirectory, 'packs', pack.name, 'CURRENT'));
+          } catch {
+            this.error('Compendia are missing. Stop Foundry and run "yarn build" before starting watch mode.');
+          }
+        }
+      }
       await Promise.all([buildStyles(this), buildYaml(this)]);
       if (watching) await watchExtraSources(this);
     },
     async writeBundle() {
-      await buildPacks();
+      if (!watching) await buildPacks();
     },
   };
 }
@@ -159,7 +171,7 @@ function devServer() {
     async configureServer(server) {
       const watcher = await build({ mode: 'development', build: { watch: {} } });
 
-      // `END` fires once the rebuild is fully written, packs and static files included.
+      // `END` fires once the code and static files are written. Compendia stay untouched.
       watcher.on('event', (event) => {
         if (event.code === 'END') server.hot.send({ type: 'full-reload' });
       });
@@ -177,16 +189,18 @@ export default defineConfig(({ mode }) => ({
     // Keep the HMR socket off `/`, where it would be indistinguishable from Foundry's own.
     hmr: { path: hmrPath },
     proxy: {
-      [`^(?!${hmrPrefix}|${hmrPath})`]: { target: foundryUrl, ws: true, changeOrigin: true },
+      // Vite's client resolves its environment module through node_modules or /@fs/.
+      [`^(?!${hmrPrefix}|${hmrPath}|/@fs/|/@id/|/node_modules/)`]: {
+        target: foundryUrl,
+        ws: true,
+        changeOrigin: true,
+      },
     },
   },
   build: {
     outDir: outputDirectory,
     emptyOutDir: true,
     sourcemap: true,
-    // Ship readable code, as the rollup build did: Foundry resolves class names at runtime (sheet
-    // registration, data models), so enabling minification also means setting
-    // `rollupOptions.output.keepNames`.
     minify: true,
     target: 'esnext',
     lib: {
@@ -194,9 +208,10 @@ export default defineConfig(({ mode }) => ({
       formats: ['es'],
       fileName: () => `module/${packageId}.js`,
     },
-    rollupOptions: {
+    rolldownOptions: {
       // Keep any future code-split chunk next to the entry that imports it.
-      output: { chunkFileNames: 'module/[name]-[hash].js' },
+      // Foundry also persists sheet identifiers derived from class names.
+      output: { chunkFileNames: 'module/[name]-[hash].js', keepNames: true },
     },
   },
 }));

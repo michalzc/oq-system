@@ -6,6 +6,22 @@ OpenQuest SRD system for Foundry VTT
 
 Beta
 
+## Development
+
+Use `nix develop` for Node 22, Yarn, and the `start-foundry` helper. Install dependencies with
+`yarn install --frozen-lockfile`, then run `yarn build` with Foundry stopped to create `dist/`, including compendia.
+Point `foundryvtt-data/Data/systems/oq` at this repository's `dist/` directory.
+
+Start Foundry with `start-foundry`, then run `yarn dev` in another terminal and open `http://localhost:32001`.
+The development proxy forwards game requests to Foundry on port 32000 and reloads the page after builds.
+`yarn build:watch` provides rebuilds without the proxy or browser reloads.
+
+Both watch commands preserve existing compendium databases. After changing `src/packs/`, stop the watcher
+and Foundry, run `yarn build`, then restart them. A browser refresh does not reopen Foundry's databases.
+Also stop Foundry before running `yarn clean`. Restart the watcher after adding deeply nested public assets.
+
+Run `yarn test`, `yarn lint`, and `yarn build` before submitting changes.
+
 ## Contributors
 
 [tuirgin](https://github.com/tuirgin) - SRD Bestiary as journal pages.
