@@ -8,6 +8,7 @@ import { registerDocuments } from './init/register-documents.js';
 import { registerHelpers } from './init/handlebar-helpers.js';
 import { registerSettings, registerLateSettings } from './init/register-settings.js';
 import { buildMoneyService } from './utils/money.js';
+import '../styles/oq.less';
 
 async function init() {
   log('Initializing OQ');

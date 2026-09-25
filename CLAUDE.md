@@ -37,7 +37,7 @@ The build follows the split tooling in `tools/`:
 - `yarn build:packs` compiles `src/packs/<pack>/` into LevelDB compendia in `build/packs/`. It replaces the generated pack directory, including removed packs. Stop Foundry first.
 - `yarn build:code` uses Vite to bundle `src/module/oq.js` into `build/module/oq.js`. Preserve `rolldownOptions.output.keepNames: true` because Foundry persists class names.
 - `systemMeta` emits `system.json`, `template.json`, and `lang/*.json` from YAML and watches metadata and public assets.
-- `systemStyles` compiles `src/styles/oq.less` into `build/styles/oq.css` outside Vite's asset pipeline, preserving Foundry URLs verbatim.
+- `src/module/oq.js` imports `src/styles/oq.less`; Vite compiles it into `build/styles/oq.css`. The library CSS filename matches the manifest, and runtime Foundry asset URLs are marked external to preserve them.
 - Vite copies `src/public/` into `build/`.
 
 **Edit source files, never `build/`.** `yarn build` runs pack compilation followed by code compilation. `yarn dev` and `yarn build:watch` only rebuild code and assets, preserving compendia. After changing packs, stop Foundry, run `yarn build:packs`, then restart Foundry. Stop Foundry and the watcher before `yarn clean`. Code builds retain old output files; run `yarn clean && yarn build` for a fresh distribution after deleting or renaming sources. Restart the watcher after adding new public assets or language files.
