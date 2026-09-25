@@ -9,14 +9,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-yarn build          # vite build → dist/
+yarn build          # compile packs, then code/assets → build/
 yarn build:watch    # rebuild on change
-yarn dev            # dev server on :32001, proxies Foundry on :32000, rebuilds + full-reloads
+yarn dev            # watch code/assets; refresh Foundry on :32000 manually
 yarn test           # mocha (test/*.js)
-yarn lint           # eslint + stylelint '**/*.less'
+yarn lint           # JavaScript, Less, Handlebars syntax and markup
 yarn lint:fix
 yarn format         # prettier
-yarn clean          # rm -rf dist
+yarn clean          # remove build/ and legacy dist/
 ```
 
 Single test file / case:
@@ -28,18 +28,19 @@ yarn mocha --grep 'getResult'
 
 ### Running it in Foundry
 
-`start-foundry` (from the nix dev shell) launches Foundry on port 32000 with `--dataPath=./foundryvtt-data --world=oq-dev`. `foundryvtt-data/Data/systems/oq` is a symlink to `dist/`, so a build is immediately live. `yarn dev` then puts a proxy on :32001 that runs `vite build --watch` internally and pushes a full page reload after each completed rebuild — open the game on :32001, not :32000, to get reloads.
+`start-foundry` (from the nix dev shell) launches Foundry on port 32000 with `--dataPath=./foundryvtt-data --world=oq-dev`. Link `foundryvtt-data/Data/systems/oq` to `build/` (update older links to `dist/`). Run `yarn build` before starting Foundry, then `yarn dev` to watch code and assets. Open :32000 and refresh after rebuilds.
 
-## Build pipeline (`vite.config.js`)
+## Build pipeline
 
-Vite only bundles `src/module/oq.js` into `dist/module/oq.js` (ES lib build, minified). Foundry resolves class names at runtime (sheet registration, data models), so preserve `rolldownOptions.output.keepNames: true`. Everything else is done by the custom `oq-system-files` plugin:
+The build follows the split tooling in `tools/`:
 
-- `src/styles/oq.less` → `dist/styles/oq.css`, compiled by `less` **outside** Vite's asset pipeline so that `url()`s pointing at `/systems/oq/…` survive verbatim.
-- every `src/**/*.yaml` outside `src/packs` → JSON at the same relative path (`src/system.yaml` → `dist/system.json`, `src/lang/en.yaml` → `dist/lang/en.json`, `src/template.yaml` → `dist/template.json`).
-- `src/packs/<pack>/*.yml` → LevelDB compendia via `@foundryvtt/foundryvtt-cli` `compilePack` during full builds only; the target dir is deleted first so removed entries do not survive.
-- `src/public/` is Vite's `publicDir`, copied verbatim (templates, fonts, assets).
+- `yarn build:packs` compiles `src/packs/<pack>/` into LevelDB compendia in `build/packs/`. It replaces the generated pack directory, including removed packs. Stop Foundry first.
+- `yarn build:code` uses Vite to bundle `src/module/oq.js` into `build/module/oq.js`. Preserve `rolldownOptions.output.keepNames: true` because Foundry persists class names.
+- `systemMeta` emits `system.json`, `template.json`, and `lang/*.json` from YAML and watches metadata and public assets.
+- `systemStyles` compiles `src/styles/oq.less` into `build/styles/oq.css` outside Vite's asset pipeline, preserving Foundry URLs verbatim.
+- Vite copies `src/public/` into `build/`.
 
-**Edit the YAML sources, never `dist/`** — `dist/` is git-ignored generated output. Run `yarn build` with Foundry stopped before the first `yarn dev` or `yarn build:watch`. Watch mode preserves `dist/` and never rebuilds compendia. After changing `src/packs`, stop Foundry and the watcher, run `yarn build`, then restart both; browser reloads cannot reopen the server's databases. Stop Foundry before `yarn clean` as well. New files added deep inside `src/public` while watching need a watcher restart.
+**Edit source files, never `build/`.** `yarn build` runs pack compilation followed by code compilation. `yarn dev` and `yarn build:watch` only rebuild code and assets, preserving compendia. After changing packs, stop Foundry, run `yarn build:packs`, then restart Foundry. Stop Foundry and the watcher before `yarn clean`. Code builds retain old output files; run `yarn clean && yarn build` for a fresh distribution after deleting or renaming sources. Restart the watcher after adding new public assets or language files.
 
 Release: `.github/workflows/release.yml` runs on a published GitHub release, substitutes `version`/`url`/`manifest`/`download` into `src/system.yaml`, builds, and uploads `system.json` + `system.zip`.
 
