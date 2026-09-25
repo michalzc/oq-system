@@ -6,6 +6,30 @@ OpenQuest SRD system for Foundry VTT
 
 Beta
 
+## Development
+
+Use `nix develop` for Node 22, Yarn, and the `start-foundry` helper. Install dependencies with
+`yarn install --frozen-lockfile`, then run `yarn build` with Foundry stopped to create `build/`, including compendia.
+Point `foundryvtt-data/Data/systems/oq` at this repository's `build/` directory (update any existing link to `dist/`).
+
+Start Foundry with `start-foundry`, then run `yarn dev` in another terminal and open `http://localhost:32000`.
+This watches code, Less styles, YAML metadata, and public assets. Refresh the browser after a rebuild;
+there is no development proxy or automatic page reload. `yarn build:watch` is an alias for the same watcher.
+
+- `yarn build:packs`: replace generated compendia in `build/packs/` from `src/packs/`.
+- `yarn build:code`: bundle JavaScript, compile Less, convert metadata to JSON, and copy public assets to `build/`.
+- `yarn build`: run both steps in order.
+- `yarn clean`: remove generated `build/` and legacy `dist/` output.
+
+Code builds and watch mode preserve existing compendium databases. After changing `src/packs/`, stop
+Foundry, run `yarn build:packs`, then restart Foundry. A browser refresh does not reopen Foundry's databases.
+Also stop Foundry and the watcher before running `yarn clean`. Code builds do not remove obsolete output files;
+use `yarn clean && yarn build` for a fresh distribution after removing or renaming sources.
+Restart the watcher after adding new public assets or language files.
+
+Run `yarn test`, `yarn lint`, and `yarn build` before submitting changes. Lint checks JavaScript, Less,
+and Handlebars syntax and markup.
+
 ## Contributors
 
 [tuirgin](https://github.com/tuirgin) - SRD Bestiary as journal pages.
