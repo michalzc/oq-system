@@ -30,6 +30,40 @@ Restart the watcher after adding new public assets or language files.
 Run `yarn test`, `yarn lint`, and `yarn build` before submitting changes. Lint checks JavaScript, Less,
 and Handlebars syntax and markup.
 
+### Nix environment
+
+The project uses the shared [foundry-dev](https://github.com/michalzc/foundry-dev) flake,
+pinned in `flake.lock`. `flake.nix` owns the Foundry 13.351 archive hash and Node.js 22 selection;
+Yarn uses the same Node.js version. Download your licensed Node.js archive, name it
+`FoundryVTT-13.351.zip`, and import it before entering the shell:
+
+```sh
+nix-store --add-fixed sha256 FoundryVTT-13.351.zip
+direnv allow
+# Or without direnv:
+nix develop
+```
+
+The shell defaults `FOUNDRY_WORLD` to `oq-dev`; override it to choose another world,
+or set it to an empty string to use Foundry's setup screen. `start-foundry` defaults to
+port 32000 and `foundryvtt-data` at the Git checkout root, including from subdirectories.
+Use `FOUNDRY_PORT` and `FOUNDRY_DATA_PATH` to override these defaults. Extra command-line
+arguments are forwarded to Foundry. Outside the shell, use
+`FOUNDRY_WORLD=oq-dev nix run .#start-foundry` to select the development world.
+
+Entering the shell exports `FOUNDRY_APP_PATH` and refreshes the ignored `foundryvtt-api`
+symlink for editor navigation. Existing real files or directories at that path are preserved.
+The `foundry` shell and `foundryvtt-13` package aliases remain available.
+
+Run `nix flake update foundry-dev` to upgrade the shared environment, then commit
+`flake.lock`. This does not change the project's Foundry version or archive hash.
+Format the flake with `nix fmt -- flake.nix`. To try the sibling shared checkout without
+changing the committed input or lock file:
+
+```sh
+nix develop --override-input foundry-dev path:../foundry-dev --no-write-lock-file
+```
+
 ## Contributors
 
 [tuirgin](https://github.com/tuirgin) - SRD Bestiary as journal pages.
