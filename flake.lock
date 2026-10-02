@@ -1,24 +1,46 @@
 {
   "nodes": {
+    "foundry-dev": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1790977774,
+        "narHash": "sha256-ZzZI1L2ztZHd+fpz/lUItGwjYFDHXOPvBLctpfNF1y0=",
+        "owner": "michalzc",
+        "repo": "foundry-dev",
+        "rev": "0fdf96a1f92de6296b7635b1014b24a101087632",
+        "type": "github"
+      },
+      "original": {
+        "owner": "michalzc",
+        "repo": "foundry-dev",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1784707089,
-        "narHash": "sha256-2V/6imsUgB7mPZlHY54oeVBRDoZbPKnvzwkAHUSSufk=",
+        "lastModified": 1790822859,
+        "narHash": "sha256-69xHQhAeMAD2wDXO7T2pcOZIF9Sga2W+JkmY2a11Ops=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b3fe9581c9061c749abef42b6d4ee7b7c05c33fa",
+        "rev": "c59305bab2065cfecc4944690d9eedbb56f3a9fa",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-26.05",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
     },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "foundry-dev": "foundry-dev",
+        "nixpkgs": [
+          "foundry-dev",
+          "nixpkgs"
+        ]
       }
     }
   },

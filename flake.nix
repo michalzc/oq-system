@@ -1,42 +1,57 @@
 {
-  description = "Env for oq-system";
+  description = "Development environment for the OpenQuest Foundry VTT system";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    foundry-dev.url = "github:michalzc/foundry-dev";
+    nixpkgs.follows = "foundry-dev/nixpkgs";
   };
 
   outputs =
-    { self, nixpkgs }:
+    { foundry-dev, nixpkgs, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-
-      foundryvtt-13 = pkgs.callPackage ./nix/foundryvtt { nodejs = pkgs.nodejs_22; } {
-        version = "13.351";
-        shortVersion = "13";
-        sha256 = "sha256-BWxKwTqjVQwzY0euV0/oWEXKVM7cYWdCfjBihRNsqQA=";
+      yarn = pkgs.yarn.override { nodejs = pkgs.nodejs_22; };
+      env = foundry-dev.lib.mkFoundryEnvironment {
+        inherit system;
+        foundry = {
+          version = "13.351";
+          sha256 = "sha256-BWxKwTqjVQwzY0euV0/oWEXKVM7cYWdCfjBihRNsqQA=";
+        };
+        nodejsMajor = 22;
+        port = 32000;
+        extraPackages = [ yarn ];
+        development = {
+          packageType = "system";
+          packageId = "oq";
+          worldId = "oq-dev";
+          worldTitle = "OpenQuest Development";
+          buildCommand = [
+            "${yarn}/bin/yarn"
+            "build"
+          ];
+          watchCommand = [
+            "${yarn}/bin/yarn"
+            "dev"
+          ];
+        };
       };
-
-      start-foundry = pkgs.writeShellScriptBin "start-foundry" ''
-        exec ${foundryvtt-13}/bin/foundryvtt-13 \
-          --port=32000 --world=oq-dev --dataPath=./foundryvtt-data "$@"
-      '';
     in
     {
-      packages.${system}.foundryvtt-13 = foundryvtt-13;
-
-      devShells.${system}.default = pkgs.mkShell {
-
-        packages = with pkgs; [
-          nodejs_22
-          (yarn.override { nodejs = nodejs_22; })
-          foundryvtt-13
-          start-foundry
-        ];
-
-        shellHook = ''
-          echo "Entering dev env"
-        '';
+      devShells.${system} = {
+        default = env.devShell;
+        foundry = env.devShell;
       };
+      apps.${system} = {
+        start-foundry = env.app;
+        start-dev = env.devApp;
+      };
+      packages.${system} = {
+        foundryvtt = env.package;
+        foundryvtt-13 = env.package;
+        start-foundry = env.launcher;
+        start-dev = env.devLauncher;
+      };
+      formatter.${system} = env.formatter;
     };
 }
