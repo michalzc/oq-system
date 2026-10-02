@@ -11,18 +11,30 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      yarn = pkgs.yarn.override { nodejs = pkgs.nodejs_24; };
       env = foundry-dev.lib.mkFoundryEnvironment {
         inherit system;
         foundry = {
-          version = "13.351";
-          sha256 = "sha256-BWxKwTqjVQwzY0euV0/oWEXKVM7cYWdCfjBihRNsqQA=";
+          version = "14.368";
+          sha256 = "sha256-SL5GxqPSTjE7k+1DNvwAcCgQfB70odihyREWFnMORsA=";
         };
-        nodejsMajor = 22;
+        nodejsMajor = 24;
         port = 32000;
-        extraPackages = [ (pkgs.yarn.override { nodejs = pkgs.nodejs_22; }) ];
-        shellHook = ''
-          export FOUNDRY_WORLD="''${FOUNDRY_WORLD-oq-dev}"
-        '';
+        extraPackages = [ yarn ];
+        development = {
+          packageType = "system";
+          packageId = "oq";
+          worldId = "oq-dev";
+          worldTitle = "OpenQuest Development";
+          buildCommand = [
+            "${yarn}/bin/yarn"
+            "build"
+          ];
+          watchCommand = [
+            "${yarn}/bin/yarn"
+            "dev"
+          ];
+        };
       };
     in
     {
@@ -30,11 +42,15 @@
         default = env.devShell;
         foundry = env.devShell;
       };
-      apps.${system}.start-foundry = env.app;
+      apps.${system} = {
+        start-foundry = env.app;
+        start-dev = env.devApp;
+      };
       packages.${system} = {
         foundryvtt = env.package;
-        foundryvtt-13 = env.package;
+        foundryvtt-14 = env.package;
         start-foundry = env.launcher;
+        start-dev = env.devLauncher;
       };
       formatter.${system} = env.formatter;
     };

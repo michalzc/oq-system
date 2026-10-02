@@ -42,3 +42,4 @@ temp/
 .direnv/
 foundryvtt-data/
 foundryvtt-api
+/.dev/

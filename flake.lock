@@ -5,11 +5,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1790939111,
-        "narHash": "sha256-iLLI9yBTIj8RqLAttVFybmFMDcytvUKXczYu2iqkFwE=",
+        "lastModified": 1790969571,
+        "narHash": "sha256-ISEOLi4C/57CtMm8i0Ugnwy0PI7oq25fsvyMVXT9wbU=",
         "owner": "michalzc",
         "repo": "foundry-dev",
-        "rev": "d058ebf35b853c9687f9ba43ba6bf7c0aae24ffd",
+        "rev": "1e21dbed29f8f0c6a1087e32361111784814c376",
         "type": "github"
       },
       "original": {

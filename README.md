@@ -8,13 +8,25 @@ Beta
 
 ## Development
 
-Use `nix develop` for Node 22, Yarn, and the `start-foundry` helper. Install dependencies with
-`yarn install --frozen-lockfile`, then run `yarn build` with Foundry stopped to create `build/`, including compendia.
-Point `foundryvtt-data/Data/systems/oq` at this repository's `build/` directory (update any existing link to `dist/`).
+After the Nix setup below, install Chromium on the host and run:
 
-Start Foundry with `start-foundry`, then run `yarn dev` in another terminal and open `http://localhost:32000`.
-This watches code, Less styles, YAML metadata, and public assets. Refresh the browser after a rebuild;
-there is no development proxy or automatic page reload. `yarn build:watch` is an alias for the same watcher.
+```sh
+yarn install --frozen-lockfile
+start-dev
+# Rebuild code and assets when sources change:
+start-dev --watch
+# Or without entering the development shell:
+nix run .#start-dev -- --watch
+```
+
+The launcher builds the system, links `build/` into `foundryvtt-data/Data/systems/oq`, starts Foundry
+on port 32000, creates or reuses the `oq-dev` world, and opens its join screen in Chromium.
+Select the GM/user in the browser. Stop any Foundry instance using this checkout's build before launching;
+the initial build replaces compendium databases. Existing worlds are preserved and checked for the `oq` system.
+
+`--watch` runs `yarn dev` after startup, watching code, Less styles, YAML metadata, and public assets.
+Refresh the browser after a rebuild; there is no automatic page reload. Ctrl+C or closing Chromium stops
+the processes started by the launcher. `yarn build:watch` is an alias for the same watcher.
 
 - `yarn build:packs`: replace generated compendia in `build/packs/` from `src/packs/`.
 - `yarn build:code`: bundle JavaScript, compile Less, convert metadata to JSON, and copy public assets to `build/`.
@@ -33,27 +45,48 @@ and Handlebars syntax and markup.
 ### Nix environment
 
 The project uses the shared [foundry-dev](https://github.com/michalzc/foundry-dev) flake,
-pinned in `flake.lock`. `flake.nix` owns the Foundry 13.351 archive hash and Node.js 22 selection;
+pinned in `flake.lock`. `flake.nix` owns the Foundry 14.368 archive hash and Node.js 24 selection;
 Yarn uses the same Node.js version. Download your licensed Node.js archive, name it
-`FoundryVTT-13.351.zip`, and import it before entering the shell:
+`FoundryVTT-14.368.zip`, and import it before entering the shell:
 
 ```sh
-nix-store --add-fixed sha256 FoundryVTT-13.351.zip
+nix-store --add-fixed sha256 FoundryVTT-14.368.zip
 direnv allow
 # Or without direnv:
 nix develop
 ```
 
-The shell defaults `FOUNDRY_WORLD` to `oq-dev`; override it to choose another world,
-or set it to an empty string to use Foundry's setup screen. `start-foundry` defaults to
-port 32000 and `foundryvtt-data` at the Git checkout root, including from subdirectories.
-Use `FOUNDRY_PORT` and `FOUNDRY_DATA_PATH` to override these defaults. Extra command-line
-arguments are forwarded to Foundry. Outside the shell, use
-`FOUNDRY_WORLD=oq-dev nix run .#start-foundry` to select the development world.
+With direnv configured, entering the checkout loads the tools into the current shell. Run `direnv reload`
+after changing the flake if needed. Without direnv, use `nix develop --command zsh` for an interactive zsh shell.
+
+`start-dev` defaults to the `oq-dev` world and `foundryvtt-data` at the Git checkout root,
+including from subdirectories. Use `FOUNDRY_WORLD`, `FOUNDRY_PORT`, and `FOUNDRY_DATA_PATH` to override these
+defaults. Relative data overrides for `start-dev` resolve against the Git root. Both build and watch use
+the packaged Yarn with Node.js 24, including when invoked through `nix run` outside the shell.
+
+Chromium uses the ignored `.dev/chromium` profile and exposes remote debugging on loopback port 9222,
+compatible with Chrome DevTools MCP at `http://127.0.0.1:9222`. The launcher discovers `chromium` or
+`chromium-browser` on PATH; override this with `CHROMIUM_BIN`. Use `CHROMIUM_DEBUG_PORT` to change the debugging
+port and update the MCP endpoint accordingly. Occupied Foundry or debugging ports cause startup to fail.
+
+On first use, enter the Foundry license and accept its terms in Chromium if requested. If the data directory
+requires administrator authentication, set `FOUNDRY_ADMIN_PASSWORD` and optionally `FOUNDRY_ADMIN_USERNAME`,
+or create and launch `oq-dev` manually in Chromium when prompted. Player login remains interactive.
+
+For manual startup, build with `yarn build` while Foundry is stopped and link
+`foundryvtt-data/Data/systems/oq` to this checkout's `build/` directory. Run `start-foundry` for the setup screen,
+or `FOUNDRY_WORLD=oq-dev start-foundry` for an existing world, then run `yarn dev` in another terminal.
+Outside the shell, use `FOUNDRY_WORLD=oq-dev nix run .#start-foundry`. This launcher also accepts
+`FOUNDRY_PORT` and `FOUNDRY_DATA_PATH`; relative data overrides resolve against the current directory.
+Extra command-line arguments are forwarded to Foundry.
+
+The development environment now uses Foundry 14 because the shared `start-dev` requires it. The system
+manifest still declares Foundry 13 as verified; moving the development environment does not verify all
+system features on Foundry 14.
 
 Entering the shell exports `FOUNDRY_APP_PATH` and refreshes the ignored `foundryvtt-api`
 symlink for editor navigation. Existing real files or directories at that path are preserved.
-The `foundry` shell and `foundryvtt-13` package aliases remain available.
+The `foundry` shell and `foundryvtt-14` package aliases are available.
 
 Run `nix flake update foundry-dev` to upgrade the shared environment, then commit
 `flake.lock`. This does not change the project's Foundry version or archive hash.
@@ -103,4 +136,3 @@ OpenQuest is the trademark of Paul Newport, used with Permission.
 Put below link into 'Manifest URL' field.
 
 https://github.com/michalzc/oq-system/releases/latest/download/system.json
-
