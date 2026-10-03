@@ -145,7 +145,6 @@ export class CharacteristicsDialog extends foundry.appv1.api.FormApplication {
           const messageData = {
             content: content,
             rolls: [roll],
-            class: ['oq'],
             speaker: ChatMessage.getSpeaker({ actor: this.object }),
           };
           await createChatMessage(messageData);

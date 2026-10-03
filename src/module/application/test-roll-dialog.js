@@ -45,7 +45,6 @@ export class OQTestRollDialog extends foundry.appv1.api.FormApplication {
     });
   }
 
-  // eslint-disable-next-line no-unused-vars
   async _updateObject(event, formData) {
     const difficultyKey = formData.difficulty;
     const difficulty = difficultyKey && { key: difficultyKey, value: this.difficultyLevels[difficultyKey] };

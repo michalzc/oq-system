@@ -549,20 +549,20 @@ version X until it is removed in version Y.
   (`data-models-item.js:126`). It has the same value as the equipment state, but is a copy-paste slip.
 - [x] **E5. `onUpdateItemAdv`:** `parseInt(...) ?? 0` (`actor-base-sheet.js:183`) — `parseInt` never returns
   null/undefined, so the `?? 0` does nothing. The `isNaN` check is what actually guards.
-- [ ] **E6. Chat commands:**
+- [x] **E6. Chat commands:**
   - `canvas.tokens.controlled` throws when the canvas is disabled (`chat-command-listener.js:8`,
     `updates-from-chat.js:6`). A GM with no token selected rolls `/hp` and `/mp` without actor data, so formulas like
     `@str` fail.
   - The `/hp` and `/mp` pattern (`chat-command-listener.js:33`) captures all the HTML after the command, and
     `htmlToText` (`:24`) drops `<br>` instead of turning it into a newline. A Shift+Enter line break therefore merges
     the next line into the formula (`/hp 1d6` + `fire` → `1d6fire`). Core's `ChatLog.parse` converts `<br>` first.
-- [ ] **E7. `characteristics-dialog.js:146` passes `class: ['oq']` to `ChatMessage.create`.** This isn't a ChatMessage
+- [x] **E7. `characteristics-dialog.js:146` passes `class: ['oq']` to `ChatMessage.create`.** This isn't a ChatMessage
   field and is silently dropped.
-- [ ] **E8. Tooling:**
+- [x] **E8. Tooling:**
   - JavaScript lint uses ESLint 8 with legacy `.eslintrc.cjs`, while the template lint uses a flat config via
     `ESLINT_USE_FLAT_CONFIG`. Unify on flat config with ESLint 9+.
   - `husky install` (husky 8) is deprecated in husky 9.
   - `package.json` still has placeholder `description` / `repository.url`.
-- [ ] **E9. Manifest placeholders.** `src/system.yaml` has `url`, `manifest` and `download` set to `tbd` (the release
+- [x] **E9. Manifest placeholders.** `src/system.yaml` has `url`, `manifest` and `download` set to `tbd` (the release
   workflow fills them) and `version: 0.1.0-SNAPSHOT`. These are fine for dev, but check the v14 manifest validation
   warnings after B10.
