@@ -1,13 +1,7 @@
 import _ from 'lodash-es';
 
 const renderTemplate = foundry.applications.handlebars.renderTemplate;
-
-const commandRegex = /^\/(?<command>[a-zA-Z]+)\s(?<param>.*)$/;
-
-const Commands = {
-  hp: hpHandler,
-  mp: mpHandler,
-};
+const ChatLog = foundry.applications.sidebar.tabs.ChatLog;
 
 async function sendAdjustMessage(rollString, type, chatData) {
   const actor = game.user.isGM ? _.head(canvas.tokens.controlled.map((token) => token.actor)) : game.user.character;
@@ -25,24 +19,26 @@ async function sendAdjustMessage(rollString, type, chatData) {
   });
 }
 
-async function mpHandler(roll, chatData) {
-  await sendAdjustMessage(roll, CONFIG.OQ.ChatConfig.AdjustmentType.mp, chatData);
+// The chat input is ProseMirror, so the matched text is HTML.
+function htmlToText(html) {
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  return template.content.textContent;
 }
 
-async function hpHandler(roll, chatData) {
-  await sendAdjustMessage(roll, CONFIG.OQ.ChatConfig.AdjustmentType.hp, chatData);
-}
-export function commandHandler(chatLog, message, chatData) {
-  const match = commandRegex.exec(message);
-  if (match) {
-    const command = match.groups?.command;
-    const param = match.groups?.param;
-    const handler = Commands[command];
-    if (handler) {
-      handler(param, chatData);
+// Not `isRoll`: that would also make core enrich `[[/hp …]]` as a plain dice roll.
+function adjustmentCommand(type) {
+  return {
+    rgx: new RegExp(`^/${type}\\s+(.+)$`, 'i'),
+    fn: async (command, match, chatData) => {
+      await sendAdjustMessage(htmlToText(match[1]), type, chatData);
       return false;
-    }
-  }
+    },
+  };
+}
 
-  return true;
+export function registerChatCommands() {
+  const { hp, mp } = CONFIG.OQ.ChatConfig.AdjustmentType;
+  ChatLog.CHAT_COMMANDS.oqHp = adjustmentCommand(hp);
+  ChatLog.CHAT_COMMANDS.oqMp = adjustmentCommand(mp);
 }

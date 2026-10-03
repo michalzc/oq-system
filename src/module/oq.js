@@ -3,6 +3,7 @@ import { log } from './utils/logger.js';
 import { oqGame } from './utils/oq-game.js';
 import { preloadTemplates } from './init/preload-templates.js';
 import { registerCustomHookHandlers } from './init/custom-hook-handlers.js';
+import { registerChatCommands } from './chat-handlers/chat-command-listener.js';
 import { registerDataModels } from './init/register-data-models.js';
 import { registerDocuments } from './init/register-documents.js';
 import { registerHelpers } from './init/handlebar-helpers.js';
@@ -20,6 +21,7 @@ async function init() {
 
   registerHelpers();
   registerCustomHookHandlers();
+  registerChatCommands();
   registerSettings();
 
   await preloadTemplates();
