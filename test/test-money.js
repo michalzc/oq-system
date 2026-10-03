@@ -143,5 +143,47 @@ describe('money.js', function () {
         expect(expected).to.eql(result);
       });
     });
+
+    it('Should not lose coins to floating point rounding', () => {
+      expect(moneyService.consolidate(makeInput(0, 0, 5, 4))).to.eql(makeExpected(0, 0, 5, 4));
+      expect(moneyService.consolidateFlat(0.58)).to.eql(makeExpected(0, 0, 5, 4));
+    });
+
+    it('Should preserve the total value of any small copper and lead combination', () => {
+      const valueOf = (coins) => _.sumBy(coins, (coin) => coin.amount * Math.round(coin.multiplier * 100));
+      _.range(0, 40).forEach((copper) =>
+        _.range(0, 25).forEach((lead) => {
+          const result = moneyService.consolidate(makeInput(0, 0, copper, lead));
+          expect(valueOf(result)).to.eql(copper * 10 + lead * 2);
+        }),
+      );
+    });
+
+    it('Should consolidate empty money to zero coins', () => {
+      expect(moneyService.consolidate({})).to.eql(makeExpected(0, 0, 0, 0));
+    });
+
+    it('Should ignore coins missing from the configuration', () => {
+      expect(moneyService.consolidate({ SP: 3, XX: 7 })).to.eql(makeExpected(0, 3, 0, 0));
+    });
+  });
+
+  describe('OQMoneyService with an ascending configuration', function () {
+    const moneyService = new OQMoneyService(
+      'Lead Bits (LB) = 0.02, Copper Pennies (CP) = 0.1, Silver Pieces (SP) = 1, Gold Ducats (GD) = 20',
+    );
+
+    it('Should order fields from the largest coin to the smallest', () => {
+      expect(moneyService.fields.map((field) => field.name)).to.eql(['GD', 'SP', 'CP', 'LB']);
+    });
+
+    it('Should calculate the internal multiplier from the smallest coin', () => {
+      expect(moneyService.multiplier).to.eql(100);
+    });
+
+    it('Should consolidate silver into gold and silver', () => {
+      const amounts = _.fromPairs(moneyService.consolidate({ SP: 25 }).map((coin) => [coin.name, coin.amount]));
+      expect(amounts).to.eql({ GD: 1, SP: 5, CP: 0, LB: 0 });
+    });
   });
 });

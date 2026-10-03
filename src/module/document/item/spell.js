@@ -2,8 +2,6 @@ import { OQBaseItem } from './base-item.js';
 import _ from 'lodash-es';
 import { inRangeValue } from '../../utils/utils.js';
 
-const renderTemplate = foundry.applications.handlebars.renderTemplate;
-
 export class OQSpell extends OQBaseItem {
   async _preUpdate(changed, options, user) {
     //FIXME: refactor to common utility
@@ -26,11 +24,6 @@ export class OQSpell extends OQBaseItem {
     }
   }
 
-  async prepareDerivedData() {
-    super.prepareDerivedData();
-    this.system.tooltip = await this.getTooltipWithTraits();
-  }
-
   getItemDataForChat() {
     const context = super.getItemDataForChat();
     return { ...context, traits: [...this.getTraits()], itemSubtypeLabel: `OQ.Labels.SpellTypes.${this.system.type}` };
@@ -38,12 +31,6 @@ export class OQSpell extends OQBaseItem {
 
   async rollItemTest() {
     await this.sendItemToChat();
-  }
-
-  async getTooltipWithTraits() {
-    const description = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.system.description);
-    const traits = this.getTraits().join(', ');
-    return await renderTemplate('systems/oq/templates/tooltip.hbs', { description, traits });
   }
 
   getTraits() {
@@ -55,7 +42,7 @@ export class OQSpell extends OQBaseItem {
       this.system.nonVariant && game.i18n.localize('OQ.Labels.NonVariable'),
       this.system.noMagicPoints && game.i18n.localize('OQ.Labels.NoMagicPoints'),
     ].filter((trait) => !!trait);
-    return _.concat(constTraits, this.system.traits ?? []);
+    return _.concat(constTraits, super.getTraits());
   }
 
   get hasSplitDivineCasting() {

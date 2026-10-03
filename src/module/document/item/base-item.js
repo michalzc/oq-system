@@ -37,7 +37,6 @@ export class OQBaseItem extends Item {
     _.merge(this, {
       system: {
         rollValues,
-        tooltip: this.system.description,
         damageRollValues,
       },
     });
@@ -71,7 +70,10 @@ export class OQBaseItem extends Item {
 
   async sendItemToChat() {
     const chatData = this.getItemDataForChat();
-    await displayItem(chatData);
+    const description = await foundry.applications.ux.TextEditor.implementation.enrichHTML(chatData.description, {
+      relativeTo: this,
+    });
+    await displayItem({ ...chatData, description });
   }
 
   makeRollString(rollFormula) {
@@ -125,14 +127,20 @@ export class OQBaseItem extends Item {
     };
   }
 
+  /**
+   * Async, so call it while building a sheet context, never from data preparation.
+   */
   async getTooltipWithTraits() {
-    if (this.system.traits && this.system.traits.length) {
-      const description = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.system.description);
-      const traits = (this.system.traits ?? []).join(', ');
-      return await renderTemplate('systems/oq/templates/tooltip.hbs', { description, traits });
-    } else {
-      return this.system.description;
-    }
+    const description = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.system.description, {
+      relativeTo: this,
+    });
+    const traits = this.getTraits().join(', ');
+    if (!description && !traits) return '';
+    return await renderTemplate('systems/oq/templates/tooltip.hbs', { description, traits });
+  }
+
+  getTraits() {
+    return this.system.traits ?? [];
   }
 
   getItemDataForChat() {

@@ -5,6 +5,8 @@ export class OQMoneyService {
     this.moneyConfig = parseMoneyString(moneyString);
     this.fields = this.buildFields(this.moneyConfig);
     this.multiplier = this.getMultiplier();
+    // Value of each coin in integer units of the smallest coin, so consolidation never touches floats.
+    this.units = _.mapValues(this.moneyConfig, (coin) => Math.round(coin.multiplier * this.multiplier));
   }
 
   buildFields() {
@@ -19,46 +21,36 @@ export class OQMoneyService {
   }
 
   getMultiplier() {
-    const smaller = _.last(this.fields)?.multiplier;
-    if (smaller) {
-      const [, decNum] = smaller.toString().split('.');
-      if (decNum) return Math.pow(10, decNum.length);
-      else return 1;
-    }
+    const decimals = _.max(this.fields.map((field) => decimalPlaces(field.multiplier))) ?? 0;
+    return Math.pow(10, decimals);
   }
 
   consolidateFlat(amount) {
-    // eslint-disable-next-line no-unused-vars
-    const { remains, ...recalculated } = _.reduce(
-      this.fields,
-      (newMoney, coinsDef) => {
-        const { remains } = newMoney;
-        const amount = Math.floor(remains / (coinsDef.multiplier * this.multiplier));
-        const newRemains = Math.floor(remains % (coinsDef.multiplier * this.multiplier));
-        return _.merge(newMoney, {
-          [coinsDef.name]: { amount, label: coinsDef.label, multiplier: coinsDef.multiplier },
-          remains: newRemains,
-        });
-      },
-      { remains: amount * this.multiplier },
-    );
-    return _(recalculated)
-      .mapValues((elem, key) => ({ ...elem, name: key }))
-      .sortBy((elem) => -elem.multiplier)
-      .value();
+    return this.consolidateUnits(Math.round((amount || 0) * this.multiplier));
   }
 
   consolidate(money) {
-    const recalculated = _(money)
-      .mapValues((count, key) => {
-        const ref = this.moneyConfig[key];
-        return ref ? count * ref.multiplier : 0;
-      })
-      .values()
-      .reduce((left, right) => left + right);
+    const units = _(money)
+      .map((count, key) => Math.round((count || 0) * (this.units[key] ?? 0)))
+      .reduce((left, right) => left + right, 0);
 
-    return this.consolidateFlat(recalculated);
+    return this.consolidateUnits(units);
   }
+
+  consolidateUnits(units) {
+    let remains = units;
+    return this.fields.map((coin) => {
+      const unit = this.units[coin.name];
+      const amount = Math.floor(remains / unit);
+      remains = remains % unit;
+      return { ...coin, amount };
+    });
+  }
+}
+
+function decimalPlaces(number) {
+  const [, decimals = ''] = number.toString().split('.');
+  return decimals.length;
 }
 
 const moneyRe = /^(?<label>[\s\w]+)\s+\((?<abbrevation>\w+)\)\s*=\s*(?<multiplier>\d+(\.\d+)?)$/;
@@ -79,7 +71,7 @@ export function parseMoneyString(moneyString) {
     .map((part) => part.trim())
     .map(fromGroup)
     .filter((part) => !!part)
-    .sortBy((elem) => -elem.modifier)
+    .sortBy(([, coin]) => -coin.multiplier)
     .fromPairs()
     .value();
 }

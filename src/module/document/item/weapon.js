@@ -81,9 +81,7 @@ export class OQWeapon extends OQBaseItem {
 
     const { correspondingSkill, hands, encumbrance, rangeFormula, rate, cost, damage } = this.system;
     const parentSystem = this.parent?.system;
-    const skillName =
-      correspondingSkill?.skillReference &&
-      parentSystem?.groupedItems?.groupedSkillBySlug[correspondingSkill.skillReference];
+    const skillName = parentSystem?.skillsBySlug?.[correspondingSkill?.skillReference]?.name;
 
     const fields = [
       skillName && { label: `OQ.Labels.Skill`, value: skillName },
