@@ -149,9 +149,9 @@ export class CharacteristicsDialog extends foundry.appv1.api.FormApplication {
             class: ['oq'],
             speaker: ChatMessage.getSpeaker({ actor: this.object }),
           };
-          this.updatePoints(event);
           await createChatMessage(messageData);
           charsTable.find(`#char-${key}-base`).val(roll.total);
+          this.updatePoints(event);
         }
       } catch (e) {
         logError('Error during roll', e);

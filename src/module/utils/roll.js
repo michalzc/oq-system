@@ -5,7 +5,7 @@
  */
 
 import { minMaxValue } from './utils.js';
-import { createChatMessage } from './chat.js';
+import { createChatMessage, evaluateRoll } from './chat.js';
 
 /**
  * @typedef {Object} RollData
@@ -38,7 +38,7 @@ const renderTemplate = (...args) => foundry.applications.handlebars.renderTempla
  * @returns {Promise<void>}
  */
 export async function testRoll(rollData) {
-  const roll = await new Roll(CONFIG.OQ.RollConfig.baseRollFormula).roll();
+  const roll = await evaluateRoll(new Roll(CONFIG.OQ.RollConfig.baseRollFormula));
   const resultFeatures = getResultFeatures(roll);
   const totalValue = minMaxValue((rollData.value ?? 0) + (rollData.difficulty?.value ?? 0) + (rollData?.mod ?? 0));
 
@@ -142,7 +142,7 @@ export function getResultFeatures(roll) {
  */
 export async function damageRoll(rollData) {
   const damageFormula = rollData.customFormula ? rollData.customFormula : rollData.finalDamageFormula;
-  const roll = await new Roll(damageFormula, rollData.actorRollData).roll();
+  const roll = await evaluateRoll(new Roll(damageFormula, rollData.actorRollData));
   const renderedRoll = await roll.render();
   const content = await renderTemplate('systems/oq/templates/chat/parts/damage-roll.hbs', {
     ...rollData,

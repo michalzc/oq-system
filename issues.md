@@ -218,7 +218,7 @@ config. Findings were checked against the Foundry sources in the nix store (13.3
 - **Fix:** `data-system-type="resistance"`.
 - _verified_
 
-### [ ] A15. Rolling one characteristic recalculates points before writing the new value
+### [x] A15. Rolling one characteristic recalculates points before writing the new value
 
 - **Where:** `src/module/application/characteristics-dialog.js:152` (`rollCharacteristic`)
 - **Problem:** `updatePoints` runs before the rolled value is written into `#char-<key>-base`. Setting the value with
@@ -227,7 +227,7 @@ config. Findings were checked against the Foundry sources in the nix store (13.3
 - **Fix:** write the value first, then call `updatePoints`.
 - _verified_ (by reading)
 
-### [ ] A16. New skills get `"false"` as their custom type name
+### [x] A16. New skills get `"false"` as their custom type name
 
 - **Where:** `src/module/sheet/actor/actor-base-sheet.js:120` (`onAddNewItem`)
 - **Problem:** `systemType === custom && dataset.customTypeName` is `false` for every non-custom type, and `StringField`
@@ -237,7 +237,7 @@ config. Findings were checked against the Foundry sources in the nix store (13.3
 - **Fix:** `|| ''`, or only set `customTypeName` for the custom type.
 - _verified_ (`StringField#_cast` is `String(value)` in 14.368)
 
-### [ ] A17. Blind rolls can ask the roller for the dice
+### [x] A17. Blind rolls can ask the roller for the dice
 
 - **Where:** `src/module/utils/roll.js:41`, `:145`; `src/module/chat-handlers/chat-command-listener.js:9`
 - **Problem:** rolls are evaluated with `Roll#roll()` (default `allowInteractive: true`) before `createChatMessage`

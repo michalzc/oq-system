@@ -1,12 +1,12 @@
 import _ from 'lodash-es';
-import { createChatMessage } from '../utils/chat.js';
+import { createChatMessage, evaluateRoll } from '../utils/chat.js';
 
 const renderTemplate = foundry.applications.handlebars.renderTemplate;
 const ChatLog = foundry.applications.sidebar.tabs.ChatLog;
 
 async function sendAdjustMessage(rollString, type, chatData) {
   const actor = game.user.isGM ? _.head(canvas.tokens.controlled.map((token) => token.actor)) : game.user.character;
-  const roll = await new Roll(rollString, actor?.getRollData()).roll();
+  const roll = await evaluateRoll(new Roll(rollString, actor?.getRollData()));
   const renderedRoll = await roll.render();
   const content = await renderTemplate(CONFIG.OQ.ChatConfig.adjustmentTemplate, { roll, renderedRoll, type });
   const messageFlags = CONFIG.OQ.ChatConfig.MessageFlags;

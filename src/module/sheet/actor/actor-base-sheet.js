@@ -117,7 +117,7 @@ export class OQActorBaseSheet extends foundry.appv1.sheets.ActorSheet {
     const dataset = currentTarget.dataset;
     const type = dataset.type;
     const systemType = dataset.systemType;
-    const customTypeName = systemType === CONFIG.OQ.ItemConfig.skillTypes.custom && dataset.customTypeName;
+    const customTypeName = (systemType === CONFIG.OQ.ItemConfig.skillTypes.custom && dataset.customTypeName) || '';
     const typeLabel = `TYPES.Item.${type}`;
     const name = `${game.i18n.localize('OQ.Labels.New')} ${game.i18n.localize(typeLabel)}`;
     const itemData = {

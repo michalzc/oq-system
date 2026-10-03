@@ -2,6 +2,18 @@ import _ from 'lodash-es';
 
 const renderTemplate = (...args) => foundry.applications.handlebars.renderTemplate(...args);
 
+const messageMode = () => game.settings.get('core', 'messageMode');
+
+/**
+ * Evaluates a roll that will be posted with `createChatMessage`. Like core's `/broll`, a blind roll never asks the
+ * roller to enter the dice (manual or interactive dice fulfillment).
+ * @param {Roll} roll
+ * @returns {Promise<Roll>}
+ */
+export function evaluateRoll(roll) {
+  return roll.evaluate({ allowInteractive: messageMode() !== 'blind' });
+}
+
 /**
  * Creates a chat message with the visibility selected in the chat log (public, private to GMs, blind, self or in
  * character). Without the `messageMode` option core posts every message publicly.
@@ -9,7 +21,7 @@ const renderTemplate = (...args) => foundry.applications.handlebars.renderTempla
  * @returns {Promise<ChatMessage|undefined>}
  */
 export function createChatMessage(messageData) {
-  return ChatMessage.create(messageData, { messageMode: game.settings.get('core', 'messageMode'), chatBubble: false });
+  return ChatMessage.create(messageData, { messageMode: messageMode(), chatBubble: false });
 }
 
 /**
