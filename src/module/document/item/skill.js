@@ -1,17 +1,11 @@
 import { OQBaseItem } from './base-item.js';
-import _ from 'lodash-es';
 import { makeSlug, minMaxValue } from '../../utils/utils.js';
 
 export class OQSkill extends OQBaseItem {
   prepareDerivedData() {
     super.prepareDerivedData();
 
-    const extendedData = {
-      slug: makeSlug(this.name),
-      typeName: this.getTypeLabel(),
-    };
-
-    this.system = _.merge(this.system, extendedData);
+    Object.assign(this.system, { slug: makeSlug(this.name), typeName: this.getTypeLabel() });
   }
 
   getTypeLabel() {
@@ -58,9 +52,10 @@ export class OQSkill extends OQBaseItem {
   getTestRollData() {
     const context = super.getTestRollData();
 
-    return _.merge(context, {
+    return {
+      ...context,
       rollType: 'skill',
-    });
+    };
   }
 
   getItemDataForChat() {
@@ -68,8 +63,9 @@ export class OQSkill extends OQBaseItem {
     const { type, customTypeName } = this.system;
     const typeLabel = type === CONFIG.OQ.ItemConfig.skillTypes.custom ? customTypeName ?? '' : `OQ.SkillTypes.${type}`;
 
-    return _.merge(context, {
+    return {
+      ...context,
       itemSubtypeLabel: typeLabel,
-    });
+    };
   }
 }

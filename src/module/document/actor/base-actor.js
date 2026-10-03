@@ -1,9 +1,16 @@
 import _ from 'lodash-es';
 import { getDefaultItemsForActor } from '../../utils/compendium-utils.js';
 
+/**
+ * Writes derived values onto the prepared attribute objects, keeping their stored fields (`base`, `mod`, ...). Every
+ * derived key is assigned, even when `undefined`, so repeated data preparation never leaves stale values behind.
+ */
+function assignAttributes(attributes, derived) {
+  for (const [key, values] of Object.entries(derived)) Object.assign(attributes[key], values);
+}
+
 export class OQBaseActor extends Actor {
   static otherSkillsTypes = ['knowledge', 'practical', 'custom'];
-  static combatItems = ['weapon', 'armour'];
 
   static getDefaultArtwork(actorData) {
     const actorConfig = CONFIG.OQ.ActorConfig;
@@ -40,7 +47,7 @@ export class OQBaseActor extends Actor {
    */
   prepareBaseData() {
     super.prepareBaseData();
-    _.merge(this.system.attributes, this.calculateBaseAttributes());
+    assignAttributes(this.system.attributes, this.calculateBaseAttributes());
   }
 
   /**
@@ -64,7 +71,7 @@ export class OQBaseActor extends Actor {
    */
   prepareDerivedData() {
     super.prepareDerivedData();
-    _.merge(this.system.attributes, this.calculateItemDependentAttributes());
+    assignAttributes(this.system.attributes, this.calculateItemDependentAttributes());
   }
 
   /**
@@ -173,6 +180,6 @@ export class OQBaseActor extends Actor {
       return { value: (value ?? 0) + (mod ?? 0), name: initiativeItem.name };
     }
 
-    return { value: mod ?? 0 };
+    return { value: mod ?? 0, name: undefined };
   }
 }

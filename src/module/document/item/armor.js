@@ -1,5 +1,4 @@
 import { OQBaseItem } from './base-item.js';
-import _ from 'lodash-es';
 
 export class OQArmour extends OQBaseItem {
   getItemDataForChat() {
@@ -12,8 +11,9 @@ export class OQArmour extends OQBaseItem {
       encumbrance && { label: `OQ.Labels.Encumbrance`, value: encumbrance },
     ].filter((field) => !!field);
 
-    return _.merge(context, {
+    return {
+      ...context,
       fields,
-    });
+    };
   }
 }

@@ -516,7 +516,7 @@ version X until it is removed in version Y.
 
 ## E. Smaller cleanups
 
-- [ ] **E1. Data preparation isn't idempotent.** It uses `_.merge` everywhere:
+- [x] **E1. Data preparation isn't idempotent.** It uses `_.merge` everywhere:
   - `base-item.js:37`
   - `skill.js:14`
   - `equipment.js:40`
@@ -531,7 +531,7 @@ version X until it is removed in version Y.
   - The actor's `initiative.name` survives clearing the initiative reference.
 
   Assign the derived objects instead of merging them. `this.system = _.merge(...)` in `skill.js:14` is also redundant.
-- [ ] **E2. Dead or duplicated code:**
+- [x] **E2. Dead or duplicated code:**
   - `CharacteristicsParams` (`actors-config.js:40`): a second damage-modifier table using `'0'` where the live one uses
     `''`, plus a `FIXME`.
   - `BaseRollFormula` / `DifficultyLevels` / `RollResults` (`rolls-config.js:18-28`), which duplicate `RollConfig`.
@@ -542,12 +542,12 @@ version X until it is removed in version Y.
   - The unused second argument to `splitSkills` (`character-sheet.js:25`).
   - The lazy `renderTemplate` wrapper, defined twice (`chat.js:3`, `roll.js:33`); other modules still bind
     `renderTemplate` when they load.
-- [ ] **E3. Item chat helpers assume an owned item.** `getBaseRollData` / `getItemDataForChat` (`base-item.js:97`,
+- [x] **E3. Item chat helpers assume an owned item.** `getBaseRollData` / `getItemDataForChat` (`base-item.js:97`,
   `:140`) call `this.actor.token` and crash for world or compendium items. This is unreachable today, but will matter
   if the new item sheets get a "send to chat" button.
-- [ ] **E4. `EquipmentDataModel.state` initial value** uses `ItemConfig.armourStates.carried.key`
+- [x] **E4. `EquipmentDataModel.state` initial value** uses `ItemConfig.armourStates.carried.key`
   (`data-models-item.js:126`). It has the same value as the equipment state, but is a copy-paste slip.
-- [ ] **E5. `onUpdateItemAdv`:** `parseInt(...) ?? 0` (`actor-base-sheet.js:183`) — `parseInt` never returns
+- [x] **E5. `onUpdateItemAdv`:** `parseInt(...) ?? 0` (`actor-base-sheet.js:183`) — `parseInt` never returns
   null/undefined, so the `?? 0` does nothing. The `isNaN` check is what actually guards.
 - [ ] **E6. Chat commands:**
   - `canvas.tokens.controlled` throws when the canvas is disabled (`chat-command-listener.js:8`,

@@ -176,7 +176,7 @@ export class OQActorBaseSheet extends foundry.appv1.sheets.ActorSheet {
     const itemContainer = targetElem.closest('.item');
     const item = this.actor.items.get(itemContainer?.dataset?.itemId);
     if (item) {
-      const value = parseInt(targetElem.value) ?? 0;
+      const value = parseInt(targetElem.value);
       if (!isNaN(value)) {
         if (value < 0) {
           const rollData = item.getTestRollData();

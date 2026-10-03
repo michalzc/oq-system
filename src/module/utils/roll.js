@@ -4,7 +4,7 @@
  * @property {number} value
  */
 
-import { minMaxValue } from './utils.js';
+import { minMaxValue, renderTemplate } from './utils.js';
 import { createChatMessage, evaluateRoll } from './chat.js';
 
 /**
@@ -28,9 +28,6 @@ const TestRollTemplates = {
   specialAbility: 'systems/oq/templates/chat/parts/skill-ability-roll.hbs',
   weapon: 'systems/oq/templates/chat/parts/weapon-roll.hbs',
 };
-
-// Resolved at call time: `foundry` does not exist yet when this module is evaluated.
-const renderTemplate = (...args) => foundry.applications.handlebars.renderTemplate(...args);
 
 /**
  * Performs test roll

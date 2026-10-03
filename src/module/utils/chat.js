@@ -1,6 +1,4 @@
-import _ from 'lodash-es';
-
-const renderTemplate = (...args) => foundry.applications.handlebars.renderTemplate(...args);
+import { renderTemplate } from './utils.js';
 
 const messageMode = () => game.settings.get('core', 'messageMode');
 
@@ -49,12 +47,7 @@ export function createChatMessage(messageData) {
  */
 export async function displayItem(itemData) {
   const traits = (itemData.traits ?? []).join(', ');
-  const content = await renderTemplate(
-    CONFIG.OQ.ChatConfig.itemTemplate,
-    _.merge(itemData, {
-      traits,
-    }),
-  );
+  const content = await renderTemplate(CONFIG.OQ.ChatConfig.itemTemplate, { ...itemData, traits });
   await createChatMessage({
     speaker: itemData.speaker,
     style: CONST.CHAT_MESSAGE_STYLES.IC,

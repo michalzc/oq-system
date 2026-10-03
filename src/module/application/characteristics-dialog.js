@@ -1,10 +1,9 @@
 import _ from 'lodash-es';
 import { logError } from '../utils/logger.js';
-import { withCharacteristicLabels } from '../utils/utils.js';
+import { renderTemplate, withCharacteristicLabels } from '../utils/utils.js';
 import { createChatMessage } from '../utils/chat.js';
 
 const mergeObject = foundry.utils.mergeObject;
-const renderTemplate = foundry.applications.handlebars.renderTemplate;
 
 export class CharacteristicsDialog extends foundry.appv1.api.FormApplication {
   static get defaultOptions() {

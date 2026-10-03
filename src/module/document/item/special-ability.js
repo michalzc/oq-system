@@ -1,5 +1,4 @@
 import { OQBaseItem } from './base-item.js';
-import _ from 'lodash-es';
 import { minMaxValue } from '../../utils/utils.js';
 
 export class OQSpecialAbility extends OQBaseItem {
@@ -33,15 +32,17 @@ export class OQSpecialAbility extends OQBaseItem {
 
   getTestRollData() {
     const context = super.getTestRollData();
-    return _.merge(context, {
+    return {
+      ...context,
       rollType: 'specialAbility',
-    });
+    };
   }
 
   getItemDataForChat() {
     const context = super.getItemDataForChat();
-    return _.merge(context, {
+    return {
+      ...context,
       itemSubtypeLabel: `OQ.Labels.SpecialAbilityTypes.${this.system.type}`,
-    });
+    };
   }
 }

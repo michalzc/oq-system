@@ -1,14 +1,9 @@
 import { OQBaseActor } from './base-actor.js';
-import _ from 'lodash-es';
 
 export class OQCharacterActor extends OQBaseActor {
   prepareDerivedData() {
     super.prepareDerivedData();
-    const enc = this.prepareEncumbrance();
-
-    _.merge(this.system, {
-      enc,
-    });
+    this.system.enc = this.prepareEncumbrance();
   }
 
   prepareEncumbrance() {

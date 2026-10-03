@@ -1,7 +1,7 @@
 import _ from 'lodash-es';
 import { createChatMessage, evaluateRoll } from '../utils/chat.js';
+import { renderTemplate } from '../utils/utils.js';
 
-const renderTemplate = foundry.applications.handlebars.renderTemplate;
 const ChatLog = foundry.applications.sidebar.tabs.ChatLog;
 
 async function sendAdjustMessage(rollString, type, chatData) {
