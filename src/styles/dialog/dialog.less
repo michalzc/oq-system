@@ -1,6 +1,6 @@
 @import '../variables';
 
-.oq.dialog {
+.oq.oq-dialog {
   .dialog-header {
     margin: 0;
     padding: 10px 5px 5px;
@@ -11,7 +11,16 @@
     h1,
     h2 {
       border: 0;
+      color: inherit;
     }
+  }
+
+  .dialog-form {
+    gap: 0;
+  }
+
+  .form-footer {
+    padding: 5px;
   }
 
   .dialog-body {
@@ -81,17 +90,6 @@
         width: 100%;
       }
     }
-
-    .roll-buttons {
-      margin-top: 1em;
-      display: flex;
-      flex-direction: row;
-      gap: 1em;
-
-      * {
-        flex: 1;
-      }
-    }
   }
 
   .npc {
@@ -111,21 +109,16 @@
     }
   }
 
-  .npc.dialog-form {
+  .actor-dialog.short-description {
     display: flex;
+    flex: 1;
     flex-direction: column;
+    min-height: 0;
+    padding: 5px;
 
-    .dialog-body.short-description {
-      display: flex;
+    .editor {
       flex: 1;
-      flex-direction: column;
-      justify-content: stretch;
-      align-content: stretch;
-
-      .editor {
-        flex: 1;
-        font-size: var(--font-size-14);
-      }
+      font-size: var(--font-size-14);
     }
   }
 }

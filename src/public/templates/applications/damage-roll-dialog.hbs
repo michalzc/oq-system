@@ -1,4 +1,4 @@
-<form class="{{cssClasses}} {{type}}" autocomplete="off">
+<div class="roll-dialog {{type}}">
   <div class="dialog-header">
     <h1>{{ entityName }}</h1>
   </div>
@@ -13,12 +13,14 @@
       {{/if}}
     </div>
     <div class="roll-params">
-      <label for="customFormula">{{ localize 'OQ.Dialog.CustomFormula' }}</label>
-      <input id="customFormula" type="text" data-dtype="String" name="customformula" class="custom-formula" value="{{customformula}}">
-    </div>
-    <div class="roll-buttons">
-      <button class="roll-button" type="submit"><i class="fas fa-dice"></i> {{ localize 'OQ.Dialog.Roll' }}</button>
-      <button class="cancel-button"><i class="fas fa-cancel"></i> {{ localize 'OQ.Dialog.Cancel'}}</button>
+      <label for="{{rootId}}-customFormula">{{ localize 'OQ.Dialog.CustomFormula' }}</label>
+      <input id="{{rootId}}-customFormula" type="text" data-dtype="String" name="customFormula" class="custom-formula"
+             value="{{customFormula}}" autofocus>
+
+      <label for="{{rootId}}-messageMode">{{ localize 'OQ.Dialog.MessageMode' }}</label>
+      <select name="messageMode" id="{{rootId}}-messageMode">
+        {{selectOptions messageModes selected=messageMode localize=true }}
+      </select>
     </div>
   </div>
-</form>
+</div>

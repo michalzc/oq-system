@@ -1,39 +1,28 @@
-import _ from 'lodash-es';
-export class OQNPCShortDescriptionEdit extends foundry.appv1.api.FormApplication {
-  static get defaultOptions() {
-    const options = super.defaultOptions;
+import { OQActorDialog } from './actor-dialog.js';
 
-    return _.merge(options, {
-      classes: ['oq', 'dialog', 'npc'],
-      width: 600,
-      height: 400,
-      id: 'short-description',
+export class OQNPCShortDescriptionEdit extends OQActorDialog {
+  static DEFAULT_OPTIONS = {
+    classes: ['short-description'],
+    position: { width: 600, height: 400 },
+    window: { resizable: true },
+  };
+
+  static PARTS = {
+    form: {
       template: 'systems/oq/templates/applications/short-description-dialog.hbs',
-      resizable: true,
-    });
-  }
+    },
+  };
 
   get title() {
-    return `${game.i18n.localize('OQ.Dialog.ShortDescription.title')} ${this.object.name}`;
+    return `${game.i18n.localize('OQ.Dialog.ShortDescription.title')} ${this.actor.name}`;
   }
 
-  constructor(object, options) {
-    super(object, options);
-  }
-
-  async _updateObject(event, formData) {
-    await this.object.update({
-      ...formData,
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    // Saving the editor submits the form. The editor also saves when it's removed, which must not submit a closing
+    // dialog.
+    this.element.querySelector('prose-mirror').addEventListener('save', () => {
+      if (this.rendered) this.form.requestSubmit();
     });
-  }
-
-  async getData() {
-    const shortDescription = this.object.system.personal.shortDescription;
-    const enrichedDescription = await foundry.applications.ux.TextEditor.implementation.enrichHTML(shortDescription);
-
-    return {
-      enrichedDescription,
-      type: 'npc',
-    };
   }
 }

@@ -1,54 +1,22 @@
-import _ from 'lodash-es';
-import { damageRoll } from '../utils/roll.js';
+import { openRollDialog } from './roll-dialog.js';
 
-export class OQDamageRollDialog extends foundry.appv1.api.FormApplication {
-  static get defaultOptions() {
-    const options = super.defaultOptions;
+/**
+ * Asks for the formula and the message mode of a damage roll.
+ * @param {DamageRollData} rollData
+ * @returns {Promise<{customFormula: string, messageMode: string}|null>} null if the dialog was cancelled or closed
+ */
+export async function promptDamageRoll(rollData) {
+  const formula = rollData.includeDM
+    ? `${rollData.damageFormula} ${rollData.actorRollData.dm}`
+    : rollData.damageFormula;
 
-    return _.merge(options, {
-      classes: ['oq', 'dialog', 'roll'],
-      width: 400,
-      id: 'roll-damage-dialog',
-      template: 'systems/oq/templates/applications/damage-roll-dialog.hbs',
-    });
-  }
+  const formData = await openRollDialog({
+    title: `${game.i18n.localize('OQ.Labels.DamageRoll')}: ${rollData.entityName}`,
+    template: 'systems/oq/templates/applications/damage-roll-dialog.hbs',
+    context: { ...rollData, customFormula: new Roll(formula).formula },
+  });
+  if (!formData) return null;
 
-  activateListeners(html) {
-    html.find('.cancel-button').on('click', this.onCancel.bind(this));
-  }
-
-  onCancel(event) {
-    event.preventDefault();
-    this.close();
-  }
-
-  getData(options) {
-    const context = super.getData(options);
-    const rollData = this.object;
-    const formula = rollData.includeDM
-      ? `${rollData.damageFormula} ${rollData.actorRollData.dm}`
-      : rollData.damageFormula;
-    const customformula = new Roll(formula).formula;
-    return _.merge(context, {
-      ...rollData,
-      customformula,
-    });
-  }
-
-  async _updateObject(event, formData) {
-    const customFormula = formData.customformula;
-    if (customFormula) {
-      const rollData = this.object;
-
-      await damageRoll(_.merge(rollData, { customFormula }));
-    }
-  }
-
-  async _render(force, options) {
-    await super._render(force, options);
-    setTimeout(() => {
-      const inputField = $(this.form).find('#customFormula');
-      inputField.select();
-    }, 50);
-  }
+  const { customFormula, messageMode } = formData;
+  return { customFormula, messageMode };
 }

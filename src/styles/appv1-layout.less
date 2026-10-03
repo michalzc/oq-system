@@ -1,0 +1,29 @@
+// The actor sheets and the dialogs were designed in AppV1 windows, which get core's content styles
+// (`body.game .app`). AppV2 windows don't, so the ones these layouts rely on are restored here. `:where` keeps them
+// at the lowest specificity, so the sheet and dialog styles override them like they did core's.
+:where(.oq.sheet.actor, .oq.oq-dialog) {
+  --input-height: @item-row-height;
+
+  :where(.window-content) {
+    h1 {
+      margin: 0 0 0.5rem;
+      font-size: 2em;
+      border-bottom: 2px solid @header-underline-color;
+    }
+
+    h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1.5em;
+      border-bottom: 1px solid @header-underline-color;
+    }
+
+    input[type='text'],
+    input[type='number'] {
+      padding: 1px 3px;
+    }
+
+    .flexrow {
+      align-items: initial;
+    }
+  }
+}

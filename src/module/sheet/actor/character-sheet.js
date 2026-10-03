@@ -64,8 +64,7 @@ export class OQCharacterSheet extends OQActorBaseSheet {
   static onModifyCharacteristics(event) {
     event.preventDefault();
     if (!this.isEditable) return;
-    const characteristicsDialog = new CharacteristicsDialog(this.actor);
-    characteristicsDialog.render(true);
+    return CharacteristicsDialog.open(this.actor);
   }
 
   static async onConsolidateMoney(event) {

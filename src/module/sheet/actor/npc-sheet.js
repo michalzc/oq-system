@@ -54,11 +54,9 @@ export class OQNpcSheet extends OQActorBaseSheet {
     await this.actor.update(characteristicsToUpdate);
   }
 
-  static async onEditShortDescription(event) {
+  static onEditShortDescription(event) {
     event.preventDefault();
     if (!this.isEditable) return;
-
-    const dialog = new OQNPCShortDescriptionEdit(this.actor);
-    dialog.render(true);
+    return OQNPCShortDescriptionEdit.open(this.actor);
   }
 }

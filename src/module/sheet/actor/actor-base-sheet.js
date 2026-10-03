@@ -155,8 +155,7 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
   static onModifyAttributes(event) {
     event.preventDefault();
     if (!this.isEditable) return;
-    const attributesDialog = new AttributesDialog(this.actor);
-    attributesDialog.render(true);
+    return AttributesDialog.open(this.actor);
   }
 
   async onUpdateItemAdv(event) {

@@ -1,6 +1,6 @@
-<form class="{{cssClass}} {{type}}" autocomplete="off">
+<div class="actor-dialog {{actor.type}}">
   <header class="dialog-header">
-    <h1>{{name}}</h1>
+    <h1>{{actor.name}}</h1>
   </header>
   <section class="dialog-body">
     <h2>{{ localize 'OQ.Labels.Attributes' }}</h2>
@@ -8,20 +8,25 @@
       <label></label>
       <label>{{ localize 'OQ.Dialog.Mod' }}</label>
 
-      <label for="hpMod">{{ localize 'OQ.Labels.AttributesNames.hp.label'}}</label>
-      <input id="hpMod" type="number" data-dtype="Number" name="attributes.hp.mod" value="{{system.attributes.hp.mod}}">
+      <label for="{{rootId}}-hpMod">{{ localize 'OQ.Labels.AttributesNames.hp.label'}}</label>
+      <input id="{{rootId}}-hpMod" type="number" data-dtype="Number" name="system.attributes.hp.mod"
+             value="{{system.attributes.hp.mod}}">
 
-      <label for="mpMod">{{ localize 'OQ.Labels.AttributesNames.mp.label'}}</label>
-      <input id="mpMod" type="number" data-dtype="Number" name="attributes.mp.mod" value="{{system.attributes.mp.mod}}">
+      <label for="{{rootId}}-mpMod">{{ localize 'OQ.Labels.AttributesNames.mp.label'}}</label>
+      <input id="{{rootId}}-mpMod" type="number" data-dtype="Number" name="system.attributes.mp.mod"
+             value="{{system.attributes.mp.mod}}">
 
-      <label for="dmMod">{{ localize 'OQ.Labels.AttributesNames.dm.label'}}</label>
-      <input id="dmMod" type="text" data-dtype="String" name="attributes.dm.mod" value="{{system.attributes.dm.mod}}">
+      <label for="{{rootId}}-dmMod">{{ localize 'OQ.Labels.AttributesNames.dm.label'}}</label>
+      <input id="{{rootId}}-dmMod" type="text" data-dtype="String" name="system.attributes.dm.mod"
+             value="{{system.attributes.dm.mod}}">
 
-      <label for="mrMod">{{ localize 'OQ.Labels.AttributesNames.mr.label'}}</label>
-      <input id="mrMod" type="number" data-dtype="Number" name="attributes.mr.mod" value="{{system.attributes.mr.mod}}">
+      <label for="{{rootId}}-mrMod">{{ localize 'OQ.Labels.AttributesNames.mr.label'}}</label>
+      <input id="{{rootId}}-mrMod" type="number" data-dtype="Number" name="system.attributes.mr.mod"
+             value="{{system.attributes.mr.mod}}">
 
-      <label for="apMod">{{ localize 'OQ.Labels.AttributesNames.ap.label'}}</label>
-      <input id="apMod" type="number" data-dtype="Number" name="attributes.ap.mod" value="{{system.attributes.ap.mod}}">
+      <label for="{{rootId}}-apMod">{{ localize 'OQ.Labels.AttributesNames.ap.label'}}</label>
+      <input id="{{rootId}}-apMod" type="number" data-dtype="Number" name="system.attributes.ap.mod"
+             value="{{system.attributes.ap.mod}}">
 
     </div>
   </section>
@@ -31,4 +36,4 @@
       <button type="reset" class="reset"><i class="fas fa-cancel"></i> {{ localize 'OQ.Dialog.Reset' }} </button>
     </div>
   </section>
-</form>
+</div>

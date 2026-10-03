@@ -1,67 +1,30 @@
 import _ from 'lodash-es';
-import { testRoll } from '../utils/roll.js';
+import { openRollDialog } from './roll-dialog.js';
 
-export class OQTestRollDialog extends foundry.appv1.api.FormApplication {
-  constructor(object, options) {
-    super(object, options);
-    this.difficultyLevels = CONFIG.OQ.RollConfig.difficultyLevels;
-    this.rollData = object;
-  }
+/**
+ * Asks for the difficulty, the other modifiers and the message mode of a test roll.
+ * @param {RollData} rollData
+ * @returns {Promise<{difficulty: Difficulty|undefined, mod: number|null, messageMode: string}|null>} null if the
+ *   dialog was cancelled or closed
+ */
+export async function promptTestRoll(rollData) {
+  const difficultyLevels = CONFIG.OQ.RollConfig.difficultyLevels;
+  const difficulties = _.mapValues(
+    difficultyLevels,
+    (value, key) => `${game.i18n.localize(`OQ.Labels.DifficultyLevels.${key}`)} (${value}%)`,
+  );
 
-  static get defaultOptions() {
-    const options = super.defaultOptions;
+  const formData = await openRollDialog({
+    title: `${game.i18n.localize('OQ.Labels.Roll')}: ${rollData.entityName}`,
+    template: 'systems/oq/templates/applications/test-roll-dialog.hbs',
+    context: { ...rollData, difficulties, defaultDifficulty: 'normal' },
+  });
+  if (!formData) return null;
 
-    return _.merge(options, {
-      classes: ['oq', 'dialog', 'roll'],
-      width: 400,
-      id: 'roll-test-dialog',
-      template: 'systems/oq/templates/applications/test-roll-dialog.hbs',
-    });
-  }
-
-  activateListeners(html) {
-    html.find('.cancel-button').on('click', this.onCancel.bind(this));
-  }
-
-  async onCancel(event) {
-    event.preventDefault();
-    await this.close();
-  }
-
-  getData(options = {}) {
-    const context = super.getData(options);
-    const defaultDifficulty = 'normal';
-    const difficulties = _.fromPairs(
-      _.keys(this.difficultyLevels).map((key) => [
-        key,
-        `${game.i18n.localize(`OQ.Labels.DifficultyLevels.${key}`)} (${this.difficultyLevels[key]}%)`,
-      ]),
-    );
-
-    return _.merge(context, {
-      ...this.rollData,
-      difficulties,
-      defaultDifficulty,
-    });
-  }
-
-  async _updateObject(event, formData) {
-    const difficultyKey = formData.difficulty;
-    const difficulty = difficultyKey && { key: difficultyKey, value: this.difficultyLevels[difficultyKey] };
-    const mod = formData.mod;
-    await testRoll(
-      _.merge(this.rollData, {
-        difficulty,
-        mod,
-      }),
-    );
-  }
-
-  async _render(force, options) {
-    await super._render(force, options);
-    setTimeout(() => {
-      const inputField = $(this.form).find('#modifier');
-      inputField.select();
-    }, 50);
-  }
+  const { difficulty: difficultyKey, mod, messageMode } = formData;
+  return {
+    difficulty: difficultyKey && { key: difficultyKey, value: difficultyLevels[difficultyKey] },
+    mod,
+    messageMode,
+  };
 }
