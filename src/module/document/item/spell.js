@@ -3,27 +3,6 @@ import _ from 'lodash-es';
 import { inRangeValue } from '../../utils/utils.js';
 
 export class OQSpell extends OQBaseItem {
-  async _preUpdate(changed, options, user) {
-    //FIXME: refactor to common utility
-    await super._preUpdate(changed, options, user);
-
-    const changedSpellType = changed.system?.type;
-    const currentImage = this.img;
-    const spellIcons = CONFIG.OQ.ItemConfig.spellIcons;
-    const newImage = spellIcons[changedSpellType];
-
-    if (
-      changedSpellType &&
-      changedSpellType !== this.system.type &&
-      _.includes(_.values(spellIcons), currentImage) &&
-      newImage
-    ) {
-      _.merge(changed, {
-        img: spellIcons[changedSpellType],
-      });
-    }
-  }
-
   getItemDataForChat() {
     const context = super.getItemDataForChat();
     return { ...context, traits: [...this.getTraits()], itemSubtypeLabel: `OQ.Labels.SpellTypes.${this.system.type}` };

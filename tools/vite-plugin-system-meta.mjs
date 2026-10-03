@@ -19,7 +19,7 @@ export function systemMeta() {
   return {
     name: 'system-meta',
     async buildStart() {
-      for (const name of ['system.yaml', 'template.yaml']) this.addWatchFile(resolve(SRC, name));
+      this.addWatchFile(resolve(SRC, 'system.yaml'));
       this.addWatchFile(resolve(LANG));
       for (const n of await langYamls()) this.addWatchFile(resolve(LANG, n));
       // Public assets are copied by Vite but are not part of the module graph.
@@ -30,13 +30,11 @@ export function systemMeta() {
       }
     },
     async generateBundle() {
-      for (const name of ['system', 'template']) {
-        this.emitFile({
-          type: 'asset',
-          fileName: `${name}.json`,
-          source: toJson(await readFile(join(SRC, `${name}.yaml`), 'utf8')),
-        });
-      }
+      this.emitFile({
+        type: 'asset',
+        fileName: 'system.json',
+        source: toJson(await readFile(join(SRC, 'system.yaml'), 'utf8')),
+      });
       for (const n of await langYamls()) {
         this.emitFile({
           type: 'asset',

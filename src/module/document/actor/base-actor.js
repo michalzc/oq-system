@@ -56,7 +56,7 @@ export class OQBaseActor extends Actor {
 
     // Actor#hierarchy covers items and effects - the latter have no ordering requirements.
     this.effects.forEach((effect) => effect._safePrepareData());
-    this.applyActiveEffects();
+    this.applyActiveEffects('initial');
   }
 
   /**

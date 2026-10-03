@@ -3,10 +3,11 @@ import { log } from './utils/logger.js';
 import { oqGame } from './utils/oq-game.js';
 import { preloadTemplates } from './init/preload-templates.js';
 import { registerCustomHookHandlers } from './init/custom-hook-handlers.js';
+import { registerChatCommands } from './chat-handlers/chat-command-listener.js';
 import { registerDataModels } from './init/register-data-models.js';
 import { registerDocuments } from './init/register-documents.js';
 import { registerHelpers } from './init/handlebar-helpers.js';
-import { registerSettings, registerLateSettings } from './init/register-settings.js';
+import { registerSettings } from './init/register-settings.js';
 import { buildMoneyService } from './utils/money.js';
 import '../styles/oq.less';
 
@@ -20,6 +21,7 @@ async function init() {
 
   registerHelpers();
   registerCustomHookHandlers();
+  registerChatCommands();
   registerSettings();
 
   await preloadTemplates();
@@ -31,7 +33,8 @@ async function init() {
 
 async function ready() {
   log('Ready');
-  registerLateSettings();
+  // The coins setting requires a reload, so checking once here covers every change to it.
+  if (game.user.isGM && !game.oq.moneyService?.fields.length) ui.notifications.warn('Invalid money configuration!');
 }
 
 async function setup() {

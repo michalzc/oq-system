@@ -1,6 +1,7 @@
 import _ from 'lodash-es';
 import { logError } from '../utils/logger.js';
 import { withCharacteristicLabels } from '../utils/utils.js';
+import { createChatMessage } from '../utils/chat.js';
 
 const mergeObject = foundry.utils.mergeObject;
 const renderTemplate = foundry.applications.handlebars.renderTemplate;
@@ -117,7 +118,7 @@ export class CharacteristicsDialog extends foundry.appv1.api.FormApplication {
           speaker: ChatMessage.getSpeaker({ actor: this.object }),
         };
 
-        await ChatMessage.create(messageData);
+        await createChatMessage(messageData);
 
         _.forIn(rolls, (roll, key) => {
           $(characteristicsBlock).find(`#char-${key}-base`).val(roll.total);
@@ -149,7 +150,7 @@ export class CharacteristicsDialog extends foundry.appv1.api.FormApplication {
             speaker: ChatMessage.getSpeaker({ actor: this.object }),
           };
           this.updatePoints(event);
-          await ChatMessage.create(messageData);
+          await createChatMessage(messageData);
           charsTable.find(`#char-${key}-base`).val(roll.total);
         }
       } catch (e) {

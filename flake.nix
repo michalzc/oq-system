@@ -11,14 +11,14 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      yarn = pkgs.yarn.override { nodejs = pkgs.nodejs_22; };
+      yarn = pkgs.yarn.override { nodejs = pkgs.nodejs_24; };
       env = foundry-dev.lib.mkFoundryEnvironment {
         inherit system;
         foundry = {
-          version = "13.351";
-          sha256 = "sha256-BWxKwTqjVQwzY0euV0/oWEXKVM7cYWdCfjBihRNsqQA=";
+          version = "14.368";
+          sha256 = "sha256-SL5GxqPSTjE7k+1DNvwAcCgQfB70odihyREWFnMORsA=";
         };
-        nodejsMajor = 22;
+        nodejsMajor = 24;
         port = 32000;
         extraPackages = [ yarn ];
         development = {

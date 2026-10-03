@@ -44,7 +44,7 @@
         <div>{{ localize 'OQ.SkillTypes.resistance'}}</div>
         <a class="add-new-item"
            data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'OQ.SkillTypes.resistance' }}" data-type="skill"
-           data-group="combat"><i class="fas fa-plus"></i></a>
+           data-system-type="resistance"><i class="fas fa-plus"></i></a>
       </div>
       {{#each groupedItems.resistances as |skill|}}
         {{> systems/oq/templates/actor/parts/skill.hbs skill}}

@@ -3,27 +3,6 @@ import _ from 'lodash-es';
 import { minMaxValue, mostSignificantModifier } from '../../utils/utils.js';
 
 export class OQWeapon extends OQBaseItem {
-  async _preUpdate(changed, options, user) {
-    //FIXME: refactor to common utility
-    await super._preUpdate(changed, options, user);
-
-    const changedWeaponType = changed.system?.type;
-    const currentImage = this.img;
-    const weaponIcons = CONFIG.OQ.ItemConfig.weaponIcons;
-    const newImage = weaponIcons[changedWeaponType];
-
-    if (
-      changedWeaponType &&
-      changedWeaponType !== this.system.type &&
-      _.includes(_.values(weaponIcons), currentImage) &&
-      newImage
-    ) {
-      _.merge(changed, {
-        img: weaponIcons[changedWeaponType],
-      });
-    }
-  }
-
   calculateDamageRollValues() {
     if (this.parent) {
       const damage = this.system.damage;

@@ -82,13 +82,11 @@ export class OQActorBaseSheet extends foundry.appv1.sheets.ActorSheet {
   }
 
   statusMenu(element, statuses, selector) {
-    const elems = _.values(
-      _.mapValues(statuses, (elem, key) => ({
-        icon: elem.icon,
-        callback: this.onItemUpdateState.bind(this, key),
-        name: game.i18n.localize(`OQ.Labels.ItemStates.${key}`),
-      })),
-    );
+    const elems = _.map(statuses, (elem, key) => ({
+      label: `OQ.Labels.ItemStates.${key}`,
+      icon: elem.icon,
+      onClick: (event, target) => this.onItemUpdateState(key, target),
+    }));
 
     // appv1 sheets hand activateListeners a jQuery object, ContextMenu wants the raw element.
     const container = element instanceof HTMLElement ? element : element[0];

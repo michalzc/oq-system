@@ -1,5 +1,6 @@
 import { ItemConfig } from '../consts/items-config.js';
 import _ from 'lodash-es';
+import { renameLegacyField } from '../utils/utils.js';
 
 const fields = foundry.data.fields;
 
@@ -19,7 +20,32 @@ function encumbranceModel() {
   return new fields.NumberField({ min: 0, integer: false, initial: 0 });
 }
 
-export class SkillDataModel extends foundry.abstract.DataModel {
+class OQItemDataModel extends foundry.abstract.TypeDataModel {
+  /**
+   * Item images by `type`. When the type changes, an item still showing one of these images switches to the image of
+   * the new type; a custom image is kept.
+   * Read from `CONFIG` on each update, so a world script replacing the maps is respected.
+   * @type {Record<string, string>|null}
+   */
+  static get typeIcons() {
+    return null;
+  }
+
+  /* override */
+  async _preUpdate(changes, options, user) {
+    const allowed = await super._preUpdate(changes, options, user);
+    if (allowed === false) return false;
+
+    const icons = this.constructor.typeIcons;
+    const newType = changes.system?.type;
+    const newIcon = icons?.[newType];
+    if (newIcon && newType !== this.type && Object.values(icons).includes(this.parent.img)) {
+      changes.img = newIcon;
+    }
+  }
+}
+
+export class SkillDataModel extends OQItemDataModel {
   static defineSchema() {
     return {
       description: htmlFieldModel(),
@@ -31,24 +57,18 @@ export class SkillDataModel extends foundry.abstract.DataModel {
     };
   }
 
-  static migrateData(source) {
-    const group = source.group;
-    const customGroupName = source.customGroupName;
-    const updatedSource =
-      group || customGroupName
-        ? _.merge(source, {
-            group: null,
-            customGroupName: null,
-            type: group,
-            customTypeName: customGroupName,
-          })
-        : source;
-
-    return super.migrateData(updatedSource);
+  static migrateData(source, options) {
+    renameLegacyField(source, 'group', 'type');
+    renameLegacyField(source, 'customGroupName', 'customTypeName');
+    return super.migrateData(source, options);
   }
 }
 
-export class WeaponDataModel extends foundry.abstract.DataModel {
+export class WeaponDataModel extends OQItemDataModel {
+  static get typeIcons() {
+    return CONFIG.OQ.ItemConfig.weaponIcons;
+  }
+
   static defineSchema() {
     return {
       description: htmlFieldModel(),
@@ -88,16 +108,13 @@ export class WeaponDataModel extends foundry.abstract.DataModel {
     };
   }
 
-  static migrateData(source) {
-    if (source.weaponType !== undefined) {
-      _.merge(source, {
-        type: source.weaponType,
-      });
-    }
+  static migrateData(source, options) {
+    renameLegacyField(source, 'weaponType', 'type');
+    return super.migrateData(source, options);
   }
 }
 
-export class ArmorDataModel extends foundry.abstract.DataModel {
+export class ArmorDataModel extends OQItemDataModel {
   static defineSchema() {
     return {
       ap: positiveNumberModel(true, 0),
@@ -114,7 +131,11 @@ export class ArmorDataModel extends foundry.abstract.DataModel {
   }
 }
 
-export class EquipmentDataModel extends foundry.abstract.DataModel {
+export class EquipmentDataModel extends OQItemDataModel {
+  static get typeIcons() {
+    return CONFIG.OQ.ItemConfig.equipmentIcons;
+  }
+
   static defineSchema() {
     return {
       description: htmlFieldModel(),
@@ -140,16 +161,19 @@ export class EquipmentDataModel extends foundry.abstract.DataModel {
     };
   }
 
-  static migrateData(source) {
-    if (source.consumable !== undefined) {
-      _.merge(source, {
-        type: source.consumable ? ItemConfig.equipmentTypes.consumable : ItemConfig.equipmentTypes.single,
-      });
-    }
+  static migrateData(source, options) {
+    renameLegacyField(source, 'consumable', 'type', (consumable) =>
+      consumable ? ItemConfig.equipmentTypes.consumable : ItemConfig.equipmentTypes.single,
+    );
+    return super.migrateData(source, options);
   }
 }
 
-export class SpellDataModel extends foundry.abstract.DataModel {
+export class SpellDataModel extends OQItemDataModel {
+  static get typeIcons() {
+    return CONFIG.OQ.ItemConfig.spellIcons;
+  }
+
   static defineSchema() {
     return {
       magnitude: positiveNumberModel(),
@@ -181,7 +205,7 @@ export class SpellDataModel extends foundry.abstract.DataModel {
   }
 }
 
-export class SpecialAbilityDataModel extends foundry.abstract.DataModel {
+export class SpecialAbilityDataModel extends OQItemDataModel {
   static defineSchema() {
     return {
       description: htmlFieldModel(),

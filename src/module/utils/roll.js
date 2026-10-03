@@ -5,6 +5,7 @@
  */
 
 import { minMaxValue } from './utils.js';
+import { createChatMessage } from './chat.js';
 
 /**
  * @typedef {Object} RollData
@@ -67,7 +68,7 @@ export async function testRoll(rollData) {
     content: messageContent,
     flags: flags,
   };
-  await ChatMessage.create(messageData);
+  await createChatMessage(messageData);
 }
 
 /**
@@ -160,5 +161,5 @@ export async function damageRoll(rollData) {
       },
     },
   };
-  await ChatMessage.create(messageData);
+  await createChatMessage(messageData);
 }

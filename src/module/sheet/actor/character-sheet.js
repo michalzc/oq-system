@@ -38,16 +38,7 @@ export class OQCharacterSheet extends OQActorBaseSheet {
   prepareMoney() {
     const money = this.actor.system.personal.money ?? {};
     const fields = game.oq.moneyService?.fields ?? [];
-    if (fields) {
-      return _(fields)
-        .map((field) => ({
-          ...field,
-          amount: money[field.name] ?? 0,
-        }))
-        .value();
-    } else {
-      ui.notifications.warning('Invalid money configuration!');
-    }
+    return fields.map((field) => ({ ...field, amount: money[field.name] ?? 0 }));
   }
 
   getSpellsPerType() {
