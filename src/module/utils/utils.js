@@ -57,3 +57,14 @@ function withLabels(values, localizationPrefix) {
     abbr: `${localizationPrefix}.${key}.abbr`,
   }));
 }
+
+/**
+ * Moves a legacy field to its new key in `migrateData` source. Legacy keys stay in the database until the document is
+ * rewritten, so the new key wins once it is set - otherwise every load would overwrite later edits.
+ */
+export function renameLegacyField(source, oldKey, newKey, convert = (value) => value) {
+  if (!(oldKey in source)) return;
+  const value = source[oldKey];
+  if (source[newKey] === undefined && value != null) source[newKey] = convert(value);
+  delete source[oldKey];
+}

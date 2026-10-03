@@ -1,5 +1,6 @@
 import { ItemConfig } from '../consts/items-config.js';
 import _ from 'lodash-es';
+import { renameLegacyField } from '../utils/utils.js';
 
 const fields = foundry.data.fields;
 
@@ -31,20 +32,10 @@ export class SkillDataModel extends foundry.abstract.DataModel {
     };
   }
 
-  static migrateData(source) {
-    const group = source.group;
-    const customGroupName = source.customGroupName;
-    const updatedSource =
-      group || customGroupName
-        ? _.merge(source, {
-            group: null,
-            customGroupName: null,
-            type: group,
-            customTypeName: customGroupName,
-          })
-        : source;
-
-    return super.migrateData(updatedSource);
+  static migrateData(source, options) {
+    renameLegacyField(source, 'group', 'type');
+    renameLegacyField(source, 'customGroupName', 'customTypeName');
+    return super.migrateData(source, options);
   }
 }
 
@@ -88,12 +79,9 @@ export class WeaponDataModel extends foundry.abstract.DataModel {
     };
   }
 
-  static migrateData(source) {
-    if (source.weaponType !== undefined) {
-      _.merge(source, {
-        type: source.weaponType,
-      });
-    }
+  static migrateData(source, options) {
+    renameLegacyField(source, 'weaponType', 'type');
+    return super.migrateData(source, options);
   }
 }
 
@@ -140,12 +128,11 @@ export class EquipmentDataModel extends foundry.abstract.DataModel {
     };
   }
 
-  static migrateData(source) {
-    if (source.consumable !== undefined) {
-      _.merge(source, {
-        type: source.consumable ? ItemConfig.equipmentTypes.consumable : ItemConfig.equipmentTypes.single,
-      });
-    }
+  static migrateData(source, options) {
+    renameLegacyField(source, 'consumable', 'type', (consumable) =>
+      consumable ? ItemConfig.equipmentTypes.consumable : ItemConfig.equipmentTypes.single,
+    );
+    return super.migrateData(source, options);
   }
 }
 
