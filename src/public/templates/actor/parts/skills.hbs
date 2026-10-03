@@ -4,9 +4,11 @@
       <div class="item-group">
         <div class="item label">
           <div>{{ localize skillGroup.label }}{{#if skillGroup.totalAdvancements}} ({{skillGroup.totalAdvancements}}){{/if}}</div>
-          <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize skillGroup.label }}"
-             data-type="skill" data-system-type="{{ skillGroup.type }}" data-custom-type-name="{{ skillGroup.label }}">
-            <i class="fas fa-plus"></i></a>
+          {{#if @root.editable}}
+            <a class="add-new-item" data-action="addItem" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize skillGroup.label }}"
+               data-type="skill" data-system-type="{{ skillGroup.type }}" data-custom-type-name="{{ skillGroup.label }}">
+              <i class="fas fa-plus"></i></a>
+          {{/if}}
         </div>
         {{#each skillGroup.skills as |skill|}}
           {{> systems/oq/templates/actor/parts/skill.hbs skill}}
@@ -20,9 +22,11 @@
       <div class="item-group">
         <div class="item label">
           <div>{{ localize skillGroup.label }}{{#if skillGroup.totalAdvancements}} ({{skillGroup.totalAdvancements}}){{/if}}</div>
-          <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize skillGroup.label }}"
-             data-type="skill" data-system-type="{{ skillGroup.type }}" data-custom-type-name="{{ skillGroup.label }}">
-            <i class="fas fa-plus"></i></a>
+          {{#if @root.editable}}
+            <a class="add-new-item" data-action="addItem" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize skillGroup.label }}"
+               data-type="skill" data-system-type="{{ skillGroup.type }}" data-custom-type-name="{{ skillGroup.label }}">
+              <i class="fas fa-plus"></i></a>
+          {{/if}}
         </div>
         {{#each skillGroup.skills as |skill|}}
           {{> systems/oq/templates/actor/parts/skill.hbs skill}}
@@ -33,9 +37,11 @@
     <div class="item-group">
       <div class="item label">
         <div>{{ localize 'OQ.Labels.SpecialAbilities'}}</div>
-        <a class="add-new-item"
-           data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.specialAbility' }}"
-           data-type="specialAbility" data-system-type="general"><i class="fas fa-plus"></i></a>
+        {{#if @root.editable}}
+          <a class="add-new-item" data-action="addItem"
+             data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.specialAbility' }}"
+             data-type="specialAbility" data-system-type="general"><i class="fas fa-plus"></i></a>
+        {{/if}}
       </div>
       {{#each groupedItems.abilities as |ability|}}
         {{> systems/oq/templates/actor/parts/ability.hbs ability}}

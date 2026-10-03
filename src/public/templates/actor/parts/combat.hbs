@@ -5,8 +5,10 @@
     <div class="item-group">
       <div class="item label">
         <div>{{ localize 'OQ.Labels.Weapons'}}</div>
-        <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.weapon' }}"
-           data-type="weapon"><i class="fas fa-plus"></i></a>
+        {{#if @root.editable}}
+          <a class="add-new-item" data-action="addItem" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.weapon' }}"
+             data-type="weapon"><i class="fas fa-plus"></i></a>
+        {{/if}}
       </div>
     </div>
     {{#each groupedItems.weaponsBySkills as |skillWithWeapons|}}
@@ -22,8 +24,10 @@
     <div class="item-group">
       <div class="item label">
         <div>{{ localize 'OQ.Labels.EquipmentTypes.ammunition'}}</div>
-        <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'OQ.Labels.EquipmentTypes.ammunition' }}"
-           data-type="equipment" data-system-type="ammunition"><i class="fas fa-plus"></i></a>
+        {{#if @root.editable}}
+          <a class="add-new-item" data-action="addItem" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'OQ.Labels.EquipmentTypes.ammunition' }}"
+             data-type="equipment" data-system-type="ammunition"><i class="fas fa-plus"></i></a>
+        {{/if}}
       </div>
       {{#each groupedItems.equipmentByType.ammunition as |ammunition|}}
         {{> systems/oq/templates/actor/parts/equipment.hbs ammunition}}
@@ -42,9 +46,11 @@
     <div class="item-group">
       <div class="item label">
         <div>{{ localize 'OQ.SkillTypes.resistance'}}</div>
-        <a class="add-new-item"
-           data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'OQ.SkillTypes.resistance' }}" data-type="skill"
-           data-system-type="resistance"><i class="fas fa-plus"></i></a>
+        {{#if @root.editable}}
+          <a class="add-new-item" data-action="addItem"
+             data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'OQ.SkillTypes.resistance' }}" data-type="skill"
+             data-system-type="resistance"><i class="fas fa-plus"></i></a>
+        {{/if}}
       </div>
       {{#each groupedItems.resistances as |skill|}}
         {{> systems/oq/templates/actor/parts/skill.hbs skill}}
@@ -54,8 +60,10 @@
     <div class="item-group">
       <div class="item label">
         <div>{{ localize 'OQ.Labels.Armours'}}</div>
-        <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.armour' }}"
-           data-type="armour"><i class="fas fa-plus"></i></a>
+        {{#if @root.editable}}
+          <a class="add-new-item" data-action="addItem" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.armour' }}"
+             data-type="armour"><i class="fas fa-plus"></i></a>
+        {{/if}}
       </div>
       {{#each groupedItems.armours as |armour|}}
         {{> systems/oq/templates/actor/parts/armour.hbs armour}}
@@ -65,9 +73,11 @@
     <div class="item-group">
       <div class="item label">
         <div>{{ localize 'OQ.Labels.Abilities'}}</div>
-        <a class="add-new-item"
-           data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.specialAbility' }}"
-           data-type="specialAbility" data-system-type="combat"><i class="fas fa-plus"></i></a>
+        {{#if @root.editable}}
+          <a class="add-new-item" data-action="addItem"
+             data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.specialAbility' }}"
+             data-type="specialAbility" data-system-type="combat"><i class="fas fa-plus"></i></a>
+        {{/if}}
       </div>
       {{#each groupedItems.combatAbilities as |ability|}}
         {{> systems/oq/templates/actor/parts/ability.hbs ability}}

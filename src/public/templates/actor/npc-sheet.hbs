@@ -1,13 +1,16 @@
-<form class="actor-sheet npc-sheet {{cssClass}} flexcol" autocomplete="off">
+<div class="actor-sheet npc-sheet flexcol">
   <header class="sheet-header">
-    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="64" height="64"
+    <img class="profile-img" src="{{actor.img}}" {{#if editable}}data-action="editImage"{{/if}} data-edit="img" title="{{actor.name}}" width="64" height="64"
       alt="{{actor.name}}">
     <div class="header-fields">
       <input class="name" type="text" data-dtype="String" name="name" value="{{actor.name}}"
         placeholder="{{ localize 'OQ.Labels.Name' }}" title="{{enrichedShortDescription}}">
       <div class="short-description">
         <div>{{{ enrichedShortDescription }}}</div>
-        <button class="show-short-description-dialog" type="button"><i class="fas fa-edit"></i></button>
+        {{#if editable}}
+        <button class="show-short-description-dialog" type="button" data-action="editShortDescription"><i
+            class="fas fa-edit"></i></button>
+        {{/if}}
       </div>
     </div>
 
@@ -21,15 +24,18 @@
       <div class="characteristics-list">
         {{#each characteristics as |char key| }}
         <div class="characteristic">
-          <label for="char{{ key }}" data-tooltip="{{ localize char.label }}" class="characteristic-label">{{ localize
+          <label for="{{@root.rootId}}-char-{{ key }}" data-tooltip="{{ localize char.label }}" class="characteristic-label">{{ localize
             char.abbr }}</label>
-          <input id="char{{ key }}" type="number" data-dtype="Number" name="system.characteristics.{{key}}.base"
+          <input id="{{@root.rootId}}-char-{{ key }}" type="number" data-dtype="Number" name="system.characteristics.{{key}}.base"
             data-tooltip="{{ localize char.label }}" class="characteristic-value" value="{{char.value}}">
           <input class="characteristic-roll" name="system.characteristics.{{key}}.roll" type="text" data-dtype="String"
             data-tooltip="{{ localize char.label}} {{ localize 'OQ.Hints.RollFormula' }}" value="{{char.roll}}">
         </div>
         {{/each}}
-        <a class="roll-characteristics" data-tooltip="{{ localize 'OQ.Hints.RollAll' }}"><i class="fas fa-dice"></i></a>
+        {{#if editable}}
+        <a class="roll-characteristics" data-action="rollCharacteristics" data-tooltip="{{ localize 'OQ.Hints.RollAll' }}"><i
+            class="fas fa-dice"></i></a>
+        {{/if}}
       </div>
 
     </div>
@@ -39,14 +45,17 @@
 
   </section>
 
-  <nav class="sheet-tabs tabs" data-group="primary">
-    <a class="item" data-tab="details">{{ localize 'OQ.Nav.Details' }}</a>
-    <a class="item" data-tab="description">{{ localize 'OQ.Nav.Description' }}</a>
+  <nav class="sheet-tabs tabs">
+    {{#each tabs as |tab|}}
+    <a class="item {{tab.cssClass}}" data-action="tab" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+      {{localize tab.label}}
+    </a>
+    {{/each}}
   </nav>
 
   <section class="sheet-content">
 
-    <div class="tab" data-group="primary" data-tab="details">
+    <div class="tab {{tabs.details.cssClass}}" data-group="primary" data-tab="details">
 
       <div class="two-columns">
 
@@ -139,14 +148,15 @@
     </div>
 
 
-    <div class="tab" data-group="primary" data-tab="description">
-      {{editor enrichedDescription target="system.personal.description" id="description"
-      engine="prosemirror"
-      button=true editable=true}}
+    <div class="tab {{tabs.description.cssClass}}" data-group="primary" data-tab="description">
+      <prose-mirror name="system.personal.description" value="{{system.personal.description}}" toggled
+        data-document-uuid="{{actor.uuid}}" {{#unless editable}}disabled{{/unless}}>
+        {{{enrichedDescription}}}
+      </prose-mirror>
     </div>
   </section>
 
   <section class="sheet-footer">
     <div class="sheet-hint">{{ localize 'OQ.Hints.ItemRollHint' }}</div>
   </section>
-</form>
+</div>

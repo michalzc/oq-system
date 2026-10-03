@@ -1,13 +1,15 @@
-<div class="item item-to-drag" draggable="true" data-item-id="{{ id }}">
-  <a class="item-to-chat">
+<div class="item draggable" data-item-id="{{ id }}">
+  <a class="item-to-chat" data-action="itemToChat">
     <img class="item-icon" src="{{img}}" data-tooltip="{{localize 'OQ.Tooltips.SendToChat'}}" alt="{{name}}">
   </a>
-  <a class="item-roll spell{{#if this.expended}}-expanded{{/if}}" data-tooltip="{{lookup @root.itemTooltips id}}" data-tooltip-direction="LEFT">
+  <a class="item-roll spell{{#if this.expended}}-expanded{{/if}}" data-action="rollItem" data-tooltip-html="{{lookup @root.itemTooltips id}}" data-tooltip-direction="LEFT">
     {{name}}
     {{#unless system.nonVariant}}
       [{{#if hasSplitDivineCasting}}{{system.remainingMagnitude}}/{{/if}}{{system.magnitude}}]
     {{/unless}}
   </a>
-  <a class="item-edit"><i class="fas fa-edit"></i></a>
-  <a class="item-delete"><i class="fas fa-trash"></i></a>
+  <a class="item-edit" data-action="editItem"><i class="fas fa-edit"></i></a>
+  {{#if @root.editable}}
+    <a class="item-delete" data-action="deleteItem"><i class="fas fa-trash"></i></a>
+  {{/if}}
 </div>

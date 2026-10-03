@@ -461,11 +461,33 @@ version X until it is removed in version Y.
     Validated on Foundry 14.368: all six types, conditional fields, world and actor-owned item saving, traits and focus,
     rich-text saving and enriched links, image picking, spell expenditure and remaining magnitude, simultaneous sheets,
     and read-only controls/actions/secret descriptions. Lint, build and all 36 unit tests pass.
-  - [ ] **Part 2 — ActorSheets:** `foundry.applications.sheets.ActorSheetV2` with `HandlebarsApplicationMixin`.
+  - [x] **Part 2 — ActorSheets:** both actor sheets use `foundry.applications.sheets.ActorSheetV2` with
+    `HandlebarsApplicationMixin`, `DEFAULT_OPTIONS`, `PARTS`, `TABS` and `_prepareContext`. The active tab survives
+    re-renders and its scroll position is preserved. The default document form handler saves on change; notes and the
+    NPC description use the native `prose-mirror` element and portraits use core's `editImage` action.
+    Actor-sheet jQuery and redundant re-renders are removed (actor portions of C2 and C5). Clicks are actions; the
+    embedded-item inputs (advancement, quantity) have no `name`, so guarded form-change handlers update the item and
+    the actor form never submits them. HP/MP adjust with left/right click through a `buttons: [0, 2]` action, and the
+    quantity buttons stop at 0. Item-state menus are bound once in `_onFirstRender`. Item rows use core's drag and drop
+    (`.draggable`, `toDragData`, `_onDropItem` sorts instead of copying on the same actor); the recursive folder import
+    is kept as an `_onDropFolder` override (C6). Edit controls are hidden for read-only viewers and their actions check
+    `isEditable`; rolls and chat cards need ownership; viewers can still open item sheets read-only (C9). Item
+    description tooltips use `data-tooltip-html`. Field ids are scoped to each sheet.
+    The actor sheets retain the light parchment theme (C8). AppV2 windows don't get core's AppV1 content styles, so the
+    ones the layout relied on are restored on `.oq.sheet.actor`: field height, input padding, heading underline,
+    `.flexrow` alignment and tab spacing.
+    Validated on Foundry 14.368 against screenshots of the AppV1 sheets: both actor types and all tabs, header, attribute,
+    characteristic, money and initiative fields, HP/MP adjustment and clamping, skill advancement (including a negative
+    entry setting the total), quantity, item states, adding, editing and deleting items, test and damage rolls with and
+    without dialogs, send to chat, the attributes, characteristics and short-description dialogs, money consolidation,
+    NPC characteristic rolls, rich-text saving and enriched links, world, compendium, same-sheet and folder drops,
+    unlinked token sheets, focus and scroll restoration, and read-only controls and actions. Lint, build and all 36
+    unit tests pass.
   - [ ] Forms and dialogs → `ApplicationV2`, or `foundry.applications.api.DialogV2.input/prompt` for the simple ones:
     test-roll, damage-roll, attributes, characteristics, short description.
 - [ ] **C2. Remove jQuery.** It is used throughout: `html.find(...).on(...)`, `$(...).closest(...).data()`, and
   `$(this.form).find(...)`. Replace it with `static DEFAULT_OPTIONS.actions` (`data-action`) and `_onRender` listeners.
+  The item and actor sheets are done (C1 parts 1 and 2); the dialogs remain.
 - [ ] **C3. Remove the `setTimeout` focus and reset hacks:**
   - `damage-roll-dialog.js:49`
   - `test-roll-dialog.js:63`
@@ -477,20 +499,26 @@ version X until it is removed in version Y.
   `short-description`, `roll-damage-dialog`, `roll-test-dialog`), so opening them for two actors collides. AppV2 needs
   unique ids, e.g. `` `attributes-${actor.id}` ``.
 - [ ] **C5. Drop the redundant re-renders.** Several handlers call `this.render(true)` after `document.update()` (5
-  places); document updates already re-render the sheet.
-- [ ] **C6. Drag and drop.** Use the `DocumentSheetV2` drag/drop handlers (`_onDropItem`, `_onDropFolder`). Keep the
+  places); document updates already re-render the sheet. The sheet ones are removed (C1 parts 1 and 2); left:
+  `attributes-dialog.js:40` and `characteristics-dialog.js:162`.
+- [x] **C6. Drag and drop.** Use the `DocumentSheetV2` drag/drop handlers (`_onDropItem`, `_onDropFolder`). Keep the
   recursive folder import from `_onDropFolder` (`actor-base-sheet.js:104`) as a small override if it's still wanted.
   See A4.
+  - **Done** in C1 part 2: the actor sheets use the `ActorSheetV2` handlers, and `_onDropFolder` keeps the recursive
+    import of Item folders.
 - [ ] **C7. Form handling.** AppV1 `_updateObject(event, formData)` with `update({system: formData})` becomes
   `form.handler` / `submitOnChange`. Field names should use full `system.*` paths so the default document submit works.
+  The sheets are done (C1 parts 1 and 2); the attributes, characteristics and short-description dialogs remain.
 - [ ] **C8. Theming.** AppV2 sheets follow the user's colour scheme (dark by default), whereas AppV1 windows are forced
   to light. The styles (`src/styles`, ~1.4k lines of LESS) hard-code a light palette over `sheetbg.webp` and don't use
   CSS layers.
   - Either force a light sheet theme, or define theme tokens and support both.
   - Consider shipping the CSS in a `@layer` (system.json `styles: [{src, layer}]`).
-- [ ] **C9. Listeners bound for read-only viewers.** The NPC sheet binds `.roll-characteristics` and
+- [x] **C9. Listeners bound for read-only viewers.** The NPC sheet binds `.roll-characteristics` and
   `.show-short-description-dialog` even when the sheet isn't editable (`npc-sheet.js:28`). The base sheet binds the
   roll/chat listeners before the `isEditable` check. Use `actions` plus permission checks in the new sheets.
+  - **Done** in C1 part 2: editing actions check `isEditable` and their controls are hidden; rolls and chat cards
+    check ownership.
 - [ ] **C10. Redesign the combat tracker.** The current tracker is a placeholder: core's tracker with the OQ changes
   patched into the DOM in `_onRender` (B5). Rethink how OQ combat should work, then reimplement the tracker properly.
   - First decide whether OQ's combat flow fits core's turn order. If it does, extend `CombatTracker` (`PARTS`, context

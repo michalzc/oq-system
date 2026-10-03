@@ -7,12 +7,15 @@
       <div class="money">
         {{#each money as |coins|}}
           <div class="coins">
-            <label for="{{coins.name}}" data-tooltip="{{coins.label}}">{{coins.name}}</label>
-            <input id="{{coins.name}}" class="mod-value" type="number" data-dtype="Number"
+            <label for="{{@root.rootId}}-money-{{coins.name}}" data-tooltip="{{coins.label}}">{{coins.name}}</label>
+            <input id="{{@root.rootId}}-money-{{coins.name}}" class="mod-value" type="number" data-dtype="Number"
                    name="system.personal.money.{{coins.name}}" value="{{coins.amount}}">
           </div>
         {{/each}}
-        <a class="consolidate-money" data-tooltip="{{ localize 'OQ.Labels.ConsolidateMoney' }}"><i class="fa fa-coins"></i></a>
+        {{#if @root.editable}}
+          <a class="consolidate-money" data-action="consolidateMoney"
+             data-tooltip="{{ localize 'OQ.Labels.ConsolidateMoney' }}"><i class="fa fa-coins"></i></a>
+        {{/if}}
       </div>
 
     </div>
@@ -26,8 +29,10 @@
   <div class="item-group">
     <div class="item label">
       <div>{{ localize 'OQ.Labels.Weapons'}}</div>
-      <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.weapon' }}"
-         data-type="weapon"><i class="fas fa-plus"></i></a>
+      {{#if @root.editable}}
+        <a class="add-new-item" data-action="addItem" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.weapon' }}"
+           data-type="weapon"><i class="fas fa-plus"></i></a>
+      {{/if}}
     </div>
     {{#each groupedItems.weapons as |weapon|}}
       {{> systems/oq/templates/actor/parts/weapon.hbs weapon id=weapon.id showEq=true}}
@@ -37,8 +42,10 @@
   <div class="item-group">
     <div class="item label">
       <div>{{ localize 'OQ.Labels.Armours'}}</div>
-      <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.armour' }}"
-         data-type="armour"><i class="fas fa-plus"></i></a>
+      {{#if @root.editable}}
+        <a class="add-new-item" data-action="addItem" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.armour' }}"
+           data-type="armour"><i class="fas fa-plus"></i></a>
+      {{/if}}
     </div>
     {{#each groupedItems.armours as |armour|}}
       {{> systems/oq/templates/actor/parts/armour.hbs armour id=armour.id showEq=true}}
@@ -49,8 +56,10 @@
     <div class="item-group">
       <div class="item label">
         <div>{{ localize (concat 'OQ.Labels.EquipmentTypes.' key)}}</div>
-        <a class="add-new-item" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.equipment' }}"
-           data-type="equipment" data-system-type="{{key}}"><i class="fas fa-plus"></i></a>
+        {{#if @root.editable}}
+          <a class="add-new-item" data-action="addItem" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize 'TYPES.Item.equipment' }}"
+             data-type="equipment" data-system-type="{{key}}"><i class="fas fa-plus"></i></a>
+        {{/if}}
       </div>
       {{#each equipmentGroup as |equipment|}}
         {{> systems/oq/templates/actor/parts/equipment.hbs equipment id=equipment.id showEq=true}}

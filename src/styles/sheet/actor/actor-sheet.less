@@ -1,7 +1,40 @@
+.oq.sheet.actor {
+  // Field sizes, headings and the portrait frame came from core's AppV1 window styles.
+  --input-height: @item-row-height;
+
+  h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.5em;
+    border-bottom: 1px solid @header-underline-color;
+  }
+
+  input[type='text'],
+  input[type='number'] {
+    padding: 1px 3px;
+  }
+
+  .flexrow {
+    align-items: initial;
+  }
+
+  nav.sheet-tabs {
+    justify-content: space-around;
+    gap: 0;
+    margin: 4px 0;
+    line-height: unset;
+
+    [data-tab] {
+      padding: 8px 12px;
+    }
+  }
+}
+
 .oq.sheet {
   .actor-sheet {
     display: flex;
+    flex: 1;
     flex-direction: column;
+    min-height: 0;
     overflow: hidden;
 
     .sheet-header {
@@ -18,7 +51,8 @@
 
       .profile-img {
         flex: 0;
-        border-color: @base-color;
+        border: 1px solid @base-color;
+        border-radius: 2px;
         width: 128px;
         height: 128px;
       }
@@ -81,7 +115,9 @@
     }
 
     .sheet-content {
+      flex: 1;
       align-content: flex-start;
+      min-height: 0;
       overflow: hidden;
 
       .tab[data-tab].active {
@@ -148,7 +184,7 @@
             .item-to-chat {
               flex-grow: 0;
               flex-shrink: 0;
-              flex-basis: 16px;
+              flex-basis: @item-row-height;
             }
 
             .item-name {

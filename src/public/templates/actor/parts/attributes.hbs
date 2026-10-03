@@ -4,24 +4,26 @@
 
   <div class="attributes-grid">
 
-    <label for="hp" class="resource-update" data-resource-id="hp"
+    <label for="{{rootId}}-hp" class="resource-update" data-action="adjustResource" data-resource-id="hp"
            data-tooltip="{{ localize attributes.hp.label}}">{{ localize attributes.hp.abbr}}</label>
     <div class="value">
-      <input id="hp" type="number" data-dtype="Number" name="system.attributes.hp.value"
+      <input id="{{rootId}}-hp" type="number" data-dtype="Number" name="system.attributes.hp.value"
              value="{{system.attributes.hp.value}}">
       <div>&nbsp;/&nbsp{{system.attributes.hp.max}}</div>
     </div>
 
-    <label for="mp" class="resource-update" data-resource-id="mp"
+    <label for="{{rootId}}-mp" class="resource-update" data-action="adjustResource" data-resource-id="mp"
            data-tooltip="{{ localize attributes.mp.label}}">{{ localize attributes.mp.abbr}}</label>
     <div class="value">
-      <input id="mp" type="number" data-dtype="Number" name="system.attributes.mp.value"
+      <input id="{{rootId}}-mp" type="number" data-dtype="Number" name="system.attributes.mp.value"
              value="{{system.attributes.mp.value}}">
       <div>&nbsp;/&nbsp{{system.attributes.mp.max}}</div>
     </div>
 
-    <a class="modify-attributes" data-tooltip="{{ localize 'OQ.Labels.EditAttributes' }}"><i
-      class="fas fa-gear"></i></a>
+    {{#if editable}}
+      <a class="modify-attributes" data-action="modifyAttributes"
+         data-tooltip="{{ localize 'OQ.Labels.EditAttributes' }}"><i class="fas fa-gear"></i></a>
+    {{/if}}
 
 
     <div class="wide">
@@ -41,14 +43,14 @@
 
 
     {{#if isCharacter}}
-      <label for="fp" data-tooltip="{{ localize attributes.fn.label }}">{{ localize
+      <label for="{{rootId}}-fp" data-tooltip="{{ localize attributes.fn.label }}">{{ localize
         attributes.fn.abbr }}</label>
-      <div class="value"><input id="fp" type="number" name="system.attributes.fn.value"
+      <div class="value"><input id="{{rootId}}-fp" type="number" name="system.attributes.fn.value"
                                 value="{{system.attributes.fn.value}}">
       </div>
-      <label for="gp" data-tooltip="{{ localize attributes.gr.label }}">{{ localize
+      <label for="{{rootId}}-gp" data-tooltip="{{ localize attributes.gr.label }}">{{ localize
         attributes.gr.abbr }}</label>
-      <div class="value"><input id="gp" type="number" name="system.attributes.gr.value"
+      <div class="value"><input id="{{rootId}}-gp" type="number" name="system.attributes.gr.value"
                                 value="{{system.attributes.gr.value}}">
       </div>
     {{/if}}
