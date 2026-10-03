@@ -20,7 +20,29 @@ function encumbranceModel() {
   return new fields.NumberField({ min: 0, integer: false, initial: 0 });
 }
 
-export class SkillDataModel extends foundry.abstract.DataModel {
+class OQItemDataModel extends foundry.abstract.TypeDataModel {
+  /**
+   * Item images by `type`. When the type changes, an item still showing one of these images switches to the image of
+   * the new type; a custom image is kept.
+   * @type {Record<string, string>|null}
+   */
+  static typeIcons = null;
+
+  /* override */
+  async _preUpdate(changes, options, user) {
+    const allowed = await super._preUpdate(changes, options, user);
+    if (allowed === false) return false;
+
+    const icons = this.constructor.typeIcons;
+    const newType = changes.system?.type;
+    const newIcon = icons?.[newType];
+    if (newIcon && newType !== this.type && Object.values(icons).includes(this.parent.img)) {
+      changes.img = newIcon;
+    }
+  }
+}
+
+export class SkillDataModel extends OQItemDataModel {
   static defineSchema() {
     return {
       description: htmlFieldModel(),
@@ -39,7 +61,9 @@ export class SkillDataModel extends foundry.abstract.DataModel {
   }
 }
 
-export class WeaponDataModel extends foundry.abstract.DataModel {
+export class WeaponDataModel extends OQItemDataModel {
+  static typeIcons = ItemConfig.weaponIcons;
+
   static defineSchema() {
     return {
       description: htmlFieldModel(),
@@ -85,7 +109,7 @@ export class WeaponDataModel extends foundry.abstract.DataModel {
   }
 }
 
-export class ArmorDataModel extends foundry.abstract.DataModel {
+export class ArmorDataModel extends OQItemDataModel {
   static defineSchema() {
     return {
       ap: positiveNumberModel(true, 0),
@@ -102,7 +126,9 @@ export class ArmorDataModel extends foundry.abstract.DataModel {
   }
 }
 
-export class EquipmentDataModel extends foundry.abstract.DataModel {
+export class EquipmentDataModel extends OQItemDataModel {
+  static typeIcons = ItemConfig.equipmentIcons;
+
   static defineSchema() {
     return {
       description: htmlFieldModel(),
@@ -136,7 +162,9 @@ export class EquipmentDataModel extends foundry.abstract.DataModel {
   }
 }
 
-export class SpellDataModel extends foundry.abstract.DataModel {
+export class SpellDataModel extends OQItemDataModel {
+  static typeIcons = ItemConfig.spellIcons;
+
   static defineSchema() {
     return {
       magnitude: positiveNumberModel(),
@@ -168,7 +196,7 @@ export class SpellDataModel extends foundry.abstract.DataModel {
   }
 }
 
-export class SpecialAbilityDataModel extends foundry.abstract.DataModel {
+export class SpecialAbilityDataModel extends OQItemDataModel {
   static defineSchema() {
     return {
       description: htmlFieldModel(),

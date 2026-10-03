@@ -2,32 +2,6 @@ import { OQBaseItem } from './base-item.js';
 import _ from 'lodash-es';
 
 export class OQEquipment extends OQBaseItem {
-  async _preUpdate(changed, options, user) {
-    //FIXME: refactor to common utility
-    await super._preUpdate(changed, options, user);
-
-    const changedEquipmentType = changed.system?.type;
-    const currentImage = this.img;
-    const equipmentImages = CONFIG.OQ.ItemConfig.equipmentIcons;
-    const newImage = equipmentImages[changedEquipmentType];
-
-    if (
-      changedEquipmentType &&
-      changedEquipmentType !== this.system.type &&
-      _.includes(_.values(equipmentImages), currentImage) &&
-      newImage
-    ) {
-      _.merge(changed, {
-        img: newImage,
-      });
-    }
-  }
-
-  getNewImage(source) {
-    const imageByType = CONFIG.OQ.ItemConfig.equipmentIcons[source.system?.type];
-    return imageByType ?? CONFIG.OQ.ItemConfig.equipmentIcons.single;
-  }
-
   prepareBaseData() {
     super.prepareBaseData();
     const countTypes = [CONFIG.OQ.ItemConfig.equipmentTypes.ammunition, CONFIG.OQ.ItemConfig.equipmentTypes.consumable];
