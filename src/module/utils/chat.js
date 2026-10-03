@@ -9,7 +9,7 @@ const renderTemplate = (...args) => foundry.applications.handlebars.renderTempla
  * @returns {Promise<ChatMessage|undefined>}
  */
 export function createChatMessage(messageData) {
-  return ChatMessage.create(messageData, { messageMode: game.settings.get('core', 'messageMode') });
+  return ChatMessage.create(messageData, { messageMode: game.settings.get('core', 'messageMode'), chatBubble: false });
 }
 
 /**

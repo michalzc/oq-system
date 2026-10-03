@@ -33,6 +33,8 @@ async function init() {
 
 async function ready() {
   log('Ready');
+  // The coins setting requires a reload, so checking once here covers every change to it.
+  if (game.user.isGM && !game.oq.moneyService?.fields.length) ui.notifications.warn('Invalid money configuration!');
 }
 
 async function setup() {

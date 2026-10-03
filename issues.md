@@ -10,7 +10,7 @@ theming (C8). Porting on v14 means writing the new sheets once, against the fina
    1. ~~B13 — Node 24 and Foundry 14 in `flake.nix`; check that the build toolchain runs on Node 24.~~
    2. ~~B8 and B10 together, so every item type has a `TypeDataModel` schema and `template.json` can go.~~
    3. ~~B12~~, ~~B6 (core part: `messageMode`)~~, ~~B11~~, ~~B5~~, ~~B9~~.
-   4. Raise the minimum compatible version to 14 and test in a v14 world.
+   4. ~~Raise the minimum compatible version to 14 and test in a v14 world.~~
 2. **AppV2 port on v14** — C, folding in E. AppV1 and AppV2 sheets can be registered side by side, so this can ship
    in pieces:
    1. The six item sheets — they share a base class and are the simplest.
@@ -217,6 +217,35 @@ config. Findings were checked against the Foundry sources in the nix store (13.3
   `data-system-type="resistance"`.
 - **Fix:** `data-system-type="resistance"`.
 - _verified_
+
+### [ ] A15. Rolling one characteristic recalculates points before writing the new value
+
+- **Where:** `src/module/application/characteristics-dialog.js:152` (`rollCharacteristic`)
+- **Problem:** `updatePoints` runs before the rolled value is written into `#char-<key>-base`. Setting the value with
+  `.val()` fires no `change` event, so spent/remaining points stay calculated from the old value until another input
+  changes. `rollAllCharacteristics` (`:127`) does it in the right order.
+- **Fix:** write the value first, then call `updatePoints`.
+- _verified_ (by reading)
+
+### [ ] A16. New skills get `"false"` as their custom type name
+
+- **Where:** `src/module/sheet/actor/actor-base-sheet.js:120` (`onAddNewItem`)
+- **Problem:** `systemType === custom && dataset.customTypeName` is `false` for every non-custom type, and `StringField`
+  stores it as the string `"false"`. Every "add" button except the custom-group one does this, including both
+  resistance buttons. If such a skill is later switched to the custom type, its name field is prefilled with "false" and
+  it is grouped under a "false" heading.
+- **Fix:** `|| ''`, or only set `customTypeName` for the custom type.
+- _verified_ (`StringField#_cast` is `String(value)` in 14.368)
+
+### [ ] A17. Blind rolls can ask the roller for the dice
+
+- **Where:** `src/module/utils/roll.js:41`, `:145`; `src/module/chat-handlers/chat-command-listener.js:9`
+- **Problem:** rolls are evaluated with `Roll#roll()` (default `allowInteractive: true`) before `createChatMessage`
+  applies the message mode. With manual or interactive dice entry configured and the chat mode set to blind, the roller
+  is asked to enter a result they shouldn't see. Core's `/broll` evaluates with `allowInteractive: messageMode !==
+  "blind"`. This only matters since B6 made blind mode take effect.
+- **Fix:** read the message mode before rolling and pass `allowInteractive: mode !== 'blind'` to `evaluate`.
+- _inferred_
 
 ---
 
@@ -432,7 +461,7 @@ version X until it is removed in version Y.
   - `test-roll-dialog.js:63`
   - `characteristics-dialog.js:62`
   - `base-item-sheet.js:58`
-  
+
   Use `_onRender` and the form `autofocus` attribute instead.
 - [ ] **C4. Unique application ids.** The dialogs use fixed ids (`attributes-dialog`, `characteristics-dialog`,
   `short-description`, `roll-damage-dialog`, `roll-test-dialog`), so opening them for two actors collides. AppV2 needs
@@ -463,6 +492,12 @@ version X until it is removed in version Y.
     message would let the core buttons stay instead of being removed.
   - Keep the initiative item name per combatant, and review the combatant context menu (`_getEntryContextOptions`:
     "Clear" and "Reroll" initiative).
+  - Today "Reset Initiative" (encounter menu) and "Clear" set initiative to `null`, and with the roll buttons removed
+    nothing restores it until `OQCombat.refreshInitiative` runs at the next round, so turn order is arbitrary until
+    then.
+  - The stopgap passes `initiativeName` from `_prepareTurnContext` to `_onRender` through `context.turns`, which relies
+    on core giving both the same context object (`combat-tracker.js:16`). Reading the name from the combatant in
+    `adjustTurns` would be simpler, if the stopgap lives long enough to matter.
 
 ---
 
@@ -487,14 +522,14 @@ version X until it is removed in version Y.
   - `equipment.js:40`
   - `base-actor.js:43`, `:67`
   - `character-actor.js:9`
-  
+
   `_.merge` never removes keys or overwrites with `undefined`. Core states that `prepareData` may run more than once per
   initialisation. Examples:
   - A weapon whose referenced skill disappears keeps its old `rollValues`, because `calculateRollValues` returns `{}`
     (`weapon.js:64`).
   - `calculateDamageRollValues` returning `undefined` leaves the previous `damageRollValues` in place.
   - The actor's `initiative.name` survives clearing the initiative reference.
-  
+
   Assign the derived objects instead of merging them. `this.system = _.merge(...)` in `skill.js:14` is also redundant.
 - [ ] **E2. Dead or duplicated code:**
   - `CharacteristicsParams` (`actors-config.js:40`): a second damage-modifier table using `'0'` where the live one uses
@@ -505,6 +540,8 @@ version X until it is removed in version Y.
   - `OQBaseActor.combatItems` (`base-actor.js:6`).
   - The no-op `OQBaseItem.getRollData` (`base-item.js:29`).
   - The unused second argument to `splitSkills` (`character-sheet.js:25`).
+  - The lazy `renderTemplate` wrapper, defined twice (`chat.js:3`, `roll.js:33`); other modules still bind
+    `renderTemplate` when they load.
 - [ ] **E3. Item chat helpers assume an owned item.** `getBaseRollData` / `getItemDataForChat` (`base-item.js:97`,
   `:140`) call `this.actor.token` and crash for world or compendium items. This is unreachable today, but will matter
   if the new item sheets get a "send to chat" button.
@@ -513,10 +550,12 @@ version X until it is removed in version Y.
 - [ ] **E5. `onUpdateItemAdv`:** `parseInt(...) ?? 0` (`actor-base-sheet.js:183`) — `parseInt` never returns
   null/undefined, so the `?? 0` does nothing. The `isNaN` check is what actually guards.
 - [ ] **E6. Chat commands:**
-  - `handler(param, chatData)` isn't awaited (`chat-command-listener.js:42`), so invalid formulas fail silently in the
-    console.
-  - `canvas.tokens.controlled` throws when the canvas is disabled (`chat-command-listener.js:13`,
-    `updates-from-chat.js:5`).
+  - `canvas.tokens.controlled` throws when the canvas is disabled (`chat-command-listener.js:8`,
+    `updates-from-chat.js:6`). A GM with no token selected rolls `/hp` and `/mp` without actor data, so formulas like
+    `@str` fail.
+  - The `/hp` and `/mp` pattern (`chat-command-listener.js:33`) captures all the HTML after the command, and
+    `htmlToText` (`:24`) drops `<br>` instead of turning it into a newline. A Shift+Enter line break therefore merges
+    the next line into the formula (`/hp 1d6` + `fire` → `1d6fire`). Core's `ChatLog.parse` converts `<br>` first.
 - [ ] **E7. `characteristics-dialog.js:146` passes `class: ['oq']` to `ChatMessage.create`.** This isn't a ChatMessage
   field and is silently dropped.
 - [ ] **E8. Tooling:**

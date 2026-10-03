@@ -24,9 +24,12 @@ class OQItemDataModel extends foundry.abstract.TypeDataModel {
   /**
    * Item images by `type`. When the type changes, an item still showing one of these images switches to the image of
    * the new type; a custom image is kept.
+   * Read from `CONFIG` on each update, so a world script replacing the maps is respected.
    * @type {Record<string, string>|null}
    */
-  static typeIcons = null;
+  static get typeIcons() {
+    return null;
+  }
 
   /* override */
   async _preUpdate(changes, options, user) {
@@ -62,7 +65,9 @@ export class SkillDataModel extends OQItemDataModel {
 }
 
 export class WeaponDataModel extends OQItemDataModel {
-  static typeIcons = ItemConfig.weaponIcons;
+  static get typeIcons() {
+    return CONFIG.OQ.ItemConfig.weaponIcons;
+  }
 
   static defineSchema() {
     return {
@@ -127,7 +132,9 @@ export class ArmorDataModel extends OQItemDataModel {
 }
 
 export class EquipmentDataModel extends OQItemDataModel {
-  static typeIcons = ItemConfig.equipmentIcons;
+  static get typeIcons() {
+    return CONFIG.OQ.ItemConfig.equipmentIcons;
+  }
 
   static defineSchema() {
     return {
@@ -163,7 +170,9 @@ export class EquipmentDataModel extends OQItemDataModel {
 }
 
 export class SpellDataModel extends OQItemDataModel {
-  static typeIcons = ItemConfig.spellIcons;
+  static get typeIcons() {
+    return CONFIG.OQ.ItemConfig.spellIcons;
+  }
 
   static defineSchema() {
     return {
