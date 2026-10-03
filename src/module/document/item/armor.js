@@ -10,7 +10,7 @@ export class OQArmour extends OQBaseItem {
       ap && { label: `OQ.Labels.ArmourPoints`, value: ap },
       cost && { label: `OQ.Labels.Cost`, value: cost },
       encumbrance && { label: `OQ.Labels.Encumbrance`, value: encumbrance },
-    ];
+    ].filter((field) => !!field);
 
     return _.merge(context, {
       fields,

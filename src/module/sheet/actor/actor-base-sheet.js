@@ -1,7 +1,12 @@
 import _ from 'lodash-es';
 import { AttributesDialog } from '../../application/attributes-dialog.js';
 import { OQBaseActor } from '../../document/actor/base-actor.js';
-import { asyncFlattenItemsFromFolder } from '../../utils/utils.js';
+import {
+  asyncFlattenItemsFromFolder,
+  inRangeValue,
+  withAttributeLabels,
+  withCharacteristicLabels,
+} from '../../utils/utils.js';
 
 const mergeObject = foundry.utils.mergeObject;
 
@@ -13,6 +18,7 @@ export class OQActorBaseSheet extends foundry.appv1.sheets.ActorSheet {
       classes: ['sheet', 'oq', 'actor'],
       width: 900,
       height: 1024,
+      dragDrop: [{ dragSelector: '.item-to-drag', dropSelector: null }],
       tabs: [
         {
           navSelector: '.sheet-tabs',
@@ -23,21 +29,27 @@ export class OQActorBaseSheet extends foundry.appv1.sheets.ActorSheet {
     });
   }
 
-  getData(options) {
+  async getData(options) {
     const context = super.getData(options);
     const system = this.actor.system;
-    const characteristics = this.updateCharacteristicsLabels(system.characteristics);
-    const attributes = this.updateAttributesLabels(system.attributes);
     const initiativeOptions = this.getInitiativeOptions();
     const groupedItems = this.prepareGroupedItems();
+    const itemTooltips = await this.prepareItemTooltips();
     return _.merge(context, {
-      system: _.merge(system, {
-        characteristics: characteristics,
-        attributes: attributes,
-      }),
+      system,
+      characteristics: withCharacteristicLabels(system.characteristics),
+      attributes: withAttributeLabels(system.attributes),
       initiativeOptions,
       groupedItems,
+      itemTooltips,
     });
+  }
+
+  async prepareItemTooltips() {
+    const tooltips = await Promise.all(
+      this.actor.items.map(async (item) => [item.id, await item.getTooltipWithTraits()]),
+    );
+    return _.fromPairs(tooltips);
   }
 
   activateListeners(html) {
@@ -64,11 +76,9 @@ export class OQActorBaseSheet extends foundry.appv1.sheets.ActorSheet {
     html.find('.item-quantity-value').on('change', this.onItemUpdateQuantity.bind(this));
     html.find('.item-quantity-update').on('click', this.onItemQuantityIncreaseDecrease.bind(this));
 
-    html.find('.resource-update').on('mouseup', this.onUpdateResource.bind(this));
+    html.find('.resource-update').on('click contextmenu', this.onUpdateResource.bind(this));
 
     html.find('.add-new-item').on('click', this.onAddNewItem.bind(this));
-
-    html.find('.item-to-drag').on('dragstart', this.onItemDragStart.bind(this));
   }
 
   statusMenu(element, statuses, selector) {
@@ -87,18 +97,6 @@ export class OQActorBaseSheet extends foundry.appv1.sheets.ActorSheet {
       eventName: 'click',
       jQuery: false,
     });
-  }
-
-  async _onDrop(event) {
-    event.preventDefault();
-
-    const rawData = event.dataTransfer.getData('text/plain');
-    const data = rawData && JSON.parse(rawData);
-    if (data && data.dragSource === CONFIG.OQ.SYSTEM_ID) {
-      await this.actor.createEmbeddedDocuments('Item', [data]);
-    } else {
-      return super._onDrop(event);
-    }
   }
 
   async _onDropFolder(event, data) {
@@ -241,28 +239,16 @@ export class OQActorBaseSheet extends foundry.appv1.sheets.ActorSheet {
     }
   }
 
-  async onItemDragStart(event) {
-    const itemContainer = event.currentTarget.closest('.item');
-    const item = this.actor.items.get(itemContainer?.dataset?.itemId);
-    if (item) {
-      const data = _.merge(item.toObject(true), {
-        folder: null,
-        dragSource: CONFIG.OQ.SYSTEM_ID,
-      });
-      event.originalEvent.dataTransfer.setData('text/plain', JSON.stringify(data));
-    }
-  }
-
   async onUpdateResource(event) {
     event.preventDefault();
 
-    const update = event.which === 1 ? 1 : -1;
-    const dataSet = event.currentTarget.dataset;
-    const resourceId = dataSet.resourceId;
-    const path = `system.attributes.${resourceId}.value`;
-    const value = _.get(this.actor, path);
+    // Left click raises the value, right click lowers it.
+    const delta = event.type === 'contextmenu' ? -1 : 1;
+    const resourceId = event.currentTarget.dataset.resourceId;
+    const { value, max } = this.actor.system.attributes[resourceId];
+    const newValue = inRangeValue(0, max, value + delta);
 
-    await this.actor.update({ [path]: value + update });
+    if (newValue !== value) await this.actor.update({ [`system.attributes.${resourceId}.value`]: newValue });
   }
 
   getInitiativeOptions() {
@@ -275,32 +261,6 @@ export class OQActorBaseSheet extends foundry.appv1.sheets.ActorSheet {
     };
 
     return _.fromPairs(items.map((item) => [item.id, makeName(item)]));
-  }
-
-  updateCharacteristicsLabels(characteristics) {
-    const localizationPrefix = 'OQ.Labels.CharacteristicsNames';
-    return _.mapValues(characteristics, (characteristic, key) => {
-      const label = `${localizationPrefix}.${key}.label`;
-      const abbr = `${localizationPrefix}.${key}.abbr`;
-      return {
-        ...characteristic,
-        label,
-        abbr,
-      };
-    });
-  }
-
-  updateAttributesLabels(attributes) {
-    const localizationPrefix = 'OQ.Labels.AttributesNames';
-    return _.mapValues(attributes, (attribute, key) => {
-      const label = `${localizationPrefix}.${key}.label`;
-      const abbr = `${localizationPrefix}.${key}.abbr`;
-      return {
-        ...attribute,
-        label,
-        abbr,
-      };
-    });
   }
 
   prepareGroupedItems() {

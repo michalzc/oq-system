@@ -5,7 +5,7 @@
   <div class="attributes-grid">
 
     <label for="hp" class="resource-update" data-resource-id="hp"
-           data-tooltip="{{ localize system.attributes.hp.label}}">{{ localize system.attributes.hp.abbr}}</label>
+           data-tooltip="{{ localize attributes.hp.label}}">{{ localize attributes.hp.abbr}}</label>
     <div class="value">
       <input id="hp" type="number" data-dtype="Number" name="system.attributes.hp.value"
              value="{{system.attributes.hp.value}}">
@@ -13,7 +13,7 @@
     </div>
 
     <label for="mp" class="resource-update" data-resource-id="mp"
-           data-tooltip="{{ localize system.attributes.mp.label}}">{{ localize system.attributes.mp.abbr}}</label>
+           data-tooltip="{{ localize attributes.mp.label}}">{{ localize attributes.mp.abbr}}</label>
     <div class="value">
       <input id="mp" type="number" data-dtype="Number" name="system.attributes.mp.value"
              value="{{system.attributes.mp.value}}">
@@ -25,29 +25,29 @@
 
 
     <div class="wide">
-      <label data-tooltip="{{ localize system.attributes.dm.label}}">{{ localize
-        system.attributes.dm.abbr}}</label>
+      <label data-tooltip="{{ localize attributes.dm.label}}">{{ localize
+        attributes.dm.abbr}}</label>
       <div class="value">{{system.attributes.dm.value}}</div>
 
-      <label data-tooltip="{{ localize system.attributes.mr.label}}">{{ localize
-        system.attributes.mr.abbr}}</label>
+      <label data-tooltip="{{ localize attributes.mr.label}}">{{ localize
+        attributes.mr.abbr}}</label>
       <div class="value">{{system.attributes.mr.value}}</div>
 
-      <label data-tooltip="{{ localize system.attributes.ap.label}}">{{ localize
-        system.attributes.ap.abbr}}</label>
+      <label data-tooltip="{{ localize attributes.ap.label}}">{{ localize
+        attributes.ap.abbr}}</label>
       <div class="value">{{system.attributes.ap.value}}</div>
     </div>
 
 
 
     {{#if isCharacter}}
-      <label for="fp" data-tooltip="{{ localize system.attributes.fn.label }}">{{ localize
-        system.attributes.fn.abbr }}</label>
+      <label for="fp" data-tooltip="{{ localize attributes.fn.label }}">{{ localize
+        attributes.fn.abbr }}</label>
       <div class="value"><input id="fp" type="number" name="system.attributes.fn.value"
                                 value="{{system.attributes.fn.value}}">
       </div>
-      <label for="gp" data-tooltip="{{ localize system.attributes.gr.label }}">{{ localize
-        system.attributes.gr.abbr }}</label>
+      <label for="gp" data-tooltip="{{ localize attributes.gr.label }}">{{ localize
+        attributes.gr.abbr }}</label>
       <div class="value"><input id="gp" type="number" name="system.attributes.gr.value"
                                 value="{{system.attributes.gr.value}}">
       </div>

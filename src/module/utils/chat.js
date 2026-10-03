@@ -34,6 +34,7 @@ export async function displayItem(itemData) {
     }),
   );
   await ChatMessage.create({
+    speaker: itemData.speaker,
     style: CONST.CHAT_MESSAGE_STYLES.IC,
     content,
   });

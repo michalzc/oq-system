@@ -19,7 +19,7 @@ export function registerDataModels() {
     ...CONFIG.Item.dataModels,
     skill: SkillDataModel,
     weapon: WeaponDataModel,
-    armor: ArmorDataModel,
+    armour: ArmorDataModel,
     equipment: EquipmentDataModel,
     spell: SpellDataModel,
     specialAbility: SpecialAbilityDataModel,

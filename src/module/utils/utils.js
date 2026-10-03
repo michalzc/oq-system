@@ -38,3 +38,22 @@ export async function asyncFlattenItemsFromFolder(folder) {
 export function formatString(format, ...values) {
   return values.reduce((acc, value, index) => acc.replace(`{${index}}`, value), format);
 }
+
+/**
+ * Copies of the characteristics with `label` and `abbr` localization keys, for rendering only.
+ */
+export const withCharacteristicLabels = (characteristics) =>
+  withLabels(characteristics, 'OQ.Labels.CharacteristicsNames');
+
+/**
+ * Copies of the attributes with `label` and `abbr` localization keys, for rendering only.
+ */
+export const withAttributeLabels = (attributes) => withLabels(attributes, 'OQ.Labels.AttributesNames');
+
+function withLabels(values, localizationPrefix) {
+  return _.mapValues(values, (value, key) => ({
+    ...value,
+    label: `${localizationPrefix}.${key}.label`,
+    abbr: `${localizationPrefix}.${key}.abbr`,
+  }));
+}

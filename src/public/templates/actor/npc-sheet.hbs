@@ -19,7 +19,7 @@
       <h2 class="flex0">{{ localize 'OQ.Labels.Characteristics' }}</h2>
 
       <div class="characteristics-list">
-        {{#each system.characteristics as |char key| }}
+        {{#each characteristics as |char key| }}
         <div class="characteristic">
           <label for="char{{ key }}" data-tooltip="{{ localize char.label }}" class="characteristic-label">{{ localize
             char.abbr }}</label>

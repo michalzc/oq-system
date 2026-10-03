@@ -45,13 +45,12 @@ export class OQEquipment extends OQBaseItem {
 
   getItemDataForChat() {
     const context = super.getItemDataForChat();
-    const { cost, encumbrance, consumable, quantity } = this.system;
+    const { cost, encumbrance, quantity } = this.system;
     const fields = [
-      consumable && { label: `OQ.Labels.Consumable`, value: '' },
       cost && { label: `OQ.Labels.Cost`, value: cost },
       encumbrance && { label: `OQ.Labels.Encumbrance`, value: encumbrance },
       quantity && { label: `OQ.Labels.Quantity`, value: quantity },
-    ];
+    ].filter((field) => !!field);
 
     return _.merge(context, {
       itemSubtypeLabel: `OQ.Labels.EquipmentTypes.${this.system.type}`,

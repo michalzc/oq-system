@@ -101,7 +101,6 @@ OQ:
         label: Strength
     Concept: Concept
     ConsolidateMoney: Consolidate Coins
-    Consumable: Consumable
     Cost: Cost
     Culture: Culture
     CustomDamage: Custom
@@ -245,8 +244,8 @@ OQ:
   Tooltips:
     SendToChat: Send to chat
   Warnings:
+    ItemNotFound: The item no longer exists.
     NoSpecialAbility: Player Character is not eligible for Special Abilities
-    OnlyItemCanBeMacro: The macro can be created only from owned items!
 TYPES:
   Actor:
     character: Player Character

@@ -1,5 +1,6 @@
 import _ from 'lodash-es';
 import { logError } from '../utils/logger.js';
+import { withCharacteristicLabels } from '../utils/utils.js';
 
 const mergeObject = foundry.utils.mergeObject;
 const renderTemplate = foundry.applications.handlebars.renderTemplate;
@@ -43,6 +44,7 @@ export class CharacteristicsDialog extends foundry.appv1.api.FormApplication {
     return mergeObject(data, {
       name: this.object.name,
       system,
+      characteristics: withCharacteristicLabels(system.characteristics),
       points,
     });
   }
@@ -112,7 +114,7 @@ export class CharacteristicsDialog extends foundry.appv1.api.FormApplication {
         const messageData = {
           content: content,
           rolls: _.values(rolls),
-          speaker: ChatMessage.getSpeaker(this.object),
+          speaker: ChatMessage.getSpeaker({ actor: this.object }),
         };
 
         await ChatMessage.create(messageData);
@@ -144,7 +146,7 @@ export class CharacteristicsDialog extends foundry.appv1.api.FormApplication {
             content: content,
             rolls: [roll],
             class: ['oq'],
-            speaker: ChatMessage.getSpeaker(this.object),
+            speaker: ChatMessage.getSpeaker({ actor: this.object }),
           };
           this.updatePoints(event);
           await ChatMessage.create(messageData);

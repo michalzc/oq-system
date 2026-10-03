@@ -1,5 +1,4 @@
 import { OQActorDocumentProxy, OQItemDocumentProxy } from '../document/document-proxy.js';
-import { OQItemDirectory } from '../document/item-directory.js';
 import { OQCombat } from '../document/combat.js';
 import { OQCombatTracker } from '../application/combat-tracker.js';
 
@@ -7,6 +6,7 @@ export function registerDocuments() {
   CONFIG.Actor.documentClass = OQActorDocumentProxy;
   CONFIG.Item.documentClass = OQItemDocumentProxy;
   CONFIG.Combat.documentClass = OQCombat;
+  OQCombat.registerQueries();
   CONFIG.ui.combat = OQCombatTracker;
 
   const localizeActorPrefix = 'TYPES.Actor';
@@ -26,6 +26,4 @@ export function registerDocuments() {
       label: `${localizeItemPrefix}.${key}`,
     });
   });
-
-  CONFIG.ui.items = OQItemDirectory;
 }

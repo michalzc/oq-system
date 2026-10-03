@@ -81,6 +81,10 @@ async function rollDamageFromChatMessage(event) {
   const uuid = event.currentTarget.dataset.itemUuid;
   if (uuid) {
     const item = await fromUuid(uuid);
+    if (!item) {
+      ui.notifications.warn('OQ.Warnings.ItemNotFound', { localize: true });
+      return;
+    }
     if (item.parent && item.parent.isOwner) {
       await item.rollItemDamage(false);
     }

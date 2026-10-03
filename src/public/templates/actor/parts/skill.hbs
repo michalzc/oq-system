@@ -3,7 +3,7 @@
     <img class="item-icon" src="{{img}}" data-tooltip="{{localize 'OQ.Tooltips.SendToChat'}}" alt="{{name}}">
   </a>
   <div class="item-name">
-    <a class="item-roll" data-tooltip="{{ system.tooltip }}" data-tooltip-direction="LEFT">
+    <a class="item-roll" data-tooltip="{{lookup @root.itemTooltips id}}" data-tooltip-direction="LEFT">
       {{name}}
     </a>
     {{#if system.rollValues.mastered}}

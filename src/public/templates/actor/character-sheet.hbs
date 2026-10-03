@@ -51,7 +51,7 @@
       <h2 class="flex0">{{ localize 'OQ.Labels.Characteristics' }}</h2>
 
       <div class="flex1 flexrow">
-        {{#each system.characteristics as |char key| }}
+        {{#each characteristics as |char key| }}
           <div class="flexcol characteristic">
             <label data-tooltip="{{ localize char.label }}" class="flex0">{{ localize char.abbr }}</label>
             <div data-tooltip="{{ localize char.label }}" class="characteristic-value flex0">{{char.value}}</div>
