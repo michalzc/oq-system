@@ -503,12 +503,12 @@ version X until it is removed in version Y.
 
 ## D. Pack data
 
-- [ ] **D1. Legacy skill fields.** 27 skills in `src/packs/basic-skills` still use the old `group` / `customGroupName`
+- [x] **D1. Legacy skill fields.** 27 skills in `src/packs/basic-skills` still use the old `group` / `customGroupName`
   fields instead of `type` / `customTypeName`, and rely on `SkillDataModel.migrateData` on every load. Migrate the YAML
   so the runtime migration can eventually be removed.
-- [ ] **D2. Dev-world user ownership.** 32 pack documents carry ownership entries for dev-world user ids
+- [x] **D2. Dev-world user ownership.** 32 pack documents carry ownership entries for dev-world user ids
   (`KsTXxaVKKsCmFqBq`, `jzN44THfEHA8DC8v`). Strip them, keeping only `default` if anything.
-- [ ] **D3. Validate after the schema fixes.** After A1, B8 and B10, run the packs through the data models (`yarn
+- [x] **D3. Validate after the schema fixes.** After A1, B8 and B10, run the packs through the data models (`yarn
   build:packs` plus a load in Foundry) to catch values that the new schemas coerce or reject. For example, weapon
   `rate: 1` is a number stored in a `StringField`.
 

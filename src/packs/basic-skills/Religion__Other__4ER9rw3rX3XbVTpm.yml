@@ -8,12 +8,10 @@ folder: QTKeyS3tL0LjreJG
 img: systems/oq/assets/icons/skills.svg
 name: Religion (Other)
 ownership:
-  KsTXxaVKKsCmFqBq: 3
   default: 0
 sort: 0
 system:
   advancement: 0
-  customGroupName: ''
   description: >-
     <p>Religion is used to recall knowledge of a religious nature, though the
     character will only be able to remember knowledge pertinent to the specified
@@ -26,7 +24,7 @@ system:
     that the character is a member of and to grant access to higher magnitudes
     of Divine magic.</p>
   formula: '@int'
-  group: magic
+  type: magic
   mod: 0
 type: skill
 _key: '!items!4ER9rw3rX3XbVTpm'

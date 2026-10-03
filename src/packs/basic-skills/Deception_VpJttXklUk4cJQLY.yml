@@ -9,12 +9,10 @@ folder: szWzZEdK1HVFTQEr
 img: systems/oq/assets/icons/skills.svg
 name: Deception
 ownership:
-  KsTXxaVKKsCmFqBq: 3
   default: 0
 sort: 0
 system:
   advancement: 0
-  customGroupName: ''
   description: >-
     <p>Deception covers the arts of:</p><p><em>Disguise:</em> Used to change a
     character’s appearance and adopt a different outward
@@ -27,7 +25,7 @@ system:
     situation. Note that attempts at Fast Talk use the Influence skill rather
     than Deception.</p>
   formula: '@dex+@int'
-  group: practical
+  type: practical
   mod: 0
 type: skill
 _key: '!items!VpJttXklUk4cJQLY'

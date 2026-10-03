@@ -7,7 +7,7 @@ system:
     skillReference: ranged-combat
   hands: one
   rangeFormula: 50m
-  rate: 1
+  rate: '1'
   cost: 50
   state: carried
   type: ranged

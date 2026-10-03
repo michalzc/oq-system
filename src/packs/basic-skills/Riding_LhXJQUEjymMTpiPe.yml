@@ -8,12 +8,10 @@ folder: szWzZEdK1HVFTQEr
 img: systems/oq/assets/icons/skills.svg
 name: Riding
 ownership:
-  KsTXxaVKKsCmFqBq: 3
   default: 0
 sort: 0
 system:
   advancement: 0
-  customGroupName: ''
   description: >-
     <p>If a character is riding a creature with the help of saddle and stirrups,
     at no more than a walking pace across flat terrain, then a Riding test will
@@ -21,7 +19,7 @@ system:
     something out of the ordinary with a mount – such as travel across
     treacherous terrain, jump obstacles, ride bareback and so on.</p>
   formula: '@dex+@pow'
-  group: practical
+  type: practical
   mod: 0
 type: skill
 _key: '!items!LhXJQUEjymMTpiPe'

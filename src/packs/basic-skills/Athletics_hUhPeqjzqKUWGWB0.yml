@@ -9,12 +9,10 @@ folder: szWzZEdK1HVFTQEr
 img: systems/oq/assets/icons/skills.svg
 name: Athletics
 ownership:
-  KsTXxaVKKsCmFqBq: 3
   default: 0
 sort: 0
 system:
   advancement: 0
-  customGroupName: ''
   description: >-
     <p>This broad skill covers a range of athletic activities useful to
     adventuring characters, including acrobatics, climbing, jumping and
@@ -43,7 +41,7 @@ system:
     when conditions are less than ideal – swimming while heavily encumbered or
     in strong currents, for example.</p>
   formula: '@dex+@str'
-  group: practical
+  type: practical
   mod: 0
 type: skill
 _key: '!items!hUhPeqjzqKUWGWB0'
