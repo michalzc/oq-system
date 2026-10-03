@@ -18,7 +18,7 @@ async function sendMessage(messageKey, actor, delta) {
 
 async function applyDamage(event) {
   const button = event.currentTarget;
-  $(button).blur();
+  button.blur();
 
   const dataSet = button.dataset;
   const value = parseInt(dataSet.damageValue);
@@ -41,7 +41,7 @@ async function applyDamage(event) {
 
 async function applyHealing(event) {
   const button = event.currentTarget;
-  $(button).blur();
+  button.blur();
 
   const dataSet = button.dataset;
   const healingValue = parseInt(dataSet.healingValue);
@@ -59,7 +59,7 @@ async function applyHealing(event) {
 
 async function adjustMagicPoints(event) {
   const button = event.currentTarget;
-  $(button).blur();
+  button.blur();
 
   const dataSet = button.dataset;
   const updateValue = parseInt(dataSet.value);
@@ -91,17 +91,21 @@ async function rollDamageFromChatMessage(event) {
   }
 }
 
+function addClickListener(html, selector, listener) {
+  html.querySelectorAll(selector).forEach((element) => element.addEventListener('click', listener));
+}
+
 export function handleDamageRollChatMessage(chatMessage, html) {
   const messageFlags = CONFIG.OQ.ChatConfig.MessageFlags;
   const messageType = chatMessage.getFlag(messageFlags.scope, messageFlags.key);
 
   if (messageType === messageFlags.updateFromChat) {
-    html.find('.oq.roll .apply-damage').on('click', applyDamage);
-    html.find('.oq.roll .apply-healing').on('click', applyHealing);
-    html.find('.oq.roll .adjust-mp').on('click', adjustMagicPoints);
+    addClickListener(html, '.oq.roll .apply-damage', applyDamage);
+    addClickListener(html, '.oq.roll .apply-healing', applyHealing);
+    addClickListener(html, '.oq.roll .adjust-mp', adjustMagicPoints);
   }
 
   if (messageType === messageFlags.hasRollDamage) {
-    html.find('.oq.roll .roll-damage').on('click', rollDamageFromChatMessage);
+    addClickListener(html, '.oq.roll .roll-damage', rollDamageFromChatMessage);
   }
 }
