@@ -1,6 +1,12 @@
 import _ from 'lodash-es';
 
 /**
+ * `foundry.applications.handlebars.renderTemplate`, resolved at call time so modules using it can be imported in tests,
+ * where the `foundry` global doesn't exist.
+ */
+export const renderTemplate = (...args) => foundry.applications.handlebars.renderTemplate(...args);
+
+/**
  * Number as string with sign. In case of 0 it returns empty string.
  * @param {number} num
  * @returns {string} string representation with sing

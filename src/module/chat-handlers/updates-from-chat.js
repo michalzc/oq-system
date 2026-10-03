@@ -3,7 +3,7 @@ import { formatString } from '../utils/utils.js';
 import { createChatMessage } from '../utils/chat.js';
 
 function findTargets() {
-  const targetTokens = canvas.tokens.controlled;
+  const targetTokens = canvas.ready ? canvas.tokens.controlled : [];
   return _.uniq(targetTokens.map((token) => token.actor));
 }
 

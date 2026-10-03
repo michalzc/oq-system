@@ -8,12 +8,10 @@ folder: szWzZEdK1HVFTQEr
 img: systems/oq/assets/icons/skills.svg
 name: Healing
 ownership:
-  KsTXxaVKKsCmFqBq: 3
   default: 0
 sort: 0
 system:
   advancement: 0
-  customGroupName: ''
   description: >-
     <p>Use of this skill will always require a healer’s kit, which includes
     suitable medical equipment, such as bandages and salves, or an appropriate
@@ -25,7 +23,7 @@ system:
     actions are stressful, so they always require a skill test to perform
     successfully.</p>
   formula: '@int+10'
-  group: practical
+  type: practical
   mod: 0
 type: skill
 _key: '!items!1e0P1ubLckesHfzb'

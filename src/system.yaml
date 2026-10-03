@@ -5,7 +5,7 @@ description: OpenQuest SRD System for FoundryVTT
 authors:
   - name: Michał Z.
     email: parmezan@gmail.com
-url: tbd
+url: https://github.com/michalzc/oq-system
 license: WTFPL – Do What the Fuck You Want to Public License
 readme: README.md
 version: 0.1.0-SNAPSHOT
@@ -97,5 +97,7 @@ languages:
     path: lang/en.json
 socket: false
 initiative: "@attributes.initiative.value"
+# Filled in by the release workflow, which only replaces keys that already exist. Kept as placeholders in development
+# builds, so Foundry never offers to update a linked dev build from the latest release.
 manifest: tbd
 download: tbd

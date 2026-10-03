@@ -8,7 +8,7 @@ system:
   hands: one
   encumbrance: 1
   rangeFormula: STR m
-  rate: 1
+  rate: '1'
   cost: 0
   state: carried
   type: ranged

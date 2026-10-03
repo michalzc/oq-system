@@ -1,10 +1,8 @@
 import { displayItem } from '../../utils/chat.js';
-import _ from 'lodash-es';
 import { damageRoll, testRoll } from '../../utils/roll.js';
 import { OQTestRollDialog } from '../../application/test-roll-dialog.js';
 import { OQDamageRollDialog } from '../../application/damage-roll-dialog.js';
-
-const renderTemplate = foundry.applications.handlebars.renderTemplate;
+import { renderTemplate } from '../../utils/utils.js';
 
 /**
  * @typedef {object} ItemRollValue
@@ -26,20 +24,10 @@ export class OQBaseItem extends Item {
     }
   }
 
-  getRollData() {
-    return super.getRollData();
-  }
   prepareDerivedData() {
     super.prepareDerivedData();
-    const rollValues = this.calculateRollValues();
-    const damageRollValues = this.calculateDamageRollValues();
-
-    _.merge(this, {
-      system: {
-        rollValues,
-        damageRollValues,
-      },
-    });
+    this.system.rollValues = this.calculateRollValues();
+    this.system.damageRollValues = this.calculateDamageRollValues();
   }
 
   /**
@@ -97,12 +85,12 @@ export class OQBaseItem extends Item {
    * @returns {{img: string, entityName: string, speaker: (object|undefined)}}
    */
   getBaseRollData() {
-    const speaker = ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token });
+    const speaker = ChatMessage.getSpeaker({ actor: this.actor, token: this.actor?.token });
     return {
       img: this.img,
       speaker,
       entityName: this.name,
-      type: this.actor.type,
+      type: this.actor?.type,
     };
   }
 
@@ -145,7 +133,7 @@ export class OQBaseItem extends Item {
 
   getItemDataForChat() {
     return {
-      speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token }),
+      speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor?.token }),
       name: this.name,
       itemTypeLabel: `TYPES.Item.${this.type}`,
       img: this.img,

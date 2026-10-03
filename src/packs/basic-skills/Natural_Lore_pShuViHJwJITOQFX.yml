@@ -8,12 +8,10 @@ folder: JvpDkeDs9DS0MQBD
 img: systems/oq/assets/icons/skills.svg
 name: Natural Lore
 ownership:
-  KsTXxaVKKsCmFqBq: 3
   default: 0
 sort: 0
 system:
   advancement: 0
-  customGroupName: ''
   description: >-
     <p>Broadly speaking, this Lore deals with the character’s knowledge of the
     natural world. It can be broken into five specialist
@@ -40,7 +38,7 @@ system:
     wilderness.</p><p><em>Weather:</em> The character can predict changes in the
     climate.</p>
   formula: '@int+10'
-  group: knowledge
+  type: knowledge
   mod: 0
 type: skill
 _key: '!items!pShuViHJwJITOQFX'

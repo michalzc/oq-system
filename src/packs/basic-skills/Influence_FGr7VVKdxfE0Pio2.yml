@@ -8,12 +8,10 @@ folder: szWzZEdK1HVFTQEr
 img: systems/oq/assets/icons/skills.svg
 name: Influence
 ownership:
-  KsTXxaVKKsCmFqBq: 3
   default: 0
 sort: 0
 system:
   advancement: 0
-  customGroupName: ''
   description: >-
     <p>This skill is the art of verbally persuading another character to do what
     you want.</p><p>Influence skill tests are usually opposed by either
@@ -29,7 +27,7 @@ system:
     people.</p></li><li><p><em>Intimidation</em>. The character tries to use the
     threat of violence against an opponent or group of opponent.</p></li></ul>
   formula: '@cha+10'
-  group: practical
+  type: practical
   mod: 0
 type: skill
 _key: '!items!FGr7VVKdxfE0Pio2'

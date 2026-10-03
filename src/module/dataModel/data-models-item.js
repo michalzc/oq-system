@@ -144,7 +144,7 @@ export class EquipmentDataModel extends OQItemDataModel {
       quantity: positiveNumberModel(false, 1),
       state: new fields.StringField({
         required: true,
-        initial: ItemConfig.armourStates.carried.key,
+        initial: ItemConfig.equipmentStates.carried.key,
         choices: _.keys(ItemConfig.equipmentStates),
         trim: true,
       }),

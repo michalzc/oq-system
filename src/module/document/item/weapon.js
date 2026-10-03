@@ -1,5 +1,4 @@
 import { OQBaseItem } from './base-item.js';
-import _ from 'lodash-es';
 import { minMaxValue, mostSignificantModifier } from '../../utils/utils.js';
 
 export class OQWeapon extends OQBaseItem {
@@ -49,10 +48,11 @@ export class OQWeapon extends OQBaseItem {
     const skillReference = this.system.correspondingSkill?.skillReference;
     const skill = this.parent?.system.skillsBySlug[skillReference];
     const skillName = skill?.name;
-    return _.merge(context, {
+    return {
+      ...context,
       rollType: 'weapon',
       skillName,
-    });
+    };
   }
 
   getItemDataForChat() {
@@ -75,9 +75,10 @@ export class OQWeapon extends OQBaseItem {
       },
     ].filter((item) => !!item);
 
-    return _.merge(context, {
+    return {
+      ...context,
       itemSubtypeLabel: `OQ.Labels.WeaponTypes.${this.system.type}`,
       fields,
-    });
+    };
   }
 }

@@ -1,12 +1,12 @@
-import _ from 'lodash-es';
-import { createChatMessage } from '../utils/chat.js';
+import { createChatMessage, evaluateRoll } from '../utils/chat.js';
+import { renderTemplate } from '../utils/utils.js';
 
-const renderTemplate = foundry.applications.handlebars.renderTemplate;
 const ChatLog = foundry.applications.sidebar.tabs.ChatLog;
 
 async function sendAdjustMessage(rollString, type, chatData) {
-  const actor = game.user.isGM ? _.head(canvas.tokens.controlled.map((token) => token.actor)) : game.user.character;
-  const roll = await new Roll(rollString, actor?.getRollData()).roll();
+  // The same actor core's /roll uses: the controlled token, otherwise the user's character. Works without a canvas.
+  const actor = ChatMessage.getSpeakerActor(chatData.speaker) ?? game.user.character;
+  const roll = await evaluateRoll(new Roll(rollString, actor?.getRollData()));
   const renderedRoll = await roll.render();
   const content = await renderTemplate(CONFIG.OQ.ChatConfig.adjustmentTemplate, { roll, renderedRoll, type });
   const messageFlags = CONFIG.OQ.ChatConfig.MessageFlags;
@@ -28,10 +28,12 @@ function htmlToText(html) {
 }
 
 // Not `isRoll`: that would also make core enrich `[[/hp …]]` as a plain dice roll.
+// `isMultiline` makes core split the input on Shift+Enter line breaks; only the first line is the command.
 function adjustmentCommand(type) {
   return {
     rgx: new RegExp(`^/${type}\\s+(.+)$`, 'i'),
-    fn: async (command, match, chatData) => {
+    isMultiline: true,
+    fn: async (command, [match], chatData) => {
       await sendAdjustMessage(htmlToText(match[1]), type, chatData);
       return false;
     },

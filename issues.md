@@ -218,7 +218,7 @@ config. Findings were checked against the Foundry sources in the nix store (13.3
 - **Fix:** `data-system-type="resistance"`.
 - _verified_
 
-### [ ] A15. Rolling one characteristic recalculates points before writing the new value
+### [x] A15. Rolling one characteristic recalculates points before writing the new value
 
 - **Where:** `src/module/application/characteristics-dialog.js:152` (`rollCharacteristic`)
 - **Problem:** `updatePoints` runs before the rolled value is written into `#char-<key>-base`. Setting the value with
@@ -227,7 +227,7 @@ config. Findings were checked against the Foundry sources in the nix store (13.3
 - **Fix:** write the value first, then call `updatePoints`.
 - _verified_ (by reading)
 
-### [ ] A16. New skills get `"false"` as their custom type name
+### [x] A16. New skills get `"false"` as their custom type name
 
 - **Where:** `src/module/sheet/actor/actor-base-sheet.js:120` (`onAddNewItem`)
 - **Problem:** `systemType === custom && dataset.customTypeName` is `false` for every non-custom type, and `StringField`
@@ -237,7 +237,7 @@ config. Findings were checked against the Foundry sources in the nix store (13.3
 - **Fix:** `|| ''`, or only set `customTypeName` for the custom type.
 - _verified_ (`StringField#_cast` is `String(value)` in 14.368)
 
-### [ ] A17. Blind rolls can ask the roller for the dice
+### [x] A17. Blind rolls can ask the roller for the dice
 
 - **Where:** `src/module/utils/roll.js:41`, `:145`; `src/module/chat-handlers/chat-command-listener.js:9`
 - **Problem:** rolls are evaluated with `Roll#roll()` (default `allowInteractive: true`) before `createChatMessage`
@@ -503,12 +503,12 @@ version X until it is removed in version Y.
 
 ## D. Pack data
 
-- [ ] **D1. Legacy skill fields.** 27 skills in `src/packs/basic-skills` still use the old `group` / `customGroupName`
+- [x] **D1. Legacy skill fields.** 27 skills in `src/packs/basic-skills` still use the old `group` / `customGroupName`
   fields instead of `type` / `customTypeName`, and rely on `SkillDataModel.migrateData` on every load. Migrate the YAML
   so the runtime migration can eventually be removed.
-- [ ] **D2. Dev-world user ownership.** 32 pack documents carry ownership entries for dev-world user ids
+- [x] **D2. Dev-world user ownership.** 32 pack documents carry ownership entries for dev-world user ids
   (`KsTXxaVKKsCmFqBq`, `jzN44THfEHA8DC8v`). Strip them, keeping only `default` if anything.
-- [ ] **D3. Validate after the schema fixes.** After A1, B8 and B10, run the packs through the data models (`yarn
+- [x] **D3. Validate after the schema fixes.** After A1, B8 and B10, run the packs through the data models (`yarn
   build:packs` plus a load in Foundry) to catch values that the new schemas coerce or reject. For example, weapon
   `rate: 1` is a number stored in a `StringField`.
 
@@ -516,7 +516,7 @@ version X until it is removed in version Y.
 
 ## E. Smaller cleanups
 
-- [ ] **E1. Data preparation isn't idempotent.** It uses `_.merge` everywhere:
+- [x] **E1. Data preparation isn't idempotent.** It uses `_.merge` everywhere:
   - `base-item.js:37`
   - `skill.js:14`
   - `equipment.js:40`
@@ -531,7 +531,7 @@ version X until it is removed in version Y.
   - The actor's `initiative.name` survives clearing the initiative reference.
 
   Assign the derived objects instead of merging them. `this.system = _.merge(...)` in `skill.js:14` is also redundant.
-- [ ] **E2. Dead or duplicated code:**
+- [x] **E2. Dead or duplicated code:**
   - `CharacteristicsParams` (`actors-config.js:40`): a second damage-modifier table using `'0'` where the live one uses
     `''`, plus a `FIXME`.
   - `BaseRollFormula` / `DifficultyLevels` / `RollResults` (`rolls-config.js:18-28`), which duplicate `RollConfig`.
@@ -542,27 +542,27 @@ version X until it is removed in version Y.
   - The unused second argument to `splitSkills` (`character-sheet.js:25`).
   - The lazy `renderTemplate` wrapper, defined twice (`chat.js:3`, `roll.js:33`); other modules still bind
     `renderTemplate` when they load.
-- [ ] **E3. Item chat helpers assume an owned item.** `getBaseRollData` / `getItemDataForChat` (`base-item.js:97`,
+- [x] **E3. Item chat helpers assume an owned item.** `getBaseRollData` / `getItemDataForChat` (`base-item.js:97`,
   `:140`) call `this.actor.token` and crash for world or compendium items. This is unreachable today, but will matter
   if the new item sheets get a "send to chat" button.
-- [ ] **E4. `EquipmentDataModel.state` initial value** uses `ItemConfig.armourStates.carried.key`
+- [x] **E4. `EquipmentDataModel.state` initial value** uses `ItemConfig.armourStates.carried.key`
   (`data-models-item.js:126`). It has the same value as the equipment state, but is a copy-paste slip.
-- [ ] **E5. `onUpdateItemAdv`:** `parseInt(...) ?? 0` (`actor-base-sheet.js:183`) — `parseInt` never returns
+- [x] **E5. `onUpdateItemAdv`:** `parseInt(...) ?? 0` (`actor-base-sheet.js:183`) — `parseInt` never returns
   null/undefined, so the `?? 0` does nothing. The `isNaN` check is what actually guards.
-- [ ] **E6. Chat commands:**
+- [x] **E6. Chat commands:**
   - `canvas.tokens.controlled` throws when the canvas is disabled (`chat-command-listener.js:8`,
     `updates-from-chat.js:6`). A GM with no token selected rolls `/hp` and `/mp` without actor data, so formulas like
     `@str` fail.
   - The `/hp` and `/mp` pattern (`chat-command-listener.js:33`) captures all the HTML after the command, and
     `htmlToText` (`:24`) drops `<br>` instead of turning it into a newline. A Shift+Enter line break therefore merges
     the next line into the formula (`/hp 1d6` + `fire` → `1d6fire`). Core's `ChatLog.parse` converts `<br>` first.
-- [ ] **E7. `characteristics-dialog.js:146` passes `class: ['oq']` to `ChatMessage.create`.** This isn't a ChatMessage
+- [x] **E7. `characteristics-dialog.js:146` passes `class: ['oq']` to `ChatMessage.create`.** This isn't a ChatMessage
   field and is silently dropped.
-- [ ] **E8. Tooling:**
+- [x] **E8. Tooling:**
   - JavaScript lint uses ESLint 8 with legacy `.eslintrc.cjs`, while the template lint uses a flat config via
     `ESLINT_USE_FLAT_CONFIG`. Unify on flat config with ESLint 9+.
   - `husky install` (husky 8) is deprecated in husky 9.
   - `package.json` still has placeholder `description` / `repository.url`.
-- [ ] **E9. Manifest placeholders.** `src/system.yaml` has `url`, `manifest` and `download` set to `tbd` (the release
+- [x] **E9. Manifest placeholders.** `src/system.yaml` has `url`, `manifest` and `download` set to `tbd` (the release
   workflow fills them) and `version: 0.1.0-SNAPSHOT`. These are fine for dev, but check the v14 manifest validation
   warnings after B10.

@@ -7,7 +7,7 @@ system:
     skillReference: ranged-combat
   hands: one
   rangeFormula: STR m
-  rate: 1
+  rate: '1'
   cost: 30
   state: carried
   type: ranged

@@ -22,7 +22,7 @@ export class OQCharacterSheet extends OQActorBaseSheet {
     );
     const spellsPerType = this.getSpellsPerType();
     const spellTypes = CONFIG.OQ.ItemConfig.spellsTypes;
-    const skillsTabContent = this.splitSkills(context.groupedItems.groupedSkills, context.groupedItems.abilities);
+    const skillsTabContent = this.splitSkills(context.groupedItems.groupedSkills);
     return _.merge(context, {
       enrichedNotes,
       isCharacter: true,

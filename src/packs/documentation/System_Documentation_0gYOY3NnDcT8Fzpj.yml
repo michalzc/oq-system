@@ -6,7 +6,6 @@ image: null
 name: System Documentation
 ownership:
   default: 0
-  jzN44THfEHA8DC8v: 3
 pages:
   - _id: UTjphPIpYI0hCNn0
     flags: {}
@@ -14,7 +13,6 @@ pages:
     name: Actors
     ownership:
       default: -1
-      jzN44THfEHA8DC8v: 3
     sort: 100000
     src: null
     system: {}
@@ -80,7 +78,6 @@ pages:
     name: Items
     ownership:
       default: -1
-      jzN44THfEHA8DC8v: 3
     sort: 200000
     src: null
     system: {}
@@ -138,7 +135,6 @@ pages:
     name: Chat Commands
     ownership:
       default: -1
-      jzN44THfEHA8DC8v: 3
     sort: 300000
     src: null
     system: {}
@@ -167,7 +163,6 @@ pages:
     name: Combat
     ownership:
       default: -1
-      jzN44THfEHA8DC8v: 3
     sort: 400000
     src: null
     system: {}

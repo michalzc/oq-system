@@ -1,5 +1,4 @@
 import { OQBaseItem } from './base-item.js';
-import _ from 'lodash-es';
 
 export class OQEquipment extends OQBaseItem {
   prepareBaseData() {
@@ -11,10 +10,7 @@ export class OQEquipment extends OQBaseItem {
       ? this.system.encumbrance * quantity
       : this.system.encumbrance;
 
-    _.merge(this.system, {
-      quantity,
-      totalEncumbrance,
-    });
+    Object.assign(this.system, { quantity, totalEncumbrance });
   }
 
   getItemDataForChat() {
@@ -26,9 +22,10 @@ export class OQEquipment extends OQBaseItem {
       quantity && { label: `OQ.Labels.Quantity`, value: quantity },
     ].filter((field) => !!field);
 
-    return _.merge(context, {
+    return {
+      ...context,
       itemSubtypeLabel: `OQ.Labels.EquipmentTypes.${this.system.type}`,
       fields,
-    });
+    };
   }
 }

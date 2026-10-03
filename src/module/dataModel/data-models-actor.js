@@ -135,11 +135,9 @@ class OQActorDataModel extends foundry.abstract.TypeDataModel {
   /* override */
   prepareBaseData() {
     super.prepareBaseData();
-    const characteristics = _.mapValues(this.characteristics, (characteristic) => ({
-      ...characteristic,
-      value: characteristic.base + characteristic.mod,
-    }));
-    _.merge(this, { characteristics });
+    for (const characteristic of Object.values(this.characteristics)) {
+      characteristic.value = characteristic.base + characteristic.mod;
+    }
   }
 }
 
