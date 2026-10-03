@@ -4,7 +4,7 @@ import _ from 'lodash-es';
 export class OQSkillSheet extends OQBaseItemSheet {
   async getData(options) {
     const baseData = await super.getData(options);
-    return mergeObject(baseData, {
+    return _.merge(baseData, {
       skillTypes: this.getSkillTypes(),
       customType: this.item.system.type === 'custom',
       assigned: Boolean(this.item.parent),

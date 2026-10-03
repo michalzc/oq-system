@@ -15,6 +15,7 @@ export class OQBaseItemSheet extends foundry.appv1.sheets.ItemSheet {
       this.item.system.description,
     );
     return _.merge(data, {
+      system: this.item.system,
       enrichedDescription,
     });
   }
