@@ -9,7 +9,7 @@ theming (C8). Porting on v14 means writing the new sheets once, against the fina
 1. **v14 release** — AppV1 sheets unchanged:
    1. ~~B13 — Node 24 and Foundry 14 in `flake.nix`; check that the build toolchain runs on Node 24.~~
    2. ~~B8 and B10 together, so every item type has a `TypeDataModel` schema and `template.json` can go.~~
-   3. B12, ~~B6 (core part: `messageMode`)~~, ~~B11~~, ~~B5~~, ~~B9~~.
+   3. ~~B12~~, ~~B6 (core part: `messageMode`)~~, ~~B11~~, ~~B5~~, ~~B9~~.
    4. Raise the minimum compatible version to 14 and test in a v14 world.
 2. **AppV2 port on v14** — C, folding in E. AppV1 and AppV2 sheets can be registered side by side, so this can ship
    in pieces:
@@ -365,7 +365,7 @@ version X until it is removed in version Y.
   `chatMessage` hook.
 - _inferred_ — confirm in a running v14 world.
 
-### [ ] B12. Settings registered in `ready`
+### [x] B12. Settings registered in `ready`
 
 - **Where:** `src/module/oq.js:34`, `src/module/init/register-settings.js:15`
 - **Problem:** the default-items compendium setting is registered in `ready` because its `choices` need `game.packs`.
