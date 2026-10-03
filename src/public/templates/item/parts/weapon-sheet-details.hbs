@@ -1,57 +1,57 @@
 <div class="item-details">
-  <label for="hands">{{ localize 'OQ.Labels.Hands'}}</label>
-  <select id="hands" name="system.hands">
+  <label for="{{rootId}}-hands">{{ localize 'OQ.Labels.Hands'}}</label>
+  <select id="{{rootId}}-hands" name="system.hands">
     {{ selectOptions weaponHandsList selected=system.hands localize=true }}
   </select>
 
-  <label for="weaponType">{{ localize 'OQ.Labels.WeaponType'}}</label>
-  <select id="weaponType" name="system.type">
+  <label for="{{rootId}}-weaponType">{{ localize 'OQ.Labels.WeaponType'}}</label>
+  <select id="{{rootId}}-weaponType" name="system.type">
     {{ selectOptions weaponTypeList selected=system.type localize=true }}
   </select>
 
   {{#if (eq system.type 'ranged')}}
-    <label for="range">{{ localize 'OQ.Labels.Range'}}</label>
-    <input id="range" type="text" data-dtype="String" name="system.rangeFormula" value="{{ system.rangeFormula }}">
+    <label for="{{rootId}}-range">{{ localize 'OQ.Labels.Range'}}</label>
+    <input id="{{rootId}}-range" type="text" data-dtype="String" name="system.rangeFormula" value="{{ system.rangeFormula }}">
 
-    <label for="rate">{{ localize 'OQ.Labels.FireRate'}}</label>
-    <input id="rate" type="text" data-dtype="String" name="system.rate" value="{{ system.rate }}">
+    <label for="{{rootId}}-rate">{{ localize 'OQ.Labels.FireRate'}}</label>
+    <input id="{{rootId}}-rate" type="text" data-dtype="String" name="system.rate" value="{{ system.rate }}">
   {{/if}}
 
-  <label for="encumbrance">{{ localize 'OQ.Labels.Encumbrance'}}</label>
-  <input id="encumbrance" type="number" data-dtype="Number" name="system.encumbrance" value="{{ system.encumbrance }}">
+  <label for="{{rootId}}-encumbrance">{{ localize 'OQ.Labels.Encumbrance'}}</label>
+  <input id="{{rootId}}-encumbrance" type="number" data-dtype="Number" name="system.encumbrance" value="{{ system.encumbrance }}">
 
-  <label for="cost">{{ localize 'OQ.Labels.Cost'}}</label>
-  <input id="cost" type="number" data-dtype="Number" name="system.cost" value="{{ system.cost }}">
+  <label for="{{rootId}}-cost">{{ localize 'OQ.Labels.Cost'}}</label>
+  <input id="{{rootId}}-cost" type="number" data-dtype="Number" name="system.cost" value="{{ system.cost }}">
 
-  <label for="skillReference">{{localize 'OQ.Labels.Skill'}}</label>
+  <label for="{{rootId}}-skillReference">{{localize 'OQ.Labels.Skill'}}</label>
   <div class="skill-reference">
     {{#if this.item.parent}}
-      <select id="skillReference" class="skill-reference-slug" name="system.correspondingSkill.skillReference">
+      <select id="{{rootId}}-skillReference" class="skill-reference-slug" name="system.correspondingSkill.skillReference">
         {{ selectOptions parentSkills
                          selected=system.correspondingSkill.skillReference blank='' sort=true }}
       </select>
 
     {{else}}
-      <input id="skillReference" class="skill-reference-slug" type="text" data-dtype="String"
+      <input id="{{rootId}}-skillReference" class="skill-reference-slug" type="text" data-dtype="String"
              name="system.correspondingSkill.skillReference" value="{{ system.correspondingSkill.skillReference }}">
     {{/if}}
-    <label class="skill-reference-modlabel" for="skillMod">{{ localize 'OQ.Labels.Mod' }}</label>
-    <input id="skillMod" class="skill-reference-mod" type="number" data-dtype="Number"
+    <label class="skill-reference-modlabel" for="{{rootId}}-skillMod">{{ localize 'OQ.Labels.Mod' }}</label>
+    <input id="{{rootId}}-skillMod" class="skill-reference-mod" type="number" data-dtype="Number"
            name="system.correspondingSkill.skillMod" value="{{system.correspondingSkill.skillMod}}">
   </div>
 
-  <label for="itemState">{{ localize 'OQ.Labels.State'}}</label>
-  <select id="itemState" name="system.state">
+  <label for="{{rootId}}-itemState">{{ localize 'OQ.Labels.State'}}</label>
+  <select id="{{rootId}}-itemState" name="system.state">
     {{selectOptions itemStates selected=system.state localize=true }}
   </select>
 
 
-  <label for="damage">{{localize 'OQ.Labels.Damage'}}</label>
+  <label for="{{rootId}}-damage">{{localize 'OQ.Labels.Damage'}}</label>
   <div class="input-with-checkbox">
-    <input id="damage" type="text" data-dtype="String" name="system.damage.damageFormula"
+    <input id="{{rootId}}-damage" type="text" data-dtype="String" name="system.damage.damageFormula"
            value="{{ system.damage.damageFormula }}">
-    <label for="includeDamageMod" class="damage-mod-label">{{ localize 'OQ.Labels.IncludeDamageMod' }}</label>
-    <input id="includeDamageMod" type="checkbox" name="system.damage.includeDamageMod" {{ checked
+    <label for="{{rootId}}-includeDamageMod" class="damage-mod-label">{{ localize 'OQ.Labels.IncludeDamageMod' }}</label>
+    <input id="{{rootId}}-includeDamageMod" type="checkbox" name="system.damage.includeDamageMod" {{ checked
       system.damage.includeDamageMod }}>
   </div>
 

@@ -1,42 +1,42 @@
 <div class="item-details">
-  <label for="type">{{ localize 'OQ.Labels.SpellType' }}</label>
-  <select id="type" name="system.type">
+  <label for="{{rootId}}-type">{{ localize 'OQ.Labels.SpellType' }}</label>
+  <select id="{{rootId}}-type" name="system.type">
     {{selectOptions spellTypes selected=system.type localize=true }}
   </select>
 
   <label></label>
   <div class="input-with-checkbox">
-    <label for="nonVariable">{{ localize 'OQ.Labels.NonVariable' }}</label>
-    <input id="nonVariable" type="checkbox" name="system.nonVariant" {{checked system.nonVariant }}>
+    <label for="{{rootId}}-nonVariable">{{ localize 'OQ.Labels.NonVariable' }}</label>
+    <input id="{{rootId}}-nonVariable" type="checkbox" name="system.nonVariant" {{checked system.nonVariant }}>
 
-    <label for="noMagicPoints">{{ localize 'OQ.Labels.NoMagicPoints' }}</label>
-    <input id="noMagicPoints" type="checkbox" name="system.noMagicPoints" {{checked system.noMagicPoints}}>
+    <label for="{{rootId}}-noMagicPoints">{{ localize 'OQ.Labels.NoMagicPoints' }}</label>
+    <input id="{{rootId}}-noMagicPoints" type="checkbox" name="system.noMagicPoints" {{checked system.noMagicPoints}}>
   </div>
-  <label for="magnitude">{{ localize 'OQ.Labels.Magnitude'}}</label>
+  <label for="{{rootId}}-magnitude">{{ localize 'OQ.Labels.Magnitude'}}</label>
   <div class="input-with-checkbox">
     {{#if system.noMagicPoints}}
       {{#if hasSplitDivineCasting}}
-        <input id="remainingMagnitude" type="number" data-dtype="Number" name="system.remainingMagnitude" value="{{ system.remainingMagnitude }}">
+        <input id="{{rootId}}-remainingMagnitude" type="number" data-dtype="Number" name="system.remainingMagnitude" value="{{ system.remainingMagnitude }}">
         <label>{{ localize 'OQ.Labels.of' }}</label>
       {{else}}
-        <label for="expended">{{ localize 'OQ.Labels.Expended' }}</label>
-        <input id="expended" class="expended-spell" type="checkbox" name="expended" {{ checked expended }}>
+        <label for="{{rootId}}-expended">{{ localize 'OQ.Labels.Expended' }}</label>
+        <input id="{{rootId}}-expended" class="expended-spell" type="checkbox" {{ checked expended }}>
       {{/if}}
 
     {{/if}}
-    <input id="magnitude" type="number" data-dtype="Number" name="system.magnitude" value="{{ system.magnitude }}">
+    <input id="{{rootId}}-magnitude" type="number" data-dtype="Number" name="system.magnitude" value="{{ system.magnitude }}">
 
   </div>
-  <label for="skillReference">{{localize 'OQ.Labels.Skill'}}</label>
+  <label for="{{rootId}}-skillReference">{{localize 'OQ.Labels.Skill'}}</label>
   {{#if this.item.parent}}
-    <select id="skillReference" class="skill-reference-slug" name="system.skillReference">
+    <select id="{{rootId}}-skillReference" class="skill-reference-slug" name="system.skillReference">
       {{ selectOptions parentSkills
                        selected=system.skillReference blank='' sort=true }}
     </select>
 
   {{else}}
-    <input id="skillReference" class="skill-reference-slug" type="text" data-dtype="String"
-           name="system.correspondingSkill.skillReference" value="{{ system.skillReference }}">
+    <input id="{{rootId}}-skillReference" class="skill-reference-slug" type="text" data-dtype="String"
+           name="system.skillReference" value="{{ system.skillReference }}">
   {{/if}}
 
   {{> systems/oq/templates/item/parts/traits.hbs }}

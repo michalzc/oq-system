@@ -450,9 +450,19 @@ version X until it is removed in version Y.
 ## C. AppV2 migration work
 
 - [ ] **C1. Port the sheets.**
-  - Actor and item sheets → `foundry.applications.sheets.ActorSheetV2` / `ItemSheetV2` with
-    `HandlebarsApplicationMixin`.
-  - Forms and dialogs → `ApplicationV2`, or `foundry.applications.api.DialogV2.input/prompt` for the simple ones:
+  - [x] **Part 1 — ItemSheets:** all six item sheets use `foundry.applications.sheets.ItemSheetV2` with
+    `HandlebarsApplicationMixin`, `DEFAULT_OPTIONS`, `PARTS` and `_prepareContext`. The default document form handler
+    saves on change; descriptions use the native `prose-mirror` element and portraits use core's `editImage` action.
+    Item-sheet jQuery, timed focus and redundant re-renders are removed (item portions of C2, C3 and C5).
+    Trait deletion uses an action; trait input and spell expenditure use guarded form-change handlers. Field ids are
+    scoped to each sheet, and resized sheets scroll while preserving their scroll position. The standalone spell's
+    skill-reference field now submits `system.skillReference`.
+    The item sheets explicitly retain the light parchment theme pending broader theme support (C8).
+    Validated on Foundry 14.368: all six types, conditional fields, world and actor-owned item saving, traits and focus,
+    rich-text saving and enriched links, image picking, spell expenditure and remaining magnitude, simultaneous sheets,
+    and read-only controls/actions/secret descriptions. Lint, build and all 36 unit tests pass.
+  - [ ] **Part 2 — ActorSheets:** `foundry.applications.sheets.ActorSheetV2` with `HandlebarsApplicationMixin`.
+  - [ ] Forms and dialogs → `ApplicationV2`, or `foundry.applications.api.DialogV2.input/prompt` for the simple ones:
     test-roll, damage-roll, attributes, characteristics, short description.
 - [ ] **C2. Remove jQuery.** It is used throughout: `html.find(...).on(...)`, `$(...).closest(...).data()`, and
   `$(this.form).find(...)`. Replace it with `static DEFAULT_OPTIONS.actions` (`data-action`) and `_onRender` listeners.
@@ -460,7 +470,7 @@ version X until it is removed in version Y.
   - `damage-roll-dialog.js:49`
   - `test-roll-dialog.js:63`
   - `characteristics-dialog.js:62`
-  - `base-item-sheet.js:58`
+  - ~~`base-item-sheet.js:58`~~ — removed in C1 part 1; trait focus is restored in `_onRender`.
 
   Use `_onRender` and the form `autofocus` attribute instead.
 - [ ] **C4. Unique application ids.** The dialogs use fixed ids (`attributes-dialog`, `characteristics-dialog`,
