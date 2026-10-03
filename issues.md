@@ -9,7 +9,7 @@ theming (C8). Porting on v14 means writing the new sheets once, against the fina
 1. **v14 release** — AppV1 sheets unchanged:
    1. ~~B13 — Node 24 and Foundry 14 in `flake.nix`; check that the build toolchain runs on Node 24.~~
    2. ~~B8 and B10 together, so every item type has a `TypeDataModel` schema and `template.json` can go.~~
-   3. B12, B6 (core part: `messageMode`), ~~B11~~, ~~B5~~, B9.
+   3. B12, B6 (core part: `messageMode`), ~~B11~~, ~~B5~~, ~~B9~~.
    4. Raise the minimum compatible version to 14 and test in a v14 world.
 2. **AppV2 port on v14** — C, folding in E. AppV1 and AppV2 sheets can be registered side by side, so this can ship
    in pieces:
@@ -335,7 +335,7 @@ version X until it is removed in version Y.
 - **Fix:** extend `foundry.abstract.TypeDataModel`. The three copy-pasted `_preUpdate` icon-swap methods (Weapon,
   Equipment, Spell, all marked `FIXME`) can then become one helper on the models.
 
-### [ ] B9. Context menu entry format
+### [x] B9. Context menu entry format
 
 - **Where:** `src/module/sheet/actor/actor-base-sheet.js:74-78` (`statusMenu`)
 - **Problem:** v14 deprecates `ContextMenuEntry#callback` and `#condition` (14→16). The new fields are `onClick(event,
