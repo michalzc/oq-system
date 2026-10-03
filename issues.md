@@ -9,7 +9,7 @@ theming (C8). Porting on v14 means writing the new sheets once, against the fina
 1. **v14 release** — AppV1 sheets unchanged:
    1. ~~B13 — Node 24 and Foundry 14 in `flake.nix`; check that the build toolchain runs on Node 24.~~
    2. ~~B8 and B10 together, so every item type has a `TypeDataModel` schema and `template.json` can go.~~
-   3. B12, B6 (core part: `messageMode`), ~~B11~~, ~~B5~~, ~~B9~~.
+   3. B12, ~~B6 (core part: `messageMode`)~~, ~~B11~~, ~~B5~~, ~~B9~~.
    4. Raise the minimum compatible version to 14 and test in a v14 world.
 2. **AppV2 port on v14** — C, folding in E. AppV1 and AppV2 sheets can be registered side by side, so this can ship
    in pieces:
@@ -286,7 +286,7 @@ version X until it is removed in version Y.
 - **Done:** the copied templates are gone. `OQCombatTracker` renders the core templates and applies the OQ changes in
   `_onRender` (bulk rolls removed, initiative read-only, initiative item name shown). This is a stopgap — see C10.
 
-### [ ] B6. Roll mode → message mode (and the system ignores roll mode today)
+### [x] B6. Roll mode → message mode (and the system ignores roll mode today)
 
 - **Where:** all `ChatMessage.create` calls:
   - `src/module/utils/roll.js`
@@ -307,6 +307,8 @@ version X until it is removed in version Y.
 - **Fix:** implement visibility directly against the v14 API, e.g.
   `ChatMessage.create(data, { messageMode: game.settings.get('core', 'messageMode') })`. Optionally expose a mode
   selector in the roll dialogs.
+- **Done:** every system message goes through `createChatMessage` (`src/module/utils/chat.js`), which passes the
+  selected `core.messageMode`. The mode selector in the roll dialogs is left for the AppV2 dialog port (sequence 2.2).
 
 ### [ ] B7. ApplicationV1 is deprecated (removed in v16)
 

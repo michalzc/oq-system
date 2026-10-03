@@ -1,4 +1,5 @@
 import _ from 'lodash-es';
+import { createChatMessage } from '../utils/chat.js';
 
 const renderTemplate = foundry.applications.handlebars.renderTemplate;
 const ChatLog = foundry.applications.sidebar.tabs.ChatLog;
@@ -9,7 +10,7 @@ async function sendAdjustMessage(rollString, type, chatData) {
   const renderedRoll = await roll.render();
   const content = await renderTemplate(CONFIG.OQ.ChatConfig.adjustmentTemplate, { roll, renderedRoll, type });
   const messageFlags = CONFIG.OQ.ChatConfig.MessageFlags;
-  await ChatMessage.create({
+  await createChatMessage({
     ...chatData,
     rolls: [roll],
     content,

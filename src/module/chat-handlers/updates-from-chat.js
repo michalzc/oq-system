@@ -1,5 +1,6 @@
 import _ from 'lodash-es';
 import { formatString } from '../utils/utils.js';
+import { createChatMessage } from '../utils/chat.js';
 
 function findTargets() {
   const targetTokens = canvas.tokens.controlled;
@@ -9,7 +10,7 @@ function findTargets() {
 const nameFromActor = (actor) => actor?.parent?.name ?? actor.name;
 
 async function sendMessage(messageKey, actor, delta) {
-  await ChatMessage.create({
+  await createChatMessage({
     speaker: ChatMessage.getSpeaker(),
     style: CONST.CHAT_MESSAGE_STYLES.OOC,
     content: formatString(game.i18n.localize(messageKey), nameFromActor(actor), delta),

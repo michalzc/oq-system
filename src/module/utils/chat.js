@@ -1,6 +1,16 @@
 import _ from 'lodash-es';
 
-const renderTemplate = foundry.applications.handlebars.renderTemplate;
+const renderTemplate = (...args) => foundry.applications.handlebars.renderTemplate(...args);
+
+/**
+ * Creates a chat message with the visibility selected in the chat log (public, private to GMs, blind, self or in
+ * character). Without the `messageMode` option core posts every message publicly.
+ * @param {object} messageData
+ * @returns {Promise<ChatMessage|undefined>}
+ */
+export function createChatMessage(messageData) {
+  return ChatMessage.create(messageData, { messageMode: game.settings.get('core', 'messageMode') });
+}
 
 /**
  * @typedef {object} FieldData
@@ -33,7 +43,7 @@ export async function displayItem(itemData) {
       traits,
     }),
   );
-  await ChatMessage.create({
+  await createChatMessage({
     speaker: itemData.speaker,
     style: CONST.CHAT_MESSAGE_STYLES.IC,
     content,
