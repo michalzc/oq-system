@@ -16,6 +16,26 @@ esmodules:
   - module/oq.js
 styles:
   - styles/oq.css
+documentTypes:
+  # htmlFields paths are relative to `system`; the server sanitises these fields.
+  Actor:
+    character:
+      htmlFields: [personal.notes]
+    npc:
+      htmlFields: [personal.description, personal.shortDescription]
+  Item:
+    skill:
+      htmlFields: [description]
+    weapon:
+      htmlFields: [description]
+    armour:
+      htmlFields: [description]
+    equipment:
+      htmlFields: [description]
+    spell:
+      htmlFields: [description]
+    specialAbility:
+      htmlFields: [description]
 packs:
   - name: oq-system-basic-skills
     label: Skills
