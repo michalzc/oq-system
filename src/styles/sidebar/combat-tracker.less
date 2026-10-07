@@ -1,28 +1,39 @@
-.combat-sidebar {
-  .combat-tracker {
-    .oq-token-name-container {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      gap: 5px;
-    }
+.oq-combat-tracker .combat-tracker {
+  .combatant {
+    flex-wrap: wrap;
+  }
 
-    .oq-token-name {
-      flex: 0 1 auto;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
+  .token-name {
+    min-width: 0;
+  }
 
+  .initiative-name {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-12);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .oq-declaration {
+    display: flex;
+    flex: 0 0 100%;
+    align-items: center;
+    gap: 6px;
+    padding: 0 4px 4px;
+
+    select,
     .initiative-name {
-      color: var(--color-text-secondary);
-      flex: 0 1 auto;
-      font-size: var(--font-size-12);
-      overflow: hidden;
-      white-space: nowrap;
-      text-align: right;
-      margin-left: 2px;
+      flex: 1;
+      min-width: 0;
+      height: 26px;
+    }
+
+    .oq-declaration-mod {
+      flex: 0 0 48px;
+      width: 48px;
+      height: 26px;
+      text-align: center;
     }
   }
 }

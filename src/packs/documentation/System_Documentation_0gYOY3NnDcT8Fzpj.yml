@@ -168,20 +168,27 @@ pages:
     system: {}
     text:
       content: >-
-        <h1>Initiative</h1><p>On the character sheet, within the 'Combat' tab,
-        and on the NPC sheet, located in the 'Combat' section, there is a combo
-        box containing a list of skills, weapons, and special abilities that can
-        be selected as a base for initiative during combat. Adjacent to this box
-        is a field designated for an additional modifier.</p><p>Initiative
-        calculations solely consider the values of the chosen skill or special
-        ability without incorporating mods. Any additional modifiers can be
-        specified in the corresponding field.</p><h1>Combat Tracker</h1><p>In
-        this version, the combat tracker requires manually rerolling initiative
-        every turn. At the end of each round, the Game Master (GM) must click
-        the 'Reset Initiative' button on the Combat Tracker. Subsequently, both
-        players and the GM (for monsters and NPCs) update their initiative
-        values, if necessary. Once completed, the GM can then click the 'Reroll
-        Initiative' button and proceed to the next round.</p>
+        <h1>Initiative</h1><p>The character sheet's Combat tab and the NPC sheet's
+        Combat section offer skills and special abilities with roll formulas as
+        initiative actions. Initiative uses the selected action's value plus the
+        adjacent integer modifier, without the action's skill-roll modifiers.</p>
+        <h1>Combat Tracker</h1><p>Every encounter begins with Round 1 — Declaration
+        and no active participant. Owners choose actions and signed initiative
+        modifiers in the tracker or actor sheet. The GM can edit all participants.
+        Tracker changes also save the actor sheet's defaults.</p><p>The GM clicks
+        Start round to freeze each participant's action, modifier and total,
+        sort initiative descending, and begin the first eligible turn. Changes
+        to the actor sheet during execution apply to the next declaration phase.
+        Declaring an action records intent; it does not restrict later actions
+        or change skill-roll modifiers.</p><p>Ending the last eligible turn opens
+        the next round's declaration phase automatically. The GM's Next round
+        control does the same. Previous turn stays within the current round;
+        reopening earlier declarations is not supported.</p><p>Blank or deleted
+        actions use modifier-only initiative. Actorless participants use zero.
+        Participants added during execution wait until the next round. Foundry's
+        defeated-participant skipping applies, and the GM cannot start a round
+        without any eligible participants. A connected GM and Query Users
+        permission are required for player tracker edits and turn advancement.</p>
       format: 1
     title:
       level: 1

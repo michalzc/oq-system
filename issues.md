@@ -7,9 +7,9 @@ verifies Foundry 14; the development environment pins Foundry 14.368 and Node.js
 
 - Both actor sheets and all six item sheets use the v2 document sheet classes with `HandlebarsApplicationMixin`.
 - All five dialogs use `ApplicationV2` or `DialogV2`.
-- `OQCombatTracker` extends Foundry's v2 `CombatTracker`. Its redesign (C10) remains open as a separate follow-up.
+- `OQCombatTracker` extends Foundry's v2 `CombatTracker`, with owned templates and declarations before every round (C10).
 - No AppV1 classes, legacy application lifecycle methods or jQuery usage remain in the system code.
-- C1–C9 are complete. C8 uses the permitted forced light theme; dark-theme support and CSS layers are optional
+- C1–C10 are complete. C8 uses the permitted forced light theme; dark-theme support and CSS layers are optional
   future improvements.
 
 Verification on 2026-10-07: source review and the running Foundry 14.368 `oq-dev` world confirmed all registered OQ
@@ -25,7 +25,7 @@ below cover those checks.
    removal of `template.json`, the B compatibility fixes, and a minimum compatible version of 14.
 2. **Completed: AppV2 port on v14** — the six item sheets, five dialogs and two actor sheets, including C1–C9
    and the E cleanups.
-3. **Remaining: combat tracker redesign** (C10) — independent of the completed framework migration.
+3. **Completed: combat tracker redesign** (C10) — declarations, frozen round initiative and owned AppV2 templates.
 
 ---
 
@@ -554,26 +554,24 @@ version X until it is removed in version Y.
   roll/chat listeners before the `isEditable` check. Use `actions` plus permission checks in the new sheets.
   - **Done** in C1 part 2: editing actions check `isEditable` and their controls are hidden; rolls and chat cards
     check ownership.
-- [ ] **C10. Redesign the combat tracker.** The current tracker is a placeholder: core's tracker with the OQ changes
-  patched into the DOM in `_onRender` (B5). Rethink how OQ combat should work, then reimplement the tracker properly.
-  - **Framework migration complete:** `OQCombatTracker` already extends
-    `foundry.applications.sidebar.tabs.CombatTracker`, which is an ApplicationV2 application in v14. The remaining
-    work is the OQ combat workflow and tracker redesign.
-  - First decide whether OQ's combat flow fits core's turn order. If it does, extend `CombatTracker` (`PARTS`, context
-    preparation, `actions`). If it doesn't, write an own ApplicationV2 sidebar tab registered as `CONFIG.ui.combat`,
-    which means reimplementing what core provides: hover and ping, context menus, encounter cycling, turn controls and
-    pop-out.
-  - Initiative is derived from the actor (`initiative: "@attributes.initiative.value"` in `system.yaml`), so core's
-    roll buttons already produce the right value. Overriding `OQCombat#rollInitiative` to set it without a dice
-    message would let the core buttons stay instead of being removed.
-  - Keep the initiative item name per combatant, and review the combatant context menu (`_getEntryContextOptions`:
-    "Clear" and "Reroll" initiative).
-  - Today "Reset Initiative" (encounter menu) and "Clear" set initiative to `null`, and with the roll buttons removed
-    nothing restores it until `OQCombat.refreshInitiative` runs at the next round, so turn order is arbitrary until
-    then.
-  - The stopgap passes `initiativeName` from `_prepareTurnContext` to `_onRender` through `context.turns`, which relies
-    on core giving both the same context object (`combat-tracker.js:16`). Reading the name from the combatant in
-    `adjustTurns` would be simpler, if the stopgap lives long enough to matter.
+- [x] **C10. Redesign the combat tracker.**
+  - Every encounter opens in **Round 1 — Declaration**. Owners choose a rollable skill or special ability and an
+    integer modifier using the actor-sheet defaults. The active GM validates and serializes tracker edits and
+    transitions using authenticated user queries.
+  - **Start round** freezes per-combatant action identity, name, modifier and total, orders initiative descending
+    with core ties, and starts the first eligible turn. The last eligible turn and **Next round** enter declaration
+    without advancing time or firing turn events. **Previous turn** stays within the executing round.
+  - Owned AppV2 header/tracker/footer templates retain encounter management, effects, resources, token controls,
+    menus and pop-outs. Conflicting initiative roll/clear/reset controls are gone. Actor/item/synthetic-token changes
+    refresh declaration previews while preserving focused fields and unsent modifier text.
+  - Saved flags restore declarations and snapshots. Late arrivals wait until the next round; defeated skipping,
+    actorless/blank actions, linked and synthetic actors, legacy encounters and participant removal are supported.
+  - **Validation (2026-10-07, Foundry 14.368):** a GM and two players in isolated browser contexts checked ownership,
+    authenticated rejection, actor-sheet and item synchronization, frozen values, duplicate starts, final-turn
+    advancement, GM disconnect errors, reconnects, hidden rows, linked/unlinked tokens, removals, defeated skipping
+    and sidebar/pop-out parity. Lifecycle callbacks and hooks occurred once at execution; declaration entry advanced
+    no world time, and Start round charged the saved previous order exactly once. Temporary test documents/users
+    were removed and tracker settings/world time restored. All 54 unit tests, lint and the full build passed.
 
 ---
 
