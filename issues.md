@@ -1,29 +1,37 @@
-# Pre-migration review — known issues
+# Migration review — status and known issues
+
+## Current status (2026-10-07)
+
+The Foundry v14 compatibility pass and ApplicationV2 framework migration are complete. The manifest requires and
+verifies Foundry 14; the development environment pins Foundry 14.368 and Node.js 24.
+
+- Both actor sheets and all six item sheets use the v2 document sheet classes with `HandlebarsApplicationMixin`.
+- All five dialogs use `ApplicationV2` or `DialogV2`.
+- `OQCombatTracker` extends Foundry's v2 `CombatTracker`. Its redesign (C10) remains open as a separate follow-up.
+- No AppV1 classes, legacy application lifecycle methods or jQuery usage remain in the system code.
+- C1–C9 are complete. C8 uses the permitted forced light theme; dark-theme support and CSS layers are optional
+  future improvements.
+
+Verification on 2026-10-07: source review and the running Foundry 14.368 `oq-dev` world confirmed all registered OQ
+sheets and the combat tracker inherit from ApplicationV2. Rendering smoke tests passed for both actor sheets, all
+six item sheets and all five dialogs. Roll dialogs focused their inputs, offered visibility choices and closed
+without posting chat messages. No console warnings or errors appeared. `yarn lint`, `yarn build` and all 36 unit
+tests passed. This pass did not repeat every saving or gameplay interaction; the earlier C1 validation records
+below cover those checks.
 
 ## Migration sequence
 
-v14 first, with the existing AppV1 sheets, then the AppV2 port on v14. AppV1 still works in v14 (it is removed in v16),
-and several v14 changes land in the code the port rewrites: B6, B9, `data-tooltip-html`, Handlebars `preventIndent` and
-theming (C8). Porting on v14 means writing the new sheets once, against the final API.
-
-1. **v14 release** — AppV1 sheets unchanged:
-   1. ~~B13 — Node 24 and Foundry 14 in `flake.nix`; check that the build toolchain runs on Node 24.~~
-   2. ~~B8 and B10 together, so every item type has a `TypeDataModel` schema and `template.json` can go.~~
-   3. ~~B12~~, ~~B6 (core part: `messageMode`)~~, ~~B11~~, ~~B5~~, ~~B9~~.
-   4. ~~Raise the minimum compatible version to 14 and test in a v14 world.~~
-2. **AppV2 port on v14** — C, folding in E. AppV1 and AppV2 sheets can be registered side by side, so this can ship
-   in pieces:
-   1. ~~The six item sheets — they share a base class and are the simplest.~~
-   2. ~~The dialogs, mostly with `DialogV2`; add the B6 message mode selector here.~~
-   3. ~~The two actor sheets, with jQuery removal (C2)~~ and theming (C8).
-3. **Combat tracker redesign** (C10) — independent of the sheets, so it can be scheduled on its own.
-
-Stay on v13 for the port only if the group has to remain on v13 for a while (for example, modules it relies on aren't
-updated yet).
+1. **Completed: v14 compatibility** — Node 24 and Foundry 14 in `flake.nix`, data models for every item type,
+   removal of `template.json`, the B compatibility fixes, and a minimum compatible version of 14.
+2. **Completed: AppV2 port on v14** — the six item sheets, five dialogs and two actor sheets, including C1–C9
+   and the E cleanups.
+3. **Remaining: combat tracker redesign** (C10) — independent of the completed framework migration.
 
 ---
 
-Code review of the whole system ahead of the migration to Foundry VTT v14 and ApplicationV2 (2026-10-03).
+Original code review of the whole system ahead of the migration to Foundry VTT v14 and ApplicationV2 (2026-10-03).
+The findings below retain their original problem descriptions and source locations; checked entries have been
+resolved, with migration implementation and validation recorded in C.
 
 Scope: all of `src/module` (~3.5k lines), `src/public/templates`, `src/styles`, `src/packs`, manifest and build
 config. Findings were checked against the Foundry sources in the nix store (13.351 and 14.368, unminified `client/` and
@@ -34,7 +42,7 @@ config. Findings were checked against the Foundry sources in the nix store (13.3
 - _verified_ — confirmed by reading the system code and the matching Foundry source, or by running the code.
 - _inferred_ — follows from the source, but not reproduced in a running Foundry; confirm in-app before fixing.
 
-## Recommended order
+## Original recommended order (historical)
 
 1. **First batch — small, mostly data integrity:** A1–A5, A14, B1, B2, B3, B10, B13.
 2. **Rest of A** — still on v13, so behaviour can be compared before and after.
@@ -45,7 +53,7 @@ config. Findings were checked against the Foundry sources in the nix store (13.3
 
 ---
 
-## A. Bugs (present today on v13)
+## A. Bugs (original v13 findings)
 
 ### [x] A1. Armour items have no data model
 
@@ -534,11 +542,13 @@ version X until it is removed in version Y.
 - [x] **C7. Form handling.** AppV1 `_updateObject(event, formData)` with `update({system: formData})` becomes
   `form.handler` / `submitOnChange`. Field names should use full `system.*` paths so the default document submit works.
   - **Done** in C1: the sheets use the default document handler, and the actor dialogs a handler updating the actor.
-- [ ] **C8. Theming.** AppV2 sheets follow the user's colour scheme (dark by default), whereas AppV1 windows are forced
+- [x] **C8. Theming.** AppV2 sheets follow the user's colour scheme (dark by default), whereas AppV1 windows are forced
   to light. The styles (`src/styles`, ~1.4k lines of LESS) hard-code a light palette over `sheetbg.webp` and don't use
   CSS layers.
-  - Either force a light sheet theme, or define theme tokens and support both.
-  - Consider shipping the CSS in a `@layer` (system.json `styles: [{src, layer}]`).
+  - **Done** in C1: actor sheets, item sheets and dialogs explicitly use `themed` and `theme-light` to retain the
+    parchment palette. This satisfies the forced light theme option for the migration.
+  - **Optional follow-up:** define theme tokens to support both colour schemes, and consider shipping the CSS in a
+    `@layer` (system.json `styles: [{src, layer}]`).
 - [x] **C9. Listeners bound for read-only viewers.** The NPC sheet binds `.roll-characteristics` and
   `.show-short-description-dialog` even when the sheet isn't editable (`npc-sheet.js:28`). The base sheet binds the
   roll/chat listeners before the `isEditable` check. Use `actions` plus permission checks in the new sheets.
@@ -546,6 +556,9 @@ version X until it is removed in version Y.
     check ownership.
 - [ ] **C10. Redesign the combat tracker.** The current tracker is a placeholder: core's tracker with the OQ changes
   patched into the DOM in `_onRender` (B5). Rethink how OQ combat should work, then reimplement the tracker properly.
+  - **Framework migration complete:** `OQCombatTracker` already extends
+    `foundry.applications.sidebar.tabs.CombatTracker`, which is an ApplicationV2 application in v14. The remaining
+    work is the OQ combat workflow and tracker redesign.
   - First decide whether OQ's combat flow fits core's turn order. If it does, extend `CombatTracker` (`PARTS`, context
     preparation, `actions`). If it doesn't, write an own ApplicationV2 sidebar tab registered as `CONFIG.ui.combat`,
     which means reimplementing what core provides: hover and ping, context menus, encounter cycling, turn controls and
