@@ -28,9 +28,9 @@ The AppV2 sheets and dialogs, the new combat tracker and the pack cleanup are me
 * Optional: publish releases to the Foundry package registry from the release workflow —
   [#68](https://github.com/michalzc/oq-system/issues/68).
 * Tracker cleanup:
-  * Verify and close [#47](https://github.com/michalzc/oq-system/issues/47) (context menu) and
-    [#104](https://github.com/michalzc/oq-system/issues/104) (icons by item subtype).
-  * Close the v0.5 milestone; move its open issues to the milestones below.
+  * ~~Verify and close [#47](https://github.com/michalzc/oq-system/issues/47) (context menu) and
+    [#104](https://github.com/michalzc/oq-system/issues/104) (icons by item subtype).~~ **Done**
+  * ~~Close the v0.5 milestone; move its open issues to the milestones below.~~ **Done**
   * ~~Move `issues.md` to `docs/` as the migration record.~~ **Done**
 
 ### v0.8 — Magic and quality of life
