@@ -131,6 +131,12 @@ function actor(reference = 'action', mod = 0, value = 50, owner = 'player') {
   };
   return actor;
 }
+// Foundry removes the documents from the collection before calling the parent's handler.
+function remove(combat, ...ids) {
+  const documents = ids.map((id) => combat.combatants.get(id));
+  for (const id of ids) combat.combatants.delete(id);
+  combat._onDeleteDescendantDocuments(combat, 'combatants', documents, ids, {}, 'gm');
+}
 function participant(id, a = actor(), defeated = false) {
   return { id, actor: a, flags: {}, initiative: null, roundJoined: null, isDefeated: defeated };
 }
@@ -177,8 +183,13 @@ describe('Combat declarations', function () {
 
   beforeEach(function () {
     worldTime = 0;
-    globalThis.game = { user: gm, users: { activeGM: gm }, combats: new Map() };
-    globalThis.CONFIG = { queries: {}, time: { roundTime: 6, turnTime: 2 } };
+    globalThis.game = { user: gm, users: { activeGM: gm }, combats: new Map(), i18n: { localize: (key) => key } };
+    globalThis.CONFIG = {
+      queries: {},
+      time: { roundTime: 6, turnTime: 2 },
+      debug: {},
+      OQ: { ItemConfig: { itemTypes: { skill: 'skill', specialAbility: 'specialAbility' } } },
+    };
     globalThis.Hooks = { callAll: () => {} };
     globalThis.foundry = { documents: { ActiveEffect: { registry: { refresh: async () => {} } } } };
     globalThis.CONST = { REGION_EVENTS: {} };
@@ -343,7 +354,7 @@ describe('Combat declarations', function () {
     assert.equal(combat.round, 1);
     assert.equal(combat.turn, null);
     combat.combatants.get('alive').isDefeated = true;
-    await assert.rejects(combat.startRound(), /No eligible/);
+    await assert.rejects(combat.startRound(), /Errors.NoEligible/);
   });
 
   it('guards duplicate starts and rejects stale edits and stale turn requests', async function () {
@@ -352,10 +363,10 @@ describe('Combat declarations', function () {
     const results = await Promise.allSettled([combat.startRound(), combat.startRound()]);
     assert.equal(results.filter((r) => r.status === 'fulfilled').length, 1);
     assert.equal(combat.round, 1);
-    await assert.rejects(combat.updateDeclaration('a', { mod: 2 }, stale), /advanced/);
+    await assert.rejects(combat.updateDeclaration('a', { mod: 2 }, stale), /Errors.Advanced/);
     const state = combat._requestState();
     await combat.nextRound();
-    await assert.rejects(combat._request('nextTurn', {}, state), /advanced/);
+    await assert.rejects(combat._request('nextTurn', {}, state), /Errors.Advanced/);
   });
 
   it('validates authenticated ownership, action identity and integer modifiers', async function () {
@@ -363,11 +374,14 @@ describe('Combat declarations', function () {
     const request = { ...combat._requestState(), operation: 'edit', combatantId: 'owned', mod: -2 };
     await combat._enqueueRequest(request, player);
     assert.equal(combat.combatants.get('owned').actor.system.attributes.initiative.mod, -2);
-    await assert.rejects(combat._enqueueRequest({ ...request, combatantId: 'other' }, player), /own this actor/);
-    await assert.rejects(combat._enqueueRequest({ ...request, mod: 1.5 }, player), /whole number/);
-    await assert.rejects(combat._enqueueRequest({ ...request, reference: 'missing' }, player), /no longer available/);
-    await assert.rejects(combat._enqueueRequest({ ...request, operation: 'start' }, player), /Only the GM/);
-    await assert.rejects(combat._enqueueRequest({ ...request, phase: 'execution' }, player), /advanced/);
+    await assert.rejects(combat._enqueueRequest({ ...request, combatantId: 'other' }, player), /Errors.NotOwner/);
+    await assert.rejects(combat._enqueueRequest({ ...request, mod: 1.5 }, player), /IntegerModifier/);
+    await assert.rejects(
+      combat._enqueueRequest({ ...request, reference: 'missing' }, player),
+      /Errors.ActionUnavailable/,
+    );
+    await assert.rejects(combat._enqueueRequest({ ...request, operation: 'start' }, player), /Errors.NotYourTurn/);
+    await assert.rejects(combat._enqueueRequest({ ...request, phase: 'execution' }, player), /Errors.Advanced/);
   });
 
   it('serializes independent fields without overwriting simultaneous choices', async function () {
@@ -379,7 +393,7 @@ describe('Combat declarations', function () {
   it('reports missing GMs and uses the authenticated query context', async function () {
     const combat = new OQCombat([participant('a')]);
     game.users.activeGM = null;
-    await assert.rejects(combat.updateDeclaration('a', { mod: 2 }), /No GM is connected/);
+    await assert.rejects(combat.updateDeclaration('a', { mod: 2 }), /Errors.NoGM/);
     game.users.activeGM = gm;
     game.combats.set(combat.id, combat);
     OQCombat.registerQueries();
@@ -388,19 +402,21 @@ describe('Combat declarations', function () {
         { ...combat._requestState(), combatId: combat.id, operation: 'edit', combatantId: 'a', mod: 2, userId: 'gm' },
         { user: { id: 'stranger', isGM: false } },
       ),
-      /own this actor/,
+      /Errors.NotOwner/,
     );
   });
 
   it('uses the saved previous order for skipped tail turns and charges time once at Start round', async function () {
     const combat = new OQCombat([participant('a', actor('', 30)), participant('z', actor('', 20), true)]);
     await combat.startRound();
+    await combat._declarationQueue;
     combat.events = [];
     await combat.nextTurn();
     assert.deepEqual(combat.events, []);
     assert.equal(worldTime, 0);
     await combat.updateDeclaration('z', { mod: 100 });
     await combat.startRound();
+    await combat._declarationQueue;
     assert.equal(worldTime, 12); // 6-second round, two remaining old turns, one leading skipped turn.
     assert.deepEqual(
       combat.events.map((event) => event.slice(0, 2)),
@@ -437,11 +453,96 @@ describe('Combat declarations', function () {
   it('removing the last eligible participant does not accidentally advance another round', async function () {
     const combat = new OQCombat([participant('a')]);
     await combat.startRound();
-    combat.combatants.delete('a');
-    combat._onDeleteDescendantDocuments();
+    remove(combat, 'a');
     await combat._declarationQueue;
     assert.equal(combat.round, 1);
     assert.equal(combat.declarationRound, 2);
     assert.equal(combat.turn, null);
+  });
+
+  it('opens declaration when the current final turn is removed, keeping the order from before the removal', async function () {
+    const combat = new OQCombat(['a', 'b', 'c'].map((id, i) => participant(id, actor('', 30 - i * 10))));
+    await combat.startRound();
+    await combat.nextTurn();
+    await combat.nextTurn();
+    remove(combat, 'c');
+    await combat._declarationQueue;
+    assert.equal(combat.isDeclaration, true);
+    assert.equal(combat.round, 1);
+    assert.deepEqual(combat.flags.oq.previousExecution, {
+      round: 1,
+      turn: 2,
+      combatantId: 'c',
+      tokenId: null,
+      order: ['a', 'b', 'c'],
+    });
+    await combat.startRound();
+    assert.equal(worldTime, 8); // 6-second round and the removed participant's remaining turn.
+  });
+
+  it('hands the turn to the next eligible participant when the current one is removed', async function () {
+    const combat = new OQCombat(['a', 'b', 'c'].map((id, i) => participant(id, actor('', 30 - i * 10))));
+    await combat.startRound();
+    await combat.nextTurn();
+    remove(combat, 'b');
+    await combat._declarationQueue;
+    assert.equal(combat.isDeclaration, false);
+    assert.equal(combat.combatant.id, 'c');
+  });
+
+  it('keeps a defeated current participant current until its turn ends', async function () {
+    const combat = new OQCombat([participant('a', actor('', 30)), participant('b', actor('', 20))]);
+    await combat.startRound();
+    await combat.nextTurn();
+    for (const c of combat.combatants) c.isDefeated = true;
+    combat.setupTurns();
+    assert.equal(combat.combatant.id, 'b');
+    combat.combatants.get('b').isDefeated = false;
+    combat.setupTurns();
+    assert.equal(combat.combatant.id, 'b');
+    combat.combatants.get('b').isDefeated = true;
+    combat.setupTurns();
+    await combat.nextTurn();
+    assert.equal(combat.isDeclaration, true);
+    assert.equal(combat.flags.oq.previousExecution.turn, 1);
+  });
+
+  it('answers before lifecycle events finish and holds later requests until they do', async function () {
+    let release;
+    const gate = new Promise((resolve) => (release = resolve));
+    const combat = new OQCombat([participant('a', actor('', 30)), participant('b', actor('', 20))]);
+    combat._onStartTurn = () => gate;
+    await combat.startRound();
+    const next = combat.nextTurn();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    assert.equal(combat.turn, 0);
+    release();
+    await next;
+    assert.equal(combat.turn, 1);
+  });
+
+  it('marks reported request failures and propagates other tracker errors', async function () {
+    const combat = new OQCombat([participant('a')]);
+    const reported = await combat.nextTurn().catch((error) => error);
+    assert.match(reported.message, /Errors.AskGMStart/);
+    assert.equal(reported.oqReported, true);
+    let failure;
+    globalThis.foundry.applications = {
+      sidebar: {
+        tabs: {
+          CombatTracker: class {
+            async _onClickAction() {
+              throw failure;
+            }
+          },
+        },
+      },
+    };
+    const { OQCombatTracker } = await import('../src/module/application/combat-tracker.js');
+    const tracker = new OQCombatTracker();
+    failure = reported;
+    await tracker._onClickAction();
+    failure = new Error('core');
+    await assert.rejects(tracker._onClickAction(), /core/);
   });
 });

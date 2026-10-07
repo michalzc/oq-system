@@ -1,6 +1,7 @@
 /** The actor sheet and declaration tracker use the same rollable actions. */
 export function getInitiativeItems(actor) {
-  return actor?.items.filter((item) => ['skill', 'specialAbility'].includes(item.type) && item.system.formula) ?? [];
+  const { skill, specialAbility } = CONFIG.OQ.ItemConfig.itemTypes;
+  return actor?.items.filter((item) => [skill, specialAbility].includes(item.type) && item.system.formula) ?? [];
 }
 
 export function getInitiativeOptions(actor) {

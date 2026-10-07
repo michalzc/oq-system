@@ -1,4 +1,7 @@
-/** Mark arrivals in legacy running encounters, which do not have an execution snapshot yet. */
+/**
+ * Mark arrivals in legacy running encounters, which do not have an execution snapshot yet. Core's roundJoined cannot
+ * replace the flag: it is also set for participants who joined before the declaration upgrade and already have turns.
+ */
 export class OQCombatant extends foundry.documents.Combatant {
   async _preCreate(data, options, user) {
     await super._preCreate(data, options, user);
@@ -16,9 +19,7 @@ export class OQCombatant extends foundry.documents.Combatant {
       'initiative' in changed &&
       changed.initiative !== declaration.total
     ) {
-      ui.notifications.error(
-        'Initiative is frozen for this round. Change the actor defaults for the next declaration.',
-      );
+      ui.notifications.error('OQ.Combat.Errors.InitiativeFrozen', { localize: true });
       return false;
     }
     return super._preUpdate(changed, options, user);

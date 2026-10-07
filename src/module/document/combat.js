@@ -8,9 +8,9 @@ export class OQCombat extends Combat {
 
   static registerQueries() {
     CONFIG.queries[DECLARATION_QUERY] = async (request, { user }) => {
-      if (!game.user.isActiveGM) throw new Error('The active GM changed. Please retry.');
+      if (!game.user.isActiveGM) throw new Error('OQ.Combat.Errors.GmChanged');
       const combat = game.combats.get(request.combatId);
-      if (!combat) throw new Error('This encounter no longer exists.');
+      if (!combat) throw new Error('OQ.Combat.Errors.NoEncounter');
       return combat._enqueueRequest(request, user);
     };
   }
@@ -47,16 +47,9 @@ export class OQCombat extends Combat {
     const turns = this.combatants.contents.filter((c) => !this.isAwaiting(c));
     if (!this.isDeclaration && ids) turns.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
     else turns.sort(this._sortCombatants);
-    if (this.isDeclaration) this.turn = null;
-    else if (this.turn !== null) {
-      if (!turns.some((c) => this.isEligible(c))) {
-        this._emptyExecution ??= {
-          ...(this.current ?? this._getCurrentState()),
-          order: this.turns?.map((c) => c.id) ?? [],
-        };
-        this.turn = null;
-      } else this.turn = Math.min(Math.max(this.turn, 0), turns.length - 1);
-    }
+    // A defeated current combatant stays current, as in core; ending its turn opens the declaration phase.
+    if (this.isDeclaration || !turns.length) this.turn = null;
+    else if (this.turn !== null) this.turn = Math.min(Math.max(this.turn, 0), turns.length - 1);
     turns.forEach((c, i) => (c.turnNumber = i));
     this.turns = turns;
     this.current = this._getCurrentState();
@@ -78,39 +71,43 @@ export class OQCombat extends Combat {
   async _request(operation, data = {}, state = this._requestState()) {
     try {
       const gm = game.users.activeGM;
-      if (!gm) throw new Error('No GM is connected. Ask a GM to connect, then retry.');
+      if (!gm) throw new Error('OQ.Combat.Errors.NoGM');
       const request = { combatId: this.id, operation, ...state, ...data };
       if (game.user.isActiveGM) await this._enqueueRequest(request, game.user);
       else {
-        if (!game.user.hasPermission('QUERY_USER')) {
-          throw new Error('Ask the GM to enable Query Users permission, then retry.');
-        }
+        if (!game.user.hasPermission('QUERY_USER')) throw new Error('OQ.Combat.Errors.QueryPermission');
         await gm.query(DECLARATION_QUERY, request, { timeout: 10000 });
       }
       return this;
     } catch (error) {
-      ui.notifications.error(`Declaration: ${error.message}`);
+      // Errors carry localization keys, so the GM never answers in its own language. Other messages pass through.
+      error.message = game.i18n.localize(error.message);
+      ui.notifications.error(`${game.i18n.localize('OQ.Combat.Declaration')}: ${error.message}`);
+      error.oqReported = true;
       throw error;
     }
   }
 
   _enqueueRequest(request, user) {
     const result = this._declarationQueue.then(() => this._applyRequest(request, user));
-    this._declarationQueue = result.catch(() => {});
+    // Answer once the update is saved, but hold later requests until its lifecycle events have finished.
+    this._declarationQueue = result
+      .then(() => Promise.allSettled([this._turnEvents, this._roundStartEvents]))
+      .catch(() => {});
     return result;
   }
 
   async _applyRequest(request, user) {
-    if (!game.user.isActiveGM) throw new Error('The active GM changed. Please retry.');
+    if (!game.user.isActiveGM) throw new Error('OQ.Combat.Errors.GmChanged');
     const state = this._requestState();
     if (request.phase !== state.phase || request.round !== state.round || request.turn !== state.turn) {
-      throw new Error('The encounter advanced. Review the tracker and retry.');
+      throw new Error('OQ.Combat.Errors.Advanced');
     }
     if (request.operation === 'edit') {
-      if (!this.isDeclaration) throw new Error('Declarations are frozen for this round.');
+      if (!this.isDeclaration) throw new Error('OQ.Combat.Errors.Frozen');
       const actor = this.combatants.get(request.combatantId)?.actor;
       if (!actor || (!user.isGM && !actor.testUserPermission(user, 'OWNER'))) {
-        throw new Error('You must own this actor to declare its action.');
+        throw new Error('OQ.Combat.Errors.NotOwner');
       }
       const update = {};
       if ('reference' in request) {
@@ -118,12 +115,12 @@ export class OQCombat extends Combat {
           typeof request.reference !== 'string' ||
           (request.reference && !getInitiativeItems(actor).some((item) => item.id === request.reference))
         ) {
-          throw new Error('That action is no longer available. Select an action again.');
+          throw new Error('OQ.Combat.Errors.ActionUnavailable');
         }
         update['system.attributes.initiative.reference'] = request.reference;
       }
       if ('mod' in request) {
-        if (!Number.isSafeInteger(request.mod)) throw new Error('Enter a whole number for the initiative modifier.');
+        if (!Number.isSafeInteger(request.mod)) throw new Error('OQ.Combat.IntegerModifier');
         update['system.attributes.initiative.mod'] = request.mod;
       }
       await actor.update(update);
@@ -134,32 +131,29 @@ export class OQCombat extends Combat {
       (!this.combatant?.actor?.testUserPermission(user, 'OWNER') ||
         !['nextTurn', 'previousTurn', 'declare'].includes(request.operation))
     ) {
-      throw new Error('Only the GM or the current actor owner can advance this encounter.');
+      throw new Error('OQ.Combat.Errors.NotYourTurn');
     }
     switch (request.operation) {
       case 'start':
-        if (!user.isGM) throw new Error('Only a GM can start a round.');
+        if (!user.isGM) throw new Error('OQ.Combat.Errors.GMOnlyStart');
         return this._startDeclaredRound();
       case 'declare':
         if (!user.isGM && this.turns.slice((this.turn ?? -1) + 1).some((c) => this.isEligible(c))) {
-          throw new Error('Finish the remaining turns before declaring the next round.');
+          throw new Error('OQ.Combat.Errors.FinishTurns');
         }
-        return this._enterDeclaration();
+        // Only the GM's own removal handler supplies the order from before the removal.
+        return this._enterDeclaration(user.isGM ? request.previous : undefined);
       case 'nextTurn':
-        if (this.isDeclaration) throw new Error('Ask the GM to start the round.');
+        if (this.isDeclaration) throw new Error('OQ.Combat.Errors.AskGMStart');
         if (!this.turns.slice((this.turn ?? -1) + 1).some((c) => this.isEligible(c))) {
           return this._enterDeclaration();
         }
-        await super.nextTurn();
-        await this._turnEvents;
-        return this;
+        return super.nextTurn();
       case 'previousTurn':
         if (this.isDeclaration || this.turn <= this.firstEligibleTurn) return;
-        await super.previousTurn();
-        await this._turnEvents;
-        return this;
+        return super.previousTurn();
       default:
-        throw new Error('Unknown combat declaration request.');
+        throw new Error('OQ.Combat.Errors.Unknown');
     }
   }
 
@@ -188,10 +182,8 @@ export class OQCombat extends Combat {
     return this;
   }
 
-  async _enterDeclaration() {
+  async _enterDeclaration(previous = { ...this.current, order: this.turns.map((c) => c.id) }) {
     if (this.isDeclaration) return this;
-    const previous = this._emptyExecution ?? { ...this.current, order: this.turns.map((c) => c.id) };
-    this._emptyExecution = undefined;
     return this.update(
       {
         turn: null,
@@ -204,8 +196,8 @@ export class OQCombat extends Combat {
   }
 
   async _startDeclaredRound() {
-    if (!this.isDeclaration) throw new Error('This round has already started.');
-    if (!this.combatants.some((c) => this.isEligible(c))) throw new Error('No eligible participants remain.');
+    if (!this.isDeclaration) throw new Error('OQ.Combat.Errors.AlreadyStarted');
+    if (!this.combatants.some((c) => this.isEligible(c))) throw new Error('OQ.Combat.Errors.NoEligible');
     const round = this.declarationRound;
     const previous = this.flags.oq?.previousExecution ?? {
       round: this.round,
@@ -243,8 +235,11 @@ export class OQCombat extends Combat {
       Hooks.callAll('combatRound', this, update, options);
     }
     await this.update(update, options);
-    await this._roundStartEvents;
-    if (previous.round === 0) await foundry.documents.ActiveEffect.registry.refresh('combatStart', { combat: this });
+    if (previous.round === 0) {
+      this._roundStartEvents = this._roundStartEvents.then(() =>
+        foundry.documents.ActiveEffect.registry.refresh('combatStart', { combat: this }),
+      );
+    }
     return this;
   }
 
@@ -298,10 +293,17 @@ export class OQCombat extends Combat {
     Hooks.callAll('combatTurnChange', this, previous, this.current);
   }
 
-  /** Preserve protected callbacks, effect expiry, movement clearing, and Region events used by core 14.368. */
+  /**
+   * Mirrors core 14.368's private #onEndTurn, #onEndRound, #onStartRound, #onStartTurn and #triggerRegionEvents:
+   * protected callbacks, movement clearing, effect expiry and Region events. Compare them on every core upgrade.
+   */
   async _dispatchLifecycle(event, state) {
     const { combatant, ...context } = state;
     const isTurn = event.endsWith('Turn');
+    if (CONFIG.debug.combat) {
+      const label = event.replace(/(Turn|Round)$/, ' $1');
+      console.debug(` | Combat ${label}: ${isTurn ? combatant.name : context.round}`);
+    }
     if (isTurn) await this[`_on${event}`](combatant, context);
     else await this[`_on${event}`](context);
     if (event === 'StartTurn') await this._clearMovementHistoryOnStartTurn(combatant, context);
@@ -315,27 +317,30 @@ export class OQCombat extends Combat {
       EndRound: 'TOKEN_ROUND_END',
       StartRound: 'TOKEN_ROUND_START',
     }[event];
-    const combatants = isTurn ? [combatant] : this.combatants;
-    const promises = [];
-    for (const c of combatants) {
+    // Core does not wait for Region events either.
+    for (const c of isTurn ? [combatant] : this.combatants) {
       for (const region of c.token?.regions ?? []) {
-        promises.push(
-          region._triggerEvent(CONST.REGION_EVENTS[regionEvent], {
-            ...context,
-            token: c.token,
-            combatant: c,
-            combat: this,
-          }),
-        );
+        region._triggerEvent(CONST.REGION_EVENTS[regionEvent], {
+          ...context,
+          token: c.token,
+          combatant: c,
+          combat: this,
+        });
       }
     }
-    await Promise.allSettled(promises);
   }
 
-  _onDeleteDescendantDocuments(...args) {
-    super._onDeleteDescendantDocuments(...args);
-    if (game.user.isActiveGM && !this.isDeclaration && !this.turns.some((c) => this.isEligible(c))) {
-      this.nextRound().catch(() => {});
+  _onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId) {
+    // Before core rebuilds the turns, which would hand a removed final turn back to a combatant who already acted.
+    const check = collection === 'combatants' && game.user.isActiveGM && !this.isDeclaration;
+    const previous = check && { ...this.current, order: this.turns.map((c) => c.id) };
+    const roundOver =
+      check &&
+      ids.includes(this.combatant?.id) &&
+      !this.turns.some((c, i) => i > this.turn && !ids.includes(c.id) && this.isEligible(c));
+    super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
+    if (check && (roundOver || !this.turns.some((c) => this.isEligible(c)))) {
+      this._request('declare', { previous }).catch(() => {});
     }
   }
 

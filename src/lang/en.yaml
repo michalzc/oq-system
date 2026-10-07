@@ -7,6 +7,23 @@ OQ:
     NoAction: No action selected
     Awaiting: Awaiting next round
     IntegerModifier: Enter a whole number for the initiative modifier.
+    Errors:
+      GmChanged: The active GM changed. Please retry.
+      NoEncounter: This encounter no longer exists.
+      NoGM: No GM is connected. Ask a GM to connect, then retry.
+      QueryPermission: Ask the GM to enable Query Users permission, then retry.
+      Advanced: The encounter advanced. Review the tracker and retry.
+      Frozen: Declarations are frozen for this round.
+      NotOwner: You must own this actor to declare its action.
+      ActionUnavailable: That action is no longer available. Select an action again.
+      NotYourTurn: Only the GM or the current actor owner can advance this encounter.
+      GMOnlyStart: Only a GM can start a round.
+      FinishTurns: Finish the remaining turns before declaring the next round.
+      AskGMStart: Ask the GM to start the round.
+      Unknown: Unknown combat declaration request.
+      AlreadyStarted: This round has already started.
+      NoEligible: No eligible participants remain.
+      InitiativeFrozen: Initiative is frozen for this round. Change the actor defaults for the next declaration.
   Chat:
     damageMessage: >-
       {0} has taken {1} points of damage.

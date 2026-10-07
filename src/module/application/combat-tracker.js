@@ -36,12 +36,13 @@ export class OQCombatTracker extends foundry.applications.sidebar.tabs.CombatTra
   async _prepareTurnContext(combat, combatant, index) {
     const turn = await super._prepareTurnContext(combat, combatant, index);
     const declaration = combat.isDeclaration ? getDeclaration(combatant.actor) : combatant.flags.oq?.declaration;
+    const declarationEditable = !!combatant.actor && (game.user.isGM || combatant.actor.isOwner);
     Object.assign(turn, {
       declaration: combat.isDeclaration,
-      declarationEditable: !!combatant.actor && (game.user.isGM || combatant.actor.isOwner),
+      declarationEditable,
       actorless: !combatant.actor,
       awaiting: combat.isAwaiting(combatant),
-      initiativeOptions: getInitiativeOptions(combatant.actor),
+      initiativeOptions: declarationEditable ? getInitiativeOptions(combatant.actor) : {},
       reference: declaration?.reference ?? '',
       mod: declaration?.mod ?? 0,
       signedMod: (declaration?.mod ?? 0) >= 0 ? `+${declaration?.mod ?? 0}` : `${declaration.mod}`,
@@ -72,7 +73,7 @@ export class OQCombatTracker extends foundry.applications.sidebar.tabs.CombatTra
       this.element.addEventListener(
         type,
         (event) => {
-          if (event.target.matches('[data-declaration-field]')) event.stopPropagation();
+          if (event.target.closest('[data-declaration-field]')) event.stopPropagation();
         },
         { capture: true },
       );
@@ -108,17 +109,19 @@ export class OQCombatTracker extends foundry.applications.sidebar.tabs.CombatTra
           turn: null,
         },
       );
-    } catch {
+    } catch (error) {
       // OQCombat reports the actionable error; restore the authoritative value on failure.
       this.render();
+      if (!error.oqReported) throw error;
     }
   }
 
   async _onClickAction(event, target) {
     try {
       await super._onClickAction(event, target);
-    } catch {
-      /* OQCombat has already displayed the request failure. */
+    } catch (error) {
+      // OQCombat has already displayed request failures.
+      if (!error.oqReported) throw error;
     }
   }
 
