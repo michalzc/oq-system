@@ -1,4 +1,4 @@
-<form class="{{cssClasses}} {{type}}" autocomplete="off">
+<div class="roll-dialog {{type}}">
   <div class="dialog-header">
     <h1>{{ entityName }}</h1>
     {{#if skillName}}
@@ -6,23 +6,21 @@
     {{/if}}
   </div>
   <div class="dialog-body">
-    <div class="roll-info">
-
-    </div>
     <div class="roll-params">
       <label>{{ localize 'OQ.Labels.Value' }}</label>
       <div>{{ value }}</div>
 
-      <label for="difficulty">{{localize 'OQ.Labels.Difficulty'}}</label>
-      <select name="difficulty" id="difficulty">
+      <label for="{{rootId}}-difficulty">{{localize 'OQ.Labels.Difficulty'}}</label>
+      <select name="difficulty" id="{{rootId}}-difficulty">
         {{selectOptions difficulties selected=defaultDifficulty localize=false }}
       </select>
-      <label for="modifier">{{ localize 'OQ.Labels.OtherMods' }}</label>
-      <input type="number" data-dtype="Number" name="mod" id="modifier" value="{{mod}}">
-    </div>
-    <div class="roll-buttons">
-      <button class="roll-button" type="submit"><i class="fas fa-dice"></i> {{ localize 'OQ.Dialog.Roll' }}</button>
-      <button class="cancel-button"><i class="fas fa-cancel"></i> {{ localize 'OQ.Dialog.Cancel'}}</button>
+      <label for="{{rootId}}-modifier">{{ localize 'OQ.Labels.OtherMods' }}</label>
+      <input type="number" data-dtype="Number" name="mod" id="{{rootId}}-modifier" value="{{mod}}" autofocus>
+
+      <label for="{{rootId}}-messageMode">{{ localize 'OQ.Dialog.MessageMode' }}</label>
+      <select name="messageMode" id="{{rootId}}-messageMode">
+        {{selectOptions messageModes selected=messageMode localize=true }}
+      </select>
     </div>
   </div>
-</form>
+</div>

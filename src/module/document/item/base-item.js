@@ -1,7 +1,7 @@
 import { displayItem } from '../../utils/chat.js';
 import { damageRoll, testRoll } from '../../utils/roll.js';
-import { OQTestRollDialog } from '../../application/test-roll-dialog.js';
-import { OQDamageRollDialog } from '../../application/damage-roll-dialog.js';
+import { promptTestRoll } from '../../application/test-roll-dialog.js';
+import { promptDamageRoll } from '../../application/damage-roll-dialog.js';
 import { renderTemplate } from '../../utils/utils.js';
 
 /**
@@ -41,8 +41,8 @@ export class OQBaseItem extends Item {
     if (skipDialog) {
       await testRoll(rollData);
     } else {
-      const dialog = new OQTestRollDialog(rollData);
-      await dialog.render(true);
+      const rollOptions = await promptTestRoll(rollData);
+      if (rollOptions) await testRoll({ ...rollData, ...rollOptions });
     }
   }
 
@@ -51,8 +51,8 @@ export class OQBaseItem extends Item {
 
     if (skipDialog) await damageRoll(rollData);
     else {
-      const rollDialog = new OQDamageRollDialog(rollData);
-      rollDialog.render(true);
+      const rollOptions = await promptDamageRoll(rollData);
+      if (rollOptions?.customFormula) await damageRoll({ ...rollData, ...rollOptions });
     }
   }
 

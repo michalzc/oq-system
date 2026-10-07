@@ -1,63 +1,88 @@
 import _ from 'lodash-es';
 
-export class OQBaseItemSheet extends foundry.appv1.sheets.ItemSheet {
-  static get defaultOptions() {
-    return _.merge(super.defaultOptions, {
-      width: 640,
-      classes: ['oq', 'sheet', 'item'],
-      template: 'systems/oq/templates/item/item-sheet.hbs',
-    });
-  }
+export class OQBaseItemSheet extends foundry.applications.api.HandlebarsApplicationMixin(
+  foundry.applications.sheets.ItemSheetV2,
+) {
+  static DEFAULT_OPTIONS = {
+    // Keep the parchment palette until the sheets support both colour schemes.
+    classes: ['oq', 'sheet', 'item', 'themed', 'theme-light'],
+    position: { width: 640 },
+    window: { resizable: true },
+    form: { submitOnChange: true, closeOnSubmit: false },
+    actions: {
+      deleteTrait: OQBaseItemSheet.onTagDelete,
+    },
+  };
 
-  async getData(options) {
-    const data = super.getData(options);
+  static PARTS = {
+    sheet: {
+      template: 'systems/oq/templates/item/item-sheet.hbs',
+      scrollable: [''],
+    },
+  };
+
+  #focusTraitInput = false;
+
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
     const enrichedDescription = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
       this.item.system.description,
+      { secrets: this.item.isOwner, relativeTo: this.item },
     );
-    return _.merge(data, {
+    return Object.assign(context, {
+      item: this.item,
       system: this.item.system,
       enrichedDescription,
     });
   }
 
-  activateListeners(html) {
-    super.activateListeners(html);
-
-    if (this.isEditable) {
-      html.find('.traits, .tag-input').on('change', this.onTagAdd.bind(this));
-      html.find('.traits .tag-delete').on('click', this.onTagDelete.bind(this));
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    if (this.#focusTraitInput && this.isEditable) {
+      this.element.querySelector('.tag-input')?.focus();
     }
+    this.#focusTraitInput = false;
   }
 
-  async onTagDelete(event) {
+  _onChangeForm(formConfig, event) {
+    if (event.target.matches('.tag-input')) {
+      if (this.isEditable) return this.onTagAdd(event);
+      return;
+    }
+    return super._onChangeForm(formConfig, event);
+  }
+
+  static async onTagDelete(event, target) {
     event.preventDefault();
-    const traitToDelete = event.currentTarget.dataset.tag;
+    if (!this.isEditable) return;
+    const traitToDelete = target.dataset.tag;
     if (traitToDelete) {
       const traitList = this.item.system.traits;
       const newTraitList = _.without(traitList, traitToDelete);
       await this.item.update({
         'system.traits': newTraitList,
       });
-      this.render(true);
     }
   }
 
   async onTagAdd(event) {
     event.preventDefault();
-    const input = event.currentTarget;
+    if (!this.isEditable) return;
+    const input = event.target;
     const newTraits = (input.value ?? '').split(',').map((trait) => trait.trim());
-    if (newTraits) {
+    input.value = '';
+    if (newTraits.some(Boolean)) {
       const traitList = this.item.system.traits;
       const allTraits = _.filter(_.sortedUniq(_.sortBy(_.concat(traitList, newTraits))), (trait) => !!trait);
 
-      await this.item.update({
-        'system.traits': allTraits,
-      });
-
-      const result = this.render(true);
-      setTimeout(() => {
-        $(result.form).find('.tag-input').focus();
-      }, 50);
+      if (_.isEqual(traitList, allTraits)) return;
+      this.#focusTraitInput = true;
+      try {
+        await this.item.update({ 'system.traits': allTraits });
+      } catch (error) {
+        this.#focusTraitInput = false;
+        throw error;
+      }
     }
   }
 }

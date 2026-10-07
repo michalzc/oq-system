@@ -1,29 +1,37 @@
-# Pre-migration review — known issues
+# Migration review — status and known issues
+
+## Current status (2026-10-07)
+
+The Foundry v14 compatibility pass and ApplicationV2 framework migration are complete. The manifest requires and
+verifies Foundry 14; the development environment pins Foundry 14.368 and Node.js 24.
+
+- Both actor sheets and all six item sheets use the v2 document sheet classes with `HandlebarsApplicationMixin`.
+- All five dialogs use `ApplicationV2` or `DialogV2`.
+- `OQCombatTracker` extends Foundry's v2 `CombatTracker`. Its redesign (C10) remains open as a separate follow-up.
+- No AppV1 classes, legacy application lifecycle methods or jQuery usage remain in the system code.
+- C1–C9 are complete. C8 uses the permitted forced light theme; dark-theme support and CSS layers are optional
+  future improvements.
+
+Verification on 2026-10-07: source review and the running Foundry 14.368 `oq-dev` world confirmed all registered OQ
+sheets and the combat tracker inherit from ApplicationV2. Rendering smoke tests passed for both actor sheets, all
+six item sheets and all five dialogs. Roll dialogs focused their inputs, offered visibility choices and closed
+without posting chat messages. No console warnings or errors appeared. `yarn lint`, `yarn build` and all 36 unit
+tests passed. This pass did not repeat every saving or gameplay interaction; the earlier C1 validation records
+below cover those checks.
 
 ## Migration sequence
 
-v14 first, with the existing AppV1 sheets, then the AppV2 port on v14. AppV1 still works in v14 (it is removed in v16),
-and several v14 changes land in the code the port rewrites: B6, B9, `data-tooltip-html`, Handlebars `preventIndent` and
-theming (C8). Porting on v14 means writing the new sheets once, against the final API.
-
-1. **v14 release** — AppV1 sheets unchanged:
-   1. ~~B13 — Node 24 and Foundry 14 in `flake.nix`; check that the build toolchain runs on Node 24.~~
-   2. ~~B8 and B10 together, so every item type has a `TypeDataModel` schema and `template.json` can go.~~
-   3. ~~B12~~, ~~B6 (core part: `messageMode`)~~, ~~B11~~, ~~B5~~, ~~B9~~.
-   4. ~~Raise the minimum compatible version to 14 and test in a v14 world.~~
-2. **AppV2 port on v14** — C, folding in E. AppV1 and AppV2 sheets can be registered side by side, so this can ship
-   in pieces:
-   1. The six item sheets — they share a base class and are the simplest.
-   2. The dialogs, mostly with `DialogV2`; add the B6 message mode selector here.
-   3. The two actor sheets, with jQuery removal (C2) and theming (C8).
-3. **Combat tracker redesign** (C10) — independent of the sheets, so it can be scheduled on its own.
-
-Stay on v13 for the port only if the group has to remain on v13 for a while (for example, modules it relies on aren't
-updated yet).
+1. **Completed: v14 compatibility** — Node 24 and Foundry 14 in `flake.nix`, data models for every item type,
+   removal of `template.json`, the B compatibility fixes, and a minimum compatible version of 14.
+2. **Completed: AppV2 port on v14** — the six item sheets, five dialogs and two actor sheets, including C1–C9
+   and the E cleanups.
+3. **Remaining: combat tracker redesign** (C10) — independent of the completed framework migration.
 
 ---
 
-Code review of the whole system ahead of the migration to Foundry VTT v14 and ApplicationV2 (2026-10-03).
+Original code review of the whole system ahead of the migration to Foundry VTT v14 and ApplicationV2 (2026-10-03).
+The findings below retain their original problem descriptions and source locations; checked entries have been
+resolved, with migration implementation and validation recorded in C.
 
 Scope: all of `src/module` (~3.5k lines), `src/public/templates`, `src/styles`, `src/packs`, manifest and build
 config. Findings were checked against the Foundry sources in the nix store (13.351 and 14.368, unminified `client/` and
@@ -34,7 +42,7 @@ config. Findings were checked against the Foundry sources in the nix store (13.3
 - _verified_ — confirmed by reading the system code and the matching Foundry source, or by running the code.
 - _inferred_ — follows from the source, but not reproduced in a running Foundry; confirm in-app before fixing.
 
-## Recommended order
+## Original recommended order (historical)
 
 1. **First batch — small, mostly data integrity:** A1–A5, A14, B1, B2, B3, B10, B13.
 2. **Rest of A** — still on v13, so behaviour can be compared before and after.
@@ -45,7 +53,7 @@ config. Findings were checked against the Foundry sources in the nix store (13.3
 
 ---
 
-## A. Bugs (present today on v13)
+## A. Bugs (original v13 findings)
 
 ### [x] A1. Armour items have no data model
 
@@ -337,9 +345,10 @@ version X until it is removed in version Y.
   `ChatMessage.create(data, { messageMode: game.settings.get('core', 'messageMode') })`. Optionally expose a mode
   selector in the roll dialogs.
 - **Done:** every system message goes through `createChatMessage` (`src/module/utils/chat.js`), which passes the
-  selected `core.messageMode`. The mode selector in the roll dialogs is left for the AppV2 dialog port (sequence 2.2).
+  selected `core.messageMode`. The test and damage roll dialogs have a visibility selector, defaulting to the chat
+  log's mode, which applies to that roll only (C1 part 3).
 
-### [ ] B7. ApplicationV1 is deprecated (removed in v16)
+### [x] B7. ApplicationV1 is deprecated (removed in v16)
 
 - **Where:**
   - `src/module/sheet/**` — 2 actor sheets and 6 item sheets
@@ -353,6 +362,7 @@ version X until it is removed in version Y.
     - Pop-out windows only work for AppV2.
     - TinyMCE is removed (our `{{editor}}` calls already use `engine="prosemirror"`).
 - **Plan:** the system can run on v14 with the current sheets, so ship v14 compatibility first and AppV2 second (see C).
+- **Done** in C1: every sheet and dialog is an AppV2 application, and nothing uses `foundry.appv1` any more.
 
 ### [x] B8. Item data models extend `DataModel` instead of `TypeDataModel`
 
@@ -449,40 +459,106 @@ version X until it is removed in version Y.
 
 ## C. AppV2 migration work
 
-- [ ] **C1. Port the sheets.**
-  - Actor and item sheets → `foundry.applications.sheets.ActorSheetV2` / `ItemSheetV2` with
-    `HandlebarsApplicationMixin`.
-  - Forms and dialogs → `ApplicationV2`, or `foundry.applications.api.DialogV2.input/prompt` for the simple ones:
-    test-roll, damage-roll, attributes, characteristics, short description.
-- [ ] **C2. Remove jQuery.** It is used throughout: `html.find(...).on(...)`, `$(...).closest(...).data()`, and
+- [x] **C1. Port the sheets.**
+  - [x] **Part 1 — ItemSheets:** all six item sheets use `foundry.applications.sheets.ItemSheetV2` with
+    `HandlebarsApplicationMixin`, `DEFAULT_OPTIONS`, `PARTS` and `_prepareContext`. The default document form handler
+    saves on change; descriptions use the native `prose-mirror` element and portraits use core's `editImage` action.
+    Item-sheet jQuery, timed focus and redundant re-renders are removed (item portions of C2, C3 and C5).
+    Trait deletion uses an action; trait input and spell expenditure use guarded form-change handlers. Field ids are
+    scoped to each sheet, and resized sheets scroll while preserving their scroll position. The standalone spell's
+    skill-reference field now submits `system.skillReference`.
+    The item sheets explicitly retain the light parchment theme pending broader theme support (C8).
+    Validated on Foundry 14.368: all six types, conditional fields, world and actor-owned item saving, traits and focus,
+    rich-text saving and enriched links, image picking, spell expenditure and remaining magnitude, simultaneous sheets,
+    and read-only controls/actions/secret descriptions. Lint, build and all 36 unit tests pass.
+  - [x] **Part 2 — ActorSheets:** both actor sheets use `foundry.applications.sheets.ActorSheetV2` with
+    `HandlebarsApplicationMixin`, `DEFAULT_OPTIONS`, `PARTS`, `TABS` and `_prepareContext`. The active tab survives
+    re-renders and its scroll position is preserved. The default document form handler saves on change; notes and the
+    NPC description use the native `prose-mirror` element and portraits use core's `editImage` action.
+    Actor-sheet jQuery and redundant re-renders are removed (actor portions of C2 and C5). Clicks are actions; the
+    embedded-item inputs (advancement, quantity) have no `name`, so guarded form-change handlers update the item and
+    the actor form never submits them. HP/MP adjust with left/right click through a `buttons: [0, 2]` action, and the
+    quantity buttons stop at 0. Item-state menus are bound once in `_onFirstRender`. Item rows use core's drag and drop
+    (`.draggable`, `toDragData`, `_onDropItem` sorts instead of copying on the same actor); the recursive folder import
+    is kept as an `_onDropFolder` override (C6). Edit controls are hidden for read-only viewers and their actions check
+    `isEditable`; rolls and chat cards need ownership; viewers can still open item sheets read-only (C9). Item
+    description tooltips use `data-tooltip-html`. Field ids are scoped to each sheet.
+    The actor sheets retain the light parchment theme (C8). AppV2 windows don't get core's AppV1 content styles, so the
+    ones the layout relied on are restored: field height, input padding, headings and `.flexrow` alignment
+    (`appv1-layout.less`, shared with the dialogs) and tab spacing.
+    Validated on Foundry 14.368 against screenshots of the AppV1 sheets: both actor types and all tabs, header, attribute,
+    characteristic, money and initiative fields, HP/MP adjustment and clamping, skill advancement (including a negative
+    entry setting the total), quantity, item states, adding, editing and deleting items, test and damage rolls with and
+    without dialogs, send to chat, the attributes, characteristics and short-description dialogs, money consolidation,
+    NPC characteristic rolls, rich-text saving and enriched links, world, compendium, same-sheet and folder drops,
+    unlinked token sheets, focus and scroll restoration, and read-only controls and actions. Lint, build and all 36
+    unit tests pass.
+  - [x] **Part 3 — Dialogs:** forms and dialogs → `ApplicationV2`, or `foundry.applications.api.DialogV2.input/prompt`
+    for the simple ones: test-roll, damage-roll, attributes, characteristics, short description.
+    The test and damage roll dialogs are `DialogV2.wait` prompts (`roll-dialog.js`) that return the chosen options;
+    the item rolls after the dialog closes. Each has a visibility selector (B6) passed to `evaluateRoll` and
+    `createChatMessage`, which take an optional message mode. The template's input has `autofocus`, so the dialog
+    focuses it instead of the Roll button, and its value is selected; Enter rolls and Escape cancels.
+    The attributes, characteristics and short-description dialogs share `OQActorDialog`, a
+    `HandlebarsApplicationMixin(ApplicationV2)` form. There is one dialog of each kind per actor (C4); opening it
+    again brings the open one to the front. Unlike a document sheet it isn't re-rendered when the actor changes, so
+    unsaved input (rolled characteristics, an edited description) survives updates made elsewhere. Fields use full
+    `system.*` paths and the form handler updates the actor (C7). The characteristics dialog uses actions for the
+    rolls and the reset, which resets the form and recalculates the points without a timer (C3); its "all points"
+    field has no `name`, so it is never submitted. Its rolls go through `evaluateRoll`, so blind rolls don't ask for
+    manual dice (A17). Saving the short description editor submits and closes the dialog, as before; closing it
+    without saving discards the changes.
+    The dialogs have window titles, keep the parchment theme and use an `oq-dialog` class, since core hides any
+    `.application.dialog` that isn't an open `<dialog>` element.
+    Validated on Foundry 14.368 against screenshots of the AppV1 dialogs: options, visibility, focus, Enter, Cancel
+    and Escape in both roll dialogs, empty damage formulas, the sheet's shift-click conventions and the chat card's
+    damage button; saving, resetting and reopening the attributes dialog, two actors' dialogs at once, and input
+    surviving actor updates; points, single and full rolls, reset and saving in the characteristics dialog; saving,
+    unchanged saving and discarding in the short-description editor. No AppV1 deprecation warnings remain. Lint,
+    build and all 36 unit tests pass.
+- [x] **C2. Remove jQuery.** It is used throughout: `html.find(...).on(...)`, `$(...).closest(...).data()`, and
   `$(this.form).find(...)`. Replace it with `static DEFAULT_OPTIONS.actions` (`data-action`) and `_onRender` listeners.
-- [ ] **C3. Remove the `setTimeout` focus and reset hacks:**
-  - `damage-roll-dialog.js:49`
-  - `test-roll-dialog.js:63`
-  - `characteristics-dialog.js:62`
-  - `base-item-sheet.js:58`
+  - **Done** in C1: no jQuery is left.
+- [x] **C3. Remove the `setTimeout` focus and reset hacks:**
+  - ~~`damage-roll-dialog.js:49`~~, ~~`test-roll-dialog.js:63`~~ — removed in C1 part 3; the input has `autofocus` and
+    the dialog's render callback selects its value.
+  - ~~`characteristics-dialog.js:62`~~ — removed in C1 part 3; the reset button is an action.
+  - ~~`base-item-sheet.js:58`~~ — removed in C1 part 1; trait focus is restored in `_onRender`.
 
   Use `_onRender` and the form `autofocus` attribute instead.
-- [ ] **C4. Unique application ids.** The dialogs use fixed ids (`attributes-dialog`, `characteristics-dialog`,
+- [x] **C4. Unique application ids.** The dialogs use fixed ids (`attributes-dialog`, `characteristics-dialog`,
   `short-description`, `roll-damage-dialog`, `roll-test-dialog`), so opening them for two actors collides. AppV2 needs
   unique ids, e.g. `` `attributes-${actor.id}` ``.
-- [ ] **C5. Drop the redundant re-renders.** Several handlers call `this.render(true)` after `document.update()` (5
+  - **Done** in C1 part 3: the actor dialogs' ids are the class name and the actor UUID, like core's document sheets;
+    the roll dialogs use `DialogV2`'s generated ids.
+- [x] **C5. Drop the redundant re-renders.** Several handlers call `this.render(true)` after `document.update()` (5
   places); document updates already re-render the sheet.
-- [ ] **C6. Drag and drop.** Use the `DocumentSheetV2` drag/drop handlers (`_onDropItem`, `_onDropFolder`). Keep the
+  - **Done** in C1: all of them are removed.
+- [x] **C6. Drag and drop.** Use the `DocumentSheetV2` drag/drop handlers (`_onDropItem`, `_onDropFolder`). Keep the
   recursive folder import from `_onDropFolder` (`actor-base-sheet.js:104`) as a small override if it's still wanted.
   See A4.
-- [ ] **C7. Form handling.** AppV1 `_updateObject(event, formData)` with `update({system: formData})` becomes
+  - **Done** in C1 part 2: the actor sheets use the `ActorSheetV2` handlers, and `_onDropFolder` keeps the recursive
+    import of Item folders.
+- [x] **C7. Form handling.** AppV1 `_updateObject(event, formData)` with `update({system: formData})` becomes
   `form.handler` / `submitOnChange`. Field names should use full `system.*` paths so the default document submit works.
-- [ ] **C8. Theming.** AppV2 sheets follow the user's colour scheme (dark by default), whereas AppV1 windows are forced
+  - **Done** in C1: the sheets use the default document handler, and the actor dialogs a handler updating the actor.
+- [x] **C8. Theming.** AppV2 sheets follow the user's colour scheme (dark by default), whereas AppV1 windows are forced
   to light. The styles (`src/styles`, ~1.4k lines of LESS) hard-code a light palette over `sheetbg.webp` and don't use
   CSS layers.
-  - Either force a light sheet theme, or define theme tokens and support both.
-  - Consider shipping the CSS in a `@layer` (system.json `styles: [{src, layer}]`).
-- [ ] **C9. Listeners bound for read-only viewers.** The NPC sheet binds `.roll-characteristics` and
+  - **Done** in C1: actor sheets, item sheets and dialogs explicitly use `themed` and `theme-light` to retain the
+    parchment palette. This satisfies the forced light theme option for the migration.
+  - **Optional follow-up:** define theme tokens to support both colour schemes, and consider shipping the CSS in a
+    `@layer` (system.json `styles: [{src, layer}]`).
+- [x] **C9. Listeners bound for read-only viewers.** The NPC sheet binds `.roll-characteristics` and
   `.show-short-description-dialog` even when the sheet isn't editable (`npc-sheet.js:28`). The base sheet binds the
   roll/chat listeners before the `isEditable` check. Use `actions` plus permission checks in the new sheets.
+  - **Done** in C1 part 2: editing actions check `isEditable` and their controls are hidden; rolls and chat cards
+    check ownership.
 - [ ] **C10. Redesign the combat tracker.** The current tracker is a placeholder: core's tracker with the OQ changes
   patched into the DOM in `_onRender` (B5). Rethink how OQ combat should work, then reimplement the tracker properly.
+  - **Framework migration complete:** `OQCombatTracker` already extends
+    `foundry.applications.sidebar.tabs.CombatTracker`, which is an ApplicationV2 application in v14. The remaining
+    work is the OQ combat workflow and tracker redesign.
   - First decide whether OQ's combat flow fits core's turn order. If it does, extend `CombatTracker` (`PARTS`, context
     preparation, `actions`). If it doesn't, write an own ApplicationV2 sidebar tab registered as `CONFIG.ui.combat`,
     which means reimplementing what core provides: hover and ping, context menus, encounter cycling, turn controls and

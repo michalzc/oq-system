@@ -1,3 +1,6 @@
 <div class="flexrow notes">
-  {{editor enrichedNotes target="system.personal.notes" id="description" engine="prosemirror" button=true class="flex1"}}
+  <prose-mirror name="system.personal.notes" value="{{system.personal.notes}}" toggled data-document-uuid="{{actor.uuid}}"
+                {{#unless editable}}disabled{{/unless}}>
+    {{{enrichedNotes}}}
+  </prose-mirror>
 </div>

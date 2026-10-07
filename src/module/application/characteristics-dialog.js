@@ -1,32 +1,28 @@
 import _ from 'lodash-es';
 import { logError } from '../utils/logger.js';
 import { renderTemplate, withCharacteristicLabels } from '../utils/utils.js';
-import { createChatMessage } from '../utils/chat.js';
+import { createChatMessage, evaluateRoll } from '../utils/chat.js';
+import { OQActorDialog } from './actor-dialog.js';
 
-const mergeObject = foundry.utils.mergeObject;
+export class CharacteristicsDialog extends OQActorDialog {
+  static DEFAULT_OPTIONS = {
+    classes: ['characteristics'],
+    position: { width: 400 },
+    actions: {
+      rollCharacteristic: CharacteristicsDialog.rollCharacteristic,
+      rollAllCharacteristics: CharacteristicsDialog.rollAllCharacteristics,
+      resetForm: CharacteristicsDialog.onFormReset,
+    },
+  };
 
-export class CharacteristicsDialog extends foundry.appv1.api.FormApplication {
-  static get defaultOptions() {
-    const options = super.defaultOptions;
-
-    return mergeObject(options, {
-      classes: ['oq', 'dialog', 'characteristics'],
-      width: 400,
-      id: 'characteristics-dialog',
+  static PARTS = {
+    form: {
       template: 'systems/oq/templates/applications/characteristics-dialog.hbs',
-    });
-  }
+    },
+  };
 
-  constructor(object) {
-    super(object);
-
-    this.points = CharacteristicsDialog.calculatePoints(
-      CONFIG.OQ.ActorConfig.characteristicsParams.characteristicPoints,
-      CONFIG.OQ.ActorConfig.characteristicsParams.basePoints,
-      Object.values(object.system.characteristics)
-        .map((char) => char.base)
-        .reduce((l, r) => l + r),
-    );
+  get title() {
+    return `${game.i18n.localize('OQ.Labels.EditCharacteristics')}: ${this.actor.name}`;
   }
 
   static calculatePoints(points, basePoints, sum) {
@@ -37,128 +33,90 @@ export class CharacteristicsDialog extends foundry.appv1.api.FormApplication {
     };
   }
 
-  getData(options) {
-    const data = super.getData(options);
-    const points = this.points;
-    let system = this.object.system;
-    return mergeObject(data, {
-      name: this.object.name,
-      system,
-      characteristics: withCharacteristicLabels(system.characteristics),
-      points,
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    const characteristicsParams = CONFIG.OQ.ActorConfig.characteristicsParams;
+    const sum = _.sum(_.map(this.actor.system.characteristics, (char) => char.base));
+    return Object.assign(context, {
+      characteristics: withCharacteristicLabels(this.actor.system.characteristics),
+      points: CharacteristicsDialog.calculatePoints(
+        characteristicsParams.characteristicPoints,
+        characteristicsParams.basePoints,
+        sum,
+      ),
     });
   }
 
-  activateListeners(html) {
-    super.activateListeners(html);
-
-    html.find('a.roll-characteristic').on('click', this.rollCharacteristic.bind(this));
-    html.find('a.roll-all').on('click', this.rollAllCharacteristics.bind(this));
-    html.find('.characteristic-base-input').on('change', this.updatePoints.bind(this));
-    html.find('button[type=reset].reset').closest('form').on('reset', this.onFormReset.bind(this));
-    html.find('.all-points').on('change', this.updatePoints.bind(this));
+  _onChangeForm(formConfig, event) {
+    if (event.target.matches('.characteristic-base-input, .all-points')) this.updatePoints();
+    return super._onChangeForm(formConfig, event);
   }
 
-  onFormReset(event) {
-    const updatePoints = this.updatePoints.bind(this);
-    setTimeout(function () {
-      updatePoints(event);
-    }, 1);
+  static onFormReset() {
+    this.form.reset();
+    this.updatePoints();
   }
 
-  updatePoints(event) {
-    const target = event.currentTarget;
-    if (target) {
-      const dialog = $(target).closest('.oq.dialog.characteristics');
-      if (dialog) {
-        const sum = dialog
-          .find('.characteristic-base-input')
-          .toArray()
-          .map((e) => parseInt(e.value))
-          .reduce((l, r) => l + r);
+  updatePoints() {
+    const sum = _.sum(
+      Array.from(this.element.querySelectorAll('.characteristic-base-input'), (input) => parseInt(input.value)),
+    );
+    const all = parseInt(this.element.querySelector('.all-points').value);
+    const points = CharacteristicsDialog.calculatePoints(
+      all,
+      CONFIG.OQ.ActorConfig.characteristicsParams.basePoints,
+      sum,
+    );
+    this.element.querySelector('.spent-points').textContent = points.spent.toString();
+    this.element.querySelector('.remain-points').textContent = points.remain.toString();
+  }
 
-        const initial = dialog.find('.all-points').val();
-        this.points = CharacteristicsDialog.calculatePoints(
-          initial,
-          CONFIG.OQ.ActorConfig.characteristicsParams.basePoints,
-          sum,
-        );
-        dialog.find('.spent-points').html(this.points.spent.toString());
-        dialog.find('.remain-points').html(this.points.remain.toString());
+  getRollFormula(key) {
+    return this.element.querySelector(`input[name="system.characteristics.${key}.roll"]`)?.value;
+  }
+
+  setBaseValue(key, value) {
+    this.element.querySelector(`input[name="system.characteristics.${key}.base"]`).value = value;
+  }
+
+  async postRolls(rolls) {
+    const content = await renderTemplate('systems/oq/templates/chat/parts/characteristics-roll.hbs', { rolls });
+    await createChatMessage({
+      content,
+      rolls: _.values(rolls),
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+    });
+  }
+
+  static async rollAllCharacteristics() {
+    const rollPromises = _.keys(this.actor.system.characteristics)
+      .map((key) => [key, this.getRollFormula(key)])
+      .filter(([, formula]) => typeof formula === 'string')
+      .map(([key, formula]) =>
+        evaluateRoll(new Roll(formula))
+          .then((result) => [key, result])
+          .catch(() => undefined),
+      );
+    const resolvedPromises = await Promise.all(rollPromises);
+    const rolls = _.fromPairs(resolvedPromises.filter((e) => e && e[1]));
+
+    await this.postRolls(rolls);
+    _.forIn(rolls, (roll, key) => this.setBaseValue(key, roll.total));
+    this.updatePoints();
+  }
+
+  static async rollCharacteristic(event, target) {
+    try {
+      const key = target.dataset.key;
+      const formula = this.getRollFormula(key);
+      if (typeof formula === 'string') {
+        const roll = await evaluateRoll(new Roll(formula));
+        await this.postRolls({ [key]: roll });
+        this.setBaseValue(key, roll.total);
+        this.updatePoints();
       }
+    } catch (e) {
+      logError('Error during roll', e);
     }
-  }
-
-  async rollAllCharacteristics(event) {
-    if (event.currentTarget) {
-      const characteristicsBlock = event.currentTarget.closest('.chars-table');
-      if (characteristicsBlock) {
-        const characteristicKeys = _.keys(this.object.system.characteristics);
-        const rollPromises = characteristicKeys
-          .map((key) => [key, `input[name="characteristics.${key}.roll"]`])
-          .map(([key, selector]) => [key, $(characteristicsBlock).find(selector).val()])
-          .filter(([, value]) => typeof value === 'string')
-          .map(([key, value]) =>
-            new Roll(value)
-              .roll()
-              .then((result) => [key, result])
-              .catch(() => undefined),
-          );
-        const resolvedPromises = await Promise.all(rollPromises);
-        const rolls = _.fromPairs(resolvedPromises.filter((e) => e && e[1]));
-
-        const content = await renderTemplate('systems/oq/templates/chat/parts/characteristics-roll.hbs', {
-          rolls,
-        });
-
-        const messageData = {
-          content: content,
-          rolls: _.values(rolls),
-          speaker: ChatMessage.getSpeaker({ actor: this.object }),
-        };
-
-        await createChatMessage(messageData);
-
-        _.forIn(rolls, (roll, key) => {
-          $(characteristicsBlock).find(`#char-${key}-base`).val(roll.total);
-        });
-
-        this.updatePoints(event);
-      }
-    }
-  }
-
-  async rollCharacteristic(event) {
-    if (event.currentTarget) {
-      try {
-        const elem = event.currentTarget;
-        const key = elem.dataset['key'];
-        const charsTable = $(event.currentTarget).closest('.chars-table');
-        const selector = `input[name="characteristics.${key}.roll"]`;
-        const rolls = charsTable.find(selector).val();
-        if (typeof rolls === 'string') {
-          const roll = await new Roll(rolls).evaluate();
-
-          const content = await renderTemplate('systems/oq/templates/chat/parts/characteristics-roll.hbs', {
-            rolls: { [key]: roll },
-          });
-          const messageData = {
-            content: content,
-            rolls: [roll],
-            speaker: ChatMessage.getSpeaker({ actor: this.object }),
-          };
-          await createChatMessage(messageData);
-          charsTable.find(`#char-${key}-base`).val(roll.total);
-          this.updatePoints(event);
-        }
-      } catch (e) {
-        logError('Error during roll', e);
-      }
-    }
-  }
-
-  async _updateObject(event, formData) {
-    await this.object.update({ system: formData });
-    this.object.sheet?.render(true);
   }
 }

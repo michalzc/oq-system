@@ -1,44 +1,44 @@
-<form class="actor-sheet character-sheet {{cssClass}} flexcol" autocomplete="off">
+<div class="actor-sheet character-sheet flexcol">
   <header class="sheet-header">
-    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="64" height="64"
+    <img class="profile-img" src="{{actor.img}}" {{#if editable}}data-action="editImage"{{/if}} data-edit="img" title="{{actor.name}}" width="64" height="64"
          alt="{{actor.name}}">
     <div class="flexcol header-fields">
       <input class="name" type="text" data-dtype="String" name="name" value="{{actor.name}}"
              placeholder="{{ localize 'OQ.Labels.Name' }}">
       <div class="flexrow">
         <div class="flex1 flex-row-no-wrap">
-          <label for="gender">{{ localize 'OQ.Labels.Gender' }}</label>
-          <input class="small" type="text" data-dtype="String" id="gender" name="system.personal.gender"
+          <label for="{{rootId}}-gender">{{ localize 'OQ.Labels.Gender' }}</label>
+          <input class="small" type="text" data-dtype="String" id="{{rootId}}-gender" name="system.personal.gender"
                  value="{{system.personal.gender}}">
         </div>
         <div class="flex1 flex-row-no-wrap">
-          <label for="age">{{ localize 'OQ.Labels.Age' }}</label>
-          <input class="small" type="number" data-dtype="Number" id="age" name="system.personal.age"
+          <label for="{{rootId}}-age">{{ localize 'OQ.Labels.Age' }}</label>
+          <input class="small" type="number" data-dtype="Number" id="{{rootId}}-age" name="system.personal.age"
                  value="{{system.personal.age}}">
         </div>
         <div class="flex2 flex-row-no-wrap">
-          <label for="culture">{{ localize 'OQ.Labels.Culture' }}</label>
-          <input type="text" data-dtype="String" id="culture" name="system.personal.culture"
+          <label for="{{rootId}}-culture">{{ localize 'OQ.Labels.Culture' }}</label>
+          <input type="text" data-dtype="String" id="{{rootId}}-culture" name="system.personal.culture"
                  value="{{system.personal.culture}}">
         </div>
       </div>
 
       <div class="flexrow">
         <div class="flex1 flex-row-no-wrap">
-          <label for="rank">{{ localize 'OQ.Labels.Rank' }}</label>
-          <input type="text" data-dtype="String" id="rank" name="system.personal.rank"
+          <label for="{{rootId}}-rank">{{ localize 'OQ.Labels.Rank' }}</label>
+          <input type="text" data-dtype="String" id="{{rootId}}-rank" name="system.personal.rank"
                  value="{{system.personal.rank}}">
         </div>
         <div class="flex1 flex-row-no-wrap">
-          <label for="organisation">{{ localize 'OQ.Labels.Organisation' }}</label>
-          <input type="text" data-dtype="String" id="organisation" name="system.personal.organisation"
+          <label for="{{rootId}}-organisation">{{ localize 'OQ.Labels.Organisation' }}</label>
+          <input type="text" data-dtype="String" id="{{rootId}}-organisation" name="system.personal.organisation"
                  value="{{system.personal.organisation}}">
         </div>
       </div>
       <div class="flexrow">
         <div class="flex1 flex-row-no-wrap">
-          <label for="concept">{{ localize 'OQ.Labels.Concept' }}</label>
-          <input type="text" data-dtype="String" id="concept" name="system.personal.concept"
+          <label for="{{rootId}}-concept">{{ localize 'OQ.Labels.Concept' }}</label>
+          <input type="text" data-dtype="String" id="{{rootId}}-concept" name="system.personal.concept"
                  value="{{system.personal.concept}}">
         </div>
       </div>
@@ -57,8 +57,10 @@
             <div data-tooltip="{{ localize char.label }}" class="characteristic-value flex0">{{char.value}}</div>
           </div>
         {{/each}}
-        <a class="modify-characteristics flex0" data-tooltip="{{ localize 'OQ.Labels.EditCharacteristics' }}"><i
-          class="fas fa-gear"></i></a>
+        {{#if editable}}
+          <a class="modify-characteristics flex0" data-action="modifyCharacteristics"
+             data-tooltip="{{ localize 'OQ.Labels.EditCharacteristics' }}"><i class="fas fa-gear"></i></a>
+        {{/if}}
       </div>
 
     </div>
@@ -68,41 +70,36 @@
 
   </section>
 
-  <nav class="sheet-tabs tabs" data-group="primary">
-    <a class="item" data-tab="skills">{{ localize 'OQ.Nav.Skills' }}</a>
-    <a class="item" data-tab="combat">{{ localize 'OQ.Nav.Combat' }}</a>
-    <a class="item" data-tab="equipment">{{ localize 'OQ.Nav.Equipment' }}</a>
-    <a class="item" data-tab="magic">{{ localize 'OQ.Nav.Magic' }}</a>
-    <!--    <a class="item" data-tab="effects">{{ localize 'OQ.Nav.Effects' }}</a>-->
-    <a class="item" data-tab="notes">{{ localize 'OQ.Nav.Notes' }}</a>
+  <nav class="sheet-tabs tabs">
+    {{#each tabs as |tab|}}
+      <a class="item {{tab.cssClass}}" data-action="tab" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+        {{localize tab.label}}
+      </a>
+    {{/each}}
   </nav>
 
   <section class="sheet-content">
-    <div class="tab" data-group="primary" data-tab="skills">
+    <div class="tab {{tabs.skills.cssClass}}" data-group="primary" data-tab="skills">
       {{> systems/oq/templates/actor/parts/skills.hbs this}}
     </div>
 
-    <div class="tab" data-group="primary" data-tab="combat">
+    <div class="tab {{tabs.combat.cssClass}}" data-group="primary" data-tab="combat">
       {{> systems/oq/templates/actor/parts/combat.hbs this}}
     </div>
 
-    <div class="tab" data-group="primary" data-tab="equipment">
+    <div class="tab {{tabs.equipment.cssClass}}" data-group="primary" data-tab="equipment">
       {{> systems/oq/templates/actor/parts/equipment-list.hbs this}}
     </div>
 
-    <div class="tab" data-group="primary" data-tab="magic">
+    <div class="tab {{tabs.magic.cssClass}}" data-group="primary" data-tab="magic">
       {{> systems/oq/templates/actor/parts/magic.hbs this}}
     </div>
-    <!--
-        <div class="tab" data-group="primary" data-tab="effects">
-          Effects
-        </div>
-    -->
-    <div class="tab" data-group="primary" data-tab="notes">
+
+    <div class="tab {{tabs.notes.cssClass}}" data-group="primary" data-tab="notes">
       {{> systems/oq/templates/actor/parts/notes.hbs this}}
     </div>
   </section>
   <section class="sheet-footer">
     <div class="sheet-hint">{{ localize 'OQ.Hints.ItemRollHint' }}</div>
   </section>
-</form>
+</div>

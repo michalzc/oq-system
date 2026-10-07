@@ -17,6 +17,7 @@ OQ:
     Cancel: Cancel
     Characteristics:
       Title: Update Characteristics
+    MessageMode: Visibility
     Mod: Mod
     Points: Points
     RemainPoints: Remain

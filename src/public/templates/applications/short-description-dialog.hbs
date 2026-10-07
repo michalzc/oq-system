@@ -1,8 +1,4 @@
-<form class="{{cssClass}} {{type}} dialog-form" autocomplete="off">
-  <section class="dialog-body short-description">
-    {{editor enrichedDescription target="system.personal.shortDescription"
-             engine="prosemirror"
-             editable=true
-             collaborate=false}}
-  </section>
-</form>
+<div class="actor-dialog {{actor.type}} short-description">
+  <prose-mirror name="system.personal.shortDescription" value="{{system.personal.shortDescription}}"
+                data-document-uuid="{{actor.uuid}}"></prose-mirror>
+</div>

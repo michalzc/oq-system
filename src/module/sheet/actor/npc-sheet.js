@@ -3,34 +3,42 @@ import _ from 'lodash-es';
 import { OQNPCShortDescriptionEdit } from '../../application/short-desc-editor.js';
 
 export class OQNpcSheet extends OQActorBaseSheet {
-  get template() {
-    return 'systems/oq/templates/actor/npc-sheet.hbs';
-  }
+  static DEFAULT_OPTIONS = {
+    actions: {
+      rollCharacteristics: OQNpcSheet.onRollCharacteristics,
+      editShortDescription: OQNpcSheet.onEditShortDescription,
+    },
+  };
 
-  async getData(options) {
-    const context = await super.getData(options);
+  static PARTS = {
+    sheet: {
+      template: 'systems/oq/templates/actor/npc-sheet.hbs',
+      scrollable: ['.sheet-content .tab.active'],
+    },
+  };
+
+  static TABS = {
+    primary: {
+      tabs: [
+        { id: 'details', label: 'OQ.Nav.Details' },
+        { id: 'description', label: 'OQ.Nav.Description' },
+      ],
+      initial: 'details',
+    },
+  };
+
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
     const personal = this.actor.system.personal;
-    const enrichedDescription = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
-      personal.description,
-    );
-    const enrichedShortDescription = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
-      personal.shortDescription,
-    );
-    return _.merge(context, {
-      enrichedDescription,
-      enrichedShortDescription,
+    return Object.assign(context, {
+      enrichedDescription: await this.enrichHTML(personal.description),
+      enrichedShortDescription: await this.enrichHTML(personal.shortDescription),
     });
   }
 
-  activateListeners(html) {
-    super.activateListeners(html);
-
-    html.find('.roll-characteristics').on('click', this.onRollCharacteristics.bind(this));
-    html.find('.show-short-description-dialog').on('click', this.onEditShortDescription.bind(this));
-  }
-
-  async onRollCharacteristics(event) {
+  static async onRollCharacteristics(event) {
     event.preventDefault();
+    if (!this.isEditable) return;
     const characteristics = this.actor.system.characteristics;
     const asyncRolls = _.toPairs(characteristics).map(([key, characteristic]) => {
       const rollPromise = characteristic.roll ? new Roll(characteristic.roll).evaluate() : Promise.resolve(null);
@@ -44,13 +52,11 @@ export class OQNpcSheet extends OQActorBaseSheet {
       },
     };
     await this.actor.update(characteristicsToUpdate);
-    this.actor.sheet.render(true);
   }
 
-  async onEditShortDescription(event) {
+  static onEditShortDescription(event) {
     event.preventDefault();
-
-    const dialog = new OQNPCShortDescriptionEdit(this.actor);
-    dialog.render(true);
+    if (!this.isEditable) return;
+    return OQNPCShortDescriptionEdit.open(this.actor);
   }
 }

@@ -2,8 +2,8 @@ import { OQBaseItemSheet } from './base-item-sheet.js';
 import _ from 'lodash-es';
 
 export class OQSpellSheet extends OQBaseItemSheet {
-  async getData(options) {
-    const context = await super.getData(options);
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
     const itemConfig = CONFIG.OQ.ItemConfig;
 
     const spellTypes = _.mapValues(itemConfig.spellsTypes, (value, key) => `OQ.Labels.SpellTypes.${key}`);
@@ -14,7 +14,7 @@ export class OQSpellSheet extends OQBaseItemSheet {
       .fromPairs()
       .value();
 
-    return _.merge(context, {
+    return Object.assign(context, {
       spellTypes,
       parentSkills,
       hasSplitDivineCasting: this.item.hasSplitDivineCasting,
@@ -22,16 +22,19 @@ export class OQSpellSheet extends OQBaseItemSheet {
     });
   }
 
-  activateListeners(html) {
-    super.activateListeners(html);
-
-    html.find('.expended-spell').on('click', this.onChangeCastedSpell.bind(this));
+  _onChangeForm(formConfig, event) {
+    if (event.target.matches('.expended-spell')) {
+      if (this.isEditable) return this.onChangeCastedSpell(event);
+      return;
+    }
+    return super._onChangeForm(formConfig, event);
   }
 
   async onChangeCastedSpell(event) {
-    const target = event.currentTarget;
+    if (!this.isEditable) return;
+    const target = event.target;
     const checked = target.checked;
-    if (checked) this.item.castDivineSpell();
-    else this.item.regainDivineSpell();
+    if (checked) return this.item.castDivineSpell();
+    return this.item.regainDivineSpell();
   }
 }

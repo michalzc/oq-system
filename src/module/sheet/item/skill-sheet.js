@@ -2,9 +2,9 @@ import { OQBaseItemSheet } from './base-item-sheet.js';
 import _ from 'lodash-es';
 
 export class OQSkillSheet extends OQBaseItemSheet {
-  async getData(options) {
-    const baseData = await super.getData(options);
-    return _.merge(baseData, {
+  async _prepareContext(options) {
+    const baseData = await super._prepareContext(options);
+    return Object.assign(baseData, {
       skillTypes: this.getSkillTypes(),
       customType: this.item.system.type === 'custom',
       assigned: Boolean(this.item.parent),

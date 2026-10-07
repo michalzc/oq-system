@@ -3,32 +3,46 @@ import { CharacteristicsDialog } from '../../application/characteristics-dialog.
 import _ from 'lodash-es';
 
 export class OQCharacterSheet extends OQActorBaseSheet {
-  get template() {
-    return 'systems/oq/templates/actor/character-sheet.hbs';
-  }
+  static DEFAULT_OPTIONS = {
+    actions: {
+      modifyCharacteristics: OQCharacterSheet.onModifyCharacteristics,
+      consolidateMoney: OQCharacterSheet.onConsolidateMoney,
+    },
+  };
 
-  activateListeners(html) {
-    super.activateListeners(html);
+  static PARTS = {
+    sheet: {
+      template: 'systems/oq/templates/actor/character-sheet.hbs',
+      scrollable: ['.sheet-content .tab.active'],
+    },
+  };
 
-    if (!this.isEditable) return;
-    html.find('.modify-characteristics').on('click', this.onModifyCharacteristics.bind(this));
-    html.find('.consolidate-money').on('click', this.onConsolidateMoney.bind(this));
-  }
+  static TABS = {
+    primary: {
+      tabs: [
+        { id: 'skills', label: 'OQ.Nav.Skills' },
+        { id: 'combat', label: 'OQ.Nav.Combat' },
+        { id: 'equipment', label: 'OQ.Nav.Equipment' },
+        { id: 'magic', label: 'OQ.Nav.Magic' },
+        { id: 'notes', label: 'OQ.Nav.Notes' },
+      ],
+      initial: 'skills',
+    },
+  };
 
-  async getData(options) {
-    const context = await super.getData(options);
-    const enrichedNotes = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
-      this.actor.system.personal.notes,
-    );
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    const enrichedNotes = await this.enrichHTML(this.actor.system.personal.notes);
     const spellsPerType = this.getSpellsPerType();
     const spellTypes = CONFIG.OQ.ItemConfig.spellsTypes;
     const skillsTabContent = this.splitSkills(context.groupedItems.groupedSkills);
-    return _.merge(context, {
+    return Object.assign(context, {
       enrichedNotes,
       isCharacter: true,
       spellTypes,
       money: this.prepareMoney(),
       groupedItems: {
+        ...context.groupedItems,
         spellsPerType,
         skillsTabContent,
       },
@@ -47,13 +61,15 @@ export class OQCharacterSheet extends OQActorBaseSheet {
     return _.groupBy(allSpells, (spell) => spell.system.type);
   }
 
-  onModifyCharacteristics() {
-    const characteristicsDialog = new CharacteristicsDialog(this.actor);
-    characteristicsDialog.render(true);
+  static onModifyCharacteristics(event) {
+    event.preventDefault();
+    if (!this.isEditable) return;
+    return CharacteristicsDialog.open(this.actor);
   }
 
-  async onConsolidateMoney(event) {
+  static async onConsolidateMoney(event) {
     event.preventDefault();
+    if (!this.isEditable) return;
 
     const money = this.actor.system.personal.money;
     if (money && game.oq.moneyService) {

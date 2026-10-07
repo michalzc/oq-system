@@ -19,6 +19,7 @@ import { createChatMessage, evaluateRoll } from './chat.js';
  * @property {string} rollType
  * @property {string} entityName
  * @property {number} value
+ * @property {string|undefined} messageMode Defaults to the mode selected in the chat log.
  */
 
 const MAX_VALUE = 100;
@@ -35,7 +36,7 @@ const TestRollTemplates = {
  * @returns {Promise<void>}
  */
 export async function testRoll(rollData) {
-  const roll = await evaluateRoll(new Roll(CONFIG.OQ.RollConfig.baseRollFormula));
+  const roll = await evaluateRoll(new Roll(CONFIG.OQ.RollConfig.baseRollFormula), rollData.messageMode);
   const resultFeatures = getResultFeatures(roll);
   const totalValue = minMaxValue((rollData.value ?? 0) + (rollData.difficulty?.value ?? 0) + (rollData?.mod ?? 0));
 
@@ -65,7 +66,7 @@ export async function testRoll(rollData) {
     content: messageContent,
     flags: flags,
   };
-  await createChatMessage(messageData);
+  await createChatMessage(messageData, rollData.messageMode);
 }
 
 /**
@@ -131,6 +132,7 @@ export function getResultFeatures(roll) {
  * @property {string} entityName
  * @property {boolean} includeDM
  * @property {Object|undefined} customFormula
+ * @property {string|undefined} messageMode Defaults to the mode selected in the chat log.
  */
 
 /**
@@ -139,7 +141,7 @@ export function getResultFeatures(roll) {
  */
 export async function damageRoll(rollData) {
   const damageFormula = rollData.customFormula ? rollData.customFormula : rollData.finalDamageFormula;
-  const roll = await evaluateRoll(new Roll(damageFormula, rollData.actorRollData));
+  const roll = await evaluateRoll(new Roll(damageFormula, rollData.actorRollData), rollData.messageMode);
   const renderedRoll = await roll.render();
   const content = await renderTemplate('systems/oq/templates/chat/parts/damage-roll.hbs', {
     ...rollData,
@@ -158,5 +160,5 @@ export async function damageRoll(rollData) {
       },
     },
   };
-  await createChatMessage(messageData);
+  await createChatMessage(messageData, rollData.messageMode);
 }
