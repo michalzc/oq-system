@@ -23,8 +23,8 @@ The AppV2 sheets and dialogs, the new combat tracker and the pack cleanup are me
 (`v0.6.0` contains only the v14 compatibility pass).
 
 * Release v0.7.0.
-* Release workflow: update the deprecated actions (`checkout`, `setup-node`) and replace the archived
-  `microsoft/variable-substitution` step — [#29](https://github.com/michalzc/oq-system/issues/29).
+* ~~Release workflow: update the deprecated actions (`checkout`, `setup-node`) and replace the archived
+  `microsoft/variable-substitution` step — [#29](https://github.com/michalzc/oq-system/issues/29).~~ **Done**
 * Optional: publish releases to the Foundry package registry from the release workflow —
   [#68](https://github.com/michalzc/oq-system/issues/68).
 * Tracker cleanup:
