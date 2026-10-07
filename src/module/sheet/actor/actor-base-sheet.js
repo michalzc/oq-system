@@ -1,6 +1,7 @@
 import _ from 'lodash-es';
 import { AttributesDialog } from '../../application/attributes-dialog.js';
 import { OQBaseActor } from '../../document/actor/base-actor.js';
+import { getInitiativeOptions } from '../../utils/initiative.js';
 import {
   asyncFlattenItemsFromFolder,
   inRangeValue,
@@ -235,15 +236,7 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
   }
 
   getInitiativeOptions() {
-    const itemTypes = CONFIG.OQ.ItemConfig.itemTypes;
-    const initiativeTypes = [itemTypes.skill, itemTypes.specialAbility];
-    const items = this.actor.items.filter((item) => initiativeTypes.includes(item.type) && item.system.formula);
-    const makeName = (item) => {
-      const rollValues = item.getRollValues && item.getRollValues();
-      return (rollValues?.value && `${item.name} (${rollValues.value})`) || item.name;
-    };
-
-    return _.fromPairs(items.map((item) => [item.id, makeName(item)]));
+    return getInitiativeOptions(this.actor);
   }
 
   prepareGroupedItems() {

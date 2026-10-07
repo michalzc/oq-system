@@ -7,7 +7,7 @@ OpenQuest SRD system for Foundry VTT
 Beta. The current development version requires Foundry VTT 14 and is verified on 14.368.
 Both actor sheets, all six item sheets, the dialogs and the combat tracker use ApplicationV2.
 Sheets and dialogs retain the light parchment theme. See [issues.md](issues.md) for the migration review
-and remaining combat tracker redesign.
+and completed combat tracker redesign.
 
 ## Contributors
 
@@ -48,6 +48,22 @@ OpenQuest is the trademark of Paul Newport, used with Permission.
 Put below link into 'Manifest URL' field.
 
 https://github.com/michalzc/oq-system/releases/latest/download/system.json
+
+## Combat
+
+Each encounter begins with **Round 1 — Declaration**, with no active turn. Choose an action and a signed integer
+initiative modifier in the tracker or actor sheet. Available actions are skills and special abilities with roll
+formulas; initiative uses their value plus the declaration modifier. Players can edit actors they own, and the GM
+can edit every participant. These choices persist as actor-sheet defaults.
+
+The GM clicks **Start round** to freeze each declaration, sort initiative from highest to lowest and begin turns.
+Changing the actor sheet afterwards affects the next declaration phase. Declarations record intent; they do not
+restrict actions or apply modifiers to subsequent skill rolls. A blank or deleted selection uses only the modifier.
+
+Ending the last eligible turn opens the next declaration phase automatically. The GM's **Next round** also opens
+that phase. **Previous turn** stays within the running round. Late participants wait until the next round, and
+Foundry's defeated-participant setting still applies. Start round is disabled when no eligible participant remains.
+A connected GM and Foundry's **Query Users** permission are required for player tracker edits and turn advancement.
 
 ## Development
 

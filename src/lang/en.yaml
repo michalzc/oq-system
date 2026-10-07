@@ -1,4 +1,12 @@
 OQ:
+  Combat:
+    Declaration: Declaration
+    StartRound: Start round
+    Action: Declared action
+    Modifier: Initiative modifier
+    NoAction: No action selected
+    Awaiting: Awaiting next round
+    IntegerModifier: Enter a whole number for the initiative modifier.
   Chat:
     damageMessage: >-
       {0} has taken {1} points of damage.

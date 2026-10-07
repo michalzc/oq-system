@@ -1,11 +1,13 @@
 import { OQActorDocumentProxy, OQItemDocumentProxy } from '../document/document-proxy.js';
 import { OQCombat } from '../document/combat.js';
+import { OQCombatant } from '../document/combatant.js';
 import { OQCombatTracker } from '../application/combat-tracker.js';
 
 export function registerDocuments() {
   CONFIG.Actor.documentClass = OQActorDocumentProxy;
   CONFIG.Item.documentClass = OQItemDocumentProxy;
   CONFIG.Combat.documentClass = OQCombat;
+  CONFIG.Combatant.documentClass = OQCombatant;
   OQCombat.registerQueries();
   CONFIG.ui.combat = OQCombatTracker;
 

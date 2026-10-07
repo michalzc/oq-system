@@ -1,5 +1,6 @@
 import _ from 'lodash-es';
 import { getDefaultItemsForActor } from '../../utils/compendium-utils.js';
+import { getDeclaration } from '../../utils/initiative.js';
 
 /**
  * Writes derived values onto the prepared attribute objects, keeping their stored fields (`base`, `mod`, ...). Every
@@ -172,14 +173,7 @@ export class OQBaseActor extends Actor {
   }
 
   calculateInitiative() {
-    const { reference, mod } = this.system.attributes.initiative;
-    const initiativeItem = reference && this.items.get(reference);
-    if (initiativeItem) {
-      const { value } = initiativeItem.getRollValues();
-
-      return { value: (value ?? 0) + (mod ?? 0), name: initiativeItem.name };
-    }
-
-    return { value: mod ?? 0, name: undefined };
+    const declaration = getDeclaration(this);
+    return { value: declaration.total, name: declaration.name || undefined };
   }
 }
