@@ -8,31 +8,24 @@ on:
   release:
     types: [published]
 
+permissions:
+  contents: read
+
 env:
   package_type: system
   node_version: 24
-  YARN_CACHE_FOLDER: .yarn-cache
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
 
       - name: Install node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.node_version }}
-
-      - name: Cache Node.js modules
-        uses: actions/cache@v4
-        with:
-          path: .yarn-cache
-          key: ${{ runner.OS }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-node-
-            ${{ runner.OS }}-
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -44,21 +37,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
 
       - name: Install node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.node_version }}
-
-      - name: Cache Node.js modules
-        uses: actions/cache@v4
-        with:
-          path: .yarn-cache
-          key: ${{ runner.OS }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-node-
-            ${{ runner.OS }}-
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -70,45 +54,40 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
 
       - name: Install node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.node_version }}
-
-      - name: Cache Node.js modules
-        uses: actions/cache@v4
-        with:
-          path: .yarn-cache
-          key: ${{ runner.OS }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-node-
-            ${{ runner.OS }}-
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Extract tag version number
-        id: get_version
-        uses: battila7/get-version-action@v2
-
-      - name: Substitute Manifest and Download Links For Versioned Ones
-        id: sub_manifest_link_version
-        uses: microsoft/variable-substitution@v1
-        with:
-          files: 'src/${{ env.package_type }}.yaml'
+      # Replaces only top-level keys that already exist in the manifest and fails if one is missing.
+      - name: Set release metadata in the manifest
         env:
-          version: ${{ steps.get_version.outputs.version-without-v }}
-          url: https://github.com/${{ github.repository }}
-          manifest: https://github.com/${{ github.repository }}/releases/latest/download/${{ env.package_type }}.json
-          download: https://github.com/${{ github.repository }}/releases/download/${{ github.event.release.tag_name }}/${{ env.package_type }}.zip
+          VERSION: ${{ github.event.release.tag_name }}
+          REPO_URL: https://github.com/${{ github.repository }}
+        run: |
+          file=src/${{ env.package_type }}.yaml
+          version=${VERSION#v}
+          for key in version url manifest download; do
+            grep -q "^$key:" "$file" || { echo "::error::$file has no top-level '$key'"; exit 1; }
+          done
+          sed -i -E \
+            -e "s|^version:.*|version: $version|" \
+            -e "s|^url:.*|url: $REPO_URL|" \
+            -e "s|^manifest:.*|manifest: $REPO_URL/releases/latest/download/${{ env.package_type }}.json|" \
+            -e "s|^download:.*|download: $REPO_URL/releases/download/$VERSION/${{ env.package_type }}.zip|" \
+            "$file"
+          grep -E '^(version|url|manifest|download):' "$file"
 
       - name: Build
         run: yarn build
 
       - name: Archive production artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: build
           path: build
@@ -119,12 +98,11 @@ jobs:
       - test
       - build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
       - name: Download production artifacts for publication
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: build
           path: build
@@ -133,12 +111,13 @@ jobs:
         working-directory: ./build
         run: zip -r ../${{ env.package_type }}.zip .
 
-      - name: Create release
-        id: create_version_release
+      # Attaches the artifacts to the published release; its name, notes and pre-release flag stay as they are.
+      - name: Attach artifacts to the release
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          name: ${{ github.event.release.name }}
+          omitNameDuringUpdate: true
+          omitBodyDuringUpdate: true
+          omitPrereleaseDuringUpdate: true
           token: ${{ secrets.GITHUB_TOKEN }}
           artifacts: './build/${{ env.package_type }}.json, ./${{ env.package_type }}.zip'
-          body: ${{ github.event.release.body }}
