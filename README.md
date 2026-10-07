@@ -15,7 +15,60 @@ and completed combat tracker redesign.
 
 ## Roadmap
 
-* ~~v0.6 - Release Foundry VTT V14 support with ApplicationV2 sheets and dialogs~~ **Done**
+Issue numbers refer to the [GitHub tracker](https://github.com/michalzc/oq-system/issues).
+
+### v0.7 — Release the v14 / ApplicationV2 work
+
+The AppV2 sheets and dialogs, the new combat tracker and the pack cleanup are merged but not yet released
+(`v0.6.0` contains only the v14 compatibility pass).
+
+* Release v0.7.0.
+* Release workflow: update the deprecated actions (`checkout`, `setup-node`) and replace the archived
+  `microsoft/variable-substitution` step — [#29](https://github.com/michalzc/oq-system/issues/29).
+* Optional: publish releases to the Foundry package registry from the release workflow —
+  [#68](https://github.com/michalzc/oq-system/issues/68).
+* Tracker cleanup:
+  * Verify and close [#47](https://github.com/michalzc/oq-system/issues/47) (context menu) and
+    [#104](https://github.com/michalzc/oq-system/issues/104) (icons by item subtype).
+  * Close the v0.5 milestone; move its open issues to the milestones below.
+  ~~* Move `issues.md` to `docs/` as the migration record.~~ **Done**
+
+### v0.8 — Magic and quality of life
+
+* Spell casting dialog: roll the referenced casting skill, deduct MP by magnitude, post a chat card —
+  [#94](https://github.com/michalzc/oq-system/issues/94).
+* Custom spell type — [#110](https://github.com/michalzc/oq-system/issues/110).
+* Item sheet option to add an item to new characters / NPCs, instead of editing `flags.oq.newActor` by hand —
+  [#121](https://github.com/michalzc/oq-system/issues/121).
+* Documentation compendium updated for the new sheets and combat flow —
+  [#61](https://github.com/michalzc/oq-system/issues/61).
+
+### v0.9 — Buffs and Active Effects
+
+* Temporary HP / MP above the maximum, independent of Active Effects —
+  [#124](https://github.com/michalzc/oq-system/issues/124).
+* Active Effects support — [#14](https://github.com/michalzc/oq-system/issues/14):
+  * decide which fields effects may change;
+  * fix the data preparation order: base data, effects, derived values;
+  * effects tab on actor and item sheets, effects transferred from items.
+* Statuses with OpenQuest conditions — [#109](https://github.com/michalzc/oq-system/issues/109).
+* Enchanted items: magic point stores and stored spells — [#96](https://github.com/michalzc/oq-system/issues/96).
+
+### v1.0 — Content and polish
+
+* SRD creatures as NPC actors in a compendium, generated from the bestiary journal into YAML packs —
+  [#11](https://github.com/michalzc/oq-system/issues/11), [#118](https://github.com/michalzc/oq-system/issues/118).
+* Dark theme for sheets and dialogs (deferred in the migration, C8).
+* Unit tests for actor and item data preparation.
+
+### Later
+
+* Token Action HUD support, probably as a separate module — [#56](https://github.com/michalzc/oq-system/issues/56).
+* Combat automation — [#10](https://github.com/michalzc/oq-system/issues/10).
+
+### Completed
+
+* ~~v0.6 - Foundry VTT V14 support~~ **Done**
 * ~~v0.5 - https://github.com/michalzc/oq-system/issues/138 - Support for V13~~ **Done**
 * ~~v0.5 - https://github.com/michalzc/oq-system/milestone/5. Quality of life improvements.~~ _Postponed_
 * ~~v0.4 - Update to FoundryVTT V12~~ **Done**
