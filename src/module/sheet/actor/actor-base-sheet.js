@@ -77,8 +77,11 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
       onClick: (event, target) => this.onItemUpdateState(key, target),
     }));
 
+    // Fixed menus open in the document body, so they aren't clipped by the scrolling tab or stretch its content.
     new foundry.applications.ux.ContextMenu.implementation(this.element, selector, elems, {
       eventName: 'click',
+      fixed: true,
+      relative: 'target',
       jQuery: false,
     });
   }
