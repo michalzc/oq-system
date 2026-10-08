@@ -83,6 +83,8 @@ The AppV2 sheets and dialogs, the new combat tracker and the pack cleanup are me
   Leander - [Tension Type Font License v1.00](https://www.fontsquirrel.com/license/leander)
 * Game Rules and content: [OpenQuest SRD](https://openquestrpg.com/srd/) by D101
   Games - [Creative Commons](https://creativecommons.org/)
+* OpenQuest 3 SRD reference copy in [docs/OpenQuest3-SRD](docs/OpenQuest3-SRD/README.adoc), converted to
+  AsciiDoc - [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)
 * Foundry VTT: Limited License Agreement for module development.
 * Project skeleton: [Foundry Factory](https://github.com/ghost-fvtt/foundry-factory) - [REUSE](https://reuse.software/)
 * The rest of the source code: [WTFPL](http://www.wtfpl.net/)
