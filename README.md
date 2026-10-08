@@ -19,15 +19,15 @@ Issue numbers refer to the [GitHub tracker](https://github.com/michalzc/oq-syste
 
 ### v0.8 — Magic and quality of life
 
-* Spell casting dialog: roll the referenced casting skill, deduct MP by magnitude, post a chat card —
-  [#94](https://github.com/michalzc/oq-system/issues/94).
+* ~~Spell casting dialog: roll the referenced casting skill, deduct MP by magnitude, post a chat card~~ —
+  [#94](https://github.com/michalzc/oq-system/issues/94). **Done**
 * Custom spell type — [#110](https://github.com/michalzc/oq-system/issues/110).
 * Item sheet option to add an item to new characters / NPCs, instead of editing `flags.oq.newActor` by hand —
   [#121](https://github.com/michalzc/oq-system/issues/121).
 * Documentation compendium updated for the new sheets and combat flow —
   [#61](https://github.com/michalzc/oq-system/issues/61).
 * Change colours for NPCs items and actions (optional) — [#152](https://github.com/michalzc/oq-system/issues/152)
-* Recommended world settings — [#153](https://github.com/michalzc/oq-system/issues/153)
+* ~~Recommended world settings~~ — [#153](https://github.com/michalzc/oq-system/issues/153) **Done**
 
 ### v0.9 — Buffs and Active Effects
 
