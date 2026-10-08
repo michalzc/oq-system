@@ -16,6 +16,24 @@ export const ActorConfig = {
     character: 'systems/oq/assets/icons/character.svg',
     npc: 'systems/oq/assets/icons/cultist.svg',
   },
+  /**
+   * Prototype token values for newly created actors: `base` for every type, merged with the actor type's own entry.
+   * They are only defaults, so they can still be changed for each actor. The HP and MP bars come from the system
+   * manifest.
+   */
+  get prototypeTokenDefaults() {
+    return {
+      base: {
+        displayName: CONST.TOKEN_DISPLAY_MODES.OWNER,
+        displayBars: CONST.TOKEN_DISPLAY_MODES.OWNER,
+      },
+      character: {
+        actorLink: true,
+        sight: { enabled: true },
+        disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY,
+      },
+    };
+  },
   characteristicsParams: {
     characteristicPoints: 30,
     basePoints: 56,

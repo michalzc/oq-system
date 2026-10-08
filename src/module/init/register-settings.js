@@ -1,5 +1,19 @@
 import { getCompendiumList } from '../utils/compendium-utils.js';
 
+/**
+ * Replaces the default values of core settings with the ones recommended for OQ. Core registers its settings after
+ * the `init` hook, so this runs in `setup`. Client settings are stored per browser, so it runs on every client.
+ */
+export function applyCoreSettingDefaults() {
+  for (const [key, value] of Object.entries(CONFIG.OQ.SettingsConfig.coreDefaults)) {
+    const setting = game.settings.settings.get(`core.${key}`);
+    if (!setting) continue;
+    setting.default = value;
+    // The settings form and its Reset Defaults button read the field's initial value and the setting default.
+    if (setting.type instanceof foundry.data.fields.DataField) setting.type.initial = value;
+  }
+}
+
 export function registerSettings() {
   game.settings.register(CONFIG.OQ.SYSTEM_ID, CONFIG.OQ.SettingsConfig.keys.coinsConfiguration, {
     name: 'OQ.Settings.coinsConfiguration.name',

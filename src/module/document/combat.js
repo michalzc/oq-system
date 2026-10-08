@@ -58,7 +58,7 @@ export class OQCombat extends Combat {
   }
 
   async _preCreate(data, options, user) {
-    await super._preCreate(data, options, user);
+    if ((await super._preCreate(data, options, user)) === false) return false;
     if (!data.round) {
       this.updateSource({ turn: null, 'flags.oq.phase': 'declaration', 'flags.oq.targetRound': 1 });
     }

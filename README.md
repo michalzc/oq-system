@@ -27,7 +27,7 @@ Issue numbers refer to the [GitHub tracker](https://github.com/michalzc/oq-syste
 * Documentation compendium updated for the new sheets and combat flow —
   [#61](https://github.com/michalzc/oq-system/issues/61).
 * Change colours for NPCs items and actions (optional) — [#152](https://github.com/michalzc/oq-system/issues/152)
-* Recommended world settings — [#152](https://github.com/michalzc/oq-system/issues/153)
+* Recommended world settings — [#153](https://github.com/michalzc/oq-system/issues/153)
 
 ### v0.9 — Buffs and Active Effects
 
