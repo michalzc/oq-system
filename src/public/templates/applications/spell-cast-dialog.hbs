@@ -1,0 +1,45 @@
+<div class="roll-dialog spell">
+  <div class="dialog-header">
+    <h1>{{ entityName }}</h1>
+    {{#if skillName}}
+      <h2>{{ skillName }}</h2>
+    {{/if}}
+  </div>
+  <div class="dialog-body">
+    {{#unless rollable}}
+      {{#unless variant}}
+        <p class="cast-confirm">{{ localize 'OQ.Labels.CastConfirm' name=entityName }}</p>
+      {{/unless}}
+    {{/unless}}
+    <div class="roll-params">
+      {{#if rollable}}
+        <label>{{ localize 'OQ.Labels.Value' }}</label>
+        <div>{{ value }}</div>
+      {{/if}}
+
+      {{#if variant}}
+        <label for="{{rootId}}-magnitude">{{ localize 'OQ.Labels.SpellMagnitude' }}</label>
+        <input type="number" data-dtype="Number" name="magnitude" id="{{rootId}}-magnitude" min="1"
+               max="{{maxMagnitude}}" step="1" value="{{maxMagnitude}}" required autofocus>
+      {{else}}
+        <label>{{ localize 'OQ.Labels.SpellMagnitude' }}</label>
+        <div>{{ maxMagnitude }}</div>
+      {{/if}}
+
+      {{#if rollable}}
+        <label for="{{rootId}}-difficulty">{{localize 'OQ.Labels.Difficulty'}}</label>
+        <select name="difficulty" id="{{rootId}}-difficulty">
+          {{selectOptions difficulties selected=defaultDifficulty localize=false }}
+        </select>
+        <label for="{{rootId}}-modifier">{{ localize 'OQ.Labels.OtherMods' }}</label>
+        <input type="number" data-dtype="Number" name="mod" id="{{rootId}}-modifier" value="{{mod}}"
+               {{#unless variant}}autofocus{{/unless}}>
+      {{/if}}
+
+      <label for="{{rootId}}-messageMode">{{ localize 'OQ.Dialog.MessageMode' }}</label>
+      <select name="messageMode" id="{{rootId}}-messageMode">
+        {{selectOptions messageModes selected=messageMode localize=true }}
+      </select>
+    </div>
+  </div>
+</div>

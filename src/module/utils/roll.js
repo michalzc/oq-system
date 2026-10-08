@@ -28,7 +28,16 @@ const TestRollTemplates = {
   skill: 'systems/oq/templates/chat/parts/skill-ability-roll.hbs',
   specialAbility: 'systems/oq/templates/chat/parts/skill-ability-roll.hbs',
   weapon: 'systems/oq/templates/chat/parts/weapon-roll.hbs',
+  spell: 'systems/oq/templates/chat/parts/spell-cast.hbs',
 };
+
+/**
+ * @typedef {Object} TestRollResult
+ * @property {Roll} roll
+ * @property {string} rollResult One of the `CONFIG.OQ.RollConfig.rollResults` values
+ * @property {number} totalValue
+ * @property {boolean} mastered
+ */
 
 /**
  * Performs test roll
@@ -36,23 +45,42 @@ const TestRollTemplates = {
  * @returns {Promise<void>}
  */
 export async function testRoll(rollData) {
+  await postTestRoll(rollData, await evaluateTestRoll(rollData));
+}
+
+/**
+ * Rolls the test dice and works out the result, without posting anything.
+ * @param {RollData} rollData
+ * @returns {Promise<TestRollResult>}
+ */
+export async function evaluateTestRoll(rollData) {
   const roll = await evaluateRoll(new Roll(CONFIG.OQ.RollConfig.baseRollFormula), rollData.messageMode);
   const resultFeatures = getResultFeatures(roll);
   const totalValue = minMaxValue((rollData.value ?? 0) + (rollData.difficulty?.value ?? 0) + (rollData?.mod ?? 0));
 
   const rollResult = getResult(resultFeatures, roll.total, { value: rollData.value, totalValue });
   const mastered = rollData.value >= MAX_VALUE && totalValue >= MAX_VALUE && rollData.mastered;
+  return { roll, rollResult, totalValue, mastered };
+}
+
+/**
+ * Posts the chat message of an evaluated test roll.
+ * @param {RollData} rollData
+ * @param {TestRollResult} testRollResult
+ * @param {object} [extraContext] Additional data for the chat template
+ * @returns {Promise<void>}
+ */
+export async function postTestRoll(rollData, testRollResult, extraContext = {}) {
+  const { roll, rollResult } = testRollResult;
   const rollTypeLabel = `TYPES.Item.${rollData.rollType}`;
   const rollResults = CONFIG.OQ.RollConfig.rollResults;
   const showDamageButton =
     rollData.hasDamage && [rollResults.success, rollResults.criticalSuccess].includes(rollResult);
   const renderData = {
     ...rollData,
-    mastered,
-    roll,
-    rollResult,
+    ...testRollResult,
+    ...extraContext,
     rollTypeLabel,
-    totalValue,
     showDamageButton,
   };
 

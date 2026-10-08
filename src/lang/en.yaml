@@ -55,6 +55,7 @@ OQ:
     SpentPoints: Spent
     Value: Value
     CustomFormula: Custom Formula
+    Cast: Cast
     ShortDescription:
       title: Edit short description of
   Errors:
@@ -102,6 +103,7 @@ OQ:
         abbr: MR
         label: Movement Rate
     Expended: Expended
+    CastConfirm: Cast {name}?
     Characteristics: Characteristics
     CharacteristicsNames:
       cha:
@@ -160,6 +162,7 @@ OQ:
     Heal: Heal
     Magnitude: Magnitude
     Mastered: Mastered
+    MPSpent: MP Spent
     Mod: Mod
     Money: Money
     Initiative: Initiative
@@ -184,6 +187,8 @@ OQ:
     Range: Range
     Rank: Rank
     Reference: Reference
+    Regain: Regain spell
+    RegainAll: Regain all spells
     RemainingMagnitude: Remaining Magnitude
     Roll: Roll
     RollFormula: Roll Formula
@@ -199,6 +204,7 @@ OQ:
       magic: Magic
       combat: Combat
     Spells: Spells
+    SpellMagnitude: Spell Magnitude
     SpellTraitsLabel: Spell Traits
     SpellTraits:
       Area: Area
@@ -270,7 +276,11 @@ OQ:
   Tooltips:
     SendToChat: Send to chat
   Warnings:
+    InvalidMagnitude: The magnitude must be a whole number from 1 to {max}.
     ItemNotFound: The item no longer exists.
+    NoCastingSkill: The spell has no casting skill. Select one on the spell sheet.
+    NotEnoughMagicPoints: Not enough magic points to cast the spell.
+    SpellExpended: The spell is expended. Regain it before casting it again.
     NoSpecialAbility: Player Character is not eligible for Special Abilities
 TYPES:
   Actor:

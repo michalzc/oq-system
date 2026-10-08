@@ -2,12 +2,17 @@
   <a class="item-to-chat" data-action="itemToChat">
     <img class="item-icon" src="{{img}}" data-tooltip="{{localize 'OQ.Tooltips.SendToChat'}}" alt="{{name}}">
   </a>
-  <a class="item-roll spell{{#if this.expended}}-expanded{{/if}}" data-action="rollItem" data-tooltip-html="{{lookup @root.itemTooltips id}}" data-tooltip-direction="LEFT">
+  <a class="item-roll spell{{#if this.expended}} spell-expended{{/if}}" data-action="rollItem" data-tooltip-html="{{lookup @root.itemTooltips id}}" data-tooltip-direction="LEFT">
     {{name}}
     {{#unless system.nonVariant}}
       [{{#if hasSplitDivineCasting}}{{system.remainingMagnitude}}/{{/if}}{{system.magnitude}}]
     {{/unless}}
   </a>
+  {{#if this.spent}}
+    {{#if @root.editable}}
+      <a class="item-regain" data-action="regainSpell" data-tooltip="{{localize 'OQ.Labels.Regain'}}"><i class="fas fa-rotate-left"></i></a>
+    {{/if}}
+  {{/if}}
   <a class="item-edit" data-action="editItem"><i class="fas fa-edit"></i></a>
   {{#if @root.editable}}
     <a class="item-delete" data-action="deleteItem"><i class="fas fa-trash"></i></a>

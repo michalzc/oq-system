@@ -18,6 +18,7 @@ export async function preloadTemplates() {
     'systems/oq/templates/chat/parts/skill-ability-roll.hbs',
     'systems/oq/templates/chat/parts/damage-roll.hbs',
     'systems/oq/templates/chat/parts/weapon-roll.hbs',
+    'systems/oq/templates/chat/parts/spell-cast.hbs',
     'systems/oq/templates/item/parts/traits.hbs',
   ];
 
