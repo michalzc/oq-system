@@ -1,0 +1,36 @@
+<h2>Character</h2>
+<h3>Character creation</h3>
+<p>When a new Character actor is created, all the skills from the Basic Skills
+    compendium are copied.</p>
+<h4>Characteristics</h4>
+<p>Characteristics can be updated using the Characteristics dialogue box, the
+    'cog' icon on the Characteristics panel. It calculates the points, as described
+    in the rules. Characteristics can be rolled, all or individual.</p>
+<h5>Mod</h5>
+<p>Mod is a workaround for tracking temporary modifications. For characteristics
+    it is simply added to the final value.</p>
+<h4>Attributes</h4>
+<p>Attributes are calculated from characteristics. Only mods can be updated in
+    the attributes dialogue. It works in the same way as above.</p>
+<h2>NPC</h2>
+<h3>NPC Creation</h3>
+<h4>Characteristics</h4>
+<p>All characteristics possess default values corresponding to those of an
+    average human and are editable directly on the NPC sheet. Beneath each value
+    lies a roll formula representing the average human defaults.</p>
+<p>The dice icon located at the bottom of the panel initiates a dice roll for
+    all characteristics based on their respective formulas and subsequently updates
+    the values.</p>
+<h4>Attributes</h4>
+<p>Similar to character attributes, NPCs possess the same characteristics and
+    functionalities.</p>
+<h2>Roll data</h2>
+<p>Actors furnish attribute values, damage modifiers, and skills as 'roll data'
+    for utilization in roll formulas.</p>
+<p>Attributes are accessible by their abbreviations, such as Strength
+    represented by 'str'. Skills reside within the 'skills' collection and can be
+    accessed as 'skills.skill-slug.value' and 'skills.skill-slug.mod'. Damage
+    modifiers are represented as 'dm'.</p>
+<p>It's worth noting that the damage modifier already incorporates the '+' or
+    '-' sign and hence should not be appended to the roll formula, for instance,
+    "/roll d6 @dm".</p>
