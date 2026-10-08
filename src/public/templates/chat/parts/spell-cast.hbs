@@ -1,0 +1,48 @@
+<div class="oq chat roll spell-cast">
+  <div class="roll-header">
+    {{#if img}}
+      <img class="roll-img" src="{{img}}" alt="{{ entityName }}">
+    {{/if}}
+    <div class="roll-header-container">
+      <div class="roll-title">{{entityName}}</div>
+      {{#if skillName}}
+        <div class="roll-subtitle">{{skillName}}</div>
+      {{/if}}
+
+      <div class="label">{{ localize 'OQ.Labels.Type' }}</div>
+      <div>{{ localize spellTypeLabel }}</div>
+
+      <div class="label">{{ localize 'OQ.Labels.SpellMagnitude' }}</div>
+      <div>{{magnitude}}</div>
+
+      {{#if rollable}}
+        <div class="label">{{ localize 'OQ.Labels.SkillValue' }}</div>
+        <div>{{value}}</div>
+        {{#if difficulty}}
+          <div class="label">{{ localize 'OQ.Labels.Difficulty'}}</div>
+          <div>{{ localize (concat 'OQ.Labels.DifficultyLevels.' difficulty.key)}} ({{ difficulty.value }}%)</div>
+        {{/if}}
+        {{#if mod}}
+          <div class="label">{{ localize 'OQ.Labels.OtherMods'}}</div>
+          <div>{{mod}}</div>
+        {{/if}}
+        <div class="label">{{ localize 'OQ.Labels.MPSpent' }}</div>
+        <div>{{mpSpent}}</div>
+      {{else}}
+        <div class="label">{{ localize 'OQ.Labels.RemainingMagnitude' }}</div>
+        <div>{{remainingMagnitude}} / {{maxMagnitude}}</div>
+      {{/if}}
+    </div>
+  </div>
+
+  {{#if rollable}}
+    <div class="roll-result roll-result-{{rollResult}}">{{ localize (concat 'OQ.RollResults.' rollResult) }}</div>
+
+    <div class="dice-roll">
+      <div class="dice-result">
+        <div class="dice-formula">{{roll.formula}} ⩽ {{totalValue}}</div>
+        <h3 class="dice-total">{{roll.total}}</h3>
+      </div>
+    </div>
+  {{/if}}
+</div>

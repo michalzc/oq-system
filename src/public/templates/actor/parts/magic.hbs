@@ -46,6 +46,10 @@
         <div class="item label">
           <div>{{ localize (concat 'OQ.Labels.SpellTypes.' spellType) }} {{localize 'OQ.Labels.Spells'}}</div>
           {{#if @root.editable}}
+            {{#if (propertyByName @root.spentSpellTypes spellType)}}
+              <a class="regain-all-spells" data-action="regainAllSpells" data-spell-type="{{spellType}}"
+                 data-tooltip="{{ localize 'OQ.Labels.RegainAll' }}"><i class="fas fa-rotate-left"></i></a>
+            {{/if}}
             <a class="add-new-item" data-action="addItem" data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize
               (concat 'OQ.Labels.SpellTypes.' spellType) }} {{localize 'OQ.Labels.Spells'}}" data-type="spell"
                data-system-type="{{spellType}}"><i class="fas fa-plus"></i></a>

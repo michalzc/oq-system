@@ -1,6 +1,7 @@
 import _ from 'lodash-es';
 import { AttributesDialog } from '../../application/attributes-dialog.js';
 import { OQBaseActor } from '../../document/actor/base-actor.js';
+import { OQSpell } from '../../document/item/spell.js';
 import { getInitiativeOptions } from '../../utils/initiative.js';
 import {
   asyncFlattenItemsFromFolder,
@@ -23,6 +24,8 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
       editItem: OQActorBaseSheet.onModifyItem,
       deleteItem: OQActorBaseSheet.onDeleteItem,
       rollItem: OQActorBaseSheet.onItemTestRoll,
+      regainSpell: OQActorBaseSheet.onRegainSpell,
+      regainAllSpells: OQActorBaseSheet.onRegainAllSpells,
       rollDamage: OQActorBaseSheet.onDamageRoll,
       itemToChat: OQActorBaseSheet.onItemToChat,
       changeQuantity: OQActorBaseSheet.onItemQuantityIncreaseDecrease,
@@ -43,7 +46,20 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
       initiativeOptions: this.getInitiativeOptions(),
       groupedItems: this.prepareGroupedItems(),
       itemTooltips: await this.prepareItemTooltips(),
+      ...this.prepareSpentSpells(),
     });
+  }
+
+  /**
+   * The spell types with spent spells that can be regained, and whether there are any.
+   * @returns {{spentSpellTypes: Object<string, boolean>, hasSpentSpells: boolean}}
+   */
+  prepareSpentSpells() {
+    const spentSpells = this.actor.items.filter((item) => item.type === 'spell' && item.spent);
+    return {
+      spentSpellTypes: _.fromPairs(spentSpells.map((spell) => [spell.system.type, true])),
+      hasSpentSpells: spentSpells.length > 0,
+    };
   }
 
   async enrichHTML(content) {
@@ -206,6 +222,21 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
     if (item) {
       await item.rollItemTest(event.shiftKey);
     }
+  }
+
+  static async onRegainSpell(event, target) {
+    event.preventDefault();
+    if (!this.isEditable) return;
+    const item = this.getItemFromElement(target);
+    if (item) {
+      await item.regainDivineSpell();
+    }
+  }
+
+  static async onRegainAllSpells(event, target) {
+    event.preventDefault();
+    if (!this.isEditable) return;
+    await OQSpell.regainAllDivineSpells(this.actor, target.dataset.spellType);
   }
 
   static async onDamageRoll(event, target) {

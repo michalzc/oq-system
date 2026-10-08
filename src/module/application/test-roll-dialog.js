@@ -8,23 +8,33 @@ import { openRollDialog } from './roll-dialog.js';
  *   dialog was cancelled or closed
  */
 export async function promptTestRoll(rollData) {
-  const difficultyLevels = CONFIG.OQ.RollConfig.difficultyLevels;
-  const difficulties = _.mapValues(
-    difficultyLevels,
-    (value, key) => `${game.i18n.localize(`OQ.Labels.DifficultyLevels.${key}`)} (${value}%)`,
-  );
-
   const formData = await openRollDialog({
     title: `${game.i18n.localize('OQ.Labels.Roll')}: ${rollData.entityName}`,
     template: 'systems/oq/templates/applications/test-roll-dialog.hbs',
-    context: { ...rollData, difficulties, defaultDifficulty: 'normal' },
+    context: { ...rollData, ...difficultyContext() },
   });
   if (!formData) return null;
 
-  const { difficulty: difficultyKey, mod, messageMode } = formData;
-  return {
-    difficulty: difficultyKey && { key: difficultyKey, value: difficultyLevels[difficultyKey] },
-    mod,
-    messageMode,
-  };
+  const { difficulty, mod, messageMode } = formData;
+  return { difficulty: toDifficulty(difficulty), mod, messageMode };
+}
+
+/**
+ * The difficulty options of a test roll dialog template.
+ * @returns {{difficulties: Object<string, string>, defaultDifficulty: string}}
+ */
+export function difficultyContext() {
+  const difficulties = _.mapValues(
+    CONFIG.OQ.RollConfig.difficultyLevels,
+    (value, key) => `${game.i18n.localize(`OQ.Labels.DifficultyLevels.${key}`)} (${value}%)`,
+  );
+  return { difficulties, defaultDifficulty: 'normal' };
+}
+
+/**
+ * @param {string|undefined} difficultyKey The difficulty selected in the dialog
+ * @returns {Difficulty|undefined}
+ */
+export function toDifficulty(difficultyKey) {
+  return difficultyKey && { key: difficultyKey, value: CONFIG.OQ.RollConfig.difficultyLevels[difficultyKey] };
 }

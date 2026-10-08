@@ -77,7 +77,15 @@
 
           {{#if groupedItems.magic }}
           <div class="item-group">
-            <label class="item label">{{ localize 'OQ.Nav.Magic' }}</label>
+            <div class="item label">
+              <div>{{ localize 'OQ.Nav.Magic' }}</div>
+              {{#if @root.editable}}
+                {{#if hasSpentSpells}}
+                  <a class="regain-all-spells" data-action="regainAllSpells"
+                     data-tooltip="{{ localize 'OQ.Labels.RegainAll' }}"><i class="fas fa-rotate-left"></i></a>
+                {{/if}}
+              {{/if}}
+            </div>
             {{#each groupedItems.magic as |magicItem|}}
             {{#if (eq magicItem.type 'skill')}}
             {{> systems/oq/templates/actor/parts/skill.hbs magicItem}}
