@@ -1,0 +1,24 @@
+_id: 0gYOY3NnDcT8Fzpj
+name: System Documentation
+pages:
+  - _id: cr7jONpS26urVpyV
+    name: Getting Started
+    file: Getting_Started.html
+  - _id: UTjphPIpYI0hCNn0
+    name: Actors
+    file: Actors.html
+  - _id: 7PhcLCq73tunH1S5
+    name: Items
+    file: Items.html
+  - _id: ZFo8TeeIRTPUVl5z
+    name: Magic
+    file: Magic.html
+  - _id: w9TtG4OPzReqh2KI
+    name: Rolls
+    file: Rolls.html
+  - _id: FYuMiDVbIhKCSKno
+    name: Chat
+    file: Chat.html
+  - _id: jSQ4r85hI4fk38lA
+    name: Combat
+    file: Combat.html

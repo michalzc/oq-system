@@ -1,0 +1,70 @@
+<h2>Common</h2>
+<p>Every item sheet has an image, a name, the fields of its type, and a description. Weapons, equipment, spells and
+    special abilities also have <strong>traits</strong>: type one or more, separated by commas, and remove them with
+    their delete icon.</p>
+<p>Weapons and spells refer to a skill by its <em>slug</em>: a simplified name shown under the skill's name, for
+    example <code>close-combat</code>. On an item that no actor owns, the skill field is a text input for the slug.
+    Once the item is on an actor, it becomes a list of the actor's skills (only magic skills for spells), and the
+    skill with the entered slug is selected.</p>
+<p>GMs can mark items that no actor owns as defaults for new actors, with <strong>Default for New Actors</strong>
+    in the header menu. See the <em>Getting Started</em> page.</p>
+
+<h2>Skills</h2>
+<ul>
+    <li><strong>Type</strong>: Resistances, Combat, Knowledge, Practical or Magic Skills, or <em>Custom Type</em>
+        with a group name of your choice. The type decides where the skill appears on actor sheets.</li>
+    <li><strong>Formula</strong>: the base value, calculated from the actor's roll data. For example,
+        <code>@str+@dex</code> is the sum of Strength and Dexterity.</li>
+</ul>
+<p>On an actor, the skill also has <strong>Advances</strong>, <strong>Mod</strong> and <strong>Total Value</strong>.
+    The total is the formula plus advances, between 0 and 100; at 100 the skill is <em>Mastered</em>. Advances can
+    also be edited in the actor's skill list.</p>
+<p>The mod is not added to the total. It is shown in brackets on the actor sheet and is pre-filled as
+    <em>Other Mods</em> in the roll dialogue, where it can be changed before rolling.</p>
+
+<h2>Weapons</h2>
+<ul>
+    <li><strong>Hands</strong>: One Handed, Two Handed, or One or Two Handed.</li>
+    <li><strong>Weapon Type</strong>: Melee, Ranged or Shield. Ranged weapons also have <strong>Range</strong> and
+        <strong>Fire Rate</strong>, both free text.</li>
+    <li><strong>Encumbrance</strong>, <strong>Cost</strong> and <strong>State</strong>.</li>
+    <li><strong>Skill</strong> and <strong>Mod</strong>: the skill used to attack and an extra modifier. The weapon's
+        value is the skill's total. Its mod is not added to the value: the roll dialogue receives the more
+        significant of the weapon's and the skill's mods, following the rules.</li>
+    <li><strong>Damage</strong>: a roll formula, which may use the actor's roll data. With <strong>Include DM</strong>
+        ticked, the actor's damage modifier is added automatically.</li>
+</ul>
+<p>A weapon can be rolled, and is listed in the Combat tab, only when the actor has its skill. Ammunition is a type
+    of equipment and is not consumed automatically.</p>
+
+<h2>Armour</h2>
+<p><strong>Armour Points</strong>, <strong>Encumbrance</strong>, <strong>Cost</strong> and <strong>State</strong>
+    (Worn, Carried, Stored or Natural). The actor's Armour Worn uses the best piece that is Worn or Natural.</p>
+
+<h2>Equipment</h2>
+<ul>
+    <li><strong>Type</strong>: Ammunition, Consumables or Items.</li>
+    <li><strong>Quantity</strong>, for ammunition and consumables. It can be changed with the +/- buttons on the actor
+        sheet. Encumbrance is multiplied by quantity.</li>
+    <li><strong>Encumbrance</strong>, <strong>Cost</strong> and <strong>State</strong> (Readied, Carried or
+        Stored).</li>
+</ul>
+
+<h2>Special Abilities</h2>
+<ul>
+    <li><strong>Type</strong>: General, Magic or Combat. The type decides where the ability appears on actor sheets;
+        all abilities are also listed on the character's Skills tab.</li>
+    <li><strong>Formula</strong>: like a skill formula, using the actor's roll data. There are no advances or mod.
+        The ability can be rolled only if the formula gives a fixed number, without dice.</li>
+    <li><strong>Damage Formula</strong>: rolled like weapon damage, but the damage modifier is not added
+        automatically.</li>
+</ul>
+<p>Special abilities are useful for NPCs and creatures, but characters can have them too.</p>
+
+<h2>Spells</h2>
+<p>See the <em>Magic</em> page.</p>
+
+<h2>Hotbar macros</h2>
+<p>Drag a skill, weapon or special ability from an actor sheet to the hotbar to create a macro. The macro rolls the
+    item with that name for the selected token's actor, or for your character, and always opens the roll
+    dialogue.</p>

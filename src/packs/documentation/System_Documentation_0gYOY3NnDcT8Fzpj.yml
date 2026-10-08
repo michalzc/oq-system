@@ -1,202 +1,430 @@
 _id: 0gYOY3NnDcT8Fzpj
-flags:
-  core: {}
-folder: null
-image: null
 name: System Documentation
+folder: null
+sort: 0
+flags: {}
 ownership:
   default: 0
 pages:
-  - _id: UTjphPIpYI0hCNn0
-    flags: {}
-    image: null
-    name: Actors
-    ownership:
-      default: -1
-    sort: 100000
-    src: null
-    system: {}
-    text:
-      content: >-
-        <h2>Character</h2><h3>Character creation</h3><p>When a new Character
-        actor is created, all the skills from the Basic Skills compendium are
-        copied.</p><h4>Characteristics</h4><p>Characteristics can be updated
-        using the Characteristics dialogue box, the 'cog' icon on the
-        Characteristics panel. It calculates the points, as described in the
-        rules. Characteristics can be rolled, all or
-        individual.</p><h5>Mod</h5><p>Mod is a workaround for tracking temporary
-        modifications. For characteristics it is simply added to the final
-        value.</p><h4>Attributes</h4><p>Attributes are calculated from
-        characteristics. Only mods can be updated in the attributes dialogue. It
-        works in the same way as above.</p><header class="journal-page-header"
-        style="box-sizing:border-box;user-select:text;color:rgb(25, 24,
-        19);font-family:Merriweather,
-        serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial"><h2><span
-        style="font-family:Merriweather, serif">NPC</span></h2></header><section
-        class="journal-page-content"
-        style="box-sizing:border-box;user-select:text;color:rgb(25, 24,
-        19);font-family:Merriweather,
-        serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial"><h3><span
-        style="font-family:Merriweather, serif">NPC
-        Creation</span></h3><h4>Characteristics</h4><p><span
-        style="font-family:Merriweather, serif">All characteristics possess
-        default values corresponding to those of an average human and are
-        editable directly on the NPC sheet. Beneath each value lies a roll
-        formula representing the average human defaults.</span></p><p><span
-        style="font-family:Merriweather, serif">The dice icon located at the
-        bottom of the panel initiates a dice roll for all characteristics based
-        on their respective formulas and subsequently updates the
-        values.</span></p><h4><span style="font-family:Merriweather,
-        serif">Attributes</span></h4><p><span style="font-family:Merriweather,
-        serif">Similar to character attributes, NPCs possess the same
-        characteristics and functionalities.</span></p><h2><span
-        style="font-family:Merriweather, serif">Roll data</span></h2><p><span
-        style="font-family:Merriweather, serif">Actors furnish attribute values,
-        damage modifiers, and skills as 'roll data' for utilization in roll
-        formulas.</span></p><p><span style="font-family:Merriweather,
-        serif">Attributes are accessible by their abbreviations, such as
-        Strength represented by 'str'. Skills reside within the 'skills'
-        collection and can be accessed as 'skills.skill-slug.value' and
-        'skills.skill-slug.mod'. Damage modifiers are represented as
-        'dm'.</span></p><p><span style="font-family:Merriweather, serif">It's
-        worth noting that the damage modifier already incorporates the '+' or
-        '-' sign and hence should not be appended to the roll formula, for
-        instance, "/roll d6 @dm".</span></p></section>
-      format: 1
-      markdown: ''
-    title:
-      level: 1
-      show: true
+  - _id: cr7jONpS26urVpyV
+    name: Getting Started
     type: text
-    video:
-      controls: true
-      volume: 0.5
+    sort: 100000
+    title:
+      show: true
+      level: 1
+    text:
+      content: |-
+        <h2>Compendia</h2>
+        <p>The system ships with these compendia, in the <em>OpenQuest SRD</em> folder:</p>
+        <ul>
+            <li><strong>Skills</strong>: the basic skills from the SRD. Most of them are marked as defaults for new actors.</li>
+            <li><strong>Spells</strong>: Personal Magic, Divine Magic and Sorcery spells.</li>
+            <li><strong>Equipment</strong>: weapons, armour, ammunition and other gear.</li>
+            <li><strong>Documentation</strong>: this journal and the <em>Spells Results</em> tables linked from spell
+                descriptions.</li>
+            <li><strong>SRD Bestiary</strong>: SRD creatures as journal pages.</li>
+        </ul>
+
+        <h2>New Actors</h2>
+        <h3>Default items</h3>
+        <p>A newly created actor receives copies of the items marked as defaults for its type. Items are added only when the
+            actor is created empty; imported and duplicated actors keep the items they already have.</p>
+        <ul>
+            <li>The source is the <strong>Default Items Compendium</strong> setting, the <em>Skills</em> compendium by
+                default. Choose <em>No Default Compendium</em> to start with empty actors.</li>
+            <li>With <strong>Default Items from World</strong> enabled, marked world items are added too. A world item
+                imported from the compendium replaces its original, so you can customise a default skill by importing and
+                editing it.</li>
+        </ul>
+        <p>To mark an item, open its sheet as a GM and choose <strong>Default for New Actors</strong> from the header menu.
+            Tick <em>Player Character</em>, <em>Monster/NPC</em> or both. The option is available only for items that no
+            actor owns: world items and items in an unlocked compendium.</p>
+        <h3>Token defaults</h3>
+        <p>New actors get prototype token defaults, unless the creation data already sets them:</p>
+        <ul>
+            <li>All actors: name and bars displayed <em>Always for Owner</em>, Hit Points as the first bar and Magic Points
+                as the second.</li>
+            <li>Player Characters: linked to the actor, vision enabled, Friendly disposition.</li>
+        </ul>
+
+        <h2>System Settings</h2>
+        <ul>
+            <li><strong>Coins Configuration</strong> (requires reload): the coins used for money and item costs, written as
+                <code>Name (ABBR) = multiplier</code> entries separated by commas. The default is
+                <code>Gold Ducats (GD) = 20, Silver Pieces (SP) = 1, Copper Pennies (CP) = 0.1, Lead Bits (LB) = 0.02</code>.
+                Item costs are entered in units of the coin with multiplier 1. Names may contain only letters, digits,
+                spaces and underscores; entries that cannot be read are skipped.</li>
+            <li><strong>Default Items Compendium</strong>: see <em>Default items</em> above.</li>
+            <li><strong>Default Items from World</strong>: see <em>Default items</em> above.</li>
+        </ul>
+        <h3>Recommended core settings</h3>
+        <p>The system changes the defaults of two core settings. Values already saved by users are kept, and
+            <em>Reset Defaults</em> restores these values:</p>
+        <ul>
+            <li><strong>Left-Click to Release Objects</strong>: on.</li>
+            <li><strong>Automatic Token Rotation</strong>: off.</li>
+        </ul>
+      format: 1
+    _key: '!journal.pages!0gYOY3NnDcT8Fzpj.cr7jONpS26urVpyV'
+  - _id: UTjphPIpYI0hCNn0
+    name: Actors
+    type: text
+    sort: 200000
+    title:
+      show: true
+      level: 1
+    text:
+      content: |-
+        <h2>Player Character</h2>
+        <p>The header holds the portrait (click it to change the image) and the character's name, gender, age, culture,
+            rank, organisation and concept.</p>
+
+        <h3>Characteristics</h3>
+        <p>The panel shows the final value of each characteristic: base plus mod. The gear icon opens the
+            <strong>Characteristics</strong> dialogue:</p>
+        <ul>
+            <li>Each row has the base value, a roll formula with a dice icon, and a mod. The <em>Roll All</em> icon rolls
+                every characteristic. Rolls are posted to chat and fill in the base values.</li>
+            <li>The points section follows the rules: <em>Spent</em> is the sum of base values minus 56, <em>Remain</em> is
+                the points available minus the spent ones. Points available default to 30.</li>
+            <li>Nothing is saved until you click <strong>Save Data</strong>. <strong>Reset Data</strong> restores the
+                current values.</li>
+        </ul>
+        <p>Mod is a simple way to track temporary changes: it is added to the base value.</p>
+
+        <h3>Attributes</h3>
+        <p>Attributes are calculated from characteristics and items:</p>
+        <ul>
+            <li><strong>Hit Points</strong>: (SIZ + CON) / 2, rounded, plus mod.</li>
+            <li><strong>Magic Points</strong>: POW plus mod.</li>
+            <li><strong>Damage Modifier</strong>: from STR + SIZ. Up to 10: -1d6, up to 15: -1d4, up to 25: none,
+                up to 30: +1d4, then +1d6 for 31-45, +2d6 for 46-60, and so on. The mod is text, for example
+                <code>+1d4</code> or <code>2</code>, and is appended to the result.</li>
+            <li><strong>Movement Rate</strong>: 15 plus mod.</li>
+            <li><strong>Armour Worn</strong>: the highest Armour Points among armour in the Worn or Natural state, plus mod.
+                Armour does not stack.</li>
+        </ul>
+        <p>The current Hit Points and Magic Points can be typed in, or adjusted by clicking the HP or MP label: left-click
+            adds one, right-click removes one. Characters also track <strong>Fortune Points</strong> and
+            <strong>Growth Points</strong>. The gear icon opens the <strong>Attributes</strong> dialogue, where only the mods
+            can be changed.</p>
+
+        <h3>Tabs</h3>
+        <ul>
+            <li><strong>Skills</strong>: skills grouped by type, custom skill groups, and all special abilities. Group headers
+                show the total of advances.</li>
+            <li><strong>Combat</strong>: initiative, combat skills each followed by the weapons that use it, ammunition,
+                resistances, armour and combat abilities. A weapon whose skill the character does not have is not listed here;
+                it is still on the Equipment tab.</li>
+            <li><strong>Equipment</strong>: money, total encumbrance, weapons, armour and other equipment.</li>
+            <li><strong>Magic</strong>: magic skills, resistances, magic abilities, and spells grouped by type. See the
+                <em>Magic</em> page.</li>
+            <li><strong>Notes</strong>: free text.</li>
+        </ul>
+
+        <h3>Working with items</h3>
+        <ul>
+            <li>Click an item's icon to send it to chat. Hover over its name to see the description and traits.</li>
+            <li>Click a name or value to roll a test, or a damage formula to roll damage. See the <em>Rolls</em> page.</li>
+            <li>The <strong>+</strong> button in a group header creates a new item of that type and opens its sheet.</li>
+            <li>The edit icon opens the item sheet. The trash icon deletes the item immediately, without confirmation.</li>
+            <li>Skill advances can be edited directly in the list. Typing a negative number sets the skill total instead:
+                <code>-65</code> makes the skill 65%.</li>
+            <li>Drop items from the sidebar or a compendium onto the sheet. Dropping a whole item folder adds every item in
+                it, including subfolders.</li>
+        </ul>
+
+        <h3>Equipment and money</h3>
+        <p>Weapons, armour and equipment have a state, shown as an icon in the Equipment tab. Click the icon to change it:
+            weapons can be Readied, Carried, Stored or Natural; armour Worn, Carried, Stored or Natural; equipment Readied,
+            Carried or Stored.</p>
+        <p><strong>Total Encumbrance</strong> counts the items that are Worn, Readied or Carried; ammunition and
+            consumables count once per unit. It is shown against the limit of STR + SIZ. No penalties are applied
+            automatically.</p>
+        <p>Money has one field per coin from the <strong>Coins Configuration</strong> setting.
+            <strong>Consolidate Coins</strong> exchanges all money into as few coins as possible. Item costs are shown in
+            coins, for example <code>1GD 5SP</code>.</p>
+
+        <h2>NPC</h2>
+        <p>The NPC sheet is a compact version of the character sheet. The header holds the name and a short description;
+            the edit icon next to it opens an editor for that description.</p>
+        <h3>Characteristics</h3>
+        <p>Characteristics are edited directly on the sheet. Under each value is a roll formula, by default that of an
+            average human: 3d6, or 2d6+6 for SIZ and INT. The dice icon rolls all formulas and updates the values, without a
+            chat message.</p>
+        <h3>Attributes</h3>
+        <p>Attributes work as for characters, except that NPCs have no Fortune or Growth Points.</p>
+        <h3>Tabs</h3>
+        <ul>
+            <li><strong>Details</strong>: skills and general abilities, magic (magic skills, abilities and spells),
+                equipment with quantities, initiative, and a combat section with resistances, weapons, combat abilities and
+                armour.</li>
+            <li><strong>Description</strong>: free text.</li>
+        </ul>
+        <p>NPC sheets have no add buttons: drop items onto the sheet. There is no money or encumbrance tracking.</p>
+
+        <h2>Initiative</h2>
+        <p>The <strong>Initiative</strong> field selects a skill or special ability with a formula, and the
+            <strong>Mod</strong> field adds a whole number to it. The result is the actor's initiative; no dice are rolled.
+            The same values are edited from the combat tracker; see the <em>Combat</em> page.</p>
+
+        <h2>Roll data</h2>
+        <p>Actors provide values for roll formulas, in skill formulas, damage formulas and chat commands:</p>
+        <ul>
+            <li><code>@str</code>, <code>@con</code>, <code>@siz</code>, <code>@dex</code>, <code>@int</code>,
+                <code>@pow</code>, <code>@cha</code>: final characteristic values.</li>
+            <li><code>@dm</code>: the damage modifier. It already includes its sign, so write <code>1d6 @dm</code>, not
+                <code>1d6 + @dm</code>.</li>
+            <li><code>@skills.&lt;slug&gt;.value</code> and <code>@skills.&lt;slug&gt;.mod</code>: a skill's total and mod,
+                for example <code>@skills.close-combat.value</code>.</li>
+            <li>Other actor data by its path, for example <code>@attributes.hp.value</code>, <code>@attributes.mp.max</code>
+                or <code>@attributes.ap.value</code>.</li>
+        </ul>
+      format: 1
     _key: '!journal.pages!0gYOY3NnDcT8Fzpj.UTjphPIpYI0hCNn0'
   - _id: 7PhcLCq73tunH1S5
-    flags: {}
-    image: null
     name: Items
-    ownership:
-      default: -1
-    sort: 200000
-    src: null
-    system: {}
-    text:
-      content: >-
-        <h1>Skills</h1><p>The skill sheet includes a 'skill formula' field that
-        utilizes the roll data provided by the actor to compute its total value
-        once assigned to the actor. For instance, '@str+@dex' would evaluate to
-        the sum of the Strength and Dexterity characteristics, which serve as
-        default values.</p><p>Upon assignment to an actor, the advancement field
-        becomes visible, allowing the user to input skill advancements. The
-        total value will then consist of the default value calculated from the
-        formula in addition to any advancements made by the user. The
-        advancement field is also visible on the actor sheet within the skills
-        listing. This allows for convenient access and modification of skill
-        advancements directly from the actor's skill section.</p><p>The 'mod'
-        field operates with a slight variation. Instead of being directly added
-        to the skill value, it functions as an additional modifier provided to
-        the roll dialog. This modifier can be adjusted before initiating the
-        roll.</p><p>Below the skill name, the skill's <em>slug</em> is visible.
-        This simplified name serves as a reference in rolls (accessible in the
-        <em>skills</em> collection) and can also be used as the value for the
-        corresponding skill field on the weapon
-        sheet.</p><h1>Weapons</h1><p>When a weapon is not attached to an actor,
-        the skill field appears as a text input for the skill <em>slug</em>.
-        Once attached to an actor, it transforms into a combo box displaying a
-        list of the actor's skills. If the actor possesses a skill with the
-        previously entered <em>slug</em>, that skill will be automatically
-        selected upon attachment to the actor.</p><p>The skill mod field
-        functions similarly to the skill mod. It does not directly augment the
-        weapon's skill value but is instead supplied to the roll dialog as an
-        extra modifier. If the corresponding skill's mod is also configured,
-        then the more significant modifier is selected, adhering to the rules of
-        the game.</p><p>The damage formula can be a roll formula and may include
-        the actor's roll data. It is unnecessary to directly incorporate the
-        actor's damage modifier, as it will be automatically included if the
-        'Include DM' checkbox is selected.</p><h1>Special Ability</h1><p>Similar
-        to skills, a special ability features a formula field where the actor's
-        roll data can be utilized. Unlike skills, it does not possess
-        advancements or mods. Additionally, it includes a damage formula akin to
-        weapons.</p><p>Primarily designed for use with NPCs, special abilities
-        can also be assigned to characters if needed.</p>
-      format: 1
-    title:
-      level: 1
-      show: true
     type: text
-    video:
-      controls: true
-      volume: 0.5
-    _key: '!journal.pages!0gYOY3NnDcT8Fzpj.7PhcLCq73tunH1S5'
-  - _id: FYuMiDVbIhKCSKno
-    flags: {}
-    image: null
-    name: Chat Commands
-    ownership:
-      default: -1
     sort: 300000
-    src: null
-    system: {}
-    text:
-      content: >-
-        <p>There are two distinctive chat commands
-        available:</p><ul><li><p>Adjust HP: Utilize <strong><code>/hp &lt;roll
-        formula&gt;</code></strong> to trigger a roll and present a chat message
-        featuring three buttons: "Apply as Damage", "Apply as Damage and Ignore
-        Armor", and "Heal".</p></li><li><p>Adjust MP: Similarly, with
-        <strong><code>/mp &lt;roll formula&gt;</code></strong>, evaluate the
-        roll formula and display a message with buttons to either add or
-        subtract Magic Points.</p></li></ul>
-      format: 1
     title:
-      level: 1
       show: true
+      level: 1
+    text:
+      content: |-
+        <h2>Common</h2>
+        <p>Every item sheet has an image, a name, the fields of its type, and a description. Weapons, equipment, spells and
+            special abilities also have <strong>traits</strong>: type one or more, separated by commas, and remove them with
+            their delete icon.</p>
+        <p>Weapons and spells refer to a skill by its <em>slug</em>: a simplified name shown under the skill's name, for
+            example <code>close-combat</code>. On an item that no actor owns, the skill field is a text input for the slug.
+            Once the item is on an actor, it becomes a list of the actor's skills (only magic skills for spells), and the
+            skill with the entered slug is selected.</p>
+        <p>GMs can mark items that no actor owns as defaults for new actors, with <strong>Default for New Actors</strong>
+            in the header menu. See the <em>Getting Started</em> page.</p>
+
+        <h2>Skills</h2>
+        <ul>
+            <li><strong>Type</strong>: Resistances, Combat, Knowledge, Practical or Magic Skills, or <em>Custom Type</em>
+                with a group name of your choice. The type decides where the skill appears on actor sheets.</li>
+            <li><strong>Formula</strong>: the base value, calculated from the actor's roll data. For example,
+                <code>@str+@dex</code> is the sum of Strength and Dexterity.</li>
+        </ul>
+        <p>On an actor, the skill also has <strong>Advances</strong>, <strong>Mod</strong> and <strong>Total Value</strong>.
+            The total is the formula plus advances, between 0 and 100; at 100 the skill is <em>Mastered</em>. Advances can
+            also be edited in the actor's skill list.</p>
+        <p>The mod is not added to the total. It is shown in brackets on the actor sheet and is pre-filled as
+            <em>Other Mods</em> in the roll dialogue, where it can be changed before rolling.</p>
+
+        <h2>Weapons</h2>
+        <ul>
+            <li><strong>Hands</strong>: One Handed, Two Handed, or One or Two Handed.</li>
+            <li><strong>Weapon Type</strong>: Melee, Ranged or Shield. Ranged weapons also have <strong>Range</strong> and
+                <strong>Fire Rate</strong>, both free text.</li>
+            <li><strong>Encumbrance</strong>, <strong>Cost</strong> and <strong>State</strong>.</li>
+            <li><strong>Skill</strong> and <strong>Mod</strong>: the skill used to attack and an extra modifier. The weapon's
+                value is the skill's total. Its mod is not added to the value: the roll dialogue receives the more
+                significant of the weapon's and the skill's mods, following the rules.</li>
+            <li><strong>Damage</strong>: a roll formula, which may use the actor's roll data. With <strong>Include DM</strong>
+                ticked, the actor's damage modifier is added automatically.</li>
+        </ul>
+        <p>A weapon can be rolled, and is listed in the Combat tab, only when the actor has its skill. Ammunition is a type
+            of equipment and is not consumed automatically.</p>
+
+        <h2>Armour</h2>
+        <p><strong>Armour Points</strong>, <strong>Encumbrance</strong>, <strong>Cost</strong> and <strong>State</strong>
+            (Worn, Carried, Stored or Natural). The actor's Armour Worn uses the best piece that is Worn or Natural.</p>
+
+        <h2>Equipment</h2>
+        <ul>
+            <li><strong>Type</strong>: Ammunition, Consumables or Items.</li>
+            <li><strong>Quantity</strong>, for ammunition and consumables. It can be changed with the +/- buttons on the actor
+                sheet. Encumbrance is multiplied by quantity.</li>
+            <li><strong>Encumbrance</strong>, <strong>Cost</strong> and <strong>State</strong> (Readied, Carried or
+                Stored).</li>
+        </ul>
+
+        <h2>Special Abilities</h2>
+        <ul>
+            <li><strong>Type</strong>: General, Magic or Combat. The type decides where the ability appears on actor sheets;
+                all abilities are also listed on the character's Skills tab.</li>
+            <li><strong>Formula</strong>: like a skill formula, using the actor's roll data. There are no advances or mod.
+                The ability can be rolled only if the formula gives a fixed number, without dice.</li>
+            <li><strong>Damage Formula</strong>: rolled like weapon damage, but the damage modifier is not added
+                automatically.</li>
+        </ul>
+        <p>Special abilities are useful for NPCs and creatures, but characters can have them too.</p>
+
+        <h2>Spells</h2>
+        <p>See the <em>Magic</em> page.</p>
+
+        <h2>Hotbar macros</h2>
+        <p>Drag a skill, weapon or special ability from an actor sheet to the hotbar to create a macro. The macro rolls the
+            item with that name for the selected token's actor, or for your character, and always opens the roll
+            dialogue.</p>
+      format: 1
+    _key: '!journal.pages!0gYOY3NnDcT8Fzpj.7PhcLCq73tunH1S5'
+  - _id: ZFo8TeeIRTPUVl5z
+    name: Magic
     type: text
-    video:
-      controls: true
-      volume: 0.5
+    sort: 400000
+    title:
+      show: true
+      level: 1
+    text:
+      content: |-
+        <h2>Spells</h2>
+        <ul>
+            <li><strong>Spell Type</strong>: Personal Magic, Divine Magic or Sorcery. Each type has its own icon and its own
+                group on the actor's Magic tab.</li>
+            <li><strong>Magnitude</strong>.</li>
+            <li><strong>Non-Variable</strong>: the spell is always cast at its full magnitude.</li>
+            <li><strong>No Magic Points</strong>: casting needs no test and no magic points; the magnitude is used up instead.
+                Divine Magic spells in the Spells compendium are set this way.</li>
+            <li><strong>Skill</strong>: the magic skill used to cast the spell.</li>
+        </ul>
+        <p>Tables referred to by spell descriptions, such as <em>Fear Effects</em> or <em>Illusions</em>, are in the
+            @UUID[Compendium.oq.oq-system-documentation.JournalEntry.tQAx53vXPFGozPEk]{Spells Results} journal.</p>
+
+        <h2>Casting</h2>
+        <p>Click a spell's name on the actor sheet to cast it. Shift-click casts at the highest magnitude without asking.</p>
+        <h3>Spells using magic points</h3>
+        <p>The cast dialogue shows the casting skill's value, the <strong>Spell Magnitude</strong> (for variable spells,
+            from 1 up to the magnitude or the actor's magic points, whichever is lower), <strong>Difficulty</strong>,
+            <strong>Other Mods</strong> and <strong>Visibility</strong>. The spell needs a casting skill and enough magic
+            points: one for variable spells, the full magnitude for non-variable ones.</p>
+        <p>The casting skill is tested as described on the <em>Rolls</em> page, and magic points are deducted
+            automatically:</p>
+        <ul>
+            <li>Success or Fumble: the full magnitude.</li>
+            <li>Critical Success or Failure: one magic point.</li>
+        </ul>
+        <p>The chat card shows the magnitude, skill value, modifiers, the result and the magic points spent.</p>
+        <h3>Spells without magic points</h3>
+        <p>No test is rolled. A variable spell asks for the magnitude to use, up to what remains, and the remaining
+            magnitude is reduced; the actor sheet shows it as <em>remaining/magnitude</em>. A non-variable spell is marked
+            <strong>Expended</strong> after casting. A spell with nothing left cannot be cast.</p>
+        <p>The <strong>Regain spell</strong> icon restores a single spell. <strong>Regain all spells</strong>, in the spell
+            group header, restores every spell of that type; on NPC sheets it restores all spells.</p>
+      format: 1
+    _key: '!journal.pages!0gYOY3NnDcT8Fzpj.ZFo8TeeIRTPUVl5z'
+  - _id: w9TtG4OPzReqh2KI
+    name: Rolls
+    type: text
+    sort: 500000
+    title:
+      show: true
+      level: 1
+    text:
+      content: |-
+        <h2>Tests</h2>
+        <p>Click a skill, weapon or special ability name, or its value, on the actor sheet to open the roll dialogue.
+            Shift-click rolls immediately, with Normal difficulty and the item's mod.</p>
+        <p>The dialogue shows the value and lets you choose:</p>
+        <ul>
+            <li><strong>Difficulty</strong>: Easy (+50%), Simple (+20%), Normal (0%), Difficult (-20%) or Hard (-50%).</li>
+            <li><strong>Other Mods</strong>: pre-filled with the skill's mod, or the weapon's combined mod; see the
+                <em>Items</em> page.</li>
+            <li><strong>Visibility</strong>: who can see the roll, defaulting to the mode selected in the chat log.</li>
+        </ul>
+        <h3>Results</h3>
+        <p>The target is the value plus difficulty plus other mods, between 0 and 100. Roll d100:</p>
+        <ul>
+            <li><strong>Critical Success</strong>: a double (11, 22 ... 99) at or under the target.</li>
+            <li><strong>Success</strong>: any other roll at or under the target.</li>
+            <li><strong>Failure</strong>: a roll over the target.</li>
+            <li><strong>Fumble</strong>: a double over the target, or 00 (100).</li>
+        </ul>
+        <p>When the value is 100 or more and the target is still 100 or more, the result is always a Critical Success.</p>
+
+        <h2>Damage</h2>
+        <p>Click a damage formula on the actor sheet to roll damage immediately. Shift-click opens a dialogue where you can
+            edit the formula and choose the visibility.</p>
+        <p>When a test with an item that has damage succeeds, the chat card has a <strong>Roll Damage</strong> button. It
+            opens the damage dialogue for the owners of the actor.</p>
+        <p>Damage cards have two buttons that apply the damage to the selected tokens: <strong>Damage</strong> subtracts the
+            target's Armour Worn, <strong>Damage I/A</strong> ignores armour. See the <em>Chat</em> page.</p>
+      format: 1
+    _key: '!journal.pages!0gYOY3NnDcT8Fzpj.w9TtG4OPzReqh2KI'
+  - _id: FYuMiDVbIhKCSKno
+    name: Chat
+    type: text
+    sort: 600000
+    title:
+      show: true
+      level: 1
+    text:
+      content: |-
+        <h2>Chat Commands</h2>
+        <ul>
+            <li><strong><code>/hp &lt;roll formula&gt;</code></strong>: rolls the formula and posts an <em>Adjust Hit
+                Points</em> card with three buttons: <em>Apply damage</em>, <em>Apply damage and ignore armour</em> and
+                <em>Heal</em>.</li>
+            <li><strong><code>/mp &lt;roll formula&gt;</code></strong>: rolls the formula and posts an <em>Adjust Magic
+                Points</em> card with <em>Decrease Magic Points</em> and <em>Increase Magic Points</em> buttons.</li>
+        </ul>
+        <p>Formulas can use the roll data of your selected token's actor, or of your character, for example
+            <code>/hp 1d8 @dm</code>. The card uses the visibility selected in the chat log.</p>
+
+        <h2>Applying Changes</h2>
+        <p>The buttons on <code>/hp</code>, <code>/mp</code> and damage roll cards apply the rolled amount to every
+            <strong>selected token</strong>, not to targeted ones.</p>
+        <ul>
+            <li>Damage subtracts the token actor's Armour Worn first; the ignore armour variant does not. Hit Points never
+                drop below 0.</li>
+            <li>Healing and magic points never go above the maximum, and magic points never below 0.</li>
+        </ul>
+        <p>Each change is reported in chat, for example "Orc has taken 5 points of damage.", or "Orc soaked all damage."
+            when armour stopped it completely.</p>
+      format: 1
     _key: '!journal.pages!0gYOY3NnDcT8Fzpj.FYuMiDVbIhKCSKno'
   - _id: jSQ4r85hI4fk38lA
-    flags: {}
-    image: null
     name: Combat
-    ownership:
-      default: -1
-    sort: 400000
-    src: null
-    system: {}
-    text:
-      content: >-
-        <h1>Initiative</h1><p>The character sheet's Combat tab and the NPC sheet's
-        Combat section offer skills and special abilities with roll formulas as
-        initiative actions. Initiative uses the selected action's value plus the
-        adjacent integer modifier, without the action's skill-roll modifiers.</p>
-        <h1>Combat Tracker</h1><p>Every encounter begins with Round 1 — Declaration
-        and no active participant. Owners choose actions and signed initiative
-        modifiers in the tracker or actor sheet. The GM can edit all participants.
-        Tracker changes also save the actor sheet's defaults.</p><p>The GM clicks
-        Start round to freeze each participant's action, modifier and total,
-        sort initiative descending, and begin the first eligible turn. Changes
-        to the actor sheet during execution apply to the next declaration phase.
-        Declaring an action records intent; it does not restrict later actions
-        or change skill-roll modifiers.</p><p>Ending the last eligible turn opens
-        the next round's declaration phase automatically. The GM's Next round
-        control does the same. Previous turn stays within the current round;
-        reopening earlier declarations is not supported.</p><p>Blank or deleted
-        actions use modifier-only initiative. Actorless participants use zero.
-        Participants added during execution wait until the next round. Foundry's
-        defeated-participant skipping applies, and the GM cannot start a round
-        without any eligible participants. A connected GM and Query Users
-        permission are required for player tracker edits and turn advancement.</p>
-      format: 1
-    title:
-      level: 1
-      show: true
     type: text
-    video:
-      controls: true
-      volume: 0.5
+    sort: 700000
+    title:
+      show: true
+      level: 1
+    text:
+      content: |-
+        <h2>Initiative</h2>
+        <p>The character sheet's Combat tab and the NPC sheet's Combat section offer skills and special abilities with roll
+            formulas as initiative actions. Initiative uses the selected action's value plus the adjacent integer modifier,
+            without the action's skill-roll modifiers. No dice are rolled.</p>
+
+        <h2>Combat Tracker</h2>
+        <h3>Declaration</h3>
+        <p>Every encounter begins with Round 1 - Declaration and no active participant. Owners choose actions and signed
+            initiative modifiers in the tracker or actor sheet. The GM can edit all participants. Tracker changes also save
+            the actor sheet's defaults.</p>
+        <p>In the tracker, each participant has a <strong>Declared action</strong> list, showing actions as
+            <em>Name (value)</em>, and an <strong>Initiative modifier</strong> field, which accepts whole numbers such as
+            <code>+5</code> or <code>-10</code>. Participants you do not own are shown read-only.</p>
+
+        <h3>Execution</h3>
+        <p>The GM clicks <strong>Start round</strong> to freeze each participant's action, modifier and total, sort
+            initiative descending, and begin the first eligible turn. Changes to the actor sheet during execution apply to the
+            next declaration phase. Declaring an action records intent; it does not restrict later actions or change
+            skill-roll modifiers.</p>
+        <p>Ending the last eligible turn opens the next round's declaration phase automatically. The GM's
+            <strong>Next Round</strong> control does the same. <strong>Previous Turn</strong> stays within the current round;
+            reopening earlier declarations is not supported.</p>
+
+        <h3>Controls</h3>
+        <ul>
+            <li>GM during declaration: <strong>Start round</strong> and <strong>End Encounter</strong>.</li>
+            <li>GM during execution: <strong>Previous Turn</strong>, <strong>Next Turn</strong>, <strong>Next Round</strong>
+                and <strong>End Encounter</strong>.</li>
+            <li>Players, on their own turn: <strong>Previous Turn</strong> and <strong>End Turn</strong>.</li>
+        </ul>
+        <p>Core initiative rolling is not used: the tracker has no roll buttons, and the context menus have no reset,
+            clear or re-roll initiative options. Initiative cannot be edited by hand during execution.</p>
+
+        <h3>Special cases</h3>
+        <p>Blank or deleted actions use modifier-only initiative. Actorless participants use zero. Participants added during
+            execution are shown as <em>Awaiting next round</em> and join the next round. Foundry's defeated-participant
+            skipping applies, and the GM cannot start a round without any eligible participants. A connected GM and the
+            Query Users permission are required for player tracker edits and turn advancement.</p>
+      format: 1
     _key: '!journal.pages!0gYOY3NnDcT8Fzpj.jSQ4r85hI4fk38lA'
-sort: 0
 _key: '!journal!0gYOY3NnDcT8Fzpj'

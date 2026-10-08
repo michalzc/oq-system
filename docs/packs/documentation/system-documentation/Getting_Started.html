@@ -1,0 +1,50 @@
+<h2>Compendia</h2>
+<p>The system ships with these compendia, in the <em>OpenQuest SRD</em> folder:</p>
+<ul>
+    <li><strong>Skills</strong>: the basic skills from the SRD. Most of them are marked as defaults for new actors.</li>
+    <li><strong>Spells</strong>: Personal Magic, Divine Magic and Sorcery spells.</li>
+    <li><strong>Equipment</strong>: weapons, armour, ammunition and other gear.</li>
+    <li><strong>Documentation</strong>: this journal and the <em>Spells Results</em> tables linked from spell
+        descriptions.</li>
+    <li><strong>SRD Bestiary</strong>: SRD creatures as journal pages.</li>
+</ul>
+
+<h2>New Actors</h2>
+<h3>Default items</h3>
+<p>A newly created actor receives copies of the items marked as defaults for its type. Items are added only when the
+    actor is created empty; imported and duplicated actors keep the items they already have.</p>
+<ul>
+    <li>The source is the <strong>Default Items Compendium</strong> setting, the <em>Skills</em> compendium by
+        default. Choose <em>No Default Compendium</em> to start with empty actors.</li>
+    <li>With <strong>Default Items from World</strong> enabled, marked world items are added too. A world item
+        imported from the compendium replaces its original, so you can customise a default skill by importing and
+        editing it.</li>
+</ul>
+<p>To mark an item, open its sheet as a GM and choose <strong>Default for New Actors</strong> from the header menu.
+    Tick <em>Player Character</em>, <em>Monster/NPC</em> or both. The option is available only for items that no
+    actor owns: world items and items in an unlocked compendium.</p>
+<h3>Token defaults</h3>
+<p>New actors get prototype token defaults, unless the creation data already sets them:</p>
+<ul>
+    <li>All actors: name and bars displayed <em>Always for Owner</em>, Hit Points as the first bar and Magic Points
+        as the second.</li>
+    <li>Player Characters: linked to the actor, vision enabled, Friendly disposition.</li>
+</ul>
+
+<h2>System Settings</h2>
+<ul>
+    <li><strong>Coins Configuration</strong> (requires reload): the coins used for money and item costs, written as
+        <code>Name (ABBR) = multiplier</code> entries separated by commas. The default is
+        <code>Gold Ducats (GD) = 20, Silver Pieces (SP) = 1, Copper Pennies (CP) = 0.1, Lead Bits (LB) = 0.02</code>.
+        Item costs are entered in units of the coin with multiplier 1. Names may contain only letters, digits,
+        spaces and underscores; entries that cannot be read are skipped.</li>
+    <li><strong>Default Items Compendium</strong>: see <em>Default items</em> above.</li>
+    <li><strong>Default Items from World</strong>: see <em>Default items</em> above.</li>
+</ul>
+<h3>Recommended core settings</h3>
+<p>The system changes the defaults of two core settings. Values already saved by users are kept, and
+    <em>Reset Defaults</em> restores these values:</p>
+<ul>
+    <li><strong>Left-Click to Release Objects</strong>: on.</li>
+    <li><strong>Automatic Token Rotation</strong>: off.</li>
+</ul>
