@@ -25,6 +25,7 @@
     "lint:styles": "stylelint \"src/**/*.less\" --max-warnings 0",
     "lint:templates": "eslint \"src/public/**/*.{hbs,handlebars,html}\" --max-warnings 0",
     "lint:fix": "yarn lint:js --fix && yarn lint:templates --fix && yarn lint:styles",
+    "build:docs": "node tools/build-docs.mjs",
     "build:packs": "node tools/build-packs.mjs",
     "build:code": "vite build",
     "build": "yarn build:packs && yarn build:code",

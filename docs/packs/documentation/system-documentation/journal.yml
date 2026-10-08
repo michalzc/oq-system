@@ -1,0 +1,15 @@
+_id: 0gYOY3NnDcT8Fzpj
+name: System Documentation
+pages:
+  - _id: UTjphPIpYI0hCNn0
+    name: Actors
+    file: Actors.html
+  - _id: 7PhcLCq73tunH1S5
+    name: Items
+    file: Items.html
+  - _id: FYuMiDVbIhKCSKno
+    name: Chat Commands
+    file: Chat_Commands.html
+  - _id: jSQ4r85hI4fk38lA
+    name: Combat
+    file: Combat.html

@@ -1,0 +1,36 @@
+_id: tQAx53vXPFGozPEk
+name: Spells Results
+pages:
+  - _id: Htd9v5uqon9218OW
+    name: Absorption Results
+    file: Absorption_Results.html
+  - _id: BtUWbrm2MnIgc5Sf
+    name: Fear Effects
+    file: Fear_Effects.html
+  - _id: 37flmpgK5hYiwE8h
+    name: Illusions
+    file: Illusions.html
+  - _id: uVCGEbKPd3cNW2pB
+    name: Madness Effects
+    file: Madness_Effects.html
+  - _id: 1thpcZxPajxkk1dG
+    name: Magnitude vs. Size of Miraculous Item
+    file: Magnitude_vs_Size_of_Miraculous_Item.html
+  - _id: wWCRB02MMRERgevu
+    name: Type of Mischief
+    file: Type_of_Mischief.html
+  - _id: xKi8bjZoCdynKjIv
+    name: 'Repair and Replace: Size of Item vs Magnitude'
+    file: Repair_and_Replace_Size_of_Item_vs_Magnitude.html
+  - _id: B11Ii3ssupRu3Yny
+    name: Reflection Results
+    file: Reflection_Results.html
+  - _id: qKW313w78WHd3It7
+    name: Spirit Block Effectiveness
+    file: Spirit_Block_Effectiveness.html
+  - _id: 4VGYVzvW6Dti0GRW
+    name: Whirlwind Results
+    file: Whirlwind_Results.html
+  - _id: lNGpuk8jNUwoBXEY
+    name: Mirage
+    file: Mirage.html
