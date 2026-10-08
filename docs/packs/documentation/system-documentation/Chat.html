@@ -1,0 +1,21 @@
+<h2>Chat Commands</h2>
+<ul>
+    <li><strong><code>/hp &lt;roll formula&gt;</code></strong>: rolls the formula and posts an <em>Adjust Hit
+        Points</em> card with three buttons: <em>Apply damage</em>, <em>Apply damage and ignore armour</em> and
+        <em>Heal</em>.</li>
+    <li><strong><code>/mp &lt;roll formula&gt;</code></strong>: rolls the formula and posts an <em>Adjust Magic
+        Points</em> card with <em>Decrease Magic Points</em> and <em>Increase Magic Points</em> buttons.</li>
+</ul>
+<p>Formulas can use the roll data of your selected token's actor, or of your character, for example
+    <code>/hp 1d8 @dm</code>. The card uses the visibility selected in the chat log.</p>
+
+<h2>Applying Changes</h2>
+<p>The buttons on <code>/hp</code>, <code>/mp</code> and damage roll cards apply the rolled amount to every
+    <strong>selected token</strong>, not to targeted ones.</p>
+<ul>
+    <li>Damage subtracts the token actor's Armour Worn first; the ignore armour variant does not. Hit Points never
+        drop below 0.</li>
+    <li>Healing and magic points never go above the maximum, and magic points never below 0.</li>
+</ul>
+<p>Each change is reported in chat, for example "Orc has taken 5 points of damage.", or "Orc soaked all damage."
+    when armour stopped it completely.</p>

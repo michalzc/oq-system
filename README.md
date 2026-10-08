@@ -6,8 +6,8 @@ OpenQuest SRD system for Foundry VTT
 
 Beta. The current development version requires Foundry VTT 14 and is verified on 14.368.
 Both actor sheets, all six item sheets, the dialogs and the combat tracker use ApplicationV2.
-Sheets and dialogs retain the light parchment theme. See [issues.md](issues.md) for the migration review
-and completed combat tracker redesign.
+Sheets and dialogs retain the light parchment theme. See [docs/migration-issues.md](docs/migration-issues.md) for
+the migration review and completed combat tracker redesign.
 
 ## Contributors
 
@@ -26,8 +26,9 @@ Issue numbers refer to the [GitHub tracker](https://github.com/michalzc/oq-syste
   [#121](https://github.com/michalzc/oq-system/issues/121). **Done**: GMs use *Default for New Actors* in the item
   sheet's header menu, for items outside actors. With the *Default Items from World* setting, marked world items are
   added next to the ones from the selected compendium.
-* Documentation compendium updated for the new sheets and combat flow —
-  [#61](https://github.com/michalzc/oq-system/issues/61).
+* ~~Documentation compendium updated for the new sheets and combat flow~~ —
+  [#61](https://github.com/michalzc/oq-system/issues/61). **Done**: the journals are generated from HTML in
+  [docs/packs](docs/packs/README.md) with `yarn build:docs`.
 * Change colours for NPCs items and actions (optional) — [#152](https://github.com/michalzc/oq-system/issues/152)
 * ~~Recommended world settings~~ — [#153](https://github.com/michalzc/oq-system/issues/153) **Done**
 
@@ -108,21 +109,10 @@ Put below link into 'Manifest URL' field.
 
 https://github.com/michalzc/oq-system/releases/latest/download/system.json
 
-## Combat
+## Documentation
 
-Each encounter begins with **Round 1 — Declaration**, with no active turn. Choose an action and a signed integer
-initiative modifier in the tracker or actor sheet. Available actions are skills and special abilities with roll
-formulas; initiative uses their value plus the declaration modifier. Players can edit actors they own, and the GM
-can edit every participant. These choices persist as actor-sheet defaults.
-
-The GM clicks **Start round** to freeze each declaration, sort initiative from highest to lowest and begin turns.
-Changing the actor sheet afterwards affects the next declaration phase. Declarations record intent; they do not
-restrict actions or apply modifiers to subsequent skill rolls. A blank or deleted selection uses only the modifier.
-
-Ending the last eligible turn opens the next declaration phase automatically. The GM's **Next round** also opens
-that phase. **Previous turn** stays within the running round. Late participants wait until the next round, and
-Foundry's defeated-participant setting still applies. Start round is disabled when no eligible participant remains.
-A connected GM and Foundry's **Query Users** permission are required for player tracker edits and turn advancement.
+The in-game manual is the *System Documentation* journal in the *Documentation* compendium. It covers settings,
+actors, items, magic, rolls, chat commands and the combat tracker.
 
 ## Development
 
@@ -143,6 +133,9 @@ when sources change, and refresh the browser after each rebuild.
 - `yarn build:packs`: replace generated compendia in `build/packs/` from `src/packs/`.
 - `yarn build:code`: bundle JavaScript, compile Less, convert metadata to JSON, and copy public assets to `build/`.
 - `yarn build`: run both steps in order.
+- `yarn build:docs`: regenerate the journal sources in `src/packs/` from the HTML in `docs/packs/`; see
+  [docs/packs/README.md](docs/packs/README.md). Not part of `yarn build`: run it after editing the docs and commit the
+  result.
 - `yarn dev` (alias `yarn build:watch`): rebuild code, Less styles, YAML metadata, and public assets on change.
 - `yarn clean`: remove generated `build/` and legacy `dist/` output.
 
