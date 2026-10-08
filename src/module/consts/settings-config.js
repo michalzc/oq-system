@@ -1,6 +1,7 @@
 export const SettingsConfig = {
   keys: {
     defaultItemsCompendium: 'defaultSkillsCompendium',
+    defaultItemsFromWorld: 'defaultItemsFromWorld',
     coinsConfiguration: 'coins',
   },
   defaults: {
