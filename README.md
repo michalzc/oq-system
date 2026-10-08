@@ -22,8 +22,10 @@ Issue numbers refer to the [GitHub tracker](https://github.com/michalzc/oq-syste
 * ~~Spell casting dialog: roll the referenced casting skill, deduct MP by magnitude, post a chat card~~ —
   [#94](https://github.com/michalzc/oq-system/issues/94). **Done**
 * Custom spell type — [#110](https://github.com/michalzc/oq-system/issues/110).
-* Item sheet option to add an item to new characters / NPCs, instead of editing `flags.oq.newActor` by hand —
-  [#121](https://github.com/michalzc/oq-system/issues/121).
+* ~~Item sheet option to add an item to new characters / NPCs, instead of editing `flags.oq.newActor` by hand~~ —
+  [#121](https://github.com/michalzc/oq-system/issues/121). **Done**: GMs use *Default for New Actors* in the item
+  sheet's header menu, for items outside actors. With the *Default Items from World* setting, marked world items are
+  added next to the ones from the selected compendium.
 * Documentation compendium updated for the new sheets and combat flow —
   [#61](https://github.com/michalzc/oq-system/issues/61).
 * Change colours for NPCs items and actions (optional) — [#152](https://github.com/michalzc/oq-system/issues/152)

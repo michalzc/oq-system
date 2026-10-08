@@ -7,10 +7,21 @@ export class OQBaseItemSheet extends foundry.applications.api.HandlebarsApplicat
     // Keep the parchment palette until the sheets support both colour schemes.
     classes: ['oq', 'sheet', 'item', 'themed', 'theme-light'],
     position: { width: 640 },
-    window: { resizable: true },
+    window: {
+      resizable: true,
+      controls: [
+        {
+          icon: 'fa-solid fa-user-plus',
+          label: 'OQ.Labels.DefaultForNewActors',
+          action: 'configureNewActor',
+          visible: OQBaseItemSheet.canConfigureNewActor,
+        },
+      ],
+    },
     form: { submitOnChange: true, closeOnSubmit: false },
     actions: {
       deleteTrait: OQBaseItemSheet.onTagDelete,
+      configureNewActor: OQBaseItemSheet.onConfigureNewActor,
     },
   };
 
@@ -50,6 +61,44 @@ export class OQBaseItemSheet extends foundry.applications.api.HandlebarsApplicat
       return;
     }
     return super._onChangeForm(formConfig, event);
+  }
+
+  /**
+   * `flags.oq.newActor` only matters for items that can end up in the default items compendium, so items of actors
+   * don't offer it. Called with the sheet as `this`.
+   * @returns {boolean}
+   */
+  static canConfigureNewActor() {
+    return game.user.isGM && this.isEditable && !this.item.parent;
+  }
+
+  /**
+   * Asks which actor types get the item when created, see `getDefaultItemsForActor`.
+   */
+  static async onConfigureNewActor() {
+    if (!OQBaseItemSheet.canConfigureNewActor.call(this)) return;
+    const actorTypes = game.documentTypes.Actor.filter((type) => type !== CONST.BASE_DOCUMENT_TYPE);
+    const selectedTypes = this.item.getFlag(CONFIG.OQ.SYSTEM_ID, 'newActor') ?? [];
+    const { createCheckboxInput, createFormGroup } = foundry.applications.fields;
+    const checkboxes = actorTypes.map(
+      (type) =>
+        createFormGroup({
+          label: CONFIG.Actor.typeLabels[type] ?? type,
+          localize: true,
+          input: createCheckboxInput({ name: type, value: selectedTypes.includes(type) }),
+        }).outerHTML,
+    );
+    const hint = `<p class="hint">${game.i18n.localize('OQ.Hints.DefaultForNewActors')}</p>`;
+
+    const result = await foundry.applications.api.DialogV2.input({
+      window: { title: `${game.i18n.localize('OQ.Labels.DefaultForNewActors')}: ${this.item.name}` },
+      content: hint + checkboxes.join(''),
+    });
+    if (!result) return;
+
+    const newActorTypes = actorTypes.filter((type) => result[type]);
+    if (newActorTypes.length) await this.item.setFlag(CONFIG.OQ.SYSTEM_ID, 'newActor', newActorTypes);
+    else await this.item.unsetFlag(CONFIG.OQ.SYSTEM_ID, 'newActor');
   }
 
   static async onTagDelete(event, target) {

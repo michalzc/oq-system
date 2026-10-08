@@ -36,4 +36,14 @@ export function registerSettings() {
     default: CONFIG.OQ.SettingsConfig.defaults.characterItemsCompendium,
     config: true,
   });
+
+  game.settings.register(CONFIG.OQ.SYSTEM_ID, CONFIG.OQ.SettingsConfig.keys.defaultItemsFromWorld, {
+    name: 'OQ.Settings.defaultItemsFromWorld.name',
+    hint: 'OQ.Settings.defaultItemsFromWorld.hint',
+    scope: 'world',
+    requiresReload: false,
+    type: Boolean,
+    default: false,
+    config: true,
+  });
 }

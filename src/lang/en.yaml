@@ -62,6 +62,9 @@ OQ:
     InvalidRoll: Invalid roll definition
   Hints:
     ItemRollHint: Hold SHIFT key to skip test roll dialog. For damage hold SHIFT to show dialog.
+    DefaultForNewActors: >-
+      New actors of the checked types get a copy of this item, when it is in the Default Items Compendium selected in
+      the system settings, or in the world with Default Items from World enabled.
     RollAll: Roll all
     RollFormula: Roll formula
     ApplyDamage: Apply damage
@@ -138,6 +141,7 @@ OQ:
     DamageMod: Mod
     DamageFormula: Damage Formula
     DamageRoll: Roll Damage
+    DefaultForNewActors: Default for New Actors
     Description: Description
     Difficulty: Difficulty
     DifficultyLevels:
@@ -259,7 +263,14 @@ OQ:
   Settings:
     defaultItemsCompendium:
       name: Default Items Compendium
-      hint: Select the name of the compendium that contains default items for newly created characters.
+      hint: >-
+        Select the compendium that contains default items for newly created actors. Only items marked with
+        "Default for New Actors" in the item sheet's menu are added.
+    defaultItemsFromWorld:
+      name: Default Items from World
+      hint: >-
+        Also add the world's items marked with "Default for New Actors" to newly created actors. A world item imported
+        from the Default Items Compendium replaces the compendium original.
     coinsConfiguration:
       name: Coins Configuration
       hint: >-
