@@ -97,6 +97,9 @@ languages:
     path: lang/en.json
 socket: false
 initiative: "@attributes.initiative.value"
+# Default token bars of newly created actors.
+primaryTokenAttribute: attributes.hp
+secondaryTokenAttribute: attributes.mp
 # Filled in by the release workflow, which only replaces keys that already exist. Kept as placeholders in development
 # builds, so Foundry never offers to update a linked dev build from the latest release.
 manifest: tbd

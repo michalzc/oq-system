@@ -30,7 +30,16 @@ export class OQBaseActor extends Actor {
   }
 
   async _preCreate(source, options, userId) {
-    await super._preCreate(source, options, userId);
+    if ((await super._preCreate(source, options, userId)) === false) return false;
+
+    // Values in the creation data win, so duplicated and imported actors keep their own token settings.
+    const tokenDefaults = CONFIG.OQ.ActorConfig.prototypeTokenDefaults;
+    const prototypeToken = foundry.utils.mergeObject(
+      foundry.utils.mergeObject(tokenDefaults.base, tokenDefaults[source.type] ?? {}),
+      source.prototypeToken ?? {},
+      { inplace: false },
+    );
+    this.updateSource({ prototypeToken });
 
     if (!source.items) {
       const defaultItems = await getDefaultItemsForActor(source.type);

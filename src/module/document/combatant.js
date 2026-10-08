@@ -4,7 +4,7 @@
  */
 export class OQCombatant extends foundry.documents.Combatant {
   async _preCreate(data, options, user) {
-    await super._preCreate(data, options, user);
+    if ((await super._preCreate(data, options, user)) === false) return false;
     const combat = this.parent;
     if (game.combats.has(combat?.id) && combat.started && !combat.isDeclaration) {
       this.updateSource({ 'flags.oq.awaitingRound': combat.round + 1 });
