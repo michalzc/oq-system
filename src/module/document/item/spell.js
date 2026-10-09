@@ -8,6 +8,22 @@ import { promptSpellCast } from '../../application/spell-cast-dialog.js';
 
 const SpellCastTemplate = 'systems/oq/templates/chat/parts/spell-cast.hbs';
 
+// Casts of all spells on an actor share a queue on this client. Token actor UUIDs include the scene and token.
+const castingQueues = new Map();
+
+function enqueueCast(actor, cast) {
+  const key = actor.uuid;
+  const result = (castingQueues.get(key) ?? Promise.resolve()).then(cast);
+  // Keep failures visible to the caller, without blocking later casts or retaining idle actors.
+  const tail = result
+    .catch(() => {})
+    .finally(() => {
+      if (castingQueues.get(key) === tail) castingQueues.delete(key);
+    });
+  castingQueues.set(key, tail);
+  return result;
+}
+
 export class OQSpell extends OQBaseItem {
   getItemDataForChat() {
     const context = super.getItemDataForChat();
@@ -57,57 +73,82 @@ export class OQSpell extends OQBaseItem {
   }
 
   async castMagicPointsSpell(skipDialog) {
-    const rollData = this.getTestRollData();
-    if (!this.castingSkill) return warn('OQ.Warnings.NoCastingSkill');
+    let castOptions;
+    if (!skipDialog) {
+      if (!this.castingSkill) return warn('OQ.Warnings.NoCastingSkill');
+      const magnitude = this.castingMagnitude;
+      const magicPoints = this.parent.system.attributes.mp.value;
+      const variant = !this.system.nonVariant;
+      if (magicPoints < (variant ? 1 : magnitude)) return warn('OQ.Warnings.NotEnoughMagicPoints');
+      castOptions = await promptSpellCast({
+        ...this.getTestRollData(),
+        rollable: true,
+        variant,
+        maxMagnitude: variant ? Math.min(magnitude, magicPoints) : magnitude,
+      });
+      if (!castOptions) return;
+    }
 
-    const magnitude = this.castingMagnitude;
-    const magicPoints = this.parent.system.attributes.mp.value;
-    const variant = !this.system.nonVariant;
-    const minimalCost = variant ? 1 : magnitude;
-    if (magicPoints < minimalCost) return warn('OQ.Warnings.NotEnoughMagicPoints');
+    const cast = await enqueueCast(this.parent, async () => {
+      if (!this.castingSkill) return warn('OQ.Warnings.NoCastingSkill');
+      const maxMagnitude = this.castingMagnitude;
+      const magicPoints = this.parent.system.attributes.mp.value;
+      const variant = !this.system.nonVariant;
+      const options = skipDialog
+        ? { magnitude: variant ? Math.min(maxMagnitude, magicPoints) : maxMagnitude }
+        : castOptions;
+      if (magicPoints < (variant ? 1 : maxMagnitude) || options.magnitude > magicPoints) {
+        return warn('OQ.Warnings.NotEnoughMagicPoints');
+      }
+      if (!validMagnitude(options.magnitude, maxMagnitude, !variant)) return;
 
-    const castOptions = skipDialog
-      ? { magnitude }
-      : await promptSpellCast({
-          ...rollData,
-          rollable: true,
-          variant,
-          maxMagnitude: variant ? Math.min(magnitude, magicPoints) : magnitude,
-        });
-    if (!castOptions) return;
-    if (castOptions.magnitude > magicPoints) return warn('OQ.Warnings.NotEnoughMagicPoints');
-
-    const castRollData = { ...rollData, ...castOptions };
-    const testRollResult = await evaluateTestRoll(castRollData);
-    const mpSpent = spellCastingCost(testRollResult.rollResult, castOptions.magnitude);
-    await this.parent.update({ 'system.attributes.mp.value': Math.max(0, magicPoints - mpSpent) });
-    await postTestRoll(castRollData, testRollResult, { rollable: true, mpSpent });
+      const castRollData = { ...this.getTestRollData(), ...options };
+      const testRollResult = await evaluateTestRoll(castRollData);
+      // Dice fulfillment can wait for user input. Honor resource edits made during that wait too.
+      const currentMagicPoints = this.parent.system.attributes.mp.value;
+      if (options.magnitude > currentMagicPoints) return warn('OQ.Warnings.NotEnoughMagicPoints');
+      const mpSpent = spellCastingCost(testRollResult.rollResult, options.magnitude);
+      const updated = await this.parent.update({ 'system.attributes.mp.value': currentMagicPoints - mpSpent });
+      if (!updated) return;
+      return { castRollData, testRollResult, mpSpent };
+    });
+    if (cast) {
+      await postTestRoll(cast.castRollData, cast.testRollResult, { rollable: true, mpSpent: cast.mpSpent });
+    }
   }
 
   async castNoMagicPointsSpell(skipDialog) {
-    if (this.expended) return warn('OQ.Warnings.SpellExpended');
+    let castOptions;
+    if (!skipDialog) {
+      if (this.expended) return warn('OQ.Warnings.SpellExpended');
+      const variant = this.hasSplitDivineCasting;
+      castOptions = await promptSpellCast({
+        ...this.getTestRollData(),
+        rollable: false,
+        variant,
+        maxMagnitude: variant ? this.system.remainingMagnitude : this.system.magnitude,
+      });
+      if (!castOptions) return;
+    }
 
-    const variant = this.hasSplitDivineCasting;
-    const maxMagnitude = this.system.magnitude;
-    const remaining = variant ? this.system.remainingMagnitude : maxMagnitude;
-    const rollData = this.getTestRollData();
+    const cast = await enqueueCast(this.parent, async () => {
+      if (this.expended) return warn('OQ.Warnings.SpellExpended');
+      const variant = this.hasSplitDivineCasting;
+      const maxMagnitude = this.system.magnitude;
+      const remaining = variant ? Math.min(this.system.remainingMagnitude, maxMagnitude) : maxMagnitude;
+      const options = skipDialog ? { magnitude: remaining } : castOptions;
+      if (!validMagnitude(options.magnitude, remaining, !variant)) return;
 
-    const castOptions = skipDialog
-      ? { magnitude: remaining }
-      : await promptSpellCast({ ...rollData, rollable: false, variant, maxMagnitude: remaining });
-    if (!castOptions) return;
-
-    const remainingMagnitude = inRangeValue(0, remaining, remaining - castOptions.magnitude);
-    await this.castDivineSpell(remainingMagnitude);
-
-    const content = await renderTemplate(SpellCastTemplate, {
-      ...rollData,
-      ...castOptions,
-      rollable: false,
-      remainingMagnitude,
-      maxMagnitude,
+      const rollData = this.getTestRollData();
+      const remainingMagnitude = remaining - options.magnitude;
+      const updated = await this.castDivineSpell(remainingMagnitude);
+      if (!updated) return;
+      return { ...rollData, ...options, rollable: false, remainingMagnitude, maxMagnitude };
     });
-    await createChatMessage({ speaker: rollData.speaker, content }, castOptions.messageMode);
+    if (cast) {
+      const content = await renderTemplate(SpellCastTemplate, cast);
+      await createChatMessage({ speaker: cast.speaker, content }, cast.messageMode);
+    }
   }
 
   /**
@@ -179,4 +220,17 @@ export class OQSpell extends OQBaseItem {
 
 function warn(messageKey) {
   ui.notifications.warn(messageKey, { localize: true });
+}
+
+function validMagnitude(magnitude, maxMagnitude, nonVariant) {
+  if (
+    Number.isInteger(magnitude) &&
+    magnitude >= 1 &&
+    magnitude <= maxMagnitude &&
+    (!nonVariant || magnitude === maxMagnitude)
+  ) {
+    return true;
+  }
+  ui.notifications.warn(game.i18n.format('OQ.Warnings.InvalidMagnitude', { max: maxMagnitude }));
+  return false;
 }
