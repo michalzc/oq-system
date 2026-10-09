@@ -148,6 +148,18 @@ Restart the watcher after adding new public assets or language files.
 Run `yarn test`, `yarn lint`, and `yarn build` before submitting changes. Lint checks JavaScript, Less,
 and Handlebars syntax and markup.
 
+### Data migrations
+
+Changes to stored data, such as renamed fields or moved assets, are written to the world by migrations in
+`src/module/migration/`. When the world loads, the active GM's client applies those newer than the `migrationVersion`
+world setting. They run on world documents with their embedded documents, and on world compendia. System compendia are
+rebuilt from `src/packs/`, so update their sources directly.
+
+To add a migration, create a module with a handler per document name (`Actor`, `Item`, `Token`, ...). Each handler
+gets the document source and returns the changes to write, or `{}` when the document is up to date. Append it to
+`migrations` in `migrations.js` with the next version number and add tests to `test/test-migrations.js`. Never edit
+a migration that has been released: worlds that already applied it won't run it again.
+
 ### Nix environment (optional)
 
 The project uses the shared [foundry-dev](https://github.com/michalzc/foundry-dev) flake,

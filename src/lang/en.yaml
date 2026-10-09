@@ -243,6 +243,15 @@ OQ:
       melee: Melee
       ranged: Ranged
       shield: Shield
+  Migration:
+    Begin: Migrating the world data to the new OQ system version. Do not close the game until it completes.
+    Complete: The world data migration completed.
+    Failed: >-
+      The world data migration failed for {count} documents. See the browser console for details. The migration runs
+      again on the next load.
+    NewerVersion: >-
+      The world data was migrated by a newer OQ system version (migration {version}). Update the system before
+      editing the world.
   Nav:
     Combat: Combat
     Description: Description

@@ -46,4 +46,12 @@ export function registerSettings() {
     default: false,
     config: true,
   });
+
+  // The version of the last data migration applied to the world, see `migration/migrations.js`.
+  game.settings.register(CONFIG.OQ.SYSTEM_ID, CONFIG.OQ.SettingsConfig.keys.migrationVersion, {
+    scope: 'world',
+    type: Number,
+    default: 0,
+    config: false,
+  });
 }

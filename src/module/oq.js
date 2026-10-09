@@ -10,6 +10,7 @@ import { registerHelpers } from './init/handlebar-helpers.js';
 import { registerIconFilters } from './init/icon-filters.js';
 import { applyCoreSettingDefaults, registerSettings } from './init/register-settings.js';
 import { buildMoneyService } from './utils/money.js';
+import { migrateWorld } from './migration/migration-runner.js';
 import '../styles/oq.less';
 
 async function init() {
@@ -35,6 +36,7 @@ async function init() {
 
 async function ready() {
   log('Ready');
+  await migrateWorld();
   // The coins setting requires a reload, so checking once here covers every change to it.
   if (game.user.isGM && !game.oq.moneyService?.fields.length) ui.notifications.warn('Invalid money configuration!');
 }
