@@ -1,6 +1,7 @@
 import { ItemConfig } from '../consts/items-config.js';
 import _ from 'lodash-es';
 import { renameLegacyField } from '../utils/utils.js';
+import { newSpellChanges, spellUpdateChanges } from '../utils/magic.js';
 
 const fields = foundry.data.fields;
 
@@ -195,6 +196,24 @@ export class SpellDataModel extends OQItemDataModel {
       description: htmlFieldModel(),
       skillReference: new fields.StringField({ required: false, trim: true }),
     };
+  }
+
+  /* override */
+  async _preCreate(data, options, user) {
+    const allowed = await super._preCreate(data, options, user);
+    if (allowed === false) return false;
+
+    const changes = newSpellChanges(data.system ?? {}, this);
+    if (!_.isEmpty(changes)) this.parent.updateSource({ system: changes });
+  }
+
+  /* override */
+  async _preUpdate(changes, options, user) {
+    const allowed = await super._preUpdate(changes, options, user);
+    if (allowed === false) return false;
+
+    const spellChanges = spellUpdateChanges(this, changes.system);
+    if (!_.isEmpty(spellChanges)) changes.system = { ...changes.system, ...spellChanges };
   }
 
   get hasSplitDivineCasting() {

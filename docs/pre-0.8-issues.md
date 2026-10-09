@@ -139,7 +139,7 @@ already applied it can lower *Data Migration Version* to run it again.
 
 ## 5. [P3] Divine spells added on the sheet can't be cast without extra steps
 
-Status: open.
+Status: resolved.
 
 Locations: [`actor-base-sheet.js:145`](../src/module/sheet/actor/actor-base-sheet.js#L145),
 [`data-models-item.js:180`](../src/module/dataModel/data-models-item.js#L180), and
@@ -162,6 +162,14 @@ Reproduction:
 Suggested fix: create spells from the Divine Magic group with `noMagicPoints: true`. Set `remainingMagnitude` to
 `magnitude` when a spell is created with, or switched to, *No Magic Points*, and when the magnitude of an unspent
 spell changes, for example in `OQSpell#_preCreate` and `_preUpdate`.
+
+Resolution: a new divine spell gets *No Magic Points* unless its creation data sets the option, so spells added in
+the Divine Magic group need no casting skill. Changing a spell's type to Divine Magic checks the option too. Leaving
+Divine Magic keeps the option as it is. A spell created with *No Magic Points* starts with its full magnitude
+remaining, unless its creation data sets the remaining magnitude, as compendium spells and copied expended spells do.
+A spell switched to *No Magic Points* also gets its full magnitude. When the magnitude of such a spell changes, an
+unspent spell stays unspent and a spent one keeps no more than the new magnitude. The rules are pure helpers in
+[`magic.js`](../src/module/utils/magic.js), called from the `SpellDataModel` creation and update hooks.
 
 ## 6. [P3] Fractional magnitudes are charged inconsistently
 
@@ -225,7 +233,7 @@ Suggested fix: remove `flags.oq.newActor` from the item data in `getDefaultItems
 
 ## 9. [P3] Sorcery manipulation can't be paid through the cast dialog
 
-Status: open; rules gap, needs a decision.
+Status: resolved; duration and range manipulation remain open.
 
 Locations: [`spell.js:69`](../src/module/document/item/spell.js#L69) and
 [`magic.js:10`](../src/module/utils/magic.js#L10).
@@ -240,6 +248,18 @@ failure and a fumble match the SRD.
 Suggested fix: for sorcery, let the dialog ask for the manipulation cost, capped by the Sorcery Casting limit and
 the current MP, instead of using the stored magnitude. Alternatively, document the workaround on the Magic journal
 page.
+
+Resolution: a variable sorcery spell that costs magic points takes the highest magnitude its casting skill allows
+when it is added to an actor, from the SRD *Manipulation cost* table: 2 from 1%, one more for every further 10%, 10
+from 81%, 15 from 91% and 20 at 100%. The skill value excludes its situational modifier, as in the cast dialog.
+Sorcery casting costs follow the same table, so magnitudes above 10 cost 11 MP. The dialog and shift-click allow the
+stored magnitude when the actor can pay its cost, and otherwise the magnitude the actor's MP pay for. The magnitude is
+kept when the actor lacks the casting skill. The Magic journal page describes both rules.
+
+Limits: the stored magnitude doesn't follow later changes of the casting skill. A separate ticket covers an
+"Adjust sorcery spells" macro for that. Items embedded in an actor's creation data, such as default items, aren't
+adjusted. A folder drop that adds the casting skill and the spell in the same batch can't see the skill yet. Only
+magnitude is manipulated: duration and range manipulation, and their costs, are still not modelled.
 
 ## Validation of fixes 1–3
 
@@ -279,3 +299,17 @@ page.
 - Not verified in a running Foundry: migration 1 writing `system` as a `ForcedReplacement` to items in unlinked
   token deltas and to world compendia. The tests use document harnesses. Before release, run the migration on a copy
   of a v0.7.0 world with unlinked tokens and a locked world compendium.
+
+## Validation of fixes 5 and 9
+
+- All 178 tests and the lint checks pass. The 41 new tests cover the helpers in
+  [`test-magic.js`](../test/test-magic.js), plus sorcery casting costs, magnitude caps and the magnitude a spell takes
+  when it is added to an actor in [`test-spell-casting.js`](../test/test-spell-casting.js).
+- Three of the new casting tests fail against the previous `spell.js`: the 11 MP cost at magnitude 15, the fumble
+  cost, and the magnitude taken from the casting skill.
+- `yarn build:docs` regenerates the documentation pack with only the Magic page changed.
+- The `SpellDataModel` hooks are exercised only through their helpers, not in a running Foundry. Still to check
+  in-app:
+  - creating a spell from the Items sidebar and switching it to Divine Magic;
+  - adding a spell in the Divine Magic group;
+  - dropping a compendium sorcery spell on actors with Sorcery Casting at 45% and 95%.

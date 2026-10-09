@@ -74,6 +74,9 @@ function spell(parent = actor(), system = {}) {
       apply(this, changes);
       return this;
     },
+    updateSource(changes) {
+      apply(this, changes);
+    },
   });
   return item;
 }
@@ -100,6 +103,8 @@ describe('Spell casting', function () {
       get actor() {
         return this.parent;
       }
+
+      async _preCreate() {}
     };
     ({ OQSpell } = await import('../src/module/document/item/spell.js'));
   });
@@ -121,7 +126,7 @@ describe('Spell casting', function () {
     globalThis.CONFIG = {
       OQ: {
         RollConfig,
-        ItemConfig: { spellsTypes: { custom: 'custom' } },
+        ItemConfig: { spellsTypes: { personal: 'personal', sorcery: 'sorcery', custom: 'custom' } },
         ChatConfig: { MessageFlags: {} },
       },
       ChatMessage: { modes: { public: { label: 'Public' }, private: { label: 'Private' } } },
@@ -353,4 +358,72 @@ describe('Spell casting', function () {
       assert.equal(messages.length, 0);
     });
   }
+
+  describe('Sorcery', function () {
+    function sorcerer(skillValue = 50, mp = 10) {
+      const caster = actor('Actor.sorcerer', mp);
+      caster.system.skillsBySlug.magic.getRollValues = () => ({ value: skillValue, mod: 0 });
+      return caster;
+    }
+
+    const sorcery = (parent, system = {}) => spell(parent, { type: 'sorcery', magnitude: 15, ...system });
+
+    it('casts magnitude 15 for 11 MP', async function () {
+      const caster = sorcerer(95, 11);
+      const cast = await openCast(sorcery(caster));
+      assert.equal(dialogs[0].context.maxMagnitude, 15);
+      cast.confirm(15);
+      await cast.pending;
+      assert.equal(caster.system.attributes.mp.value, 0);
+      assert.equal(messages[0].context.mpSpent, 11);
+      assert.equal(warnings.length, 0);
+    });
+
+    it('caps shift-click at the magnitude the MP pay for', async function () {
+      const caster = sorcerer(95, 8);
+      await sorcery(caster).rollItemTest(true);
+      assert.equal(messages[0].context.magnitude, 8);
+      assert.equal(caster.system.attributes.mp.value, 0);
+    });
+
+    for (const [total, cost] of [
+      [77, 11],
+      [70, 1],
+    ]) {
+      it(`charges ${cost} MP at magnitude 15 for roll ${total}`, async function () {
+        rollSteps.push({ total });
+        const caster = sorcerer(50, 20);
+        await sorcery(caster).rollItemTest(true);
+        assert.equal(caster.system.attributes.mp.value, 20 - cost);
+        assert.equal(messages[0].context.mpSpent, cost);
+      });
+    }
+
+    it('takes the highest magnitude the casting skill allows when added to an actor', async function () {
+      const item = sorcery(sorcerer(55), { magnitude: 1 });
+      await item._preCreate({}, {}, {});
+      assert.equal(item.system.magnitude, 7);
+    });
+
+    for (const [label, makeSpell] of [
+      ['without the casting skill', () => sorcery(sorcerer(55), { magnitude: 1, skillReference: '' })],
+      ['for a non-variable spell', () => sorcery(sorcerer(55), { magnitude: 1, nonVariant: true })],
+      ['for a spell with no magic point cost', () => sorcery(sorcerer(55), { magnitude: 1, noMagicPoints: true })],
+      ['for a personal spell', () => spell(sorcerer(55), { magnitude: 1 })],
+      [
+        'outside an actor',
+        () => {
+          const item = sorcery(sorcerer(55), { magnitude: 1 });
+          item.parent = null;
+          return item;
+        },
+      ],
+    ]) {
+      it(`keeps the magnitude ${label}`, async function () {
+        const item = makeSpell();
+        await item._preCreate({}, {}, {});
+        assert.equal(item.system.magnitude, 1);
+      });
+    }
+  });
 });
