@@ -186,6 +186,7 @@ export class SpellDataModel extends OQItemDataModel {
         choices: _.keys(ItemConfig.spellsTypes),
         initial: ItemConfig.spellsTypes.personal,
       }),
+      customTypeName: commonStringModel(),
       traits: new fields.ArrayField(commonStringModel(), {
         nullable: false,
         required: false,

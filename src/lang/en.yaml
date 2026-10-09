@@ -227,6 +227,7 @@ OQ:
       personal: Personal Magic
       divine: Divine Magic
       sorcery: Sorcery
+      custom: Custom Type
     State: State
     TotalEncumbrance: Total Encumbrance
     TotalValue: Total Value

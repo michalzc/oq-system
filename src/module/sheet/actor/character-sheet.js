@@ -34,7 +34,8 @@ export class OQCharacterSheet extends OQActorBaseSheet {
     const context = await super._prepareContext(options);
     const enrichedNotes = await this.enrichHTML(this.actor.system.personal.notes);
     const spellsPerType = this.getSpellsPerType();
-    const spellTypes = CONFIG.OQ.ItemConfig.spellsTypes;
+    // Custom type spells are grouped by their custom type name instead, see `prepareGroupedItems`.
+    const spellTypes = _.omit(CONFIG.OQ.ItemConfig.spellsTypes, CONFIG.OQ.ItemConfig.spellsTypes.custom);
     const skillsTabContent = this.splitSkills(context.groupedItems.groupedSkills);
     return Object.assign(context, {
       enrichedNotes,

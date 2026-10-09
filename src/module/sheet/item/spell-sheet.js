@@ -16,6 +16,7 @@ export class OQSpellSheet extends OQBaseItemSheet {
 
     return Object.assign(context, {
       spellTypes,
+      customType: this.item.system.type === itemConfig.spellsTypes.custom,
       parentSkills,
       hasSplitDivineCasting: this.item.hasSplitDivineCasting,
       expended: this.item.expended,

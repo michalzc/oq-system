@@ -101,6 +101,24 @@
           </div>
           {{/if}}
 
+          {{#each groupedItems.customSpellGroups as |spellGroup|}}
+          <div class="item-group">
+            <div class="item label">
+              <div>{{ localize spellGroup.label }}</div>
+              {{#if @root.editable}}
+                {{#if spellGroup.spent}}
+                  <a class="regain-all-spells" data-action="regainAllSpells" data-spell-type="{{spellGroup.type}}"
+                     data-custom-type-name="{{spellGroup.customTypeName}}"
+                     data-tooltip="{{ localize 'OQ.Labels.RegainAll' }}"><i class="fas fa-rotate-left"></i></a>
+                {{/if}}
+              {{/if}}
+            </div>
+            {{#each spellGroup.spells as |spell|}}
+            {{> systems/oq/templates/actor/parts/spell.hbs spell}}
+            {{/each}}
+          </div>
+          {{/each}}
+
           {{#if groupedItems.equipment }}
           <div class="item-group">
             <label class="item label">{{ localize 'OQ.Nav.Equipment' }}</label>

@@ -2,7 +2,7 @@ import { OQBaseItem } from './base-item.js';
 import _ from 'lodash-es';
 import { inRangeValue, renderTemplate } from '../../utils/utils.js';
 import { evaluateTestRoll, postTestRoll } from '../../utils/roll.js';
-import { spellCastingCost } from '../../utils/magic.js';
+import { isInSpellGroup, spellCastingCost } from '../../utils/magic.js';
 import { createChatMessage } from '../../utils/chat.js';
 import { promptSpellCast } from '../../application/spell-cast-dialog.js';
 
@@ -11,7 +11,17 @@ const SpellCastTemplate = 'systems/oq/templates/chat/parts/spell-cast.hbs';
 export class OQSpell extends OQBaseItem {
   getItemDataForChat() {
     const context = super.getItemDataForChat();
-    return { ...context, traits: [...this.getTraits()], itemSubtypeLabel: `OQ.Labels.SpellTypes.${this.system.type}` };
+    return { ...context, traits: [...this.getTraits()], itemSubtypeLabel: this.typeLabel };
+  }
+
+  /**
+   * The custom type name of a custom type spell, otherwise the localization key of the spell type.
+   * @returns {string}
+   */
+  get typeLabel() {
+    const { type, customTypeName } = this.system;
+    const isCustom = type === CONFIG.OQ.ItemConfig.spellsTypes.custom;
+    return (isCustom && customTypeName) || `OQ.Labels.SpellTypes.${type}`;
   }
 
   calculateRollValues() {
@@ -31,7 +41,7 @@ export class OQSpell extends OQBaseItem {
       ...context,
       rollType: 'spell',
       skillName: this.castingSkill?.name,
-      spellTypeLabel: `OQ.Labels.SpellTypes.${this.system.type}`,
+      spellTypeLabel: this.typeLabel,
     };
   }
 
@@ -157,10 +167,11 @@ export class OQSpell extends OQBaseItem {
    * Regains every spent spell with no magic point cost of the actor in a single update.
    * @param {Actor} actor
    * @param {string} [spellType] Regains only the spells of this type
+   * @param {string} [customTypeName] Regains only the custom type spells of this name, with the custom spell type
    */
-  static async regainAllDivineSpells(actor, spellType) {
+  static async regainAllDivineSpells(actor, spellType, customTypeName) {
     const updates = actor.items
-      .filter((item) => item.type === 'spell' && item.spent && (!spellType || item.system.type === spellType))
+      .filter((item) => item.type === 'spell' && item.spent && isInSpellGroup(item, spellType, customTypeName))
       .map((spell) => ({ _id: spell.id, 'system.remainingMagnitude': spell.system.magnitude }));
     if (updates.length) await actor.updateEmbeddedDocuments('Item', updates);
   }

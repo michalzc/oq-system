@@ -3,6 +3,10 @@
   <select id="{{rootId}}-type" name="system.type">
     {{selectOptions spellTypes selected=system.type localize=true }}
   </select>
+  {{#if customType}}
+    <label for="{{rootId}}-customType">{{localize 'OQ.Labels.CustomType'}}</label>
+    <input type="text" name="system.customTypeName" id="{{rootId}}-customType" value="{{system.customTypeName}}">
+  {{/if}}
 
   <label></label>
   <div class="input-with-checkbox">

@@ -131,6 +131,7 @@ export const ItemConfig = {
     personal: 'personal',
     divine: 'divine',
     sorcery: 'sorcery',
+    custom: 'custom',
   },
 
   spellTraits: {
