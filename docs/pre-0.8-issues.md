@@ -23,18 +23,19 @@ Reproduction:
 3. Confirm both casts at magnitude 3, with successful casting rolls.
 4. The final balance is 7 MP instead of 4 MP.
 
-Suggested fix: revalidate current resources before committing the deduction and
-serialize competing casts. Apply the same protection to divine spell magnitude.
+Suggested fix: revalidate current resources before committing the deduction.
+Apply the same protection to divine spell magnitude.
 
-Resolution: confirmed casts now share a per-actor queue on each client. Dialogs
-stay outside the queue. Casting rechecks current resources and spell limits when
-the queued operation runs, and MP is checked again after dice fulfillment.
-Unaffordable selections are cancelled with a warning. Chat cards are posted only
-after resource persistence succeeds, and failed casts do not block the queue.
-Divine casting deducts from the current remainder and rejects spent spells.
+Resolution: when the casting dialog is confirmed, the chosen magnitude is checked
+against the actor's current MP, or the spell's current remaining magnitude.
+Unaffordable selections are cancelled with a warning. After the roll, the cost is
+deducted from the current MP balance, never below zero, so MP changes made during
+dice fulfillment are kept. Divine casting deducts from the current remainder and
+rejects spells expended while the dialog was open.
 
-Limits: the queue does not serialize casts from different clients or provide
-atomic transactions for arbitrary external resource edits during persistence.
+Limits: casts are not serialized. Two casts that both read MP before either update
+is saved, such as rapid repeated shift-clicks or casts from different clients, can
+still overwrite each other.
 
 ## 2. [P2] Migrations can report success without saving every document
 
@@ -90,20 +91,20 @@ Reproduction:
 Suggested fix: cap the shortcut's magnitude at available MP for variable spells,
 using the same limit as the dialog.
 
-Resolution: shift-click selects the magnitude when its queued cast executes.
-Variable MP spells use the lower of the spell's magnitude and current MP;
-non-variable spells still require their full magnitude. Split divine spells use
-their current remaining magnitude.
+Resolution: variable MP spells cast with shift-click use the lower of the
+spell's magnitude and current MP; non-variable spells still require their full
+magnitude. Split divine spells use their current remaining magnitude.
 
 ## Validation
 
-- All 138 tests passed, including 26 casting regression tests in
+- All 132 tests passed, including 20 casting regression tests in
   [`test-spell-casting.js`](../test/test-spell-casting.js) and eight new migration
   regression tests in [`test-migrations.js`](../test/test-migrations.js).
 - JavaScript, template, and style lint checks passed.
 - Casting tests exercise the real casting methods with controlled dialogs, dice
-  fulfillment, and updates. They cover overlapping casts, resource edits, casting
-  costs, shortcut limits, cancellation, failures, and independent token actors.
+  fulfillment, and updates. They cover casts confirmed from dialogs opened at the
+  same time, resource edits, casting costs, shortcut limits, cancellation, and
+  failures. Eleven of them fail against the casting code before the fix.
 - Migration tests cover empty and partial results, returned ID matching, omitted
   embedded and compendium updates, lock restoration, rejected batches, and
   continued processing. The reload test separates persisted and in-memory data

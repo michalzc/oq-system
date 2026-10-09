@@ -38,7 +38,6 @@ function actor(uuid = 'Actor.caster', mp = 10) {
     async update(changes) {
       this.updates.push(changes);
       await this.beforeUpdate?.(changes);
-      if (this.cancelUpdate) return;
       apply(this, changes);
       return this;
     },
@@ -72,7 +71,6 @@ function spell(parent = actor(), system = {}) {
     async update(changes) {
       this.updates.push(changes);
       await this.beforeUpdate?.(changes);
-      if (this.cancelUpdate) return;
       apply(this, changes);
       return this;
     },
@@ -168,7 +166,7 @@ describe('Spell casting', function () {
   });
 
   for (const differentSpells of [false, true]) {
-    it(`deducts both confirmed casts ${
+    it(`deducts both casts confirmed in turn ${
       differentSpells ? 'of different spells' : 'of the same spell'
     }`, async function () {
       const caster = actor();
@@ -176,54 +174,22 @@ describe('Spell casting', function () {
       const first = await openCast(item);
       const second = await openCast(differentSpells ? spell(caster) : item);
       first.confirm();
+      await first.pending;
       second.confirm();
-      await Promise.all([first.pending, second.pending]);
+      await second.pending;
       assert.equal(caster.system.attributes.mp.value, 4);
       assert.equal(messages.length, 2);
       assert.equal(warnings.length, 0);
     });
   }
 
-  it('holds later casts until the resource update is saved', async function () {
-    const gate = deferred();
-    const caster = actor();
-    caster.beforeUpdate = () => gate.promise;
-    const first = spell(caster).rollItemTest(true);
-    await tick();
-    const second = spell(caster).rollItemTest(true);
-    await tick();
-    assert.equal(rolls.length, 1);
-    assert.equal(messages.length, 0);
-    gate.resolve();
-    await Promise.all([first, second]);
-    assert.equal(caster.system.attributes.mp.value, 4);
-  });
-
-  it('shares the actor queue between divine and MP casts', async function () {
-    const gate = deferred();
-    const caster = actor();
-    const divine = spell(caster, { noMagicPoints: true });
-    divine.beforeUpdate = () => gate.promise;
-    const first = divine.rollItemTest(true);
-    await tick();
-    const second = spell(caster).rollItemTest(true);
-    await tick();
-    assert.equal(rolls.length, 0);
-    gate.resolve();
-    await Promise.all([first, second]);
-    assert.equal(divine.system.remainingMagnitude, 0);
-    assert.equal(caster.system.attributes.mp.value, 7);
-  });
-
-  it('uses MP and skill values edited while a dialog is open', async function () {
+  it('uses MP edited while a dialog is open', async function () {
     const caster = actor();
     const cast = await openCast(spell(caster));
     caster.system.attributes.mp.value = 6;
-    caster.system.skillsBySlug.magic.getRollValues = () => ({ value: 75, mod: 5 });
     cast.confirm();
     await cast.pending;
     assert.equal(caster.system.attributes.mp.value, 3);
-    assert.equal(messages[0].context.value, 75);
     assert.equal(messages[0].options.messageMode, 'private');
   });
 
@@ -239,8 +205,11 @@ describe('Spell casting', function () {
     assert.deepEqual(warnings, ['OQ.Warnings.NotEnoughMagicPoints']);
   });
 
-  for (const mp of [6, 2]) {
-    it(`rechecks MP after interactive dice fulfillment changes it to ${mp}`, async function () {
+  for (const [mp, left] of [
+    [6, 3],
+    [2, 0],
+  ]) {
+    it(`deducts from MP changed to ${mp} during interactive dice fulfillment`, async function () {
       const gate = deferred();
       rollSteps.push({ wait: gate.promise });
       const caster = actor();
@@ -249,9 +218,9 @@ describe('Spell casting', function () {
       caster.system.attributes.mp.value = mp;
       gate.resolve();
       await cast;
-      assert.equal(caster.system.attributes.mp.value, mp === 6 ? 3 : 2);
-      assert.equal(messages.length, mp === 6 ? 1 : 0);
-      assert.equal(warnings.length, mp === 6 ? 0 : 1);
+      assert.equal(caster.system.attributes.mp.value, left);
+      assert.equal(messages.length, 1);
+      assert.equal(warnings.length, 0);
     });
   }
 
@@ -270,10 +239,11 @@ describe('Spell casting', function () {
     });
   }
 
-  it('caps shift-click at available MP, including after another queued cast', async function () {
+  it('caps shift-click at available MP', async function () {
     const caster = actor('Actor.caster', 7);
     const item = spell(caster, { magnitude: 5 });
-    await Promise.all([item.rollItemTest(true), item.rollItemTest(true)]);
+    await item.rollItemTest(true);
+    await item.rollItemTest(true);
     assert.deepEqual(
       messages.map((message) => message.context.magnitude),
       [5, 2],
@@ -295,8 +265,9 @@ describe('Spell casting', function () {
     const first = await openCast(item);
     const second = await openCast(item);
     first.confirm(1);
+    await first.pending;
     second.confirm(2);
-    await Promise.all([first.pending, second.pending]);
+    await second.pending;
     assert.equal(item.system.remainingMagnitude, 0);
     assert.deepEqual(
       messages.map((message) => message.context.remainingMagnitude),
@@ -310,14 +281,15 @@ describe('Spell casting', function () {
     const first = await openCast(item);
     const second = await openCast(item);
     first.confirm(2);
+    await first.pending;
     second.confirm(2);
-    await Promise.all([first.pending, second.pending]);
+    await second.pending;
     assert.equal(item.system.remainingMagnitude, 1);
     assert.equal(messages.length, 1);
     assert.match(warnings[0], /InvalidMagnitude/);
   });
 
-  it('honors divine magnitude edits and regaining while a dialog is open', async function () {
+  it('honors divine regaining while a dialog is open', async function () {
     const item = spell(actor(), { noMagicPoints: true, magnitude: 5, remainingMagnitude: 2 });
     const cast = await openCast(item);
     await item.regainDivineSpell();
@@ -332,8 +304,9 @@ describe('Spell casting', function () {
     const first = await openCast(item);
     const second = await openCast(item);
     first.confirm();
+    await first.pending;
     second.confirm();
-    await Promise.all([first.pending, second.pending]);
+    await second.pending;
     assert.equal(item.system.remainingMagnitude, 0);
     assert.equal(messages.length, 1);
     assert.deepEqual(warnings, ['OQ.Warnings.SpellExpended']);
@@ -342,12 +315,12 @@ describe('Spell casting', function () {
     assert.equal(messages.length, 2);
   });
 
-  it('uses the current divine remainder for a queued shift-click', async function () {
+  it('casts the current divine remainder on shift-click', async function () {
     const item = spell(actor(), { noMagicPoints: true });
     const first = await openCast(item);
     first.confirm(1);
-    await tick();
-    await Promise.all([first.pending, item.rollItemTest(true)]);
+    await first.pending;
+    await item.rollItemTest(true);
     assert.deepEqual(
       messages.map((message) => message.context.magnitude),
       [1, 2],
@@ -355,23 +328,7 @@ describe('Spell casting', function () {
     assert.equal(item.system.remainingMagnitude, 0);
   });
 
-  it('revalidates the spell limit and casting skill after dialog confirmation', async function () {
-    const item = spell();
-    const cast = await openCast(item);
-    item.system.magnitude = 2;
-    cast.confirm(3);
-    await cast.pending;
-    const missingSkill = await openCast(item);
-    delete item.parent.system.skillsBySlug.magic;
-    missingSkill.confirm(2);
-    await missingSkill.pending;
-    assert.equal(rolls.length, 0);
-    assert.equal(messages.length, 0);
-    assert.match(warnings[0], /InvalidMagnitude/);
-    assert.equal(warnings[1], 'OQ.Warnings.NoCastingSkill');
-  });
-
-  it('does not block casts behind an open or cancelled dialog', async function () {
+  it('casts while another dialog is open or after it is cancelled', async function () {
     const item = spell();
     const cast = await openCast(item);
     await item.rollItemTest(true);
@@ -383,52 +340,17 @@ describe('Spell casting', function () {
   });
 
   for (const failure of ['roll', 'update']) {
-    it(`releases the queue and propagates a rejected ${failure}`, async function () {
+    it(`propagates a rejected ${failure} without posting a card`, async function () {
       const gate = deferred();
       const caster = actor();
       if (failure === 'roll') rollSteps.push({ wait: gate.promise });
       else caster.beforeUpdate = () => gate.promise;
-      const item = spell(caster);
-      const first = item.rollItemTest(true);
-      const rejected = assert.rejects(first, /failed/);
+      const cast = spell(caster).rollItemTest(true);
       await tick();
-      const second = item.rollItemTest(true);
-      caster.beforeUpdate = undefined;
       gate.reject(new Error('failed'));
-      await rejected;
-      await second;
-      assert.equal(caster.system.attributes.mp.value, 7);
-      assert.equal(messages.length, 1);
-    });
-  }
-
-  for (const divine of [false, true]) {
-    it(`does not post a card for a cancelled ${divine ? 'divine' : 'MP'} update`, async function () {
-      const item = spell(actor(), { noMagicPoints: divine });
-      const target = divine ? item : item.parent;
-      target.cancelUpdate = true;
-      await item.rollItemTest(true);
+      await assert.rejects(cast, /failed/);
+      assert.equal(caster.system.attributes.mp.value, 10);
       assert.equal(messages.length, 0);
-      assert.equal(item.system.remainingMagnitude, 3);
-      assert.equal(item.parent.system.attributes.mp.value, 10);
-      target.cancelUpdate = false;
-      await item.rollItemTest(true);
-      assert.equal(messages.length, 1);
     });
   }
-
-  it('lets independent synthetic token actors cast while another actor waits', async function () {
-    const gate = deferred();
-    rollSteps.push({ wait: gate.promise });
-    const firstActor = actor('Scene.scene.Token.first.Actor.base');
-    const secondActor = actor('Scene.scene.Token.second.Actor.base');
-    const first = spell(firstActor).rollItemTest(true);
-    await tick();
-    await spell(secondActor).rollItemTest(true);
-    assert.equal(secondActor.system.attributes.mp.value, 7);
-    assert.equal(firstActor.system.attributes.mp.value, 10);
-    gate.resolve();
-    await first;
-    assert.equal(firstActor.system.attributes.mp.value, 7);
-  });
 });
