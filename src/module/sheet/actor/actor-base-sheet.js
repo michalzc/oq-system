@@ -3,6 +3,7 @@ import { AttributesDialog } from '../../application/attributes-dialog.js';
 import { OQBaseActor } from '../../document/actor/base-actor.js';
 import { OQSpell } from '../../document/item/spell.js';
 import { getInitiativeOptions } from '../../utils/initiative.js';
+import { customSpellGroups } from '../../utils/magic.js';
 import {
   asyncFlattenItemsFromFolder,
   inRangeValue,
@@ -133,7 +134,9 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
     const dataset = target.dataset;
     const type = dataset.type;
     const systemType = dataset.systemType;
-    const customTypeName = (systemType === CONFIG.OQ.ItemConfig.skillTypes.custom && dataset.customTypeName) || '';
+    const { skillTypes, spellsTypes } = CONFIG.OQ.ItemConfig;
+    const isCustomType = systemType === skillTypes.custom || systemType === spellsTypes.custom;
+    const customTypeName = (isCustomType && dataset.customTypeName) || '';
     const typeLabel = `TYPES.Item.${type}`;
     const name = `${game.i18n.localize('OQ.Labels.New')} ${game.i18n.localize(typeLabel)}`;
     const itemData = {
@@ -236,7 +239,8 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
   static async onRegainAllSpells(event, target) {
     event.preventDefault();
     if (!this.isEditable) return;
-    await OQSpell.regainAllDivineSpells(this.actor, target.dataset.spellType);
+    const { spellType, customTypeName } = target.dataset;
+    await OQSpell.regainAllDivineSpells(this.actor, spellType, customTypeName);
   }
 
   static async onDamageRoll(event, target) {
@@ -288,7 +292,11 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
 
     const magicSkills = groupedSkills.magic ?? [];
     const magicAbilities = groupedAbilities.magic ?? [];
-    const spells = groupedItems.spell ?? [];
+    // Custom type spells are listed in their own groups, after the other spells.
+    const [customSpells, spells] = _.partition(
+      groupedItems.spell ?? [],
+      (spell) => spell.system.type === CONFIG.OQ.ItemConfig.spellsTypes.custom,
+    );
     const magic = _.concat(magicSkills, magicAbilities, spells);
 
     const resistances = groupedSkills.resistance ?? [];
@@ -306,6 +314,7 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
       abilities,
       armours,
       combatAbilities,
+      customSpellGroups: customSpellGroups(customSpells),
       equipment,
       groupedSkills,
       magic,

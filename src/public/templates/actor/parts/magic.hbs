@@ -60,5 +60,26 @@
         {{/each}}
       </div>
     {{/each}}
+    {{#each groupedItems.customSpellGroups as |spellGroup|}}
+      <div class="item-group">
+        <div class="item label">
+          <div>{{ localize spellGroup.label }}</div>
+          {{#if @root.editable}}
+            {{#if spellGroup.spent}}
+              <a class="regain-all-spells" data-action="regainAllSpells" data-spell-type="{{spellGroup.type}}"
+                 data-custom-type-name="{{spellGroup.customTypeName}}"
+                 data-tooltip="{{ localize 'OQ.Labels.RegainAll' }}"><i class="fas fa-rotate-left"></i></a>
+            {{/if}}
+            <a class="add-new-item" data-action="addItem"
+               data-tooltip="{{ localize 'OQ.Labels.AddNew' }} {{ localize spellGroup.label }}" data-type="spell"
+               data-system-type="{{spellGroup.type}}" data-custom-type-name="{{spellGroup.customTypeName}}"><i
+              class="fas fa-plus"></i></a>
+          {{/if}}
+        </div>
+        {{#each spellGroup.spells as |spell|}}
+          {{> systems/oq/templates/actor/parts/spell.hbs spell}}
+        {{/each}}
+      </div>
+    {{/each}}
   </div>
 </div>
