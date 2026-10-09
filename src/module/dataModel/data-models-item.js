@@ -56,7 +56,8 @@ export class SkillDataModel extends OQItemDataModel {
     return {
       description: htmlFieldModel(),
       formula: commonStringModel(),
-      mod: positiveNumberModel(),
+      // A bonus or a penalty, like the actor attribute modifiers.
+      mod: new fields.NumberField({ required: true, integer: true, initial: 0 }),
       type: commonStringModel(),
       customTypeName: commonStringModel(),
       advancement: positiveNumberModel(),
