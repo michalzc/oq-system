@@ -24,8 +24,13 @@ export async function getDefaultItemsForActor(actorType) {
     (entry) => isDefaultFor(entry) && !replacedUuids.has(entry.uuid),
   );
 
-  // Same as core's item drop on an actor sheet: embedded items don't belong to the source's folders.
-  return [...compendiumItems, ...worldItems].map((item) => game.items.fromCompendium(item, { clearFolder: true }));
+  // Same as core's item drop on an actor sheet: embedded items don't belong to the source's folders. They don't keep the
+  // default item mark either, see `OQBaseItem#_preCreate`, which items in a new actor's creation data don't run.
+  return [...compendiumItems, ...worldItems].map((item) => {
+    const data = game.items.fromCompendium(item, { clearFolder: true });
+    delete data.flags?.oq?.newActor;
+    return data;
+  });
 }
 
 /**

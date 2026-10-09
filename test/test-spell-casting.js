@@ -139,6 +139,7 @@ describe('Spell casting', function () {
     globalThis.document = { createElement: () => ({ innerHTML: '' }) };
     globalThis.foundry = {
       utils: { randomID: () => 'dialog' },
+      data: { operators: { ForcedDeletion: class {} } },
       applications: {
         handlebars: { renderTemplate: async (_template, context) => JSON.stringify(context) },
         api: {
@@ -358,6 +359,36 @@ describe('Spell casting', function () {
       assert.equal(messages.length, 0);
     });
   }
+
+  describe('Default item mark', function () {
+    function marked({ onActor = true } = {}) {
+      const item = spell();
+      if (!onActor) item.parent = null;
+      item.flags = { oq: { newActor: ['character'] } };
+      item.sourceUpdates = [];
+      item.updateSource = (changes) => item.sourceUpdates.push(changes);
+      return item;
+    }
+
+    it('clears flags.oq.newActor of an item added to an actor', async function () {
+      const item = marked();
+      await item._preCreate({}, {}, {});
+      assert.equal(item.sourceUpdates.length, 1);
+      assert.ok(item.sourceUpdates[0].flags.oq.newActor instanceof foundry.data.operators.ForcedDeletion);
+    });
+
+    it('keeps the mark of an item created outside an actor', async function () {
+      const item = marked({ onActor: false });
+      await item._preCreate({}, {}, {});
+      assert.deepEqual(item.sourceUpdates, []);
+    });
+
+    it('leaves items without the mark alone', async function () {
+      const item = spell();
+      item.updateSource = () => assert.fail('unexpected source update');
+      await item._preCreate({}, {}, {});
+    });
+  });
 
   describe('Sorcery', function () {
     function sorcerer(skillValue = 50, mp = 10) {

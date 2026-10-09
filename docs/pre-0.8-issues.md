@@ -235,7 +235,7 @@ calls that hook with the new window once its document is ready.
 
 ## 8. [P3] Copies of default items keep the `newActor` flag
 
-Status: open.
+Status: resolved.
 
 Location: [`compendium-utils.js:28`](../src/module/utils/compendium-utils.js#L28).
 
@@ -251,6 +251,19 @@ Reproduction:
 3. Create another character. It gets the item twice.
 
 Suggested fix: remove `flags.oq.newActor` from the item data in `getDefaultItemsForActor` before it is embedded.
+
+Resolution: any item added to an actor drops `flags.oq.newActor`. This covers a drop on the sheet, an item created
+from the sheet, and any other `createEmbeddedDocuments` call, through
+[`OQBaseItem#_preCreate`](../src/module/document/item/base-item.js). Core runs that hook only for the top-level
+documents of an operation, so default items embedded in a new actor's creation data are also cleared in
+`getDefaultItemsForActor`. Items created outside actors keep the mark, including compendium items imported to the
+world, so an imported default item still replaces its compendium original.
+
+Limits: items already embedded in actors keep the flag until they are re-added. Dragging such an item to the sidebar
+still creates a default item.
+
+Validation: all 186 tests and the lint checks pass. Two of the new tests fail against the previous code: the hook
+clearing the flag of an item added to an actor, and the default item copies losing it.
 
 ## 9. [P3] Sorcery manipulation can't be paid through the cast dialog
 
