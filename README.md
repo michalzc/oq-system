@@ -164,6 +164,12 @@ gets the document source and returns the changes to write, or `{}` when the docu
 `migrations` in `migrations.js` with the next version number and add tests to `test/test-migrations.js`. Never edit
 a migration that has been released: worlds that already applied it won't run it again.
 
+The system icons live in `src/public/assets/icons/themed/`. The SVGs directly in `src/public/assets/icons/`, apart
+from `cultist.svg`, are copies with a black background, kept at the paths used before 0.8. They serve stored
+references that migrations can't reach, such as images in rich text, module compendia, or data imported later, and
+their colour tells users something wasn't migrated. Never use them in code, templates or packs.
+`test/test-legacy-icons.js` checks that they match the themed icons.
+
 ### Nix environment (optional)
 
 The project uses the shared [foundry-dev](https://github.com/michalzc/foundry-dev) flake,

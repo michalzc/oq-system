@@ -107,7 +107,7 @@ magnitude. Split divine spells use their current remaining magnitude.
 
 ## 4. [P2] Moving the icons breaks references the migration doesn't reach
 
-Status: open.
+Status: resolved.
 
 Locations: [`migration-runner.js:6`](../src/module/migration/migration-runner.js#L6),
 [`migration-runner.js:9`](../src/module/migration/migration-runner.js#L9), and
@@ -136,6 +136,17 @@ Suggested fix: also keep the icons at their old paths for at least one release, 
 `themed/*.svg` to `assets/icons/`. This repairs every reference the migration can't find. As 0.8 is unreleased,
 migration 1 can still be extended to roll table results in the world and in world compendia. Development worlds that
 already applied it can lower *Data Migration Version* to run it again.
+
+Resolution: migration 1 also migrates roll tables and their results, in the world and in world compendia: the image
+and the paths in the description of each. Development worlds that already applied migration 1 need *Data Migration
+Version* set to 0 and a reload. The 94 moved icons are also back at their old paths, as copies whose background is
+black instead of dark red. Every other reference the migration can't reach shows a black icon instead of a broken
+one, and the odd colour should prompt users to report it. `cultist.svg` never moved. A test checks that the copies
+match the themed icons apart from the background, and the README tells developers not to use them.
+
+Limits: rich text, module compendia and data imported after the migration keep the old paths and show black icons
+until someone edits them. The file picker lists the black copies next to the `themed` folder. A black icon picked
+after the migration has run is never migrated.
 
 ## 5. [P3] Divine spells added on the sheet can't be cast without extra steps
 
@@ -300,7 +311,22 @@ magnitude is manipulated: duration and range manipulation, and their costs, are 
   token deltas and to world compendia. The tests use document harnesses. Before release, run the migration on a copy
   of a v0.7.0 world with unlinked tokens and a locked world compendium.
 
-## Validation of fixes 5 and 9
+## Validation of fixes 4, 5 and 9
+
+### Fix 4
+
+- All 182 tests and the lint checks pass.
+- The new tests cover:
+  - the roll table handlers;
+  - a world roll table with its results;
+  - a world RollTable compendium, while a system one is skipped;
+  - the legacy icon copies.
+- Three of the new tests fail against the previous migration code.
+- Not yet checked in a running Foundry:
+  - the black icon at an old path;
+  - a 0.7 roll table migrated after *Data Migration Version* is reset to 0.
+
+### Fixes 5 and 9
 
 - All 178 tests and the lint checks pass. The 41 new tests cover the helpers in
   [`test-magic.js`](../test/test-magic.js), plus sorcery casting costs, magnitude caps and the magnitude a spell takes

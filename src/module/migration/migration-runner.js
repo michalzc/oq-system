@@ -3,10 +3,10 @@ import { log, logError } from '../utils/logger.js';
 import { LATEST_MIGRATION_VERSION, pendingMigrations } from './migrations.js';
 
 /** World collections on `game`, migrated with their embedded documents. */
-const WORLD_COLLECTIONS = ['actors', 'items', 'scenes', 'journal', 'macros', 'messages'];
+const WORLD_COLLECTIONS = ['actors', 'items', 'scenes', 'journal', 'macros', 'messages', 'tables'];
 
 /** Document types of world compendia that are migrated. System packs are rebuilt from `src/packs/` instead. */
-const PACK_DOCUMENT_TYPES = ['Actor', 'Item', 'Scene', 'JournalEntry', 'Macro'];
+const PACK_DOCUMENT_TYPES = ['Actor', 'Item', 'Scene', 'JournalEntry', 'Macro', 'RollTable'];
 
 /** Updates sent in one request, so a large chat log doesn't go out in a single message. */
 const BATCH_SIZE = 100;
@@ -25,6 +25,8 @@ function embeddedCollections(documentName, document) {
       return [{ documentName: 'Token', parent: document, documents: document.tokens }];
     case 'JournalEntry':
       return [{ documentName: 'JournalEntryPage', parent: document, documents: document.pages }];
+    case 'RollTable':
+      return [{ documentName: 'TableResult', parent: document, documents: document.results }];
     case 'Token': {
       // Only the items stored in the delta of an unlinked token; the base actor's items are migrated with the actor.
       const items = document.delta?.items;

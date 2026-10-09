@@ -109,6 +109,17 @@ describe('migration-1-themed-icons.js', function () {
       });
       expect(handlers.JournalEntryPage({ src: null, text: { content: null } }, helpers)).to.eql({});
     });
+
+    it('Should migrate roll table and table result images and descriptions', function () {
+      for (const handler of [handlers.RollTable, handlers.TableResult]) {
+        expect(handler({ img: LEGACY, description: `<img src="${LEGACY}">` }, helpers)).to.eql({
+          img: THEMED,
+          description: `<img src="${THEMED}">`,
+        });
+        expect(handler({ img: THEMED, description: '' }, helpers)).to.eql({});
+        expect(handler({ img: null }, helpers)).to.eql({});
+      }
+    });
   });
 });
 
@@ -211,6 +222,7 @@ describe('migration-runner.js', function () {
         journal: collection('JournalEntry', []),
         macros: collection('Macro', documents.macros ?? []),
         messages: collection('ChatMessage', documents.messages ?? []),
+        tables: collection('RollTable', documents.tables ?? []),
         packs,
       };
     }
@@ -290,6 +302,29 @@ describe('migration-runner.js', function () {
       );
     });
 
+    it('Should migrate roll tables with their results', async function () {
+      const table = new FakeDocument(
+        { _id: 'r1', img: LEGACY, description: '' },
+        { updateEmbeddedDocuments: recordEmbedded('r1') },
+      );
+      table.results = [
+        new FakeDocument({ _id: 'tr1', img: LEGACY, description: '' }),
+        new FakeDocument({ _id: 'tr2', img: 'icons/svg/d20.svg', description: '' }),
+      ];
+      setGlobals({ documents: { tables: [table] } });
+
+      await run();
+
+      assert.deepEqual(
+        updates.map(({ target, batch }) => ({ target, batch })),
+        [
+          { target: 'RollTable', batch: [{ _id: 'r1', img: THEMED }] },
+          { target: 'r1.TableResult', batch: [{ _id: 'tr1', img: THEMED }] },
+        ],
+      );
+      expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+    });
+
     it('Should migrate world compendia only, restoring their lock', async function () {
       const configured = [];
       const pack = (packageType, documentName) => ({
@@ -298,16 +333,25 @@ describe('migration-runner.js', function () {
         collection: `${packageType}.${documentName}`,
         locked: true,
         configure: async (config) => configured.push(config),
-        getDocuments: async () => [new FakeDocument({ _id: 'p1', img: LEGACY })],
+        getDocuments: async () => [new FakeDocument({ _id: 'p1', img: LEGACY }, { results: [] })],
         documentClass: { updateDocuments: record(`${packageType}.${documentName}`) },
       });
-      setGlobals({ packs: [pack('world', 'Macro'), pack('system', 'Macro'), pack('world', 'Playlist')] });
+      setGlobals({
+        packs: [
+          pack('world', 'Macro'),
+          pack('system', 'Macro'),
+          pack('world', 'Playlist'),
+          pack('world', 'RollTable'),
+          pack('system', 'RollTable'),
+        ],
+      });
 
       await run();
 
-      expect(updates.map(({ target }) => target)).to.eql(['world.Macro']);
+      expect(updates.map(({ target }) => target)).to.eql(['world.Macro', 'world.RollTable']);
       expect(updates[0].options.pack).to.be('world.Macro');
-      expect(configured).to.eql([{ locked: false }, { locked: true }]);
+      expect(updates[1].options.pack).to.be('world.RollTable');
+      expect(configured).to.eql([{ locked: false }, { locked: true }, { locked: false }, { locked: true }]);
     });
 
     it('Should keep the version when a document fails, so the migration runs again', async function () {
