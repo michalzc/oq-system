@@ -66,21 +66,21 @@ export class OQSpell extends OQBaseItem {
     const minimalCost = variant ? 1 : magnitude;
     if (magicPoints < minimalCost) return warn('OQ.Warnings.NotEnoughMagicPoints');
 
+    const maxMagnitude = variant ? Math.min(magnitude, magicPoints) : magnitude;
     const castOptions = skipDialog
-      ? { magnitude }
-      : await promptSpellCast({
-          ...rollData,
-          rollable: true,
-          variant,
-          maxMagnitude: variant ? Math.min(magnitude, magicPoints) : magnitude,
-        });
+      ? { magnitude: maxMagnitude }
+      : await promptSpellCast({ ...rollData, rollable: true, variant, maxMagnitude });
     if (!castOptions) return;
-    if (castOptions.magnitude > magicPoints) return warn('OQ.Warnings.NotEnoughMagicPoints');
+    // MP can change while the dialog is open, so the cast is checked and paid from the current balance.
+    if (castOptions.magnitude > this.parent.system.attributes.mp.value) {
+      return warn('OQ.Warnings.NotEnoughMagicPoints');
+    }
 
     const castRollData = { ...rollData, ...castOptions };
     const testRollResult = await evaluateTestRoll(castRollData);
     const mpSpent = spellCastingCost(testRollResult.rollResult, castOptions.magnitude);
-    await this.parent.update({ 'system.attributes.mp.value': Math.max(0, magicPoints - mpSpent) });
+    const currentMagicPoints = this.parent.system.attributes.mp.value;
+    await this.parent.update({ 'system.attributes.mp.value': Math.max(0, currentMagicPoints - mpSpent) });
     await postTestRoll(castRollData, testRollResult, { rollable: true, mpSpent });
   }
 
@@ -96,8 +96,15 @@ export class OQSpell extends OQBaseItem {
       ? { magnitude: remaining }
       : await promptSpellCast({ ...rollData, rollable: false, variant, maxMagnitude: remaining });
     if (!castOptions) return;
+    // The spell can be cast or regained while the dialog is open, so the cast uses its current remaining magnitude.
+    if (this.expended) return warn('OQ.Warnings.SpellExpended');
+    const currentRemaining = variant ? this.system.remainingMagnitude : maxMagnitude;
+    if (castOptions.magnitude > currentRemaining) {
+      ui.notifications.warn(game.i18n.format('OQ.Warnings.InvalidMagnitude', { max: currentRemaining }));
+      return;
+    }
 
-    const remainingMagnitude = inRangeValue(0, remaining, remaining - castOptions.magnitude);
+    const remainingMagnitude = currentRemaining - castOptions.magnitude;
     await this.castDivineSpell(remainingMagnitude);
 
     const content = await renderTemplate(SpellCastTemplate, {

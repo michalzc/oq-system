@@ -39,29 +39,35 @@ function embeddedCollections(documentName, document) {
 
 /**
  * @typedef {object} MigrationPlan The changes of the pending migrations, applied in memory and waiting to be written.
- * @property {{migration: import('./migrations.js').Migration, writes: PendingWrite[]}[]} steps
- * @property {number} failed
+ * @property {MigrationStep[]} steps
+ */
+
+/**
+ * @typedef {object} MigrationStep A migration applied in memory, with the writes that store its changes.
+ * @property {import('./migrations.js').Migration} migration
+ * @property {PendingWrite[]} writes
+ * @property {number} failed The documents the migration failed for in memory
  */
 
 /**
  * @typedef {object} PendingWrite
  * @property {string} documentName
- * @property {function(object[], object): Promise} update Writes a batch of changes, each with the `_id` of its
- *   document. Foundry assigns `parent` and `pack` to the operation it is given, so each call gets new options.
+ * @property {function(object[], object): Promise<foundry.abstract.Document[]>} update Writes a batch of changes,
+ *   each with the `_id` of its document, and returns the documents that were saved. Foundry assigns `parent` and `pack`
+ *   to the operation it is given, so each call gets new options.
  * @property {object[]} changes
  */
 
 /**
  * Applies a migration to the documents in memory, then to their embedded documents, and collects the writes that store
- * the changes. A failing document is logged and counted, and the remaining ones are still migrated.
- * @param {import('./migrations.js').Migration} migration
+ * the changes in the step. A failing document is logged and counted, and the remaining ones are still migrated.
+ * @param {MigrationStep} step
  * @param {string} documentName
  * @param {Iterable<foundry.abstract.Document>} documents
  * @param {PendingWrite['update']} update
- * @param {PendingWrite[]} writes
- * @param {MigrationPlan} plan
  */
-function applyToDocuments(migration, documentName, documents, update, writes, plan) {
+function applyToDocuments(step, documentName, documents, update) {
+  const { migration } = step;
   const migrate = migration.handlers[documentName];
   if (migrate) {
     const changes = [];
@@ -75,17 +81,17 @@ function applyToDocuments(migration, documentName, documents, update, writes, pl
         changes.push({ _id: document.id, ...documentChanges });
       } catch (error) {
         logError(`Migration ${migration.version} failed for ${document.uuid}`, error);
-        plan.failed += 1;
+        step.failed += 1;
       }
     }
-    if (changes.length) writes.push({ documentName, update, changes });
+    if (changes.length) step.writes.push({ documentName, update, changes });
   }
 
   for (const document of documents) {
     for (const embedded of embeddedCollections(documentName, document)) {
       const updateEmbedded = (batch, options) =>
         embedded.parent.updateEmbeddedDocuments(embedded.documentName, batch, options);
-      applyToDocuments(migration, embedded.documentName, embedded.documents, updateEmbedded, writes, plan);
+      applyToDocuments(step, embedded.documentName, embedded.documents, updateEmbedded);
     }
   }
 }
@@ -100,12 +106,22 @@ async function storeWrites(migration, writes) {
   const report = { migrated: 0, failed: 0 };
   for (const { documentName, update, changes } of writes) {
     for (const batch of _.chunk(changes, BATCH_SIZE)) {
+      let documents;
       try {
-        await update(batch, { diff: false });
-        report.migrated += batch.length;
+        documents = await update(batch, { diff: false });
       } catch (error) {
         logError(`Migration ${migration.version} failed to update ${documentName} documents`, batch, error);
         report.failed += batch.length;
+        continue;
+      }
+      // Validation and hooks can omit updates without rejecting the operation. A result that isn't an array, from a
+      // wrapper breaking the update contract, can't show which were omitted, so the whole batch counts as saved.
+      const requestedIds = batch.map(({ _id }) => _id);
+      const omittedIds = Array.isArray(documents) ? _.difference(requestedIds, _.map(documents, 'id')) : [];
+      report.migrated += batch.length - omittedIds.length;
+      report.failed += omittedIds.length;
+      if (omittedIds.length) {
+        logError(`Migration ${migration.version} omitted updates for ${documentName} documents`, omittedIds);
       }
     }
   }
@@ -119,11 +135,10 @@ async function migratePack(migration, pack) {
   try {
     const documents = await pack.getDocuments();
     const update = (batch, options) => pack.documentClass.updateDocuments(batch, { ...options, pack: pack.collection });
-    const plan = { failed: 0 };
-    const writes = [];
-    applyToDocuments(migration, pack.documentName, documents, update, writes, plan);
-    const report = await storeWrites(migration, writes);
-    return { migrated: report.migrated, failed: report.failed + plan.failed };
+    const step = { migration, writes: [], failed: 0 };
+    applyToDocuments(step, pack.documentName, documents, update);
+    const report = await storeWrites(migration, step.writes);
+    return { migrated: report.migrated, failed: report.failed + step.failed };
   } finally {
     if (locked) await pack.configure({ locked: true });
   }
@@ -162,21 +177,42 @@ export function applyPendingMigrations() {
   const migrations = pendingMigrations(currentVersion);
   if (!migrations.length) return;
 
-  const plan = { steps: [], failed: 0 };
+  const plan = { steps: [] };
   for (const migration of migrations) {
-    const writes = [];
+    const step = { migration, writes: [], failed: 0 };
     for (const collection of WORLD_COLLECTIONS.map((name) => game[name])) {
       const update = (batch, options) => collection.documentClass.updateDocuments(batch, options);
-      applyToDocuments(migration, collection.documentName, collection, update, writes, plan);
+      applyToDocuments(step, collection.documentName, collection, update);
     }
-    plan.steps.push({ migration, writes });
+    plan.steps.push(step);
   }
   pendingPlan = plan;
 }
 
 /**
+ * Asks the GM whether to skip the documents a migration failed for, or to retry the migration on the next load.
+ * @param {import('./migrations.js').Migration} migration
+ * @param {number} count
+ * @returns {Promise<boolean>} true to skip, false to retry, also when the dialog is closed
+ */
+async function confirmSkipFailed(migration, count) {
+  const prompt = game.i18n.format('OQ.Migration.SkipPrompt', { version: migration.version, count });
+  const result = await foundry.applications.api.DialogV2.wait({
+    window: { title: 'OQ.Migration.SkipTitle' },
+    content: `<p>${prompt}</p>`,
+    modal: true,
+    buttons: [
+      { action: 'retry', label: 'OQ.Migration.Retry', icon: 'fas fa-rotate-right', default: true },
+      { action: 'skip', label: 'OQ.Migration.Skip', icon: 'fas fa-forward' },
+    ],
+  });
+  return result === 'skip';
+}
+
+/**
  * Stores the migrations applied by {@link applyPendingMigrations} and migrates the world compendia, storing the version
- * of each migration once applied without failures. Runs on the active GM's client only.
+ * of each migration once applied. When a migration fails for some documents, the GM chooses whether to retry it on the
+ * next load or to skip those documents. Runs on the active GM's client only.
  */
 export async function migrateWorld() {
   if (!game.users.activeGM?.isSelf) return;
@@ -191,23 +227,33 @@ export async function migrateWorld() {
   if (!pendingPlan?.steps.length) return;
 
   const notification = ui.notifications.warn('OQ.Migration.Begin', { localize: true, permanent: true });
-  const report = { migrated: 0, failed: pendingPlan.failed };
-  for (const { migration, writes } of pendingPlan.steps) {
+  let failed = 0;
+  let skipped = 0;
+  for (const { migration, writes, failed: failedInMemory } of pendingPlan.steps) {
     log(`Applying migration ${migration.version}: ${migration.name}`);
-    const worldReport = await storeWrites(migration, writes);
-    report.migrated += worldReport.migrated;
-    report.failed += worldReport.failed;
+    const report = await storeWrites(migration, writes);
+    report.failed += failedInMemory;
     await migratePacks(migration, report);
-    // A failed migration is retried on the next load, and later migrations wait for it: they may rely on its changes.
-    if (report.failed) break;
+    if (report.failed) {
+      // A failed migration is retried on the next load, and later migrations wait for it: they may rely on its changes.
+      // Failures that come back on every load would block them for good, so the GM can skip the documents instead.
+      if (!(await confirmSkipFailed(migration, report.failed))) {
+        failed = report.failed;
+        break;
+      }
+      log(`Migration ${migration.version} skipped ${report.failed} documents`);
+      skipped += report.failed;
+    }
     await game.settings.set(CONFIG.OQ.SYSTEM_ID, CONFIG.OQ.SettingsConfig.keys.migrationVersion, migration.version);
     log(`Applied migration ${migration.version}`, report);
   }
   pendingPlan = null;
 
   ui.notifications.remove(notification);
-  if (report.failed) {
-    ui.notifications.error(game.i18n.format('OQ.Migration.Failed', { count: report.failed }), { permanent: true });
+  if (failed) {
+    ui.notifications.error(game.i18n.format('OQ.Migration.Failed', { count: failed }), { permanent: true });
+  } else if (skipped) {
+    ui.notifications.warn(game.i18n.format('OQ.Migration.CompleteSkipped', { count: skipped }), { permanent: true });
   } else {
     ui.notifications.info('OQ.Migration.Complete', { localize: true });
   }

@@ -118,6 +118,9 @@ describe('migration-runner.js', function () {
     let storedVersion;
     let updates;
     let notifications;
+    let dialogs;
+    // The GM's answer to the failed migration dialog, null when it is closed.
+    let dialogAnswer;
 
     // Foundry writes the parent into the operation it is given, which must not leak into the next update. The changes
     // are already applied in memory, so they must be sent without diffing.
@@ -128,7 +131,7 @@ describe('migration-runner.js', function () {
         expect(options.diff).to.be(false);
         options.parent = target;
         updates.push({ target, batch, options });
-        return batch;
+        return batch.map((source) => new FakeDocument(source));
       };
     const recordEmbedded =
       (target) =>
@@ -136,6 +139,7 @@ describe('migration-runner.js', function () {
         expect(options.diff).to.be(false);
         options.parent = target;
         updates.push({ target: `${target}.${name}`, batch });
+        return batch.map((source) => new FakeDocument(source));
       };
 
     const run = async () => {
@@ -171,7 +175,19 @@ describe('migration-runner.js', function () {
 
     function setGlobals({ isGM = true, documents = {}, packs = [] } = {}) {
       globalThis.CONFIG = { OQ: { SYSTEM_ID: 'oq', SettingsConfig } };
-      globalThis.foundry = { data: { operators: { ForcedReplacement: { create: (value) => ({ replaced: value }) } } } };
+      globalThis.foundry = {
+        data: { operators: { ForcedReplacement: { create: (value) => ({ replaced: value }) } } },
+        applications: {
+          api: {
+            DialogV2: {
+              wait: async (config) => {
+                dialogs.push(config);
+                return dialogAnswer;
+              },
+            },
+          },
+        },
+      };
       globalThis.ui = {
         notifications: {
           warn: (message) => notifications.push(['warn', message]) && message,
@@ -214,6 +230,8 @@ describe('migration-runner.js', function () {
       storedVersion = 0;
       updates = [];
       notifications = [];
+      dialogs = [];
+      dialogAnswer = null;
     });
 
     it('Should migrate world documents with their embedded documents and store the version', async function () {
@@ -304,8 +322,261 @@ describe('migration-runner.js', function () {
       await run();
 
       expect(updates.map(({ target }) => target)).to.eql(['Item']);
+      expect(dialogs.map(({ content }) => content)).to.eql(['<p>OQ.Migration.SkipPrompt {"version":1,"count":1}</p>']);
       expect(storedVersion).to.be(0);
       expect(notifications.at(-1)[0]).to.be('error');
+    });
+
+    it('Should keep the version when the GM chooses to retry', async function () {
+      setGlobals({ documents: { macros: [new FakeDocument({ _id: 'm1', img: LEGACY })] } });
+      game.macros.documentClass.updateDocuments = async () => [];
+      dialogAnswer = 'retry';
+
+      await run();
+
+      expect(dialogs.length).to.be(1);
+      expect(storedVersion).to.be(0);
+      expect(notifications.at(-1)).to.eql(['error', 'OQ.Migration.Failed {"count":1}']);
+    });
+
+    it('Should store the version and warn when the GM skips the failed documents', async function () {
+      setGlobals({ documents: { macros: [new FakeDocument({ _id: 'm1', img: LEGACY })] } });
+      game.macros.documentClass.updateDocuments = async () => [];
+      dialogAnswer = 'skip';
+
+      await run();
+
+      expect(dialogs.length).to.be(1);
+      expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+      expect(notifications).to.eql([
+        ['warn', 'OQ.Migration.Begin'],
+        ['remove', 'OQ.Migration.Begin'],
+        ['warn', 'OQ.Migration.CompleteSkipped {"count":1}'],
+      ]);
+    });
+
+    describe('with a later migration', function () {
+      let later;
+
+      beforeEach(function () {
+        later = {
+          version: LATEST_MIGRATION_VERSION + 1,
+          name: 'Rename',
+          handlers: { Macro: (source) => (source.name === 'old' ? { name: 'new' } : {}) },
+        };
+        migrations.push(later);
+      });
+
+      afterEach(function () {
+        migrations.pop();
+      });
+
+      it('Should run the later migration after the GM skips the failed documents', async function () {
+        setGlobals({ documents: { macros: [new FakeDocument({ _id: 'm1', img: LEGACY, name: 'old' })] } });
+        const update = game.macros.documentClass.updateDocuments;
+        game.macros.documentClass.updateDocuments = async (batch, options) =>
+          batch[0].img ? [] : update(batch, options);
+        dialogAnswer = 'skip';
+
+        await run();
+
+        expect(dialogs.length).to.be(1);
+        expect(updates.map(({ batch }) => batch)).to.eql([[{ _id: 'm1', name: 'new' }]]);
+        expect(storedVersion).to.be(later.version);
+        expect(notifications.at(-1)).to.eql(['warn', 'OQ.Migration.CompleteSkipped {"count":1}']);
+      });
+
+      it('Should store the earlier migration when only the later one fails', async function () {
+        const macros = ['m1', 'm2'].map((_id) => new FakeDocument({ _id, img: LEGACY }));
+        setGlobals({ documents: { macros } });
+        later.handlers.Macro = () => {
+          throw new Error('invalid');
+        };
+
+        await run();
+
+        expect(updates.map(({ batch }) => batch)).to.eql([
+          [
+            { _id: 'm1', img: THEMED },
+            { _id: 'm2', img: THEMED },
+          ],
+        ]);
+        expect(dialogs.map(({ content }) => content)).to.eql([
+          `<p>OQ.Migration.SkipPrompt {"version":${later.version},"count":2}</p>`,
+        ]);
+        expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+        expect(notifications.at(-1)).to.eql(['error', 'OQ.Migration.Failed {"count":2}']);
+      });
+    });
+
+    it('Should fail every requested document when an update returns no documents', async function () {
+      setGlobals({ documents: { macros: [new FakeDocument({ _id: 'm1', img: LEGACY })] } });
+      game.macros.documentClass.updateDocuments = async () => [];
+
+      await run();
+
+      expect(storedVersion).to.be(0);
+      expect(notifications).to.eql([
+        ['warn', 'OQ.Migration.Begin'],
+        ['remove', 'OQ.Migration.Begin'],
+        ['error', 'OQ.Migration.Failed {"count":1}'],
+      ]);
+    });
+
+    it('Should count partial updates as failures and continue later batches and collections', async function () {
+      const items = Array.from(
+        { length: 101 },
+        (_, index) => new FakeDocument({ _id: `i${index}`, type: 'armour', img: LEGACY }),
+      );
+      setGlobals({ documents: { items, macros: [new FakeDocument({ _id: 'm1', img: LEGACY })] } });
+      const update = game.items.documentClass.updateDocuments;
+      game.items.documentClass.updateDocuments = async (batch, options) => {
+        const documents = await update(batch, options);
+        return documents.filter((document) => document.id !== 'i0' && document.id !== 'i1');
+      };
+
+      await run();
+
+      expect(updates.map(({ target, batch }) => [target, batch.length])).to.eql([
+        ['Item', 100],
+        ['Item', 1],
+        ['Macro', 1],
+      ]);
+      expect(storedVersion).to.be(0);
+      expect(notifications.at(-1)).to.eql(['error', 'OQ.Migration.Failed {"count":2}']);
+    });
+
+    it('Should count a batch as saved when its update does not return an array', async function () {
+      setGlobals({ documents: { macros: [new FakeDocument({ _id: 'm1', img: LEGACY })] } });
+      const update = game.macros.documentClass.updateDocuments;
+      game.macros.documentClass.updateDocuments = async (batch, options) => {
+        await update(batch, options);
+      };
+
+      await run();
+
+      expect(updates.length).to.be(1);
+      expect(dialogs).to.eql([]);
+      expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+      expect(notifications.at(-1)).to.eql(['info', 'OQ.Migration.Complete']);
+    });
+
+    it('Should accept all requested document IDs returned in a different order', async function () {
+      const macros = ['m1', 'm2'].map((_id) => new FakeDocument({ _id, img: LEGACY }));
+      setGlobals({ documents: { macros } });
+      const update = game.macros.documentClass.updateDocuments;
+      game.macros.documentClass.updateDocuments = async (batch, options) => (await update(batch, options)).reverse();
+
+      await run();
+
+      expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+      expect(notifications.at(-1)).to.eql(['info', 'OQ.Migration.Complete']);
+    });
+
+    it('Should not let duplicate or unrelated returned IDs mask omitted documents', async function () {
+      const macros = ['m1', 'm2', 'm3'].map((_id) => new FakeDocument({ _id, img: LEGACY }));
+      setGlobals({ documents: { macros } });
+      game.macros.documentClass.updateDocuments = async () => [
+        macros[0],
+        macros[0],
+        new FakeDocument({ _id: 'other' }),
+      ];
+
+      await run();
+
+      expect(storedVersion).to.be(0);
+      expect(notifications.at(-1)).to.eql(['error', 'OQ.Migration.Failed {"count":2}']);
+    });
+
+    it('Should keep the version when an embedded update omits a document', async function () {
+      const actor = new FakeDocument(
+        { _id: 'a1', img: THEMED },
+        {
+          items: [new FakeDocument({ _id: 'i1', type: 'armour', img: LEGACY })],
+          updateEmbeddedDocuments: async () => [],
+        },
+      );
+      setGlobals({ documents: { actors: [actor] } });
+
+      await run();
+
+      expect(storedVersion).to.be(0);
+      expect(notifications.at(-1)).to.eql(['error', 'OQ.Migration.Failed {"count":1}']);
+    });
+
+    it('Should restore the compendium lock and keep the version when its update omits a document', async function () {
+      const configured = [];
+      const pack = {
+        metadata: { packageType: 'world' },
+        documentName: 'Macro',
+        collection: 'world.macros',
+        locked: true,
+        configure: async (config) => configured.push(config),
+        getDocuments: async () => [new FakeDocument({ _id: 'p1', img: LEGACY })],
+        documentClass: { updateDocuments: async () => [] },
+      };
+      setGlobals({ packs: [pack] });
+
+      await run();
+
+      expect(configured).to.eql([{ locked: false }, { locked: true }]);
+      expect(storedVersion).to.be(0);
+      expect(notifications.at(-1)).to.eql(['error', 'OQ.Migration.Failed {"count":1}']);
+    });
+
+    it('Should count a rejected batch as failed and continue other collections', async function () {
+      const items = ['i1', 'i2'].map((_id) => new FakeDocument({ _id, type: 'armour', img: LEGACY }));
+      setGlobals({ documents: { items, macros: [new FakeDocument({ _id: 'm1', img: LEGACY })] } });
+      game.items.documentClass.updateDocuments = async () => {
+        throw new Error('write failed');
+      };
+
+      await run();
+
+      expect(updates.map(({ target }) => target)).to.eql(['Macro']);
+      expect(storedVersion).to.be(0);
+      expect(notifications.at(-1)).to.eql(['error', 'OQ.Migration.Failed {"count":2}']);
+    });
+
+    it('Should retry only unsaved changes after reloading persisted documents', async function () {
+      const persisted = ['m1', 'm2'].map((_id) => ({ _id, img: LEGACY }));
+      const load = (skipId) => {
+        const macros = persisted.map((source) => new FakeDocument(structuredClone(source)));
+        setGlobals({ documents: { macros } });
+        const update = game.macros.documentClass.updateDocuments;
+        game.macros.documentClass.updateDocuments = async (batch, options) => {
+          const documents = await update(batch, options);
+          const saved = documents.filter((document) => document.id !== skipId);
+          for (const document of saved) {
+            _.merge(
+              persisted.find((source) => source._id === document.id),
+              document.toObject(),
+            );
+          }
+          return saved;
+        };
+        return macros;
+      };
+      const firstLoad = load('m2');
+
+      await run();
+
+      expect(firstLoad.map((document) => document.source.img)).to.eql([THEMED, THEMED]);
+      expect(persisted.map((source) => source.img)).to.eql([THEMED, LEGACY]);
+      expect(storedVersion).to.be(0);
+      expect(notifications.at(-1)).to.eql(['error', 'OQ.Migration.Failed {"count":1}']);
+
+      const secondLoad = load();
+      expect(secondLoad.map((document) => document.source.img)).to.eql([THEMED, LEGACY]);
+      updates = [];
+      notifications = [];
+
+      await run();
+
+      expect(updates.map(({ batch }) => batch)).to.eql([[{ _id: 'm2', img: THEMED }]]);
+      expect(persisted.map((source) => source.img)).to.eql([THEMED, THEMED]);
+      expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+      expect(notifications.at(-1)).to.eql(['info', 'OQ.Migration.Complete']);
     });
 
     it('Should apply the changes in memory before the world is stored', function () {
