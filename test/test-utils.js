@@ -53,6 +53,16 @@ describe('utils.js', function () {
       );
     });
 
+    it('Should move every legacy system icon in HTML content', function () {
+      const html =
+        '<img src="systems/oq/assets/icons/skills.svg"><img src="systems/oq/assets/icons/cultist.svg">' +
+        '<img src="systems/oq/assets/icons/ink-swirl.svg">';
+      expect(themedIconPath(html)).to.be(
+        '<img src="systems/oq/assets/icons/themed/skills.svg"><img src="systems/oq/assets/icons/cultist.svg">' +
+          '<img src="systems/oq/assets/icons/themed/ink-swirl.svg">',
+      );
+    });
+
     it('Should leave other images untouched', function () {
       expect(themedIconPath('icons/svg/mystery-man.svg')).to.be('icons/svg/mystery-man.svg');
       expect(themedIconPath('worlds/test/assets/icons/skills.svg')).to.be('worlds/test/assets/icons/skills.svg');

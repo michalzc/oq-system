@@ -1,10 +1,9 @@
 import { handleDamageRollChatMessage } from '../chat-handlers/updates-from-chat.js';
 import { onHotbarDrop } from '../utils/item-macro.js';
-import { themedIconPath } from '../utils/utils.js';
 
 export function registerCustomHookHandlers() {
   Hooks.on('renderChatMessageHTML', handleDamageRollChatMessage);
-  Hooks.on('renderChatMessageHTML', styleChatMessage);
+  Hooks.on('renderChatMessageHTML', markNpcMessage);
   Hooks.on('hotbarDrop', onHotbarDrop);
   const renderDeclarations = foundry.utils.debounce(() => {
     if (ui.combat?.viewed?.isDeclaration) ui.combat.render();
@@ -41,12 +40,7 @@ function relatedActor(doc) {
   return doc?.parent ? relatedActor(doc.parent) : null;
 }
 
-/** Gives NPC messages their palette and points images baked into older messages at the moved system icons. */
-function styleChatMessage(message, html) {
+/** Gives messages spoken by NPCs their own palette. */
+function markNpcMessage(message, html) {
   html.classList.toggle('oq-npc', message.speakerActor?.type === 'npc');
-  for (const img of html.querySelectorAll('img[src]')) {
-    const src = img.getAttribute('src');
-    const themedSrc = themedIconPath(src);
-    if (themedSrc !== src) img.setAttribute('src', themedSrc);
-  }
 }
