@@ -2,13 +2,32 @@ import { OQBaseItem } from './base-item.js';
 import _ from 'lodash-es';
 import { inRangeValue, renderTemplate } from '../../utils/utils.js';
 import { evaluateTestRoll, postTestRoll } from '../../utils/roll.js';
-import { isInSpellGroup, spellCastingCost } from '../../utils/magic.js';
+import {
+  isInSpellGroup,
+  maxAffordableMagnitude,
+  sorceryMaxMagnitude,
+  spellCastingCost,
+  spellMagicPointCost,
+} from '../../utils/magic.js';
 import { createChatMessage } from '../../utils/chat.js';
 import { promptSpellCast } from '../../application/spell-cast-dialog.js';
 
 const SpellCastTemplate = 'systems/oq/templates/chat/parts/spell-cast.hbs';
 
 export class OQSpell extends OQBaseItem {
+  /**
+   * A variable sorcery spell added to an actor gets the highest magnitude the actor's casting skill allows, see the
+   * SRD Manipulation table. Without the casting skill the magnitude is kept.
+   */
+  async _preCreate(data, options, user) {
+    if ((await super._preCreate(data, options, user)) === false) return false;
+
+    const { type, nonVariant, noMagicPoints } = this.system;
+    if (type !== CONFIG.OQ.ItemConfig.spellsTypes.sorcery || nonVariant || noMagicPoints) return;
+    const skill = this.actor && this.castingSkill;
+    if (skill) this.updateSource({ 'system.magnitude': sorceryMaxMagnitude(skill.getRollValues().value) });
+  }
+
   getItemDataForChat() {
     const context = super.getItemDataForChat();
     return { ...context, traits: [...this.getTraits()], itemSubtypeLabel: this.typeLabel };
@@ -63,22 +82,23 @@ export class OQSpell extends OQBaseItem {
     const magnitude = this.castingMagnitude;
     const magicPoints = this.parent.system.attributes.mp.value;
     const variant = !this.system.nonVariant;
-    const minimalCost = variant ? 1 : magnitude;
+    const minimalCost = this.magicPointCost(variant ? 1 : magnitude);
     if (magicPoints < minimalCost) return warn('OQ.Warnings.NotEnoughMagicPoints');
 
-    const maxMagnitude = variant ? Math.min(magnitude, magicPoints) : magnitude;
+    const maxMagnitude = variant ? maxAffordableMagnitude(this.system.type, magnitude, magicPoints) : magnitude;
     const castOptions = skipDialog
       ? { magnitude: maxMagnitude }
       : await promptSpellCast({ ...rollData, rollable: true, variant, maxMagnitude });
     if (!castOptions) return;
     // MP can change while the dialog is open, so the cast is checked and paid from the current balance.
-    if (castOptions.magnitude > this.parent.system.attributes.mp.value) {
+    const fullCost = this.magicPointCost(castOptions.magnitude);
+    if (fullCost > this.parent.system.attributes.mp.value) {
       return warn('OQ.Warnings.NotEnoughMagicPoints');
     }
 
     const castRollData = { ...rollData, ...castOptions };
     const testRollResult = await evaluateTestRoll(castRollData);
-    const mpSpent = spellCastingCost(testRollResult.rollResult, castOptions.magnitude);
+    const mpSpent = spellCastingCost(testRollResult.rollResult, fullCost);
     const currentMagicPoints = this.parent.system.attributes.mp.value;
     await this.parent.update({ 'system.attributes.mp.value': Math.max(0, currentMagicPoints - mpSpent) });
     await postTestRoll(castRollData, testRollResult, { rollable: true, mpSpent });
@@ -123,6 +143,15 @@ export class OQSpell extends OQBaseItem {
    */
   get castingMagnitude() {
     return Math.max(1, this.system.magnitude ?? 0);
+  }
+
+  /**
+   * The full magic point cost of casting the spell at the given magnitude.
+   * @param {number} magnitude
+   * @returns {number}
+   */
+  magicPointCost(magnitude) {
+    return spellMagicPointCost(this.system.type, magnitude);
   }
 
   getTraits() {

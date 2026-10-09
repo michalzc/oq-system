@@ -1,10 +1,13 @@
 import { themedIconsMigration } from './migration-1-themed-icons.js';
+import { embeddedNewActorFlagMigration } from './migration-2-embedded-new-actor-flag.js';
 
 /**
  * @callback MigrationHandler
  * @param {object} source The document source, from `toObject()`.
- * @param {{replace: function(*): *}} helpers `replace` wraps a value so it replaces the stored one instead of being
- *   merged into it, which drops keys the data models no longer define.
+ * @param {{replace: function(*): *, remove: function(): *, parent: foundry.abstract.Document|null}} helpers
+ *   `replace` wraps a value so it replaces the stored one instead of being merged into it, which drops keys the data
+ *   models no longer define. `remove()` is a value that deletes the key it is assigned to. `parent` is the document the
+ *   migrated one is embedded in, null for world and compendium documents.
  * @returns {object} The changes to write, empty when the document is up to date.
  */
 
@@ -20,7 +23,7 @@ import { themedIconsMigration } from './migration-1-themed-icons.js';
  * with the next version.
  * @type {Migration[]}
  */
-export const migrations = [themedIconsMigration];
+export const migrations = [themedIconsMigration, embeddedNewActorFlagMigration];
 
 export const LATEST_MIGRATION_VERSION = Math.max(0, ...migrations.map((migration) => migration.version));
 

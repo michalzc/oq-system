@@ -55,7 +55,7 @@ describe('compendium-utils.js', function () {
         packs: { get: (id) => (id === PACK_ID ? pack : undefined) },
         items: {
           filter: (predicate) => worldItems.filter(predicate),
-          fromCompendium: (item) => ({ name: item.name }),
+          fromCompendium: (item) => ({ name: item.name, flags: structuredClone(item.flags) }),
         },
       };
     });
@@ -82,6 +82,15 @@ describe('compendium-utils.js', function () {
       settings[SettingsConfig.keys.defaultItemsFromWorld] = true;
       worldItems.push(worldItem('trade (edited)', ['character'], `Compendium.${PACK_ID}.Item.trade`));
       assert.deepEqual(await names('character'), ['dodge', 'torch', 'trade (edited)']);
+    });
+
+    it('Should clear the default item mark of the copies', async function () {
+      settings[SettingsConfig.keys.defaultItemsFromWorld] = true;
+      const items = await getDefaultItemsForActor('character');
+      assert.deepEqual(
+        items.map((item) => item.flags),
+        [{ oq: {} }, { oq: {} }, { oq: {} }],
+      );
     });
 
     it('Should keep a compendium item when its world copy is not marked for the actor type', async function () {

@@ -1,6 +1,7 @@
 import { ItemConfig } from '../consts/items-config.js';
 import _ from 'lodash-es';
 import { renameLegacyField } from '../utils/utils.js';
+import { newSpellChanges, spellUpdateChanges } from '../utils/magic.js';
 
 const fields = foundry.data.fields;
 
@@ -10,6 +11,11 @@ function commonStringModel(required = false) {
 
 function positiveNumberModel(required = true, initial = 0) {
   return new fields.NumberField({ min: 0, integer: false, required: required, initial: initial });
+}
+
+/** Stored fractions load rounded: core cleans integer fields whenever a document is constructed. */
+function positiveIntegerModel(required = true, initial = 0) {
+  return new fields.NumberField({ min: 0, integer: true, required: required, initial: initial });
 }
 
 function htmlFieldModel() {
@@ -176,8 +182,8 @@ export class SpellDataModel extends OQItemDataModel {
 
   static defineSchema() {
     return {
-      magnitude: positiveNumberModel(),
-      remainingMagnitude: positiveNumberModel(),
+      magnitude: positiveIntegerModel(),
+      remainingMagnitude: positiveIntegerModel(),
       nonVariant: new fields.BooleanField({ required: true, initial: false }),
       noMagicPoints: new fields.BooleanField({ required: true, initial: false }),
       type: new fields.StringField({
@@ -195,6 +201,24 @@ export class SpellDataModel extends OQItemDataModel {
       description: htmlFieldModel(),
       skillReference: new fields.StringField({ required: false, trim: true }),
     };
+  }
+
+  /* override */
+  async _preCreate(data, options, user) {
+    const allowed = await super._preCreate(data, options, user);
+    if (allowed === false) return false;
+
+    const changes = newSpellChanges(data.system ?? {}, this);
+    if (!_.isEmpty(changes)) this.parent.updateSource({ system: changes });
+  }
+
+  /* override */
+  async _preUpdate(changes, options, user) {
+    const allowed = await super._preUpdate(changes, options, user);
+    if (allowed === false) return false;
+
+    const spellChanges = spellUpdateChanges(this, changes.system);
+    if (!_.isEmpty(spellChanges)) changes.system = { ...changes.system, ...spellChanges };
   }
 
   get hasSplitDivineCasting() {

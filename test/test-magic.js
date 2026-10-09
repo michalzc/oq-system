@@ -1,5 +1,14 @@
 import assert from 'assert';
-import { customSpellGroups, isInSpellGroup, spellCastingCost } from '../src/module/utils/magic.js';
+import {
+  customSpellGroups,
+  isInSpellGroup,
+  maxAffordableMagnitude,
+  newSpellChanges,
+  sorceryMaxMagnitude,
+  spellCastingCost,
+  spellMagicPointCost,
+  spellUpdateChanges,
+} from '../src/module/utils/magic.js';
 import { RollConfig } from '../src/module/consts/rolls-config.js';
 
 describe('magic.js', function () {
@@ -91,6 +100,143 @@ describe('magic.js', function () {
         assert.equal(isInSpellGroup(spell('custom', 'Witchcraft'), 'custom', 'Rune Magic'), false);
         assert.equal(isInSpellGroup(spell('custom', undefined), 'custom', ''), true);
         assert.equal(isInSpellGroup(spell('divine'), 'custom', ''), false);
+      });
+    });
+  });
+
+  describe('sorcery manipulation', function () {
+    beforeEach(function () {
+      globalThis.CONFIG = {
+        OQ: { RollConfig, ItemConfig: { spellsTypes: { personal: 'personal', sorcery: 'sorcery' } } },
+      };
+    });
+
+    describe('#sorceryMaxMagnitude()', function () {
+      [
+        [0, 1],
+        [1, 2],
+        [10, 2],
+        [11, 3],
+        [50, 6],
+        [90, 10],
+        [91, 15],
+        [99, 15],
+        [100, 20],
+        [120, 20],
+        [undefined, 1],
+      ].forEach(([skillValue, magnitude]) => {
+        it(`Should allow magnitude ${magnitude} at casting skill ${skillValue}`, function () {
+          assert.equal(sorceryMaxMagnitude(skillValue), magnitude);
+        });
+      });
+    });
+
+    describe('#spellMagicPointCost()', function () {
+      [
+        ['personal', 15, 15],
+        ['sorcery', 1, 1],
+        ['sorcery', 10, 10],
+        ['sorcery', 11, 11],
+        ['sorcery', 15, 11],
+        ['sorcery', 20, 11],
+        ['sorcery', 25, 11],
+      ].forEach(([type, magnitude, cost]) => {
+        it(`Should cost ${cost} MP to cast ${type} magnitude ${magnitude}`, function () {
+          assert.equal(spellMagicPointCost(type, magnitude), cost);
+        });
+      });
+    });
+
+    describe('#maxAffordableMagnitude()', function () {
+      it('Should keep a magnitude the magic points pay for', function () {
+        assert.equal(maxAffordableMagnitude('sorcery', 15, 11), 15);
+        assert.equal(maxAffordableMagnitude('personal', 5, 5), 5);
+      });
+
+      it('Should lower the magnitude to the magic points otherwise', function () {
+        assert.equal(maxAffordableMagnitude('sorcery', 15, 10), 10);
+        assert.equal(maxAffordableMagnitude('personal', 5, 3), 3);
+      });
+    });
+  });
+
+  describe('spell defaults', function () {
+    const system = (values = {}) => ({
+      type: 'personal',
+      magnitude: 3,
+      remainingMagnitude: 0,
+      noMagicPoints: false,
+      ...values,
+    });
+
+    beforeEach(function () {
+      globalThis.CONFIG = {
+        OQ: { RollConfig, ItemConfig: { spellsTypes: { personal: 'personal', divine: 'divine' } } },
+      };
+    });
+
+    describe('#newSpellChanges()', function () {
+      it('Should make a new divine spell need no magic points, with its full magnitude remaining', function () {
+        assert.deepEqual(newSpellChanges({ type: 'divine' }, system({ type: 'divine' })), {
+          noMagicPoints: true,
+          remainingMagnitude: 3,
+        });
+      });
+
+      it('Should keep the values of the creation data', function () {
+        const source = { type: 'divine', noMagicPoints: false };
+        assert.deepEqual(newSpellChanges(source, system({ type: 'divine' })), {});
+        const expended = { type: 'divine', noMagicPoints: true, remainingMagnitude: 0 };
+        assert.deepEqual(newSpellChanges(expended, system({ type: 'divine', noMagicPoints: true })), {});
+      });
+
+      it('Should give any spell with no magic point cost its full magnitude', function () {
+        const source = { noMagicPoints: true };
+        assert.deepEqual(newSpellChanges(source, system({ noMagicPoints: true })), { remainingMagnitude: 3 });
+      });
+
+      it('Should not change other spells', function () {
+        assert.deepEqual(newSpellChanges({}, system()), {});
+      });
+    });
+
+    describe('#spellUpdateChanges()', function () {
+      it('Should make a spell changed to divine need no magic points, with its full magnitude remaining', function () {
+        const changes = { type: 'divine', noMagicPoints: false, magnitude: 3 };
+        assert.deepEqual(spellUpdateChanges(system(), changes), { noMagicPoints: true, remainingMagnitude: 3 });
+      });
+
+      it('Should keep No Magic Points unchecked on a divine spell', function () {
+        const divine = system({ type: 'divine' });
+        assert.deepEqual(spellUpdateChanges(divine, { type: 'divine', noMagicPoints: false, magnitude: 3 }), {});
+      });
+
+      it('Should give a spell switched to No Magic Points its full magnitude', function () {
+        assert.deepEqual(spellUpdateChanges(system(), { noMagicPoints: true, magnitude: 4 }), {
+          remainingMagnitude: 4,
+        });
+      });
+
+      it('Should keep an unspent spell unspent when its magnitude changes', function () {
+        const unspent = system({ noMagicPoints: true, remainingMagnitude: 3 });
+        const changes = { noMagicPoints: true, magnitude: 5, remainingMagnitude: 3 };
+        assert.deepEqual(spellUpdateChanges(unspent, changes), { remainingMagnitude: 5 });
+      });
+
+      it('Should keep no more than the new magnitude of a spent spell', function () {
+        const spent = system({ noMagicPoints: true, magnitude: 5, remainingMagnitude: 4 });
+        assert.deepEqual(spellUpdateChanges(spent, { magnitude: 2 }), { remainingMagnitude: 2 });
+        assert.deepEqual(spellUpdateChanges(spent, { magnitude: 6 }), { remainingMagnitude: 4 });
+      });
+
+      it('Should keep a remaining magnitude edited without a magnitude change', function () {
+        const spell = system({ noMagicPoints: true, remainingMagnitude: 3 });
+        assert.deepEqual(spellUpdateChanges(spell, { magnitude: 3, remainingMagnitude: 1 }), {});
+        assert.deepEqual(spellUpdateChanges(spell, undefined), {});
+      });
+
+      it('Should not change spells that cost magic points', function () {
+        assert.deepEqual(spellUpdateChanges(system(), { type: 'personal', magnitude: 5 }), {});
       });
     });
   });

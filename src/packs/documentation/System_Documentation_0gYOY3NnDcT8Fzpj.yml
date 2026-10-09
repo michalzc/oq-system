@@ -278,10 +278,15 @@ pages:
             <li><strong>Spell Type</strong>: Personal Magic, Divine Magic or Sorcery. Each type has its own icon and its own
                 group on the actor's Magic tab. <em>Custom Type</em> takes a group name of your choice: custom spells are
                 grouped by that name after the other spells, on the Magic tab and in the NPC spell list.</li>
-            <li><strong>Magnitude</strong>.</li>
+            <li><strong>Magnitude</strong>. A variable Sorcery spell added to an actor gets the highest magnitude the
+                actor's casting skill allows, following the <em>Manipulation cost</em> table: magnitude 2 from 1%, one more
+                for every further 10%, 10 from 81%, 15 from 91% and 20 at 100%. The magnitude is kept when the actor doesn't
+                have the casting skill, and it doesn't follow later changes of the skill.</li>
             <li><strong>Non-Variable</strong>: the spell is always cast at its full magnitude.</li>
             <li><strong>No Magic Points</strong>: casting needs no test and no magic points; the magnitude is used up instead.
-                Divine Magic spells in the Spells compendium are set this way.</li>
+                Choosing Divine Magic as the spell type checks it, and so does adding a spell in the Divine Magic group of the
+                actor sheet. A spell gets its full magnitude remaining when the option is checked, and an unspent spell keeps
+                it when the magnitude changes.</li>
             <li><strong>Skill</strong>: the magic skill used to cast the spell.</li>
         </ul>
         <p>Tables referred to by spell descriptions, such as <em>Fear Effects</em> or <em>Illusions</em>, are in the
@@ -291,13 +296,15 @@ pages:
         <p>Click a spell's name on the actor sheet to cast it. Shift-click casts at the highest magnitude without asking.</p>
         <h3>Spells using magic points</h3>
         <p>The cast dialogue shows the casting skill's value, the <strong>Spell Magnitude</strong> (for variable spells,
-            from 1 up to the magnitude or the actor's magic points, whichever is lower), <strong>Difficulty</strong>,
+            from 1 up to the magnitude, or to what the actor's magic points pay for), <strong>Difficulty</strong>,
             <strong>Other Mods</strong> and <strong>Visibility</strong>. The spell needs a casting skill and enough magic
-            points: one for variable spells, the full magnitude for non-variable ones.</p>
+            points: one for variable spells, the full cost for non-variable ones.</p>
+        <p>A spell costs one magic point per point of magnitude. Sorcery follows the <em>Manipulation cost</em> table instead,
+            so any magnitude above 10 costs 11 magic points.</p>
         <p>The casting skill is tested as described on the <em>Rolls</em> page, and magic points are deducted
             automatically:</p>
         <ul>
-            <li>Success or Fumble: the full magnitude.</li>
+            <li>Success or Fumble: the full cost.</li>
             <li>Critical Success or Failure: one magic point.</li>
         </ul>
         <p>The chat card shows the magnitude, skill value, modifiers, the result and the magic points spent.</p>

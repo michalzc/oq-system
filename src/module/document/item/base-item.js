@@ -24,6 +24,18 @@ export class OQBaseItem extends Item {
     }
   }
 
+  /**
+   * `flags.oq.newActor` marks the items copied into new actors, see `getDefaultItemsForActor`. An item added to an actor
+   * drops it, so dragging the item back to the sidebar doesn't create another default item. Default items embedded in
+   * a new actor's creation data skip this hook and are cleared by `getDefaultItemsForActor`.
+   */
+  async _preCreate(data, options, user) {
+    if ((await super._preCreate(data, options, user)) === false) return false;
+    if (this.parent && this.flags?.oq?.newActor !== undefined) {
+      this.updateSource({ flags: { oq: { newActor: new foundry.data.operators.ForcedDeletion() } } });
+    }
+  }
+
   prepareDerivedData() {
     super.prepareDerivedData();
     this.system.rollValues = this.calculateRollValues();

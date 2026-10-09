@@ -23,8 +23,9 @@ function migratePath(changes, path, value) {
 }
 
 /**
- * Icons moved to `assets/icons/themed/` (#152), and the legacy keys of the 0.6.0 field renames are dropped from the
- * database: skill `group` and `customGroupName`, weapon `weaponType` and equipment `consumable`.
+ * Icons moved to `assets/icons/themed/` (#152), also in roll tables and their results, and the legacy keys of the 0.6.0
+ * field renames are dropped from the database: skill `group` and `customGroupName`, weapon `weaponType` and equipment
+ * `consumable`. Paths the migration can't reach find black copies of the icons at the old location.
  */
 export const themedIconsMigration = {
   version: 1,
@@ -50,6 +51,15 @@ export const themedIconsMigration = {
     JournalEntryPage: (source) => {
       const changes = migratePath({}, 'src', source.src);
       return migratePath(changes, 'text.content', source.text?.content);
+    },
+    RollTable: (source) => {
+      const changes = migratePath({}, 'img', source.img);
+      return migratePath(changes, 'description', source.description);
+    },
+    // Core copies the image of an item dropped on a roll table into its result.
+    TableResult: (source) => {
+      const changes = migratePath({}, 'img', source.img);
+      return migratePath(changes, 'description', source.description);
     },
   },
 };
