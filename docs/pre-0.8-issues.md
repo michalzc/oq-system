@@ -38,7 +38,7 @@ atomic transactions for arbitrary external resource edits during persistence.
 
 ## 2. [P2] Migrations can report success without saving every document
 
-Status: open.
+Status: resolved.
 
 Location: [`migration-runner.js:104`](../src/module/migration/migration-runner.js#L104).
 
@@ -59,6 +59,16 @@ Reproduction in a document harness:
 
 Suggested fix: compare returned document IDs with the requested IDs and count
 omitted updates as failures, retaining the previous migration version for retry.
+
+Resolution: each batch now counts only requested IDs returned by Foundry as
+migrated. Omitted IDs are logged and counted as failures, keeping the previous
+migration version and blocking later migration steps. Remaining batches and
+collections still run. The shared check covers world documents, embedded
+documents, and world compendia; compendium locks are restored after omissions.
+Reload retries changes that were not persisted.
+
+Limits: this does not repair worlds whose migration version already advanced
+incorrectly before the fix.
 
 ## 3. [P2] Shift-click rejects affordable variable spells
 
@@ -87,11 +97,16 @@ their current remaining magnitude.
 
 ## Validation
 
-- All 130 tests passed, including 26 new casting regression tests in
-  [`test-spell-casting.js`](../test/test-spell-casting.js).
+- All 138 tests passed, including 26 casting regression tests in
+  [`test-spell-casting.js`](../test/test-spell-casting.js) and eight new migration
+  regression tests in [`test-migrations.js`](../test/test-migrations.js).
 - JavaScript, template, and style lint checks passed.
 - Casting tests exercise the real casting methods with controlled dialogs, dice
   fulfillment, and updates. They cover overlapping casts, resource edits, casting
   costs, shortcut limits, cancellation, failures, and independent token actors.
-- Validation uses document harnesses, not end-to-end browser tests. Finding #2
-  remains open and its migration harness reproduction is unchanged.
+- Migration tests cover empty and partial results, returned ID matching, omitted
+  embedded and compendium updates, lock restoration, rejected batches, and
+  continued processing. The reload test separates persisted and in-memory data
+  and verifies that only unsaved changes are retried before the version advances.
+- Validation uses document harnesses, not end-to-end browser tests. Six new
+  migration tests reproduced finding #2 before the fix and pass with the fix.

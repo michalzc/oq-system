@@ -46,8 +46,9 @@ function embeddedCollections(documentName, document) {
 /**
  * @typedef {object} PendingWrite
  * @property {string} documentName
- * @property {function(object[], object): Promise} update Writes a batch of changes, each with the `_id` of its
- *   document. Foundry assigns `parent` and `pack` to the operation it is given, so each call gets new options.
+ * @property {function(object[], object): Promise<foundry.abstract.Document[]>} update Writes a batch of changes,
+ *   each with the `_id` of its document, and returns the documents that were saved. Foundry assigns `parent` and `pack`
+ *   to the operation it is given, so each call gets new options.
  * @property {object[]} changes
  */
 
@@ -100,12 +101,20 @@ async function storeWrites(migration, writes) {
   const report = { migrated: 0, failed: 0 };
   for (const { documentName, update, changes } of writes) {
     for (const batch of _.chunk(changes, BATCH_SIZE)) {
+      const requestedIds = batch.map(({ _id }) => _id);
       try {
-        await update(batch, { diff: false });
-        report.migrated += batch.length;
+        const documents = await update(batch, { diff: false });
+        // Validation and hooks can omit updates without rejecting the operation.
+        const savedIds = new Set(documents.map((document) => document.id));
+        const omittedIds = requestedIds.filter((id) => !savedIds.has(id));
+        report.migrated += requestedIds.length - omittedIds.length;
+        report.failed += omittedIds.length;
+        if (omittedIds.length) {
+          logError(`Migration ${migration.version} omitted updates for ${documentName} documents`, omittedIds);
+        }
       } catch (error) {
         logError(`Migration ${migration.version} failed to update ${documentName} documents`, batch, error);
-        report.failed += batch.length;
+        report.failed += requestedIds.length;
       }
     }
   }
