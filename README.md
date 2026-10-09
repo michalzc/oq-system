@@ -160,7 +160,9 @@ Version* in the system settings: lowering it applies the newer migrations again 
 rebuilt from `src/packs/`, so update their sources directly.
 
 To add a migration, create a module with a handler per document name (`Actor`, `Item`, `Token`, ...). Each handler
-gets the document source and returns the changes to write, or `{}` when the document is up to date. Append it to
+gets the document source and returns the changes to write, or `{}` when the document is up to date. Its helpers
+include `replace(value)` and `remove()`, which replace or delete a stored value, and `parent`, the document the
+migrated one is embedded in. Append it to
 `migrations` in `migrations.js` with the next version number and add tests to `test/test-migrations.js`. Never edit
 a migration that has been released: worlds that already applied it won't run it again.
 

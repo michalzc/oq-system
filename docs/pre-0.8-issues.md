@@ -259,11 +259,17 @@ documents of an operation, so default items embedded in a new actor's creation d
 `getDefaultItemsForActor`. Items created outside actors keep the mark, including compendium items imported to the
 world, so an imported default item still replaces its compendium original.
 
-Limits: items already embedded in actors keep the flag until they are re-added. Dragging such an item to the sidebar
-still creates a default item.
+Migration 2 ([`migration-2-embedded-new-actor-flag.js`](../src/module/migration/migration-2-embedded-new-actor-flag.js))
+clears the flag from items already in actors: in world actors, in unlinked token deltas and in actors in world
+compendia. World items and compendium items keep it. To tell them apart, the migration runner now passes each handler
+the document the migrated one is embedded in, as `parent`. It also passes a `remove()` helper that deletes a key.
 
-Validation: all 186 tests and the lint checks pass. Two of the new tests fail against the previous code: the hook
-clearing the flag of an item added to an actor, and the default item copies losing it.
+Validation: all 190 tests and the lint checks pass. Three of the new tests fail against the previous code:
+- the hook clearing the flag of an item added to an actor;
+- the default item copies losing it;
+- migration 2 clearing it in an actor and a token delta, but not on a world item.
+
+Not yet checked in a running Foundry: an actor created before this fix, whose items lose the flag after reload as GM.
 
 ## 9. [P3] Sorcery manipulation can't be paid through the cast dialog
 

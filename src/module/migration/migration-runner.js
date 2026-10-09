@@ -12,6 +12,7 @@ const PACK_DOCUMENT_TYPES = ['Actor', 'Item', 'Scene', 'JournalEntry', 'Macro', 
 const BATCH_SIZE = 100;
 
 const replace = (value) => foundry.data.operators.ForcedReplacement.create(value);
+const remove = () => new foundry.data.operators.ForcedDeletion();
 
 /**
  * The embedded collections of a document that are migrated after it, with the document that updates them.
@@ -67,8 +68,9 @@ function embeddedCollections(documentName, document) {
  * @param {string} documentName
  * @param {Iterable<foundry.abstract.Document>} documents
  * @param {PendingWrite['update']} update
+ * @param {foundry.abstract.Document|null} [parent] The document the documents are embedded in
  */
-function applyToDocuments(step, documentName, documents, update) {
+function applyToDocuments(step, documentName, documents, update, parent = null) {
   const { migration } = step;
   const migrate = migration.handlers[documentName];
   if (migrate) {
@@ -76,10 +78,10 @@ function applyToDocuments(step, documentName, documents, update) {
     for (const document of documents) {
       try {
         const source = document.toObject();
-        const documentChanges = migrate(source, { replace });
+        const documentChanges = migrate(source, { replace, remove, parent });
         if (_.isEmpty(documentChanges)) continue;
         // Handlers are pure, so the source update gets its own copy of the changes, operators included.
-        document.updateSource(migrate(source, { replace }));
+        document.updateSource(migrate(source, { replace, remove, parent }));
         changes.push({ _id: document.id, ...documentChanges });
       } catch (error) {
         logError(`Migration ${migration.version} failed for ${document.uuid}`, error);
@@ -93,7 +95,7 @@ function applyToDocuments(step, documentName, documents, update) {
     for (const embedded of embeddedCollections(documentName, document)) {
       const updateEmbedded = (batch, options) =>
         embedded.parent.updateEmbeddedDocuments(embedded.documentName, batch, options);
-      applyToDocuments(step, embedded.documentName, embedded.documents, updateEmbedded);
+      applyToDocuments(step, embedded.documentName, embedded.documents, updateEmbedded, embedded.parent);
     }
   }
 }

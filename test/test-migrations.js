@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import expect from 'expect.js';
 import _ from 'lodash-es';
 import { themedIconPath, themedIconsMigration } from '../src/module/migration/migration-1-themed-icons.js';
+import { embeddedNewActorFlagMigration } from '../src/module/migration/migration-2-embedded-new-actor-flag.js';
 import { LATEST_MIGRATION_VERSION, migrations, pendingMigrations } from '../src/module/migration/migrations.js';
 import { applyPendingMigrations, migrateWorld } from '../src/module/migration/migration-runner.js';
 import { SettingsConfig } from '../src/module/consts/settings-config.js';
@@ -123,6 +124,25 @@ describe('migration-1-themed-icons.js', function () {
   });
 });
 
+describe('migration-2-embedded-new-actor-flag.js', function () {
+  const { Item } = embeddedNewActorFlagMigration.handlers;
+  const remove = () => 'removed';
+  const marked = { _id: 'i1', flags: { oq: { newActor: ['character'] } } };
+
+  it('Should clear the default item mark of an item in an actor', function () {
+    expect(Item(marked, { parent: {}, remove })).to.eql({ flags: { oq: { newActor: 'removed' } } });
+  });
+
+  it('Should keep the mark of items outside actors', function () {
+    expect(Item(marked, { parent: null, remove })).to.eql({});
+  });
+
+  it('Should leave items in actors without the mark alone', function () {
+    expect(Item({ _id: 'i2', flags: {} }, { parent: {}, remove })).to.eql({});
+    expect(Item({ _id: 'i3', flags: { oq: {} } }, { parent: {}, remove })).to.eql({});
+  });
+});
+
 describe('migration-runner.js', function () {
   describe('#applyPendingMigrations() and #migrateWorld()', function () {
     let savedGlobals;
@@ -187,7 +207,12 @@ describe('migration-runner.js', function () {
     function setGlobals({ isGM = true, documents = {}, packs = [] } = {}) {
       globalThis.CONFIG = { OQ: { SYSTEM_ID: 'oq', SettingsConfig } };
       globalThis.foundry = {
-        data: { operators: { ForcedReplacement: { create: (value) => ({ replaced: value }) } } },
+        data: {
+          operators: {
+            ForcedReplacement: { create: (value) => ({ replaced: value }) },
+            ForcedDeletion: class ForcedDeletion {},
+          },
+        },
         applications: {
           api: {
             DialogV2: {
@@ -302,6 +327,33 @@ describe('migration-runner.js', function () {
       );
     });
 
+    it('Should clear the default item mark of items in actors and token deltas only', async function () {
+      const marked = (_id) => ({ _id, type: 'armour', img: THEMED, flags: { oq: { newActor: ['character'] } } });
+      const actor = new FakeDocument({ _id: 'a1', img: THEMED }, { updateEmbeddedDocuments: recordEmbedded('a1') });
+      actor.items = [new FakeDocument(marked('i1'))];
+      const deltaItems = Object.assign([new FakeDocument(marked('d1'))], { manages: () => true });
+      const token = new FakeDocument(
+        { _id: 't1', texture: { src: THEMED } },
+        { actorLink: false, delta: { items: deltaItems }, actor: { updateEmbeddedDocuments: recordEmbedded('t1') } },
+      );
+      const scene = new FakeDocument({ _id: 's1' }, { tokens: [token], updateEmbeddedDocuments: recordEmbedded('s1') });
+      const worldItem = new FakeDocument(marked('i2'));
+      setGlobals({ documents: { actors: [actor], items: [worldItem], scenes: [scene] } });
+
+      await run();
+
+      const removed = { flags: { oq: { newActor: new foundry.data.operators.ForcedDeletion() } } };
+      assert.deepEqual(
+        updates.map(({ target, batch }) => ({ target, batch })),
+        [
+          { target: 'a1.Item', batch: [{ _id: 'i1', ...removed }] },
+          { target: 't1.Item', batch: [{ _id: 'd1', ...removed }] },
+        ],
+      );
+      expect(worldItem.source.flags.oq.newActor).to.eql(['character']);
+      expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+    });
+
     it('Should migrate roll tables with their results', async function () {
       const table = new FakeDocument(
         { _id: 'r1', img: LEGACY, description: '' },
@@ -351,7 +403,9 @@ describe('migration-runner.js', function () {
       expect(updates.map(({ target }) => target)).to.eql(['world.Macro', 'world.RollTable']);
       expect(updates[0].options.pack).to.be('world.Macro');
       expect(updates[1].options.pack).to.be('world.RollTable');
-      expect(configured).to.eql([{ locked: false }, { locked: true }, { locked: false }, { locked: true }]);
+      // Each migration unlocks both world packs and locks them again.
+      const pairs = Array(2 * migrations.length).fill([{ locked: false }, { locked: true }]);
+      expect(_.chunk(configured, 2)).to.eql(pairs);
     });
 
     it('Should keep the version when a document fails, so the migration runs again', async function () {
