@@ -29,7 +29,8 @@ Issue numbers refer to the [GitHub tracker](https://github.com/michalzc/oq-syste
 * ~~Documentation compendium updated for the new sheets and combat flow~~ —
   [#61](https://github.com/michalzc/oq-system/issues/61). **Done**: the journals are generated from HTML in
   [docs/packs](docs/packs/README.md) with `yarn build:docs`.
-* Change colours for NPCs items and actions (optional) — [#152](https://github.com/michalzc/oq-system/issues/152)
+* ~~Change colours for NPCs items and actions (optional)~~ — [#152](https://github.com/michalzc/oq-system/issues/152)
+  **Done**, also migations mechanism introduced.
 * ~~Recommended world settings~~ — [#153](https://github.com/michalzc/oq-system/issues/153) **Done**
 
 ### v0.9 — Buffs and Active Effects
