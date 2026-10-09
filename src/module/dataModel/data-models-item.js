@@ -13,6 +13,11 @@ function positiveNumberModel(required = true, initial = 0) {
   return new fields.NumberField({ min: 0, integer: false, required: required, initial: initial });
 }
 
+/** Stored fractions load rounded: core cleans integer fields whenever a document is constructed. */
+function positiveIntegerModel(required = true, initial = 0) {
+  return new fields.NumberField({ min: 0, integer: true, required: required, initial: initial });
+}
+
 function htmlFieldModel() {
   return new fields.HTMLField({ trim: true, initial: '' });
 }
@@ -177,8 +182,8 @@ export class SpellDataModel extends OQItemDataModel {
 
   static defineSchema() {
     return {
-      magnitude: positiveNumberModel(),
-      remainingMagnitude: positiveNumberModel(),
+      magnitude: positiveIntegerModel(),
+      remainingMagnitude: positiveIntegerModel(),
       nonVariant: new fields.BooleanField({ required: true, initial: false }),
       noMagicPoints: new fields.BooleanField({ required: true, initial: false }),
       type: new fields.StringField({

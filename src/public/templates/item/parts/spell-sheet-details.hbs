@@ -20,7 +20,7 @@
   <div class="input-with-checkbox">
     {{#if system.noMagicPoints}}
       {{#if hasSplitDivineCasting}}
-        <input id="{{rootId}}-remainingMagnitude" type="number" data-dtype="Number" name="system.remainingMagnitude" value="{{ system.remainingMagnitude }}">
+        <input id="{{rootId}}-remainingMagnitude" type="number" data-dtype="Number" name="system.remainingMagnitude" value="{{ system.remainingMagnitude }}" step="1" min="0">
         <label>{{ localize 'OQ.Labels.of' }}</label>
       {{else}}
         <label for="{{rootId}}-expended">{{ localize 'OQ.Labels.Expended' }}</label>
@@ -28,7 +28,7 @@
       {{/if}}
 
     {{/if}}
-    <input id="{{rootId}}-magnitude" type="number" data-dtype="Number" name="system.magnitude" value="{{ system.magnitude }}">
+    <input id="{{rootId}}-magnitude" type="number" data-dtype="Number" name="system.magnitude" value="{{ system.magnitude }}" step="1" min="0">
 
   </div>
   <label for="{{rootId}}-skillReference">{{localize 'OQ.Labels.Skill'}}</label>

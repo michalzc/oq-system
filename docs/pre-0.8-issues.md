@@ -184,7 +184,7 @@ unspent spell stays unspent and a spent one keeps no more than the new magnitude
 
 ## 6. [P3] Fractional magnitudes are charged inconsistently
 
-Status: open.
+Status: resolved.
 
 Locations: [`data-models-item.js:11`](../src/module/dataModel/data-models-item.js#L11),
 [`spell.js:124`](../src/module/document/item/spell.js#L124), and
@@ -201,6 +201,16 @@ Reproduction:
 3. Click the spell and confirm the dialog. The result is "The magnitude must be a whole number from 1 to 2.5."
 
 Suggested fix: make `magnitude` and `remainingMagnitude` integer fields, so they match magic points and the dialog.
+
+Resolution: `magnitude` and `remainingMagnitude` are integer fields. OpenQuest has no fractional magnitudes: the SRD
+spells and the Sorcery *Manipulation cost* table use whole numbers, and so do the system packs. A stored fraction
+needs no migration, because core cleans data whenever a document loads and rounds integer fields to the nearest whole
+number, so 2.5 loads as 3 and stays valid. Updates are cleaned the same way, so a fraction typed on the sheet is saved
+rounded. The sheet's magnitude inputs now step by 1 with a minimum of 0.
+
+Validation: all 182 tests and the lint checks pass. There is no unit test, because the data model module can't be
+loaded in the node harness without mocking Foundry's application API. Still to check in a running Foundry: a spell
+with a fractional magnitude stored before the change loads rounded without validation errors.
 
 ## 7. [P3] NPC icons lose their palette in detached windows
 
