@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
 import expect from 'expect.js';
+import _ from 'lodash-es';
 import { themedIconPath, themedIconsMigration } from '../src/module/migration/migration-1-themed-icons.js';
 import { LATEST_MIGRATION_VERSION, migrations, pendingMigrations } from '../src/module/migration/migrations.js';
-import { migrateWorld } from '../src/module/migration/migration-runner.js';
+import { applyPendingMigrations, migrateWorld } from '../src/module/migration/migration-runner.js';
 import { SettingsConfig } from '../src/module/consts/settings-config.js';
 
 const LEGACY = 'systems/oq/assets/icons/skills.svg';
@@ -62,7 +63,7 @@ describe('migration-1-themed-icons.js', function () {
 
     it('Should migrate the actor image and prototype token texture', function () {
       const source = { img: LEGACY, prototypeToken: { texture: { src: LEGACY } } };
-      expect(handlers.Actor(source, helpers)).to.eql({ img: THEMED, 'prototypeToken.texture.src': THEMED });
+      expect(handlers.Actor(source, helpers)).to.eql({ img: THEMED, prototypeToken: { texture: { src: THEMED } } });
     });
 
     it('Should return no changes for an up to date actor', function () {
@@ -84,8 +85,8 @@ describe('migration-1-themed-icons.js', function () {
 
     it('Should migrate the token texture and the image stored in its delta', function () {
       expect(handlers.Token({ texture: { src: LEGACY }, delta: { img: LEGACY } }, helpers)).to.eql({
-        'texture.src': THEMED,
-        'delta.img': THEMED,
+        texture: { src: THEMED },
+        delta: { img: THEMED },
       });
       expect(handlers.Token({ texture: { src: THEMED }, delta: { img: null } }, helpers)).to.eql({});
       expect(handlers.Token({ texture: { src: THEMED } }, helpers)).to.eql({});
@@ -104,7 +105,7 @@ describe('migration-1-themed-icons.js', function () {
     it('Should migrate journal page images and text content', function () {
       expect(handlers.JournalEntryPage({ src: LEGACY, text: { content: `<img src="${LEGACY}">` } }, helpers)).to.eql({
         src: THEMED,
-        'text.content': `<img src="${THEMED}">`,
+        text: { content: `<img src="${THEMED}">` },
       });
       expect(handlers.JournalEntryPage({ src: null, text: { content: null } }, helpers)).to.eql({});
     });
@@ -112,15 +113,34 @@ describe('migration-1-themed-icons.js', function () {
 });
 
 describe('migration-runner.js', function () {
-  describe('#migrateWorld()', function () {
+  describe('#applyPendingMigrations() and #migrateWorld()', function () {
     let savedGlobals;
     let storedVersion;
     let updates;
     let notifications;
 
-    const record = (target) => async (batch, options) => {
-      updates.push({ target, batch, options });
-      return batch;
+    // Foundry writes the parent into the operation it is given, which must not leak into the next update. The changes
+    // are already applied in memory, so they must be sent without diffing.
+    const record =
+      (target) =>
+      async (batch, options = {}) => {
+        expect(options.parent).to.be(undefined);
+        expect(options.diff).to.be(false);
+        options.parent = target;
+        updates.push({ target, batch, options });
+        return batch;
+      };
+    const recordEmbedded =
+      (target) =>
+      async (name, batch, options = {}) => {
+        expect(options.diff).to.be(false);
+        options.parent = target;
+        updates.push({ target: `${target}.${name}`, batch });
+      };
+
+    const run = async () => {
+      applyPendingMigrations();
+      await migrateWorld();
     };
 
     class FakeDocument {
@@ -139,6 +159,10 @@ describe('migration-runner.js', function () {
 
       toObject() {
         return structuredClone(this.source);
+      }
+
+      updateSource(changes) {
+        _.merge(this.source, changes);
       }
     }
 
@@ -170,7 +194,7 @@ describe('migration-runner.js', function () {
         scenes: collection('Scene', documents.scenes ?? []),
         journal: collection('JournalEntry', []),
         macros: collection('Macro', documents.macros ?? []),
-        messages: collection('ChatMessage', []),
+        messages: collection('ChatMessage', documents.messages ?? []),
         packs,
       };
     }
@@ -195,18 +219,21 @@ describe('migration-runner.js', function () {
     it('Should migrate world documents with their embedded documents and store the version', async function () {
       const actor = new FakeDocument(
         { _id: 'a1', img: LEGACY, prototypeToken: { texture: { src: THEMED } } },
-        { updateEmbeddedDocuments: async (name, batch) => updates.push({ target: `a1.${name}`, batch }) },
+        { updateEmbeddedDocuments: recordEmbedded('a1') },
       );
       actor.items = [new FakeDocument({ _id: 'i1', type: 'armour', img: LEGACY })];
-      setGlobals({ documents: { actors: [actor], macros: [new FakeDocument({ _id: 'm1', img: THEMED })] } });
+      const item = new FakeDocument({ _id: 'i2', type: 'armour', img: LEGACY });
+      const macro = new FakeDocument({ _id: 'm1', img: THEMED });
+      setGlobals({ documents: { actors: [actor], items: [item], macros: [macro] } });
 
-      await migrateWorld();
+      await run();
 
       assert.deepEqual(
         updates.map(({ target, batch }) => ({ target, batch })),
         [
           { target: 'Actor', batch: [{ _id: 'a1', img: THEMED }] },
           { target: 'a1.Item', batch: [{ _id: 'i1', img: THEMED }] },
+          { target: 'Item', batch: [{ _id: 'i2', img: THEMED }] },
         ],
       );
       expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
@@ -218,7 +245,7 @@ describe('migration-runner.js', function () {
       const baseItem = new FakeDocument({ _id: 'b1', type: 'armour', img: LEGACY });
       const items = Object.assign([deltaItem, baseItem], { manages: (id) => id === 'd1' });
       const tokenActor = {
-        updateEmbeddedDocuments: async (name, batch) => updates.push({ target: `t1.${name}`, batch }),
+        updateEmbeddedDocuments: recordEmbedded('t1'),
       };
       const token = new FakeDocument(
         { _id: 't1', texture: { src: LEGACY }, delta: { img: null } },
@@ -228,18 +255,19 @@ describe('migration-runner.js', function () {
         { _id: 's1' },
         {
           tokens: [token],
-          updateEmbeddedDocuments: async (name, batch) => updates.push({ target: `s1.${name}`, batch }),
+          updateEmbeddedDocuments: recordEmbedded('s1'),
         },
       );
-      setGlobals({ documents: { scenes: [scene] } });
+      setGlobals({ documents: { scenes: [scene], macros: [new FakeDocument({ _id: 'm1', img: LEGACY })] } });
 
-      await migrateWorld();
+      await run();
 
       assert.deepEqual(
         updates.map(({ target, batch }) => ({ target, batch })),
         [
-          { target: 's1.Token', batch: [{ _id: 't1', 'texture.src': THEMED }] },
+          { target: 's1.Token', batch: [{ _id: 't1', texture: { src: THEMED } }] },
           { target: 't1.Item', batch: [{ _id: 'd1', img: THEMED }] },
+          { target: 'Macro', batch: [{ _id: 'm1', img: THEMED }] },
         ],
       );
     });
@@ -257,7 +285,7 @@ describe('migration-runner.js', function () {
       });
       setGlobals({ packs: [pack('world', 'Macro'), pack('system', 'Macro'), pack('world', 'Playlist')] });
 
-      await migrateWorld();
+      await run();
 
       expect(updates.map(({ target }) => target)).to.eql(['world.Macro']);
       expect(updates[0].options.pack).to.be('world.Macro');
@@ -273,21 +301,45 @@ describe('migration-runner.js', function () {
       const valid = new FakeDocument({ _id: 'i1', type: 'armour', img: LEGACY });
       setGlobals({ documents: { actors: [broken], items: [valid] } });
 
-      await migrateWorld();
+      await run();
 
       expect(updates.map(({ target }) => target)).to.eql(['Item']);
       expect(storedVersion).to.be(0);
       expect(notifications.at(-1)[0]).to.be('error');
     });
 
-    it('Should do nothing for a player or an up to date world', async function () {
-      setGlobals({ isGM: false, documents: { macros: [new FakeDocument({ _id: 'm1', img: LEGACY })] } });
-      await migrateWorld();
+    it('Should apply the changes in memory before the world is stored', function () {
+      const actor = new FakeDocument({ _id: 'a1', img: LEGACY }, { items: [] });
+      const message = new FakeDocument({ _id: 'c1', content: `<img src="${LEGACY}">` });
+      setGlobals({ documents: { actors: [actor], messages: [message] } });
 
+      applyPendingMigrations();
+
+      expect(actor.source.img).to.be(THEMED);
+      expect(message.source.content).to.be(`<img src="${THEMED}">`);
+      expect(updates).to.eql([]);
+    });
+
+    it('Should only apply the changes in memory for a player', async function () {
+      const macro = new FakeDocument({ _id: 'm1', img: LEGACY });
+      setGlobals({ isGM: false, documents: { macros: [macro] } });
+
+      await run();
+
+      expect(macro.source.img).to.be(THEMED);
+      expect(updates).to.eql([]);
+      expect(notifications).to.eql([]);
+      expect(storedVersion).to.be(0);
+    });
+
+    it('Should do nothing for an up to date world', async function () {
       storedVersion = LATEST_MIGRATION_VERSION;
-      setGlobals({ documents: { macros: [new FakeDocument({ _id: 'm1', img: LEGACY })] } });
-      await migrateWorld();
+      const macro = new FakeDocument({ _id: 'm1', img: LEGACY });
+      setGlobals({ documents: { macros: [macro] } });
 
+      await run();
+
+      expect(macro.source.img).to.be(LEGACY);
       expect(updates).to.eql([]);
       expect(notifications).to.eql([]);
     });
@@ -296,7 +348,7 @@ describe('migration-runner.js', function () {
       storedVersion = LATEST_MIGRATION_VERSION + 1;
       setGlobals({ documents: { macros: [new FakeDocument({ _id: 'm1', img: LEGACY })] } });
 
-      await migrateWorld();
+      await run();
 
       expect(updates).to.eql([]);
       expect(notifications.map(([type]) => type)).to.eql(['warn']);

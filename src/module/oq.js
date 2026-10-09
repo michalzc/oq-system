@@ -10,7 +10,7 @@ import { registerHelpers } from './init/handlebar-helpers.js';
 import { registerIconFilters } from './init/icon-filters.js';
 import { applyCoreSettingDefaults, registerSettings } from './init/register-settings.js';
 import { buildMoneyService } from './utils/money.js';
-import { migrateWorld } from './migration/migration-runner.js';
+import { applyPendingMigrations, migrateWorld } from './migration/migration-runner.js';
 import '../styles/oq.less';
 
 async function init() {
@@ -44,6 +44,7 @@ async function ready() {
 async function setup() {
   log('Setup');
   applyCoreSettingDefaults();
+  applyPendingMigrations();
 }
 
 Hooks.once('init', init);

@@ -151,8 +151,9 @@ and Handlebars syntax and markup.
 ### Data migrations
 
 Changes to stored data, such as renamed fields or moved assets, are written to the world by migrations in
-`src/module/migration/`. When the world loads, the active GM's client applies those newer than the `migrationVersion`
-world setting. They run on world documents with their embedded documents, and on world compendia. System compendia are
+`src/module/migration/`. Migrations newer than the `migrationVersion` world setting are applied in memory on every
+client in the `setup` hook, before anything renders, and the active GM's client stores them in `ready`. They run on
+world documents with their embedded documents, and on world compendia. System compendia are
 rebuilt from `src/packs/`, so update their sources directly.
 
 To add a migration, create a module with a handler per document name (`Actor`, `Item`, `Token`, ...). Each handler

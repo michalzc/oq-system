@@ -1,3 +1,5 @@
+import _ from 'lodash-es';
+
 const LEGACY_THEMED_ICONS = /(systems\/oq\/assets\/icons\/)(?!cultist\.svg)([\w-]+\.svg)/g;
 
 /**
@@ -12,11 +14,11 @@ export const themedIconPath = (text) => text.replace(LEGACY_THEMED_ICONS, '$1the
 /** Item types whose `system` fields were renamed in 0.6.0. Their data models still rename the keys on load. */
 const RENAMED_FIELDS_TYPES = ['skill', 'weapon', 'equipment'];
 
-/** Adds `{[key]: migrated value}` to the changes when the string at `key` holds a legacy icon path. */
-function migratePath(changes, key, value) {
+/** Sets the migrated value at `path` in the changes when the string there holds a legacy icon path. */
+function migratePath(changes, path, value) {
   if (typeof value !== 'string') return changes;
   const migrated = themedIconPath(value);
-  if (migrated !== value) changes[key] = migrated;
+  if (migrated !== value) _.set(changes, path, migrated);
   return changes;
 }
 

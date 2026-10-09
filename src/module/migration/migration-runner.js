@@ -11,8 +11,6 @@ const PACK_DOCUMENT_TYPES = ['Actor', 'Item', 'Scene', 'JournalEntry', 'Macro'];
 /** Updates sent in one request, so a large chat log doesn't go out in a single message. */
 const BATCH_SIZE = 100;
 
-const UPDATE_OPTIONS = { render: false };
-
 const replace = (value) => foundry.data.operators.ForcedReplacement.create(value);
 
 /**
@@ -40,30 +38,70 @@ function embeddedCollections(documentName, document) {
 }
 
 /**
- * Applies a migration to the documents, then to their embedded documents. A failing document is logged and counted,
- * and the remaining ones are still migrated.
+ * @typedef {object} MigrationPlan The changes of the pending migrations, applied in memory and waiting to be written.
+ * @property {{migration: import('./migrations.js').Migration, writes: PendingWrite[]}[]} steps
+ * @property {number} failed
+ */
+
+/**
+ * @typedef {object} PendingWrite
+ * @property {string} documentName
+ * @property {function(object[], object): Promise} update Writes a batch of changes, each with the `_id` of its
+ *   document. Foundry assigns `parent` and `pack` to the operation it is given, so each call gets new options.
+ * @property {object[]} changes
+ */
+
+/**
+ * Applies a migration to the documents in memory, then to their embedded documents, and collects the writes that store
+ * the changes. A failing document is logged and counted, and the remaining ones are still migrated.
  * @param {import('./migrations.js').Migration} migration
  * @param {string} documentName
  * @param {Iterable<foundry.abstract.Document>} documents
- * @param {function(object[]): Promise} update Writes a batch of changes, each with the `_id` of its document.
- * @param {{migrated: number, failed: number}} report
+ * @param {PendingWrite['update']} update
+ * @param {PendingWrite[]} writes
+ * @param {MigrationPlan} plan
  */
-async function migrateDocuments(migration, documentName, documents, update, report) {
+function applyToDocuments(migration, documentName, documents, update, writes, plan) {
   const migrate = migration.handlers[documentName];
   if (migrate) {
-    const updates = [];
+    const changes = [];
     for (const document of documents) {
       try {
-        const changes = migrate(document.toObject(), { replace });
-        if (!_.isEmpty(changes)) updates.push({ _id: document.id, ...changes });
+        const source = document.toObject();
+        const documentChanges = migrate(source, { replace });
+        if (_.isEmpty(documentChanges)) continue;
+        // Handlers are pure, so the source update gets its own copy of the changes, operators included.
+        document.updateSource(migrate(source, { replace }));
+        changes.push({ _id: document.id, ...documentChanges });
       } catch (error) {
         logError(`Migration ${migration.version} failed for ${document.uuid}`, error);
-        report.failed += 1;
+        plan.failed += 1;
       }
     }
-    for (const batch of _.chunk(updates, BATCH_SIZE)) {
+    if (changes.length) writes.push({ documentName, update, changes });
+  }
+
+  for (const document of documents) {
+    for (const embedded of embeddedCollections(documentName, document)) {
+      const updateEmbedded = (batch, options) =>
+        embedded.parent.updateEmbeddedDocuments(embedded.documentName, batch, options);
+      applyToDocuments(migration, embedded.documentName, embedded.documents, updateEmbedded, writes, plan);
+    }
+  }
+}
+
+/**
+ * Writes the changes already applied in memory. The documents match them now, so the changes are sent as they are
+ * instead of being diffed against the document.
+ * @param {PendingWrite[]} writes
+ * @returns {Promise<{migrated: number, failed: number}>}
+ */
+async function storeWrites(migration, writes) {
+  const report = { migrated: 0, failed: 0 };
+  for (const { documentName, update, changes } of writes) {
+    for (const batch of _.chunk(changes, BATCH_SIZE)) {
       try {
-        await update(batch);
+        await update(batch, { diff: false });
         report.migrated += batch.length;
       } catch (error) {
         logError(`Migration ${migration.version} failed to update ${documentName} documents`, batch, error);
@@ -71,31 +109,21 @@ async function migrateDocuments(migration, documentName, documents, update, repo
       }
     }
   }
-
-  for (const document of documents) {
-    for (const embedded of embeddedCollections(documentName, document)) {
-      const updateEmbedded = (batch) =>
-        embedded.parent.updateEmbeddedDocuments(embedded.documentName, batch, UPDATE_OPTIONS);
-      await migrateDocuments(migration, embedded.documentName, embedded.documents, updateEmbedded, report);
-    }
-  }
-}
-
-async function migrateWorldCollections(migration, report) {
-  for (const collection of WORLD_COLLECTIONS.map((name) => game[name])) {
-    const update = (batch) => collection.documentClass.updateDocuments(batch, UPDATE_OPTIONS);
-    await migrateDocuments(migration, collection.documentName, collection, update, report);
-  }
+  return report;
 }
 
 /** Migrates a world compendium, unlocking it for the migration if needed. */
-async function migratePack(migration, pack, report) {
+async function migratePack(migration, pack) {
   const locked = pack.locked;
   if (locked) await pack.configure({ locked: false });
   try {
     const documents = await pack.getDocuments();
-    const update = (batch) => pack.documentClass.updateDocuments(batch, { ...UPDATE_OPTIONS, pack: pack.collection });
-    await migrateDocuments(migration, pack.documentName, documents, update, report);
+    const update = (batch, options) => pack.documentClass.updateDocuments(batch, { ...options, pack: pack.collection });
+    const plan = { failed: 0 };
+    const writes = [];
+    applyToDocuments(migration, pack.documentName, documents, update, writes, plan);
+    const report = await storeWrites(migration, writes);
+    return { migrated: report.migrated, failed: report.failed + plan.failed };
   } finally {
     if (locked) await pack.configure({ locked: true });
   }
@@ -107,7 +135,9 @@ async function migratePacks(migration, report) {
   );
   for (const pack of packs) {
     try {
-      await migratePack(migration, pack, report);
+      const packReport = await migratePack(migration, pack);
+      report.migrated += packReport.migrated;
+      report.failed += packReport.failed;
     } catch (error) {
       logError(`Migration ${migration.version} failed for compendium ${pack.collection}`, error);
       report.failed += 1;
@@ -115,36 +145,65 @@ async function migratePacks(migration, report) {
   }
 }
 
+const storedVersion = () => game.settings.get(CONFIG.OQ.SYSTEM_ID, CONFIG.OQ.SettingsConfig.keys.migrationVersion);
+
+/** @type {MigrationPlan|null} */
+let pendingPlan = null;
+
 /**
- * Applies the pending data migrations to the world documents and world compendia, storing the version of each one
- * once applied without failures. Runs on the active GM's client only.
+ * Applies the pending migrations to the world documents in memory, on every client. It runs in the `setup` hook, after
+ * the documents are created and before the sidebar, chat log and canvas render them, so they never show legacy data.
+ * The active GM stores the changes in `ready`, see {@link migrateWorld}.
+ */
+export function applyPendingMigrations() {
+  pendingPlan = null;
+  const currentVersion = storedVersion();
+  if (currentVersion > LATEST_MIGRATION_VERSION) return;
+  const migrations = pendingMigrations(currentVersion);
+  if (!migrations.length) return;
+
+  const plan = { steps: [], failed: 0 };
+  for (const migration of migrations) {
+    const writes = [];
+    for (const collection of WORLD_COLLECTIONS.map((name) => game[name])) {
+      const update = (batch, options) => collection.documentClass.updateDocuments(batch, options);
+      applyToDocuments(migration, collection.documentName, collection, update, writes, plan);
+    }
+    plan.steps.push({ migration, writes });
+  }
+  pendingPlan = plan;
+}
+
+/**
+ * Stores the migrations applied by {@link applyPendingMigrations} and migrates the world compendia, storing the version
+ * of each migration once applied without failures. Runs on the active GM's client only.
  */
 export async function migrateWorld() {
   if (!game.users.activeGM?.isSelf) return;
 
-  const settingKey = CONFIG.OQ.SettingsConfig.keys.migrationVersion;
-  const currentVersion = game.settings.get(CONFIG.OQ.SYSTEM_ID, settingKey);
+  const currentVersion = storedVersion();
   if (currentVersion > LATEST_MIGRATION_VERSION) {
     ui.notifications.warn(game.i18n.format('OQ.Migration.NewerVersion', { version: currentVersion }), {
       permanent: true,
     });
     return;
   }
-
-  const migrations = pendingMigrations(currentVersion);
-  if (!migrations.length) return;
+  if (!pendingPlan?.steps.length) return;
 
   const notification = ui.notifications.warn('OQ.Migration.Begin', { localize: true, permanent: true });
-  const report = { migrated: 0, failed: 0 };
-  for (const migration of migrations) {
+  const report = { migrated: 0, failed: pendingPlan.failed };
+  for (const { migration, writes } of pendingPlan.steps) {
     log(`Applying migration ${migration.version}: ${migration.name}`);
-    await migrateWorldCollections(migration, report);
+    const worldReport = await storeWrites(migration, writes);
+    report.migrated += worldReport.migrated;
+    report.failed += worldReport.failed;
     await migratePacks(migration, report);
     // A failed migration is retried on the next load, and later migrations wait for it: they may rely on its changes.
     if (report.failed) break;
-    await game.settings.set(CONFIG.OQ.SYSTEM_ID, settingKey, migration.version);
+    await game.settings.set(CONFIG.OQ.SYSTEM_ID, CONFIG.OQ.SettingsConfig.keys.migrationVersion, migration.version);
     log(`Applied migration ${migration.version}`, report);
   }
+  pendingPlan = null;
 
   ui.notifications.remove(notification);
   if (report.failed) {
