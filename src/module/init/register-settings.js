@@ -47,11 +47,15 @@ export function registerSettings() {
     config: true,
   });
 
-  // The version of the last data migration applied to the world, see `migration/migrations.js`.
+  // The version of the last data migration applied to the world, see `migration/migrations.js`. Pending migrations
+  // are applied when the world loads, so lowering it takes effect after the reload.
   game.settings.register(CONFIG.OQ.SYSTEM_ID, CONFIG.OQ.SettingsConfig.keys.migrationVersion, {
+    name: 'OQ.Settings.migrationVersion.name',
+    hint: 'OQ.Settings.migrationVersion.hint',
     scope: 'world',
-    type: Number,
+    requiresReload: true,
+    type: new foundry.data.fields.NumberField({ required: true, nullable: false, integer: true, min: 0, initial: 0 }),
     default: 0,
-    config: false,
+    config: true,
   });
 }
