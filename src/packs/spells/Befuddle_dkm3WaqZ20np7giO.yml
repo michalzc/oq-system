@@ -25,7 +25,7 @@ system:
     this spell.</p>
 name: Befuddle
 folder: PmL84WZU2luOrJSw
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 _id: dkm3WaqZ20np7giO
 type: spell
 _key: '!items!dkm3WaqZ20np7giO'

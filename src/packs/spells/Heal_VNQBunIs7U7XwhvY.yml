@@ -35,6 +35,6 @@ type: spell
 folder: PmL84WZU2luOrJSw
 name: Heal
 _id: VNQBunIs7U7XwhvY
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 _key: '!items!VNQBunIs7U7XwhvY'
 effects: []

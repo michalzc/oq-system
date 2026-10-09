@@ -62,7 +62,7 @@ system:
   type: sorcery
 _id: frJm16WSd9AIPXuZ
 folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
+img: systems/oq/assets/icons/themed/ink-swirl.svg
 name: Mystic Vision
 type: spell
 _key: '!items!frJm16WSd9AIPXuZ'

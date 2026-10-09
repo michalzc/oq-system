@@ -62,7 +62,7 @@ system:
   type: sorcery
 _id: 98aCb2Pi67dGoeqr
 folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
+img: systems/oq/assets/icons/themed/ink-swirl.svg
 name: Tap (characteristic)
 type: spell
 _key: '!items!98aCb2Pi67dGoeqr'

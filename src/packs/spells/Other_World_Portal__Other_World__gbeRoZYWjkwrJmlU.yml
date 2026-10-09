@@ -39,7 +39,7 @@ system:
   type: sorcery
 _id: gbeRoZYWjkwrJmlU
 folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
+img: systems/oq/assets/icons/themed/ink-swirl.svg
 name: Other World Portal (Other World)
 type: spell
 _key: '!items!gbeRoZYWjkwrJmlU'

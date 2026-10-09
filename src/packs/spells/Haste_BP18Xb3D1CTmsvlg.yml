@@ -12,7 +12,7 @@ system:
   type: sorcery
 _id: BP18Xb3D1CTmsvlg
 folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
+img: systems/oq/assets/icons/themed/ink-swirl.svg
 name: Haste
 type: spell
 _key: '!items!BP18Xb3D1CTmsvlg'

@@ -39,7 +39,7 @@ system:
     spells upon them.</li> </ul>
 type: spell
 _id: YEaEdiMtDpvGDU9H
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 name: Hinder (Skill)
 folder: PmL84WZU2luOrJSw
 _key: '!items!YEaEdiMtDpvGDU9H'

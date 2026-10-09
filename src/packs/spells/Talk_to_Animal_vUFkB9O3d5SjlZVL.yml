@@ -9,7 +9,7 @@ system:
   nonVariant: true
 name: Talk to Animal
 folder: PmL84WZU2luOrJSw
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 type: spell
 _id: vUFkB9O3d5SjlZVL
 _key: '!items!vUFkB9O3d5SjlZVL'

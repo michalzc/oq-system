@@ -7,8 +7,10 @@ import { registerChatCommands } from './chat-handlers/chat-command-listener.js';
 import { registerDataModels } from './init/register-data-models.js';
 import { registerDocuments } from './init/register-documents.js';
 import { registerHelpers } from './init/handlebar-helpers.js';
+import { registerIconFilters } from './init/icon-filters.js';
 import { applyCoreSettingDefaults, registerSettings } from './init/register-settings.js';
 import { buildMoneyService } from './utils/money.js';
+import { applyPendingMigrations, migrateWorld } from './migration/migration-runner.js';
 import '../styles/oq.less';
 
 async function init() {
@@ -22,6 +24,7 @@ async function init() {
   registerHelpers();
   registerCustomHookHandlers();
   registerChatCommands();
+  registerIconFilters();
   registerSettings();
 
   await preloadTemplates();
@@ -33,6 +36,7 @@ async function init() {
 
 async function ready() {
   log('Ready');
+  await migrateWorld();
   // The coins setting requires a reload, so checking once here covers every change to it.
   if (game.user.isGM && !game.oq.moneyService?.fields.length) ui.notifications.warn('Invalid money configuration!');
 }
@@ -40,6 +44,7 @@ async function ready() {
 async function setup() {
   log('Setup');
   applyCoreSettingDefaults();
+  applyPendingMigrations();
 }
 
 Hooks.once('init', init);

@@ -9,7 +9,7 @@ system:
     intuition.</p> <p><i>For example</i> the question “Why can I not harm the
     creature?” would get the answer “Because your sword is not enchanted”, while
     “Why can we not harm the creature?” would not get an answer.</p>
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 type: spell
 folder: PmL84WZU2luOrJSw
 _id: CXBIhgsML0GalQWH

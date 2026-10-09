@@ -32,7 +32,7 @@ system:
   type: sorcery
 _id: hx0NVLA3ztZSG9t2
 folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
+img: systems/oq/assets/icons/themed/ink-swirl.svg
 name: Diminish (characteristic)
 type: spell
 _key: '!items!hx0NVLA3ztZSG9t2'

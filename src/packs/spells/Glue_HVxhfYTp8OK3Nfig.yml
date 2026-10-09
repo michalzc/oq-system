@@ -27,7 +27,7 @@ system:
     - Touch
 _id: HVxhfYTp8OK3Nfig
 folder: PmL84WZU2luOrJSw
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 name: Glue
 type: spell
 _key: '!items!HVxhfYTp8OK3Nfig'

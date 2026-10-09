@@ -17,7 +17,7 @@ system:
   type: sorcery
 _id: lEecNAFaJ4SaFTQB
 folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
+img: systems/oq/assets/icons/themed/ink-swirl.svg
 name: Palsy
 type: spell
 _key: '!items!lEecNAFaJ4SaFTQB'

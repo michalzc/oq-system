@@ -33,7 +33,7 @@ system:
 name: Multimissile
 type: spell
 _id: xVKWKkfGPhkiTeHo
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 folder: PmL84WZU2luOrJSw
 _key: '!items!xVKWKkfGPhkiTeHo'
 effects: []

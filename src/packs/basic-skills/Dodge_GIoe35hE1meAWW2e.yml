@@ -6,7 +6,7 @@ flags:
       - character
       - npc
 folder: qqPG8bsnE8NcmJV4
-img: systems/oq/assets/icons/skills.svg
+img: systems/oq/assets/icons/themed/skills.svg
 name: Dodge
 ownership:
   default: 0

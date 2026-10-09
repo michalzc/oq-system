@@ -21,7 +21,7 @@ system:
   type: divine
 _id: 6CKcTOlbUpjq2neF
 folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
+img: systems/oq/assets/icons/themed/divided-spiral.svg
 name: Soul Sight
 type: spell
 _key: '!items!6CKcTOlbUpjq2neF'

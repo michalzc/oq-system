@@ -15,6 +15,6 @@ type: spell
 name: Cover Blind Side
 _id: ZOJzXJBKf49TXjrC
 folder: PmL84WZU2luOrJSw
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 _key: '!items!ZOJzXJBKf49TXjrC'
 effects: []

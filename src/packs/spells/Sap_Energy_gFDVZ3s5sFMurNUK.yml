@@ -15,7 +15,7 @@ system:
 _id: gFDVZ3s5sFMurNUK
 folder: PmL84WZU2luOrJSw
 name: Sap Energy
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 type: spell
 _key: '!items!gFDVZ3s5sFMurNUK'
 effects: []

@@ -13,7 +13,7 @@ export const ActorConfig = {
     npc: OQNpcSheet,
   },
   defaultIcons: {
-    character: 'systems/oq/assets/icons/character.svg',
+    character: 'systems/oq/assets/icons/themed/character.svg',
     npc: 'systems/oq/assets/icons/cultist.svg',
   },
   /**

@@ -22,7 +22,7 @@ system:
   type: personal
 folder: PmL84WZU2luOrJSw
 _id: eHXXJHdIh2BD67eD
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 name: Weapon Enhance
 type: spell
 _key: '!items!eHXXJHdIh2BD67eD'

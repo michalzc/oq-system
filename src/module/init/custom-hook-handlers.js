@@ -3,6 +3,7 @@ import { onHotbarDrop } from '../utils/item-macro.js';
 
 export function registerCustomHookHandlers() {
   Hooks.on('renderChatMessageHTML', handleDamageRollChatMessage);
+  Hooks.on('renderChatMessageHTML', markNpcMessage);
   Hooks.on('hotbarDrop', onHotbarDrop);
   const renderDeclarations = foundry.utils.debounce(() => {
     if (ui.combat?.viewed?.isDeclaration) ui.combat.render();
@@ -37,4 +38,9 @@ function relatedActor(doc) {
   if (doc?.documentName === 'Token') return doc.actor;
   if (doc?.documentName === 'Actor') return doc;
   return doc?.parent ? relatedActor(doc.parent) : null;
+}
+
+/** Gives messages spoken by NPCs their own palette. */
+function markNpcMessage(message, html) {
+  html.classList.toggle('oq-npc', message.speakerActor?.type === 'npc');
 }

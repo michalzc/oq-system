@@ -26,7 +26,7 @@ system:
   type: sorcery
 _id: jRqKpVYkarizFu9B
 folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
+img: systems/oq/assets/icons/themed/ink-swirl.svg
 name: Treat Wounds
 type: spell
 _key: '!items!jRqKpVYkarizFu9B'

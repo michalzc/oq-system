@@ -17,7 +17,7 @@ system:
   type: sorcery
 _id: zRAyfvMbDv4twIac
 folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
+img: systems/oq/assets/icons/themed/ink-swirl.svg
 name: Skin of Life
 type: spell
 _key: '!items!zRAyfvMbDv4twIac'

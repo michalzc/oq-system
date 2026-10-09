@@ -41,7 +41,7 @@ system:
 
     <p>Charms are mundane items.  Breaking the item dispels the charm.</p>
   nonVariant: false
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 _id: rGSj5N0pUmsCpADO
 type: spell
 folder: PmL84WZU2luOrJSw

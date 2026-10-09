@@ -19,7 +19,7 @@ system:
   type: sorcery
 _id: KHy3APO0uTzRw2ey
 folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
+img: systems/oq/assets/icons/themed/ink-swirl.svg
 name: Poison Antidote
 type: spell
 _key: '!items!KHy3APO0uTzRw2ey'

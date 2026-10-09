@@ -18,7 +18,7 @@ system:
     spell automatically cancels the effects of this spell, and vice versa.</p>
   magnitude: 2
   type: personal
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 name: Demoralise
 folder: PmL84WZU2luOrJSw
 type: spell

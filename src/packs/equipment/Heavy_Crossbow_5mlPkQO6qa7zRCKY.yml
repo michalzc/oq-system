@@ -1,6 +1,6 @@
 _id: 5mlPkQO6qa7zRCKY
 folder: 3XzLI3qEcMxeUqEk
-img: systems/oq/assets/icons/crossbow.svg
+img: systems/oq/assets/icons/themed/crossbow.svg
 name: Heavy Crossbow
 system:
   correspondingSkill:

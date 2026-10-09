@@ -16,7 +16,7 @@ system:
 name: Ignite
 type: spell
 _id: neD6x5aAxSJK0TM1
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 folder: PmL84WZU2luOrJSw
 _key: '!items!neD6x5aAxSJK0TM1'
 effects: []

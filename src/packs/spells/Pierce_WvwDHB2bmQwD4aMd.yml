@@ -13,7 +13,7 @@ system:
     - Touch
   nonVariant: false
 name: Pierce
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 type: spell
 folder: PmL84WZU2luOrJSw
 _id: WvwDHB2bmQwD4aMd

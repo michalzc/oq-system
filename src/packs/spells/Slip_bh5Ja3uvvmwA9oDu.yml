@@ -11,7 +11,7 @@ system:
 _id: bh5Ja3uvvmwA9oDu
 name: Slip
 folder: PmL84WZU2luOrJSw
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 type: spell
 _key: '!items!bh5Ja3uvvmwA9oDu'
 effects: []

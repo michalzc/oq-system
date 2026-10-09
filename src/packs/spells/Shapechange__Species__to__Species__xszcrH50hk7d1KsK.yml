@@ -37,7 +37,7 @@ system:
   type: sorcery
 _id: xszcrH50hk7d1KsK
 folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
+img: systems/oq/assets/icons/themed/ink-swirl.svg
 name: Shapechange (Species) to (Species)
 type: spell
 _key: '!items!xszcrH50hk7d1KsK'

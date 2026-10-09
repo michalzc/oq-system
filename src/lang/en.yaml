@@ -243,6 +243,15 @@ OQ:
       melee: Melee
       ranged: Ranged
       shield: Shield
+  Migration:
+    Begin: Migrating the world data to the new OQ system version. Do not close the game until it completes.
+    Complete: The world data migration completed.
+    Failed: >-
+      The world data migration failed for {count} documents. See the browser console for details. The migration runs
+      again on the next load.
+    NewerVersion: >-
+      The world data was migrated by a newer OQ system version (migration {version}). Update the system before
+      editing the world.
   Nav:
     Combat: Combat
     Description: Description
@@ -277,6 +286,12 @@ OQ:
         Input coins in the format <CoinName> (<CoinAbbr>) = <Multiplier>. Each coin is separated by a comma.
         <CoinName> is the full name of the coin, <CoinAbbr> is the coin's abbreviation, and <Multiplier> is
         the coin's value relative to the base coin. Ensure at least one coin has a multiplier of 1.
+    migrationVersion:
+      name: Data Migration Version
+      hint: >-
+        The version of the last data migration applied to this world. Warning: lowering it applies every newer
+        migration to the world data again on the next load. Back up the world first, and change it only if you know
+        what you are doing.
   SkillTypes:
     combat: Combat Skills
     custom: Custom Type

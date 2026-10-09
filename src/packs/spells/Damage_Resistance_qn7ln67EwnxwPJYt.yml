@@ -30,7 +30,7 @@ system:
   type: sorcery
 _id: qn7ln67EwnxwPJYt
 folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
+img: systems/oq/assets/icons/themed/ink-swirl.svg
 name: Damage Resistance
 type: spell
 _key: '!items!qn7ln67EwnxwPJYt'

@@ -25,7 +25,7 @@ system:
   type: divine
 _id: lEgJonAZfQ3T4eUR
 folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
+img: systems/oq/assets/icons/themed/divided-spiral.svg
 name: Create Idol
 type: spell
 _key: '!items!lEgJonAZfQ3T4eUR'

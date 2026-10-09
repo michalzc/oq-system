@@ -1,6 +1,6 @@
 _id: oKnD6bGLAAfqsQlC
 folder: 2cMno9TdAHHB1UkH
-img: systems/oq/assets/icons/knapsack.svg
+img: systems/oq/assets/icons/themed/knapsack.svg
 name: Backpack
 system:
   description: <p>It can hold 20 ENC of equipment.</p>
