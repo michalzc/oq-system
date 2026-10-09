@@ -70,7 +70,7 @@ system:
   type: sorcery
 _id: 2dXZTpCS4KHppGhm
 folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
+img: systems/oq/assets/icons/themed/ink-swirl.svg
 name: Time Travel (Time Period)
 type: spell
 _key: '!items!2dXZTpCS4KHppGhm'

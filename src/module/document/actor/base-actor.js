@@ -1,6 +1,7 @@
 import _ from 'lodash-es';
 import { getDefaultItemsForActor } from '../../utils/compendium-utils.js';
 import { getDeclaration } from '../../utils/initiative.js';
+import { themedIconPath } from '../../utils/utils.js';
 
 /**
  * Writes derived values onto the prepared attribute objects, keeping their stored fields (`base`, `mod`, ...). Every
@@ -27,6 +28,13 @@ export class OQBaseActor extends Actor {
     } else {
       return super.getDefaultArtwork(actorData);
     }
+  }
+
+  static migrateData(source, options) {
+    if (source.img) source.img = themedIconPath(source.img);
+    const texture = source.prototypeToken?.texture;
+    if (texture?.src) texture.src = themedIconPath(texture.src);
+    return super.migrateData(source, options);
   }
 
   async _preCreate(source, options, userId) {

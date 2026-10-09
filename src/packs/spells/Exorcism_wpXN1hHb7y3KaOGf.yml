@@ -25,7 +25,7 @@ system:
   type: divine
 _id: wpXN1hHb7y3KaOGf
 folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
+img: systems/oq/assets/icons/themed/divided-spiral.svg
 name: Exorcism
 type: spell
 _key: '!items!wpXN1hHb7y3KaOGf'

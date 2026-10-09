@@ -15,7 +15,7 @@ system:
 _id: B06EbrTwKUAhjXSb
 type: spell
 name: Resist (Element)
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 folder: PmL84WZU2luOrJSw
 _key: '!items!B06EbrTwKUAhjXSb'
 effects: []

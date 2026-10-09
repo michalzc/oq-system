@@ -15,7 +15,7 @@ system:
   type: divine
 _id: eF8YF44A5Tii0B5n
 folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
+img: systems/oq/assets/icons/themed/divided-spiral.svg
 name: Divine Heal
 type: spell
 _key: '!items!eF8YF44A5Tii0B5n'

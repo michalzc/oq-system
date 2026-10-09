@@ -1,5 +1,12 @@
 .oq.sheet {
   .npc-sheet {
+    .npc-themed-icons();
+
+    // Only the themed send-to-chat background shows on hover, whatever the item's own image is.
+    .item-icon:hover {
+      filter: url('#oq-npc-icon');
+    }
+
     .editor {
       flex: 1;
       align-self: normal;

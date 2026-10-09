@@ -13,7 +13,7 @@ system:
     - Instant
 _id: zr5mLyRPWg3CK5dw
 type: spell
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 name: Fist of Wind
 folder: PmL84WZU2luOrJSw
 _key: '!items!zr5mLyRPWg3CK5dw'

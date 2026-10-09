@@ -21,7 +21,7 @@ system:
   type: divine
 _id: SlDgudUIdJv8Fo0n
 folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
+img: systems/oq/assets/icons/themed/divided-spiral.svg
 name: Touch of Death
 type: spell
 _key: '!items!SlDgudUIdJv8Fo0n'

@@ -18,7 +18,7 @@ system:
   type: divine
 _id: ms7fxNiZVU4hRqNm
 folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
+img: systems/oq/assets/icons/themed/divided-spiral.svg
 name: Repair and Replace
 type: spell
 _key: '!items!ms7fxNiZVU4hRqNm'

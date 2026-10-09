@@ -26,7 +26,7 @@ system:
   type: sorcery
 _id: T04kbM58hkmOFcbv
 folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
+img: systems/oq/assets/icons/themed/ink-swirl.svg
 name: Teleport
 type: spell
 _key: '!items!T04kbM58hkmOFcbv'

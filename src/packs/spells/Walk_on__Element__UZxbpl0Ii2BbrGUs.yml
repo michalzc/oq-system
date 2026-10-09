@@ -18,6 +18,6 @@ type: spell
 folder: PmL84WZU2luOrJSw
 _id: UZxbpl0Ii2BbrGUs
 name: Walk on (Element)
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 _key: '!items!UZxbpl0Ii2BbrGUs'
 effects: []

@@ -34,7 +34,7 @@ system:
   type: divine
 _id: wyfZN6Mp8YX96YHx
 folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
+img: systems/oq/assets/icons/themed/divided-spiral.svg
 name: Spirit Block
 type: spell
 _key: '!items!wyfZN6Mp8YX96YHx'

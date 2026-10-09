@@ -40,7 +40,7 @@ system:
 folder: PmL84WZU2luOrJSw
 _id: Guze8QoPo8pHfNAE
 type: spell
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 name: Call Spirit (Type)
 _key: '!items!Guze8QoPo8pHfNAE'
 effects: []

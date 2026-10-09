@@ -16,7 +16,7 @@ system:
 _id: 1D8E2p8uLU78BcO3
 name: Clear Path
 folder: PmL84WZU2luOrJSw
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 type: spell
 _key: '!items!1D8E2p8uLU78BcO3'
 effects: []

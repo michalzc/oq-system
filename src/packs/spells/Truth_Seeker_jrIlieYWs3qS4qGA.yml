@@ -13,7 +13,7 @@ system:
   traits:
     - Instant
 folder: PmL84WZU2luOrJSw
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 _id: jrIlieYWs3qS4qGA
 name: Truth Seeker
 type: spell

@@ -7,6 +7,7 @@ import { registerChatCommands } from './chat-handlers/chat-command-listener.js';
 import { registerDataModels } from './init/register-data-models.js';
 import { registerDocuments } from './init/register-documents.js';
 import { registerHelpers } from './init/handlebar-helpers.js';
+import { registerIconFilters } from './init/icon-filters.js';
 import { applyCoreSettingDefaults, registerSettings } from './init/register-settings.js';
 import { buildMoneyService } from './utils/money.js';
 import '../styles/oq.less';
@@ -22,6 +23,7 @@ async function init() {
   registerHelpers();
   registerCustomHookHandlers();
   registerChatCommands();
+  registerIconFilters();
   registerSettings();
 
   await preloadTemplates();

@@ -14,7 +14,7 @@ system:
 _id: cp8ivAlWQwPKvOmS
 folder: PmL84WZU2luOrJSw
 type: spell
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 name: Restore Energy
 _key: '!items!cp8ivAlWQwPKvOmS'
 effects: []

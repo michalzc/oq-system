@@ -12,7 +12,7 @@ system:
   nonVariant: true
 type: spell
 _id: 2iuxEOg9k5rqfARf
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 folder: PmL84WZU2luOrJSw
 name: Harden
 _key: '!items!2iuxEOg9k5rqfARf'

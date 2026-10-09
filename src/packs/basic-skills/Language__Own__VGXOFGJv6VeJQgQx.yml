@@ -5,7 +5,7 @@ flags:
     newActor:
       - character
 folder: JvpDkeDs9DS0MQBD
-img: systems/oq/assets/icons/skills.svg
+img: systems/oq/assets/icons/themed/skills.svg
 name: Language (Own)
 ownership:
   default: 0

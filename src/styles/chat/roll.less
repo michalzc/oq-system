@@ -1,7 +1,7 @@
 .oq.chat.roll {
   .roll-title {
     .header-font();
-    color: @dark-color;
+    color: var(--oq-chat-color, @dark-color);
     font-size: var(--font-size-18);
     font-weight: bold;
     grid-column-start: span 2;
@@ -9,7 +9,7 @@
 
   .roll-subtitle {
     .header-font();
-    color: @dark-color;
+    color: var(--oq-chat-color, @dark-color);
     font-size: var(--font-size-14);
     font-weight: bold;
     grid-column-start: span 2;
@@ -56,7 +56,7 @@
 
     &.roll-result-fumble {
       color: @base-color;
-      background-color: @dark-color;
+      background-color: var(--oq-chat-color, @dark-color);
     }
 
     &.roll-result-criticalSuccess {
@@ -65,7 +65,7 @@
     }
 
     &.roll-result-failure {
-      color: @dark-color;
+      color: var(--oq-chat-color, @dark-color);
     }
   }
 
@@ -82,7 +82,7 @@
       .header-font();
       font-weight: bold;
       font-size: var(--font-size-18);
-      color: @dark-color;
+      color: var(--oq-chat-color, @dark-color);
     }
   }
 

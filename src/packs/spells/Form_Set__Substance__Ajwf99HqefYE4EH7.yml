@@ -38,7 +38,7 @@ system:
   type: sorcery
 _id: Ajwf99HqefYE4EH7
 folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
+img: systems/oq/assets/icons/themed/ink-swirl.svg
 name: Form/Set (Substance)
 type: spell
 _key: '!items!Ajwf99HqefYE4EH7'

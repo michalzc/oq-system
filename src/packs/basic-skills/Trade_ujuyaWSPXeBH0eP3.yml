@@ -5,7 +5,7 @@ flags:
     newActor:
       - character
 folder: szWzZEdK1HVFTQEr
-img: systems/oq/assets/icons/skills.svg
+img: systems/oq/assets/icons/themed/skills.svg
 name: Trade
 ownership:
   default: 0

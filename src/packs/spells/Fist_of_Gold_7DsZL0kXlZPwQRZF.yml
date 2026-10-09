@@ -8,7 +8,7 @@ system:
     magnitude that persists for the duration of the spell.</p>
 _id: 7DsZL0kXlZPwQRZF
 type: spell
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 name: Fist of Gold
 folder: PmL84WZU2luOrJSw
 _key: '!items!7DsZL0kXlZPwQRZF'

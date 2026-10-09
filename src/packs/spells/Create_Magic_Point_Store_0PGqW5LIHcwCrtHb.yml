@@ -46,7 +46,7 @@ system:
     released
 
     harmlessly into the surrounding area.</p>
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 _id: 0PGqW5LIHcwCrtHb
 type: spell
 name: Create Magic Point Store

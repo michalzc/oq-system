@@ -28,7 +28,7 @@ system:
   type: divine
 _id: lj0twPzomiKt38zt
 folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
+img: systems/oq/assets/icons/themed/divided-spiral.svg
 name: Shield
 type: spell
 _key: '!items!lj0twPzomiKt38zt'

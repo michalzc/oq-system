@@ -14,7 +14,7 @@ system:
   nonVariant: true
   type: personal
 name: Speedart
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 type: spell
 _id: 4C94G7NBZiO28ovx
 folder: PmL84WZU2luOrJSw

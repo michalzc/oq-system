@@ -1,6 +1,6 @@
 _id: O1V8XJFKPJQvCyLz
 folder: 3XzLI3qEcMxeUqEk
-img: systems/oq/assets/icons/thrown-knife.svg
+img: systems/oq/assets/icons/themed/thrown-knife.svg
 name: Throwing Knife
 system:
   correspondingSkill:

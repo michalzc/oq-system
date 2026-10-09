@@ -6,7 +6,7 @@ flags:
       - character
       - npc
 folder: szWzZEdK1HVFTQEr
-img: systems/oq/assets/icons/skills.svg
+img: systems/oq/assets/icons/themed/skills.svg
 name: Deception
 ownership:
   default: 0

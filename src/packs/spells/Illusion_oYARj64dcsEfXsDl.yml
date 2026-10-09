@@ -38,7 +38,7 @@ system:
   type: divine
 _id: oYARj64dcsEfXsDl
 folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
+img: systems/oq/assets/icons/themed/divided-spiral.svg
 name: Illusion
 type: spell
 _key: '!items!oYARj64dcsEfXsDl'

@@ -10,9 +10,9 @@ import io.circe.yaml.Printer
 import cats.syntax.option._
 
 val SpellIcons = Map(
-  "personal" -> "systems/oq/assets/icons/magic-swirl.svg",
-  "divine"   -> "systems/oq/assets/icons/divided-spiral.svg",
-  "sorcery"  -> "systems/oq/assets/icons/ink-swirl.svg"
+  "personal" -> "systems/oq/assets/icons/themed/magic-swirl.svg",
+  "divine"   -> "systems/oq/assets/icons/themed/divided-spiral.svg",
+  "sorcery"  -> "systems/oq/assets/icons/themed/ink-swirl.svg"
 )
 
 val SkillReferences = Map(

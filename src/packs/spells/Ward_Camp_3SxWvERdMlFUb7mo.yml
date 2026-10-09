@@ -21,7 +21,7 @@ system:
   type: divine
 _id: 3SxWvERdMlFUb7mo
 folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
+img: systems/oq/assets/icons/themed/divided-spiral.svg
 name: Ward Camp
 type: spell
 _key: '!items!3SxWvERdMlFUb7mo'

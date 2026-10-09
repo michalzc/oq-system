@@ -12,3 +12,10 @@
 // Core AppV1 values, which the sheet layouts were designed around. AppV2 windows don't define them.
 @item-row-height: 26px;
 @header-underline-color: #782e22;
+
+// System icons drawn in the PC palette, recolored with the filter from `init/icon-filters.js`.
+.npc-themed-icons() {
+  img[src*='systems/oq/assets/icons/themed/'] {
+    filter: url('#oq-npc-icon');
+  }
+}

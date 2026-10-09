@@ -17,7 +17,7 @@ system:
     magnitude x 20% of the Lock spell.</p>
 folder: PmL84WZU2luOrJSw
 type: spell
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 _id: JcLmy8uLAvjBTfGm
 name: Unlock
 _key: '!items!JcLmy8uLAvjBTfGm'

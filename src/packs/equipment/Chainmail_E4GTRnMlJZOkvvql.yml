@@ -1,7 +1,7 @@
 _id: E4GTRnMlJZOkvvql
 name: Chainmail
 folder: 1LSg8TGkuL3Z4Wyx
-img: systems/oq/assets/icons/chain-mail.svg
+img: systems/oq/assets/icons/themed/chain-mail.svg
 type: armour
 system:
   ap: 5

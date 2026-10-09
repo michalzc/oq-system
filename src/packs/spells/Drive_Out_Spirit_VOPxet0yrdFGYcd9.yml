@@ -20,7 +20,7 @@ system:
   nonVariant: false
 folder: PmL84WZU2luOrJSw
 _id: VOPxet0yrdFGYcd9
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 type: spell
 name: Drive Out Spirit
 _key: '!items!VOPxet0yrdFGYcd9'

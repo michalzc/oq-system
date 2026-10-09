@@ -38,7 +38,7 @@ system:
   type: sorcery
 _id: 3QoWPalsZ3pHGwai
 folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
+img: systems/oq/assets/icons/themed/ink-swirl.svg
 name: Neutralise Magic
 type: spell
 _key: '!items!3QoWPalsZ3pHGwai'

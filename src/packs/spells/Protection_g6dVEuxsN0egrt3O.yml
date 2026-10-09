@@ -9,7 +9,7 @@ system:
 name: Protection
 folder: PmL84WZU2luOrJSw
 _id: g6dVEuxsN0egrt3O
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 type: spell
 _key: '!items!g6dVEuxsN0egrt3O'
 effects: []

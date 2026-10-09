@@ -14,7 +14,7 @@ system:
   type: sorcery
 _id: zfWT49tSe3dDtjkP
 folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
+img: systems/oq/assets/icons/themed/ink-swirl.svg
 name: Damage Boosting
 type: spell
 _key: '!items!zfWT49tSe3dDtjkP'

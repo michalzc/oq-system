@@ -20,7 +20,7 @@ system:
   type: divine
 _id: rMuHpVgIkmWZCJBV
 folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
+img: systems/oq/assets/icons/themed/divided-spiral.svg
 name: True (Weapon)
 type: spell
 _key: '!items!rMuHpVgIkmWZCJBV'

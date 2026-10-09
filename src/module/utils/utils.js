@@ -74,3 +74,13 @@ export function renameLegacyField(source, oldKey, newKey, convert = (value) => v
   if (source[newKey] === undefined && value != null) source[newKey] = convert(value);
   delete source[oldKey];
 }
+
+const LEGACY_THEMED_ICON = /(systems\/oq\/assets\/icons\/)(?!cultist\.svg)([^/]+\.svg)$/;
+
+/**
+ * Moves a path of a recolorable system icon from the old `assets/icons/` location to `assets/icons/themed/`. Any other
+ * path, including the NPC portrait which stays in place, is returned unchanged.
+ * @param {string} path
+ * @returns {string}
+ */
+export const themedIconPath = (path) => path.replace(LEGACY_THEMED_ICON, '$1themed/$2');

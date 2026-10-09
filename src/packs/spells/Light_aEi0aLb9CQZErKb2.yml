@@ -17,7 +17,7 @@ system:
   magnitude: 1
 type: spell
 _id: aEi0aLb9CQZErKb2
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 name: Light
 folder: PmL84WZU2luOrJSw
 _key: '!items!aEi0aLb9CQZErKb2'

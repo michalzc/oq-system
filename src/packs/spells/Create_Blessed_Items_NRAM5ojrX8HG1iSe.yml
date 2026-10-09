@@ -42,7 +42,7 @@ system:
   type: divine
 _id: NRAM5ojrX8HG1iSe
 folder: dbvkv9rUDY2YT8qS
-img: systems/oq/assets/icons/divided-spiral.svg
+img: systems/oq/assets/icons/themed/divided-spiral.svg
 name: Create Blessed Items
 type: spell
 _key: '!items!NRAM5ojrX8HG1iSe'

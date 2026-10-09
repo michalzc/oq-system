@@ -57,7 +57,7 @@ system:
 folder: PmL84WZU2luOrJSw
 name: Create Scroll
 _id: IYC4DNTyAzPBr2ox
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 type: spell
 _key: '!items!IYC4DNTyAzPBr2ox'
 effects: []

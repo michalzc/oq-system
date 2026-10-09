@@ -29,7 +29,7 @@ system:
   type: sorcery
 _id: fwZelUXJzFIbI570
 folder: 9nSgoZ4l88FtYgms
-img: systems/oq/assets/icons/ink-swirl.svg
+img: systems/oq/assets/icons/themed/ink-swirl.svg
 name: Spell Resistance
 type: spell
 _key: '!items!fwZelUXJzFIbI570'

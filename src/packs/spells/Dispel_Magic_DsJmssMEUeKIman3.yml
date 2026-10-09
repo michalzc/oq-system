@@ -24,7 +24,7 @@ system:
   type: personal
 type: spell
 name: Dispel Magic
-img: systems/oq/assets/icons/magic-swirl.svg
+img: systems/oq/assets/icons/themed/magic-swirl.svg
 _id: DsJmssMEUeKIman3
 folder: PmL84WZU2luOrJSw
 _key: '!items!DsJmssMEUeKIman3'

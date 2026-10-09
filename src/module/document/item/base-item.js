@@ -2,7 +2,7 @@ import { displayItem } from '../../utils/chat.js';
 import { damageRoll, testRoll } from '../../utils/roll.js';
 import { promptTestRoll } from '../../application/test-roll-dialog.js';
 import { promptDamageRoll } from '../../application/damage-roll-dialog.js';
-import { renderTemplate } from '../../utils/utils.js';
+import { renderTemplate, themedIconPath } from '../../utils/utils.js';
 
 /**
  * @typedef {object} ItemRollValue
@@ -22,6 +22,11 @@ export class OQBaseItem extends Item {
     } else {
       return super.getDefaultArtwork(itemData);
     }
+  }
+
+  static migrateData(source, options) {
+    if (source.img) source.img = themedIconPath(source.img);
+    return super.migrateData(source, options);
   }
 
   prepareDerivedData() {
