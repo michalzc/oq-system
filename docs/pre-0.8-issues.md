@@ -62,11 +62,21 @@ Suggested fix: compare returned document IDs with the requested IDs and count
 omitted updates as failures, retaining the previous migration version for retry.
 
 Resolution: each batch now counts only requested IDs returned by Foundry as
-migrated. Omitted IDs are logged and counted as failures, keeping the previous
-migration version and blocking later migration steps. Remaining batches and
+migrated. Omitted IDs are logged and counted as failures. Remaining batches and
 collections still run. The shared check covers world documents, embedded
 documents, and world compendia; compendium locks are restored after omissions.
-Reload retries changes that were not persisted.
+An update result that isn't an array, from a wrapper breaking the update
+contract, can't show which documents were omitted, so its batch counts as saved.
+
+When a migration has failures, the GM chooses in a dialog whether to retry it on
+the next load or skip the failed documents. Retrying, also when the dialog is
+closed, keeps the previous migration version and blocks later migration steps;
+reload retries changes that were not persisted. Skipping stores the version and
+runs later migrations, and the skipped documents keep their old data. Foundry
+omits the same updates on every load when a module hook vetoes them or the data
+fails validation, so without the skip such failures would block migrations for
+good. Failures are counted per migration, so a failure in a later migration no
+longer keeps an earlier successful one from being stored.
 
 Limits: this does not repair worlds whose migration version already advanced
 incorrectly before the fix.
@@ -97,17 +107,21 @@ magnitude. Split divine spells use their current remaining magnitude.
 
 ## Validation
 
-- All 132 tests passed, including 20 casting regression tests in
-  [`test-spell-casting.js`](../test/test-spell-casting.js) and eight new migration
+- All 137 tests passed, including 20 casting regression tests in
+  [`test-spell-casting.js`](../test/test-spell-casting.js) and 13 new migration
   regression tests in [`test-migrations.js`](../test/test-migrations.js).
 - JavaScript, template, and style lint checks passed.
 - Casting tests exercise the real casting methods with controlled dialogs, dice
   fulfillment, and updates. They cover casts confirmed from dialogs opened at the
   same time, resource edits, casting costs, shortcut limits, cancellation, and
   failures. Eleven of them fail against the casting code before the fix.
-- Migration tests cover empty and partial results, returned ID matching, omitted
-  embedded and compendium updates, lock restoration, rejected batches, and
-  continued processing. The reload test separates persisted and in-memory data
-  and verifies that only unsaved changes are retried before the version advances.
+- Migration tests cover empty, partial, and non-array results, returned ID
+  matching, omitted embedded and compendium updates, lock restoration, rejected
+  batches, and continued processing. The reload test separates persisted and
+  in-memory data and verifies that only unsaved changes are retried before the
+  version advances. Others cover the GM's retry and skip choices, a later
+  migration running after a skip, and per-migration failure counts.
 - Validation uses document harnesses, not end-to-end browser tests. Six new
   migration tests reproduced finding #2 before the fix and pass with the fix.
+  Six more fail against the runner before the skip dialog and the non-array
+  handling.

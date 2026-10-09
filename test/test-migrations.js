@@ -118,6 +118,9 @@ describe('migration-runner.js', function () {
     let storedVersion;
     let updates;
     let notifications;
+    let dialogs;
+    // The GM's answer to the failed migration dialog, null when it is closed.
+    let dialogAnswer;
 
     // Foundry writes the parent into the operation it is given, which must not leak into the next update. The changes
     // are already applied in memory, so they must be sent without diffing.
@@ -172,7 +175,19 @@ describe('migration-runner.js', function () {
 
     function setGlobals({ isGM = true, documents = {}, packs = [] } = {}) {
       globalThis.CONFIG = { OQ: { SYSTEM_ID: 'oq', SettingsConfig } };
-      globalThis.foundry = { data: { operators: { ForcedReplacement: { create: (value) => ({ replaced: value }) } } } };
+      globalThis.foundry = {
+        data: { operators: { ForcedReplacement: { create: (value) => ({ replaced: value }) } } },
+        applications: {
+          api: {
+            DialogV2: {
+              wait: async (config) => {
+                dialogs.push(config);
+                return dialogAnswer;
+              },
+            },
+          },
+        },
+      };
       globalThis.ui = {
         notifications: {
           warn: (message) => notifications.push(['warn', message]) && message,
@@ -215,6 +230,8 @@ describe('migration-runner.js', function () {
       storedVersion = 0;
       updates = [];
       notifications = [];
+      dialogs = [];
+      dialogAnswer = null;
     });
 
     it('Should migrate world documents with their embedded documents and store the version', async function () {
@@ -305,8 +322,91 @@ describe('migration-runner.js', function () {
       await run();
 
       expect(updates.map(({ target }) => target)).to.eql(['Item']);
+      expect(dialogs.map(({ content }) => content)).to.eql(['<p>OQ.Migration.SkipPrompt {"version":1,"count":1}</p>']);
       expect(storedVersion).to.be(0);
       expect(notifications.at(-1)[0]).to.be('error');
+    });
+
+    it('Should keep the version when the GM chooses to retry', async function () {
+      setGlobals({ documents: { macros: [new FakeDocument({ _id: 'm1', img: LEGACY })] } });
+      game.macros.documentClass.updateDocuments = async () => [];
+      dialogAnswer = 'retry';
+
+      await run();
+
+      expect(dialogs.length).to.be(1);
+      expect(storedVersion).to.be(0);
+      expect(notifications.at(-1)).to.eql(['error', 'OQ.Migration.Failed {"count":1}']);
+    });
+
+    it('Should store the version and warn when the GM skips the failed documents', async function () {
+      setGlobals({ documents: { macros: [new FakeDocument({ _id: 'm1', img: LEGACY })] } });
+      game.macros.documentClass.updateDocuments = async () => [];
+      dialogAnswer = 'skip';
+
+      await run();
+
+      expect(dialogs.length).to.be(1);
+      expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+      expect(notifications).to.eql([
+        ['warn', 'OQ.Migration.Begin'],
+        ['remove', 'OQ.Migration.Begin'],
+        ['warn', 'OQ.Migration.CompleteSkipped {"count":1}'],
+      ]);
+    });
+
+    describe('with a later migration', function () {
+      let later;
+
+      beforeEach(function () {
+        later = {
+          version: LATEST_MIGRATION_VERSION + 1,
+          name: 'Rename',
+          handlers: { Macro: (source) => (source.name === 'old' ? { name: 'new' } : {}) },
+        };
+        migrations.push(later);
+      });
+
+      afterEach(function () {
+        migrations.pop();
+      });
+
+      it('Should run the later migration after the GM skips the failed documents', async function () {
+        setGlobals({ documents: { macros: [new FakeDocument({ _id: 'm1', img: LEGACY, name: 'old' })] } });
+        const update = game.macros.documentClass.updateDocuments;
+        game.macros.documentClass.updateDocuments = async (batch, options) =>
+          batch[0].img ? [] : update(batch, options);
+        dialogAnswer = 'skip';
+
+        await run();
+
+        expect(dialogs.length).to.be(1);
+        expect(updates.map(({ batch }) => batch)).to.eql([[{ _id: 'm1', name: 'new' }]]);
+        expect(storedVersion).to.be(later.version);
+        expect(notifications.at(-1)).to.eql(['warn', 'OQ.Migration.CompleteSkipped {"count":1}']);
+      });
+
+      it('Should store the earlier migration when only the later one fails', async function () {
+        const macros = ['m1', 'm2'].map((_id) => new FakeDocument({ _id, img: LEGACY }));
+        setGlobals({ documents: { macros } });
+        later.handlers.Macro = () => {
+          throw new Error('invalid');
+        };
+
+        await run();
+
+        expect(updates.map(({ batch }) => batch)).to.eql([
+          [
+            { _id: 'm1', img: THEMED },
+            { _id: 'm2', img: THEMED },
+          ],
+        ]);
+        expect(dialogs.map(({ content }) => content)).to.eql([
+          `<p>OQ.Migration.SkipPrompt {"version":${later.version},"count":2}</p>`,
+        ]);
+        expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+        expect(notifications.at(-1)).to.eql(['error', 'OQ.Migration.Failed {"count":2}']);
+      });
     });
 
     it('Should fail every requested document when an update returns no documents', async function () {
@@ -344,6 +444,21 @@ describe('migration-runner.js', function () {
       ]);
       expect(storedVersion).to.be(0);
       expect(notifications.at(-1)).to.eql(['error', 'OQ.Migration.Failed {"count":2}']);
+    });
+
+    it('Should count a batch as saved when its update does not return an array', async function () {
+      setGlobals({ documents: { macros: [new FakeDocument({ _id: 'm1', img: LEGACY })] } });
+      const update = game.macros.documentClass.updateDocuments;
+      game.macros.documentClass.updateDocuments = async (batch, options) => {
+        await update(batch, options);
+      };
+
+      await run();
+
+      expect(updates.length).to.be(1);
+      expect(dialogs).to.eql([]);
+      expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+      expect(notifications.at(-1)).to.eql(['info', 'OQ.Migration.Complete']);
     });
 
     it('Should accept all requested document IDs returned in a different order', async function () {

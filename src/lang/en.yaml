@@ -247,12 +247,22 @@ OQ:
   Migration:
     Begin: Migrating the world data to the new OQ system version. Do not close the game until it completes.
     Complete: The world data migration completed.
+    CompleteSkipped: >-
+      The world data migration completed, skipping {count} documents. They keep their old data. See the browser console
+      for details.
     Failed: >-
       The world data migration failed for {count} documents. See the browser console for details. The migration runs
       again on the next load.
     NewerVersion: >-
       The world data was migrated by a newer OQ system version (migration {version}). Update the system before
       editing the world.
+    Retry: Retry on next load
+    Skip: Skip them and continue
+    SkipPrompt: >-
+      Migration {version} could not update {count} documents. See the browser console (F12) for the documents and
+      errors. You can retry the migration on the next load, or skip these documents and continue. Skipped documents
+      keep their old data.
+    SkipTitle: World data migration failed
   Nav:
     Combat: Combat
     Description: Description
