@@ -17,23 +17,6 @@ the migration review and completed combat tracker redesign.
 
 Issue numbers refer to the [GitHub tracker](https://github.com/michalzc/oq-system/issues).
 
-### v0.8 — Magic and quality of life
-
-* ~~Spell casting dialog: roll the referenced casting skill, deduct MP by magnitude, post a chat card~~ —
-  [#94](https://github.com/michalzc/oq-system/issues/94). **Done**
-* ~~Custom spell type~~ — [#110](https://github.com/michalzc/oq-system/issues/110). **Done**: spells of the *Custom
-  Type* are grouped by their custom type name, after the other spells on the Magic tab and in the NPC spell list.
-* ~~Item sheet option to add an item to new characters / NPCs, instead of editing `flags.oq.newActor` by hand~~ —
-  [#121](https://github.com/michalzc/oq-system/issues/121). **Done**: GMs use *Default for New Actors* in the item
-  sheet's header menu, for items outside actors. With the *Default Items from World* setting, marked world items are
-  added next to the ones from the selected compendium.
-* ~~Documentation compendium updated for the new sheets and combat flow~~ —
-  [#61](https://github.com/michalzc/oq-system/issues/61). **Done**: the journals are generated from HTML in
-  [docs/packs](docs/packs/README.md) with `yarn build:docs`.
-* ~~Change colours for NPCs items and actions (optional)~~ — [#152](https://github.com/michalzc/oq-system/issues/152)
-  **Done**, also migations mechanism introduced.
-* ~~Recommended world settings~~ — [#153](https://github.com/michalzc/oq-system/issues/153) **Done**
-
 ### v0.9 — Buffs and Active Effects
 
 * Temporary HP / MP above the maximum, independent of Active Effects —
@@ -58,6 +41,23 @@ Issue numbers refer to the [GitHub tracker](https://github.com/michalzc/oq-syste
 * Combat automation — [#10](https://github.com/michalzc/oq-system/issues/10).
 
 ### Completed
+
+#### v0.8 — Magic and quality of life
+
+* ~~Spell casting dialog: roll the referenced casting skill, deduct MP by magnitude, post a chat card~~ —
+  [#94](https://github.com/michalzc/oq-system/issues/94). **Done**
+* ~~Custom spell type~~ — [#110](https://github.com/michalzc/oq-system/issues/110). **Done**: spells of the *Custom
+  Type* are grouped by their custom type name, after the other spells on the Magic tab and in the NPC spell list.
+* ~~Item sheet option to add an item to new characters / NPCs, instead of editing `flags.oq.newActor` by hand~~ —
+  [#121](https://github.com/michalzc/oq-system/issues/121). **Done**: GMs use *Default for New Actors* in the item
+  sheet's header menu, for items outside actors. With the *Default Items from World* setting, marked world items are
+  added next to the ones from the selected compendium.
+* ~~Documentation compendium updated for the new sheets and combat flow~~ —
+  [#61](https://github.com/michalzc/oq-system/issues/61). **Done**: the journals are generated from HTML in
+  [docs/packs](docs/packs/README.md) with `yarn build:docs`.
+* ~~Change colours for NPCs items and actions (optional)~~ — [#152](https://github.com/michalzc/oq-system/issues/152)
+  **Done**, also migations mechanism introduced.
+* ~~Recommended world settings~~ — [#153](https://github.com/michalzc/oq-system/issues/153) **Done**
 
 #### v0.7 — Release the v14 / ApplicationV2 work
 
