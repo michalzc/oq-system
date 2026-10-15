@@ -1,0 +1,969 @@
+= Active Effects — implementation plan
+:icons: font
+:toc: right
+
+Roadmap item: v0.9, https://github.com/michalzc/oq-system/issues/14[#14]
+(README.md:20-27). Branch: `feature/#14-active-effects-support`. Line
+references are to commit `e161fdb`; recheck them after each task.
+
+== Goal
+
+Make Active Effects work for OpenQuest values. Effects use a small,
+system-owned vocabulary of *keys*, not data paths. The system applies
+each key at the right step of data preparation, so: - a STR effect
+changes the damage modifier; - a CON effect changes HP max; - a skill
+effect changes every weapon and spell that uses the skill.
+
+Effects never change stored fields, so their values are never saved into
+sheet or dialog forms.
+
+Today effects are inert. `OQBaseActor.prepareEmbeddedDocuments`
+(`src/module/document/actor/base-actor.js:67-77`) calls
+`applyActiveEffects('initial')` after characteristics, HP, MP, DM, MR
+and every skill, weapon and spell value have been calculated. Only `ap`
+and `initiative`, which are calculated later, could react to an effect.
+
+== Decisions
+
+* *HP/MP:* an effect that raises `attributes.hp` or `attributes.mp`
+raises max and current by the same amount.
+** When the effect’s contribution goes down (the effect ends, is
+disabled or suppressed, or is negative), current is only capped at the
+new max.
+** This matches Vigour: ``damage comes off the magical hit points
+first'' (SRD Personal Magic 970-974).
+** Characteristic effects (CON, SIZ, POW) change max only. This matches
+Enhance (POW), which ``does not increase the character’s magic points''
+(SRD Sorcery 587).
+** Accepted side effect: removing a negative HP effect from a wounded
+character gives the HP back.
+* *Skills:* `skills.<slug>` changes the skill *value*.
+** Bonuses stack, and flow into weapons, spells and the initiative
+declaration.
+** The skill’s `mod` and the roll dialog’s ``Other mods'' stay for
+situational modifiers.
+* *Damage modifier:* the base stays the STR+SIZ table plus `dm.mod`, so
+STR/SIZ effects move along the table. An `attributes.dm` effect is a
+formula term: `add` appends it (`+1d6`, `+1`), `override` replaces the
+whole value.
+* *Extra keys from the spell survey:*
+** skill groups;
+** skills by base characteristic;
+** armour item AP;
+** a weapon damage dice multiplier.
+
+== Effect keys
+
+[width="100%",cols="20%,20%,20%,20%,20%",options="header",]
+|===
+|Key |Changes |Kind |Change types |SRD examples
+|`characteristics.<str\|con\|dex\|siz\|int\|pow\|cha>` |characteristic
+value (base + mod + effects), ≥ 0 |number |all numeric
+|Enhance/Diminish, Mindblast, poisons (−3 CON), Shapechange (override)
+
+|`attributes.hp`, `attributes.mp` |max; current follows the HP/MP rule
+|number |all numeric |Vigour (+2/mag)
+
+|`attributes.mr` |movement |number |all numeric |Mobility (+2/mag),
+Slow, Haste/Hamper, Rout (×2)
+
+|`attributes.ap` |actor armour points |number |all numeric |Protection,
+Shield (+1/mag)
+
+|`attributes.initiative` |initiative declaration total |number |all
+numeric |Coordination, Haste
+
+|`attributes.dm` |damage modifier |formula |add, override |Strength
+(+1/mag), Enhance Unit (+1d6)
+
+|`skills.<slug>` |one skill’s value; ignored when the actor has no such
+skill |number |all numeric |Fanaticism, Berserk, Enhance (Skill)
+
+|`skillTypes.<resistance\|combat\|knowledge\|practical\|magic\|custom\|all>`
+|every skill of a type, or all |number |all numeric |Demoralise (combat
+×0.5), Fear/Madness, Fatigue (all −20)
+
+|`skillsUsing.<str\|con\|dex\|siz\|int\|pow\|cha>` |every skill whose
+formula uses `@<char>` |number |all numeric |Befuddle (INT −20),
+Mischief #10 (DEX −20)
+
+|`item.skill` |weapon attack value; weapon’s own effects only |number
+|all numeric |Weapon Enhance (+10/mag), Speedart (+20)
+
+|`item.damage` |weapon base damage, before DM; weapon’s own effects only
+|formula |add, override, multiply (dice counts) |Fireblade (+1d10),
+Damage Boosting, True (Weapon) (×2 dice)
+
+|`item.ap` |armour item AP; armour’s own effects only |number |all
+numeric |holy armour (×2), Mischief #6 (override 0)
+
+|`token.*` |passed to Foundry core |core |core |Light/Glow light radius,
+Farsight
+|===
+
+The numeric change types are `add`, `subtract`, `multiply`, `override`,
+`upgrade` and `downgrade`.
+
+* *Order:* changes apply in priority order: `change.priority`, or else
+the type’s default (multiply 10, add/subtract 20, downgrade 30, upgrade
+40, override 50). Ties keep insertion order.
+* *Rounding:* numeric results are rounded up once per chain, as the SRD
+rounds up.
+* *Not targetable:* `attributes.gr` (growth points) and `attributes.fn`
+(fortune points).
+* *Ignored keys:* any other key, `system.*` included, does nothing and
+is flagged in the effect sheet.
+* *Not supported in values:* `@` references.
+* *Transfer:*
+** Actor keys on an item’s effect apply only when `transfer` is on (core
+rule).
+** `item.*` keys apply to the item holding the effect, whatever
+`transfer` is set to.
+* *Phase:* the change `phase` is ignored for system keys.
+* *Slugs:* slugs come from skill names (`makeSlug`,
+`src/module/utils/utils.js:26`).
+** The SRD skill is Close Combat (`close-combat`); there is no Melee
+Combat.
+** Renaming a skill breaks effects that use its slug, as it already does
+for weapons and spells.
+* *Suppression:* an item’s effects are suppressed in these cases:
+** spells: always — their effects are templates, and a known spell is
+not an active spell;
+** armour: unless worn or natural;
+** weapons and equipment: while stored;
+** skills and special abilities: never.
+
+== Foundry v14 facts the tasks rely on
+
+All of these were checked in the Foundry 14.368 sources
+(`foundryvtt-api/`).
+
+* *Preparation order:* `system.prepareBaseData` →
+`actor.prepareBaseData` → `prepareEmbeddedDocuments` →
+`system.prepareDerivedData` → `prepareDerivedData` →
+`applyActiveEffects('final')`
+(`client/documents/abstract/client-document.mjs:313-320`,
+`client/documents/actor.mjs:428-446`).
+** When `actor.prepareBaseData` runs, items and effects are initialised
+from source but not yet prepared in this cycle
+(`client-document.mjs:60-67`).
+* *Change data:* `effect.system.changes[]` holds
+`{key, type, value (AnyField), phase ('initial'), priority   (nullable)}`
+(`common/data/active-effect.mjs:15-25`).
+** Default priorities are in `CONST.ACTIVE_EFFECT_CHANGE_TYPES`
+(`common/constants.mjs:107-160`).
+** `ActiveEffect#prepareBaseData` fills in `priority`
+(`client/documents/active-effect.mjs:265-272`).
+** `custom` is a core type and appears in the type dropdown.
+* *Where changes are applied:* `Actor#applyActiveEffects(phase)`
+(`actor.mjs:212-272`) applies only the changes for which
+`effect.shouldApplyChange(change, {phase})` returns true (l.245).
+** Statuses are collected per effect regardless (l.254-256).
+** `token.*` changes are routed to tokens (l.248-252).
+** Any other key goes to `_applyChangeUnguided`
+(`active-effect.mjs:594-674`). For `characteristics.str` that merges a
+garbage property onto the actor, so `shouldApplyChange` must reject
+system keys.
+* *Suppression:* `isSuppressed` is
+`!!(this.system.isSuppressed ?? this.duration.expired)`, and `active` is
+`!disabled && !isSuppressed` (`active-effect.mjs:191-211`).
+* *Which effects reach the actor:* `Actor#allApplicableEffects` yields
+actor effects plus item effects with `transfer` (`actor.mjs:305-314`).
+Core never applies effects to items.
+* *Effect config sheet:* `ActiveEffectConfig` JSON-parses change values
+on submit
+(`client/applications/sheets/active-effect-config.mjs:202-207`). `"10"`
+becomes 10; `"+5"` and `"1d6"` stay strings. The `phase` field is a
+hidden input (`templates/sheets/active-effect/change.hbs`).
+* *Descendant events:* the client backend runs `preX` → `parent.reset()`
+→ `onX` with no `await` in between (`client/data/client-backend.mjs`:
+create l.155/168/173, update l.319/342/348, delete l.447/471/477).
+** For an item’s effects, core
+`Actor._on{Create,Update,Delete}DescendantDocuments` resets the actor
+(`actor.mjs:712/730/748`), so system code must run after `super`.
+** `ActorDelta` replays the events on its synthetic actor
+(`client/documents/actor-delta.mjs:241-248`, reset l.115-119).
+* *Expiry:* `ActiveEffectRegistry.refresh` marks expired effects
+(`duration.expired: true`) only on the active GM’s client
+(`client/helpers/active-effect-registry.mjs:146-166`). The default
+`CONFIG.ActiveEffect.expiryAction` is `"update"`, so expired effects
+stay on the document.
+* *Drag and drop:* `ActorSheetV2` and `ItemSheetV2` already drag
+`.draggable` rows with `data-effect-id` (and `data-item-id`), and create
+dropped effects
+(`client/applications/sheets/actor-sheet.mjs:224-238, 308-314`,
+`item-sheet.mjs:100, 168`).
+** Core refuses to drop an effect from an actor’s own item onto that
+actor (`actor-sheet.mjs:311`).
+* *Compendium effects:* they are created with `transfer: false`
+(`common/documents/active-effect.mjs:126-129`). `ActiveEffect` is a
+primary document type only in compendiums; there is no world sidebar for
+effects.
+* *Sheet registration:* use
+`foundry.applications.apps.DocumentSheetConfig.registerSheet(cls, scope, sheet, opts)`
+(`client/applications/apps/document-sheet-config.mjs:410-424`). Don’t
+write `CONFIG.*.sheetClasses` directly.
+* *Possible core bug:* `Item._preCreate`
+(`client/documents/item.mjs:91`) passes the effect start without a
+`{start}` wrapper. Timed effects on items may then never get `start` and
+never expire (`isExpiryTrackable`, `active-effect.mjs:233`). Timed buffs
+belong on the actor; check this in the game.
+
+== Conventions for every task
+
+* *Before ticking a task:* run `yarn test` and `yarn lint`. Tick the
+checkbox and add a short *Resolution* note under the task.
+* *`src/module/utils/effects.js` stays pure and importable by mocha:*
+** no `foundry`, `CONFIG` or `game` at module evaluation;
+** no imports from `consts/*`, because `items-config.js` imports sheets;
+** lodash is fine;
+** keep local constants with ``keep in sync with …'' comments.
+* *Prepared state on documents:* use plain properties assigned during
+preparation (`this.oqEffectChanges`).
+** Never `#private` fields or class field initialisers. Preparation runs
+inside the constructor; core uses `overrides = this.overrides ?? {}` for
+the same reason.
+* *Effects only change prepared values.* Forms bind stored fields, read
+from `_source` where prepared and stored values can differ.
+* *Document tests:* follow the stubbed-globals pattern of
+`test/test-spell-casting.js` and `test/test-combat.js`. Save and restore
+the globals; stub `Actor`, `Item`, `ActiveEffect`, `Roll` and
+`CONFIG.OQ`; import dynamically after stubbing; polyfill
+`String.prototype.slugify` for `makeSlug`.
+* *Labels:* go under `OQ.Effects.*` in `src/lang/en.yaml`.
+`OQ.Nav.Effects` already exists (`en.yaml:270`).
+* *Styles:* go in a new `src/styles/sheet/effects.less`, imported where
+the other sheet styles are.
+
+== Task overview
+
+.Tasks
+[width="100%",cols="25%,25%,25%,25%",options="header",]
+|===
+|Task |Title |Depends on |Suggested PR
+|E1 |Effect keys and constants |— |A: engine
+
+|E2 |Collecting and applying numeric changes |E1 |A
+
+|E3 |Formula changes; DM refactor |E1, E2 |A
+
+|E4 |System ActiveEffect class |E1 |B: foundations
+
+|E5 |Keep effects out of stored fields |— |B
+
+|E6 |Effect lists on actor and item sheets |E4 |B
+
+|E7 |Pipeline: collect changes, characteristic keys |E2, E4 |C: actor
+keys
+
+|E8 |Attribute keys |E3, E7 |C
+
+|E9 |Skill keys |E7 |C
+
+|E10 |Weapon keys and damage consumers |E3, E9 |D: item keys
+
+|E11 |Armour key |E10 |D
+
+|E12 |HP/MP current-value sync |E8 |E: resources
+
+|E13 |Effect config sheet: key suggestions and validation |E6, E8–E11
+|F: polish
+
+|E14 |Modified-value markers |E8–E11 |F
+
+|E15 |Documentation and roadmap |all |F
+|===
+
+.Icons
+[frame=none, grid=none,width=30%]
+|===
+| Not Completed |icon:square-o[]
+| Completed |icon:check[]
+|===
+
+Effects can be checked by hand in Foundry from E6 onwards.
+
+== A. Engine (`src/module/utils/effects.js`)
+
+=== icon:square-o[] E1. Effect keys and constants
+
+* *Depends on:* —
+* *Files:* new `src/module/utils/effects.js`, new
+`test/test-effects.js`.
+* *Work:*
+** Constants:
+*** `CHARACTERISTIC_KEYS = ['str','con','dex','siz','int','pow','cha']`
+*** `SKILL_TYPE_KEYS = ['resistance','combat','knowledge','practical','magic','custom']`,
+plus `'all'` for `skillTypes`
+*** `NUMERIC_ATTRIBUTE_KEYS = ['hp','mp','mr','ap','initiative']`
+*** `FORMULA_ATTRIBUTE_KEYS = ['dm']`
+*** `ITEM_KEYS = { weapon: { skill: 'numeric', damage: 'formula' }, armour: { ap: 'numeric' } }`
+*** `NUMERIC_CHANGE_TYPES = ['add','subtract','multiply','override','upgrade','downgrade']`
+*** `FORMULA_CHANGE_TYPES = { 'attributes.dm': ['add','override'], 'item.damage': ['add','override','multiply'] }`
+*** `DEFAULT_PRIORITIES = { custom: 0, multiply: 10, add: 20, subtract: 20, downgrade: 30, upgrade: 40, override: 50 }`
+** `parseEffectKey(key)` returns
+`{ scope: 'actor'|'item'|'token', group, name, kind: 'numeric'|'formula'|'core' }`,
+or `null`.
+*** Groups: `characteristics`, `attributes`, `skills`, `skillTypes`,
+`skillsUsing`, `item`, `token`.
+*** Trim the key. `skills.` takes everything after the prefix as the
+slug, which must be non-empty.
+*** Return `null` for `attributes.fn`, `attributes.gr`, `system.*`,
+unknown groups, names and empty keys.
+** `isCoreEffectKey(key)` returns `key.startsWith('token.')`.
+* *Tests:*
+** Every valid family.
+** `attributes.fn`, `attributes.gr`, `system.characteristics.str.base`,
+`skills.` (empty), `skillTypes.foo`, `skillsUsing.foo`, `item.foo`,
+`token.light.dim`, and whitespace around a key.
+* *Done when:* the key table above maps one-to-one to `parseEffectKey`
+results.
+
+=== icon:square-o[] E2. Collecting and applying numeric changes
+
+* *Depends on:* E1
+* *Files:* `src/module/utils/effects.js`, `test/test-effects.js`.
+* *Work:*
+** `buildActorEffectChanges(effects)` takes an iterable of `{ changes }`
+that the caller has already filtered to active effects.
+*** It keeps actor-scope keys and returns
+`{ byKey: Map<string, OQEffectChange[]>, isEmpty }`.
+*** An `OQEffectChange` is
+`{ key, group, name, kind, type, value, priority, order }`.
+*** `priority = change.priority ?? DEFAULT_PRIORITIES[type] ?? 0`;
+`order` is the insertion index.
+** `buildItemEffectChanges(effects, itemType)` returns
+`{ skill: [], damage: [], ap: [] }`. It keeps only the `item.*` keys
+that are valid for `itemType`.
+** `changesForKey(index, key)` returns the changes sorted by
+`(priority, order)`, or `[]` for a nullish index.
+** `referencedCharacteristics(formula)` matches
+`/@(str|con|dex|siz|int|pow|cha)\b/gi` and returns the unique lowercase
+names.
+** `changesForSkill(index, { slug, type, formula })` merges
+`skillTypes.all`, `skillTypes.<type>`, `skillsUsing.<c>` for every
+referenced characteristic, and `skills.<slug>`, sorted.
+** `parseNumericValue(value)`: returns a finite number as is; parses a
+numeric string (`"+5"`, `"-20"`, `"0.5"`); returns `null` for anything
+else, including `""`.
+** `roundUp(v) = Math.ceil(Math.round(v * 1e6) / 1e6)`. This keeps
+`10 * 1.1` from becoming 12.
+** `applyNumericChanges(base, changes)`:
+*** Applies `add`, `subtract`, `multiply`, `override`, `upgrade` (max)
+and `downgrade` (min) in order.
+*** Skips `custom`, unknown types and invalid values.
+*** Returns `base` unchanged when nothing applied; otherwise rounds up
+once at the end of the chain.
+* *Tests:*
+** Priority defaults and stable order; an explicit priority wins.
+** Every type.
+** Demoralise (×0.5) followed by +20, in that order.
+** Invalid values are skipped.
+** `roundUp`: `10*1.1`, `7.5`, `-7.5`.
+** `changesForSkill` merging.
+** `buildItemEffectChanges` filters by item type.
+* *Done when:* both pipelines (E7–E11) can be expressed through these
+functions alone.
+
+=== icon:square-o[] E3. Formula changes; DM refactor
+
+* *Depends on:* E1, E2
+* *Files:* `src/module/utils/effects.js`,
+`src/module/document/actor/base-actor.js:158-167`,
+`test/test-effects.js`.
+* *Work:*
+** `formulaValue(value)`: a number becomes `String(value)`; a non-empty
+trimmed string is returned as is; anything else returns `null`.
+** `appendFormulaTerm(formula, term)`:
+*** a signed term (`+…`, `-…`) gives `"<f> <term>"`;
+*** an unsigned term gives `"<f> + <term>"`;
+*** with an empty `formula`, the result keeps the sign: `"+1d6"`,
+`"+ 1d6"`, `"-2"`.
+*** DM values are fragments appended to weapon formulas, so they must
+stay signed.
+** `multiplyDiceCounts(formula, factor)`:
+*** Uses the regex `/(^|[^\w@.])(\d*)([dD])(\d+)/g`; the new count is
+`roundUp((count || 1) * factor)`.
+*** Flat numbers and `@refs` are unchanged.
+*** A factor ≤ 0 or not a number leaves the formula unchanged.
+*** True (Weapon) ``doubles the damage dice'', so `1d4+1` becomes
+`2d4+1`.
+** `applyFormulaChanges(formula, changes, { allowedTypes })` runs the
+sorted chain: `add` appends, `override` replaces, `multiply` multiplies
+dice counts. Other types are skipped.
+** Refactor `calculateDamageModifier` so the `dm.mod` term uses
+`appendFormulaTerm`, with no change in behaviour.
+* *Tests:*
+** `appendFormulaTerm` cases:
+*** `'' + '+2'` → `'+2'`;
+*** `'+1d4' + '2'` → `'+1d4 + 2'`;
+*** `'-1d4' + '-1'` → `'-1d4 -1'`.
+** `multiplyDiceCounts` on `1d8`, `d8`, `2d6+1`, `1d10+1d4`, `4d6kh3`
+and `@dm`, with factors 2, 1.5 and 0.
+** `applyFormulaChanges`: ordering, an override followed by an add,
+disallowed types.
+* *Done when:* the existing DM output is unchanged for every row of the
+damage modifier table, with and without `dm.mod`. The only difference
+allowed is surrounding whitespace: today an empty table row gives
+`' +2'`.
+
+== B. Foundations
+
+=== icon:square-o[] E4. System ActiveEffect class
+
+* *Depends on:* E1
+* *Files:*
+** new `src/module/document/active-effect.js`;
+** `src/module/init/register-documents.js`;
+** `src/module/utils/effects.js` (`itemSuppressesEffects`);
+** new `test/test-active-effect.js`.
+* *Work:*
+** `itemSuppressesEffects({ type, state })`:
+*** `spell` → `true`;
+*** `armour` → `!['worn','natural'].includes(state)`;
+*** `weapon` / `equipment` → `state == 'stored'`;
+*** anything else → `false`.
+** `class OQActiveEffect extends ActiveEffect`:
+*** `shouldApplyChange(change, options)` returns
+`isCoreEffectKey(change.key) && super.shouldApplyChange(...)`, so core
+applies `token.*` only.
+*** `get isSuppressed()` returns true when the parent is an Item and
+`itemSuppressesEffects({ type: item.type, state: item.system.state })`
+holds; otherwise `super.isSuppressed`. This keeps the expiry fallback.
+*** `get isTemplate()`: the parent is a spell item.
+** Register it in `registerDocuments`:
+`CONFIG.ActiveEffect.documentClass = OQActiveEffect`. There is a single
+`base` type, so a plain class is enough; no proxy.
+** No ActiveEffect TypeDataModel for now:
+*** its `isSuppressed` would have to return `undefined`, not `false`, or
+the expiry fallback is lost;
+*** it would replace the model for every effect;
+*** `shouldApplyChange` has to live on the document anyway.
+* *Tests:* stub a global `ActiveEffect` base class that has
+`isSuppressed` and `shouldApplyChange`, then import dynamically.
+** The suppression matrix for every item type and state.
+** An expired effect without an item is still suppressed.
+** `shouldApplyChange` is true only for `token.*` keys.
+* *Done when:* an effect with `characteristics.str` no longer adds
+properties to the actor, `token.*` changes still reach tokens, and
+statuses still apply.
+
+=== icon:square-o[] E5. Keep effects out of stored fields
+
+* *Depends on:* — (can be done any time before E7)
+* *Files:*
+** `src/public/templates/actor/npc-sheet.hbs:29-30`;
+** `src/module/application/actor-dialog.js:40-47`;
+** `src/module/application/characteristics-dialog.js` (l.39, 41, 92);
+** their templates.
+* *Work:*
+** *NPC characteristics:* the input is named
+`system.characteristics.<key>.base` but shows `char.value` (base + mod),
+so any form change writes the effect-modified value into `base`.
+*** Bind the input value to `char.base`.
+*** Show the effective `char.value` next to it when it differs, e.g. in
+a small label or tooltip.
+** *Attribute and characteristic dialogs:* they render prepared data and
+submit every field.
+*** Editable inputs (`base`, `mod`, `roll`) read
+`this.actor._source.system`.
+*** Display-only values stay prepared.
+*** The point total in the characteristics dialog sums the source
+`base`.
+* *Tests:* none automated; check by hand. Give an NPC STR mod 2, edit
+another field and check that
+`actor._source.system.characteristics.str.base` is unchanged.
+* *Done when:* no form writes a prepared value into a stored field.
+
+=== icon:square-o[] E6. Effect lists on actor and item sheets
+
+* *Depends on:* E4
+* *Files:*
+** Shared code:
+*** new `src/module/sheet/effect-list.js`;
+*** `src/module/utils/effects.js` (`effectCategory`).
+** Actor sheets:
+*** `src/module/sheet/actor/actor-base-sheet.js` (actions l.23-36,
+`_prepareContext` l.39-52);
+*** `character-sheet.js` (TABS l.20-31) and `character-sheet.hbs` (tabs
+l.74-101);
+*** `npc-sheet.js` (TABS l.20-28) and `npc-sheet.hbs` (tabs l.49-58,
+l.177).
+** Item sheet:
+*** `src/module/sheet/item/base-item-sheet.js` (actions,
+`_prepareContext` l.37-48);
+*** `src/public/templates/item/item-sheet.hbs`.
+** New templates `src/public/templates/actor/parts/effects.hbs` and
+`src/public/templates/item/parts/effects.hbs`.
+** Supporting files: `src/module/init/preload-templates.js`, `en.yaml`,
+`effects.less`.
+* *Work:*
+** `effectCategory({ disabled, isSuppressed, isTemporary, expired })`
+returns `'inactive'` when disabled or expired, `'suppressed'` when
+suppressed, and otherwise `'temporary'` or `'passive'`.
+** Helpers in `effect-list.js`:
+*** `effectRowContext(effect, item)` returns: id, item id, name, image,
+source label, duration label, disabled, category, template flag.
+*** `prepareActorEffectGroups(actor)` groups actor effects plus the
+transferred effects of non-spell items.
+*** `prepareItemEffects(item)`.
+*** `getEffectFromElement(document, element)` reads `data-effect-id`,
+plus an optional `data-item-id` for effects that live on an item.
+*** `createEffect(parent, { category })`:
+**** name `OQ.Effects.New`, image `icons/svg/aura.svg`;
+**** temporary → `duration: { value: 1, units: 'rounds' }`;
+**** inactive → `disabled: true`;
+**** opens the sheet.
+*** `toggleEffect(effect)`.
+*** `droppedEffectData(effect, overrides)`: `toObject()` with
+`start: null`, `duration.expired: false`, and `origin` defaulting to the
+source item’s uuid.
+** Actor sheets:
+*** Actions `createEffect`, `editEffect`, `deleteEffect`,
+`toggleEffect`. Delete directly, like `onDeleteItem`.
+*** Context `effects`.
+*** An Effects tab on the character sheet (before Notes) and on the NPC
+sheet.
+*** Rows are `class="item effect draggable"` with `data-effect-id` (and
+`data-item-id`), so core drag works.
+** Item sheet: an Effects fieldset after `getPartial`, using the same
+actions. For spells, show a hint that these effects are templates and
+don’t apply while the spell is known.
+** Drop handling:
+*** Override the actor sheet’s `_onDropActiveEffect` so a template from
+one of the actor’s own spells can be dropped on that actor. Create a
+copy with `origin` set to the spell.
+*** Override the item sheet’s `_onDropActiveEffect` so an effect without
+a parent (from a compendium) is created with `transfer: true`.
+*** Make sure `_onSortItem` ignores effect rows.
+* *Tests:* `effectCategory` and the pure parts of the grouping helpers.
+* *Done when:* on both actor types and every item type, effects can be
+created, edited, toggled, deleted and dragged between sheets.
+** Spell effects are listed only on the spell.
+** Suppressed and expired effects show in their own groups.
+
+== C. Actor keys
+
+=== icon:square-o[] E7. Pipeline: collect changes, characteristic keys
+
+* *Depends on:* E2, E4
+* *Files:*
+** `src/module/document/actor/base-actor.js` (`prepareBaseData` l.58-61,
+`prepareEmbeddedDocuments` l.67-77);
+** `src/module/dataModel/data-models-actor.js` (comment l.130-141);
+** new `test/test-actor-effects.js`.
+* *Work:*
+** In `prepareBaseData`, after `super.prepareBaseData()`:
+[arabic]
+. Prepare the actor’s own effects
+(`this.effects.forEach((e) => e._safePrepareData())`), moved from l.75,
+so their expiry state is fresh.
+. `this.oqEffectChanges = buildActorEffectChanges(...)` over
+`this.allApplicableEffects()`, keeping only `effect.active`. Read
+`effect.system.changes`; it is source-initialised, so reading it before
+the effects’ own preparation is safe. Priority comes from E2.
+. `applyCharacteristicEffects()`: for each characteristic,
+`value = max(0, applyNumericChanges(base + mod, changesForKey(idx, 'characteristics.<k>')))`,
+and `effectDelta = value - (base + mod)`.
+. The existing `calculateBaseAttributes()` then picks up the new values.
+DM, HP, MP and encumbrance (`character-actor.js`) follow automatically.
+** Keep `this.applyActiveEffects('initial')` at the end of
+`prepareEmbeddedDocuments`; it now only handles `token.*`.
+** Use the `isEmpty` fast path when there are no changes.
+** Update the data-model comment: the model computes `base + mod`, and
+the actor applies effects.
+* *Tests:* an actor harness with stubbed `Actor`, effects and items, and
+`CONFIG.OQ.ActorConfig` damage-modifier params.
+** STR +2 changes the value and the DM.
+** CON +4 changes HP max.
+** multiply / override.
+** Clamping at 0.
+** Disabled and suppressed effects are ignored.
+** An actor without effects is unchanged.
+* *Done when:* characteristic effects flow into every derived value, and
+`_source` is untouched.
+
+=== icon:square-o[] E8. Attribute keys
+
+* *Depends on:* E3, E7
+* *Files:*
+** `base-actor.js`: `calculateBaseAttributes` l.122-145,
+`calculateItemDependentAttributes` l.147-156, `calculateDamageModifier`
+l.158-167;
+** `src/module/utils/initiative.js` (`getDeclaration` l.17-22);
+** `test/test-actor-effects.js`.
+* *Work:*
+** *hp / mp:*
+*** `baseMax` is the current formula.
+*** `max = max(0, applyNumericChanges(baseMax, changes))`.
+*** `effectMod = max - baseMax`; store it on the prepared attribute,
+because E12 uses it.
+*** `value = min(stored, max)`, as now.
+** *mr:* `value = max(0, apply(base + mod))`, plus `effectDelta`.
+** *dm:* after the table and `dm.mod`, apply
+`applyFormulaChanges(dm, changes, { allowedTypes: ['add','override'] })`,
+plus an `effectModified` flag.
+** *ap:* in `calculateItemDependentAttributes`,
+`value = max(0, apply(base + mod + armour))`, plus `effectDelta`.
+** *initiative:* in `getDeclaration`,
+`total = applyNumericChanges(value + mod, changes)`, plus
+`effectModified`.
+*** The sheet, the combat round start (`combat.js:210`) and the tracker
+(`combat-tracker.js:38`) all use it.
+*** `actor.oqEffectChanges` may be missing (tests, partial actors),
+which means no changes.
+* *Tests:*
+** hp/mp max and `effectMod`.
+** mr, ap.
+** dm add/override, including the empty table row (16–25).
+** Initiative through `getDeclaration`.
+** `test/test-combat.js` stays green.
+* *Done when:* every numeric attribute key and `attributes.dm` work, and
+`fn`/`gr` are untouched.
+
+=== icon:square-o[] E9. Skill keys
+
+* *Depends on:* E7
+* *Files:*
+** `src/module/document/item/skill.js` (l.5-9, l.29-50);
+** `base-actor.js` (`getDataForItems` l.94-102);
+** `src/module/sheet/actor/actor-base-sheet.js` (`onUpdateItemAdv`
+l.184-201);
+** `test/test-actor-effects.js`.
+* *Work:*
+** Set `slug` and `typeName` *before* `super.prepareDerivedData()`.
+Today they are set after the roll values are computed, and `system` is
+rebuilt on every reset, so the slug is undefined during
+`calculateRollValues`.
+** `calculateRollValues`:
+*** `total = baseValue + advancement`;
+*** `changes = changesForSkill(actor.oqEffectChanges, { slug, type, formula })`;
+*** `rawValue = applyNumericChanges(total, changes)`;
+*** `value = minMaxValue(rawValue)`;
+*** `effectDelta = rawValue - total`;
+*** return `rawValue` and `effectDelta` as well. `mastered` uses
+`value`.
+** Weapons and spells read skills through `skillsBySlug`, and the
+initiative declaration reads the skill value, so all of them follow.
+** *Advancement shortcut:* a negative entry in the skill row sets the
+total, as `advancement = -value - baseValue`. Once characteristic
+effects exist, `baseValue` includes them.
+*** Add `getDataForItems({ natural: true })`, where characteristics are
+`base + mod`, and `OQSkill.calculateNaturalBaseValue()`.
+*** `onUpdateItemAdv` uses that natural base value.
+* *Tests:*
+** Slug, type, `skillsUsing` and `all` merge on one skill.
+** The priority order (×0.5 before +20).
+** The 0..100 clamp, while `rawValue` keeps the unclamped number.
+** An unknown slug is ignored.
+** The natural base value with an INT effect.
+* *Done when:* skill effects change skills, their weapons and spells,
+and the declaration; the advancement shortcut ignores effects.
+
+== D. Item keys
+
+=== icon:square-o[] E10. Weapon keys and damage consumers
+
+* *Depends on:* E3, E9
+* *Files:*
+** `src/module/document/item/base-item.js` (l.39-43);
+** `src/module/document/item/weapon.js` (l.5-21, l.23-43, l.72-75);
+** `src/module/application/damage-roll-dialog.js` (l.8-11);
+** `src/public/templates/chat/parts/damage-roll.hbs` (l.12-21);
+** the `DamageRollData` typedef in `src/module/utils/roll.js`;
+** new `test/test-item-effects.js`.
+* *Work:*
+** In `OQBaseItem.prepareDerivedData`, before the calculations:
+`this.oqEffectChanges = buildItemEffectChanges(<own active effects' changes>, this.type)`.
+*** The item’s effects are already prepared, because item
+`prepareEmbeddedDocuments` runs before derived data.
+*** `transfer` doesn’t matter here.
+*** A stored weapon’s effects are suppressed, so they are inactive.
+** `calculateRollValues`:
+`value = minMaxValue(applyNumericChanges(skill.rawValue ?? skill.value, itemSkillChanges))`,
+plus `effectDelta`. The `mod` logic (`mostSignificantModifier`) is
+unchanged.
+** `calculateDamageRollValues`:
+*** `effective = applyFormulaChanges(damageFormula, damageChanges, { allowedTypes: ['add','override','multiply'] })`;
+*** `full = includeDM ? \`$\{effective} $\{dm}` : effective`;
+*** return
+`{ damageFormula: effective, baseDamageFormula, fullDamageFormula: full, finalDamageFormula:   makeRollString(full), includeDM, effectModified }`.
+*** The guard at l.9 uses `effective`.
+** *Damage dialog:* use `rollData.fullDamageFormula` instead of
+rebuilding the formula from `actorRollData.dm`.
+** *Weapon chat card* (l.72-75): show the effective formula with DM.
+** Special abilities get no item keys (out of scope).
+* *Tests:*
+** `item.skill` +10, including the clamp.
+** `1d8` with add `1d6` and multiply 2 gives `2d8 + 1d6`, followed by
+DM.
+** Override.
+** A stored weapon is unaffected.
+** A weapon without an actor returns `{}`.
+* *Done when:* the attack value, the damage formula, the damage dialog
+and the chat card all agree.
+
+=== icon:square-o[] E11. Armour key
+
+* *Depends on:* E10 (item change collection)
+* *Files:*
+** `src/module/document/item/armor.js`;
+** `base-actor.js` (`calculateArmourPoints` l.169-182);
+** `src/public/templates/actor/parts/armour.hbs`;
+** the armour item-sheet partial;
+** `test/test-item-effects.js`.
+* *Work:*
+** `OQArmour.prepareDerivedData` (call `super`) sets
+`system.effectiveAp = max(0, applyNumericChanges(ap,   apChanges))`.
+** `calculateArmourPoints` uses `effectiveAp ?? ap`.
+** The chat card and the actor’s armour row show `effectiveAp`.
+** The item sheet’s input stays bound to `system.ap`, with the effective
+value shown read-only when it differs.
+* *Tests:*
+** Effective AP.
+** Worn vs carried: carried armour is suppressed and doesn’t count
+anyway.
+** Override 0.
+* *Done when:* magic armour changes actor AP only while worn, and the
+armour sheet never saves the effective value.
+
+== E. Resources
+
+=== icon:square-o[] E12. HP/MP current-value sync
+
+* *Depends on:* E8
+* *Files:* `base-actor.js`, `src/module/utils/effects.js`,
+`test/test-actor-effects.js` (or a new `test/test-resource-sync.js`).
+* *Work:*
+** Engine:
+*** `resourceChanged(before, after)`: `effectMod` or `max` differ.
+*** `adjustResourceValue(before, after, baseValue = before.value)`:
+**** `gained = after.effectMod - before.effectMod`;
+**** `v = gained > 0 ? baseValue + gained : baseValue`;
+**** return `clamp(v, 0, after.max)`.
+** Actor hooks —
+`_preCreateDescendantDocuments(parent, collection, data, options, userId)`
+and the Update (`changes`) and Delete (`ids`) variants:
+*** Call `super`.
+*** When `userId == game.user.id`, `this.isOwner`, and not
+`options.oqSkipResourceSync`, snapshot
+`{ hp: { value, max, effectMod }, mp: { … } }` from the prepared
+attributes.
+** The matching `_on…DescendantDocuments`:
+*** Call *`super` first*; core resets the actor there for an item’s
+effects.
+*** Then compare. For each resource where `resourceChanged`, compute
+`next = adjustResourceValue(before, after, pending ?? before.value)`.
+*** Queue `next` when it differs from `pending ?? _source` value.
+*** The snapshot covers effect create, update and delete;
+enable/disable; expiry; item create and delete (for transferred
+effects); and item state changes that suppress or unsuppress effects.
+** Coalesce the queued values in `this.oqPendingResources` and send one
+`this.update({...}, { oqResourceSync: true })`.
+*** Clear the pending values once the update resolves, unless newer ones
+replaced them.
+*** The pending values keep two quick operations from computing from a
+stale stored value.
+** There is no loop: the write is an actor update, not a descendant
+event.
+** Expiry is written by the active GM, so the GM’s client makes the
+adjustment.
+** *Known limitation:* an effect on a base actor doesn’t adjust current
+HP/MP on its unlinked tokens. Changes made through a token’s own sheet
+do work, through the `ActorDelta` replay.
+* *Tests:* drive pre → change the prepared attributes → on, with a spy
+on `update`.
+** The user guard.
+** A rise (capped).
+** A fall (capped at the new max).
+** No change → no update.
+** Pending values across two operations.
+** `oqSkipResourceSync`.
+* *Done when:* the HP/MP rule in Decisions holds, with exactly one
+`updateActor` per triggering operation.
+
+== F. Polish
+
+=== icon:square-o[] E13. Effect config sheet: key suggestions and validation
+
+* *Depends on:* E6, E8–E11
+* *Files:* new `src/module/sheet/effect/active-effect-config.js`,
+`register-documents.js`, `src/module/utils/effects.js`, `en.yaml`,
+`effects.less`, `test/test-effects.js`.
+* *Work:*
+** `validateEffectChange({ key, type, value }, context)` returns
+`{ status: 'ok'|'warning'|'invalid', messageKey, data }`.
+*** The context is
+`{ scope: 'actor'|'item'|'world', itemType, transfer, skillSlugs }`.
+*** *Invalid:* an unparseable key; `system.*`; `fn`/`gr`; `item.*` on an
+actor, a world effect, or the wrong item type; a change type the key
+doesn’t support (`custom` included); a non-numeric value on a numeric
+key; an empty formula.
+*** *Warning:* an unknown skill slug when slugs are known; an actor key
+on a non-transfer item effect.
+** `effectKeyOptions(context)` returns `[{ value, label }]` for the
+datalist.
+*** Labels reuse `OQ.Labels.CharacteristicsNames.*`,
+`OQ.Labels.AttributesNames.*` and `OQ.SkillTypes.*`.
+** `OQActiveEffectConfig extends foundry.applications.sheets.ActiveEffectConfig`:
+*** `_prepareContext` builds the key context:
+**** effect on an actor → the actor’s `skillsBySlug` keys;
+**** effect on an item → item type, `transfer`, and the owning actor’s
+slugs;
+**** no parent (compendium) → skill slugs from the compendium Item
+indexes plus `game.items`, memoised.
+*** `_onRender` inserts `<datalist id="${this.id}-oq-keys">` and sets
+`list` on every `input[name$=".key"]`. Core’s `formInput` can’t emit
+`list=`, so decorate the inputs rather than overriding `_renderChange`.
+*** It also validates each row, adding `.oq-invalid`/`.oq-warning` and a
+`data-tooltip` with the message.
+*** `_onChangeForm` calls `super` (which keeps the priority
+placeholder), then re-validates the row. When `transfer` changes, it
+re-validates every row.
+*** A hint in the Changes tab says that `phase` is ignored for system
+keys.
+** Register it with
+`foundry.applications.apps.DocumentSheetConfig.registerSheet(foundry.documents.ActiveEffect,   CONFIG.OQ.SYSTEM_ID, OQActiveEffectConfig, { makeDefault: true, label: 'OQ.Effects.ConfigSheet' })`.
+* *Tests:* `validateEffectChange` and `effectKeyOptions` for each
+context.
+* *Done when:* these cases are all flagged:
+** `system.characteristics.str.base`;
+** `attributes.fn`;
+** `item.ap` on a weapon;
+** `skills.nonexistent` on an actor;
+** a `custom` type;
+** `"abc"` on a numeric key.
++
+The datalist lists the actor’s skills, or the compendium skills for an
+unowned effect.
+
+=== icon:square-o[] E14. Modified-value markers
+
+* *Depends on:* E8–E11
+* *Files:*
+** `src/module/init/handlebar-helpers.js`;
+** `src/public/templates/actor/character-sheet.hbs:54-58` and the NPC
+characteristics in `npc-sheet.hbs`;
+** `actor/parts/attributes.hbs` (hp max l.12, mp max l.20, dm l.32, mr
+l.36, ap l.40);
+** `actor/parts/initiative.hbs:9`, `actor/parts/skill.hbs:13-17`,
+`actor/parts/weapon.hbs`, `actor/parts/armour.hbs`;
+** `effects.less`, `en.yaml`.
+* *Work:*
+** A helper `oqEffectMark(deltaOrFlag)` returns an icon with
+`data-tooltip="OQ.Effects.ModifiedBy"`, or `''`. Positive and negative
+deltas can be styled differently.
+** Use it on:
+*** `characteristics.<c>.effectDelta`;
+*** `hp/mp.effectMod`;
+*** `mr/ap.effectDelta`;
+*** `dm.effectModified`;
+*** the declaration’s `effectModified`;
+*** the skill’s `rollValues.effectDelta`;
+*** the weapon’s `rollValues.effectDelta` and
+`damageRollValues.effectModified`.
+** Keep it modest; no breakdown tooltips in this task.
+* *Done when:* every value an effect changes shows the marker, and
+unchanged values look as they do today.
+
+=== icon:square-o[] E15. Documentation and roadmap
+
+* *Depends on:* all
+* *Files:*
+** `docs/packs/documentation/system-documentation/`: a new Effects page,
+plus a `journal.yml` entry with a new `_id`; then run `yarn build:docs`;
+** `README.md` (move v0.9 #14 to Completed);
+** release notes.
+* *Work:* document:
+** the key table, change types, priorities and rounding;
+** the HP/MP rule;
+** the suppression rules;
+** spell effects as templates, and dragging them onto actors;
+** the limitations: no `@` references, `phase` ignored, slug renames,
+unlinked tokens, timed effects on items.
++
+Release note: effects that use `system.*` paths no longer apply. No data
+migration is needed: every pack document has `effects: []`, and there is
+no schema change.
+* *Done when:* the in-game documentation compendium has the Effects
+page, and the README is updated.
+
+'''''
+
+== End-to-end verification (Foundry 14, GM plus a player client)
+
+[arabic]
+. *STR +2 on a character (E7):* a marker shows next to STR. DM, max
+encumbrance, STR-based skills, weapons and the declaration rise.
+`_source` STR base is unchanged.
+. *CON +4 / POW +3 (E7, E8):* HP/MP max rise; current HP/MP stay the
+same.
+. *`attributes.hp` +6 (E12):*
+* max and current rise by 6;
+* after 3 damage from chat, disabling the effect caps current at max;
+* re-enabling it adds 6 again;
+* one `updateActor` fires per toggle, checked on both clients.
+. *1-round temporary effect in combat (E12):* advance the turns. The GM
+expires it, it moves to inactive, and HP is adjusted once.
+. *`skillTypes.all` −10 plus `skillsUsing.int` −20 (E9):* INT skills
+drop by 30, others by 10. The tracker declaration follows.
+. *`attributes.initiative` +5 and `attributes.dm` (E8):*
+* Initiative +5: the sheet and the tracker show the new total.
+* `attributes.dm` add `1d6`, then an override: the DM display and the
+weapon damage follow.
+. *Weapon effect, transfer off (E10):* `item.skill` +10, `item.damage`
+add `1d6` and multiply 2.
+* The attack value, the damage formula, the damage dialog and the chat
+card all show `2d8 + 1d6 + DM`.
+* Storing the weapon suppresses the effect.
+. *Armour `item.ap` +2 (E11):* actor AP rises. Carrying the armour
+suppresses it. The armour sheet’s AP input keeps the stored value.
+. *Amulet (equipment, transfer) with `attributes.mp` +3 (E12):* storing
+it caps MP; carrying it again gives +3 current MP.
+. *Spell template effect (E6):* it doesn’t affect the actor. Dragging it
+onto the same actor or another actor creates an active copy with its
+origin set.
+. *Unlinked NPC token (E12):* an HP effect added through the token’s
+sheet changes only that token. `token.light.dim` 20 makes the token emit
+light.
+. *Config sheet (E13):* the invalid and warning cases are flagged, and
+the datalist is populated.
+. *NPC sheet with STR +2 (E5):* editing any field leaves `_source` STR
+base unchanged.
+. *Skill advancement shortcut with an INT effect active (E9):* entering
+−55 gives a natural total of 55.
+. *Timed effect on an item:* check whether it expires, given the
+possible core bug above, and record the result in E15.
+
+== Risks and notes
+
+* *`getRollData` / `getDataForItems`:* they expose effect-modified
+values (`@str`, `@skills.x.value`, `@dm`). This affects macros, and the
+magnitude set when a sorcery spell is created (`spell.js:23-28`), which
+uses the casting skill.
+* *Performance:* one pass over the applicable effects per preparation,
+plus small per-skill merges. There is a fast path for actors without
+effects.
+* *Duplicate skill names:* both skills receive a `skills.<slug>` change.
+A renamed skill silently stops matching; the config sheet warns about
+unknown slugs.
+* *Change types:* `custom` and module change types are ignored on system
+keys and flagged in the sheet.
+* *Future work:* temporary HP/MP above max (#124) must work alongside
+`effectMod`. Keep the rule in `adjustResourceValue`.
+
+== Out of scope (follow-ups from the spell survey)
+
+* Status conditions (#109): prone, blinded, unconscious, demoralised,
+fatigued, berserk, befuddled, shaken, …
+* Temporary HP/MP above max (#124, Tap) and magic point stores (#96).
+* Applying spell effects when a spell is cast, magnitude scaling, and
+`@` references in values.
+* The SRD rule that ``only the most powerful magic modifier applies''
+(SK:276-284), and spell exclusivity groups. The GM disables overlapping
+effects.
+* Conditional and one-shot modifiers: against mind magic, against an
+element, ``next test only''.
+* Damage type, magical damage, armour penetration, immunities,
+spell-blocking magnitudes, extra attacks.
+* An effects compendium for the SRD spells.
