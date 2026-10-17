@@ -101,3 +101,18 @@ references; `test/test-legacy-icons.js` checks they match the themed set.
 Mocha with Node `assert` / `expect.js`, run in plain Node without Foundry. Tests import pure modules from
 `src/module/` and stub the globals they need (e.g. `globalThis.CONFIG = { OQ: { RollConfig } }`), so logic meant to
 be tested should stay free of direct Foundry API calls at import time.
+
+## Agent skills
+
+### Issue tracker
+
+Issues and specs live as local markdown under `.scratch/<feature>/`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default five roles (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`), recorded as
+`Status:` lines in issue files. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: `GLOSSARY.md` and `docs/adr/` at the repo root, created lazily. See `docs/agents/domain.md`.
