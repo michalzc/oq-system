@@ -29,15 +29,24 @@ describe('Difficulty levels', function () {
   describe('#toDifficulty()', function () {
     it('Should take the modifier from the difficulty Rule Options', function () {
       useDifficulty(requesterDifficulty);
-      expect(toDifficulty('easy')).to.eql({ key: 'easy', value: 50 });
-      expect(toDifficulty('simple')).to.eql({ key: 'simple', value: 25 });
-      expect(toDifficulty('difficult')).to.eql({ key: 'difficult', value: -25 });
-      expect(toDifficulty('hard')).to.eql({ key: 'hard', value: -50 });
+      expect(toDifficulty('easy')).to.have.property('value', 50);
+      expect(toDifficulty('simple')).to.have.property('value', 25);
+      expect(toDifficulty('difficult')).to.have.property('value', -25);
+      expect(toDifficulty('hard')).to.have.property('value', -50);
     });
 
     it('Should keep Normal at 0', function () {
       useDifficulty(requesterDifficulty);
-      expect(toDifficulty('normal')).to.eql({ key: 'normal', value: 0 });
+      expect(toDifficulty('normal')).to.eql({ key: 'normal', value: 0, label: 'normal (0%)' });
+    });
+
+    it('Should label the difficulty like the dialog does, with its signed modifier', function () {
+      useDifficulty(requesterDifficulty);
+      expect(toDifficulty('easy')).to.eql({ key: 'easy', value: 50, label: 'easy (+50%)' });
+      expect(toDifficulty('difficult')).to.eql({ key: 'difficult', value: -25, label: 'difficult (-25%)' });
+      for (const key of ['easy', 'simple', 'normal', 'difficult', 'hard']) {
+        expect(toDifficulty(key).label).to.be(difficultyContext().difficulties[key]);
+      }
     });
 
     it('Should give no difficulty when none is selected', function () {

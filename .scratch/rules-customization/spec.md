@@ -24,8 +24,9 @@ The requester's combination: uncapped, 1/10 criticals, fumble on 100 only, Maste
 ## Decisions
 
 - **Scope and access.** World-scoped, edited in one GM-only settings menu (`registerMenu`, `restricted: true`) that
-  opens an ApplicationV2 form. Players never see it. Applies to every actor type and every test (skills, special
-  abilities, weapons, spells).
+  opens an ApplicationV2 form. Players never see it; as with every restricted Foundry menu, it is shown to users with
+  the Modify Settings permission, by default the GM and Assistant GMs. Applies to every actor type and every test
+  (skills, special abilities, weapons, spells).
 - **Rules Preset is derived, not stored.** Only Rule Option values are saved. The combo shows "OpenQuest SRD" when every
   option equals its SRD value, otherwise "Custom". Choosing "OpenQuest SRD" resets all options to SRD values; editing
   any option makes the combo show "Custom". Further presets are just further named bundles to compare against.
@@ -44,7 +45,9 @@ The requester's combination: uncapped, 1/10 criticals, fumble on 100 only, Maste
   less still automatically fails and can still fumble). The excess over 100% has no further mechanical effect; the
   system does not automate opposed tests.
 - **Difficulty modifiers** are four integer Rule Options; Easy and Simple are 0..100, Difficult and Hard are −100..0.
-  Their mutual order is not enforced. Normal is always 0.
+  Their mutual order is not enforced. Normal is always 0. The form edits them with Foundry's range sliders, which keep
+  a typed value inside its range and round it to a whole number as it is entered (150 becomes 100), so the GM never
+  meets a rejection; the save handler still rejects anything invalid with a notification and keeps the form open.
 - **Applying changes requires a reload** (`requiresReload: true`). Derived values (`rollValues`, Mastery) are computed
   during data preparation; a reload is the only way to guarantee nothing stale. Rule changes are rare and between
   sessions. Chat cards already posted stay as rolled.

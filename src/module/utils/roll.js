@@ -2,6 +2,7 @@
  * @typedef {Object} Difficulty
  * @property {string} key
  * @property {number} value
+ * @property {string} label The localized level with its signed modifier, e.g. "Easy (+50%)"
  */
 
 import { minMaxValue, renderTemplate } from './utils.js';

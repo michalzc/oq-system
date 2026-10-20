@@ -88,13 +88,17 @@ export class RulesConfigDialog extends foundry.applications.api.HandlebarsApplic
   }
 
   /**
-   * Saves the Rule Options. Invalid values are rejected with a notification, keeping the form open: the setting
-   * itself would clamp them silently. Rules differing from the active ones ask for a reload.
+   * Saves the Rule Options. The range pickers already clamp typed modifiers; anything invalid that still gets here is
+   * rejected with a notification, keeping the form open, as the setting itself would clamp it silently. Rules
+   * differing from the active ones ask for a reload.
    */
   static async onSubmit(event, form, formData) {
     const rules = rulesFromFormData(formData.object, RulesConfigDialog.settingId);
     const invalid = invalidRuleOptions(rules);
-    if (invalid.length) throw new Error(invalid.map(RulesConfigDialog.invalidMessage).join(' '));
+    if (invalid.length) {
+      ui.notifications.error(invalid.map(RulesConfigDialog.invalidMessage).join(' '));
+      return;
+    }
 
     await game.settings.set(CONFIG.OQ.SYSTEM_ID, CONFIG.OQ.SettingsConfig.keys.rules, rules);
     await this.close({ submitted: true });

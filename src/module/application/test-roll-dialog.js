@@ -24,19 +24,26 @@ export async function promptTestRoll(rollData) {
  * @returns {{difficulties: Object<string, string>, defaultDifficulty: string}}
  */
 export function difficultyContext() {
-  const difficulties = _.mapValues(
-    difficultyLevels(),
-    (value, key) => `${game.i18n.localize(`OQ.Labels.DifficultyLevels.${key}`)} (${value > 0 ? '+' : ''}${value}%)`,
-  );
+  const difficulties = _.mapValues(difficultyLevels(), (value, key) => difficultyLabel(key, value));
   return { difficulties, defaultDifficulty: 'normal' };
 }
 
 /**
  * @param {string|undefined} difficultyKey The difficulty selected in the dialog
- * @returns {Difficulty|undefined}
+ * @returns {Difficulty|undefined} labelled as in the dialog, for the chat card
  */
 export function toDifficulty(difficultyKey) {
-  return difficultyKey && { key: difficultyKey, value: difficultyLevels()[difficultyKey] };
+  const value = difficultyKey && difficultyLevels()[difficultyKey];
+  return difficultyKey && { key: difficultyKey, value, label: difficultyLabel(difficultyKey, value) };
+}
+
+/**
+ * @param {string} key The difficulty level
+ * @param {number} value Its modifier
+ * @returns {string} e.g. "Easy (+50%)"
+ */
+function difficultyLabel(key, value) {
+  return `${game.i18n.localize(`OQ.Labels.DifficultyLevels.${key}`)} (${value > 0 ? '+' : ''}${value}%)`;
 }
 
 /**
