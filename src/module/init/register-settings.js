@@ -1,5 +1,6 @@
 import { getCompendiumList } from '../utils/compendium-utils.js';
 import { RulesConfigDialog } from '../application/rules-config-dialog.js';
+import { CriticalRules, DifficultyRanges, FumbleRules, SrdRules } from '../consts/rules-config.js';
 
 /**
  * Replaces the default values of core settings with the ones recommended for OQ. Core registers its settings after
@@ -87,8 +88,8 @@ export function registerSettings() {
  */
 function buildRulesField() {
   const fields = foundry.data.fields;
-  const { srd, CriticalRules, FumbleRules, DifficultyRanges } = CONFIG.OQ.RulesConfig;
   const prefix = 'OQ.Settings.rules';
+  const labelled = (key) => ({ label: `${prefix}.${key}.label`, hint: `${prefix}.${key}.hint` });
   const choices = (rules, key) =>
     Object.fromEntries(Object.values(rules).map((rule) => [rule, `${prefix}.${key}.choices.${rule}`]));
   const modifier = (key) =>
@@ -97,35 +98,25 @@ function buildRulesField() {
       nullable: false,
       integer: true,
       ...DifficultyRanges[key],
-      initial: srd.difficulty[key],
+      initial: SrdRules.difficulty[key],
       label: `${prefix}.difficulty.${key}`,
     });
 
   return new fields.SchemaField({
-    skillCap: new fields.BooleanField({
-      initial: srd.skillCap,
-      label: `${prefix}.skillCap.label`,
-      hint: `${prefix}.skillCap.hint`,
-    }),
+    skillCap: new fields.BooleanField({ initial: SrdRules.skillCap, ...labelled('skillCap') }),
     criticalRule: new fields.StringField({
       required: true,
-      initial: srd.criticalRule,
+      initial: SrdRules.criticalRule,
       choices: choices(CriticalRules, 'criticalRule'),
-      label: `${prefix}.criticalRule.label`,
-      hint: `${prefix}.criticalRule.hint`,
+      ...labelled('criticalRule'),
     }),
     fumbleRule: new fields.StringField({
       required: true,
-      initial: srd.fumbleRule,
+      initial: SrdRules.fumbleRule,
       choices: choices(FumbleRules, 'fumbleRule'),
-      label: `${prefix}.fumbleRule.label`,
-      hint: `${prefix}.fumbleRule.hint`,
+      ...labelled('fumbleRule'),
     }),
-    mastery: new fields.BooleanField({
-      initial: srd.mastery,
-      label: `${prefix}.mastery.label`,
-      hint: `${prefix}.mastery.hint`,
-    }),
+    mastery: new fields.BooleanField({ initial: SrdRules.mastery, ...labelled('mastery') }),
     difficulty: new fields.SchemaField({
       easy: modifier('easy'),
       simple: modifier('simple'),

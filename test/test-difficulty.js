@@ -47,17 +47,28 @@ describe('Difficulty levels', function () {
   });
 
   describe('#difficultyContext()', function () {
-    it('Should offer the levels from Easy to Hard with their modifiers', function () {
+    it('Should offer the levels from Easy to Hard with their signed modifiers', function () {
       useDifficulty(requesterDifficulty);
       const { difficulties, defaultDifficulty } = difficultyContext();
       expect(Object.entries(difficulties)).to.eql([
-        ['easy', 'easy (50%)'],
-        ['simple', 'simple (25%)'],
+        ['easy', 'easy (+50%)'],
+        ['simple', 'simple (+25%)'],
         ['normal', 'normal (0%)'],
         ['difficult', 'difficult (-25%)'],
         ['hard', 'hard (-50%)'],
       ]);
       expect(defaultDifficulty).to.be('normal');
+    });
+
+    it('Should label a zero modifier without a sign', function () {
+      useDifficulty({ easy: 0, simple: 0, difficult: 0, hard: 0 });
+      expect(Object.values(difficultyContext().difficulties)).to.eql([
+        'easy (0%)',
+        'simple (0%)',
+        'normal (0%)',
+        'difficult (0%)',
+        'hard (0%)',
+      ]);
     });
 
     it('Should keep the order when the modifiers are not ordered', function () {

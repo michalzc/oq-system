@@ -342,7 +342,8 @@ pages:
         <h3>Results</h3>
         <p>This section describes the default OpenQuest SRD rules; <em>Rule Options</em> below lists what the GM can
             change.</p>
-        <p>The target (the Modified skill) is the value plus difficulty plus other mods, between 0 and 100. Roll d100:</p>
+        <p>The target (the Modified skill) is the value plus difficulty plus other mods, between 0 and 100 (with no upper
+            limit when the <strong>Skills Capped at 100%</strong> Rule Option is off). Roll d100:</p>
         <ul>
             <li><strong>Critical Success</strong>: a double (11, 22 ... 99) at or under the target.</li>
             <li><strong>Success</strong>: any other roll at or under the target.</li>

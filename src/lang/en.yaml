@@ -324,13 +324,13 @@ OQ:
         hint: Skills, weapons and Modified skills cannot exceed 100%. Turn off to let them grow above 100%.
       criticalRule:
         label: Critical Success
-        hint: Which successful rolls are critical successes.
+        hint: Which successful rolls are critical successes. One tenth of the Modified skill is rounded up.
         choices:
           doubles: Successful doubles (SRD)
           tenth: Roll up to one tenth of the Modified skill
       fumbleRule:
         label: Fumble
-        hint: Which failed rolls are fumbles. A roll of 100 is always a fumble.
+        hint: Which failed rolls are fumbles. A roll of 100 is always a fumble, except for a Master while Mastery is on.
         choices:
           doubles: Failed doubles or a roll of 100 (SRD)
           hundred: A roll of 100 only
@@ -338,7 +338,7 @@ OQ:
         label: Mastery
         hint: >-
           A character whose skill is 100% or more, and still at least 100% after modifiers, is a Master: their tests
-          are automatic critical successes.
+          are automatic critical successes. Turn off to roll such skills like any other.
       difficulty:
         easy: Easy Modifier
         simple: Simple Modifier

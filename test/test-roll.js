@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { evaluateTestRoll, getResult, getResultFeatures } from '../src/module/utils/roll.js';
+import { evaluateTestRoll, getResult, getResultFeatures, isMaster } from '../src/module/utils/roll.js';
 import { RollConfig } from '../src/module/consts/rolls-config.js';
 import { CriticalRules, FumbleRules, SrdRules } from '../src/module/consts/rules-config.js';
 
@@ -12,10 +12,10 @@ function stubRules(rules = {}) {
 /**
  * @param {number} rollValue the D100 roll
  * @param {number} value the unmodified skill
- * @param {number} [totalValue] the Modified skill
+ * @param {number} [modifiedSkill] the Modified skill
  */
-function resultOf(rollValue, value, totalValue = value) {
-  return getResult(getResultFeatures({ total: rollValue }), rollValue, { value, totalValue });
+function resultOf(rollValue, value, modifiedSkill = value) {
+  return getResult(getResultFeatures({ total: rollValue }), rollValue, { value, totalValue: modifiedSkill });
 }
 
 describe('roll.js', function () {
@@ -190,6 +190,32 @@ describe('roll.js', function () {
     it('fumbles on 100 for a skill modified up to 100%', function () {
       stubRules({ criticalRule: CriticalRules.tenth });
       assert.equal(resultOf(100, 50, 1000), fumble);
+    });
+  });
+
+  describe('#isMaster()', function () {
+    const masteryOn = { ...SrdRules, mastery: true };
+    const masteryOff = { ...SrdRules, mastery: false };
+
+    it('makes a 100% skill still at 100% after modifiers a Master while Mastery is on', function () {
+      assert.equal(isMaster(100, 100, masteryOn), true);
+    });
+
+    it('makes nobody a Master while Mastery is off', function () {
+      assert.equal(isMaster(120, 120, masteryOff), false);
+    });
+
+    it('does not make a Master of a 100% skill modified below 100%', function () {
+      assert.equal(isMaster(100, 80, masteryOn), false);
+    });
+
+    it('does not make a Master of a skill only modified up to 100%', function () {
+      assert.equal(isMaster(90, 110, masteryOn), false);
+    });
+
+    it('reads Mastery from the given rules, not CONFIG.OQ.Rules', function () {
+      stubRules({ mastery: false });
+      assert.equal(isMaster(100, 100, masteryOn), true);
     });
   });
 

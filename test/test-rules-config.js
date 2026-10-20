@@ -1,4 +1,4 @@
-import { invalidRuleOptions, isSrdRules, rulesFromFormData, rulesPresetOf } from '../src/module/consts/rules-config.js';
+import { invalidRuleOptions, rulesFromFormData, rulesPresetOf } from '../src/module/consts/rules-config.js';
 import expect from 'expect.js';
 
 /** The OpenQuest SRD Rule Options, written out from the spec. */
@@ -13,9 +13,9 @@ function srdRules() {
 }
 
 describe('rules-config.js', function () {
-  describe('#isSrdRules()', function () {
-    it('Should recognize the OpenQuest SRD rules', function () {
-      expect(isSrdRules(srdRules())).to.be(true);
+  describe('#rulesPresetOf()', function () {
+    it('Should name the OpenQuest SRD preset for the SRD rules', function () {
+      expect(rulesPresetOf(srdRules())).to.be('srd');
     });
 
     const singleChanges = {
@@ -30,18 +30,12 @@ describe('rules-config.js', function () {
     };
 
     for (const [change, apply] of Object.entries(singleChanges)) {
-      it(`Should not recognize the SRD rules with ${change}`, function () {
+      it(`Should name the Custom preset for the SRD rules with ${change}`, function () {
         const rules = srdRules();
         apply(rules);
-        expect(isSrdRules(rules)).to.be(false);
+        expect(rulesPresetOf(rules)).to.be('custom');
       });
     }
-  });
-
-  describe('#rulesPresetOf()', function () {
-    it('Should name the OpenQuest SRD preset for the SRD rules', function () {
-      expect(rulesPresetOf(srdRules())).to.be('srd');
-    });
 
     it("Should name the Custom preset for the requester's combination", function () {
       const rules = {
@@ -51,12 +45,6 @@ describe('rules-config.js', function () {
         mastery: false,
         difficulty: { easy: 50, simple: 25, difficult: -25, hard: -50 },
       };
-      expect(rulesPresetOf(rules)).to.be('custom');
-    });
-
-    it('Should name the Custom preset when one modifier differs', function () {
-      const rules = srdRules();
-      rules.difficulty.hard = -49;
       expect(rulesPresetOf(rules)).to.be('custom');
     });
   });

@@ -41,16 +41,7 @@ export const RulesConfig = {
   CriticalRules,
   FumbleRules,
   DifficultyRanges,
-  srd: SrdRules,
 };
-
-/**
- * @param {object} rules Rule Options
- * @returns {boolean} whether every Rule Option equals its OpenQuest SRD value
- */
-export function isSrdRules(rules) {
-  return _.isEqual(rules, SrdRules);
-}
 
 /** The named Rules Presets, compared in order; rules matching none of them are the "Custom" preset. */
 export const RulesPresets = Object.freeze({ srd: SrdRules });

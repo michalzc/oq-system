@@ -36,7 +36,7 @@ export class OQSkill extends OQBaseItem {
       const total = baseValue + advancement;
       const value = minMaxValue(total);
       const valueWithMod = mod && minMaxValue(value + mod);
-      const mastered = isMaster(value);
+      const mastered = isMaster(value, value, CONFIG.OQ.Rules);
 
       return {
         value,

@@ -20,13 +20,13 @@ export async function promptTestRoll(rollData) {
 }
 
 /**
- * The difficulty options of a test roll dialog template.
+ * The difficulty options of a test roll dialog template, labelled with their signed modifiers, e.g. "Easy (+50%)".
  * @returns {{difficulties: Object<string, string>, defaultDifficulty: string}}
  */
 export function difficultyContext() {
   const difficulties = _.mapValues(
     difficultyLevels(),
-    (value, key) => `${game.i18n.localize(`OQ.Labels.DifficultyLevels.${key}`)} (${value}%)`,
+    (value, key) => `${game.i18n.localize(`OQ.Labels.DifficultyLevels.${key}`)} (${value > 0 ? '+' : ''}${value}%)`,
   );
   return { difficulties, defaultDifficulty: 'normal' };
 }
