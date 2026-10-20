@@ -3,6 +3,7 @@ import { ItemConfig } from './items-config.js';
 import { ActorConfig } from './actors-config.js';
 import { ChatConfig } from './chat-config.js';
 import { SettingsConfig } from './settings-config.js';
+import { RulesConfig } from './rules-config.js';
 
 export const SYSTEM_ID = 'oq';
 export const SYSTEM_NAME = 'OQ System';
@@ -15,4 +16,5 @@ export const OQ = {
   RollConfig,
   ChatConfig,
   SettingsConfig,
+  RulesConfig,
 };

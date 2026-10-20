@@ -4,6 +4,8 @@ export const SettingsConfig = {
     defaultItemsFromWorld: 'defaultItemsFromWorld',
     coinsConfiguration: 'coins',
     migrationVersion: 'migrationVersion',
+    rules: 'rules',
+    rulesMenu: 'rulesMenu',
   },
   defaults: {
     characterItemsCompendium: 'oq.oq-system-basic-skills',

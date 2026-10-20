@@ -1,5 +1,6 @@
 import { OQBaseItem } from './base-item.js';
 import { makeSlug, minMaxValue } from '../../utils/utils.js';
+import { isMaster } from '../../utils/roll.js';
 
 export class OQSkill extends OQBaseItem {
   prepareDerivedData() {
@@ -35,7 +36,7 @@ export class OQSkill extends OQBaseItem {
       const total = baseValue + advancement;
       const value = minMaxValue(total);
       const valueWithMod = mod && minMaxValue(value + mod);
-      const mastered = value >= 100;
+      const mastered = isMaster(value, value, CONFIG.OQ.Rules);
 
       return {
         value,

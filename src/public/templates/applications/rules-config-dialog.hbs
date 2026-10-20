@@ -1,0 +1,26 @@
+<section class="dialog-body standard-form scrollable">
+  <p class="hint">{{localize 'OQ.Settings.rules.hint'}}</p>
+  <div class="form-group">
+    <label for="{{rootId}}-preset">{{localize 'OQ.Settings.rules.preset.label'}}</label>
+    <div class="form-fields">
+      <select class="rules-preset" id="{{rootId}}-preset">
+        {{selectOptions presets selected=preset localize=true}}
+      </select>
+    </div>
+    <p class="hint">{{localize 'OQ.Settings.rules.preset.hint'}}</p>
+  </div>
+  <fieldset>
+    <legend>{{localize 'OQ.Settings.rules.legends.tests'}}</legend>
+    {{formGroup fields.skillCap value=rules.skillCap localize=true rootId=rootId}}
+    {{formGroup fields.criticalRule value=rules.criticalRule localize=true rootId=rootId}}
+    {{formGroup fields.fumbleRule value=rules.fumbleRule localize=true rootId=rootId}}
+    {{formGroup fields.mastery value=rules.mastery localize=true rootId=rootId}}
+  </fieldset>
+  <fieldset>
+    <legend>{{localize 'OQ.Settings.rules.legends.difficulty'}}</legend>
+    {{formGroup fields.difficulty.fields.easy value=rules.difficulty.easy localize=true rootId=rootId}}
+    {{formGroup fields.difficulty.fields.simple value=rules.difficulty.simple localize=true rootId=rootId}}
+    {{formGroup fields.difficulty.fields.difficult value=rules.difficulty.difficult localize=true rootId=rootId}}
+    {{formGroup fields.difficulty.fields.hard value=rules.difficulty.hard localize=true rootId=rootId}}
+  </fieldset>
+</section>

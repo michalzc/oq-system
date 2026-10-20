@@ -20,21 +20,38 @@ export async function promptTestRoll(rollData) {
 }
 
 /**
- * The difficulty options of a test roll dialog template.
+ * The difficulty options of a test roll dialog template, labelled with their signed modifiers, e.g. "Easy (+50%)".
  * @returns {{difficulties: Object<string, string>, defaultDifficulty: string}}
  */
 export function difficultyContext() {
-  const difficulties = _.mapValues(
-    CONFIG.OQ.RollConfig.difficultyLevels,
-    (value, key) => `${game.i18n.localize(`OQ.Labels.DifficultyLevels.${key}`)} (${value}%)`,
-  );
+  const difficulties = _.mapValues(difficultyLevels(), (value, key) => difficultyLabel(key, value));
   return { difficulties, defaultDifficulty: 'normal' };
 }
 
 /**
  * @param {string|undefined} difficultyKey The difficulty selected in the dialog
- * @returns {Difficulty|undefined}
+ * @returns {Difficulty|undefined} labelled as in the dialog, for the chat card
  */
 export function toDifficulty(difficultyKey) {
-  return difficultyKey && { key: difficultyKey, value: CONFIG.OQ.RollConfig.difficultyLevels[difficultyKey] };
+  const value = difficultyKey && difficultyLevels()[difficultyKey];
+  return difficultyKey && { key: difficultyKey, value, label: difficultyLabel(difficultyKey, value) };
+}
+
+/**
+ * @param {string} key The difficulty level
+ * @param {number} value Its modifier
+ * @returns {string} e.g. "Easy (+50%)"
+ */
+function difficultyLabel(key, value) {
+  return `${game.i18n.localize(`OQ.Labels.DifficultyLevels.${key}`)} (${value > 0 ? '+' : ''}${value}%)`;
+}
+
+/**
+ * The difficulty levels in dialog order, from Easy to Hard, with their modifiers from the difficulty Rule Options.
+ * Normal is always 0.
+ * @returns {{easy: number, simple: number, normal: number, difficult: number, hard: number}}
+ */
+function difficultyLevels() {
+  const { easy, simple, difficult, hard } = CONFIG.OQ.Rules.difficulty;
+  return { easy, simple, normal: 0, difficult, hard };
 }

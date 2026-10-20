@@ -57,6 +57,8 @@ pages:
                 spaces and underscores; entries that cannot be read are skipped.</li>
             <li><strong>Default Items Compendium</strong>: see <em>Default items</em> above.</li>
             <li><strong>Default Items from World</strong>: see <em>Default items</em> above.</li>
+            <li><strong>Rule Options</strong> (GM only, requires reload): rules that differ from the OpenQuest SRD; see the
+                <em>Rolls</em> page.</li>
         </ul>
         <h3>Recommended core settings</h3>
         <p>The system changes the defaults of two core settings. Values already saved by users are kept, and
@@ -331,20 +333,99 @@ pages:
             Shift-click rolls immediately, with Normal difficulty and the item's mod.</p>
         <p>The dialogue shows the value and lets you choose:</p>
         <ul>
-            <li><strong>Difficulty</strong>: Easy (+50%), Simple (+20%), Normal (0%), Difficult (-20%) or Hard (-50%).</li>
+            <li><strong>Difficulty</strong>: Easy (+50%), Simple (+20%), Normal (0%), Difficult (-20%) or Hard (-50%). These
+                are the OpenQuest SRD values; the GM can change them, see <em>Rule Options</em> below.</li>
             <li><strong>Other Mods</strong>: pre-filled with the skill's mod, or the weapon's combined mod; see the
                 <em>Items</em> page.</li>
             <li><strong>Visibility</strong>: who can see the roll, defaulting to the mode selected in the chat log.</li>
         </ul>
         <h3>Results</h3>
-        <p>The target is the value plus difficulty plus other mods, between 0 and 100. Roll d100:</p>
+        <p>This section describes the default OpenQuest SRD rules; <em>Rule Options</em> below lists what the GM can
+            change.</p>
+        <p>The target (the Modified skill) is the value plus difficulty plus other mods, between 0 and 100 (with no upper
+            limit when the <strong>Skills Capped at 100%</strong> Rule Option is off). Roll d100:</p>
         <ul>
             <li><strong>Critical Success</strong>: a double (11, 22 ... 99) at or under the target.</li>
             <li><strong>Success</strong>: any other roll at or under the target.</li>
             <li><strong>Failure</strong>: a roll over the target.</li>
             <li><strong>Fumble</strong>: a double over the target, or 00 (100).</li>
         </ul>
-        <p>When the value is 100 or more and the target is still 100 or more, the result is always a Critical Success.</p>
+        <p>When the value is 100 or more and the target is still 100 or more, the character is a Master: the result is
+            always a Critical Success. The sheet marks the skill and the chat card says <em>Mastered</em>.</p>
+
+        <h3>Rule Options</h3>
+        <p>The GM can run the game with rules that differ from the OpenQuest SRD. Open <em>Game Settings</em> in the
+            sidebar, go to the <em>OQ System</em> tab and click <strong>Configure Rule Options</strong>. Players do not see
+            this menu. The options apply to every actor and every test: skills, special abilities, weapons and
+            spells.</p>
+        <p>The <strong>Rules Preset</strong> box at the top shows <em>OpenQuest SRD</em> while every option has its SRD
+            value, and <em>Custom</em> otherwise. Choosing <em>OpenQuest SRD</em> restores all SRD values; changing any option
+            switches it to <em>Custom</em>.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Option</th>
+                    <th>OpenQuest SRD</th>
+                    <th>Alternative</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Skills Capped at 100%</strong></td>
+                    <td>on: skills, weapons and the target stop at 100%</td>
+                    <td>off: they can grow above 100%</td>
+                </tr>
+                <tr>
+                    <td><strong>Critical Success</strong></td>
+                    <td>successful doubles</td>
+                    <td>a roll up to one tenth of the target, rounded up</td>
+                </tr>
+                <tr>
+                    <td><strong>Fumble</strong></td>
+                    <td>failed doubles or a roll of 100</td>
+                    <td>a roll of 100 only</td>
+                </tr>
+                <tr>
+                    <td><strong>Mastery</strong></td>
+                    <td>on</td>
+                    <td>off: nobody is a Master</td>
+                </tr>
+                <tr>
+                    <td><strong>Easy Modifier</strong></td>
+                    <td>+50</td>
+                    <td>0 to 100</td>
+                </tr>
+                <tr>
+                    <td><strong>Simple Modifier</strong></td>
+                    <td>+20</td>
+                    <td>0 to 100</td>
+                </tr>
+                <tr>
+                    <td><strong>Difficult Modifier</strong></td>
+                    <td>-20</td>
+                    <td>-100 to 0</td>
+                </tr>
+                <tr>
+                    <td><strong>Hard Modifier</strong></td>
+                    <td>-50</td>
+                    <td>-100 to 0</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>The options can be combined freely:</p>
+        <ul>
+            <li>Without the cap, the part of a value or target above 100 has no further effect: it does not reduce an
+                opponent's skill. A target of 0 or less still always fails.</li>
+            <li>With the one-tenth critical rule, a target of 5 is a critical on 01 and a target of 27 on 01-03; doubles mean
+                nothing on a success. A target of 0 or less has no critical range.</li>
+            <li>A roll of 100 is always a fumble, whatever the target, unless the character is a Master and Mastery is
+                on.</li>
+            <li>With Mastery off, skills at 100% or more are rolled like any other: a success unless the roll is a fumble,
+                with criticals by the Critical Success option.</li>
+            <li>The roll dialogue shows the current difficulty modifiers. Normal is always 0.</li>
+        </ul>
+        <p>Saving changed options asks to reload the world; the new rules apply only after the reload. Chat cards already
+            posted keep their results.</p>
 
         <h2>Damage</h2>
         <p>Click a damage formula on the actor sheet to roll damage immediately. Shift-click opens a dialogue where you can

@@ -2,10 +2,12 @@
  * @typedef {Object} Difficulty
  * @property {string} key
  * @property {number} value
+ * @property {string} label The localized level with its signed modifier, e.g. "Easy (+50%)"
  */
 
 import { minMaxValue, renderTemplate } from './utils.js';
 import { createChatMessage, evaluateRoll } from './chat.js';
+import { CriticalRules, FumbleRules } from '../consts/rules-config.js';
 
 /**
  * @typedef {Object} RollData
@@ -59,7 +61,7 @@ export async function evaluateTestRoll(rollData) {
   const totalValue = minMaxValue((rollData.value ?? 0) + (rollData.difficulty?.value ?? 0) + (rollData?.mod ?? 0));
 
   const rollResult = getResult(resultFeatures, roll.total, { value: rollData.value, totalValue });
-  const mastered = rollData.value >= MAX_VALUE && totalValue >= MAX_VALUE && rollData.mastered;
+  const mastered = !!rollData.mastered && isMaster(rollData.value, totalValue, CONFIG.OQ.Rules);
   return { roll, rollResult, totalValue, mastered };
 }
 
@@ -98,15 +100,15 @@ export async function postTestRoll(rollData, testRollResult, extraContext = {}) 
 }
 
 /**
- * Determines the result of a roll based on various input parameters.
+ * Determines the result of a roll under the active Rule Options (`CONFIG.OQ.Rules`).
  *
  * @param {object} resultFeatures - The features of the result.
  * @param {boolean} resultFeatures.double - Indicates if the result can be a double.
  * @param {boolean} resultFeatures.possibleFumble - Indicates if the result can be a fumble.
  * @param {number} rollValue - The value against which the roll is compared.
  * @param {object} rollData - The data of the roll.
- * @param {number} rollData.totalValue - The total value of the roll.
- * @param {number} rollData.value
+ * @param {number} rollData.totalValue - The Modified skill.
+ * @param {number} rollData.value - The unmodified skill.
  *
  * @returns {string} - The result of the roll. Possible values are:
  *   - "criticalSuccess" if the roll is a critical success.
@@ -116,13 +118,52 @@ export async function postTestRoll(rollData, testRollResult, extraContext = {}) 
  */
 export function getResult(resultFeatures, rollValue, rollData) {
   const rollResults = CONFIG.OQ.RollConfig.rollResults;
-  const mastered = rollData.value >= 100 && rollData.totalValue >= 100;
+  const rules = CONFIG.OQ.Rules;
+  const modifiedSkill = rollData.totalValue;
+  const mastered = isMaster(rollData.value, modifiedSkill, rules);
 
   if (mastered) return rollResults.criticalSuccess;
   else if (resultFeatures.possibleFumble) return rollResults.fumble;
-  else if (rollValue <= rollData.totalValue)
-    return resultFeatures.double ? rollResults.criticalSuccess : rollResults.success;
-  else return resultFeatures.double ? rollResults.fumble : rollResults.failure;
+  else if (rollValue <= modifiedSkill)
+    return isCritical(resultFeatures, rollValue, modifiedSkill, rules)
+      ? rollResults.criticalSuccess
+      : rollResults.success;
+  else return isFumble(resultFeatures, rules) ? rollResults.fumble : rollResults.failure;
+}
+
+/**
+ * Whether a skill makes its owner a Master: Mastery is on, the unmodified skill is at least 100% and the Modified skill
+ * is still at least 100%.
+ * @param {number} value - The unmodified skill.
+ * @param {number} modifiedSkill - The Modified skill; the unmodified skill when there are no modifiers.
+ * @param {object} rules - The Rule Options, usually `CONFIG.OQ.Rules`.
+ * @returns {boolean}
+ */
+export function isMaster(value, modifiedSkill, rules) {
+  return rules.mastery && value >= MAX_VALUE && modifiedSkill >= MAX_VALUE;
+}
+
+/**
+ * Whether a failed roll is a fumble under the fumble rule. A roll of 100 is handled by `getResult`.
+ * @param {RollFeatures} resultFeatures - The features of the roll.
+ * @param {object} rules - The Rule Options.
+ * @returns {boolean}
+ */
+function isFumble(resultFeatures, rules) {
+  return rules.fumbleRule === FumbleRules.doubles && resultFeatures.double;
+}
+
+/**
+ * Whether a successful roll is a critical success under the critical rule.
+ * @param {RollFeatures} resultFeatures - The features of the roll.
+ * @param {number} rollValue - The D100 roll.
+ * @param {number} modifiedSkill - The Modified skill.
+ * @param {object} rules - The Rule Options.
+ * @returns {boolean}
+ */
+function isCritical(resultFeatures, rollValue, modifiedSkill, rules) {
+  if (rules.criticalRule === CriticalRules.tenth) return rollValue <= Math.ceil(modifiedSkill / 10);
+  else return resultFeatures.double;
 }
 
 /**
