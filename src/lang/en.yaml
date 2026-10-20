@@ -306,6 +306,19 @@ OQ:
     rules:
       name: Rule Options
       hint: Core rules that differ from the OpenQuest SRD. Changes apply after the world is reloaded.
+      menuLabel: Configure Rule Options
+      preset:
+        label: Rules Preset
+        hint: Choose OpenQuest SRD to restore the SRD values. Changing any option below makes the preset Custom.
+        choices:
+          srd: OpenQuest SRD
+          custom: Custom
+      legends:
+        tests: Tests
+        difficulty: Difficulty Levels
+      errors:
+        outOfRange: '{label} must be a whole number from {min} to {max}.'
+        invalidChoice: '{label} has an unknown value.'
       skillCap:
         label: Skills Capped at 100%
         hint: Skills, weapons and Modified skills cannot exceed 100%. Turn off to let them grow above 100%.

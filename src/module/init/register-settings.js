@@ -1,4 +1,5 @@
 import { getCompendiumList } from '../utils/compendium-utils.js';
+import { RulesConfigDialog } from '../application/rules-config-dialog.js';
 
 /**
  * Replaces the default values of core settings with the ones recommended for OQ. Core registers its settings after
@@ -69,6 +70,15 @@ export function registerSettings() {
     type: buildRulesField(),
     config: false,
   });
+
+  game.settings.registerMenu(CONFIG.OQ.SYSTEM_ID, CONFIG.OQ.SettingsConfig.keys.rulesMenu, {
+    name: 'OQ.Settings.rules.name',
+    label: 'OQ.Settings.rules.menuLabel',
+    hint: 'OQ.Settings.rules.hint',
+    icon: 'fa-solid fa-scale-balanced',
+    type: RulesConfigDialog,
+    restricted: true,
+  });
 }
 
 /**
@@ -77,17 +87,16 @@ export function registerSettings() {
  */
 function buildRulesField() {
   const fields = foundry.data.fields;
-  const { srd, CriticalRules, FumbleRules } = CONFIG.OQ.RulesConfig;
+  const { srd, CriticalRules, FumbleRules, DifficultyRanges } = CONFIG.OQ.RulesConfig;
   const prefix = 'OQ.Settings.rules';
   const choices = (rules, key) =>
     Object.fromEntries(Object.values(rules).map((rule) => [rule, `${prefix}.${key}.choices.${rule}`]));
-  const modifier = (key, min, max) =>
+  const modifier = (key) =>
     new fields.NumberField({
       required: true,
       nullable: false,
       integer: true,
-      min,
-      max,
+      ...DifficultyRanges[key],
       initial: srd.difficulty[key],
       label: `${prefix}.difficulty.${key}`,
     });
@@ -118,10 +127,10 @@ function buildRulesField() {
       hint: `${prefix}.mastery.hint`,
     }),
     difficulty: new fields.SchemaField({
-      easy: modifier('easy', 0, 100),
-      simple: modifier('simple', 0, 100),
-      difficult: modifier('difficult', -100, 0),
-      hard: modifier('hard', -100, 0),
+      easy: modifier('easy'),
+      simple: modifier('simple'),
+      difficult: modifier('difficult'),
+      hard: modifier('hard'),
     }),
   });
 }
