@@ -6,6 +6,7 @@
 
 import { minMaxValue, renderTemplate } from './utils.js';
 import { createChatMessage, evaluateRoll } from './chat.js';
+import { CriticalRules, FumbleRules } from '../consts/rules-config.js';
 
 /**
  * @typedef {Object} RollData
@@ -59,7 +60,7 @@ export async function evaluateTestRoll(rollData) {
   const totalValue = minMaxValue((rollData.value ?? 0) + (rollData.difficulty?.value ?? 0) + (rollData?.mod ?? 0));
 
   const rollResult = getResult(resultFeatures, roll.total, { value: rollData.value, totalValue });
-  const mastered = rollData.value >= MAX_VALUE && totalValue >= MAX_VALUE && rollData.mastered;
+  const mastered = !!rollData.mastered && isMaster(rollData.value, totalValue);
   return { roll, rollResult, totalValue, mastered };
 }
 
@@ -98,7 +99,7 @@ export async function postTestRoll(rollData, testRollResult, extraContext = {}) 
 }
 
 /**
- * Determines the result of a roll based on various input parameters.
+ * Determines the result of a roll under the active Rule Options (`CONFIG.OQ.Rules`).
  *
  * @param {object} resultFeatures - The features of the result.
  * @param {boolean} resultFeatures.double - Indicates if the result can be a double.
@@ -116,13 +117,36 @@ export async function postTestRoll(rollData, testRollResult, extraContext = {}) 
  */
 export function getResult(resultFeatures, rollValue, rollData) {
   const rollResults = CONFIG.OQ.RollConfig.rollResults;
-  const mastered = rollData.value >= 100 && rollData.totalValue >= 100;
+  const rules = CONFIG.OQ.Rules;
+  const mastered = isMaster(rollData.value, rollData.totalValue);
 
   if (mastered) return rollResults.criticalSuccess;
   else if (resultFeatures.possibleFumble) return rollResults.fumble;
   else if (rollValue <= rollData.totalValue)
-    return resultFeatures.double ? rollResults.criticalSuccess : rollResults.success;
-  else return resultFeatures.double ? rollResults.fumble : rollResults.failure;
+    return isCritical(resultFeatures, rollValue, rollData.totalValue, rules)
+      ? rollResults.criticalSuccess
+      : rollResults.success;
+  else return isFumble(resultFeatures, rules) ? rollResults.fumble : rollResults.failure;
+}
+
+/**
+ * Whether a skill makes its owner a Master: Mastery is on, the unmodified skill is at least 100% and the Modified skill
+ * is still at least 100%.
+ * @param {number} value the unmodified skill
+ * @param {number} [totalValue] the Modified skill, defaults to the unmodified one
+ * @returns {boolean}
+ */
+export function isMaster(value, totalValue = value) {
+  return CONFIG.OQ.Rules.mastery && value >= MAX_VALUE && totalValue >= MAX_VALUE;
+}
+
+function isFumble(resultFeatures, rules) {
+  return rules.fumbleRule === FumbleRules.doubles && resultFeatures.double;
+}
+
+function isCritical(resultFeatures, rollValue, totalValue, rules) {
+  if (rules.criticalRule === CriticalRules.tenth) return rollValue <= Math.ceil(totalValue / 10);
+  else return resultFeatures.double;
 }
 
 /**
