@@ -1,7 +1,7 @@
 # Foundry v14 notes
 
-Behaviour of Foundry 14.368 that the sources do not make obvious, found while building this system. Paths are relative
-to the `foundryvtt-api` symlink.
+Behaviour of Foundry 14.369 that the sources do not make obvious, found while building this system on 14.368 and
+rechecked against the 14.369 sources. Paths are relative to the `foundryvtt-api` symlink.
 
 ## Startup order
 
@@ -34,12 +34,12 @@ World settings cannot be written before `ready`.
 
 ## ApplicationV2 forms
 
-- `_onSubmitForm` (`client/applications/api/application.mjs:2134-2148`) catches an error thrown by the form handler,
+- `_onSubmitForm` (`client/applications/api/application.mjs:2147-2161`) catches an error thrown by the form handler,
   shows it with `ui.notifications.error(err)` (displayed as `Error: <message>`) and keeps the form open. For a clean
   message with `closeOnSubmit: false`, call `ui.notifications.error(message)` and return instead of throwing.
 - `_onChangeForm(formConfig, event)` fires on every input change; override it for live updates and call `super`.
 - `{{formGroup field ...}}` renders a `NumberField` with `min`/`max` as a `<range-picker>`. It clamps a typed value to
-  the range and rounds it to the step as it is entered (`client/applications/elements/range-picker.mjs:110-117`), so a
+  the range and rounds it to the step as it is entered (`client/applications/elements/range-picker.mjs:112-119`), so a
   form cannot submit an out-of-range number through it. Its number box is 40px wide in core CSS.
 - Core example of a settings menu with its own form: `client/applications/settings/menus/ui-config.mjs`.
 

@@ -4,7 +4,8 @@ OpenQuest SRD system for Foundry VTT
 
 ## Status
 
-Beta. The current development version requires Foundry VTT 14 and is verified on 14.368.
+Beta. The current development version requires Foundry VTT 14 and targets 14.369; it was last verified in a running
+world on 14.368.
 Both actor sheets, all six item sheets, the dialogs and the combat tracker use ApplicationV2.
 Sheets and dialogs retain the light parchment theme. See [docs/migration-issues.md](docs/migration-issues.md) for
 the migration review and completed combat tracker redesign.
@@ -119,7 +120,7 @@ actors, items, magic, rolls, chat commands and the combat tracker.
 ## Development
 
 Building the system needs only Node.js (`^20.19` or `>=22.12`; Node.js 24 is recommended) and Yarn 1.
-Running Foundry VTT 14.368 also requires Node.js 24 (24.13.1 or later).
+Running Foundry VTT 14.369 also requires Node.js 24 (24.13.1 or later).
 Nix is optional: the [Nix environment](#nix-environment-optional) below adds pinned tooling, a packaged
 Foundry VTT and one-command launchers, but nothing in the build depends on it.
 
@@ -175,12 +176,12 @@ their colour tells users something wasn't migrated. Never use them in code, temp
 ### Nix environment (optional)
 
 The project uses the shared [foundry-dev](https://github.com/michalzc/foundry-dev) flake,
-pinned in `flake.lock`. `flake.nix` owns the Foundry 14.368 archive hash and Node.js 24 selection;
+pinned in `flake.lock`. `flake.nix` owns the Foundry 14.369 archive hash and Node.js 24 selection;
 Yarn uses the same Node.js version. Download your licensed Node.js archive, name it
-`FoundryVTT-14.368.zip`, and import it before entering the shell:
+`FoundryVTT-14.369.zip`, and import it before entering the shell:
 
 ```sh
-nix-store --add-fixed sha256 FoundryVTT-14.368.zip
+nix-store --add-fixed sha256 FoundryVTT-14.369.zip
 direnv allow
 # Or without direnv:
 nix develop
@@ -232,12 +233,12 @@ Outside the shell, use `FOUNDRY_WORLD=oq-dev nix run .#start-foundry`. This laun
 `FOUNDRY_PORT` and `FOUNDRY_DATA_PATH`; relative data overrides resolve against the current directory.
 Extra command-line arguments are forwarded to Foundry.
 
-The development environment uses Foundry 14.368; the system manifest sets both the minimum and verified
+The development environment uses Foundry 14.369; the system manifest sets both the minimum and verified
 compatible version to 14.
 
 Entering the shell exports `FOUNDRY_APP_PATH` and refreshes the ignored `foundryvtt-api`
 symlink for editor navigation. Existing real files or directories at that path are preserved.
-The `foundry` shell alias is available. The `foundryvtt` package provides the pinned Foundry 14.368 build;
+The `foundry` shell alias is available. The `foundryvtt` package provides the pinned Foundry 14.369 build;
 the legacy `foundryvtt-13` package alias currently points to that same build.
 
 Run `nix flake update foundry-dev` to upgrade the shared environment, then commit
