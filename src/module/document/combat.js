@@ -294,7 +294,7 @@ export class OQCombat extends Combat {
   }
 
   /**
-   * Mirrors core 14.368's private #onEndTurn, #onEndRound, #onStartRound, #onStartTurn and #triggerRegionEvents:
+   * Mirrors core 14.369's private #onEndTurn, #onEndRound, #onStartRound, #onStartTurn and #triggerRegionEvents:
    * protected callbacks, movement clearing, effect expiry and Region events. Compare them on every core upgrade.
    */
   async _dispatchLifecycle(event, state) {

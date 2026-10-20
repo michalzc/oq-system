@@ -15,8 +15,8 @@
       env = foundry-dev.lib.mkFoundryEnvironment {
         inherit system;
         foundry = {
-          version = "14.368";
-          sha256 = "sha256-SL5GxqPSTjE7k+1DNvwAcCgQfB70odihyREWFnMORsA=";
+          version = "14.369";
+          sha256 = "sha256-TIIhnx9s8mcK02kcryO3kpqkPSr5ELr1gd9bpYyurC4=";
         };
         nodejsMajor = 24;
         port = 32000;

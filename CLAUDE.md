@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-OpenQuest SRD game system (`id: oq`) for Foundry VTT 14 (minimum and verified 14, dev version 14.368). Plain ES
+OpenQuest SRD game system (`id: oq`) for Foundry VTT 14 (minimum and verified 14, dev version 14.369). Plain ES
 modules bundled by Vite; no TypeScript. Node.js 24 and Yarn 1.
 
 ## Commands
