@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { RollConfig } from '../src/module/consts/rolls-config.js';
+import { SrdRules } from '../src/module/consts/rules-config.js';
 
 const globals = ['Item', 'Roll', 'ChatMessage', 'CONFIG', 'game', 'ui', 'foundry', 'document'];
 let savedGlobals;
@@ -126,6 +127,7 @@ describe('Spell casting', function () {
     globalThis.CONFIG = {
       OQ: {
         RollConfig,
+        Rules: SrdRules,
         ItemConfig: { spellsTypes: { personal: 'personal', sorcery: 'sorcery', custom: 'custom' } },
         ChatConfig: { MessageFlags: {} },
       },
