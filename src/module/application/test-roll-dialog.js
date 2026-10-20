@@ -25,7 +25,7 @@ export async function promptTestRoll(rollData) {
  */
 export function difficultyContext() {
   const difficulties = _.mapValues(
-    CONFIG.OQ.RollConfig.difficultyLevels,
+    difficultyLevels(),
     (value, key) => `${game.i18n.localize(`OQ.Labels.DifficultyLevels.${key}`)} (${value}%)`,
   );
   return { difficulties, defaultDifficulty: 'normal' };
@@ -36,5 +36,15 @@ export function difficultyContext() {
  * @returns {Difficulty|undefined}
  */
 export function toDifficulty(difficultyKey) {
-  return difficultyKey && { key: difficultyKey, value: CONFIG.OQ.RollConfig.difficultyLevels[difficultyKey] };
+  return difficultyKey && { key: difficultyKey, value: difficultyLevels()[difficultyKey] };
+}
+
+/**
+ * The difficulty levels in dialog order, from Easy to Hard, with their modifiers from the difficulty Rule Options.
+ * Normal is always 0.
+ * @returns {{easy: number, simple: number, normal: number, difficult: number, hard: number}}
+ */
+function difficultyLevels() {
+  const { easy, simple, difficult, hard } = CONFIG.OQ.Rules.difficulty;
+  return { easy, simple, normal: 0, difficult, hard };
 }
