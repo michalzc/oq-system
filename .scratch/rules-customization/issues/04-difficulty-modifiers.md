@@ -34,3 +34,5 @@ Difficulty levels take their modifiers from `CONFIG.OQ.Rules.difficulty`; Normal
 ## Comments
 
 - 2026-10-20: Implemented in 4f69e98, merged into `feature/rules-customization`; code-review fixes in a61bc6c. Unit tests, lint and `build:code` pass. Not yet verified in a running Foundry world.
+
+- 2026-10-20 in-world QA (Foundry 14.368, `oq-dev` world, GM client): passed. Test-roll and spell-cast dialogs offer the configured modifiers (±25/±50 with the requester set) and apply them. The chat card showed the value unsigned ("Easy (50%)"); fixed in 8cde797, chat cards now use the dialog label ("Easy (+50%)").

@@ -48,3 +48,5 @@ In `test/test-roll.js`, with `CONFIG.OQ.Rules` stubbed:
 ## Comments
 
 - 2026-10-20: Implemented in 29041bf, merged into `feature/rules-customization`; code-review fixes in a61bc6c. Unit tests, lint and `build:code` pass. Not yet verified in a running Foundry world.
+
+- 2026-10-20 in-world QA (Foundry 14.368, `oq-dev` world, GM client): passed. 44 forced d100 rolls (skills, weapon) and 11 rolls through the roll dialog matched the expected result under the SRD set, the requester set (1/10, 100 only, Mastery off) and a mixed set (1/10, doubles, Mastery on): a Master auto-crits even on 100, loses Mastery when modified below 100 (Hard), and sheet badges and the chat "Mastered" line follow the Mastery option.

@@ -36,3 +36,5 @@ With `CONFIG.OQ.Rules.skillCap` off, skill values are no longer clamped at 100%.
 ## Comments
 
 - 2026-10-20: Implemented in 51acd96, merged into `feature/rules-customization`; code-review fixes in a61bc6c. Unit tests, lint and `build:code` pass. Not yet verified in a running Foundry world.
+
+- 2026-10-20 in-world QA (Foundry 14.368, `oq-dev` world, GM client): passed. Uncapped: character sheet shows Close Combat 120%, its Longsword 120%, a special ability with formula 150 at 150%, NPC Dodge 154%; capped, all show 100%. A target modified below 0 rolls against 0 and fails.

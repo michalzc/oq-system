@@ -28,3 +28,5 @@ Describe the Rule Options in the in-game documentation.
 ## Comments
 
 - 2026-10-20: Implemented in 70a2a1a, merged into `feature/rules-customization`; code-review fixes in a61bc6c. Unit tests, lint and `build:code` pass. Not yet verified in a running Foundry world.
+
+- 2026-10-20 in-world QA (Foundry 14.368, `oq-dev` world, GM client): passed after a wording fix. The Rule Options section is in the built documentation compendium and matches the behaviour. The menu path said "Game Settings → Configure Settings → system's tab"; fixed in 8cde797 to "Game Settings → OQ System tab" (needs `yarn build:packs` with Foundry stopped to show in the world).

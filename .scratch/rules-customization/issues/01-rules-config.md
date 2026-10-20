@@ -42,3 +42,5 @@ Foundation for the other issues: the SRD Rule Option values, the world setting t
 ## Comments
 
 - 2026-10-20: Implemented in f67e131, merged into `feature/rules-customization`; code-review fixes in a61bc6c. Unit tests, lint and `build:code` pass. Not yet verified in a running Foundry world.
+
+- 2026-10-20 in-world QA (Foundry 14.368, `oq-dev` world, GM client): passed. Fresh world reads the SRD values into `CONFIG.OQ.Rules`; values saved from the form are active after reload (checked with three different rule sets).
