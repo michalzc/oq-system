@@ -26,17 +26,19 @@ Run `yarn test`, `yarn lint` and `yarn build` before submitting changes. A pre-c
 --fix, stylelint, prettier). Prettier: single quotes, trailing commas, 120 columns.
 
 The optional Nix shell (`direnv allow` / `nix develop`) provides `start-dev [--watch]`, which builds, links `build/`
-into `foundryvtt-data/Data/systems/oq`, starts Foundry on port 32000 with the `oq-dev` world, and opens Chromium
-with remote debugging on `127.0.0.1:9222` (usable through the Chrome DevTools MCP). The shell also creates the
-`foundryvtt-api` symlink to the Foundry sources, the place to look up Foundry v14 APIs. There is no live reload:
-refresh the browser after a rebuild; after changing `src/packs/`, stop Foundry, run `yarn build:packs`, restart.
+into `foundryvtt-data/Data/systems/oq`, starts Foundry on port 32000 with the `oq-dev` world, and opens Chromium with
+remote debugging on `127.0.0.1:9222`, which the Chrome DevTools MCP in `.mcp.json` attaches to. The shell also creates
+the `foundryvtt-api` symlink to the Foundry sources, the place to look up Foundry v14 APIs; read
+`docs/foundry-v14-notes.md` first for its known traps (startup order, settings, forms, forcing dice). There is no live
+reload: refresh the browser after a rebuild; after changing `src/packs/`, stop Foundry, run `yarn build:packs`, restart.
 
 ## Architecture
 
-**Entry point** `src/module/oq.js` registers everything on Foundry hooks: `init` (data models, document classes,
-sheets, Handlebars helpers, hooks, chat commands, settings, template preload, money service), `setup` (core setting
-defaults, in-memory migrations), `ready` (GM persists migrations). `CONFIG.OQ` is the `OQ` object from
-`consts/consts.js`, which aggregates `ActorConfig`, `ItemConfig`, `RollConfig`, `ChatConfig`, `SettingsConfig`.
+**Entry point** `src/module/oq.js` registers everything on Foundry hooks: `init` (data models, document classes, sheets,
+Handlebars helpers, hooks, chat commands, settings, template preload, money service), `setup` (core setting defaults,
+in-memory migrations), `ready` (GM persists migrations). World documents are prepared after `init` and before `setup`,
+so anything data preparation reads (e.g. `CONFIG.OQ.Rules`) must be set during `init`. `CONFIG.OQ` is the `OQ` object
+from `consts/consts.js`, which aggregates `ActorConfig`, `ItemConfig`, `RollConfig`, `ChatConfig`, `SettingsConfig`.
 
 **Type dispatch through config.** Actor types (`character`, `npc`) and item types (`skill`, `weapon`, `armour`,
 `equipment`, `spell`, `specialAbility`) are mapped to their document class and sheet class in

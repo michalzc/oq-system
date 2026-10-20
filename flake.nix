@@ -20,7 +20,10 @@
         };
         nodejsMajor = 24;
         port = 32000;
-        extraPackages = [ yarn ];
+        extraPackages = [
+          yarn
+          pkgs.gh
+        ];
         development = {
           packageType = "system";
           packageId = "oq";

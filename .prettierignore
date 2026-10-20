@@ -7,3 +7,6 @@ package-lock.json
 .pnp.cjs
 .pnp.js
 build
+
+# Journal sources, formatted by hand; `yarn build:docs` reads them
+docs/packs/**/*.html
