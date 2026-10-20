@@ -303,6 +303,34 @@ OQ:
         The version of the last data migration applied to this world. Warning: lowering it applies every newer
         migration to the world data again on the next load. Back up the world first, and change it only if you know
         what you are doing.
+    rules:
+      name: Rule Options
+      hint: Core rules that differ from the OpenQuest SRD. Changes apply after the world is reloaded.
+      skillCap:
+        label: Skills Capped at 100%
+        hint: Skills, weapons and Modified skills cannot exceed 100%. Turn off to let them grow above 100%.
+      criticalRule:
+        label: Critical Success
+        hint: Which successful rolls are critical successes.
+        choices:
+          doubles: Successful doubles (SRD)
+          tenth: Roll up to one tenth of the Modified skill
+      fumbleRule:
+        label: Fumble
+        hint: Which failed rolls are fumbles. A roll of 100 is always a fumble.
+        choices:
+          doubles: Failed doubles or a roll of 100 (SRD)
+          hundred: A roll of 100 only
+      mastery:
+        label: Mastery
+        hint: >-
+          A character whose skill is 100% or more, and still at least 100% after modifiers, is a Master: their tests
+          are automatic critical successes.
+      difficulty:
+        easy: Easy Modifier
+        simple: Simple Modifier
+        difficult: Difficult Modifier
+        hard: Hard Modifier
   SkillTypes:
     combat: Combat Skills
     custom: Custom Type

@@ -8,7 +8,7 @@ import { registerDataModels } from './init/register-data-models.js';
 import { registerDocuments } from './init/register-documents.js';
 import { registerHelpers } from './init/handlebar-helpers.js';
 import { registerIconFilters } from './init/icon-filters.js';
-import { applyCoreSettingDefaults, registerSettings } from './init/register-settings.js';
+import { applyCoreSettingDefaults, readRules, registerSettings } from './init/register-settings.js';
 import { buildMoneyService } from './utils/money.js';
 import { applyPendingMigrations, migrateWorld } from './migration/migration-runner.js';
 import '../styles/oq.less';
@@ -26,6 +26,8 @@ async function init() {
   registerChatCommands();
   registerIconFilters();
   registerSettings();
+  // Rule code reads this snapshot, never the setting; changing the setting requires a reload.
+  CONFIG.OQ.Rules = readRules();
 
   await preloadTemplates();
 

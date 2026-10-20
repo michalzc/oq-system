@@ -58,4 +58,79 @@ export function registerSettings() {
     default: 0,
     config: true,
   });
+
+  // All Rule Options in one setting, so a change is saved at once and asks for one reload. Edited through the rules
+  // settings menu, not the core settings form.
+  game.settings.register(CONFIG.OQ.SYSTEM_ID, CONFIG.OQ.SettingsConfig.keys.rules, {
+    name: 'OQ.Settings.rules.name',
+    hint: 'OQ.Settings.rules.hint',
+    scope: 'world',
+    requiresReload: true,
+    type: buildRulesField(),
+    config: false,
+  });
+}
+
+/**
+ * The schema of the rules setting. Its initial value is the OpenQuest SRD Rule Options.
+ * @returns {foundry.data.fields.SchemaField}
+ */
+function buildRulesField() {
+  const fields = foundry.data.fields;
+  const { srd, CriticalRules, FumbleRules } = CONFIG.OQ.RulesConfig;
+  const prefix = 'OQ.Settings.rules';
+  const choices = (rules, key) =>
+    Object.fromEntries(Object.values(rules).map((rule) => [rule, `${prefix}.${key}.choices.${rule}`]));
+  const modifier = (key, min, max) =>
+    new fields.NumberField({
+      required: true,
+      nullable: false,
+      integer: true,
+      min,
+      max,
+      initial: srd.difficulty[key],
+      label: `${prefix}.difficulty.${key}`,
+    });
+
+  return new fields.SchemaField({
+    skillCap: new fields.BooleanField({
+      initial: srd.skillCap,
+      label: `${prefix}.skillCap.label`,
+      hint: `${prefix}.skillCap.hint`,
+    }),
+    criticalRule: new fields.StringField({
+      required: true,
+      initial: srd.criticalRule,
+      choices: choices(CriticalRules, 'criticalRule'),
+      label: `${prefix}.criticalRule.label`,
+      hint: `${prefix}.criticalRule.hint`,
+    }),
+    fumbleRule: new fields.StringField({
+      required: true,
+      initial: srd.fumbleRule,
+      choices: choices(FumbleRules, 'fumbleRule'),
+      label: `${prefix}.fumbleRule.label`,
+      hint: `${prefix}.fumbleRule.hint`,
+    }),
+    mastery: new fields.BooleanField({
+      initial: srd.mastery,
+      label: `${prefix}.mastery.label`,
+      hint: `${prefix}.mastery.hint`,
+    }),
+    difficulty: new fields.SchemaField({
+      easy: modifier('easy', 0, 100),
+      simple: modifier('simple', 0, 100),
+      difficult: modifier('difficult', -100, 0),
+      hard: modifier('hard', -100, 0),
+    }),
+  });
+}
+
+/**
+ * Reads the stored Rule Options (or the SRD ones in a fresh world). World settings are readable during `init`, and it
+ * must be read then: world documents are prepared before `setup`.
+ * @returns {object} a copy of the active Rule Options, the value of `CONFIG.OQ.Rules`
+ */
+export function readRules() {
+  return foundry.utils.deepClone(game.settings.get(CONFIG.OQ.SYSTEM_ID, CONFIG.OQ.SettingsConfig.keys.rules));
 }
