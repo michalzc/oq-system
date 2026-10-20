@@ -1,11 +1,13 @@
 import assert from 'assert';
-import { getResult, getResultFeatures } from '../src/module/utils/roll.js';
+import { evaluateTestRoll, getResult, getResultFeatures } from '../src/module/utils/roll.js';
 import { RollConfig } from '../src/module/consts/rolls-config.js';
+import { SrdRules } from '../src/module/consts/rules-config.js';
 
 describe('roll.js', function () {
   globalThis.CONFIG = {
     OQ: {
       RollConfig,
+      Rules: SrdRules,
     },
   };
 
@@ -88,6 +90,47 @@ describe('roll.js', function () {
         const rollFeatures = getResultFeatures(roll);
         const result = getResult(rollFeatures, roll.total, updatedRollData);
         assert.equal(result, data.expectedResult);
+      });
+    });
+  });
+
+  describe('#evaluateTestRoll() Modified skill', function () {
+    let savedGlobals;
+
+    beforeEach(function () {
+      savedGlobals = { CONFIG: globalThis.CONFIG, Roll: globalThis.Roll };
+      globalThis.Roll = class {
+        async evaluate() {
+          this.total = 50;
+          return this;
+        }
+      };
+    });
+
+    afterEach(function () {
+      globalThis.CONFIG = savedGlobals.CONFIG;
+      globalThis.Roll = savedGlobals.Roll;
+    });
+
+    const withSkillCap = (skillCap) => {
+      globalThis.CONFIG = { OQ: { RollConfig, Rules: { ...SrdRules, skillCap } } };
+    };
+
+    const difficult = { key: 'difficult', value: -20 };
+
+    const rows = [
+      [false, 120, difficult, 100],
+      [false, 150, undefined, 150],
+      [true, 150, undefined, 100],
+    ];
+
+    rows.forEach(([skillCap, value, difficulty, expected]) => {
+      it(`should roll a ${value}% skill${
+        difficulty ? ' at Difficult' : ''
+      } against ${expected} when skillCap is ${skillCap}`, async function () {
+        withSkillCap(skillCap);
+        const { totalValue } = await evaluateTestRoll({ value, difficulty, messageMode: 'public' });
+        assert.equal(totalValue, expected);
       });
     });
   });
