@@ -1,6 +1,6 @@
 # 06 — User documentation
 
-Status: ready-for-agent
+Status: resolved
 
 Blocked by: 02, 03, 04, 05
 
@@ -24,3 +24,7 @@ Describe the Rule Options in the in-game documentation.
 
 - `yarn build:docs` output committed; the page renders in a running world after `yarn build:packs`.
 - `yarn test`, `yarn lint`, `yarn build` pass.
+
+## Comments
+
+- 2026-10-20: Implemented in 70a2a1a, merged into `feature/rules-customization`; code-review fixes in a61bc6c. Unit tests, lint and `build:code` pass. Not yet verified in a running Foundry world.

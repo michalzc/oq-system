@@ -1,6 +1,6 @@
 # 05 — Rules settings menu and preset combo
 
-Status: ready-for-agent
+Status: resolved
 
 Blocked by: 01
 
@@ -39,3 +39,7 @@ A GM-only menu in the system settings that edits the Rule Options, with a Rules 
   shows "Custom", saving prompts a reload and the new values take effect afterwards; reopening shows "OpenQuest SRD"
   again if the saved values equal SRD.
 - `yarn test`, `yarn lint`, `yarn build` pass.
+
+## Comments
+
+- 2026-10-20: Implemented in 0a93a45, merged into `feature/rules-customization`; code-review fixes in a61bc6c. Unit tests, lint and `build:code` pass. Not yet verified in a running Foundry world.

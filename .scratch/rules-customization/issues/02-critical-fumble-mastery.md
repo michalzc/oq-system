@@ -1,6 +1,6 @@
 # 02 — Critical, fumble and Mastery rules
 
-Status: ready-for-agent
+Status: resolved
 
 Blocked by: 01
 
@@ -44,3 +44,7 @@ In `test/test-roll.js`, with `CONFIG.OQ.Rules` stubbed:
 
 - All combinations above behave as specified in a running world (check a skill and a weapon roll).
 - `yarn test`, `yarn lint`, `yarn build` pass.
+
+## Comments
+
+- 2026-10-20: Implemented in 29041bf, merged into `feature/rules-customization`; code-review fixes in a61bc6c. Unit tests, lint and `build:code` pass. Not yet verified in a running Foundry world.

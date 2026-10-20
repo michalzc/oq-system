@@ -1,6 +1,6 @@
 # 01 — Rules config and settings storage
 
-Status: ready-for-agent
+Status: resolved
 
 Spec: [../spec.md](../spec.md)
 
@@ -38,3 +38,7 @@ Foundation for the other issues: the SRD Rule Option values, the world setting t
 - `CONFIG.OQ.Rules` equals the SRD values in a fresh world; a value written to the setting shows up in
   `CONFIG.OQ.Rules` after reload.
 - `yarn test`, `yarn lint`, `yarn build` pass.
+
+## Comments
+
+- 2026-10-20: Implemented in f67e131, merged into `feature/rules-customization`; code-review fixes in a61bc6c. Unit tests, lint and `build:code` pass. Not yet verified in a running Foundry world.

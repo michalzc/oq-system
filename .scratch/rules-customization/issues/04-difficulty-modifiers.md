@@ -1,6 +1,6 @@
 # 04 — Difficulty modifiers
 
-Status: ready-for-agent
+Status: resolved
 
 Blocked by: 01
 
@@ -30,3 +30,7 @@ Difficulty levels take their modifiers from `CONFIG.OQ.Rules.difficulty`; Normal
 
 - With the requester's values, the test roll, weapon and spell cast dialogs offer ±25/±50 and apply them.
 - `yarn test`, `yarn lint`, `yarn build` pass.
+
+## Comments
+
+- 2026-10-20: Implemented in 4f69e98, merged into `feature/rules-customization`; code-review fixes in a61bc6c. Unit tests, lint and `build:code` pass. Not yet verified in a running Foundry world.

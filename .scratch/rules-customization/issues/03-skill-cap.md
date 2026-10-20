@@ -1,6 +1,6 @@
 # 03 — Skill cap
 
-Status: ready-for-agent
+Status: resolved
 
 Blocked by: 01
 
@@ -32,3 +32,7 @@ With `CONFIG.OQ.Rules.skillCap` off, skill values are no longer clamped at 100%.
 - In an uncapped world a skill with advancement above 100% shows its full value on the character and NPC sheets, and
   its weapons show the same value.
 - `yarn test`, `yarn lint`, `yarn build` pass.
+
+## Comments
+
+- 2026-10-20: Implemented in 51acd96, merged into `feature/rules-customization`; code-review fixes in a61bc6c. Unit tests, lint and `build:code` pass. Not yet verified in a running Foundry world.
