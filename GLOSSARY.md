@@ -8,12 +8,24 @@ Foundry VTT implementation of the OpenQuest SRD rules, with optional deviations 
 A percentile value a character tests by rolling D100 equal to or under it.
 
 **Modified skill**:
-A skill after difficulty and any situational modifiers are applied; the value a test is actually rolled against.
+A skill after temporary effects, difficulty and any situational modifiers are applied; the value a test is actually
+rolled against. Temporary effects do not change the character's learned skill.
 _Avoid_: total value, final skill
+
+**Test modifier**:
+A bonus or penalty applied when resolving a skill test without changing the character's learned skill.
+
+**Characteristic-based skill**:
+A skill whose own base formula directly references a given characteristic; one formula may qualify for several
+characteristics. Fixed percentages and references through another skill do not establish that basis.
+
+**Conditional effect**:
+An effect whose relevance to a particular test is decided by the person making the roll. Matching the skill makes
+the effect eligible; its numeric contribution applies only when that person chooses to use it for the test.
 
 **Master**:
 A character whose unmodified skill is 100% or more; under the SRD their tests are automatic criticals and are not rolled.
-A skill only modified up to 100% does not make a Master.
+A skill only modified up to 100%, including through temporary effects, does not make a Master.
 
 **Critical success**:
 The best result of a successful test.
