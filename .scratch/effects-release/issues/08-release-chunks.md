@@ -25,3 +25,9 @@ The resource decision requires separate temporary HP/MP buffers. The candidate s
 buffers, non-resource characteristic effects, maximum/current transitions and Vigour integration into separately
 testable behaviors. Tap stays manual. Carry forward the explicit acceptance examples and compatibility requirement
 for stored legacy excess values; do not reintroduce scalar ordinary overflow as the planned representation.
+
+[Specify Apply effect on spell and ability result cards](04-chat-card-application.md) now provides the application
+contract and click-by-click Protection/hostile-ability scenarios. Assess separate reviewable slices for historical
+cast snapshots, recipient application/permissions/conflicts and partial results, non-rolled use cards, and complete
+follow-up damage snapshots. These are concrete behaviours to size here, not approved extra implementation chunks.
+Keep old/incomplete cards on the explicit manual fallback and preserve the owner-without-message-edit-permission case.

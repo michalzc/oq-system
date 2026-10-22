@@ -25,3 +25,8 @@ including a synthetic NPC actor. State where an applied effect remains independe
 and grant-pool suspension/cleanup. This ticket must define which applied effect owns a grant and distinguish its
 lifecycle from deleting/transferring the originating spell or item. Preserve that resolved pool behavior while
 choosing the representation; do not make source-item changes silently erase an independently applied benefit.
+
+[Specify Apply effect on spell and ability result cards](04-chat-card-application.md) now fixes historical cast/template
+snapshots, recipient-specific choices and independent applied benefits. Choose the representation and stable binding
+strategy within that contract; do not make application depend on rereading or retaining the original spell item.
+It also requires prior-application context without granting recipient owners edit permission on another user's card.

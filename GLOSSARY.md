@@ -23,6 +23,12 @@ characteristics. Fixed percentages and references through another skill do not e
 An effect whose relevance to a particular test is decided by the person making the roll. Matching the skill makes
 the effect eligible; its numeric contribution applies only when that person chooses to use it for the test.
 
+**Effect template**:
+A reusable definition of an ongoing benefit or restriction that a spell or ability can place on a recipient.
+
+**Applied effect**:
+A particular instance of an ongoing benefit or restriction on a recipient, with its own duration and ending.
+
 **Temporary points**:
 HP or MP granted in addition to ordinary points and spent before them. Ordinary healing and regeneration do not
 restore these points; they require an explicit temporary-point grant.

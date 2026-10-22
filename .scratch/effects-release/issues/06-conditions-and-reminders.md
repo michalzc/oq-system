@@ -32,3 +32,7 @@ consumes the source. Next-use clearing remains manual.
 Specify presentation, sensible checkbox defaults, explanation of conditions and competing modifiers, quick rolls that
 skip the dialog, and consistency with casting/ability roll flows. A quick roll must not silently assume a conditional
 effect applies without a selection. This is a UX/application decision, not a reason to add an event/predicate engine.
+
+[Specify Apply effect on spell and ability result cards](04-chat-card-application.md) now fixes selected conditional
+contributions and the complete original damage basis for follow-up damage from a test card. Presentation, checkbox
+defaults and quick-roll handling remain here; do not recompute that historical test from later selections/current effects.

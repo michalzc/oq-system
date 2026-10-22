@@ -35,6 +35,9 @@ Implementation starts in a later effort, after the relevant decisions are resolv
 - [Choose duration, duplicate, and conflicting-effect handling](issues/03-lifetime-and-duplicates.md): core clocks,
   human conflict decisions, and source-specific temporary-point pools with FIFO spending and selective cleanup are agreed.
 
+- [Specify Apply effect on spell and ability result cards](issues/04-chat-card-application.md): historical cast/damage
+  snapshots, recipient-owner/GM application, explicit repeats, per-recipient outcomes and non-rolled use cards are agreed.
+
 ## Not yet specified
 
 - Exact migration and compatibility work once the effect representation, item references, and stored-spell ownership
