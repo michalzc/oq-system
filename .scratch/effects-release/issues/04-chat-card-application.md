@@ -31,3 +31,7 @@ snapshot for applying a spell to another actor.
 The resource decision selects separate temporary HP/MP buffers. Vigour's application grants temporary HP; it must not
 be implemented as an ordinary maximum/current modifier. Preserve the cast magnitude and use the resolved grant/cap
 policy; coordinate source ending/overlap cleanup with the lifetime decision rather than silently clearing unrelated points.
+
+[Choose duration, duplicate, and conflicting-effect handling](03-lifetime-and-duplicates.md) now settles clocks,
+human duplicate/conflict resolution and source-specific pool lifecycles. Use that answer for repeated application
+and explicit new grants; this ticket still owns their precise UI, permission and snapshot behavior.

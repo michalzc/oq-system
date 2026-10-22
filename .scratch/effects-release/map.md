@@ -32,6 +32,8 @@ Implementation starts in a later effort, after the relevant decisions are resolv
   direct-formula skill matching, per-test conditional selection, and the SRD coverage boundary are agreed.
 - [Define excess HP/MP and temporary magical resource behavior](issues/02-resource-semantics.md): separate buffers are
   spent first; ordinary healing, signed maximum adjustments, Vigour's grant cap and manual Tap bookkeeping are agreed.
+- [Choose duration, duplicate, and conflicting-effect handling](issues/03-lifetime-and-duplicates.md): core clocks,
+  human conflict decisions, and source-specific temporary-point pools with FIFO spending and selective cleanup are agreed.
 
 ## Not yet specified
 
@@ -49,3 +51,5 @@ Implementation starts in a later effort, after the relevant decisions are resolv
   are sufficient for this release.
 - A general engine for line of sight, auras, AI behavior, resistance resolution, attack triggers, or damage immunities.
   Such rules must remain representable as reminders even when their adjudication is manual.
+- Manual choice/reordering of temporary-point spending and a general automatic effect-conflict engine; the
+  [duration and conflict decision](issues/03-lifetime-and-duplicates.md) fixes the v0.9 boundary.

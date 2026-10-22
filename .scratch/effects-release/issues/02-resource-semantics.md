@@ -70,7 +70,14 @@ ordinary current values above their maxima.
 
 ### Resource model
 
-Each of HP and MP has ordinary current points, a normal maximum, and a separately editable temporary-point buffer.
+The representation is subsequently refined in
+[Choose duration, duplicate, and conflicting-effect handling](03-lifetime-and-duplicates.md): the user approved
+source-specific temporary-point pools with an aggregate total and FIFO spending. Its answer owns that refinement,
+including editing and lifecycle details. References below to a temporary buffer describe the aggregate resource semantics,
+not a requirement to store every grant as one unattributed number.
+
+Each of HP and MP has ordinary current points, a normal maximum, and a separate temporary-point total; explicit
+grants and corrections operate on its source pools as specified in the linked refinement.
 The normal maximum is the capacity of ordinary points; temporary points can take the available total above it.
 Generic buffers are nonnegative and have no universal upper cap. Specific granting rules have their own limits.
 This model works without an Active Effect: the GM can grant, edit or clear temporary points directly.
@@ -118,14 +125,13 @@ ordinary maximum effect with an inverse subtraction of the original grant.
 - Explicit damage uses remaining magical HP first. Ordinary healing does not refill the magical HP.
 - Ending the benefit discards its remaining magical HP and preserves ordinary HP. Do not subtract the original grant
   from a combined current value after some of the grant has already absorbed damage.
-- The generic buffer editor remains available for explicit GM overrides. Applying the rule's normal cap does not
+- Explicit GM corrections remain available through the source-pool editor. Applying the rule's normal cap does not
   create a universal buffer cap or continuously trim buffers whenever ordinary maximum changes.
 
-Overlapping grants, replacement and attribution of points in a shared buffer must be settled in
-[Choose duration, duplicate, and conflicting-effect handling](03-lifetime-and-duplicates.md). Do not silently discard
-unrelated temporary points, invent additive spell stacking or assume a per-source ledger has already been approved.
-Single-grant behavior is settled here; the overlapping-grant policy remains a prerequisite for automated multi-source
-cleanup. Effect application and clock support remain with their existing decisions.
+Overlapping grants, replacement and attribution are settled in
+[Choose duration, duplicate, and conflicting-effect handling](03-lifetime-and-duplicates.md). That answer owns
+the source-pool lifecycle refinement; the single-grant amount/cap remains here. Effect-application details remain
+with their existing decision.
 
 ### Tap and other exceptional gains
 

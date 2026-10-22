@@ -38,6 +38,10 @@ The [resolved mechanics decision](issues/01-supported-mechanics.md) owns the cor
 spending, ordinary-only recovery, signed maximum/current transitions and Vigour's cap. Tap's gains/drain/decay remain
 manual. Enchantment rows describe their minimum manual workflow while their own decision remains open.
 
+The [resolved lifetime and conflict decision](issues/03-lifetime-and-duplicates.md) refines temporary points into
+source-specific FIFO pools and owns clocks, suspension/selective cleanup and human duplicate/conflict decisions.
+Use that answer alongside this inventory; the precise chat-card application workflow is still open.
+
 Planned treatments for the **163 actual SRD spells**: **15 automated, 28 assisted, 120 manual**.
 Including the pack-only Binding Spirits procedure gives **164 inventory rows: 15 automated, 28 assisted, 121 manual**.
 
@@ -111,7 +115,7 @@ Including the pack-only Binding Spirits procedure gives **164 inventory rows: 15
 | [Tongues](../../src/packs/spells/Tongues_l6xH28jDM3a2mX8k.yml) | Language permission | Manual | Choose language and grant perfect speech during spell; do not permanently raise learned language skill or Master status. |
 | [Truth Seeker](../../src/packs/spells/Truth_Seeker_jrIlieYWs3qS4qGA.yml) | Next relevant test / nonstacking | Assisted | Offer +10% per magnitude as a conditional choice on matching skill tests. The person rolling judges whether the test discovers lies, secrets or hidden objects, excludes other spell bonuses as required, and clears the reminder manually after use. |
 | [Unlock](../../src/packs/spells/Unlock_JcLmy8uLAvjBTfGm.yml) | One-time object test / opposed lock | Manual | Roll magnitude×20% adjusted for lock intricacy, opposed by magical Lock when present; GM opens actual object and ends Lock as applicable. |
-| [Vigour](../../src/packs/spells/Vigour_bl6L0iB5JANGwvxH.yml) | Temporary HP pool / damage priority | Automated | Grant temporary HP equal to min(2 × magnitude, normal HP maximum). Damage consumes temporary points first; ordinary healing/regeneration do not refill them. Ending removes remaining magical HP while preserving ordinary HP. Single-grant semantics are resolved; overlaps/source cleanup remain with the lifetime/application decisions. |
+| [Vigour](../../src/packs/spells/Vigour_bl6L0iB5JANGwvxH.yml) | Temporary HP pool / damage priority | Automated | Grant a source-specific pool of min(2 × magnitude, normal HP maximum) HP. Spend permitted pools FIFO before ordinary HP; healing does not refill them. Disable suspends only its remainder; enable restores that remainder/order. Ending removes only its own remaining points. Human resolves duplicate-spell conflicts; precise application UI remains open. |
 | [Vomit](../../src/packs/spells/Vomit_cqpoOFizBVzf1CZU.yml) | Disabled condition / fumble damage | Manual | Resolve Resilience, show disabled for magnitude rounds and explicitly apply 1D6 HP damage on fumble; no automatic roll prohibition required. |
 | [Walk on (Element)](../../src/packs/spells/Walk_on__Element__UZxbpl0Ii2BbrGUs.yml) | Terrain/hazard permission | Manual | Choose element, permit walking without sinking/harm and record extra duration; no universal movement speed or AP bonus. |
 | [Water Breath](../../src/packs/spells/Water_Breath_vV0qFKzEZB7TS5CO.yml) | Breathing permission / allocation | Manual | Choose extra recipients or extra minutes from magnitude and track duration; permit water and air breathing without numerical actor change. |

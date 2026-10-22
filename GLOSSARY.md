@@ -27,6 +27,10 @@ the effect eligible; its numeric contribution applies only when that person choo
 HP or MP granted in addition to ordinary points and spent before them. Ordinary healing and regeneration do not
 restore these points; they require an explicit temporary-point grant.
 
+**Temporary-point pool**:
+The remaining temporary HP or MP from one grant, distinct from points supplied by other grants. Ending that grant
+removes only its remaining points.
+
 **Normal maximum**:
 The capacity for ordinary HP or MP, including effects that change that capacity. Temporary points are separate and
 do not increase this maximum.
