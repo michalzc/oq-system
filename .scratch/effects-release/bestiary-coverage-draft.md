@@ -48,6 +48,10 @@ item grouping and the remaining resource/duration/application details still need
 reuse a spell payload while retaining different applicability, costs and lifetime. There are no unambiguously numeric-only
 complete rule families below; Automated subsets occur inside Assisted abilities.
 
+The [resolved resource decision](issues/02-resource-semantics.md) provides separate temporary HP/MP buffers spent
+first, ordinary-only healing/regeneration, and manual Tap bookkeeping. This does not turn creature drain, feeding,
+regeneration or exceptional healing into automatic triggers.
+
 ## Inventory by creature
 
 ### Basilisk

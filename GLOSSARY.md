@@ -23,6 +23,14 @@ characteristics. Fixed percentages and references through another skill do not e
 An effect whose relevance to a particular test is decided by the person making the roll. Matching the skill makes
 the effect eligible; its numeric contribution applies only when that person chooses to use it for the test.
 
+**Temporary points**:
+HP or MP granted in addition to ordinary points and spent before them. Ordinary healing and regeneration do not
+restore these points; they require an explicit temporary-point grant.
+
+**Normal maximum**:
+The capacity for ordinary HP or MP, including effects that change that capacity. Temporary points are separate and
+do not increase this maximum.
+
 **Master**:
 A character whose unmodified skill is 100% or more; under the SRD their tests are automatic criticals and are not rolled.
 A skill only modified up to 100%, including through temporary effects, does not make a Master.

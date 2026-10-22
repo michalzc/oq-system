@@ -19,3 +19,11 @@ cases? Do not invent a universal stacking policy beyond the local SRD evidence.
 Record explicit examples for duplicate Protection, duplicate Shield, cancelling mental effects, repeated chat-card
 application, expiration after reload, and a manual reminder with no clock. Check timing assumptions against the
 existing declaration/round workflow and installed core before recommending a custom timer.
+
+## Comments
+
+[Define excess HP/MP and temporary magical resource behavior](02-resource-semantics.md) establishes one temporary buffer
+for each resource, buffer-first damage/spending, ordinary-only recovery, and Vigour's single-grant behavior. Decide how
+overlapping/replacement grants interact with shared buffers and how ending one grant identifies its remaining points.
+Compare manual conflict resolution or a single selected grant with any per-source ledger proposal; the latter has not
+been approved. Do not silently remove unrelated temporary points or assume duplicate Vigour grants add together.

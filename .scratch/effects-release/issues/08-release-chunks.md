@@ -18,3 +18,10 @@ Identify independent tracks and the minimum complete v0.9 scope. Record the agre
 criteria so the completed map can feed the subsequent specification and implementation-ticket flows. Carry forward
 the coverage inventories with explicit manual workflows, including the now-agreed conditional test-selection behavior.
 Do not label wayfinder decisions as implementation-ready or execute the release inside this map.
+
+## Comments
+
+The resource decision requires separate temporary HP/MP buffers. The candidate sequence now splits HP buffers, MP
+buffers, non-resource characteristic effects, maximum/current transitions and Vigour integration into separately
+testable behaviors. Tap stays manual. Carry forward the explicit acceptance examples and compatibility requirement
+for stored legacy excess values; do not reintroduce scalar ordinary overflow as the planned representation.

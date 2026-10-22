@@ -30,6 +30,8 @@ Implementation starts in a later effort, after the relevant decisions are resolv
 
 - [Choose effect mechanics and the spell/ability coverage boundary](issues/01-supported-mechanics.md): numeric effects,
   direct-formula skill matching, per-test conditional selection, and the SRD coverage boundary are agreed.
+- [Define excess HP/MP and temporary magical resource behavior](issues/02-resource-semantics.md): separate buffers are
+  spent first; ordinary healing, signed maximum adjustments, Vigour's grant cap and manual Tap bookkeeping are agreed.
 
 ## Not yet specified
 
@@ -43,5 +45,7 @@ Implementation starts in a later effort, after the relevant decisions are resolv
 - Automatic interpretation/consumption of next-applicable-roll benefits, including disease-only or purpose-based tests.
 - Adding opposed-roll resolution as a prerequisite for applying effects.
 - Recursive/transitive skill-formula analysis, stored skill-basis metadata, and characteristic inference from names.
+- Automatic Tap characteristic drain/MP decay and negative-HP tracking; explicit buffer bookkeeping and zero-floor HP
+  are sufficient for this release.
 - A general engine for line of sight, auras, AI behavior, resistance resolution, attack triggers, or damage immunities.
   Such rules must remain representable as reminders even when their adjudication is manual.

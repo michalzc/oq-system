@@ -27,3 +27,7 @@ The mechanics decision includes per-test selection of matching conditional effec
 are captured with the roll, including any contribution needed for a later damage roll from that card. This must not
 re-query an unrelated current selection or silently consume the effect. It is distinct from the magnitude/source
 snapshot for applying a spell to another actor.
+
+The resource decision selects separate temporary HP/MP buffers. Vigour's application grants temporary HP; it must not
+be implemented as an ordinary maximum/current modifier. Preserve the cast magnitude and use the resolved grant/cap
+policy; coordinate source ending/overlap cleanup with the lifetime decision rather than silently clearing unrelated points.

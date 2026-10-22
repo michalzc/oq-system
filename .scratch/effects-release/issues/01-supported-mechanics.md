@@ -198,4 +198,4 @@ owns recipients, permissions, snapshots and repeated application. [Separate item
 applied templates](05-item-ownership-and-transfer.md) owns source/target representation and activation.
 [Choose OpenQuest conditions and useful manual reminder workflows](06-conditions-and-reminders.md) owns condition
 presentation and the detailed conditional-selection/quick-roll experience. [Bound magic point stores and stored-spell
-casting for v0.9](07-enchanted-items.md) owns enchanted-item workflows. These tickets remain open.
+casting for v0.9](07-enchanted-items.md) owns enchanted-item workflows. Follow those tickets for their current status.
