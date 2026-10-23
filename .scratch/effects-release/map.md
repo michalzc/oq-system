@@ -38,10 +38,18 @@ Implementation starts in a later effort, after the relevant decisions are resolv
 - [Specify Apply effect on spell and ability result cards](issues/04-chat-card-application.md): historical cast/damage
   snapshots, recipient-owner/GM application, explicit repeats, per-recipient outcomes and non-rolled use cards are agreed.
 
+- [Separate item-local effects, passive transfer, and applied templates](issues/05-item-ownership-and-transfer.md): three
+  roles, mixed passive/use abilities, state gating, independent applications, identity bindings and copy/import behavior
+  are agreed.
+
+- [Choose OpenQuest conditions and useful manual reminder workflows](issues/06-conditions-and-reminders.md): curated
+  reminder markers, source-owned numbers, source-aware controls, unchecked test choices and quick-roll dialogs are agreed.
+
+- [Bound magic point stores and stored-spell casting for v0.9](issues/07-enchanted-items.md): item stores, explicit
+  single-source payment, recoverable casts and portable Personal Magic charms are agreed; other enchanted kinds stay manual.
+
 ## Not yet specified
 
-- Exact migration and compatibility work once the effect representation, item references, and stored-spell ownership
-  are chosen. Preserve existing document IDs and world data; do not guess the migration shape now.
 - Additional review splits exposed by a concrete sheet/application flow or by the first representative implementation.
 
 ## Out of scope
@@ -56,3 +64,7 @@ Implementation starts in a later effort, after the relevant decisions are resolv
   Such rules must remain representable as reminders even when their adjudication is manual.
 - Manual choice/reordering of temporary-point spending and a general automatic effect-conflict engine; the
   [duration and conflict decision](issues/03-lifetime-and-duplicates.md) fixes the v0.9 boundary.
+- Dedicated crafting, matrix/potion/scroll/blessed-item use and special-reservoir automation beyond the bounded
+  [enchanted-item scope](issues/07-enchanted-items.md); these retain documented manual workflows for v0.9.
+- Automatic multi-source MP allocation, store fallback and equipment-slot/attunement limits; single-source payment and
+  unlimited readied ordinary items are the agreed release boundary.

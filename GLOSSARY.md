@@ -26,8 +26,27 @@ the effect eligible; its numeric contribution applies only when that person choo
 **Effect template**:
 A reusable definition of an ongoing benefit or restriction that a spell or ability can place on a recipient.
 
+**Item-local effect**:
+A benefit or restriction that changes only the item bearing it, rather than its owner's general capabilities.
+
+**Passive effect**:
+A benefit or restriction supplied by an owned item or ability while its activation requirements are met.
+An ability may supply passive effects as well as effect templates used explicitly.
+
 **Applied effect**:
 A particular instance of an ongoing benefit or restriction on a recipient, with its own duration and ending.
+
+**Condition**:
+A named state affecting a creature's actions or circumstances. Its precise consequences and ending can depend on
+what caused it.
+
+**Status marker**:
+A visible indication of a condition. The marker supplies no numeric modifiers by itself; any such consequences
+belong to the effect causing the condition.
+
+**Reminder**:
+A visible rule or instruction retained for human adjudication. It may accompany numeric effects or stand alone
+without changing any values.
 
 **Temporary points**:
 HP or MP granted in addition to ordinary points and spent before them. Ordinary healing and regeneration do not
@@ -36,6 +55,17 @@ restore these points; they require an explicit temporary-point grant.
 **Temporary-point pool**:
 The remaining temporary HP or MP from one grant, distinct from points supplied by other grants. Ending that grant
 removes only its remaining points.
+
+**Magic point store**:
+An enchanted physical item holding a separate supply of MP, with its own capacity and remaining balance.
+_Avoid_: temporary MP pool
+
+**Stored spell**:
+A spell held in an enchanted item for a wielder to invoke; its use rules depend on the kind of enchantment.
+
+**Charm**:
+A physical item holding one or more Personal Magic spells, invoked using the wielder's Personal Magic Casting skill
+and MP.
 
 **Normal maximum**:
 The capacity for ordinary HP or MP, including effects that change that capacity. Temporary points are separate and
