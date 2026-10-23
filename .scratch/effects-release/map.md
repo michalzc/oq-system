@@ -48,6 +48,9 @@ Implementation starts in a later effort, after the relevant decisions are resolv
 - [Bound magic point stores and stored-spell casting for v0.9](issues/07-enchanted-items.md): item stores, explicit
   single-source payment, recoverable casts and portable Personal Magic charms are agreed; other enchanted kinds stay manual.
 
+- [Choose v0.9 migration and compatibility policy](issues/09-migration-and-compatibility.md): preserve supported data,
+  recover stored resource excess, leave unsupported legacy effects alone and adopt official templates explicitly.
+
 ## Not yet specified
 
 - Additional review splits exposed by a concrete sheet/application flow or by the first representative implementation.
@@ -68,3 +71,7 @@ Implementation starts in a later effort, after the relevant decisions are resolv
   [enchanted-item scope](issues/07-enchanted-items.md); these retain documented manual workflows for v0.9.
 - Automatic multi-source MP allocation, store fallback and equipment-slot/attunement limits; single-source payment and
   unlimited readied ordinary items are the agreed release boundary.
+- Migration or compatibility support for pre-v0.9 user/macro/module-created ActiveEffects, including inferred
+  effect roles, status/grant conversions and repair tooling. The system had no supported effects feature before v0.9;
+  leave those stored definitions alone without promising continued behavior. This boundary is recorded in
+  [migration and compatibility decision](issues/09-migration-and-compatibility.md).

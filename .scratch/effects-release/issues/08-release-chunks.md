@@ -3,7 +3,7 @@
 Labels: wayfinder:grilling
 Type: grilling
 Parent: ../map.md
-Blocked by: 01, 02, 03, 04, 05, 06, 07, 09
+Blocked by: 01, 02, 03, 04, 05, 06, 07, 09, 10
 
 ## Question
 
@@ -52,3 +52,18 @@ recovery must accompany/predecessor any release of payment/single-use casting. L
 personal-paid charm does not inherently depend on store selection. Size snapshot/application integration explicitly.
 Other enchanted kinds and special reservoirs have documented manual workflows, not hidden extra automation scope.
 Do not describe single-source UI or ordinary-only refill policies as explicit SRD prohibitions.
+
+The user narrowed compatibility scope while discussing
+[Choose v0.9 migration and compatibility policy](09-migration-and-compatibility.md): pre-v0.9 ActiveEffects created by
+users/macros/modules are unsupported and will not be migrated, classified or repaired. Do not size legacy-effect
+adapters, role inference, status/grant conversion or repair tooling into the release. Preserve official pre-existing
+actor/item/resource/chat data and the new feature's own save/copy/import contracts; leaving old effect definitions
+alone does not guarantee their behavior. The remaining compatibility choices concern excess resource attribution
+and adoption of new official templates on existing world/owned spell copies.
+
+[Choose v0.9 migration and compatibility policy](09-migration-and-compatibility.md) is resolved with the narrowed support
+boundary and source-overflow fixtures: recover only excess still stored, no legacy-effect adapter, no retroactive
+resource actions, existing migration retry behavior and safe ordinary-data imports. The user suggested an optional,
+manually invoked macro to refresh SRD spells on world actors; its exact adoption/replacement contract is now
+[Define the optional SRD spell refresh macro](10-srd-spell-refresh.md). Resolve that prerequisite before sizing its
+content/tooling chunk; do not silently include an automatic world spell replacement in migration work.
