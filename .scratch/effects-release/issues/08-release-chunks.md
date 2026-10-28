@@ -67,3 +67,6 @@ resource actions, existing migration retry behavior and safe ordinary-data impor
 manually invoked macro to refresh SRD spells on world actors; its exact adoption/replacement contract is now
 [Define the optional SRD spell refresh macro](10-srd-spell-refresh.md). Resolve that prerequisite before sizing its
 content/tooling chunk; do not silently include an automatic world spell replacement in migration work.
+
+[Define the optional SRD spell refresh macro](10-srd-spell-refresh.md) is resolved: size it as one late slice after
+the first templated spells exist, with its documentation page; its pure planning/payload functions carry the tests.

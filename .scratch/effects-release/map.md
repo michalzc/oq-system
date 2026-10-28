@@ -51,6 +51,9 @@ Implementation starts in a later effort, after the relevant decisions are resolv
 - [Choose v0.9 migration and compatibility policy](issues/09-migration-and-compatibility.md): preserve supported data,
   recover stored resource excess, leave unsupported legacy effects alone and adopt official templates explicitly.
 
+- [Define the optional SRD spell refresh macro](issues/10-srd-spell-refresh.md): GM-only, manually invoked in-place
+  refresh of pack-linked spells on world actors/items/unlinked tokens; learned/spent state kept, unlinked spells excluded.
+
 ## Not yet specified
 
 - Additional review splits exposed by a concrete sheet/application flow or by the first representative implementation.

@@ -67,6 +67,12 @@ A spell held in an enchanted item for a wielder to invoke; its use rules depend 
 A physical item holding one or more Personal Magic spells, invoked using the wielder's Personal Magic Casting skill
 and MP.
 
+**Spell refresh**:
+A deliberate, Referee-initiated update of a character's copy of an official SRD spell to the current official rules
+text and effect templates. The character's learned magnitude, remaining magnitude, casting skill and chosen name are
+kept; only copies known to come from the official spells are eligible.
+_Avoid_: spell migration, spell update
+
 **Normal maximum**:
 The capacity for ordinary HP or MP, including effects that change that capacity. Temporary points are separate and
 do not increase this maximum.
