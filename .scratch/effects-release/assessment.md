@@ -3,6 +3,10 @@
 This is a planning draft supporting [Plan v0.9 effects as reviewable, playable increments](map.md).
 It evaluates the original [release outline](../../temp/effects.md); it does not replace it with a settled spec.
 
+> **Superseded sequence.** [Finalize reviewable chunks and release acceptance criteria](issues/08-release-chunks.md)
+> owns the agreed chunks, dependencies and release cut. The candidate table below is history; the
+> [Definition of a reviewable chunk](#definition-of-a-reviewable-chunk) remains the agreed acceptance bar.
+
 ## Evaluation
 
 The four original bullets are reasonable release themes, but are too broad for individual review/test units.

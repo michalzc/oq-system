@@ -54,9 +54,14 @@ Implementation starts in a later effort, after the relevant decisions are resolv
 - [Define the optional SRD spell refresh macro](issues/10-srd-spell-refresh.md): GM-only, manually invoked in-place
   refresh of pack-linked spells on world actors/items/unlinked tokens; learned/spent state kept, unlinked spells excluded.
 
+- [Finalize reviewable chunks and release acceptance criteria](issues/08-release-chunks.md): 25 chunks across Res, Fx,
+  Itm, App, Clk, Cnd and Ench tracks with a dependency graph; Ench and the refresh macro may slip; PR per chunk to
+  master; content in mechanic-ordered batches; one spec per track for the handoff.
+
 ## Not yet specified
 
-- Additional review splits exposed by a concrete sheet/application flow or by the first representative implementation.
+None. The map is complete; further chunk splits are left to the spec/ticket flows and implementation, as recorded in
+[Finalize reviewable chunks and release acceptance criteria](issues/08-release-chunks.md).
 
 ## Out of scope
 
@@ -78,3 +83,6 @@ Implementation starts in a later effort, after the relevant decisions are resolv
   effect roles, status/grant conversions and repair tooling. The system had no supported effects feature before v0.9;
   leave those stored definitions alone without promising continued behavior. This boundary is recorded in
   [migration and compatibility decision](issues/09-migration-and-compatibility.md).
+- A proper bestiary compendium of creature actors. v0.9 ships the special-ability item pack as its building blocks; the
+  journal bestiary stays as the reference until that later effort
+  ([release chunks decision](issues/08-release-chunks.md)).
