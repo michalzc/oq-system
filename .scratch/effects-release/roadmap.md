@@ -11,11 +11,13 @@ a folder gets its tickets or a chunk merges.
 | Decisions (wayfinder) | [map.md](map.md), `issues/01`–`10` | Done |
 | Chunk list and dependency graph | [08 release chunks](issues/08-release-chunks.md), section "Chunks and dependency graph" | Done |
 | One spec per track | `.scratch/v09-*/spec.md`, section "Delivery and dependencies" in each | Done |
-| Tickets per track | `.scratch/v09-*/issues/` | **In progress: resources done, next actor-effects** |
+| Tickets per track | `.scratch/v09-*/issues/` | **In progress: resources and actor-effects done, next application or conditions** |
 | Implementation | One PR per chunk into `master` | Not started |
 
 Where 08 and a spec disagree on a blocking edge, the spec is newer and wins. The specs added three edges:
-App4 also needs Itm2, App6 also needs Fx5, and Clk1 also needs App1.
+App4 also needs Itm2, App6 also needs Fx5, and Clk1 also needs App1. The actor-effects tickets added two more: Itm1's
+hit-modifier ticket also needs Fx5's first ticket (actor-effects 06), and Itm2 starts after Itm1's first ticket
+(actor-effects 13), which adds the item effect role and Effects section both chunks use.
 
 ## Step 1: write tickets, one folder at a time, in this order
 
@@ -25,7 +27,7 @@ at another folder's ticket files, so a folder can only be ticketed after every f
 | # | Folder | Chunks | Needs tickets from | Tickets |
 | --- | --- | --- | --- | --- |
 | 1 | [v09-resources](../v09-resources/spec.md) | Res1, Res2 | — | [x] |
-| 2 | [v09-actor-effects](../v09-actor-effects/spec.md) | Fx1–Fx6b, Itm1, Itm2 | resources | [ ] |
+| 2 | [v09-actor-effects](../v09-actor-effects/spec.md) | Fx1–Fx6b, Itm1, Itm2 | resources | [x] |
 | 3 | [v09-application](../v09-application/spec.md) | App1–App6, Clk1, Clk2 | resources, actor-effects | [ ] |
 | 4 | [v09-conditions](../v09-conditions/spec.md) | Cnd1, Cnd2 | actor-effects | [ ] |
 | 5 | [v09-enchanted](../v09-enchanted/spec.md) | Ench1–Ench4 | resources, application | [ ] |
@@ -64,15 +66,15 @@ Fill in the ticket path once a folder is ticketed and tick Merged when the PR la
 | --- | --- | --- | --- | --- |
 | Res1 Temporary HP pools | resources | — | [01–04](../v09-resources/issues/) | [ ] |
 | Res2 Temporary MP pools | resources | Res1 | [05–07](../v09-resources/issues/) | [ ] |
-| Fx1 Actor effects with Protection | actor-effects | — | | [ ] |
-| Fx2 Movement | actor-effects | Fx1 | | [ ] |
-| Fx3 Characteristics | actor-effects | Fx1 | | [ ] |
-| Fx4 Maximum/current transitions | actor-effects | Res1, Res2, Fx3 | | [ ] |
-| Fx5 Skill test modifiers | actor-effects | Fx1 | | [ ] |
-| Fx6a Conditional choices | actor-effects | Fx5 | | [ ] |
-| Fx6b Quick-roll paths | actor-effects | Fx6a | | [ ] |
-| Itm1 Item-local effects | actor-effects | Fx1 | | [ ] |
-| Itm2 Owner passives | actor-effects | Fx1 | | [ ] |
+| Fx1 Actor effects with Protection | actor-effects | — | [01–02](../v09-actor-effects/issues/) | [ ] |
+| Fx2 Movement | actor-effects | Fx1 | [03](../v09-actor-effects/issues/) | [ ] |
+| Fx3 Characteristics | actor-effects | Fx1 | [04](../v09-actor-effects/issues/) | [ ] |
+| Fx4 Maximum/current transitions | actor-effects | Res1, Res2, Fx3 | [05](../v09-actor-effects/issues/), 17 if after Itm2 | [ ] |
+| Fx5 Skill test modifiers | actor-effects | Fx1 | [06–07](../v09-actor-effects/issues/) | [ ] |
+| Fx6a Conditional choices | actor-effects | Fx5 | [08–10](../v09-actor-effects/issues/) | [ ] |
+| Fx6b Quick-roll paths | actor-effects | Fx6a | [11–12](../v09-actor-effects/issues/) | [ ] |
+| Itm1 Item-local effects | actor-effects | Fx1, Fx5 (ticket 14) | [13–14](../v09-actor-effects/issues/) | [ ] |
+| Itm2 Owner passives | actor-effects | Fx1, Itm1 (ticket 13) | [15–16](../v09-actor-effects/issues/), 17 if after Fx4 | [ ] |
 | App1 Apply effect | application | Fx1 | | [ ] |
 | App2 Conflict review | application | App1 | | [ ] |
 | App3 Multiple recipients | application | App1 | | [ ] |
