@@ -11,7 +11,7 @@ a folder gets its tickets or a chunk merges.
 | Decisions (wayfinder) | [map.md](map.md), `issues/01`–`10` | Done |
 | Chunk list and dependency graph | [08 release chunks](issues/08-release-chunks.md), section "Chunks and dependency graph" | Done |
 | One spec per track | `.scratch/v09-*/spec.md`, section "Delivery and dependencies" in each | Done |
-| Tickets per track | `.scratch/v09-*/issues/` | **In progress: resources, actor-effects and application done, next conditions** |
+| Tickets per track | `.scratch/v09-*/issues/` | **In progress: resources, actor-effects, application and conditions done, next enchanted** |
 | Implementation | One PR per chunk into `master` | Not started |
 
 Where 08 and a spec disagree on a blocking edge, the spec is newer and wins. The specs added three edges:
@@ -21,7 +21,10 @@ hit-modifier ticket also needs Fx5's first ticket (actor-effects 06), and Itm2 s
 added more: App1 starts after actor-effects 13 (its role field), and App5 also needs Itm1's first ticket (actor-effects
 13, item-local damage terms). Three edges moved to later slices: Itm2 gates only App4's ability slice (application 07;
 the Divine slice 06 needs only App1), Fx4 gates only Clk1's last slice (application 13), and Clk1 gates only Clk2's last
-slice (application 15).
+slice (application 15). The conditions tickets added more: Cnd1's first ticket (conditions 01, the palette) has no
+blockers, so it can start in wave 0; the rest of Cnd1 needs actor-effects 01 and 02. Markers on templates
+(conditions 05) is its own ticket after conditions 03 and application 02, so content batches that put markers on
+templates need it, not just Cnd1. Itm2 gates only Cnd2's last ticket (conditions 07).
 
 ## Step 1: write tickets, one folder at a time, in this order
 
@@ -33,7 +36,7 @@ at another folder's ticket files, so a folder can only be ticketed after every f
 | 1 | [v09-resources](../v09-resources/spec.md) | Res1, Res2 | — | [x] |
 | 2 | [v09-actor-effects](../v09-actor-effects/spec.md) | Fx1–Fx6b, Itm1, Itm2 | resources | [x] |
 | 3 | [v09-application](../v09-application/spec.md) | App1–App6, Clk1, Clk2 | resources, actor-effects | [x] |
-| 4 | [v09-conditions](../v09-conditions/spec.md) | Cnd1, Cnd2 | actor-effects | [ ] |
+| 4 | [v09-conditions](../v09-conditions/spec.md) | Cnd1, Cnd2 | actor-effects | [x] |
 | 5 | [v09-enchanted](../v09-enchanted/spec.md) | Ench1–Ench4 | resources, application | [ ] |
 | 6 | [v09-content](../v09-content/spec.md) | Cov, Sp1–Sp6c, Ab1–Ab5b, Man, Ref, Rel | actor-effects, application, conditions | [ ] |
 
@@ -87,8 +90,8 @@ Fill in the ticket path once a folder is ticketed and tick Merged when the PR la
 | App6 Weapon/skill binding | application | App1, Itm1, Fx5 | [09–10](../v09-application/issues/) | [ ] |
 | Clk1 Core clocks | application | App1, Fx4 (ticket 13 only) | [11–13](../v09-application/issues/) | [ ] |
 | Clk2 Vigour | application | Res1, App1, Clk1 (ticket 15 only) | [14–15](../v09-application/issues/) | [ ] |
-| Cnd1 Conditions display | conditions | Fx1 | | [ ] |
-| Cnd2 Source-aware controls | conditions | Cnd1, Itm2 | | [ ] |
+| Cnd1 Conditions display | conditions | Fx1 (not ticket 01) | [01–04](../v09-conditions/issues/), 05 also needs App1 | [ ] |
+| Cnd2 Source-aware controls | conditions | Cnd1, Itm2 (ticket 07 only) | [06–07](../v09-conditions/issues/) | [ ] |
 | Ench1 Store ledger | enchanted | — | | [ ] |
 | Ench2 Recoverable payment | enchanted | Res2 | | [ ] |
 | Ench3 Store-paid casting | enchanted | Ench1, Ench2 | | [ ] |
