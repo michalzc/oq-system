@@ -11,13 +11,17 @@ a folder gets its tickets or a chunk merges.
 | Decisions (wayfinder) | [map.md](map.md), `issues/01`–`10` | Done |
 | Chunk list and dependency graph | [08 release chunks](issues/08-release-chunks.md), section "Chunks and dependency graph" | Done |
 | One spec per track | `.scratch/v09-*/spec.md`, section "Delivery and dependencies" in each | Done |
-| Tickets per track | `.scratch/v09-*/issues/` | **In progress: resources and actor-effects done, next application or conditions** |
+| Tickets per track | `.scratch/v09-*/issues/` | **In progress: resources, actor-effects and application done, next conditions** |
 | Implementation | One PR per chunk into `master` | Not started |
 
 Where 08 and a spec disagree on a blocking edge, the spec is newer and wins. The specs added three edges:
 App4 also needs Itm2, App6 also needs Fx5, and Clk1 also needs App1. The actor-effects tickets added two more: Itm1's
 hit-modifier ticket also needs Fx5's first ticket (actor-effects 06), and Itm2 starts after Itm1's first ticket
-(actor-effects 13), which adds the item effect role and Effects section both chunks use.
+(actor-effects 13), which adds the item effect role and Effects section both chunks use. The application tickets
+added more: App1 starts after actor-effects 13 (its role field), and App5 also needs Itm1's first ticket (actor-effects
+13, item-local damage terms). Three edges moved to later slices: Itm2 gates only App4's ability slice (application 07;
+the Divine slice 06 needs only App1), Fx4 gates only Clk1's last slice (application 13), and Clk1 gates only Clk2's last
+slice (application 15).
 
 ## Step 1: write tickets, one folder at a time, in this order
 
@@ -28,7 +32,7 @@ at another folder's ticket files, so a folder can only be ticketed after every f
 | --- | --- | --- | --- | --- |
 | 1 | [v09-resources](../v09-resources/spec.md) | Res1, Res2 | — | [x] |
 | 2 | [v09-actor-effects](../v09-actor-effects/spec.md) | Fx1–Fx6b, Itm1, Itm2 | resources | [x] |
-| 3 | [v09-application](../v09-application/spec.md) | App1–App6, Clk1, Clk2 | resources, actor-effects | [ ] |
+| 3 | [v09-application](../v09-application/spec.md) | App1–App6, Clk1, Clk2 | resources, actor-effects | [x] |
 | 4 | [v09-conditions](../v09-conditions/spec.md) | Cnd1, Cnd2 | actor-effects | [ ] |
 | 5 | [v09-enchanted](../v09-enchanted/spec.md) | Ench1–Ench4 | resources, application | [ ] |
 | 6 | [v09-content](../v09-content/spec.md) | Cov, Sp1–Sp6c, Ab1–Ab5b, Man, Ref, Rel | actor-effects, application, conditions | [ ] |
@@ -75,14 +79,14 @@ Fill in the ticket path once a folder is ticketed and tick Merged when the PR la
 | Fx6b Quick-roll paths | actor-effects | Fx6a | [11–12](../v09-actor-effects/issues/) | [ ] |
 | Itm1 Item-local effects | actor-effects | Fx1, Fx5 (ticket 14) | [13–14](../v09-actor-effects/issues/) | [ ] |
 | Itm2 Owner passives | actor-effects | Fx1, Itm1 (ticket 13) | [15–16](../v09-actor-effects/issues/), 17 if after Fx4 | [ ] |
-| App1 Apply effect | application | Fx1 | | [ ] |
-| App2 Conflict review | application | App1 | | [ ] |
-| App3 Multiple recipients | application | App1 | | [ ] |
-| App4 Use ability / non-rolled | application | App1, Itm2 | | [ ] |
-| App5 Damage basis snapshot | application | Fx6a | | [ ] |
-| App6 Weapon/skill binding | application | App1, Itm1, Fx5 | | [ ] |
-| Clk1 Core clocks | application | Fx4, App1 | | [ ] |
-| Clk2 Vigour | application | Res1, App1, Clk1 | | [ ] |
+| App1 Apply effect | application | Fx1, Itm1 (ticket 13) | [01–03](../v09-application/issues/) | [ ] |
+| App2 Conflict review | application | App1 | [04](../v09-application/issues/) | [ ] |
+| App3 Multiple recipients | application | App1 | [05](../v09-application/issues/) | [ ] |
+| App4 Use ability / non-rolled | application | App1, Itm2 (ticket 07 only) | [06–07](../v09-application/issues/) | [ ] |
+| App5 Damage basis snapshot | application | Fx6a, Itm1 (ticket 13) | [08](../v09-application/issues/) | [ ] |
+| App6 Weapon/skill binding | application | App1, Itm1, Fx5 | [09–10](../v09-application/issues/) | [ ] |
+| Clk1 Core clocks | application | App1, Fx4 (ticket 13 only) | [11–13](../v09-application/issues/) | [ ] |
+| Clk2 Vigour | application | Res1, App1, Clk1 (ticket 15 only) | [14–15](../v09-application/issues/) | [ ] |
 | Cnd1 Conditions display | conditions | Fx1 | | [ ] |
 | Cnd2 Source-aware controls | conditions | Cnd1, Itm2 | | [ ] |
 | Ench1 Store ledger | enchanted | — | | [ ] |
