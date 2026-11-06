@@ -10,6 +10,7 @@ Implementation starts in a later effort, after the relevant decisions are resolv
 
 ## Notes
 
+- **Lost? Start at the [roadmap](roadmap.md)**: ticketing order, build waves and status of every chunk.
 - Source proposal: [Buffs and Active Effects](../../temp/effects.md).
 - [Evaluation and candidate delivery chunks](assessment.md) is the supporting draft, not an approved specification.
 - Use the wayfinder, grilling, and domain-modeling skills. Read `CLAUDE.md`, `GLOSSARY.md`, and the local tracker guidance.
