@@ -11,7 +11,7 @@ a folder gets its tickets or a chunk merges.
 | Decisions (wayfinder) | [map.md](map.md), `issues/01`–`10` | Done |
 | Chunk list and dependency graph | [08 release chunks](issues/08-release-chunks.md), section "Chunks and dependency graph" | Done |
 | One spec per track | `.scratch/v09-*/spec.md`, section "Delivery and dependencies" in each | Done |
-| Tickets per track | `.scratch/v09-*/issues/` | **In progress: resources, actor-effects, application and conditions done, next enchanted** |
+| Tickets per track | `.scratch/v09-*/issues/` | **In progress: resources, actor-effects, application, conditions and enchanted done, next content** |
 | Implementation | One PR per chunk into `master` | Not started |
 
 Where 08 and a spec disagree on a blocking edge, the spec is newer and wins. The specs added three edges:
@@ -26,6 +26,12 @@ blockers, so it can start in wave 0; the rest of Cnd1 needs actor-effects 01 and
 (conditions 05) is its own ticket after conditions 03 and application 02, so content batches that put markers on
 templates need it, not just Cnd1. Itm2 gates only Cnd2's last ticket (conditions 07).
 
+The enchanted tickets added and narrowed more edges. Ench1's refill ticket (enchanted 03) also needs resources 05
+(temporary MP pools), so Ench1 01–02 stay in wave 0 but 03 waits for Res2's first ticket. Ench4's authoring ticket
+(enchanted 09) needs only application 01, not Ench2. Ench3's first ticket (enchanted 07) needs only Ench1's 02 and
+Ench2's 04. Ench4's Apply ticket (enchanted 12) also needs App2 (application 04) for duplicate review. Enchanted 13
+(charms paid from a store) needs both Ench3 and Ench4 and ships with whichever lands second.
+
 ## Step 1: write tickets, one folder at a time, in this order
 
 Run `/to-tickets .scratch/<folder>/spec.md` in a fresh session for each folder. Cross-track `Blocked by:` lines point
@@ -37,7 +43,7 @@ at another folder's ticket files, so a folder can only be ticketed after every f
 | 2 | [v09-actor-effects](../v09-actor-effects/spec.md) | Fx1–Fx6b, Itm1, Itm2 | resources | [x] |
 | 3 | [v09-application](../v09-application/spec.md) | App1–App6, Clk1, Clk2 | resources, actor-effects | [x] |
 | 4 | [v09-conditions](../v09-conditions/spec.md) | Cnd1, Cnd2 | actor-effects | [x] |
-| 5 | [v09-enchanted](../v09-enchanted/spec.md) | Ench1–Ench4 | resources, application | [ ] |
+| 5 | [v09-enchanted](../v09-enchanted/spec.md) | Ench1–Ench4 | resources, application | [x] |
 | 6 | [v09-content](../v09-content/spec.md) | Cov, Sp1–Sp6c, Ab1–Ab5b, Man, Ref, Rel | actor-effects, application, conditions | [ ] |
 
 Steps 3 and 4 do not depend on each other and can be done in either order. Content goes last because it depends on
@@ -92,10 +98,10 @@ Fill in the ticket path once a folder is ticketed and tick Merged when the PR la
 | Clk2 Vigour | application | Res1, App1, Clk1 (ticket 15 only) | [14–15](../v09-application/issues/) | [ ] |
 | Cnd1 Conditions display | conditions | Fx1 (not ticket 01) | [01–04](../v09-conditions/issues/), 05 also needs App1 | [ ] |
 | Cnd2 Source-aware controls | conditions | Cnd1, Itm2 (ticket 07 only) | [06–07](../v09-conditions/issues/) | [ ] |
-| Ench1 Store ledger | enchanted | — | | [ ] |
-| Ench2 Recoverable payment | enchanted | Res2 | | [ ] |
-| Ench3 Store-paid casting | enchanted | Ench1, Ench2 | | [ ] |
-| Ench4 Personal Magic charms | enchanted | Ench2, App1 | | [ ] |
+| Ench1 Store ledger | enchanted | — (ticket 03: Res2 ticket 05) | [01–03](../v09-enchanted/issues/) | [ ] |
+| Ench2 Recoverable payment | enchanted | Res2 | [04–06](../v09-enchanted/issues/) | [ ] |
+| Ench3 Store-paid casting | enchanted | Ench1, Ench2 | [07–08](../v09-enchanted/issues/), 13 if after Ench4 | [ ] |
+| Ench4 Personal Magic charms | enchanted | App1 (ticket 09), Ench2, App2 (ticket 12) | [09–12](../v09-enchanted/issues/), 13 if after Ench3 | [ ] |
 | Cov Coverage page | content | — | | [ ] |
 | Sp1 Movement and combat order | content | App1, Fx2, Fx5, Cov | | [ ] |
 | Sp2 Skill test modifiers | content | App1, Fx5, Cov | | [ ] |
