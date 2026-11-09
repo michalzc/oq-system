@@ -11,7 +11,7 @@ a folder gets its tickets or a chunk merges.
 | Decisions (wayfinder) | [map.md](map.md), `issues/01`–`10` | Done |
 | Chunk list and dependency graph | [08 release chunks](issues/08-release-chunks.md), section "Chunks and dependency graph" | Done |
 | One spec per track | `.scratch/v09-*/spec.md`, section "Delivery and dependencies" in each | Done |
-| Tickets per track | `.scratch/v09-*/issues/` | **In progress: resources, actor-effects, application, conditions and enchanted done, next content** |
+| Tickets per track | `.scratch/v09-*/issues/` | Done |
 | Implementation | One PR per chunk into `master` | Not started |
 
 Where 08 and a spec disagree on a blocking edge, the spec is newer and wins. The specs added three edges:
@@ -32,6 +32,15 @@ The enchanted tickets added and narrowed more edges. Ench1's refill ticket (ench
 Ench2's 04. Ench4's Apply ticket (enchanted 12) also needs App2 (application 04) for duplicate review. Enchanted 13
 (charms paid from a store) needs both Ench3 and Ench4 and ships with whichever lands second.
 
+The content tickets added and narrowed more edges. Every spell batch needs application 06 (Apply effect on non-rolled
+Divine cards), because each contains Divine spells; it reaches them through content 03, a new harness ticket that also
+carries the template invariants, which can't exist on Cov's day one. Sp2a (content 05) also needs App2 (application 04)
+for Demoralise's conflict review. Sun Disc (content 10) and Ab3 (content 22) also need conditions 05 for their markers.
+Rules-text ability items (content 17 and 18) need only Cov; only the six reminder abilities (content 19) need App4 and
+Cnd1. Ab4 needs Itm2 but not App4, Sp3a (content 07) doesn't need Sp2, and Sp5c (content 13) doesn't need App5.
+Two capabilities not in the content spec's extension table were agreed when ticketing: reminders bound to a weapon
+(content 13) and the cast magnitude in an applied name (content 15).
+
 ## Step 1: write tickets, one folder at a time, in this order
 
 Run `/to-tickets .scratch/<folder>/spec.md` in a fresh session for each folder. Cross-track `Blocked by:` lines point
@@ -44,7 +53,7 @@ at another folder's ticket files, so a folder can only be ticketed after every f
 | 3 | [v09-application](../v09-application/spec.md) | App1–App6, Clk1, Clk2 | resources, actor-effects | [x] |
 | 4 | [v09-conditions](../v09-conditions/spec.md) | Cnd1, Cnd2 | actor-effects | [x] |
 | 5 | [v09-enchanted](../v09-enchanted/spec.md) | Ench1–Ench4 | resources, application | [x] |
-| 6 | [v09-content](../v09-content/spec.md) | Cov, Sp1–Sp6c, Ab1–Ab5b, Man, Ref, Rel | actor-effects, application, conditions | [ ] |
+| 6 | [v09-content](../v09-content/spec.md) | Cov, Sp1–Sp6c, Ab1–Ab5b, Man, Ref, Rel | actor-effects, application, conditions | [x] |
 
 Steps 3 and 4 do not depend on each other and can be done in either order. Content goes last because it depends on
 three other tracks.
@@ -59,15 +68,17 @@ earliest point they can start. Anything in a wave can be worked in any order, or
 | Wave | Can start once earlier waves are done | Notes |
 | --- | --- | --- |
 | 0 | Res1, Fx1, Ench1, Cov | No blockers at all |
-| 1 | Res2, Fx2, Fx3, Fx5, Itm1, Itm2, App1, Cnd1 | Most need only Fx1, so Fx1 opens the most work |
-| 2 | Fx4, Fx6a, App2, App3, App4, App6, Cnd2, Ench2, Sp1, Sp2, Sp6b, Sp6c | First content batches become possible |
-| 3 | Fx6b, App5, Clk1, Ench3, Ench4, Sp3, Sp4, Sp6a, Ab1, Ab3, Ab4, Ab5a, Ab5b, Ref | |
-| 4 | Clk2, Sp5, Ab2 | |
-| 5 | Man | Needs every Sp and Ab batch |
-| 6 | Rel | Needs every must-ship chunk |
+| 1 | Res2, Fx2, Fx3, Fx5, Itm1, Itm2, App1, Cnd1, Cov's creature page (content 02) | Most need only Fx1, so Fx1 opens the most work |
+| 2 | Fx4, Fx6a, App2, App3, App4, App6, Cnd2, Ench2, first rules-text abilities (content 17) | First ability items become possible |
+| 3 | Fx6b, App5, Clk1, Ench3, Ench4, template harness (content 03), rules-text abilities (content 18) | Content 03 opens every spell batch |
+| 4 | Clk2, Sp1, Sp2, Sp3a, Sp5, Sp6b, Sp6c, Ab1, Ab4, reminder abilities (content 19) | |
+| 5 | Sp3b, Sp4, Sp6a, Ab3, Ref | Need Sp2 or Sp1 |
+| 6 | Ab2, Man's spell page (content 24) | Content 24 needs every Sp batch |
+| 7 | Man's creature page (content 25) | Needs every Ab batch |
+| 8 | Rel | Needs every must-ship chunk |
 
-The longest path to release is **Fx1 → Fx5 → Fx6a → App5 → Sp5 → Man → Rel**, so Fx1, Fx5 and Fx6a should not wait
-behind other work. The path through the resource track (Res1 → Res2 → Fx4 → Clk1 → Clk2) is one step shorter.
+The longest path to release is **Fx1 → Itm1 (ticket 13) → App1 → App4 (ticket 06) → template harness → Sp2 → Sp3b → Ab2
+→ Man → Rel**, so App1 and the first App4 ticket should not wait behind other work.
 
 Ench1–Ench4 and Ref may slip to 0.9.x as a unit without blocking anything else. Everything else must ship.
 
@@ -102,22 +113,22 @@ Fill in the ticket path once a folder is ticketed and tick Merged when the PR la
 | Ench2 Recoverable payment | enchanted | Res2 | [04–06](../v09-enchanted/issues/) | [ ] |
 | Ench3 Store-paid casting | enchanted | Ench1, Ench2 | [07–08](../v09-enchanted/issues/), 13 if after Ench4 | [ ] |
 | Ench4 Personal Magic charms | enchanted | App1 (ticket 09), Ench2, App2 (ticket 12) | [09–12](../v09-enchanted/issues/), 13 if after Ench3 | [ ] |
-| Cov Coverage page | content | — | | [ ] |
-| Sp1 Movement and combat order | content | App1, Fx2, Fx5, Cov | | [ ] |
-| Sp2 Skill test modifiers | content | App1, Fx5, Cov | | [ ] |
-| Sp3 Characteristics | content | App1, App6, Fx3, Fx4, Sp2, Cov | | [ ] |
-| Sp4 Conditional and damage additions | content | App1, App6, Fx6a, Sp2, Cov | | [ ] |
-| Sp5 Selected weapons | content | App1, App5, App6, Itm1, Cov | | [ ] |
-| Sp6a Conditions and behaviour | content | App1, Cnd1, Sp2, Cov | | [ ] |
-| Sp6b Wards | content | App1, Cnd1, Cov | | [ ] |
-| Sp6c Senses and permissions | content | App1, Cnd1, Cov | | [ ] |
-| Ab1 Venoms and poisons | content | App4, Fx3, Fx4, Cnd1, Cov | | [ ] |
-| Ab2 Demoralising and spirit | content | App4, Fx5, Fx6a, Sp2, Sp3, Cov | | [ ] |
-| Ab3 Conditional creature modifiers | content | App4, Itm2, Fx6a, Sp2, Cov | | [ ] |
-| Ab4 Werewolf | content | App4, Itm2, Fx2, Fx3, Cov | | [ ] |
-| Ab5a, Ab5b Manual creature abilities | content | App4, Cnd1, Cov | | [ ] |
-| Man Manual-coverage documentation | content | every Sp and Ab batch | | [ ] |
-| Ref SRD spell refresh macro | content | Sp1 | | [ ] |
-| Rel Release-acceptance checklist | content | every must-ship chunk | | [ ] |
+| Cov Coverage page | content | — (ticket 03: App4 ticket 06) | [01–03](../v09-content/issues/) | [ ] |
+| Sp1 Movement and combat order | content | Content 03, Fx2, Fx5 | [04](../v09-content/issues/) | [ ] |
+| Sp2 Skill test modifiers | content | Content 03, Fx5, App2 (ticket 05 only) | [05–06](../v09-content/issues/) | [ ] |
+| Sp3 Characteristics | content | Content 03, App6 (ticket 09), Fx4, Sp2 (ticket 08 only) | [07–08](../v09-content/issues/) | [ ] |
+| Sp4 Conditional and damage additions | content | Sp2, Fx6a, App6 and Cnd1's markers (ticket 10 only) | [09–10](../v09-content/issues/) | [ ] |
+| Sp5 Selected weapons | content | Content 03, App6 (ticket 09), App5 (tickets 11–12 only) | [11–13](../v09-content/issues/) | [ ] |
+| Sp6a Conditions and behaviour | content | Content 03, Cnd1, conditions 05, Sp2 (ticket 06) | [14](../v09-content/issues/) | [ ] |
+| Sp6b Wards | content | Content 03, Cnd1 | [15](../v09-content/issues/) | [ ] |
+| Sp6c Senses and permissions | content | Content 03, Cnd1 | [16](../v09-content/issues/) | [ ] |
+| Ab1 Venoms and poisons | content | Content 03, content 17, App4, Fx4, conditions 05 | [20](../v09-content/issues/) | [ ] |
+| Ab2 Demoralising and spirit | content | Content 17, App4, Fx6a (ticket 08), Sp2 (ticket 05), Sp3 (ticket 08) | [21](../v09-content/issues/) | [ ] |
+| Ab3 Conditional creature modifiers | content | Content 17, App4, Fx6a (ticket 08), Sp2 (ticket 05), conditions 05 | [22](../v09-content/issues/) | [ ] |
+| Ab4 Werewolf | content | Content 03, content 17, Itm2, Fx2, Fx3 | [23](../v09-content/issues/) | [ ] |
+| Ab5a, Ab5b Manual creature abilities | content | Cov (ticket 19: content 03, App4, Cnd1, conditions 05) | [17–19](../v09-content/issues/) | [ ] |
+| Man Manual-coverage documentation | content | every Sp batch (ticket 24), every Ab batch (ticket 25) | [24–25](../v09-content/issues/) | [ ] |
+| Ref SRD spell refresh macro | content | Sp1 | [26–27](../v09-content/issues/) | [ ] |
+| Rel Release-acceptance checklist | content | every must-ship chunk | [28](../v09-content/issues/) | [ ] |
 
 Vigour is not a separate content batch: its template ships with Clk2.
