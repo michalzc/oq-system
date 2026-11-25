@@ -301,8 +301,10 @@ Each target is introduced by the chunk that first needs it. The editor offers on
 | Weapon hit modifier, weapon damage addition (this weapon only) | add | Itm1 |
 
 Per-target combination is deterministic and visible: multipliers apply to the unmodified value, then additions, then
-an override replaces the result, then the minimum applies. When one target has both multiplicative and additive
-contributions, or more than one override, the value's source breakdown lists them all so a human can adjudicate.
+an override replaces the result, then the minimum applies. The minimum is a floor for effects ("through use of this
+spell"): it never raises a value that is already below it without effects (MR 0 with Slow stays 0), so a change that
+only sets a minimum changes nothing. When one target has both multiplicative and additive contributions, or more
+than one override, the value's source breakdown lists them all so a human can adjudicate.
 This is not a general conflict engine.
 
 ### Pure effect-contributions module (the main seam)

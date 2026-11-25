@@ -12,7 +12,7 @@ a folder gets its tickets or a chunk merges.
 | Chunk list and dependency graph | [08 release chunks](issues/08-release-chunks.md), section "Chunks and dependency graph" | Done |
 | One spec per track | `.scratch/v09-*/spec.md`, section "Delivery and dependencies" in each | Done |
 | Tickets per track | `.scratch/v09-*/issues/` | Done |
-| Implementation | One PR per chunk into `master` | Not started |
+| Implementation | One PR per chunk into `master` | In progress (Fx1, Fx2 merged) |
 
 Where 08 and a spec disagree on a blocking edge, the spec is newer and wins. The specs added three edges:
 App4 also needs Itm2, App6 also needs Fx5, and Clk1 also needs App1. The actor-effects tickets added two more: Itm1's
@@ -84,14 +84,15 @@ Ench1–Ench4 and Ref may slip to 0.9.x as a unit without blocking anything else
 
 ## All chunks
 
-Fill in the ticket path once a folder is ticketed and tick Merged when the PR lands.
+Fill in the ticket path once a folder is ticketed and tick Merged when the PR lands (see
+`docs/agents/issue-tracker.md`, "fetch the relevant ticket").
 
 | Chunk | Track folder | Blocked by | Ticket | Merged |
 | --- | --- | --- | --- | --- |
 | Res1 Temporary HP pools | resources | — | [01–04](../v09-resources/issues/) | [ ] |
 | Res2 Temporary MP pools | resources | Res1 | [05–07](../v09-resources/issues/) | [ ] |
-| Fx1 Actor effects with Protection | actor-effects | — | [01–02](../v09-actor-effects/issues/) | [ ] |
-| Fx2 Movement | actor-effects | Fx1 | [03](../v09-actor-effects/issues/) | [ ] |
+| Fx1 Actor effects with Protection | actor-effects | — | [01–02](../v09-actor-effects/issues/) | [x] |
+| Fx2 Movement | actor-effects | Fx1 | [03](../v09-actor-effects/issues/) | [x] |
 | Fx3 Characteristics | actor-effects | Fx1 | [04](../v09-actor-effects/issues/) | [ ] |
 | Fx4 Maximum/current transitions | actor-effects | Res1, Res2, Fx3 | [05](../v09-actor-effects/issues/), 17 if after Itm2 | [ ] |
 | Fx5 Skill test modifiers | actor-effects | Fx1 | [06–07](../v09-actor-effects/issues/) | [ ] |

@@ -38,6 +38,9 @@ the `chrome-devtools` MCP attaches to. Drive the world with `evaluate_script`, c
      save a baseline in `localStorage` (page state is lost on reload) and compare after each reload.
    - `take_screenshot` without `filePath`, then `Read` the returned path. To show a tooltip first:
      `game.tooltip.activate(element)`.
+   - Every control of a form the change touches, not only the ones the scenario needs: set each `select`/`input`
+     and fire `change` on it while a `window` `error` listener records exceptions. Core listeners that throw on a
+     change (see `docs/foundry-v14-notes.md`, Active Effects) leave no console warning and no visible trace.
    - `list_console_messages` with `types: ["error", "warn"]`: none expected.
 6. **Record** the result in the ticket's `## Comments`: date, Foundry version, world, client (GM or player), each
    scenario with its observed values, and anything not checked.
