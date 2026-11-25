@@ -54,6 +54,24 @@ World settings cannot be written before `ready`.
   the range and rounds it to the step as it is entered (`client/applications/elements/range-picker.mjs:115-119`), so a
   form cannot submit an out-of-range number through it. Its number box is 40px wide in core CSS.
 - Core example of a settings menu with its own form: `client/applications/settings/menus/ui-config.mjs`.
+- An action with `buttons: [0, 2]` runs its right-click on `auxclick` (`client/applications/api/application.mjs:1892`);
+  `contextmenu` does not reach it.
+- A plain `ApplicationV2` is not re-rendered when a document changes. One that must show live data registers in
+  `document.apps` in `_onFirstRender` and removes itself in `_onClose`, as `DocumentSheetV2` does
+  (`client/applications/api/document-sheet.mjs:245`, `:261`); `ClientDocument#render` re-renders every app there.
+
+## Tokens: bars and HUD
+
+- A bar redraws only when its value changes: an actor update makes `TokenDocument#_onRelatedUpdate`
+  (`client/documents/token.mjs:3800`) animate `bar1`/`bar2`, which sets `refreshBars` only for a changed value. Any
+  other bar visual needs `token.object.renderFlags.set({refreshBars: true})`, for example from an `updateActor` hook,
+  which also fires for synthetic token actors. `Token#_drawBar(index, bar, data)`
+  (`client/canvas/placeables/token.mjs:1797`) also runs for every animation frame.
+- The HUD's bar input calls `Actor#modifyTokenAttribute(attribute, value, isDelta, isBar)`
+  (`client/documents/actor.mjs:409`). Its `modifyTokenAttribute` hook may veto the update (return `false`) or rewrite
+  the `updates` object in place; an override should keep both.
+- The HUD's bar containers (`#token-hud .attribute.bar1`) are `position: static`: an absolutely positioned element
+  inside one lands relative to the middle column, and outside the input the side columns cover it.
 
 ## Forcing dice results
 

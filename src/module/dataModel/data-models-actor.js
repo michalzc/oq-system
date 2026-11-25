@@ -67,7 +67,6 @@ function temporaryPoolsModel() {
       label: new fields.StringField({ required: true, trim: true, initial: '' }),
       remaining: new fields.NumberField({ required: true, nullable: false, min: 0, integer: true, initial: 0 }),
     }),
-    // A factory: a plain `initial` value is shared by reference, and in-place source updates would leak into it.
     { required: true, initial: () => [] },
   );
 }
@@ -144,7 +143,7 @@ function characterPersonalModel() {
     rank: new fields.StringField({ trim: true, initial: '' }),
     organisation: new fields.StringField({ trim: true, initial: '' }),
     notes: new fields.HTMLField({ trim: true, initial: '' }),
-    money: new fields.ObjectField({ required: false, initial: {} }),
+    money: new fields.ObjectField({ required: false, initial: () => ({}) }),
   });
 }
 
