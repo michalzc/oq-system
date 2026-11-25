@@ -33,16 +33,11 @@
 
       <label data-tooltip="{{ localize attributes.mr.label}}">{{ localize
         attributes.mr.abbr}}</label>
-      <div class="value">{{system.attributes.mr.value}}</div>
+      {{> systems/oq/templates/actor/parts/effect-value.hbs value=system.attributes.mr.value tooltip=effectTooltips.mr}}
 
       <label data-tooltip="{{ localize attributes.ap.label}}">{{ localize
         attributes.ap.abbr}}</label>
-      {{#if effectTooltips.ap}}
-        <div class="value effect-changed" data-tooltip-html="{{effectTooltips.ap}}">{{system.attributes.ap.value}}<i
-            class="fa-solid fa-wand-magic-sparkles effect-marker" aria-label="{{ localize 'OQ.Effects.ChangedByEffects' }}"></i></div>
-      {{else}}
-        <div class="value">{{system.attributes.ap.value}}</div>
-      {{/if}}
+      {{> systems/oq/templates/actor/parts/effect-value.hbs value=system.attributes.ap.value tooltip=effectTooltips.ap}}
     </div>
 
 

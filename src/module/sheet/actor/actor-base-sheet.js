@@ -111,7 +111,7 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
   async prepareEffectTooltips() {
     const attributes = withAttributeLabels(this.actor.system.attributes);
     const tooltips = await Promise.all(
-      ['ap']
+      ['mr', 'ap']
         .filter((key) => attributes[key].effects)
         .map(async (key) => {
           const { effects, label } = attributes[key];
@@ -121,6 +121,10 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
             contributions: effects.contributions.map((contribution) => ({
               ...contribution,
               amount: formatContribution(contribution),
+              minimumLabel:
+                contribution.minimum === undefined
+                  ? ''
+                  : game.i18n.format('OQ.Effects.MinimumOf', { minimum: contribution.minimum }),
             })),
           });
           return [key, html];

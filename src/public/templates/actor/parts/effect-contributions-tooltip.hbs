@@ -8,7 +8,7 @@
     {{#each contributions as |contribution|}}
       <tr>
         <td>{{ contribution.name }}{{#if contribution.sourceName}} <span class="source">({{ contribution.sourceName }})</span>{{/if}}</td>
-        <td class="amount">{{ contribution.amount }}</td>
+        <td class="amount">{{ contribution.amount }}{{#if contribution.minimumLabel}} <span class="minimum">({{ contribution.minimumLabel }})</span>{{/if}}</td>
       </tr>
     {{/each}}
   </table>
