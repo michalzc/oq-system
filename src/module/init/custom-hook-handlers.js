@@ -1,10 +1,13 @@
 import { handleDamageRollChatMessage } from '../chat-handlers/updates-from-chat.js';
 import { onHotbarDrop } from '../utils/item-macro.js';
+import { refreshTemporaryPointBars, showTemporaryPointsOnHud } from '../canvas/token.js';
 
 export function registerCustomHookHandlers() {
   Hooks.on('renderChatMessageHTML', handleDamageRollChatMessage);
   Hooks.on('renderChatMessageHTML', markNpcMessage);
   Hooks.on('hotbarDrop', onHotbarDrop);
+  Hooks.on('renderTokenHUD', showTemporaryPointsOnHud);
+  Hooks.on('updateActor', refreshTemporaryPointBars);
   const renderDeclarations = foundry.utils.debounce(() => {
     if (ui.combat?.viewed?.isDeclaration) ui.combat.render();
   }, 100);

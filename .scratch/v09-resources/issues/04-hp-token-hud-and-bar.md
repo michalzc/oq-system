@@ -11,15 +11,70 @@ heal HP methods and the set-ordinary operation; other attributes keep core behav
 
 **Blocked by:** 03 (HP damage and healing take temporary HP first)
 
-**Status:** ready-for-agent
+**Status:** resolved
 
-- [ ] HUD shows "+N" next to the HP input only when temporary HP is above zero.
-- [ ] The canvas HP bar draws a small distinct marker when temporary HP exists, including at full ordinary HP; the bar
+- [x] HUD shows "+N" next to the HP input only when temporary HP is above zero.
+- [x] The canvas HP bar draws a small distinct marker when temporary HP exists, including at full ordinary HP; the bar
       still represents ordinary current / normal maximum, and default token bars stay HP and MP.
-- [ ] HUD relative decrease, relative increase and absolute value behave as above; non-HP attributes keep core
+- [x] HUD relative decrease, relative increase and absolute value behave as above; non-HP attributes keep core
       behavior.
-- [ ] Unlinked tokens change only their own actor; linked tokens change the world actor.
-- [ ] Manual: the spec's acceptance row "Token HUD -3, then +5, then 4" passes on linked and unlinked tokens of a
+- [x] Unlinked tokens change only their own actor; linked tokens change the world actor.
+- [x] Manual: the spec's acceptance row "Token HUD -3, then +5, then 4" passes on linked and unlinked tokens of a
       character and an NPC, with reloads.
-- [ ] The Actors documentation page explains the token display (edit the HTML source, regenerate the journal sources).
-- [ ] `yarn test`, `yarn lint` and `yarn build` pass.
+- [x] The Actors documentation page explains the token display (edit the HTML source, regenerate the journal sources).
+- [x] `yarn test`, `yarn lint` and `yarn build` pass (`yarn build:code` + `yarn check:packs` while the dev world ran).
+
+## Comments
+
+### 2026-11-26 implementation notes
+
+- Module: `applyBarInput(state, value, isDelta)`: relative decrease → `spendPoints`, relative increase →
+  `restorePoints`, absolute → `setOrdinaryPoints`; tested with the spec's HUD row as state-in/state-out.
+- Actor: `OQBaseActor#modifyTokenAttribute` handles `attributes.hp` bars through `applyBarInput` and writes only the
+  changed fields; other attributes go to core. The core `modifyTokenAttribute` hook is still called with the HP
+  update and may veto it. `_onUpdate` sets `refreshBars` on the actor's rendered tokens when HP pools change, because
+  core redraws bars only when their value changes (`TokenDocument#_onRelatedUpdate` animates `bar1`/`bar2`).
+- Canvas: `OQToken` (`src/module/canvas/token.js`, `CONFIG.Token.objectClass`) draws a green dot at the right end of
+  a bar whose attribute has temporary points (`attributes.hp` for now); the bar still shows ordinary / maximum.
+  Default bars stay HP (bar1) and MP (bar2).
+- HUD: a `renderTokenHUD` hook adds "+N" inside the right end of the bar's input (outside it, the HUD's side
+  columns covered it); `pointer-events: none` keeps the input fully editable, so the marker has no tooltip.
+
+### 2026-11-26 manual QA
+
+Foundry 14.370, `oq-dev`, GM. Tokens `QA dmg PC linked/unlinked` and `QA dmg NPC linked/unlinked` (HP max 10), bars
+set to always show for the test. The HUD was bound to each token and its bar1 input changed as a user would.
+
+| Step | All four tokens |
+| --- | --- |
+| 10/10, no pools | no canvas marker, no HUD "+N" |
+| Grant A=2 at 10/10 (pools change only) | canvas marker drawn on the full bar; HUD "+2" |
+| HUD "-3" | 9/10, A=0; marker gone, no "+N" |
+| HUD "+5" | 10/10, A=0 |
+| HUD "4" | 4/10, A=0 |
+
+- MP bar (bar2) "-2" from 5 → 3: core behaviour kept.
+- The `modifyTokenAttribute` hook saw each HP change (e.g. `-3` → `value` and `pools`, `+5` → `value` only).
+- Unlinked token set to 7 and granted 3 through its HUD/actor: the token showed 7/10 +3 while its base NPC stayed
+  4/10 +0; linked tokens changed their world actors.
+- After a reload every token kept its HP and pools, the marker showed on the two tokens with temporary HP, and the
+  HUD read "7 +3" inside the input (screenshot). No console errors or warnings.
+
+### 2026-11-26 review
+
+Two-axis review (standards, spec) of 9a28a58. Changes made:
+
+- The HUD route now goes through `setOrdinaryHp` / `damageHp` / `healHp`, the actor-level reuse point, instead of
+  writing the computed update itself. It still previews the update with `applyBarInput` so the core
+  `modifyTokenAttribute` hook can see and veto it; a hook that rewrites the update takes over and its update is applied
+  as given. Verified in-world on a linked and an unlinked token: the HUD row again (9/10 A=0; 10/10 A=0; 4/10 A=0), a
+  vetoing hook left 4/10, a rewriting hook set 1/10.
+- The bar refresh on pool changes moved out of the actor into the canvas module (`refreshTemporaryPointBars`, an
+  `updateActor` hook, which also fires for synthetic token actors). Which resources have pools is one list,
+  `TEMPORARY_POINT_RESOURCES` in the resource-points module, used by the token bars and that refresh; ticket 05 adds
+  MP there.
+- One named colour for temporary points over the canvas, `@temporary-points-hud-color`, shared by the HUD "+N" and
+  the canvas marker (the sheet keeps `@distinction-color` on parchment).
+
+Kept: the marker's bar height repeats core's sizing so it lines up with core's bar; the HUD helper stays in the token
+module with the canvas marker.

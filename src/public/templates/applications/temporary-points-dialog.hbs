@@ -1,0 +1,44 @@
+<div class="actor-dialog {{actor.type}}">
+  <header class="dialog-header">
+    <h1>{{actor.name}}</h1>
+  </header>
+  <section class="dialog-body">
+    <h2>{{ localize 'OQ.Resources.Heading' resource=resourceLabel }}</h2>
+    <p class="ordinary-points">
+      {{ localize 'OQ.Resources.Ordinary' value=ordinary.value max=ordinary.max }}
+      &middot; {{ localize 'OQ.Resources.Total' amount=total }}
+    </p>
+    {{#if pools.length}}
+      <ol class="pools-table">
+        <li class="pools-header">
+          <span>{{ localize 'OQ.Resources.Label' }}</span>
+          <span>{{ localize 'OQ.Resources.Remaining' }}</span>
+          <span></span>
+        </li>
+        {{#each pools as |pool|}}
+          <li class="pool" data-pool-id="{{pool.id}}">
+            <label for="{{@root.rootId}}-pool-{{pool.id}}">{{pool.label}}</label>
+            <input id="{{@root.rootId}}-pool-{{pool.id}}" class="pool-remaining" type="number" min="0" step="1"
+                   value="{{pool.remaining}}">
+            <a data-action="removePool" data-tooltip="{{ localize 'OQ.Resources.RemovePool' }}"
+               aria-label="{{ localize 'OQ.Resources.RemovePool' }}"><i class="fas fa-trash"></i></a>
+          </li>
+        {{/each}}
+      </ol>
+    {{else}}
+      <p class="no-pools">{{ localize 'OQ.Resources.NoPools' }}</p>
+    {{/if}}
+  </section>
+  <section class="dialog-body">
+    <h2>{{ localize 'OQ.Resources.GrantHeading' }}</h2>
+    <div class="grant-row">
+      <label for="{{rootId}}-amount">{{ localize 'OQ.Resources.Amount' }}</label>
+      <input id="{{rootId}}-amount" name="amount" type="number" min="0" step="1" required>
+      <label for="{{rootId}}-label">{{ localize 'OQ.Resources.Label' }}</label>
+      <input id="{{rootId}}-label" name="label" type="text" placeholder="{{ localize 'OQ.Resources.Manual' }}">
+    </div>
+    <div class="flexrow">
+      <button type="submit"><i class="fas fa-plus"></i> {{ localize 'OQ.Resources.Grant' }}</button>
+    </div>
+  </section>
+</div>

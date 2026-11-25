@@ -13,6 +13,7 @@ const BATCH_SIZE = 100;
 
 const replace = (value) => foundry.data.operators.ForcedReplacement.create(value);
 const remove = () => new foundry.data.operators.ForcedDeletion();
+const worldActor = (id) => game.actors.get(id)?.toObject() ?? null;
 
 /**
  * The embedded collections of a document that are migrated after it, with the document that updates them.
@@ -78,10 +79,11 @@ function applyToDocuments(step, documentName, documents, update, parent = null) 
     for (const document of documents) {
       try {
         const source = document.toObject();
-        const documentChanges = migrate(source, { replace, remove, parent });
+        const helpers = { replace, remove, parent, worldActor };
+        const documentChanges = migrate(source, helpers);
         if (_.isEmpty(documentChanges)) continue;
         // Handlers are pure, so the source update gets its own copy of the changes, operators included.
-        document.updateSource(migrate(source, { replace, remove, parent }));
+        document.updateSource(migrate(source, helpers));
         changes.push({ _id: document.id, ...documentChanges });
       } catch (error) {
         logError(`Migration ${migration.version} failed for ${document.uuid}`, error);

@@ -1,5 +1,6 @@
 import _ from 'lodash-es';
 import { AttributesDialog } from '../../application/attributes-dialog.js';
+import { TemporaryPointsDialog } from '../../application/temporary-points-dialog.js';
 import { OQBaseActor } from '../../document/actor/base-actor.js';
 import { OQActiveEffect } from '../../document/active-effect.js';
 import { OQSpell } from '../../document/item/spell.js';
@@ -34,6 +35,7 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
       itemToChat: OQActorBaseSheet.onItemToChat,
       changeQuantity: OQActorBaseSheet.onItemQuantityIncreaseDecrease,
       modifyAttributes: OQActorBaseSheet.onModifyAttributes,
+      editTemporaryPoints: OQActorBaseSheet.onEditTemporaryPoints,
       addEffect: OQActorBaseSheet.onAddEffect,
       editEffect: OQActorBaseSheet.onEditEffect,
       deleteEffect: OQActorBaseSheet.onDeleteEffect,
@@ -176,6 +178,11 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
       if (this.isEditable) return this.onItemUpdateQuantity(event);
       return;
     }
+    // Ordinary HP has no name either: typing sets it through the actor, clamped, without touching temporary HP.
+    if (event.target.matches('.ordinary-hp')) {
+      if (this.isEditable) return this.onSetOrdinaryHp(event);
+      return;
+    }
     return super._onChangeForm(formConfig, event);
   }
 
@@ -213,6 +220,13 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
     await this.actor.createEmbeddedDocuments('Item', [itemData], { renderSheet: true });
   }
 
+  async onSetOrdinaryHp(event) {
+    const typed = Number(event.target.value);
+    if (event.target.value.trim() !== '' && Number.isFinite(typed)) await this.actor.setOrdinaryHp(Math.trunc(typed));
+    // A value clamped to the stored one changes nothing, so nothing re-renders the field: show the stored value.
+    if (Number(event.target.value) !== this.actor.system.attributes.hp.value) this.render();
+  }
+
   async onItemUpdateQuantity(event) {
     event.preventDefault();
     const input = event.target;
@@ -242,6 +256,12 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
     event.preventDefault();
     if (!this.isEditable) return;
     return AttributesDialog.open(this.actor);
+  }
+
+  static onEditTemporaryPoints(event, target) {
+    event.preventDefault();
+    if (!this.isEditable) return;
+    return TemporaryPointsDialog.open(this.actor, { resource: target.dataset.resourceId });
   }
 
   async onUpdateItemAdv(event) {
@@ -370,6 +390,8 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
 
     const delta = event.button === 2 ? -1 : 1;
     const resourceId = target.dataset.resourceId;
+    // HP: +1 heals ordinary HP only, -1 is damage and takes temporary HP first.
+    if (resourceId === 'hp') return delta > 0 ? this.actor.healHp(1) : this.actor.damageHp(1);
     const { value, max } = this.actor.system.attributes[resourceId];
     const newValue = inRangeValue(0, max, value + delta);
 

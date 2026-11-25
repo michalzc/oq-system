@@ -2,6 +2,20 @@ import _ from 'lodash-es';
 import { getDefaultItemsForActor } from '../../utils/compendium-utils.js';
 import { activeEffectChanges, attributeContribution } from '../../utils/effect-contributions.js';
 import { getDeclaration } from '../../utils/initiative.js';
+import {
+  applyBarInput,
+  availableTemporaryPoints,
+  convertLegacyHp,
+  correctPool,
+  grantPool,
+  hasPoolList,
+  hpNormalMaximum,
+  RECOVERED_EXCESS_LABEL_KEY,
+  removePool,
+  restorePoints,
+  setOrdinaryPoints,
+  spendPoints,
+} from '../../utils/resource-points.js';
 
 /**
  * Writes derived values onto the prepared attribute objects, keeping their stored fields (`base`, `mod`, ...). Every
@@ -41,6 +55,16 @@ export class OQBaseActor extends Actor {
       { inplace: false },
     );
     this.updateSource({ prototypeToken });
+
+    // Creation data is cleaned without data model migration, so legacy HP in raw data (a macro creating an actor from
+    // an old export) is converted here. Data copied from a loaded document already has its pool list, and new actors
+    // get an empty one from the schema.
+    const createdHp = source.system?.attributes?.hp;
+    if (createdHp?.value !== undefined && !hasPoolList(createdHp)) {
+      const { characteristics } = this._source.system;
+      const hp = convertLegacyHp(characteristics, createdHp, game.i18n.localize(RECOVERED_EXCESS_LABEL_KEY));
+      this.updateSource({ system: { attributes: { hp } } });
+    }
 
     if (!source.items) {
       const defaultItems = await getDefaultItemsForActor(source.type);
@@ -128,7 +152,7 @@ export class OQBaseActor extends Actor {
     const attributes = this.system.attributes;
     const characteristics = this.system.characteristics;
 
-    const hpMax = Math.round((characteristics.siz.value + characteristics.con.value) / 2) + attributes.hp.mod;
+    const hpMax = hpNormalMaximum(characteristics.siz.value, characteristics.con.value, attributes.hp.mod);
     const mpMax = characteristics.pow.value + attributes.mp.mod;
 
     return {
@@ -138,6 +162,7 @@ export class OQBaseActor extends Actor {
       hp: {
         max: hpMax,
         value: Math.min(attributes.hp.value, hpMax),
+        temporary: availableTemporaryPoints(attributes.hp.pools),
       },
       mp: {
         max: mpMax,
@@ -196,5 +221,149 @@ export class OQBaseActor extends Actor {
   calculateInitiative() {
     const declaration = getDeclaration(this);
     return { value: declaration.total, name: declaration.name || undefined };
+  }
+
+  /**
+   * The stored temporary-point pools of a resource, in spending order. Read from the source, the base every pool
+   * update starts from; preparation never changes pools.
+   * @param {string} resource `hp`
+   * @returns {object[]}
+   */
+  temporaryPools(resource) {
+    const pools = this._source.system.attributes[resource]?.pools;
+    if (!hasPoolList({ pools })) throw new Error(`${resource} has no temporary points`);
+    return pools;
+  }
+
+  /**
+   * Grants temporary points as a new pool, spent after every existing one. On an unlinked token's actor the pool
+   * belongs to that token only.
+   * @param {string} resource `hp`
+   * @param {number} amount a nonnegative whole number, without an upper cap
+   * @param {string} [label] shown in the pool editor; a blank label becomes "Manual"
+   * @returns {Promise<OQBaseActor|undefined>}
+   */
+  async grantTemporaryPoints(resource, amount, label) {
+    const grant = {
+      id: foundry.utils.randomID(),
+      label: label?.trim() || game.i18n.localize('OQ.Resources.Manual'),
+      amount,
+    };
+    return this.#updatePools(resource, grantPool(this.temporaryPools(resource), grant));
+  }
+
+  /**
+   * Corrects the remaining amount of a pool without moving it in the spending order.
+   * @param {string} resource `hp`
+   * @param {string} poolId
+   * @param {number} remaining a nonnegative whole number
+   * @returns {Promise<OQBaseActor|undefined>}
+   */
+  async correctTemporaryPool(resource, poolId, remaining) {
+    return this.#updatePools(resource, correctPool(this.temporaryPools(resource), poolId, remaining));
+  }
+
+  /**
+   * Removes a pool, discarding only its remaining points.
+   * @param {string} resource `hp`
+   * @param {string} poolId
+   * @returns {Promise<OQBaseActor|undefined>}
+   */
+  async removeTemporaryPool(resource, poolId) {
+    return this.#updatePools(resource, removePool(this.temporaryPools(resource), poolId));
+  }
+
+  #updatePools(resource, pools) {
+    return this.update({ [`system.attributes.${resource}.pools`]: pools });
+  }
+
+  /**
+   * A resource's points as the resource-points module works with them: the prepared ordinary current (already
+   * within the normal maximum), the normal maximum and the stored pools.
+   * @param {string} resource `hp`
+   * @returns {import('../../utils/resource-points.js').ResourceState}
+   */
+  resourceState(resource) {
+    const { value, max } = this.system.attributes[resource];
+    return { value: Math.max(0, value), max, pools: this.temporaryPools(resource) };
+  }
+
+  /**
+   * Damage after armour: temporary HP first, the oldest pool first, then ordinary HP, floored at zero.
+   * @param {number} amount a nonnegative whole number
+   * @returns {Promise<{fromPools: number, fromOrdinary: number}>} the HP actually taken from each
+   */
+  async damageHp(amount) {
+    const before = this.resourceState('hp');
+    const { state, fromPools, fromOrdinary } = spendPoints(before, amount);
+    await this.#updateResource('hp', before, state);
+    return { fromPools, fromOrdinary };
+  }
+
+  /**
+   * Healing: restores ordinary HP up to the normal maximum and never refills temporary HP.
+   * @param {number} amount a nonnegative whole number
+   * @returns {Promise<{restored: number}>} the ordinary HP actually restored
+   */
+  async healHp(amount) {
+    const before = this.resourceState('hp');
+    const { state, restored } = restorePoints(before, amount);
+    await this.#updateResource('hp', before, state);
+    return { restored };
+  }
+
+  /**
+   * Sets ordinary HP, as typed on the sheet, clamped to zero and the normal maximum. Temporary HP is untouched.
+   * @param {number} value a whole number
+   * @returns {Promise<OQBaseActor|undefined>}
+   */
+  async setOrdinaryHp(value) {
+    const before = this.resourceState('hp');
+    return this.#updateResource('hp', before, setOrdinaryPoints(before, value).state);
+  }
+
+  /**
+   * Stores what changed in a resource's ordinary current and pools, in one update.
+   * @returns {Promise<OQBaseActor|undefined>} undefined when nothing changed
+   */
+  async #updateResource(resource, before, after) {
+    const changes = OQBaseActor.#resourceChanges(resource, before, after);
+    return _.isEmpty(changes) ? undefined : this.update(changes);
+  }
+
+  /**
+   * The update data of a resource change. Unchanged pools are not written, so healing or a typed value never
+   * overwrites a pool edited elsewhere meanwhile.
+   */
+  static #resourceChanges(resource, before, after) {
+    const changes = {};
+    if (after.value !== before.value) changes[`system.attributes.${resource}.value`] = after.value;
+    if (!_.isEqual(after.pools, before.pools)) changes[`system.attributes.${resource}.pools`] = after.pools;
+    return changes;
+  }
+
+  /**
+   * A value typed into a token HUD bar input. On the HP bar it agrees with chat and sheet: "-N" is damage, taking
+   * temporary HP first, "+N" heals ordinary HP up to the maximum, and a plain number sets ordinary HP, clamped. Other
+   * attributes keep core behaviour.
+   *
+   * The core `modifyTokenAttribute` hook sees the resulting update and may veto it. The change is then made by the HP
+   * methods, like every other HP route, with the same result; a hook that rewrites the update takes over instead.
+   * @override
+   */
+  async modifyTokenAttribute(attribute, value, isDelta = false, isBar = true) {
+    if (attribute !== 'attributes.hp' || !isBar) return super.modifyTokenAttribute(attribute, value, isDelta, isBar);
+    const amount = Math.trunc(Number(value));
+    if (!Number.isFinite(amount)) return this;
+    const before = this.resourceState('hp');
+    const updates = OQBaseActor.#resourceChanges('hp', before, applyBarInput(before, amount, isDelta).state);
+    if (_.isEmpty(updates)) return this;
+    const preview = foundry.utils.deepClone(updates);
+    if (Hooks.call('modifyTokenAttribute', { attribute, value, isDelta, isBar }, updates, this) === false) return this;
+    if (!_.isEqual(updates, preview)) return this.update(updates);
+    if (!isDelta) await this.setOrdinaryHp(amount);
+    else if (amount < 0) await this.damageHp(-amount);
+    else await this.healHp(amount);
+    return this;
   }
 }

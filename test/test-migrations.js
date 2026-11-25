@@ -3,6 +3,7 @@ import expect from 'expect.js';
 import _ from 'lodash-es';
 import { themedIconPath, themedIconsMigration } from '../src/module/migration/migration-1-themed-icons.js';
 import { embeddedNewActorFlagMigration } from '../src/module/migration/migration-2-embedded-new-actor-flag.js';
+import { legacyHpExcessMigration } from '../src/module/migration/migration-3-legacy-hp-excess.js';
 import { LATEST_MIGRATION_VERSION, migrations, pendingMigrations } from '../src/module/migration/migrations.js';
 import { applyPendingMigrations, migrateWorld } from '../src/module/migration/migration-runner.js';
 import { SettingsConfig } from '../src/module/consts/settings-config.js';
@@ -143,6 +144,128 @@ describe('migration-2-embedded-new-actor-flag.js', function () {
   });
 });
 
+/** An actor source with SIZ 10 and CON 10: HP normal maximum 10 plus the HP modifier. */
+const actorSource = (hp, extra = {}) => ({
+  _id: 'a1',
+  type: 'character',
+  system: {
+    characteristics: { siz: { base: 10, mod: 0 }, con: { base: 10, mod: 0 }, pow: { base: 10, mod: 0 } },
+    attributes: { hp: { mod: 0, max: 0, ...hp }, mp: { mod: 0, max: 0, value: 14 } },
+  },
+  ...extra,
+});
+// The label is stored translated; the stub translation marks it.
+const recoveredPool = (remaining) => ({ id: 'recoveredExcess', label: 'i18n:OQ.Resources.RecoveredExcess', remaining });
+const i18n = { localize: (key) => `i18n:${key}` };
+
+describe('migration-3-legacy-hp-excess.js', function () {
+  const { Actor, Token } = legacyHpExcessMigration.handlers;
+  let savedGame;
+
+  before(function () {
+    savedGame = globalThis.game;
+    globalThis.game = { i18n };
+  });
+
+  after(function () {
+    if (savedGame === undefined) delete globalThis.game;
+    else globalThis.game = savedGame;
+  });
+
+  describe('Actor', function () {
+    it('Should persist HP above the normal maximum as a recovered excess pool', function () {
+      expect(Actor(actorSource({ value: 15 }), helpers)).to.eql({
+        system: { attributes: { hp: { value: 10, pools: [recoveredPool(5)] } } },
+      });
+    });
+
+    it('Should persist an empty pool list for HP within the normal maximum', function () {
+      expect(Actor(actorSource({ value: 6 }), helpers)).to.eql({
+        system: { attributes: { hp: { value: 6, pools: [] } } },
+      });
+    });
+
+    it('Should persist a source converted on load as it is, without reinterpreting it', function () {
+      // Loaded actors were converted by their data model, so the stored HP is written from them.
+      const loaded = actorSource({ value: 10, pools: [recoveredPool(5)] });
+      expect(Actor(loaded, helpers)).to.eql({
+        system: { attributes: { hp: { value: 10, pools: [recoveredPool(5)] } } },
+      });
+      // A lowered HP modifier makes the maximum 4; the converted actor keeps HP 6 and gets no recovery pool.
+      const lowered = actorSource({ value: 6, mod: -6, pools: [] });
+      expect(Actor(lowered, helpers)).to.eql({ system: { attributes: { hp: { value: 6, pools: [] } } } });
+    });
+
+    it('Should leave MP and other actor data alone', function () {
+      const changes = Actor(actorSource({ value: 15 }), helpers);
+      expect(Object.keys(changes)).to.eql(['system']);
+      expect(Object.keys(changes.system.attributes)).to.eql(['hp']);
+    });
+
+    it('Should make no effect changes to an actor with legacy active effects', function () {
+      const effects = [
+        { _id: 'e1', name: 'Old buff', changes: [{ key: 'system.attributes.hp.value', mode: 2, value: '5' }] },
+        { _id: 'e2', name: 'Module effect', changes: [{ key: 'system.attributes.hp.max', mode: 5, value: '30' }] },
+      ];
+      const changes = Actor(actorSource({ value: 15 }, { effects }), helpers);
+      expect(changes).to.not.have.key('effects');
+      expect(Object.keys(changes)).to.eql(['system']);
+    });
+
+    it('Should return no changes for an actor without HP', function () {
+      expect(Actor({ _id: 'a1', img: THEMED }, helpers)).to.eql({});
+    });
+  });
+
+  describe('Token', function () {
+    const convertedBase = actorSource({ value: 10, pools: [recoveredPool(5)] });
+    const tokenHelpers = { ...helpers, worldActor: (id) => (id === 'a1' ? structuredClone(convertedBase) : null) };
+    const token = (delta, extra = {}) => ({ _id: 't1', actorId: 'a1', actorLink: false, delta, ...extra });
+
+    it('Should give a delta overriding HP its own empty pool list instead of the base recovery pool', function () {
+      const source = token({ system: { attributes: { hp: { value: 6 } } } });
+      expect(Token(source, tokenHelpers)).to.eql({
+        delta: { system: { attributes: { hp: { value: 6, pools: [] } } } },
+      });
+    });
+
+    it('Should recover the excess stored in a delta into its own pool', function () {
+      const source = token({ system: { attributes: { hp: { value: 15 } } } });
+      expect(Token(source, tokenHelpers)).to.eql({
+        delta: { system: { attributes: { hp: { value: 10, pools: [recoveredPool(5)] } } } },
+      });
+    });
+
+    it("Should compute the maximum from the delta's characteristics and modifier merged over the base actor's", function () {
+      const source = token({
+        system: { characteristics: { con: { base: 14 } }, attributes: { hp: { value: 15, mod: -1 } } },
+      });
+      // round((10 + 14) / 2) - 1 = 11
+      expect(Token(source, tokenHelpers)).to.eql({
+        delta: { system: { attributes: { hp: { value: 11, pools: [recoveredPool(4)] } } } },
+      });
+    });
+
+    it('Should leave a delta that does not override HP inheriting the base actor', function () {
+      expect(Token(token({ system: { attributes: { mp: { value: 3 } } } }), tokenHelpers)).to.eql({});
+      expect(Token(token({ system: {} }), tokenHelpers)).to.eql({});
+      expect(Token(token({ img: null }), tokenHelpers)).to.eql({});
+      expect(Token(token(undefined), tokenHelpers)).to.eql({});
+    });
+
+    it('Should return no changes for a delta that already has a pool list', function () {
+      const source = token({ system: { attributes: { hp: { value: 15, pools: [] } } } });
+      expect(Token(source, tokenHelpers)).to.eql({});
+    });
+
+    it('Should leave linked tokens and tokens without a base actor alone', function () {
+      const delta = { system: { attributes: { hp: { value: 15 } } } };
+      expect(Token(token(delta, { actorLink: true }), tokenHelpers)).to.eql({});
+      expect(Token(token(delta, { actorId: 'missing' }), tokenHelpers)).to.eql({});
+    });
+  });
+});
+
 describe('migration-runner.js', function () {
   describe('#applyPendingMigrations() and #migrateWorld()', function () {
     let savedGlobals;
@@ -202,7 +325,11 @@ describe('migration-runner.js', function () {
     }
 
     const collection = (documentName, documents) =>
-      Object.assign(documents, { documentName, documentClass: { updateDocuments: record(documentName) } });
+      Object.assign(documents, {
+        documentName,
+        documentClass: { updateDocuments: record(documentName) },
+        get: (id) => documents.find((document) => document.id === id),
+      });
 
     function setGlobals({ isGM = true, documents = {}, packs = [] } = {}) {
       globalThis.CONFIG = { OQ: { SYSTEM_ID: 'oq', SettingsConfig } };
@@ -240,7 +367,7 @@ describe('migration-runner.js', function () {
             storedVersion = value;
           },
         },
-        i18n: { format: (key, data) => `${key} ${JSON.stringify(data)}` },
+        i18n: { ...i18n, format: (key, data) => `${key} ${JSON.stringify(data)}` },
         actors: collection('Actor', documents.actors ?? []),
         items: collection('Item', documents.items ?? []),
         scenes: collection('Scene', documents.scenes ?? []),
@@ -675,6 +802,107 @@ describe('migration-runner.js', function () {
       expect(persisted.map((source) => source.img)).to.eql([THEMED, THEMED]);
       expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
       expect(notifications.at(-1)).to.eql(['info', 'OQ.Migration.Complete']);
+    });
+
+    describe('legacy HP excess', function () {
+      const legacyActor = (_id, value) => actorSource({ value }, { _id });
+      const hpOf = (source) => _.pick(source.system.attributes.hp, ['value', 'pools']);
+
+      it('Should persist world actors and give an overriding token delta its own pool list', async function () {
+        const actor = new FakeDocument(legacyActor('a1', 15), { items: [] });
+        const overriding = new FakeDocument({
+          _id: 't1',
+          actorId: 'a1',
+          actorLink: false,
+          delta: { system: { attributes: { hp: { value: 6 } } } },
+        });
+        const inheriting = new FakeDocument({ _id: 't2', actorId: 'a1', actorLink: false, delta: { system: {} } });
+        const scene = new FakeDocument(
+          { _id: 's1' },
+          { tokens: [overriding, inheriting], updateEmbeddedDocuments: recordEmbedded('s1') },
+        );
+        setGlobals({ documents: { actors: [actor], scenes: [scene] } });
+
+        await run();
+
+        assert.deepEqual(
+          updates.map(({ target, batch }) => ({ target, batch })),
+          [
+            {
+              target: 'Actor',
+              batch: [{ _id: 'a1', system: { attributes: { hp: { value: 10, pools: [recoveredPool(5)] } } } }],
+            },
+            {
+              target: 's1.Token',
+              batch: [{ _id: 't1', delta: { system: { attributes: { hp: { value: 6, pools: [] } } } } }],
+            },
+          ],
+        );
+        expect(hpOf(actor.source)).to.eql({ value: 10, pools: [recoveredPool(5)] });
+        expect(inheriting.source.delta).to.eql({ system: {} });
+        expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+      });
+
+      it('Should convert actors in locked world compendia, keeping their IDs and restoring the lock', async function () {
+        const configured = [];
+        const packDocument = new FakeDocument(legacyActor('p1', 15), { items: [] });
+        const pack = {
+          metadata: { packageType: 'world' },
+          documentName: 'Actor',
+          collection: 'world.monsters',
+          locked: true,
+          configure: async (config) => configured.push(config),
+          getDocuments: async () => [packDocument],
+          documentClass: { updateDocuments: record('world.monsters') },
+        };
+        setGlobals({ packs: [pack] });
+
+        await run();
+
+        expect(updates.map(({ target, batch, options }) => [target, batch, options.pack])).to.eql([
+          [
+            'world.monsters',
+            [{ _id: 'p1', system: { attributes: { hp: { value: 10, pools: [recoveredPool(5)] } } } }],
+            'world.monsters',
+          ],
+        ]);
+        expect(configured.at(-2)).to.eql({ locked: false });
+        expect(configured.at(-1)).to.eql({ locked: true });
+        expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+      });
+
+      it('Should give the same totals and one recovery pool per actor when retried', async function () {
+        storedVersion = LATEST_MIGRATION_VERSION - 1;
+        const persisted = [legacyActor('a1', 15), legacyActor('a2', 13)];
+        const load = (skipId) => {
+          const actors = persisted.map((source) => new FakeDocument(structuredClone(source), { items: [] }));
+          setGlobals({ documents: { actors } });
+          const update = game.actors.documentClass.updateDocuments;
+          game.actors.documentClass.updateDocuments = async (batch, options) => {
+            const saved = (await update(batch, options)).filter((document) => document.id !== skipId);
+            for (const document of saved) {
+              const stored = persisted.find((source) => source._id === document.id);
+              Object.assign(stored.system.attributes.hp, document.toObject().system.attributes.hp);
+            }
+            return saved;
+          };
+        };
+
+        load('a2');
+        await run();
+
+        expect(storedVersion).to.be(LATEST_MIGRATION_VERSION - 1);
+        expect(persisted.map(hpOf)).to.eql([{ value: 10, pools: [recoveredPool(5)] }, { value: 13 }]);
+
+        load();
+        await run();
+
+        expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+        expect(persisted.map(hpOf)).to.eql([
+          { value: 10, pools: [recoveredPool(5)] },
+          { value: 10, pools: [recoveredPool(3)] },
+        ]);
+      });
     });
 
     it('Should apply the changes in memory before the world is stored', function () {

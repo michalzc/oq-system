@@ -32,6 +32,18 @@ World settings cannot be written before `ready`.
   (`client/applications/settings/config.mjs:50-57`). That permission defaults to Assistant GM, so Assistant GMs see
   restricted menus too.
 
+## Data model fields and migration
+
+- `DataField#getInitialValue` (`common/data/fields.mjs:264`) returns a non-function `initial` by reference, so
+  `initial: []` or `initial: {}` is one object shared by every document that gets it. An in-place source update (e.g.
+  `updateSource` in `_preCreate`) then leaks into the next new document. Use a factory: `initial: () => []`.
+- A `TypeDataModel`'s `migrateData` also runs on update changes and on creation input, which are cleaned with
+  `partial: true` (`common/abstract/data.mjs` `_preUpdateSource`, `client/data/client-backend.mjs`
+  `#preCreateDocumentArray`); the creation constructor then passes `migrate: false`. Check `options.partial` before
+  reading an absent key as legacy data. World load, compendium load and `fromImport` (JSON import) migrate complete
+  sources.
+- `ActorDelta#system` is an `ObjectField`: token deltas are never passed to the system's `migrateData`.
+
 ## ApplicationV2 forms
 
 - `_onSubmitForm` (`client/applications/api/application.mjs:2159-2178`) catches an error thrown by the form handler,

@@ -27,6 +27,8 @@ OQ:
   Chat:
     damageMessage: >-
       {0} has taken {1} points of damage.
+    damageAbsorbed: >-
+      {0} has taken {1} points of damage, {2} of them absorbed by temporary hit points.
     healMessage: >-
       {0} has gained {1} hit points.
     spentMagicPoints: >-
@@ -312,6 +314,23 @@ OQ:
     Magic: Magic
     Notes: Notes
     Skills: Skills
+  Resources:
+    Amount: Amount
+    DialogTitle: 'Temporary {resource}: {name}'
+    EditTemporaryPoints: Temporary points
+    Grant: Grant
+    GrantHeading: Grant temporary points
+    Heading: 'Temporary {resource}'
+    InvalidAmount: Enter a whole number of 0 or more.
+    Label: Label
+    Manual: Manual
+    NoPools: No temporary points.
+    Ordinary: 'Ordinary: {value} / {max}'
+    RecoveredExcess: Recovered excess
+    Remaining: Remaining
+    RemovePool: Remove pool and its remaining points
+    TemporaryPoints: 'Temporary points: {amount}'
+    Total: 'Temporary: {amount}'
   RollMessage:
     flavour: Test of
     mastered: mastered

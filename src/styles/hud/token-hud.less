@@ -1,0 +1,19 @@
+// Temporary points at the right end of a token HUD bar input: the input's value is centred, and outside it the HUD's
+// side columns would cover the marker. Core leaves the bar container static (its `bottom: 0` is then no offset), so it
+// is made the marker's positioning context.
+#token-hud .attribute:has(> .oq-temporary-points) {
+  position: relative;
+}
+
+#token-hud .attribute .oq-temporary-points {
+  position: absolute;
+  top: 50%;
+  right: 0.5em;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: @temporary-points-hud-color;
+  font-size: var(--font-size-20);
+  font-weight: bold;
+  text-shadow: 0 0 4px #000000;
+  white-space: nowrap;
+}
