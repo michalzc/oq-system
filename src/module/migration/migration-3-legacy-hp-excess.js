@@ -17,7 +17,7 @@ export const legacyHpExcessMigration = {
     Actor: (source) => {
       const hp = source.system?.attributes?.hp;
       if (!hp) return {};
-      const { value, pools } = convertLegacyHp(source.system) ?? hp;
+      const { value, pools } = hasPoolList(hp) ? hp : convertLegacyHp(source.system.characteristics, hp);
       return { system: { attributes: { hp: { value, pools } } } };
     },
     Token: (source, { worldActor }) => {
@@ -26,11 +26,9 @@ export const legacyHpExcessMigration = {
       if (source.actorLink || hp?.value === undefined || hasPoolList(hp)) return {};
       const base = worldActor(source.actorId)?.system;
       if (!base) return {};
-      const merged = {
-        characteristics: _.merge({}, base.characteristics, delta.characteristics),
-        attributes: { hp: { mod: hp.mod ?? base.attributes?.hp?.mod, value: hp.value } },
-      };
-      return { delta: { system: { attributes: { hp: convertLegacyHp(merged) } } } };
+      const characteristics = _.merge({}, base.characteristics, delta.characteristics);
+      const converted = convertLegacyHp(characteristics, { mod: hp.mod ?? base.attributes?.hp?.mod, value: hp.value });
+      return { delta: { system: { attributes: { hp: converted } } } };
     },
   },
 };

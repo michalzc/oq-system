@@ -53,9 +53,8 @@ export class OQBaseActor extends Actor {
     // get an empty one from the schema.
     const createdHp = source.system?.attributes?.hp;
     if (createdHp?.value !== undefined && !hasPoolList(createdHp)) {
-      const { characteristics, attributes } = this._source.system;
-      const hp = convertLegacyHp({ characteristics, attributes: { hp: _.omit(attributes.hp, 'pools') } });
-      this.updateSource({ system: { attributes: { hp } } });
+      const { characteristics } = this._source.system;
+      this.updateSource({ system: { attributes: { hp: convertLegacyHp(characteristics, createdHp) } } });
     }
 
     if (!source.items) {

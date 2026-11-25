@@ -52,15 +52,15 @@ function recoverExcess(current, max) {
 }
 
 /**
- * HP of a stored actor `system` source in the format of versions before 0.9, which has no pool list, converted to
- * ordinary current points and pools. The normal maximum is computed from the source, never read from the stored one.
- * @param {object} system
- * @returns {{value: number, pools: object[]}|undefined} undefined when the source already has a pool list
+ * Legacy HP, stored by a version before 0.9 without a pool list (see {@link hasPoolList}, checked by callers), converted
+ * to ordinary current points and pools. The normal maximum is computed from the stored characteristics and HP
+ * modifier, never read from the stored maximum.
+ * @param {object} [characteristics] stored characteristics, `{siz: {base, mod}, con: {base, mod}, ...}`
+ * @param {{value?: number, mod?: number}} hp stored HP
+ * @returns {{value: number, pools: object[]}}
  */
-export function convertLegacyHp(system) {
-  const hp = system.attributes.hp;
-  if (hasPoolList(hp)) return undefined;
-  const { siz, con } = system.characteristics ?? {};
+export function convertLegacyHp(characteristics, hp) {
+  const { siz, con } = characteristics ?? {};
   const max = hpNormalMaximum(sourceCharacteristic(siz), sourceCharacteristic(con), hp.mod ?? 0);
   return recoverExcess(hp.value ?? 0, max);
 }

@@ -43,7 +43,7 @@ Conversion lands before any route can write a pool, so no route ships that could
 - [x] Resource-points module tests: excess, no excess, zero maximum, stale stored maximum, negative modifiers,
       idempotence, available total.
 - [x] Migration tests: actor sources, token sources with and without overriding deltas (including the inherited
-      recovery pool trap), already-converted sources returning no changes, locked world compendia and retry at runner
+      recovery pool trap), already-converted sources returning no changes (Token handler only; see Comments), locked world compendia and retry at runner
       level, and an actor with arbitrary legacy ActiveEffects getting no effect changes.
 - [x] Manual: the HP rows of the spec's acceptance table for "v0.8 actor", "Unlinked token delta HP 6", "Locked world
       compendium actor", "Old actor JSON", "Converted actor (empty pool list)" and "Repeat migration / retry" pass,
@@ -93,3 +93,32 @@ new build. Persisted state was read raw from the server (`modifyDocument` `get` 
 Console: only the induced "omitted updates" errors of the blocked first load. Not checked: a player client's in-memory
 application (covered by runner tests). The QA fixtures (`QA *` actors, two `QA token *` tokens, `world.qa-actors`)
 remain in `oq-dev`.
+
+### 2026-11-25 review
+
+Two-axis review (standards, spec) of 38d0327. Changes made:
+
+- `convertLegacyHp(characteristics, hp)` no longer takes a whole `system` nor checks the pool list itself; callers
+  check `hasPoolList`. This removed the fake `system` objects in `_preCreate` and the Token handler.
+- In-world re-check found a bug: the `pools` field's `initial: []` was one array shared by every new actor, and
+  `_preCreate`'s `updateSource` pushed a recovered pool into it, so the next `{name, type}` actor was created with
+  that pool. Fixed with `initial: () => []`; re-verified (legacy create, then a new character and NPC persist
+  `pools: []`). Noted in `docs/foundry-v14-notes.md`. Other fields with a plain array/object `initial` predate this
+  change (`personal.money`, four item array fields) and may share the same trap.
+
+Open decisions for the user (behaviour kept as implemented):
+
+1. The Actor handler writes HP for every actor because handlers see load-converted sources; step 3 therefore writes
+   every world actor and every world Actor compendium once (and again on a retry). The alternative would need the raw
+   stored data, which the client doesn't keep.
+2. The recovered pool's label is stored as the key `OQ.Resources.RecoveredExcess` (deterministic across clients), so
+   every display (ticket 02 pool editor, ticket 04 HUD, chat) must localize pool labels; macros reading raw data see
+   the key.
+3. `_preCreate` converts creation data that has `hp.value` and no pool list. That covers `Actor.create` from an old
+   export, but it also turns a v0.9 macro's `Actor.create({system: {attributes: {hp: {value: 20}}}})` on a maximum-10
+   actor into 10 + a 10-point "Recovered excess" pool. Without it, that creation would store 20 hidden above the
+   maximum.
+4. A token in a world compendium scene whose base actor is not a world actor is left unconverted (no base to merge
+   with); if imported later, an overriding delta inherits the base's pool list. The spec's late-import list names
+   actors only.
+5. "Recovered excess" is not in `GLOSSARY.md` yet.

@@ -1,6 +1,6 @@
 import _ from 'lodash-es';
 import { npcCharacteristics, pcCharacteristics } from './default-characteristics.js';
-import { convertLegacyHp } from '../utils/resource-points.js';
+import { convertLegacyHp, hasPoolList } from '../utils/resource-points.js';
 
 const fields = foundry.data.fields;
 
@@ -67,7 +67,8 @@ function temporaryPoolsModel() {
       label: new fields.StringField({ required: true, trim: true, initial: '' }),
       remaining: new fields.NumberField({ required: true, nullable: false, min: 0, integer: true, initial: 0 }),
     }),
-    { required: true, initial: [] },
+    // A factory: a plain `initial` value is shared by reference, and in-place source updates would leak into it.
+    { required: true, initial: () => [] },
   );
 }
 
@@ -161,10 +162,8 @@ class OQActorDataModel extends foundry.abstract.TypeDataModel {
    * missing pool list says nothing about the stored one. Migration 3 persists the conversion for world documents.
    */
   static migrateData(source, options) {
-    if (!options?.partial && source.attributes?.hp) {
-      const hp = convertLegacyHp(source);
-      if (hp) Object.assign(source.attributes.hp, hp);
-    }
+    const hp = source.attributes?.hp;
+    if (!options?.partial && hp && !hasPoolList(hp)) Object.assign(hp, convertLegacyHp(source.characteristics, hp));
     return super.migrateData(source, options);
   }
 
