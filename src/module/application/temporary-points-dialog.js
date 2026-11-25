@@ -4,13 +4,14 @@ import { OQActorDialog } from './actor-dialog.js';
 /**
  * The pool editor of a resource's temporary points: lists the pools in spending order, corrects a pool's remaining
  * amount, removes a pool and grants new points. Every change is saved at once through the actor's pool methods.
- * Unlike the other actor dialogs it is re-rendered when the actor changes, so it never shows spent or removed pools.
+ * Unlike the other actor dialogs it is re-rendered when the actor changes, so it never shows spent or removed pools;
+ * a grant being typed when someone else changes the actor is cleared.
  */
 export class TemporaryPointsDialog extends OQActorDialog {
   static DEFAULT_OPTIONS = {
     classes: ['temporary-points'],
     position: { width: 420 },
-    form: { handler: TemporaryPointsDialog.onGrant, closeOnSubmit: false, submitOnChange: false },
+    form: { handler: TemporaryPointsDialog.onGrant, closeOnSubmit: false },
     actions: {
       removePool: TemporaryPointsDialog.onRemovePool,
     },
@@ -27,9 +28,13 @@ export class TemporaryPointsDialog extends OQActorDialog {
    * @param {Actor} options.actor
    * @param {string} options.resource `hp`
    */
-  constructor({ actor, resource, ...options }) {
-    super({ actor, id: `TemporaryPointsDialog-${resource}-${actor.uuid.replaceAll('.', '-')}`, ...options });
-    this.resource = resource;
+  constructor(options) {
+    super(options);
+    this.resource = options.resource;
+  }
+
+  static dialogId(actor, { resource }) {
+    return `${super.dialogId(actor)}-${resource}`;
   }
 
   get resourceLabel() {
@@ -62,31 +67,46 @@ export class TemporaryPointsDialog extends OQActorDialog {
     delete this.actor.apps[this.id];
   }
 
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    // Enter in a pool's field confirms its correction instead of submitting the form, which would grant.
+    for (const input of this.element.querySelectorAll('.pool-remaining')) {
+      input.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter') return;
+        event.preventDefault();
+        input.blur();
+      });
+    }
+  }
+
   _onChangeForm(formConfig, event) {
     super._onChangeForm(formConfig, event);
     const poolId = event.target.closest('[data-pool-id]')?.dataset.poolId;
-    if (poolId && event.target.matches('.pool-remaining')) this.correctPool(poolId, event.target.value);
+    if (poolId && event.target.matches('.pool-remaining')) this.onCorrectRemaining(poolId, event.target.value);
   }
 
-  async correctPool(poolId, text) {
+  /** Saves the remaining amount typed in a pool's field. */
+  async onCorrectRemaining(poolId, text) {
     if (!this.actor.isOwner) return;
-    const remaining = parsePointAmount(text);
-    if (remaining === null) {
-      ui.notifications.error('OQ.Resources.InvalidAmount', { localize: true });
-      return this.render();
-    }
+    const remaining = this.#readAmount(text);
+    // An invalid amount, or a pool someone else removed meanwhile: show the stored pools again.
+    const exists = this.actor.temporaryPools(this.resource).some((pool) => pool.id === poolId);
+    if (remaining === null || !exists) return this.render();
     await this.actor.correctTemporaryPool(this.resource, poolId, remaining);
   }
 
   /** Submitting the form, with the Grant button or Enter, grants the amount typed in the grant row. */
   static async onGrant(event, form, formData) {
     if (!this.actor.isOwner) return;
-    const amount = parsePointAmount(formData.object.amount);
-    if (amount === null) {
-      ui.notifications.error('OQ.Resources.InvalidAmount', { localize: true });
-      return;
-    }
-    await this.actor.grantTemporaryPoints(this.resource, amount, formData.object.label);
+    const amount = this.#readAmount(formData.object.amount);
+    if (amount !== null) await this.actor.grantTemporaryPoints(this.resource, amount, formData.object.label);
+  }
+
+  /** A typed amount of points, or null after telling the user it is invalid. */
+  #readAmount(text) {
+    const amount = parsePointAmount(text);
+    if (amount === null) ui.notifications.error('OQ.Resources.InvalidAmount', { localize: true });
+    return amount;
   }
 
   static async onRemovePool(event, target) {

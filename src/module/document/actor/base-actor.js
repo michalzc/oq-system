@@ -220,7 +220,8 @@ export class OQBaseActor extends Actor {
   }
 
   /**
-   * The stored temporary-point pools of a resource, in spending order.
+   * The stored temporary-point pools of a resource, in spending order. Read from the source, the base every pool
+   * update starts from; preparation never changes pools.
    * @param {string} resource `hp`
    * @returns {object[]}
    */

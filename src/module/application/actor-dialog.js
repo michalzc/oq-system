@@ -1,6 +1,7 @@
 /**
- * A form editing part of an actor. There is one dialog of each kind per actor. Unlike a document sheet it isn't
- * re-rendered when the actor changes, so unsaved input survives updates made elsewhere.
+ * A form editing part of an actor, one per actor and {@link OQActorDialog.dialogId}. Unlike a document sheet it isn't
+ * re-rendered when the actor changes, so unsaved input survives updates made elsewhere; a dialog that must show live
+ * data registers itself in `actor.apps`.
  */
 export class OQActorDialog extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2,
@@ -15,11 +16,21 @@ export class OQActorDialog extends foundry.applications.api.HandlebarsApplicatio
   /**
    * @param {object} options
    * @param {Actor} options.actor The edited actor
-   * @param {string} [options.id] Defaults to one dialog of the class per actor
    */
   constructor({ actor, ...options }) {
-    super({ id: `${new.target.name}-${actor.uuid.replaceAll('.', '-')}`, ...options });
+    super({ ...options, id: new.target.dialogId(actor, options) });
     this.actor = actor;
+  }
+
+  /**
+   * The id of the actor's dialog: one per class and actor. Subclasses add the options that tell their dialogs apart.
+   * @param {Actor} actor
+   * @param {object} options The dialog's other options
+   * @returns {string}
+   */
+  // eslint-disable-next-line no-unused-vars
+  static dialogId(actor, options) {
+    return `${this.name}-${actor.uuid.replaceAll('.', '-')}`;
   }
 
   /**

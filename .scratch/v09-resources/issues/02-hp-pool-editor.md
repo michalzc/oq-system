@@ -73,3 +73,22 @@ was relaunched with the user's approval. Driven through the sheet control and di
 
 QA fixtures left in `oq-dev`: `QA pools PC` (now owned by `Edek`), `QA pools NPC`, tokens `QA pools linked` and
 `QA pools unlinked`.
+
+### 2026-11-25 review
+
+Two-axis review (standards, spec) of 2d9a9c8. Changes made:
+
+- Enter in a pool's Remaining field submitted the form, which grants: with an amount waiting in the grant row it
+  created an unconfirmed pool. Enter there now only confirms the correction. Verified with real key input: typing 6 +
+  Enter in C's field set C=6 and granted nothing; 2 + Enter in the grant row still granted `Manual=2`.
+- Correcting a pool that someone else removed meanwhile threw "Unknown pool"; it now re-renders the stored pools.
+  Verified in-world, no errors.
+- `OQActorDialog.dialogId(actor, options)` replaces the copied id recipe; the pool editor's id is
+  `TemporaryPointsDialog-<actor uuid>-<resource>`. The base class documents that a live dialog registers in
+  `actor.apps`. Attributes dialog still opens with its old id.
+- Amount parsing and its message live in one dialog helper; the dialog's correction handler is
+  `onCorrectRemaining`; `isPointAmount` is module-private; `temporaryPools` says why it reads the source.
+- Actors page: "Earlier versions … could store a current value above the maximum" (it no longer implies typing above
+  the maximum is prevented; ticket 03 adds that clamp).
+
+Kept: a grant being typed is cleared when someone else changes the actor, the price of never showing stale pools.

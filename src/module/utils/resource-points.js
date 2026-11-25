@@ -72,7 +72,7 @@ export function convertLegacyHp(characteristics, hp, label) {
  * @param {*} amount
  * @returns {boolean}
  */
-export const isPointAmount = (amount) => Number.isInteger(amount) && amount >= 0;
+const isPointAmount = (amount) => Number.isInteger(amount) && amount >= 0;
 
 /**
  * A typed amount of points, from a form input.
