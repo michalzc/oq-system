@@ -2,6 +2,12 @@ import _ from 'lodash-es';
 import { getDefaultItemsForActor } from '../../utils/compendium-utils.js';
 import { activeEffectChanges, attributeContribution } from '../../utils/effect-contributions.js';
 import { getDeclaration } from '../../utils/initiative.js';
+import {
+  availableTemporaryPoints,
+  convertLegacyHp,
+  hasPoolList,
+  hpNormalMaximum,
+} from '../../utils/resource-points.js';
 
 /**
  * Writes derived values onto the prepared attribute objects, keeping their stored fields (`base`, `mod`, ...). Every
@@ -41,6 +47,16 @@ export class OQBaseActor extends Actor {
       { inplace: false },
     );
     this.updateSource({ prototypeToken });
+
+    // Creation data is cleaned without data model migration, so legacy HP in raw data (a macro creating an actor from
+    // an old export) is converted here. Data copied from a loaded document already has its pool list, and new actors
+    // get an empty one from the schema.
+    const createdHp = source.system?.attributes?.hp;
+    if (createdHp?.value !== undefined && !hasPoolList(createdHp)) {
+      const { characteristics, attributes } = this._source.system;
+      const hp = convertLegacyHp({ characteristics, attributes: { hp: _.omit(attributes.hp, 'pools') } });
+      this.updateSource({ system: { attributes: { hp } } });
+    }
 
     if (!source.items) {
       const defaultItems = await getDefaultItemsForActor(source.type);
@@ -128,7 +144,7 @@ export class OQBaseActor extends Actor {
     const attributes = this.system.attributes;
     const characteristics = this.system.characteristics;
 
-    const hpMax = Math.round((characteristics.siz.value + characteristics.con.value) / 2) + attributes.hp.mod;
+    const hpMax = hpNormalMaximum(characteristics.siz.value, characteristics.con.value, attributes.hp.mod);
     const mpMax = characteristics.pow.value + attributes.mp.mod;
 
     return {
@@ -138,6 +154,7 @@ export class OQBaseActor extends Actor {
       hp: {
         max: hpMax,
         value: Math.min(attributes.hp.value, hpMax),
+        temporary: availableTemporaryPoints(attributes.hp.pools),
       },
       mp: {
         max: mpMax,

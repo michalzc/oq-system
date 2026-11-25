@@ -86,9 +86,10 @@ converted to `system.json`; the release workflow rewrites its `version`/`url`/`m
 
 Migrations in `src/module/migration/` are appended to `migrations` in `migrations.js` with the next `version`. Each
 has handlers per document name (`Actor`, `Item`, `Token`, ...) receiving the document source and helpers `replace`,
-`remove`, `parent`, and returning the changes (or `{}`). They run on world documents (with embedded ones) and world
-compendia; system compendia are rebuilt from `src/packs/`, so fix those sources directly. Add tests to
-`test/test-migrations.js`. **Never edit a released migration** — add a new one.
+`remove`, `parent`, `worldActor`, and returning the changes (or `{}`). They run on world documents (with embedded ones)
+and world compendia; system compendia are rebuilt from `src/packs/`, so fix those sources directly. Sources are taken
+after load, so a data model's `migrateData` has already converted them; actor deltas (`ObjectField`) are not. Add tests
+to `test/test-migrations.js`. **Never edit a released migration** — add a new one.
 
 ## Compendium content
 

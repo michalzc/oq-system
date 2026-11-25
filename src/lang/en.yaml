@@ -312,6 +312,9 @@ OQ:
     Magic: Magic
     Notes: Notes
     Skills: Skills
+  Resources:
+    RecoveredExcess: Recovered excess
+    TemporaryPoints: 'Temporary points: {amount}'
   RollMessage:
     flavour: Test of
     mastered: mastered

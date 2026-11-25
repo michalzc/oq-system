@@ -10,6 +10,11 @@
       <input id="{{rootId}}-hp" type="number" data-dtype="Number" name="system.attributes.hp.value"
              value="{{system.attributes.hp.value}}">
       <div>&nbsp;/&nbsp{{system.attributes.hp.max}}</div>
+      {{#if system.attributes.hp.temporary}}
+        <div class="temporary-points"
+             data-tooltip="{{ localize 'OQ.Resources.TemporaryPoints' amount=system.attributes.hp.temporary }}">
+          +{{system.attributes.hp.temporary}}</div>
+      {{/if}}
     </div>
 
     <label for="{{rootId}}-mp" class="resource-update" data-action="adjustResource" data-resource-id="mp"
