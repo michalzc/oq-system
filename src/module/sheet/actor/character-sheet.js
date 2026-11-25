@@ -24,6 +24,7 @@ export class OQCharacterSheet extends OQActorBaseSheet {
         { id: 'combat', label: 'OQ.Nav.Combat' },
         { id: 'equipment', label: 'OQ.Nav.Equipment' },
         { id: 'magic', label: 'OQ.Nav.Magic' },
+        { id: 'effects', label: 'OQ.Nav.Effects' },
         { id: 'notes', label: 'OQ.Nav.Notes' },
       ],
       initial: 'skills',

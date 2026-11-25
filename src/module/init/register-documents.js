@@ -2,12 +2,15 @@ import { OQActorDocumentProxy, OQItemDocumentProxy } from '../document/document-
 import { OQCombat } from '../document/combat.js';
 import { OQCombatant } from '../document/combatant.js';
 import { OQCombatTracker } from '../application/combat-tracker.js';
+import { OQActiveEffect } from '../document/active-effect.js';
+import { OQActiveEffectConfig } from '../sheet/effect/effect-config.js';
 
 export function registerDocuments() {
   CONFIG.Actor.documentClass = OQActorDocumentProxy;
   CONFIG.Item.documentClass = OQItemDocumentProxy;
   CONFIG.Combat.documentClass = OQCombat;
   CONFIG.Combatant.documentClass = OQCombatant;
+  CONFIG.ActiveEffect.documentClass = OQActiveEffect;
   OQCombat.registerQueries();
   CONFIG.ui.combat = OQCombatTracker;
 
@@ -28,4 +31,11 @@ export function registerDocuments() {
       label: `${localizeItemPrefix}.${key}`,
     });
   });
+
+  foundry.applications.apps.DocumentSheetConfig.registerSheet(
+    foundry.documents.ActiveEffect,
+    CONFIG.OQ.SYSTEM_ID,
+    OQActiveEffectConfig,
+    { makeDefault: true, label: 'OQ.Effects.EditorLabel' },
+  );
 }

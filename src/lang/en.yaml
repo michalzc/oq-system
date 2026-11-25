@@ -58,6 +58,26 @@ OQ:
     Cast: Cast
     ShortDescription:
       title: Edit short description of
+  Effects:
+    AddEffect: Add effect
+    DeleteEffect: Delete effect
+    Disable: Disable
+    EditEffect: Edit effect
+    EditorLabel: OpenQuest effect editor
+    Effects: Effects
+    Enable: Enable
+    NewEffect: New effect
+    NoEffects: No effects
+    NoRulesText: No rules text.
+    OtherChanges: Other stored changes not managed by OpenQuest
+    OtherChangesHint: Made by a macro or module. They are kept as stored and their behaviour is not guaranteed.
+    RulesText: Rules text
+    ShowRulesText: Show or hide the rules text
+    SourceName: Source
+    SourceNameHint: Where the effect came from, such as a spell, a blessing or a ruling.
+    States:
+      disabled: Disabled
+      enabled: Enabled
   Errors:
     InvalidRoll: Invalid roll definition
   Hints:

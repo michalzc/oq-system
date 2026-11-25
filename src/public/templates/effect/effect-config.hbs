@@ -1,0 +1,25 @@
+<section class="tab effect-details scrollable{{#if tab.active}} active{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+  {{formGroup systemFields.sourceName name='system.sourceName' value=source.system.sourceName rootId=rootId
+              label=(localize 'OQ.Effects.SourceName') hint=(localize 'OQ.Effects.SourceNameHint')}}
+  {{formGroup fields.disabled value=source.disabled rootId=rootId label=(localize 'OQ.Effects.States.disabled')}}
+  {{formGroup fields.description value=source.description rootId=rootId label=(localize 'OQ.Effects.RulesText')}}
+  {{#if isItemEffect}}
+    {{formGroup fields.transfer value=source.transfer rootId=rootId}}
+  {{/if}}
+
+  {{#if otherChanges.length}}
+    <fieldset class="other-changes">
+      <legend>{{localize 'OQ.Effects.OtherChanges'}}</legend>
+      <p class="hint">{{localize 'OQ.Effects.OtherChangesHint'}}</p>
+      <ol>
+        {{#each otherChanges as |change|}}
+          <li>
+            <code class="key">{{change.key}}</code>
+            <span class="type">{{change.type}}</span>
+            <code class="value">{{change.value}}</code>
+          </li>
+        {{/each}}
+      </ol>
+    </fieldset>
+  {{/if}}
+</section>
