@@ -1,5 +1,6 @@
 import expect from 'expect.js';
 import {
+  applyBarInput,
   availableTemporaryPoints,
   convertLegacyHp,
   correctPool,
@@ -309,6 +310,36 @@ describe('resource-points.js', function () {
           expect(() => setOrdinaryPoints(state(6, 10), value)).to.throwError(RangeError);
         }
       });
+    });
+  });
+
+  describe('#applyBarInput()', function () {
+    const pool = (id, remaining) => ({ id, label: id.toUpperCase(), remaining });
+    const state = (value, max, ...pools) => ({ value, max, pools });
+
+    it('Should agree with damage, healing and typing for the HUD input sequence', function () {
+      // HP 10/10 + A=2; token HUD "-3", then "+5", then "4": 9/10 A=0; 10/10 A=0; 4/10 A=0.
+      const minus3 = applyBarInput(state(10, 10, pool('a', 2)), -3, true).state;
+      expect(minus3).to.eql(state(9, 10, pool('a', 0)));
+      const plus5 = applyBarInput(minus3, 5, true).state;
+      expect(plus5).to.eql(state(10, 10, pool('a', 0)));
+      expect(applyBarInput(plus5, 4, false).state).to.eql(state(4, 10, pool('a', 0)));
+    });
+
+    it('Should clamp an absolute value and leave pools alone', function () {
+      expect(applyBarInput(state(6, 10, pool('a', 2)), 15, false).state).to.eql(state(10, 10, pool('a', 2)));
+      expect(applyBarInput(state(6, 10, pool('a', 2)), -4, false).state).to.eql(state(0, 10, pool('a', 2)));
+    });
+
+    it('Should change nothing for a zero change', function () {
+      expect(applyBarInput(state(6, 10, pool('a', 2)), 0, true).state).to.eql(state(6, 10, pool('a', 2)));
+    });
+
+    it('Should reject a value that is not a whole number', function () {
+      for (const value of [1.5, NaN]) {
+        expect(() => applyBarInput(state(6, 10), value, true)).to.throwError(RangeError);
+        expect(() => applyBarInput(state(6, 10), value, false)).to.throwError(RangeError);
+      }
     });
   });
 });

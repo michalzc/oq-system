@@ -4,6 +4,7 @@ import { OQCombatant } from '../document/combatant.js';
 import { OQCombatTracker } from '../application/combat-tracker.js';
 import { OQActiveEffect } from '../document/active-effect.js';
 import { OQActiveEffectConfig } from '../sheet/effect/effect-config.js';
+import { OQToken } from '../canvas/token.js';
 
 export function registerDocuments() {
   CONFIG.Actor.documentClass = OQActorDocumentProxy;
@@ -11,6 +12,7 @@ export function registerDocuments() {
   CONFIG.Combat.documentClass = OQCombat;
   CONFIG.Combatant.documentClass = OQCombatant;
   CONFIG.ActiveEffect.documentClass = OQActiveEffect;
+  CONFIG.Token.objectClass = OQToken;
   OQCombat.registerQueries();
   CONFIG.ui.combat = OQCombatTracker;
 

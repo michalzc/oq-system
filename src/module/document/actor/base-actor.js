@@ -3,6 +3,7 @@ import { getDefaultItemsForActor } from '../../utils/compendium-utils.js';
 import { activeEffectChanges, attributeContribution } from '../../utils/effect-contributions.js';
 import { getDeclaration } from '../../utils/initiative.js';
 import {
+  applyBarInput,
   availableTemporaryPoints,
   convertLegacyHp,
   correctPool,
@@ -322,15 +323,49 @@ export class OQBaseActor extends Actor {
   }
 
   /**
-   * Stores what changed in a resource's ordinary current and pools, in one update. Unchanged pools are not written,
-   * so healing or a typed value never overwrites a pool edited elsewhere meanwhile.
+   * Stores what changed in a resource's ordinary current and pools, in one update.
    * @returns {Promise<OQBaseActor|undefined>} undefined when nothing changed
    */
   async #updateResource(resource, before, after) {
+    const changes = OQBaseActor.#resourceChanges(resource, before, after);
+    return _.isEmpty(changes) ? undefined : this.update(changes);
+  }
+
+  /**
+   * The update data of a resource change. Unchanged pools are not written, so healing or a typed value never
+   * overwrites a pool edited elsewhere meanwhile.
+   */
+  static #resourceChanges(resource, before, after) {
     const changes = {};
     if (after.value !== before.value) changes[`system.attributes.${resource}.value`] = after.value;
     if (!_.isEqual(after.pools, before.pools)) changes[`system.attributes.${resource}.pools`] = after.pools;
-    if (_.isEmpty(changes)) return undefined;
-    return this.update(changes);
+    return changes;
+  }
+
+  /**
+   * A value typed into a token HUD bar input. On the HP bar it agrees with chat and sheet: "-N" is damage, taking
+   * temporary HP first, "+N" heals ordinary HP up to the maximum, and a plain number sets ordinary HP, clamped. Other
+   * attributes keep core behaviour. The core `modifyTokenAttribute` hook still sees, and may veto, the HP update.
+   * @override
+   */
+  async modifyTokenAttribute(attribute, value, isDelta = false, isBar = true) {
+    if (attribute !== 'attributes.hp' || !isBar) return super.modifyTokenAttribute(attribute, value, isDelta, isBar);
+    const amount = Math.trunc(Number(value));
+    if (!Number.isFinite(amount)) return this;
+    const before = this.resourceState('hp');
+    const updates = OQBaseActor.#resourceChanges('hp', before, applyBarInput(before, amount, isDelta).state);
+    if (_.isEmpty(updates)) return this;
+    const allowed = Hooks.call('modifyTokenAttribute', { attribute, value, isDelta, isBar }, updates, this);
+    return allowed !== false ? this.update(updates) : this;
+  }
+
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+    // Token bars redraw when their value changes; a change of pools alone must redraw the temporary HP marker too.
+    if (foundry.utils.hasProperty(changed, 'system.attributes.hp.pools')) {
+      for (const token of this.getDependentTokens({ scenes: canvas.scene })) {
+        if (token.rendered) token.object.renderFlags.set({ refreshBars: true });
+      }
+    }
   }
 }

@@ -176,3 +176,18 @@ export function setOrdinaryPoints(state, value) {
   if (!Number.isInteger(value)) throw new RangeError(`Invalid amount of points: ${value}`);
   return { state: { ...state, value: clampOrdinary(value, state.max) } };
 }
+
+/**
+ * A value typed into a token HUD bar input: a relative decrease spends (temporary points first), a relative increase
+ * restores ordinary points, and an absolute value sets ordinary points, clamped. The same rules as damage, healing and
+ * typing on the sheet.
+ * @param {ResourceState} state
+ * @param {number} value a whole number: the change when `isDelta`, otherwise the new ordinary value
+ * @param {boolean} isDelta
+ * @returns {{state: ResourceState}}
+ */
+export function applyBarInput(state, value, isDelta) {
+  if (!Number.isInteger(value)) throw new RangeError(`Invalid amount of points: ${value}`);
+  if (!isDelta) return setOrdinaryPoints(state, value);
+  return { state: value < 0 ? spendPoints(state, -value).state : restorePoints(state, value).state };
+}

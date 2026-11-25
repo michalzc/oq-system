@@ -52,6 +52,12 @@
         list.</li>
     <li><strong>Remove</strong>: the trash icon removes the pool and only its remaining points.</li>
 </ul>
+<p>On the canvas, a token's Hit Points bar still shows the ordinary Hit Points against the maximum. When the token
+    has temporary Hit Points, a green dot is drawn at the right end of the bar, even when the bar is full. The token
+    HUD shows the temporary total in green inside the Hit Points field, for example <code>7 +3</code>. Typing into
+    that field works like the sheet and chat: <code>-3</code> is 3 points of damage, taking temporary points first;
+    <code>+5</code> heals ordinary Hit Points up to the maximum; a plain number such as <code>4</code> sets the
+    ordinary Hit Points, clamped to the maximum.</p>
 <p>Amounts are whole numbers of 0 or more, with no upper limit; anything else is rejected. A pool at 0 stays listed
     until you remove it. On an unlinked token's sheet the pools belong to that token only; on a linked token they
     belong to the actor.</p>
