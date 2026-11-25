@@ -59,3 +59,22 @@ set to always show for the test. The HUD was bound to each token and its bar1 in
   4/10 +0; linked tokens changed their world actors.
 - After a reload every token kept its HP and pools, the marker showed on the two tokens with temporary HP, and the
   HUD read "7 +3" inside the input (screenshot). No console errors or warnings.
+
+### 2026-11-26 review
+
+Two-axis review (standards, spec) of 9a28a58. Changes made:
+
+- The HUD route now goes through `setOrdinaryHp` / `damageHp` / `healHp`, the actor-level reuse point, instead of
+  writing the computed update itself. It still previews the update with `applyBarInput` so the core
+  `modifyTokenAttribute` hook can see and veto it; a hook that rewrites the update takes over and its update is applied
+  as given. Verified in-world on a linked and an unlinked token: the HUD row again (9/10 A=0; 10/10 A=0; 4/10 A=0), a
+  vetoing hook left 4/10, a rewriting hook set 1/10.
+- The bar refresh on pool changes moved out of the actor into the canvas module (`refreshTemporaryPointBars`, an
+  `updateActor` hook, which also fires for synthetic token actors). Which resources have pools is one list,
+  `TEMPORARY_POINT_RESOURCES` in the resource-points module, used by the token bars and that refresh; ticket 05 adds
+  MP there.
+- One named colour for temporary points over the canvas, `@temporary-points-hud-color`, shared by the HUD "+N" and
+  the canvas marker (the sheet keeps `@distinction-color` on parchment).
+
+Kept: the marker's bar height repeats core's sizing so it lines up with core's bar; the HUD helper stays in the token
+module with the canvas marker.

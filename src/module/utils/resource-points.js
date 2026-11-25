@@ -3,6 +3,9 @@
  * temporary-point pools. Pure, without Foundry calls, so data models, migrations and actors share it.
  */
 
+/** Resources with temporary-point pools, by their key under `system.attributes`. */
+export const TEMPORARY_POINT_RESOURCES = ['hp'];
+
 /** The identity of the pool that recovers points stored above the normal maximum by versions before 0.9. */
 export const RECOVERED_EXCESS_POOL_ID = 'recoveredExcess';
 

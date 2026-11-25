@@ -345,7 +345,10 @@ export class OQBaseActor extends Actor {
   /**
    * A value typed into a token HUD bar input. On the HP bar it agrees with chat and sheet: "-N" is damage, taking
    * temporary HP first, "+N" heals ordinary HP up to the maximum, and a plain number sets ordinary HP, clamped. Other
-   * attributes keep core behaviour. The core `modifyTokenAttribute` hook still sees, and may veto, the HP update.
+   * attributes keep core behaviour.
+   *
+   * The core `modifyTokenAttribute` hook sees the resulting update and may veto it. The change is then made by the HP
+   * methods, like every other HP route, with the same result; a hook that rewrites the update takes over instead.
    * @override
    */
   async modifyTokenAttribute(attribute, value, isDelta = false, isBar = true) {
@@ -355,17 +358,12 @@ export class OQBaseActor extends Actor {
     const before = this.resourceState('hp');
     const updates = OQBaseActor.#resourceChanges('hp', before, applyBarInput(before, amount, isDelta).state);
     if (_.isEmpty(updates)) return this;
-    const allowed = Hooks.call('modifyTokenAttribute', { attribute, value, isDelta, isBar }, updates, this);
-    return allowed !== false ? this.update(updates) : this;
-  }
-
-  _onUpdate(changed, options, userId) {
-    super._onUpdate(changed, options, userId);
-    // Token bars redraw when their value changes; a change of pools alone must redraw the temporary HP marker too.
-    if (foundry.utils.hasProperty(changed, 'system.attributes.hp.pools')) {
-      for (const token of this.getDependentTokens({ scenes: canvas.scene })) {
-        if (token.rendered) token.object.renderFlags.set({ refreshBars: true });
-      }
-    }
+    const preview = foundry.utils.deepClone(updates);
+    if (Hooks.call('modifyTokenAttribute', { attribute, value, isDelta, isBar }, updates, this) === false) return this;
+    if (!_.isEqual(updates, preview)) return this.update(updates);
+    if (!isDelta) await this.setOrdinaryHp(amount);
+    else if (amount < 0) await this.damageHp(-amount);
+    else await this.healHp(amount);
+    return this;
   }
 }
