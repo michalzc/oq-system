@@ -57,3 +57,48 @@
     color: @unimportant-color;
   }
 }
+
+// A value changed by effects: a marker after it, and a tooltip listing the contributions.
+.oq.sheet .actor-sheet .value.effect-changed {
+  align-items: baseline;
+  gap: 0.2em;
+  cursor: help;
+
+  .effect-marker {
+    font-size: var(--font-size-11);
+  }
+}
+
+// The contributions tooltip, rendered in core's tooltip element outside the sheet.
+.oq-effect-contributions {
+  text-align: left;
+
+  h4 {
+    margin: 0 0 0.25em;
+  }
+
+  table {
+    margin: 0;
+    border: 0;
+    background: none;
+  }
+
+  td {
+    padding: 0 0.5em 0 0;
+  }
+
+  .amount {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .source {
+    opacity: 0.8;
+  }
+
+  .hint {
+    margin: 0.25em 0 0;
+    max-width: 20em;
+    font-style: italic;
+  }
+}

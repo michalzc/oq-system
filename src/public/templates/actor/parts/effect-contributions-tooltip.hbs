@@ -1,0 +1,18 @@
+<div class="oq-effect-contributions">
+  <h4>{{ localize label }}: {{ value }}</h4>
+  <table>
+    <tr class="unmodified">
+      <td>{{ localize 'OQ.Effects.WithoutEffects' }}</td>
+      <td class="amount">{{ unmodified }}</td>
+    </tr>
+    {{#each contributions as |contribution|}}
+      <tr>
+        <td>{{ contribution.name }}{{#if contribution.sourceName}} <span class="source">({{ contribution.sourceName }})</span>{{/if}}</td>
+        <td class="amount">{{ contribution.amount }}</td>
+      </tr>
+    {{/each}}
+  </table>
+  {{#if needsReview}}
+    <p class="hint">{{ localize 'OQ.Effects.NeedsReview' }}</p>
+  {{/if}}
+</div>

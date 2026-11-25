@@ -59,16 +59,27 @@ OQ:
     ShortDescription:
       title: Edit short description of
   Effects:
+    AddChange: Add change
     AddEffect: Add effect
+    ChangedByEffects: Changed by effects
+    Changes: Changes
+    DeleteChange: Delete change
     DeleteEffect: Delete effect
     Disable: Disable
     EditEffect: Edit effect
     EditorLabel: OpenQuest effect editor
     Effects: Effects
     Enable: Enable
+    NeedsReview: Combines multiplied and added amounts, or several overrides. Check which of them apply.
     NewEffect: New effect
+    NoChanges: No changes. The effect is a reminder only.
     NoEffects: No effects
     NoRulesText: No rules text.
+    Operation: Operation
+    Operations:
+      add: Add
+      multiply: Multiply by
+      override: Set to
     OtherChanges: Other stored changes not managed by OpenQuest
     OtherChangesHint: Made by a macro or module. They are kept as stored and their behaviour is not guaranteed.
     RulesText: Rules text
@@ -78,6 +89,11 @@ OQ:
     States:
       disabled: Disabled
       enabled: Enabled
+    Target: Target
+    Targets:
+      ap: Armour points
+    Value: Value
+    WithoutEffects: Without effects
   Errors:
     InvalidRoll: Invalid roll definition
   Hints:

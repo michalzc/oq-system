@@ -48,3 +48,16 @@ World settings cannot be written before `ready`.
 A die face is `Math.ceil((1 - u) * faces)` with `u = CONFIG.Dice.randomUniform()` (`client/dice/terms/dice.mjs:365-376`).
 To get face `f` on a d100 in a running world, temporarily set
 `CONFIG.Dice.randomUniform = () => 1 - (f - 0.5) / 100`, roll, and restore the original function.
+
+## Active Effects
+
+- `Actor#applyActiveEffects(phase)` (`client/documents/actor.mjs:212`) asks `ActiveEffect#shouldApplyChange(change,
+  {phase})` per change and skips changes whose `key` is blank. Statuses are collected per active effect outside that
+  check, and `token.`-prefixed changes are split off after it into `actor.tokenActiveEffectChanges`, so overriding
+  `shouldApplyChange` to skip some changes keeps core status and token handling for the rest.
+- A system can replace the change schema of `ActiveEffectTypeDataModel` but must keep `type`, `phase` and `priority`.
+  Field instances cannot be reused across schemas: `SchemaField` throws when a field already has a `parent`
+  (`common/data/fields.mjs:935`) and fields have no `clone`. To extend core's change fields, take them from a
+  throwaway `super.defineSchema()` and clear their `parent` before adopting them.
+- A new optional field without an `initial` (`StringField({required: false, blank: true})`) cleans to `undefined`,
+  which is not serialized, so changes stored without that field are saved back without it.

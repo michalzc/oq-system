@@ -3,11 +3,13 @@ import { AttributesDialog } from '../../application/attributes-dialog.js';
 import { OQBaseActor } from '../../document/actor/base-actor.js';
 import { OQActiveEffect } from '../../document/active-effect.js';
 import { OQSpell } from '../../document/item/spell.js';
+import { formatContribution } from '../../utils/effect-contributions.js';
 import { getInitiativeOptions } from '../../utils/initiative.js';
 import { customSpellGroups } from '../../utils/magic.js';
 import {
   asyncFlattenItemsFromFolder,
   inRangeValue,
+  renderTemplate,
   withAttributeLabels,
   withCharacteristicLabels,
 } from '../../utils/utils.js';
@@ -57,6 +59,7 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
       groupedItems: this.prepareGroupedItems(),
       itemTooltips: await this.prepareItemTooltips(),
       effects: await this.prepareEffects(),
+      effectTooltips: await this.prepareEffectTooltips(),
       ...this.prepareSpentSpells(),
     });
   }
@@ -98,6 +101,32 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
         };
       }),
     );
+  }
+
+  /**
+   * Tooltips listing the effects that changed an attribute and by how much, keyed by attribute. An attribute without
+   * a tooltip is not changed by effects.
+   * @returns {Promise<Object<string, string>>}
+   */
+  async prepareEffectTooltips() {
+    const attributes = withAttributeLabels(this.actor.system.attributes);
+    const tooltips = await Promise.all(
+      ['ap']
+        .filter((key) => attributes[key].effects)
+        .map(async (key) => {
+          const { effects, label } = attributes[key];
+          const html = await renderTemplate('systems/oq/templates/actor/parts/effect-contributions-tooltip.hbs', {
+            ...effects,
+            label,
+            contributions: effects.contributions.map((contribution) => ({
+              ...contribution,
+              amount: formatContribution(contribution),
+            })),
+          });
+          return [key, html];
+        }),
+    );
+    return Object.fromEntries(tooltips);
   }
 
   async prepareItemTooltips() {

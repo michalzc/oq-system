@@ -8,6 +8,43 @@
     border: 1px solid @base-color;
   }
 
+  .oq-changes {
+    ol {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .change-header,
+    .change {
+      display: flex;
+      gap: 0.5em;
+      align-items: center;
+      margin-bottom: 0.25em;
+    }
+
+    .target {
+      flex: 2;
+    }
+
+    .type {
+      flex: 1.5;
+    }
+
+    .value {
+      flex: 1;
+      min-width: 4em;
+    }
+
+    .controls {
+      flex: 0 0 1.5em;
+    }
+
+    .add-change {
+      margin-top: 0.25em;
+    }
+  }
+
   .other-changes {
     ol {
       margin: 0;
