@@ -50,10 +50,15 @@ the data model (`dataModel/`, registered in `init/register-data-models.js`), the
 config maps, `documentTypes` in `src/system.yaml`, and `src/lang/en.yaml` (`TYPES.*`).
 
 **Data preparation order** (`document/actor/base-actor.js`) is deliberate:
-1. `prepareBaseData` — attributes derived from characteristics only.
+1. `prepareBaseData` — reads the actor's active effect changes once (`effectChanges`), then attributes that need only
+   characteristics and those changes (e.g. movement rate).
 2. `prepareEmbeddedDocuments` — items prepared in dependency order (skills before weapons/spells that reference them).
    Items may read only `actor.getDataForItems()` (level-1 attributes plus skills prepared so far).
-3. `prepareDerivedData` — attributes that need prepared items.
+3. `prepareDerivedData` — attributes that need prepared items (e.g. armour points).
+
+OpenQuest effect changes (those with a `target`) are applied only by the pure `utils/effect-contributions.js`, never
+by core key-path application, and never written back to source; `OQBaseActor#effectAttribute` gives an attribute's
+effective value and its tooltip breakdown.
 
 Items compute `system.rollValues` / `system.damageRollValues` in their own `prepareDerivedData`.
 
