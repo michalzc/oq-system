@@ -27,6 +27,8 @@ OQ:
   Chat:
     damageMessage: >-
       {0} has taken {1} points of damage.
+    damageAbsorbed: >-
+      {0} has taken {1} points of damage, {2} of them absorbed by temporary hit points.
     healMessage: >-
       {0} has gained {1} hit points.
     spentMagicPoints: >-

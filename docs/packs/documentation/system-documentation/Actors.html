@@ -28,7 +28,7 @@
         Armour does not stack. Effects add to this; see <em>Effects</em> below.</li>
 </ul>
 <p>The current Hit Points and Magic Points can be typed in, or adjusted by clicking the HP or MP label: left-click
-    adds one, right-click removes one. Characters also track <strong>Fortune Points</strong> and
+    adds one, right-click removes one. A typed value above the maximum is stored as the maximum. Characters also track <strong>Fortune Points</strong> and
     <strong>Growth Points</strong>. The gear icon opens the <strong>Attributes</strong> dialogue, where only the mods
     can be changed.</p>
 
@@ -36,8 +36,12 @@
 <p>Some spells and rulings give a creature Hit Points beyond its maximum, such as <em>Vigour</em> or
     <em>5 extra HP until sunrise</em>. These are <strong>temporary points</strong>, kept apart from the ordinary Hit
     Points: the sheet shows the ordinary value against the maximum, then the temporary total in green, for example
-    <code>6 / 10 +7</code>. Hover over the green number to see it named. Typing a new current value or healing
-    changes only the ordinary Hit Points; it never adds or removes temporary points.</p>
+    <code>6 / 10 +7</code>. Hover over the green number to see it named.</p>
+<p>Damage takes temporary points first: the oldest pool is emptied before the next, and only then are ordinary Hit
+    Points lost. Right-clicking the HP label counts as one point of damage, so it removes a temporary point first.
+    Healing, including left-clicking the HP label, restores ordinary Hit Points only and never refills a pool. Typing
+    a new current value changes only the ordinary Hit Points. See the <em>Chat</em> page for applying damage and
+    healing.</p>
 <p>Each grant is its own <strong>pool</strong>, listed in the order it was granted. The layers icon next to the Hit
     Points opens the <strong>Temporary Hit Points</strong> dialogue, available to anyone who can edit the sheet:</p>
 <ul>

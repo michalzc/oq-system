@@ -7,6 +7,9 @@ import {
   hasPoolList,
   parsePointAmount,
   removePool,
+  restorePoints,
+  setOrdinaryPoints,
+  spendPoints,
 } from '../src/module/utils/resource-points.js';
 
 /** A stored v0.8 actor `system` source: HP normal maximum is round((SIZ + CON) / 2) + HP modifier. */
@@ -195,6 +198,116 @@ describe('resource-points.js', function () {
 
       it('Should leave the list unchanged when the pool is already gone', function () {
         expect(removePool(pools(), 'z')).to.eql(pools());
+      });
+    });
+  });
+
+  describe('spending and restoring', function () {
+    const pool = (id, remaining) => ({ id, label: id.toUpperCase(), remaining });
+    const state = (value, max, ...pools) => ({ value, max, pools });
+
+    describe('#spendPoints()', function () {
+      it('Should drain the oldest pool completely before the next', function () {
+        // HP 6/10, A=4 then B=3; chat damage 5 (ignore armour): HP 6/10, A=0, B=2, 5 absorbed.
+        expect(spendPoints(state(6, 10, pool('a', 4), pool('b', 3)), 5)).to.eql({
+          state: state(6, 10, pool('a', 0), pool('b', 2)),
+          fromPools: 5,
+          fromOrdinary: 0,
+        });
+      });
+
+      it('Should continue into ordinary points once every pool is empty', function () {
+        // HP 6/10 + A=4; damage 7: HP 3/10, A=0.
+        expect(spendPoints(state(6, 10, pool('a', 4)), 7)).to.eql({
+          state: state(3, 10, pool('a', 0)),
+          fromPools: 4,
+          fromOrdinary: 3,
+        });
+      });
+
+      it('Should skip exhausted pools and keep them listed', function () {
+        const result = spendPoints(state(6, 10, pool('a', 0), pool('b', 2), pool('c', 3)), 4);
+        expect(result.state).to.eql(state(6, 10, pool('a', 0), pool('b', 0), pool('c', 1)));
+        expect(result.fromPools).to.be(4);
+      });
+
+      it('Should floor ordinary points at zero and report only the points actually taken', function () {
+        expect(spendPoints(state(3, 10, pool('a', 1)), 10)).to.eql({
+          state: state(0, 10, pool('a', 0)),
+          fromPools: 1,
+          fromOrdinary: 3,
+        });
+        expect(spendPoints(state(0, 10), 2)).to.eql({ state: state(0, 10), fromPools: 0, fromOrdinary: 0 });
+      });
+
+      it('Should take a single point from temporary points first', function () {
+        // HP 10/10 + A=2: right-click on the HP label, or normal damage 3 against AP 2.
+        expect(spendPoints(state(10, 10, pool('a', 2)), 1).state).to.eql(state(10, 10, pool('a', 1)));
+      });
+
+      it('Should spend recovered excess like any pool, and healing should not refill it', function () {
+        // Converted HP 10/10 + recovered 5: damage 3, then heal.
+        const damaged = spendPoints(state(10, 10, pool('recoveredExcess', 5)), 3).state;
+        expect(damaged).to.eql(state(10, 10, pool('recoveredExcess', 2)));
+        expect(restorePoints(damaged, 5)).to.eql({ state: damaged, restored: 0 });
+      });
+
+      it('Should change nothing for zero', function () {
+        const start = state(6, 10, pool('a', 4));
+        expect(spendPoints(start, 0)).to.eql({ state: start, fromPools: 0, fromOrdinary: 0 });
+      });
+
+      it('Should reject negative or fractional amounts', function () {
+        for (const amount of [-1, 1.5, NaN]) expect(() => spendPoints(state(6, 10), amount)).to.throwError(RangeError);
+      });
+
+      it('Should not change the given state', function () {
+        const start = state(6, 10, pool('a', 4));
+        spendPoints(start, 7);
+        expect(start).to.eql(state(6, 10, pool('a', 4)));
+      });
+    });
+
+    describe('#restorePoints()', function () {
+      it('Should restore ordinary points only, up to the normal maximum', function () {
+        // HP 6/10, A=1, B=2; heal 4: HP 10/10, A=1, B=2.
+        expect(restorePoints(state(6, 10, pool('a', 1), pool('b', 2)), 4)).to.eql({
+          state: state(10, 10, pool('a', 1), pool('b', 2)),
+          restored: 4,
+        });
+        expect(restorePoints(state(6, 10), 9)).to.eql({ state: state(10, 10), restored: 4 });
+      });
+
+      it('Should restore nothing at full ordinary points and leave pools intact', function () {
+        expect(restorePoints(state(10, 10, pool('a', 2)), 3)).to.eql({
+          state: state(10, 10, pool('a', 2)),
+          restored: 0,
+        });
+      });
+
+      it('Should restore nothing with a zero or negative normal maximum', function () {
+        expect(restorePoints(state(0, 0, pool('a', 3)), 2)).to.eql({ state: state(0, 0, pool('a', 3)), restored: 0 });
+        expect(restorePoints(state(0, -2), 2)).to.eql({ state: state(0, -2), restored: 0 });
+      });
+
+      it('Should reject negative or fractional amounts', function () {
+        for (const amount of [-1, 0.5]) expect(() => restorePoints(state(6, 10), amount)).to.throwError(RangeError);
+      });
+    });
+
+    describe('#setOrdinaryPoints()', function () {
+      it('Should set ordinary points clamped to zero and the normal maximum, leaving pools alone', function () {
+        const start = state(6, 10, pool('a', 2));
+        expect(setOrdinaryPoints(start, 4)).to.eql({ state: state(4, 10, pool('a', 2)) });
+        expect(setOrdinaryPoints(start, 15)).to.eql({ state: state(10, 10, pool('a', 2)) });
+        expect(setOrdinaryPoints(start, -3)).to.eql({ state: state(0, 10, pool('a', 2)) });
+        expect(setOrdinaryPoints(state(0, -2), 5)).to.eql({ state: state(0, -2) });
+      });
+
+      it('Should reject a value that is not a whole number', function () {
+        for (const value of [NaN, 1.5, Infinity]) {
+          expect(() => setOrdinaryPoints(state(6, 10), value)).to.throwError(RangeError);
+        }
       });
     });
   });

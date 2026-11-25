@@ -120,3 +120,59 @@ export function correctPool(pools, id, remaining) {
  * @returns {object[]} the new pool list
  */
 export const removePool = (pools, id) => pools.filter((pool) => pool.id !== id);
+
+/**
+ * @typedef {object} ResourceState A resource's points: ordinary current, normal maximum and pools in spending order.
+ * @property {number} value ordinary current points, within 0…maximum
+ * @property {number} max normal maximum
+ * @property {object[]} pools
+ */
+
+/** Ordinary points clamped to zero and the normal maximum (itself floored at zero). */
+const clampOrdinary = (value, max) => Math.min(Math.max(0, max), Math.max(0, value));
+
+/**
+ * Spends points, for damage or MP spending: temporary points first, the oldest pool emptied before the next and
+ * exhausted pools skipped, then ordinary points, floored at zero.
+ * @param {ResourceState} state
+ * @param {number} amount a nonnegative whole number
+ * @returns {{state: ResourceState, fromPools: number, fromOrdinary: number}} the points actually taken from each
+ */
+export function spendPoints(state, amount) {
+  assertPointAmount(amount);
+  let left = amount;
+  const pools = state.pools.map((pool) => {
+    const taken = Math.min(pool.remaining, left);
+    left -= taken;
+    return taken ? { ...pool, remaining: pool.remaining - taken } : pool;
+  });
+  const fromOrdinary = Math.min(state.value, left);
+  return {
+    state: { ...state, value: state.value - fromOrdinary, pools },
+    fromPools: amount - left,
+    fromOrdinary,
+  };
+}
+
+/**
+ * Restores ordinary points, for healing or MP gain, up to the normal maximum. Pools are never refilled.
+ * @param {ResourceState} state
+ * @param {number} amount a nonnegative whole number
+ * @returns {{state: ResourceState, restored: number}} the ordinary points actually restored
+ */
+export function restorePoints(state, amount) {
+  assertPointAmount(amount);
+  const value = Math.max(state.value, clampOrdinary(state.value + amount, state.max));
+  return { state: { ...state, value }, restored: value - state.value };
+}
+
+/**
+ * Sets ordinary points, as typed on the sheet, clamped to zero and the normal maximum. Pools are untouched.
+ * @param {ResourceState} state
+ * @param {number} value a whole number
+ * @returns {{state: ResourceState}}
+ */
+export function setOrdinaryPoints(state, value) {
+  if (!Number.isInteger(value)) throw new RangeError(`Invalid amount of points: ${value}`);
+  return { state: { ...state, value: clampOrdinary(value, state.max) } };
+}

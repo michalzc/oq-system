@@ -108,7 +108,7 @@ pages:
                 Armour does not stack. Effects add to this; see <em>Effects</em> below.</li>
         </ul>
         <p>The current Hit Points and Magic Points can be typed in, or adjusted by clicking the HP or MP label: left-click
-            adds one, right-click removes one. Characters also track <strong>Fortune Points</strong> and
+            adds one, right-click removes one. A typed value above the maximum is stored as the maximum. Characters also track <strong>Fortune Points</strong> and
             <strong>Growth Points</strong>. The gear icon opens the <strong>Attributes</strong> dialogue, where only the mods
             can be changed.</p>
 
@@ -116,8 +116,12 @@ pages:
         <p>Some spells and rulings give a creature Hit Points beyond its maximum, such as <em>Vigour</em> or
             <em>5 extra HP until sunrise</em>. These are <strong>temporary points</strong>, kept apart from the ordinary Hit
             Points: the sheet shows the ordinary value against the maximum, then the temporary total in green, for example
-            <code>6 / 10 +7</code>. Hover over the green number to see it named. Typing a new current value or healing
-            changes only the ordinary Hit Points; it never adds or removes temporary points.</p>
+            <code>6 / 10 +7</code>. Hover over the green number to see it named.</p>
+        <p>Damage takes temporary points first: the oldest pool is emptied before the next, and only then are ordinary Hit
+            Points lost. Right-clicking the HP label counts as one point of damage, so it removes a temporary point first.
+            Healing, including left-clicking the HP label, restores ordinary Hit Points only and never refills a pool. Typing
+            a new current value changes only the ordinary Hit Points. See the <em>Chat</em> page for applying damage and
+            healing.</p>
         <p>Each grant is its own <strong>pool</strong>, listed in the order it was granted. The layers icon next to the Hit
             Points opens the <strong>Temporary Hit Points</strong> dialogue, available to anyone who can edit the sheet:</p>
         <ul>
@@ -570,12 +574,23 @@ pages:
         <p>The buttons on <code>/hp</code>, <code>/mp</code> and damage roll cards apply the rolled amount to every
             <strong>selected token</strong>, not to targeted ones.</p>
         <ul>
-            <li>Damage subtracts the token actor's Armour Worn first; the ignore armour variant does not. Hit Points never
-                drop below 0.</li>
-            <li>Healing and magic points never go above the maximum, and magic points never below 0.</li>
+            <li>Damage subtracts the token actor's Armour Worn first; the ignore armour variant does not. What armour lets
+                through takes <strong>temporary Hit Points</strong> first (see the <em>Actors</em> page), emptying the oldest
+                pool before the next, then the ordinary Hit Points. Hit Points never drop below 0.</li>
+            <li>Healing restores ordinary Hit Points only, up to the maximum. It never refills temporary Hit Points.</li>
+            <li>Magic points never go above the maximum or below 0.</li>
         </ul>
-        <p>Each change is reported in chat, for example "Orc has taken 5 points of damage.", or "Orc soaked all damage."
-            when armour stopped it completely.</p>
+        <p>Each change is reported in chat with the points actually changed:</p>
+        <ul>
+            <li>"Orc has taken 5 points of damage." when only ordinary Hit Points were lost.</li>
+            <li>"Orc has taken 7 points of damage, 4 of them absorbed by temporary hit points." when temporary Hit Points
+                took part of it: here the Orc lost 4 temporary and 3 ordinary Hit Points.</li>
+            <li>"Orc soaked all damage." when armour stopped it completely; temporary Hit Points are then untouched.</li>
+            <li>"Orc has gained 3 hit points." for healing, counting only the points restored: an Orc at full Hit Points
+                gains 0.</li>
+        </ul>
+        <p>For example, an Orc with 6 of 10 Hit Points and two temporary pools, 4 then 3, takes 5 damage that ignores armour:
+            the first pool is emptied and the second drops to 2, while its ordinary Hit Points stay at 6.</p>
       format: 1
     _key: '!journal.pages!0gYOY3NnDcT8Fzpj.FYuMiDVbIhKCSKno'
   - _id: jSQ4r85hI4fk38lA

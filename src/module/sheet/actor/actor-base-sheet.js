@@ -178,6 +178,11 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
       if (this.isEditable) return this.onItemUpdateQuantity(event);
       return;
     }
+    // Ordinary HP has no name either: typing sets it through the actor, clamped, without touching temporary HP.
+    if (event.target.matches('.ordinary-points')) {
+      if (this.isEditable) return this.onSetOrdinaryPoints(event);
+      return;
+    }
     return super._onChangeForm(formConfig, event);
   }
 
@@ -372,12 +377,20 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
     }
   }
 
+  async onSetOrdinaryPoints(event) {
+    const value = Number(event.target.value);
+    if (event.target.value.trim() === '' || !Number.isFinite(value)) return this.render();
+    await this.actor.setOrdinaryHp(Math.trunc(value));
+  }
+
   static async onUpdateResource(event, target) {
     event.preventDefault();
     if (!this.isEditable) return;
 
     const delta = event.button === 2 ? -1 : 1;
     const resourceId = target.dataset.resourceId;
+    // HP: +1 heals ordinary HP only, -1 is damage and takes temporary HP first.
+    if (resourceId === 'hp') return delta > 0 ? this.actor.healHp(1) : this.actor.damageHp(1);
     const { value, max } = this.actor.system.attributes[resourceId];
     const newValue = inRangeValue(0, max, value + delta);
 

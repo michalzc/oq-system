@@ -13,9 +13,20 @@
 <p>The buttons on <code>/hp</code>, <code>/mp</code> and damage roll cards apply the rolled amount to every
     <strong>selected token</strong>, not to targeted ones.</p>
 <ul>
-    <li>Damage subtracts the token actor's Armour Worn first; the ignore armour variant does not. Hit Points never
-        drop below 0.</li>
-    <li>Healing and magic points never go above the maximum, and magic points never below 0.</li>
+    <li>Damage subtracts the token actor's Armour Worn first; the ignore armour variant does not. What armour lets
+        through takes <strong>temporary Hit Points</strong> first (see the <em>Actors</em> page), emptying the oldest
+        pool before the next, then the ordinary Hit Points. Hit Points never drop below 0.</li>
+    <li>Healing restores ordinary Hit Points only, up to the maximum. It never refills temporary Hit Points.</li>
+    <li>Magic points never go above the maximum or below 0.</li>
 </ul>
-<p>Each change is reported in chat, for example "Orc has taken 5 points of damage.", or "Orc soaked all damage."
-    when armour stopped it completely.</p>
+<p>Each change is reported in chat with the points actually changed:</p>
+<ul>
+    <li>"Orc has taken 5 points of damage." when only ordinary Hit Points were lost.</li>
+    <li>"Orc has taken 7 points of damage, 4 of them absorbed by temporary hit points." when temporary Hit Points
+        took part of it: here the Orc lost 4 temporary and 3 ordinary Hit Points.</li>
+    <li>"Orc soaked all damage." when armour stopped it completely; temporary Hit Points are then untouched.</li>
+    <li>"Orc has gained 3 hit points." for healing, counting only the points restored: an Orc at full Hit Points
+        gains 0.</li>
+</ul>
+<p>For example, an Orc with 6 of 10 Hit Points and two temporary pools, 4 then 3, takes 5 damage that ignores armour:
+    the first pool is emptied and the second drops to 2, while its ordinary Hit Points stay at 6.</p>

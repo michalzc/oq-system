@@ -9,11 +9,11 @@ function findTargets() {
 
 const nameFromActor = (actor) => actor?.parent?.name ?? actor.name;
 
-async function sendMessage(messageKey, actor, delta) {
+async function sendMessage(messageKey, actor, ...values) {
   await createChatMessage({
     speaker: ChatMessage.getSpeaker(),
     style: CONST.CHAT_MESSAGE_STYLES.OOC,
-    content: formatString(game.i18n.localize(messageKey), nameFromActor(actor), delta),
+    content: formatString(game.i18n.localize(messageKey), nameFromActor(actor), ...values),
   });
 }
 
@@ -25,17 +25,14 @@ async function applyDamage(event) {
   const value = parseInt(dataSet.damageValue);
   const type = dataSet.damageApplyType;
   const updates = findTargets().map(async (actor) => {
-    const { hp, ap } = actor.system.attributes;
-    const hpDelta = Math.max(0, type === 'normal' ? value - (ap.value ?? 0) : value);
-    const updatedHpValue = Math.max(0, hp.value - hpDelta);
-    if (hpDelta > 0) {
-      await sendMessage('OQ.Chat.damageMessage', actor, Math.min(hp.value, hpDelta));
-      return await actor.update({
-        'system.attributes.hp.value': updatedHpValue,
-      });
-    } else {
-      return sendMessage('OQ.Chat.damageSoaked', actor);
-    }
+    // Armour soaks normal damage before temporary HP is touched.
+    const armour = type === 'normal' ? actor.system.attributes.ap.value ?? 0 : 0;
+    const damage = Math.max(0, (Number.isInteger(value) ? value : 0) - armour);
+    if (damage === 0) return sendMessage('OQ.Chat.damageSoaked', actor);
+    const { fromPools, fromOrdinary } = await actor.damageHp(damage);
+    const taken = fromPools + fromOrdinary;
+    if (fromPools) return sendMessage('OQ.Chat.damageAbsorbed', actor, taken, fromPools);
+    return sendMessage('OQ.Chat.damageMessage', actor, taken);
   });
   await Promise.all(updates);
 }
@@ -48,12 +45,8 @@ async function applyHealing(event) {
   const healingValue = parseInt(dataSet.healingValue);
 
   const updates = findTargets().map(async (actor) => {
-    const { value, max } = actor.system.attributes.hp;
-    const updatedHpValue = Math.min(max, value + healingValue);
-    await sendMessage('OQ.Chat.healMessage', actor, Math.min(max - value, healingValue));
-    return await actor.update({
-      'system.attributes.hp.value': updatedHpValue,
-    });
+    const { restored } = await actor.healHp(Number.isInteger(healingValue) ? Math.max(0, healingValue) : 0);
+    return sendMessage('OQ.Chat.healMessage', actor, restored);
   });
   await Promise.all(updates);
 }

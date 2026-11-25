@@ -11,6 +11,9 @@ import {
   hpNormalMaximum,
   RECOVERED_EXCESS_LABEL_KEY,
   removePool,
+  restorePoints,
+  setOrdinaryPoints,
+  spendPoints,
 } from '../../utils/resource-points.js';
 
 /**
@@ -271,5 +274,55 @@ export class OQBaseActor extends Actor {
 
   #updatePools(resource, pools) {
     return this.update({ [`system.attributes.${resource}.pools`]: pools });
+  }
+
+  /**
+   * A resource's points as the resource-points module works with them: the prepared ordinary current (already
+   * within the normal maximum), the normal maximum and the stored pools.
+   * @param {string} resource `hp`
+   * @returns {import('../../utils/resource-points.js').ResourceState}
+   */
+  resourceState(resource) {
+    const { value, max } = this.system.attributes[resource];
+    return { value: Math.max(0, value), max, pools: this.temporaryPools(resource) };
+  }
+
+  /**
+   * Damage after armour: temporary HP first, the oldest pool first, then ordinary HP, floored at zero.
+   * @param {number} amount a nonnegative whole number
+   * @returns {Promise<{fromPools: number, fromOrdinary: number}>} the HP actually taken from each
+   */
+  async damageHp(amount) {
+    const { state, fromPools, fromOrdinary } = spendPoints(this.resourceState('hp'), amount);
+    await this.#updateResource('hp', state);
+    return { fromPools, fromOrdinary };
+  }
+
+  /**
+   * Healing: restores ordinary HP up to the normal maximum and never refills temporary HP.
+   * @param {number} amount a nonnegative whole number
+   * @returns {Promise<{restored: number}>} the ordinary HP actually restored
+   */
+  async healHp(amount) {
+    const { state, restored } = restorePoints(this.resourceState('hp'), amount);
+    await this.#updateResource('hp', state);
+    return { restored };
+  }
+
+  /**
+   * Sets ordinary HP, as typed on the sheet, clamped to zero and the normal maximum. Temporary HP is untouched.
+   * @param {number} value a whole number
+   * @returns {Promise<OQBaseActor|undefined>}
+   */
+  async setOrdinaryHp(value) {
+    return this.#updateResource('hp', setOrdinaryPoints(this.resourceState('hp'), value).state);
+  }
+
+  /** Stores a resource's ordinary current and pools together, in one update. */
+  #updateResource(resource, { value, pools }) {
+    return this.update({
+      [`system.attributes.${resource}.value`]: value,
+      [`system.attributes.${resource}.pools`]: pools,
+    });
   }
 }
