@@ -382,10 +382,16 @@ describe('effect-contributions.js', function () {
       );
     });
 
-    it('keeps a change that only sets a minimum', function () {
+    it('never raises movement already below the minimum: Slow 1 on 0m leaves 0m', function () {
+      const changes = activeEffectChanges([effect('slow', 'Slow 1', [mr('add', -2, 1)])]);
+
+      assert.strictEqual(attributeContribution('mr', 0, changes).value, 0);
+    });
+
+    it('leaves out a change that only sets a minimum, since it cannot change anything', function () {
       const changes = activeEffectChanges([effect('floor', 'Sure-footed', [mr('add', 0, 5)])]);
 
-      assert.strictEqual(attributeContribution('mr', 3, changes).value, 5);
+      assert.deepStrictEqual(changes, []);
     });
 
     it('ignores a minimum stored on a target without minimums', function () {

@@ -11,9 +11,9 @@
  * editor offers only these.
  */
 export const EFFECT_TARGETS = Object.freeze({
-  ap: { label: 'OQ.Effects.Targets.ap', types: ['add', 'multiply', 'override'], roundDown: true },
+  ap: { label: 'OQ.Effects.Targets.ap', types: ['add', 'multiply', 'override'], roundsDown: true },
   // The SRD states no rounding for movement, so a multiplied rate keeps its fraction.
-  mr: { label: 'OQ.Effects.Targets.mr', types: ['add', 'multiply', 'override'], minimum: true },
+  mr: { label: 'OQ.Effects.Targets.mr', types: ['add', 'multiply', 'override'], allowsMinimum: true },
 });
 
 /**
@@ -92,8 +92,8 @@ export function effectChangesToSave(storedChanges, edited) {
 }
 
 /** A change that leaves its target as it is, such as a row just added in the editor. */
-function changesNothing(type, value, minimum) {
-  return minimum === undefined && ((type === 'add' && value === 0) || (type === 'multiply' && value === 1));
+function changesNothing(type, value) {
+  return (type === 'add' && value === 0) || (type === 'multiply' && value === 1);
 }
 
 /** The given fields of a change, plus the minimum it sets, if any. */
@@ -105,7 +105,7 @@ function withMinimum(change, fields) {
 /** The minimum a change sets, if its target allows one. */
 function changeMinimum(change) {
   const minimum = change.minimum === null || change.minimum === '' ? NaN : Number(change.minimum);
-  return EFFECT_TARGETS[change.target].minimum && Number.isFinite(minimum) ? minimum : undefined;
+  return EFFECT_TARGETS[change.target].allowsMinimum && Number.isFinite(minimum) ? minimum : undefined;
 }
 
 /**
@@ -122,7 +122,7 @@ export function activeEffectChanges(effects) {
     for (const change of effect.system?.changes ?? []) {
       if (!isManagedChange(change)) continue;
       const value = Number(change.value);
-      if (!Number.isFinite(value) || changesNothing(change.type, value, changeMinimum(change))) continue;
+      if (!Number.isFinite(value) || changesNothing(change.type, value)) continue;
       changes.push(
         withMinimum(change, {
           effectId: effect.id ?? effect._id,
@@ -142,7 +142,9 @@ export function activeEffectChanges(effects) {
 /**
  * The effective value of one attribute and the effects that contributed to it. Multipliers apply to the unmodified
  * value (rounded down where the target rounds), then additions, then an override replaces the result; of several
- * overrides the highest wins. Last, the result is raised to the highest minimum any contributing change sets.
+ * overrides the highest wins. Last, the highest minimum any contributing change sets is a floor the effects cannot
+ * push the value below; it never raises a value that is already lower without effects (Slow: "may not go below one
+ * metre through use of this spell").
  * `needsReview` marks results a human should adjudicate: multiplied and added amounts together, or several overrides.
  * @param {string} target a key of `EFFECT_TARGETS`
  * @param {number} unmodified the value without effects
@@ -169,14 +171,14 @@ export function attributeContribution(target, unmodified, changes) {
   const factor = multipliers.reduce((product, { value }) => product * value, 1);
   const multiplied = withoutNoise(unmodified * factor);
   const calculated = withoutNoise(
-    (EFFECT_TARGETS[target].roundDown ? Math.floor(multiplied) : multiplied) + sum(additions),
+    (EFFECT_TARGETS[target].roundsDown ? Math.floor(multiplied) : multiplied) + sum(additions),
   );
   // Several overrides are a conflict for a human to adjudicate; the highest is used so the result is deterministic.
   const replaced = overrides.length ? Math.max(...overrides.map(({ value }) => value)) : calculated;
   const minimums = contributions.filter(({ minimum }) => minimum !== undefined).map(({ minimum }) => minimum);
   const minimum = minimums.length ? Math.max(...minimums) : undefined;
   return {
-    value: minimum === undefined ? replaced : Math.max(replaced, minimum),
+    value: minimum === undefined ? replaced : Math.max(replaced, Math.min(minimum, unmodified)),
     unmodified,
     needsReview: (multipliers.length > 0 && additions.length > 0) || overrides.length > 1,
     ...(minimum === undefined ? {} : { minimum }),

@@ -49,7 +49,7 @@ export class OQActiveEffectConfig extends foundry.applications.sheets.ActiveEffe
         offersChanges: this.offersChanges,
         changes: entry.changes.map((change) => ({
           ...change,
-          allowsMinimum: EFFECT_TARGETS[change.target].minimum ?? false,
+          allowsMinimum: EFFECT_TARGETS[change.target].allowsMinimum ?? false,
           targetOptions,
           typeOptions: Object.fromEntries(
             EFFECT_TARGETS[change.target].types.map((type) => [type, `OQ.Effects.Operations.${type}`]),

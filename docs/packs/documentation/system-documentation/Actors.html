@@ -127,7 +127,8 @@
 </ul>
 <p>When several changes affect the same value, multipliers apply first to the value without effects, then additions,
     then a <em>Set to</em> replaces the result. If several <em>Set to</em> changes apply, the highest is used. Last,
-    the value is raised to the highest minimum of the changes that apply.</p>
+    effects cannot take the value below the highest minimum of the changes that apply. A minimum never raises a value
+    that is already lower without effects: Slow on a creature with Movement Rate 0 leaves it at 0.</p>
 <p>An effect with no changes is a <strong>reminder</strong>: it only shows its rules text, for example
     <em>Owes the river spirit a favour</em>.</p>
 <p>Effects created by macros or modules before this version may contain changes the editor does not manage. They
@@ -137,8 +138,9 @@
 <h3>Values changed by effects</h3>
 <p>A value changed by effects shows a wand icon next to it. Hover over the value to see the value without effects and
     each contributing effect, with its source and amount, such as <code>+3</code>, <code>×0.5</code>,
-    <code>= 8</code> or <code>−6 (minimum 1)</code>. When a value combines multiplied and added amounts, or several <em>Set to</em> changes, the
-    tooltip asks you to check which of them apply: the system does not decide whether two spells may stack.</p>
+    <code>= 8</code> or <code>−6 (minimum 1)</code>. When a value combines multiplied and added amounts, or several
+    <em>Set to</em> changes, the tooltip asks you to check which of them apply: the system does not decide whether two
+    spells may stack.</p>
 <p>Effect armour points are added on top of the Armour Worn calculation above: the best Worn or Natural armour plus
     the mod.</p>
 
