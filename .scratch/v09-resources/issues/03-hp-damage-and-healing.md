@@ -73,3 +73,20 @@ token (`QA dmg *`); `/hp N` cards posted through the chat command and their butt
 - No console errors or warnings.
 - Right-click actions in ApplicationV2 fire on `auxclick` (`client/applications/api/application.mjs:1892`);
   a synthetic `contextmenu` does nothing, which matters for scripted QA.
+
+### 2026-11-25 review
+
+Two-axis review (standards, spec) of c9fc4d2. Changes made:
+
+- Actor writes only what changed: healing and typed values no longer resend the pool list ("pools untouched"), so
+  they cannot overwrite a pool edited elsewhere meanwhile; damage absorbed entirely by pools writes only the pools;
+  nothing changed → no update. Verified in-world with a `preUpdateActor`/`preUpdateToken` hook on a linked and an
+  unlinked token: heal → `hp.value`; damage 1 → `hp.pools`; damage into ordinary → both; typing 15 at 10/10 → no
+  write, field shows 10; typing 4 → `hp.value`.
+- Sheet: the HP input class and handler are HP-specific (`ordinary-hp`, `onSetOrdinaryHp`, next to the other
+  change handlers); a typed value that clamps to the stored one re-renders the field.
+- Chat: one `buttonAmount` guard for damage and healing values.
+- Actors page: the clamp sentence names Hit Points only (MP is still stored as typed until ticket 06), rewrapped.
+
+Kept: `clampOrdinary` stays local so the pure module imports nothing; armour stays computed in the chat handler as
+before; the message reports the HP actually taken (as before), not the damage left after armour when HP floors at 0.

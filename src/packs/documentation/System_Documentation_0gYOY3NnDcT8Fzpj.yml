@@ -108,8 +108,8 @@ pages:
                 Armour does not stack. Effects add to this; see <em>Effects</em> below.</li>
         </ul>
         <p>The current Hit Points and Magic Points can be typed in, or adjusted by clicking the HP or MP label: left-click
-            adds one, right-click removes one. A typed value above the maximum is stored as the maximum. Characters also track <strong>Fortune Points</strong> and
-            <strong>Growth Points</strong>. The gear icon opens the <strong>Attributes</strong> dialogue, where only the mods
+            adds one, right-click removes one. Typed Hit Points above the maximum are stored as the maximum. Characters also
+            track <strong>Fortune Points</strong> and <strong>Growth Points</strong>. The gear icon opens the <strong>Attributes</strong> dialogue, where only the mods
             can be changed.</p>
 
         <h3>Temporary Hit Points</h3>

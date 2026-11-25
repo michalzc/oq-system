@@ -7,6 +7,9 @@ function findTargets() {
   return _.uniq(targetTokens.map((token) => token.actor));
 }
 
+/** A button's amount: a whole number of 0 or more, otherwise 0. */
+const buttonAmount = (value) => (Number.isInteger(value) ? Math.max(0, value) : 0);
+
 const nameFromActor = (actor) => actor?.parent?.name ?? actor.name;
 
 async function sendMessage(messageKey, actor, ...values) {
@@ -27,7 +30,7 @@ async function applyDamage(event) {
   const updates = findTargets().map(async (actor) => {
     // Armour soaks normal damage before temporary HP is touched.
     const armour = type === 'normal' ? actor.system.attributes.ap.value ?? 0 : 0;
-    const damage = Math.max(0, (Number.isInteger(value) ? value : 0) - armour);
+    const damage = Math.max(0, buttonAmount(value) - armour);
     if (damage === 0) return sendMessage('OQ.Chat.damageSoaked', actor);
     const { fromPools, fromOrdinary } = await actor.damageHp(damage);
     const taken = fromPools + fromOrdinary;
@@ -45,7 +48,7 @@ async function applyHealing(event) {
   const healingValue = parseInt(dataSet.healingValue);
 
   const updates = findTargets().map(async (actor) => {
-    const { restored } = await actor.healHp(Number.isInteger(healingValue) ? Math.max(0, healingValue) : 0);
+    const { restored } = await actor.healHp(buttonAmount(healingValue));
     return sendMessage('OQ.Chat.healMessage', actor, restored);
   });
   await Promise.all(updates);

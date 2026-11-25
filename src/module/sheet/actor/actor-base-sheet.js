@@ -179,8 +179,8 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
       return;
     }
     // Ordinary HP has no name either: typing sets it through the actor, clamped, without touching temporary HP.
-    if (event.target.matches('.ordinary-points')) {
-      if (this.isEditable) return this.onSetOrdinaryPoints(event);
+    if (event.target.matches('.ordinary-hp')) {
+      if (this.isEditable) return this.onSetOrdinaryHp(event);
       return;
     }
     return super._onChangeForm(formConfig, event);
@@ -218,6 +218,13 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
       },
     };
     await this.actor.createEmbeddedDocuments('Item', [itemData], { renderSheet: true });
+  }
+
+  async onSetOrdinaryHp(event) {
+    const typed = Number(event.target.value);
+    if (event.target.value.trim() !== '' && Number.isFinite(typed)) await this.actor.setOrdinaryHp(Math.trunc(typed));
+    // A value clamped to the stored one changes nothing, so nothing re-renders the field: show the stored value.
+    if (Number(event.target.value) !== this.actor.system.attributes.hp.value) this.render();
   }
 
   async onItemUpdateQuantity(event) {
@@ -375,12 +382,6 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
     if (item) {
       await item.sendItemToChat();
     }
-  }
-
-  async onSetOrdinaryPoints(event) {
-    const value = Number(event.target.value);
-    if (event.target.value.trim() === '' || !Number.isFinite(value)) return this.render();
-    await this.actor.setOrdinaryHp(Math.trunc(value));
   }
 
   static async onUpdateResource(event, target) {

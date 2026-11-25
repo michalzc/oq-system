@@ -293,8 +293,9 @@ export class OQBaseActor extends Actor {
    * @returns {Promise<{fromPools: number, fromOrdinary: number}>} the HP actually taken from each
    */
   async damageHp(amount) {
-    const { state, fromPools, fromOrdinary } = spendPoints(this.resourceState('hp'), amount);
-    await this.#updateResource('hp', state);
+    const before = this.resourceState('hp');
+    const { state, fromPools, fromOrdinary } = spendPoints(before, amount);
+    await this.#updateResource('hp', before, state);
     return { fromPools, fromOrdinary };
   }
 
@@ -304,8 +305,9 @@ export class OQBaseActor extends Actor {
    * @returns {Promise<{restored: number}>} the ordinary HP actually restored
    */
   async healHp(amount) {
-    const { state, restored } = restorePoints(this.resourceState('hp'), amount);
-    await this.#updateResource('hp', state);
+    const before = this.resourceState('hp');
+    const { state, restored } = restorePoints(before, amount);
+    await this.#updateResource('hp', before, state);
     return { restored };
   }
 
@@ -315,14 +317,20 @@ export class OQBaseActor extends Actor {
    * @returns {Promise<OQBaseActor|undefined>}
    */
   async setOrdinaryHp(value) {
-    return this.#updateResource('hp', setOrdinaryPoints(this.resourceState('hp'), value).state);
+    const before = this.resourceState('hp');
+    return this.#updateResource('hp', before, setOrdinaryPoints(before, value).state);
   }
 
-  /** Stores a resource's ordinary current and pools together, in one update. */
-  #updateResource(resource, { value, pools }) {
-    return this.update({
-      [`system.attributes.${resource}.value`]: value,
-      [`system.attributes.${resource}.pools`]: pools,
-    });
+  /**
+   * Stores what changed in a resource's ordinary current and pools, in one update. Unchanged pools are not written,
+   * so healing or a typed value never overwrites a pool edited elsewhere meanwhile.
+   * @returns {Promise<OQBaseActor|undefined>} undefined when nothing changed
+   */
+  async #updateResource(resource, before, after) {
+    const changes = {};
+    if (after.value !== before.value) changes[`system.attributes.${resource}.value`] = after.value;
+    if (!_.isEqual(after.pools, before.pools)) changes[`system.attributes.${resource}.pools`] = after.pools;
+    if (_.isEmpty(changes)) return undefined;
+    return this.update(changes);
   }
 }
