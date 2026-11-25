@@ -5,9 +5,12 @@ import { getDeclaration } from '../../utils/initiative.js';
 import {
   availableTemporaryPoints,
   convertLegacyHp,
+  correctPool,
+  grantPool,
   hasPoolList,
   hpNormalMaximum,
   RECOVERED_EXCESS_LABEL_KEY,
+  removePool,
 } from '../../utils/resource-points.js';
 
 /**
@@ -214,5 +217,58 @@ export class OQBaseActor extends Actor {
   calculateInitiative() {
     const declaration = getDeclaration(this);
     return { value: declaration.total, name: declaration.name || undefined };
+  }
+
+  /**
+   * The stored temporary-point pools of a resource, in spending order.
+   * @param {string} resource `hp`
+   * @returns {object[]}
+   */
+  temporaryPools(resource) {
+    const pools = this._source.system.attributes[resource]?.pools;
+    if (!hasPoolList({ pools })) throw new Error(`${resource} has no temporary points`);
+    return pools;
+  }
+
+  /**
+   * Grants temporary points as a new pool, spent after every existing one. On an unlinked token's actor the pool
+   * belongs to that token only.
+   * @param {string} resource `hp`
+   * @param {number} amount a nonnegative whole number, without an upper cap
+   * @param {string} [label] shown in the pool editor; a blank label becomes "Manual"
+   * @returns {Promise<OQBaseActor|undefined>}
+   */
+  async grantTemporaryPoints(resource, amount, label) {
+    const grant = {
+      id: foundry.utils.randomID(),
+      label: label?.trim() || game.i18n.localize('OQ.Resources.Manual'),
+      amount,
+    };
+    return this.#updatePools(resource, grantPool(this.temporaryPools(resource), grant));
+  }
+
+  /**
+   * Corrects the remaining amount of a pool without moving it in the spending order.
+   * @param {string} resource `hp`
+   * @param {string} poolId
+   * @param {number} remaining a nonnegative whole number
+   * @returns {Promise<OQBaseActor|undefined>}
+   */
+  async correctTemporaryPool(resource, poolId, remaining) {
+    return this.#updatePools(resource, correctPool(this.temporaryPools(resource), poolId, remaining));
+  }
+
+  /**
+   * Removes a pool, discarding only its remaining points.
+   * @param {string} resource `hp`
+   * @param {string} poolId
+   * @returns {Promise<OQBaseActor|undefined>}
+   */
+  async removeTemporaryPool(resource, poolId) {
+    return this.#updatePools(resource, removePool(this.temporaryPools(resource), poolId));
+  }
+
+  #updatePools(resource, pools) {
+    return this.update({ [`system.attributes.${resource}.pools`]: pools });
   }
 }

@@ -32,6 +32,30 @@
     <strong>Growth Points</strong>. The gear icon opens the <strong>Attributes</strong> dialogue, where only the mods
     can be changed.</p>
 
+<h3>Temporary Hit Points</h3>
+<p>Some spells and rulings give a creature Hit Points beyond its maximum, such as <em>Vigour</em> or
+    <em>5 extra HP until sunrise</em>. These are <strong>temporary points</strong>, kept apart from the ordinary Hit
+    Points: the sheet shows the ordinary value against the maximum, then the temporary total in green, for example
+    <code>6 / 10 +7</code>. Hover over the green number to see it named. Typing a new current value or healing
+    changes only the ordinary Hit Points; it never adds or removes temporary points.</p>
+<p>Each grant is its own <strong>pool</strong>, listed in the order it was granted. The layers icon next to the Hit
+    Points opens the <strong>Temporary Hit Points</strong> dialogue, available to anyone who can edit the sheet:</p>
+<ul>
+    <li><strong>Grant</strong>: type an amount and an optional label, such as <em>Vigour from Aldric</em>, and click
+        <strong>Grant</strong> or press Enter. The new pool goes after every existing one. Without a label it is
+        called <em>Manual</em>.</li>
+    <li><strong>Correct</strong>: type a new remaining amount in a pool's field. The pool keeps its place in the
+        list.</li>
+    <li><strong>Remove</strong>: the trash icon removes the pool and only its remaining points.</li>
+</ul>
+<p>Amounts are whole numbers of 0 or more, with no upper limit; anything else is rejected. A pool at 0 stays listed
+    until you remove it. On an unlinked token's sheet the pools belong to that token only; on a linked token they
+    belong to the actor.</p>
+<p>Earlier versions of the system let a current value above the maximum be typed in, and kept it hidden. When a world
+    is upgraded, or an old actor is imported, any Hit Points stored above the maximum become one pool called
+    <em>Recovered excess</em>, so no points are lost. It works like any other pool: correct or remove it once you
+    know where those points came from.</p>
+
 <h3>Tabs</h3>
 <ul>
     <li><strong>Skills</strong>: skills grouped by type, custom skill groups, and all special abilities. Group headers
@@ -77,7 +101,8 @@
     average human: 3d6, or 2d6+6 for SIZ and INT. The dice icon rolls all formulas and updates the values, without a
     chat message.</p>
 <h3>Attributes</h3>
-<p>Attributes work as for characters, except that NPCs have no Fortune or Growth Points.</p>
+<p>Attributes work as for characters, temporary Hit Points included, except that NPCs have no Fortune or Growth
+    Points.</p>
 <h3>Tabs</h3>
 <ul>
     <li><strong>Details</strong>: skills and general abilities, magic (magic skills, abilities and spells, followed

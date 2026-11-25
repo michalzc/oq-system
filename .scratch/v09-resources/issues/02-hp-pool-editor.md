@@ -12,18 +12,64 @@ actor methods are the reuse point for later chunks (Fx4, Clk2, Ench).
 
 **Blocked by:** 01 (Recover legacy HP excess and show temporary HP on the sheet)
 
-**Status:** ready-for-agent
+**Status:** resolved
 
-- [ ] A grant always appends a new pool with a fresh identity after every existing pool.
-- [ ] Correcting a pool keeps its FIFO position; removing a pool drops only that pool.
-- [ ] A pool at zero stays listed until removed.
-- [ ] Amounts accept any nonnegative whole number with no upper cap; negative or fractional input is rejected.
-- [ ] The editor is an ApplicationV2 dialog alongside the existing attribute/characteristic dialogs, available on
+- [x] A grant always appends a new pool with a fresh identity after every existing pool.
+- [x] Correcting a pool keeps its FIFO position; removing a pool drops only that pool.
+- [x] A pool at zero stays listed until removed.
+- [x] Amounts accept any nonnegative whole number with no upper cap; negative or fractional input is rejected.
+- [x] The editor is an ApplicationV2 dialog alongside the existing attribute/characteristic dialogs, available on
       character and NPC sheets to anyone who can edit HP today (not GM-only), with the parchment theme kept.
-- [ ] Grants on an unlinked token's actor change only that token; on a linked token they change the world actor.
-- [ ] Pools, their remaining amounts and their order survive a reload unchanged.
-- [ ] Resource-points module tests for grant, correct (position kept) and remove (only its pool).
-- [ ] Manual: the spec's acceptance rows "Remove A" and "Correct A to 3, then grant C=4" pass on a character and an NPC.
-- [ ] The Actors documentation page explains temporary points and the pool editor (edit the HTML source, regenerate
+- [x] Grants on an unlinked token's actor change only that token; on a linked token they change the world actor.
+- [x] Pools, their remaining amounts and their order survive a reload unchanged.
+- [x] Resource-points module tests for grant, correct (position kept) and remove (only its pool).
+- [x] Manual: the spec's acceptance rows "Remove A" and "Correct A to 3, then grant C=4" pass on a character and an NPC.
+- [x] The Actors documentation page explains temporary points and the pool editor (edit the HTML source, regenerate
       the journal sources).
-- [ ] `yarn test`, `yarn lint` and `yarn build` pass.
+- [x] `yarn test`, `yarn lint` and `yarn build` pass.
+
+## Comments
+
+### 2026-11-25 implementation notes
+
+- Module (`src/module/utils/resource-points.js`): `grantPool`, `correctPool`, `removePool`, `isPointAmount` and
+  `parsePointAmount` (typed input). They work on the pool list; grant and correct reject amounts that are not
+  nonnegative whole numbers (`RangeError`), grant rejects a duplicate identity, correct rejects an unknown pool, and
+  removing a pool already gone changes nothing.
+- Actor (`OQBaseActor`): `temporaryPools(resource)`, `grantTemporaryPoints(resource, amount, label)` (fresh
+  `randomID`, blank label → localized "Manual"), `correctTemporaryPool(resource, poolId, remaining)`,
+  `removeTemporaryPool(resource, poolId)`; each is one update of `system.attributes.<resource>.pools`. `resource` is
+  `hp` until ticket 05 adds MP pools.
+- Dialog: `TemporaryPointsDialog` (`application/temporary-points-dialog.js`), one per actor and resource, opened by
+  the layers icon beside HP when the sheet is editable. Every change saves at once (grant on submit/Enter, correct on
+  change, remove by the trash icon). Unlike the other actor dialogs it registers in `actor.apps`, so it re-renders
+  when the actor changes (damage, another user's edit) and never shows stale pools. `OQActorDialog` now accepts an
+  `id` and forwards `open(actor, options)` for that.
+- Grant amount inputs are `type=number min=0 step=1 required`: negative, fractional or blank grants are stopped by
+  the browser's validation bubble before the handler; the handler also rejects them with "Enter a whole number of 0
+  or more." A rejected correction shows that message and the field snaps back to the stored amount.
+- Sheet layout fix: the HP number input no longer shrinks when "+N" and the control share its row (`flex: 0 0 2em`);
+  on the character sheet it had collapsed to a sliver since ticket 01's "+N".
+
+### 2026-11-25 manual QA
+
+Foundry 14.370, `oq-dev`. The world had been shut down to the setup screen during the work (not by this session); it
+was relaunched with the user's approval. Driven through the sheet control and dialog DOM.
+
+| Row | Character (`QA pools PC`) | NPC (`QA pools NPC`) |
+| --- | --- | --- |
+| HP 6/10, A=4, B=3 → Remove A | 6/10, B=3 | 6/10, B=3 |
+| HP 6/10, A=1 → Correct A to 3, then grant C=4 | A(3), C(4); sheet "6 / 10 +7" | A(3), C(4); "6 / 10 +7" |
+| Grant -1 / 1.5 / blank; correct C to -2 | Pools unchanged; correction message shown, C back to 4 | Same |
+| Grant 0 with a blank label; correct A to 0 | `Manual=0` appended last; A=0 stays listed | Same |
+
+- Linked token of the character: a grant from its sheet landed on the world actor; the token has no delta.
+- Unlinked token of the NPC: a grant landed in the token's delta only; the base NPC and another unlinked token were
+  unchanged. With the token's editor open, `correctTemporaryPool` from the console re-rendered it with the new amount.
+- Player `Edek` (owner of the character, not GM), after a reload: pools, amounts and order identical to before the
+  reload; granting "Player grant" 3 and removing "Manual" worked; sheet "6 / 10 +9".
+- Parchment theme kept (screenshot). No console errors or warnings.
+- `yarn build` (with packs) ran while the world was stopped; `yarn build:docs` regenerated the documentation journal.
+
+QA fixtures left in `oq-dev`: `QA pools PC` (now owned by `Edek`), `QA pools NPC`, tokens `QA pools linked` and
+`QA pools unlinked`.

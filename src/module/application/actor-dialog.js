@@ -15,19 +15,21 @@ export class OQActorDialog extends foundry.applications.api.HandlebarsApplicatio
   /**
    * @param {object} options
    * @param {Actor} options.actor The edited actor
+   * @param {string} [options.id] Defaults to one dialog of the class per actor
    */
   constructor({ actor, ...options }) {
-    super({ ...options, id: `${new.target.name}-${actor.uuid.replaceAll('.', '-')}` });
+    super({ id: `${new.target.name}-${actor.uuid.replaceAll('.', '-')}`, ...options });
     this.actor = actor;
   }
 
   /**
    * Shows the dialog for the actor. An open one is brought to the front as it is, keeping any unsaved input.
    * @param {Actor} actor
+   * @param {object} [options] Further options of the dialog class
    * @returns {Promise<OQActorDialog>}
    */
-  static async open(actor) {
-    const dialog = new this({ actor });
+  static async open(actor, options = {}) {
+    const dialog = new this({ actor, ...options });
     const existing = foundry.applications.instances.get(dialog.id);
     if (existing?.rendered) {
       await existing.maximize();

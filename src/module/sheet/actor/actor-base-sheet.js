@@ -1,5 +1,6 @@
 import _ from 'lodash-es';
 import { AttributesDialog } from '../../application/attributes-dialog.js';
+import { TemporaryPointsDialog } from '../../application/temporary-points-dialog.js';
 import { OQBaseActor } from '../../document/actor/base-actor.js';
 import { OQActiveEffect } from '../../document/active-effect.js';
 import { OQSpell } from '../../document/item/spell.js';
@@ -34,6 +35,7 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
       itemToChat: OQActorBaseSheet.onItemToChat,
       changeQuantity: OQActorBaseSheet.onItemQuantityIncreaseDecrease,
       modifyAttributes: OQActorBaseSheet.onModifyAttributes,
+      editTemporaryPoints: OQActorBaseSheet.onEditTemporaryPoints,
       addEffect: OQActorBaseSheet.onAddEffect,
       editEffect: OQActorBaseSheet.onEditEffect,
       deleteEffect: OQActorBaseSheet.onDeleteEffect,
@@ -242,6 +244,12 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
     event.preventDefault();
     if (!this.isEditable) return;
     return AttributesDialog.open(this.actor);
+  }
+
+  static onEditTemporaryPoints(event, target) {
+    event.preventDefault();
+    if (!this.isEditable) return;
+    return TemporaryPointsDialog.open(this.actor, { resource: target.dataset.resourceId });
   }
 
   async onUpdateItemAdv(event) {

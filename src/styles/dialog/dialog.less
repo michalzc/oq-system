@@ -109,6 +109,51 @@
     }
   }
 
+  &.temporary-points .dialog-body {
+    h2 {
+      margin-bottom: 0.25em;
+    }
+
+    .ordinary-points,
+    .no-pools {
+      margin: 0 0 0.5em;
+      font-size: var(--font-size-14);
+    }
+
+    .pools-table {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        display: grid;
+        grid-template-columns: 1fr 4em 1.5em;
+        align-items: center;
+        gap: 10px;
+        padding: 2px 0;
+      }
+
+      .pools-header {
+        font-size: var(--font-size-12);
+        color: @unimportant-color;
+      }
+
+      label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    .grant-row {
+      display: grid;
+      grid-template-columns: auto 4em auto 1fr;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.5em;
+    }
+  }
+
   .actor-dialog.short-description {
     display: flex;
     flex: 1;

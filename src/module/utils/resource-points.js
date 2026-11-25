@@ -66,3 +66,57 @@ export function convertLegacyHp(characteristics, hp, label) {
   const max = hpNormalMaximum(sourceCharacteristic(siz), sourceCharacteristic(con), hp.mod ?? 0);
   return recoverExcess(hp.value ?? 0, max, label);
 }
+
+/**
+ * Whether a value is a valid amount of points: a nonnegative whole number, without an upper cap.
+ * @param {*} amount
+ * @returns {boolean}
+ */
+export const isPointAmount = (amount) => Number.isInteger(amount) && amount >= 0;
+
+/**
+ * A typed amount of points, from a form input.
+ * @param {string} [text]
+ * @returns {number|null} null unless the text is a nonnegative whole number
+ */
+export function parsePointAmount(text) {
+  const trimmed = String(text ?? '').trim();
+  return /^\d+$/.test(trimmed) ? Number(trimmed) : null;
+}
+
+function assertPointAmount(amount) {
+  if (!isPointAmount(amount)) throw new RangeError(`Invalid amount of points: ${amount}`);
+}
+
+/**
+ * Grants temporary points as a new pool after every existing one, so it is spent last.
+ * @param {object[]} pools
+ * @param {{id: string, label: string, amount: number}} grant `id` must be new
+ * @returns {object[]} the new pool list
+ */
+export function grantPool(pools, { id, label, amount }) {
+  assertPointAmount(amount);
+  if (pools.some((pool) => pool.id === id)) throw new Error(`Pool ${id} already exists`);
+  return [...pools, { id, label, remaining: amount }];
+}
+
+/**
+ * Corrects the remaining amount of a pool, keeping its place in the spending order. A pool at zero stays listed.
+ * @param {object[]} pools
+ * @param {string} id
+ * @param {number} remaining
+ * @returns {object[]} the new pool list
+ */
+export function correctPool(pools, id, remaining) {
+  assertPointAmount(remaining);
+  if (!pools.some((pool) => pool.id === id)) throw new Error(`Unknown pool ${id}`);
+  return pools.map((pool) => (pool.id === id ? { ...pool, remaining } : pool));
+}
+
+/**
+ * Removes a pool with its remaining points; the other pools keep theirs. Removing a pool already gone changes nothing.
+ * @param {object[]} pools
+ * @param {string} id
+ * @returns {object[]} the new pool list
+ */
+export const removePool = (pools, id) => pools.filter((pool) => pool.id !== id);

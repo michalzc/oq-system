@@ -89,6 +89,8 @@
         font-size: 18px;
 
         input {
+          // Keeps its width when temporary points and the pool editor control share the row.
+          flex: 0 0 2em;
           border: 0;
           border-bottom: 1px solid;
           max-width: 2em;
@@ -101,6 +103,11 @@
           color: @distinction-color;
           font-weight: bold;
           cursor: help;
+        }
+
+        .edit-temporary-points {
+          margin-left: 0.4em;
+          font-size: var(--font-size-12);
         }
       }
     }

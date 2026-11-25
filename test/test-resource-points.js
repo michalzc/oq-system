@@ -1,5 +1,13 @@
 import expect from 'expect.js';
-import { availableTemporaryPoints, convertLegacyHp, hasPoolList } from '../src/module/utils/resource-points.js';
+import {
+  availableTemporaryPoints,
+  convertLegacyHp,
+  correctPool,
+  grantPool,
+  hasPoolList,
+  parsePointAmount,
+  removePool,
+} from '../src/module/utils/resource-points.js';
 
 /** A stored v0.8 actor `system` source: HP normal maximum is round((SIZ + CON) / 2) + HP modifier. */
 const legacySystem = ({ siz = 10, con = 10, hp = {} } = {}) => ({
@@ -95,6 +103,99 @@ describe('resource-points.js', function () {
     it('Should be zero without pools', function () {
       expect(availableTemporaryPoints([])).to.be(0);
       expect(availableTemporaryPoints(undefined)).to.be(0);
+    });
+  });
+
+  describe('#parsePointAmount()', function () {
+    it('Should read a typed nonnegative whole number', function () {
+      expect(parsePointAmount('0')).to.be(0);
+      expect(parsePointAmount(' 12 ')).to.be(12);
+      expect(parsePointAmount('1000000')).to.be(1000000);
+    });
+
+    it('Should reject blank, negative, fractional and other input', function () {
+      for (const text of ['', '  ', '-1', '1.5', '1e3', '+3', 'abc', undefined, null]) {
+        expect(parsePointAmount(text)).to.be(null);
+      }
+    });
+  });
+
+  describe('pool editing', function () {
+    const pool = (id, remaining) => ({ id, label: id.toUpperCase(), remaining });
+    // HP 6/10 with A=1, B=2 (the spec's examples).
+    const pools = () => [pool('a', 1), pool('b', 2)];
+
+    describe('#grantPool()', function () {
+      it('Should append a new pool after every existing pool', function () {
+        const granted = grantPool(pools(), { id: 'c', label: 'Vigour from Aldric', amount: 4 });
+        expect(granted).to.eql([pool('a', 1), pool('b', 2), { id: 'c', label: 'Vigour from Aldric', remaining: 4 }]);
+      });
+
+      it('Should append after exhausted pools too', function () {
+        expect(grantPool([pool('a', 0)], { id: 'b', label: 'B', amount: 3 })).to.eql([pool('a', 0), pool('b', 3)]);
+      });
+
+      it('Should accept any nonnegative whole amount without an upper cap', function () {
+        expect(grantPool([], { id: 'a', label: 'A', amount: 0 })).to.eql([pool('a', 0)]);
+        expect(grantPool([], { id: 'a', label: 'A', amount: 250 })).to.eql([pool('a', 250)]);
+      });
+
+      it('Should reject negative or fractional amounts', function () {
+        for (const amount of [-1, 1.5, NaN, Infinity, '3', null, undefined]) {
+          expect(() => grantPool([], { id: 'a', label: 'A', amount })).to.throwError(RangeError);
+        }
+      });
+
+      it('Should reject an identity already in the list', function () {
+        expect(() => grantPool(pools(), { id: 'a', label: 'A', amount: 1 })).to.throwError();
+      });
+
+      it('Should not change the given list', function () {
+        const original = pools();
+        grantPool(original, { id: 'c', label: 'C', amount: 4 });
+        expect(original).to.eql(pools());
+      });
+    });
+
+    describe('#correctPool()', function () {
+      it('Should set the remaining amount and keep the pool in its place', function () {
+        // Correct A to 3, then grant C=4: order A(3), C(4); total +7.
+        const corrected = correctPool([pool('a', 1)], 'a', 3);
+        const granted = grantPool(corrected, { id: 'c', label: 'C', amount: 4 });
+        expect(granted).to.eql([pool('a', 3), pool('c', 4)]);
+        expect(availableTemporaryPoints(granted)).to.be(7);
+        expect(correctPool(pools(), 'a', 9)).to.eql([pool('a', 9), pool('b', 2)]);
+      });
+
+      it('Should keep a pool corrected to zero listed', function () {
+        expect(correctPool(pools(), 'b', 0)).to.eql([pool('a', 1), pool('b', 0)]);
+      });
+
+      it('Should reject negative or fractional amounts', function () {
+        for (const amount of [-1, 0.5, NaN]) expect(() => correctPool(pools(), 'a', amount)).to.throwError(RangeError);
+      });
+
+      it('Should reject an unknown pool', function () {
+        expect(() => correctPool(pools(), 'z', 1)).to.throwError();
+      });
+
+      it('Should not change the given list', function () {
+        const original = pools();
+        correctPool(original, 'a', 5);
+        expect(original).to.eql(pools());
+      });
+    });
+
+    describe('#removePool()', function () {
+      it('Should drop only the removed pool and its remaining points', function () {
+        // HP 6/10, A=4, B=3: remove A leaves B=3.
+        expect(removePool([pool('a', 4), pool('b', 3)], 'a')).to.eql([pool('b', 3)]);
+        expect(removePool([pool('a', 4), pool('b', 3), pool('c', 1)], 'b')).to.eql([pool('a', 4), pool('c', 1)]);
+      });
+
+      it('Should leave the list unchanged when the pool is already gone', function () {
+        expect(removePool(pools(), 'z')).to.eql(pools());
+      });
     });
   });
 });

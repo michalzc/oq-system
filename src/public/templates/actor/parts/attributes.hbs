@@ -15,6 +15,11 @@
              data-tooltip="{{ localize 'OQ.Resources.TemporaryPoints' amount=system.attributes.hp.temporary }}">
           +{{system.attributes.hp.temporary}}</div>
       {{/if}}
+      {{#if editable}}
+        <a class="edit-temporary-points" data-action="editTemporaryPoints" data-resource-id="hp"
+           data-tooltip="{{ localize 'OQ.Resources.EditTemporaryPoints' }}"
+           aria-label="{{ localize 'OQ.Resources.EditTemporaryPoints' }}"><i class="fas fa-layer-group"></i></a>
+      {{/if}}
     </div>
 
     <label for="{{rootId}}-mp" class="resource-update" data-action="adjustResource" data-resource-id="mp"
