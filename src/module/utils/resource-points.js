@@ -6,8 +6,8 @@
 /** The identity of the pool that recovers points stored above the normal maximum by versions before 0.9. */
 export const RECOVERED_EXCESS_POOL_ID = 'recoveredExcess';
 
-/** Localization key of the recovered pool's label; labels are localized when they are shown. */
-export const RECOVERED_EXCESS_LABEL = 'OQ.Resources.RecoveredExcess';
+/** Localization key of the recovered pool's label. Callers store it translated, like the labels people type. */
+export const RECOVERED_EXCESS_LABEL_KEY = 'OQ.Resources.RecoveredExcess';
 
 /**
  * The HP normal maximum, used by actor preparation and legacy conversion alike.
@@ -40,14 +40,15 @@ const sourceCharacteristic = (characteristic) => (characteristic?.base ?? 0) + (
  * within it and a pool holding the excess.
  * @param {number} current stored ordinary current points
  * @param {number} max normal maximum, floored at zero
+ * @param {string} label label of the pool holding the excess
  * @returns {{value: number, pools: object[]}}
  */
-function recoverExcess(current, max) {
+function recoverExcess(current, max, label) {
   const normalMax = Math.max(0, max);
   if (current <= normalMax) return { value: current, pools: [] };
   return {
     value: normalMax,
-    pools: [{ id: RECOVERED_EXCESS_POOL_ID, label: RECOVERED_EXCESS_LABEL, remaining: current - normalMax }],
+    pools: [{ id: RECOVERED_EXCESS_POOL_ID, label, remaining: current - normalMax }],
   };
 }
 
@@ -57,10 +58,11 @@ function recoverExcess(current, max) {
  * modifier, never read from the stored maximum.
  * @param {object} [characteristics] stored characteristics, `{siz: {base, mod}, con: {base, mod}, ...}`
  * @param {{value?: number, mod?: number}} hp stored HP
+ * @param {string} label label of a recovered excess pool: the translation of {@link RECOVERED_EXCESS_LABEL_KEY}
  * @returns {{value: number, pools: object[]}}
  */
-export function convertLegacyHp(characteristics, hp) {
+export function convertLegacyHp(characteristics, hp, label) {
   const { siz, con } = characteristics ?? {};
   const max = hpNormalMaximum(sourceCharacteristic(siz), sourceCharacteristic(con), hp.mod ?? 0);
-  return recoverExcess(hp.value ?? 0, max);
+  return recoverExcess(hp.value ?? 0, max, label);
 }

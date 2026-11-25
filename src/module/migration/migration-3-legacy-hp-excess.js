@@ -1,5 +1,7 @@
 import _ from 'lodash-es';
-import { convertLegacyHp, hasPoolList } from '../utils/resource-points.js';
+import { convertLegacyHp, hasPoolList, RECOVERED_EXCESS_LABEL_KEY } from '../utils/resource-points.js';
+
+const recoveredExcessLabel = () => game.i18n.localize(RECOVERED_EXCESS_LABEL_KEY);
 
 /**
  * HP gains temporary-point pools (v0.9 resources). HP that earlier versions stored above the normal maximum is kept
@@ -17,7 +19,9 @@ export const legacyHpExcessMigration = {
     Actor: (source) => {
       const hp = source.system?.attributes?.hp;
       if (!hp) return {};
-      const { value, pools } = hasPoolList(hp) ? hp : convertLegacyHp(source.system.characteristics, hp);
+      const { value, pools } = hasPoolList(hp)
+        ? hp
+        : convertLegacyHp(source.system.characteristics, hp, recoveredExcessLabel());
       return { system: { attributes: { hp: { value, pools } } } };
     },
     Token: (source, { worldActor }) => {
@@ -27,7 +31,8 @@ export const legacyHpExcessMigration = {
       const base = worldActor(source.actorId)?.system;
       if (!base) return {};
       const characteristics = _.merge({}, base.characteristics, delta.characteristics);
-      const converted = convertLegacyHp(characteristics, { mod: hp.mod ?? base.attributes?.hp?.mod, value: hp.value });
+      const stored = { mod: hp.mod ?? base.attributes?.hp?.mod, value: hp.value };
+      const converted = convertLegacyHp(characteristics, stored, recoveredExcessLabel());
       return { delta: { system: { attributes: { hp: converted } } } };
     },
   },

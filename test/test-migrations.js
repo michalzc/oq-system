@@ -154,10 +154,23 @@ const actorSource = (hp, extra = {}) => ({
   },
   ...extra,
 });
-const recoveredPool = (remaining) => ({ id: 'recoveredExcess', label: 'OQ.Resources.RecoveredExcess', remaining });
+// The label is stored translated; the stub translation marks it.
+const recoveredPool = (remaining) => ({ id: 'recoveredExcess', label: 'i18n:OQ.Resources.RecoveredExcess', remaining });
+const i18n = { localize: (key) => `i18n:${key}` };
 
 describe('migration-3-legacy-hp-excess.js', function () {
   const { Actor, Token } = legacyHpExcessMigration.handlers;
+  let savedGame;
+
+  before(function () {
+    savedGame = globalThis.game;
+    globalThis.game = { i18n };
+  });
+
+  after(function () {
+    if (savedGame === undefined) delete globalThis.game;
+    else globalThis.game = savedGame;
+  });
 
   describe('Actor', function () {
     it('Should persist HP above the normal maximum as a recovered excess pool', function () {
@@ -354,7 +367,7 @@ describe('migration-runner.js', function () {
             storedVersion = value;
           },
         },
-        i18n: { format: (key, data) => `${key} ${JSON.stringify(data)}` },
+        i18n: { ...i18n, format: (key, data) => `${key} ${JSON.stringify(data)}` },
         actors: collection('Actor', documents.actors ?? []),
         items: collection('Item', documents.items ?? []),
         scenes: collection('Scene', documents.scenes ?? []),

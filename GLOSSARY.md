@@ -56,6 +56,11 @@ restore these points; they require an explicit temporary-point grant.
 The remaining temporary HP or MP from one grant, distinct from points supplied by other grants. Ending that grant
 removes only its remaining points.
 
+**Recovered excess**:
+The temporary-point pool that keeps HP or MP stored above the normal maximum by a version before 0.9, created once
+when the world is upgraded or the old data is imported. It is an ordinary temporary-point pool, not an applied effect:
+spent first, never refilled by healing or regeneration, and editable or removable like any other.
+
 **Magic point store**:
 An enchanted physical item holding a separate supply of MP, with its own capacity and remaining balance.
 _Avoid_: temporary MP pool

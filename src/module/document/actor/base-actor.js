@@ -7,6 +7,7 @@ import {
   convertLegacyHp,
   hasPoolList,
   hpNormalMaximum,
+  RECOVERED_EXCESS_LABEL_KEY,
 } from '../../utils/resource-points.js';
 
 /**
@@ -54,7 +55,8 @@ export class OQBaseActor extends Actor {
     const createdHp = source.system?.attributes?.hp;
     if (createdHp?.value !== undefined && !hasPoolList(createdHp)) {
       const { characteristics } = this._source.system;
-      this.updateSource({ system: { attributes: { hp: convertLegacyHp(characteristics, createdHp) } } });
+      const hp = convertLegacyHp(characteristics, createdHp, game.i18n.localize(RECOVERED_EXCESS_LABEL_KEY));
+      this.updateSource({ system: { attributes: { hp } } });
     }
 
     if (!source.items) {

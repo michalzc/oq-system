@@ -8,16 +8,16 @@ const legacySystem = ({ siz = 10, con = 10, hp = {} } = {}) => ({
 });
 
 /** Converts the HP of a stored `system` source. */
-const convert = (system) => convertLegacyHp(system.characteristics, system.attributes.hp);
+const convert = (system) => convertLegacyHp(system.characteristics, system.attributes.hp, 'Recovered excess');
 
-const recovered = (remaining) => ({ id: 'recoveredExcess', label: 'OQ.Resources.RecoveredExcess', remaining });
+const recovered = (remaining) => ({ id: 'recoveredExcess', label: 'Recovered excess', remaining });
 
 describe('resource-points.js', function () {
   describe('#convert()', function () {
     it('Should recover HP stored above the normal maximum into one pool', function () {
       expect(convert(legacySystem({ hp: { value: 15 } }))).to.eql({
         value: 10,
-        pools: [{ id: 'recoveredExcess', label: 'OQ.Resources.RecoveredExcess', remaining: 5 }],
+        pools: [{ id: 'recoveredExcess', label: 'Recovered excess', remaining: 5 }],
       });
     });
 

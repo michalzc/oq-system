@@ -56,8 +56,9 @@ Conversion lands before any route can write a pool, so no route ships that could
 
 - Module: `src/module/utils/resource-points.js` (`hpNormalMaximum`, `hasPoolList`, `availableTemporaryPoints`,
   `convertLegacyHp`). Prepared `system.attributes.hp.temporary` is the available total. The recovered pool is
-  `{ id: 'recoveredExcess', label: 'OQ.Resources.RecoveredExcess', remaining }`; the label is stored as a localization
-  key so every client converts identically, and it is localized where it is shown (pool editor, ticket 02).
+  `{ id: 'recoveredExcess', label: <translated "Recovered excess">, remaining }`. The fixed id makes conversion
+  repeatable; the label is stored translated (in the language of the client that persists it, normally the GM's),
+  like the labels people type, so displays show labels as they are.
 - Load-time conversion: `OQActorDataModel.migrateData`, skipped when `options.partial` (updates and creation input
   are cleaned as partial data in v14, `common/abstract/data.mjs` `_preUpdateSource`, `client/data/client-backend.mjs`
   `#preCreateDocumentArray`). `ActorDelta#system` is an `ObjectField`, so deltas are never converted on load.
@@ -111,9 +112,9 @@ Open decisions for the user (behaviour kept as implemented):
 1. The Actor handler writes HP for every actor because handlers see load-converted sources; step 3 therefore writes
    every world actor and every world Actor compendium once (and again on a retry). The alternative would need the raw
    stored data, which the client doesn't keep.
-2. The recovered pool's label is stored as the key `OQ.Resources.RecoveredExcess` (deterministic across clients), so
-   every display (ticket 02 pool editor, ticket 04 HUD, chat) must localize pool labels; macros reading raw data see
-   the key.
+2. ~~The recovered pool's label is stored as the key `OQ.Resources.RecoveredExcess`.~~ Decided with the user: the
+   label is stored translated (the pure module takes it as a parameter; callers translate
+   `RECOVERED_EXCESS_LABEL_KEY`), so displays and macros see plain text.
 3. `_preCreate` converts creation data that has `hp.value` and no pool list. That covers `Actor.create` from an old
    export, but it also turns a v0.9 macro's `Actor.create({system: {attributes: {hp: {value: 20}}}})` on a maximum-10
    actor into 10 + a 10-point "Recovered excess" pool. Without it, that creation would store 20 hidden above the
@@ -121,4 +122,14 @@ Open decisions for the user (behaviour kept as implemented):
 4. A token in a world compendium scene whose base actor is not a world actor is left unconverted (no base to merge
    with); if imported later, an overriding delta inherits the base's pool list. The spec's late-import list names
    actors only.
-5. "Recovered excess" is not in `GLOSSARY.md` yet.
+5. ~~"Recovered excess" is not in `GLOSSARY.md` yet.~~ Added.
+
+Also decided with the user: keep 1, 3 and 4 as implemented; the shared-default fields found in the review get their
+own ticket, `.scratch/shared-initial-defaults/issues/01-factory-initial-defaults.md`.
+
+### 2026-11-25 translated label
+
+In `oq-dev` after the change: `importFromJSON` (load-time conversion) and `Actor.create` (creation conversion) of the
+old JSON both persisted `label: "Recovered excess"`. Migration 3's handlers translate the same key (unit tests with a
+stubbed `game.i18n`); the world is already at version 3, so the migration itself was not re-run in-world. The QA
+fixtures' stored key labels were rewritten to the translated text. No console errors.
