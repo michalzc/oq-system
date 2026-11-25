@@ -106,7 +106,7 @@ export class WeaponDataModel extends OQItemDataModel {
       }),
       traits: new fields.ArrayField(commonStringModel(), {
         required: false,
-        initial: [],
+        initial: () => [],
       }),
       damage: new fields.SchemaField({
         damageFormula: commonStringModel(true),
@@ -163,7 +163,7 @@ export class EquipmentDataModel extends OQItemDataModel {
       }),
       traits: new fields.ArrayField(commonStringModel(), {
         required: false,
-        initial: [],
+        initial: () => [],
       }),
     };
   }
@@ -197,7 +197,7 @@ export class SpellDataModel extends OQItemDataModel {
       traits: new fields.ArrayField(commonStringModel(), {
         nullable: false,
         required: false,
-        initial: [],
+        initial: () => [],
       }),
       description: htmlFieldModel(),
       skillReference: new fields.StringField({ required: false, trim: true }),
@@ -238,7 +238,7 @@ export class SpecialAbilityDataModel extends OQItemDataModel {
       traits: new fields.ArrayField(commonStringModel(), {
         nullable: false,
         required: false,
-        initial: [],
+        initial: () => [],
       }),
       formula: commonStringModel(),
       damageFormula: commonStringModel(),

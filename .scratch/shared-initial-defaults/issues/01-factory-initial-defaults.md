@@ -18,10 +18,23 @@ and removes the trap: switch each to a factory (`initial: () => ({})`, `initial:
 
 **Blocked by:** None
 
-**Status:** needs-triage
+**Status:** resolved
 
-- [ ] Each field listed above uses a factory `initial`; no data model field in `src/module/dataModel/` has a plain
+- [x] Each field listed above uses a factory `initial`; no data model field in `src/module/dataModel/` has a plain
       array or object `initial`.
-- [ ] Manual: create a character, change its money; create a second character: it starts with empty money. Same for
+- [x] Manual: create a character, change its money; create a second character: it starts with empty money. Same for
       an item's traits.
-- [ ] `yarn test`, `yarn lint` and `yarn build` pass.
+- [x] `yarn test`, `yarn lint` and `yarn build` pass.
+
+## Comments
+
+### 2026-11-26 resolution
+
+Not confirmed as a live bug: rather than audit every in-place mutation path, the trap is closed for good.
+
+- `eslint.config.mjs` rejects a plain array or object `initial` in `src/module/dataModel/` (`no-restricted-syntax`),
+  so `yarn lint`, the pre-commit hook and CI catch the next one.
+- `personal.money` (`initial: () => ({})`) and the four `traits` fields (`initial: () => []`) now use factories.
+- Checked in `oq-dev` (Foundry 14.370, GM): after mutating one new document's `money` and `traits` source in place,
+  the next new character and weapon, equipment, spell and special ability start with `{}` / `[]` and do not share the
+  object; creating a character, setting its money and creating another leaves the second with `{}`. No errors.

@@ -13,7 +13,16 @@ the `chrome-devtools` MCP attaches to. Drive the world with `evaluate_script`, c
 ## Steps
 
 1. **Attach.** `list_pages` shows `http://127.0.0.1:32000/game`. When the page or Foundry is missing, ask the user to
-   run `start-dev`; it starts processes they own.
+   run `start-dev`; it starts processes they own. On `/setup` the world was shut down: ask the user before launching
+   it (`[data-package-id="oq-dev"] [data-action="worldLaunch"]`). On `/join`, log in as the GM (no password); the
+   navigation destroys the script, so wait for ready in the next one:
+
+   ```js
+   const form = document.getElementById('join-game-form');
+   form.querySelector('[name=userId]').value = [...form.userId.options].find((o) => o.text === 'Gamemaster').value;
+   setTimeout(() => form.querySelector('button[type=submit]').click(), 50);
+   ```
+
 2. **Rebuild.** `yarn build:code`, then `navigate_page` with `type: reload, ignoreCache: true`. Pack changes need
    Foundry stopped for `yarn build:packs`; while it runs, `yarn check:packs` only checks that they compile.
 3. **Wait for ready** at the start of every script that follows a reload:
@@ -32,18 +41,39 @@ the `chrome-devtools` MCP attaches to. Drive the world with `evaluate_script`, c
    await new Promise((r) => setTimeout(r, 1000)); // let the update and re-render land
    ```
 
-   Fill a form by setting input values, then click its `button[type=submit]`.
+   Fill a form by setting input values, then click its `button[type=submit]`. Other input paths:
+   - A right-click action (`buttons: [0, 2]`) fires on `auxclick`:
+     `el.dispatchEvent(new MouseEvent('auxclick', { bubbles: true, button: 2 }))`. A `contextmenu` event does nothing.
+   - A value set from a script and then blurred fires no `change`. For Enter, Tab or blur behaviour, focus the field
+     in `evaluate_script`, then type with `type_text` (its `submitKey`) or `press_key`.
+   - Token HUD: `canvas.tokens.hud.bind(token.object)`, then set `input[name=bar1]` and fire `change` on it.
+   - Chat card buttons: post the card (`await ui.chat.processMessage('/hp 5')`), select the target token
+     (`token.object.control({ releaseOthers: true })`), then click the button inside
+     ``ui.chat.element.querySelector(`[data-message-id="${message.id}"]`)``.
 5. **Verify** each step:
    - Prepared values (`actor.system...`) and stored data (`actor.toObject()`). To prove "no stored field changes",
      save a baseline in `localStorage` (page state is lost on reload) and compare after each reload.
+   - What the server stored, when a data model's `migrateData` converts on load and so `toObject()` cannot tell:
+     `await new Promise((r) => game.socket.emit('modifyDocument', { type: 'Actor', action: 'get', operation: { query:
+     {}, pack } }, r))` returns the raw sources in `.result` (omit `pack` for world documents).
    - `take_screenshot` without `filePath`, then `Read` the returned path. To show a tooltip first:
-     `game.tooltip.activate(element)`.
+     `game.tooltip.activate(element)`. Shoot every sheet type a changed template appears on, one at a time and
+     unobstructed: a layout bug hidden behind an overlapping window goes unseen.
    - Every control of a form the change touches, not only the ones the scenario needs: set each `select`/`input`
      and fire `change` on it while a `window` `error` listener records exceptions. Core listeners that throw on a
      change (see `docs/foundry-v14-notes.md`, Active Effects) leave no console warning and no visible trace.
    - `list_console_messages` with `types: ["error", "warn"]`: none expected.
 6. **Record** the result in the ticket's `## Comments`: date, Foundry version, world, client (GM or player), each
    scenario with its observed values, and anything not checked.
+
+## Recipe: migration QA
+
+Legacy data has to be stored by the old code. While the page still runs the previous build, create the fixtures
+(actors, unlinked tokens with deltas, a locked world compendium, an exported JSON kept in `localStorage`); then
+`yarn build:code` and reload into the new build, which runs the migration. Check what was stored with the raw
+`modifyDocument` read above. To test a retry, pass `navigate_page` an `initScript` that waits for `window.Hooks` and
+registers a `preUpdateActor` hook returning `false` for one document while `options.diff === false`; answer the
+migration's dialog with Retry, then reload without the script.
 
 ## Traps
 
