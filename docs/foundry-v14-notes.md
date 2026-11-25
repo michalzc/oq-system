@@ -62,3 +62,7 @@ original function.
   throwaway `super.defineSchema()` and clear their `parent` before adopting them.
 - A new optional field without an `initial` (`StringField({required: false, blank: true})`) cleans to `undefined`,
   which is not serialized, so changes stored without that field are saved back without it.
+- `ActiveEffectConfig#_onChangeForm` (`client/applications/sheets/active-effect-config.mjs:229-239`) treats every
+  `<select>` whose name ends in `.type` as one of its change rows and sets the placeholder of the row's `.priority`
+  input, throwing a `TypeError` when there is none. Name a subclass's own operation selects differently (the system
+  editor uses `oqChanges.N.operation`).

@@ -23,7 +23,7 @@
     <li><strong>Damage Modifier</strong>: from STR + SIZ. Up to 10: -1d6, up to 15: -1d4, up to 25: none,
         up to 30: +1d4, then +1d6 for 31-45, +2d6 for 46-60, and so on. The mod is text, for example
         <code>+1d4</code> or <code>2</code>, and is appended to the result.</li>
-    <li><strong>Movement Rate</strong>: 15 plus mod.</li>
+    <li><strong>Movement Rate</strong>: 15 plus mod. Effects change this; see <em>Effects</em> below.</li>
     <li><strong>Armour Worn</strong>: the highest Armour Points among armour in the Worn or Natural state, plus mod.
         Armour does not stack. Effects add to this; see <em>Effects</em> below.</li>
 </ul>
@@ -113,17 +113,21 @@
         list.</li>
     <li><strong>Changes</strong>: the values the effect changes. <strong>Add change</strong> adds a row; the trash
         icon removes one. Each row has a target, an operation and a value. The editor offers only the targets the
-        system supports. For now that is <strong>Armour points</strong>, with these operations:
+        system supports: <strong>Armour points</strong> and <strong>Movement rate</strong>. Both have these
+        operations:
         <ul>
             <li><strong>Add</strong>: adds the value; a negative value subtracts.</li>
-            <li><strong>Multiply by</strong>: multiplies the armour points without effects, rounding down. For
-                example 0.5 halves them.</li>
+            <li><strong>Multiply by</strong>: multiplies the value without effects. For example 0.5 halves it. Armour
+                points round down; movement keeps the fraction, such as 7.5m.</li>
             <li><strong>Set to</strong>: replaces the result with the value.</li>
         </ul>
+        A movement rate row also has an optional <strong>Minimum</strong>: the rule's floor, such as Slow's 1m.
+        Changing a row's target saves the effect, so the row shows the fields of its new target.
     </li>
 </ul>
 <p>When several changes affect the same value, multipliers apply first to the value without effects, then additions,
-    then a <em>Set to</em> replaces the result. If several <em>Set to</em> changes apply, the highest is used.</p>
+    then a <em>Set to</em> replaces the result. If several <em>Set to</em> changes apply, the highest is used. Last,
+    the value is raised to the highest minimum of the changes that apply.</p>
 <p>An effect with no changes is a <strong>reminder</strong>: it only shows its rules text, for example
     <em>Owes the river spirit a favour</em>.</p>
 <p>Effects created by macros or modules before this version may contain changes the editor does not manage. They
@@ -132,8 +136,8 @@
 
 <h3>Values changed by effects</h3>
 <p>A value changed by effects shows a wand icon next to it. Hover over the value to see the value without effects and
-    each contributing effect, with its source and amount, such as <code>+3</code>, <code>×0.5</code> or
-    <code>= 8</code>. When a value combines multiplied and added amounts, or several <em>Set to</em> changes, the
+    each contributing effect, with its source and amount, such as <code>+3</code>, <code>×0.5</code>,
+    <code>= 8</code> or <code>−6 (minimum 1)</code>. When a value combines multiplied and added amounts, or several <em>Set to</em> changes, the
     tooltip asks you to check which of them apply: the system does not decide whether two spells may stack.</p>
 <p>Effect armour points are added on top of the Armour Worn calculation above: the best Worn or Natural armour plus
     the mod.</p>
@@ -151,6 +155,19 @@
         effects and <em>Protection 3 (Protection) +3</em>.</li>
 </ol>
 <p>When the spell ends, disable or delete the effect and the armour points return to 2.</p>
+
+<h3>Recipe: Mobility</h3>
+<p>Mobility adds 2 metres of movement per point of magnitude. To record Mobility 2 on a character with Movement
+    Rate 15, create an effect named <em>Mobility 2</em> with source <em>Mobility</em> and add the change
+    <em>Movement rate</em>, <em>Add</em>, <em>4</em>. Movement Rate shows 19 with the wand icon.</p>
+
+<h3>Recipe: Slow</h3>
+<p>Slow takes away 2 metres per point of magnitude, but never reduces movement below 1 metre. To record Slow 3,
+    create an effect named <em>Slow 3</em> with source <em>Slow</em> and add the change <em>Movement rate</em>,
+    <em>Add</em>, <em>-6</em>, with <em>Minimum</em> 1. A Movement Rate of 15 becomes 9; Slow 8 (<em>-16</em>, minimum
+    1) gives 1.</p>
+<p>When Mobility and Slow are both on a creature, both apply and the tooltip lists both (15 + 4 − 6 = 13). Whether the
+    spells really combine is the GM's call: disable or delete the one that does not apply.</p>
 
 <h2>Initiative</h2>
 <p>The <strong>Initiative</strong> field selects a skill or special ability with a formula, and the

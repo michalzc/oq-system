@@ -49,6 +49,7 @@ export class OQActiveEffectConfig extends foundry.applications.sheets.ActiveEffe
         offersChanges: this.offersChanges,
         changes: entry.changes.map((change) => ({
           ...change,
+          allowsMinimum: EFFECT_TARGETS[change.target].minimum ?? false,
           targetOptions,
           typeOptions: Object.fromEntries(
             EFFECT_TARGETS[change.target].types.map((type) => [type, `OQ.Effects.Operations.${type}`]),
@@ -60,12 +61,20 @@ export class OQActiveEffectConfig extends foundry.applications.sheets.ActiveEffe
     return partContext;
   }
 
+  _onChangeForm(formConfig, event) {
+    super._onChangeForm(formConfig, event);
+    // Another target may allow other operations or a minimum: save, so the row is drawn again for its new target.
+    if (event.target.matches('.oq-changes select.target')) this.submit();
+  }
+
   _processFormData(event, form, formData) {
     const submitData = super._processFormData(event, form, formData);
     const { oqChanges, ...data } = submitData;
     if (!this.offersChanges) return data;
     data.system ??= {};
-    data.system.changes = effectChangesToSave(this.document._source.system.changes, Object.values(oqChanges ?? {}));
+    // The operation select is not named `type`: core's change listener would take it for one of its own rows.
+    const edited = Object.values(oqChanges ?? {}).map(({ operation, ...change }) => ({ ...change, type: operation }));
+    data.system.changes = effectChangesToSave(this.document._source.system.changes, edited);
     return data;
   }
 

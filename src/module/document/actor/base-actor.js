@@ -58,6 +58,9 @@ export class OQBaseActor extends Actor {
    */
   prepareBaseData() {
     super.prepareBaseData();
+    // The OpenQuest changes of the actor's own effects, read once per preparation; item effects get their roles in
+    // later chunks.
+    this.effectChanges = activeEffectChanges(this.effects);
     assignAttributes(this.system.attributes, this.calculateBaseAttributes());
   }
 
@@ -140,30 +143,28 @@ export class OQBaseActor extends Actor {
         max: mpMax,
         value: Math.min(mpMax, attributes.mp.value),
       },
-      mr: {
-        value: attributes.mr.base + attributes.mr.mod,
-      },
+      mr: this.effectAttribute('mr', attributes.mr.base + attributes.mr.mod),
     };
   }
 
   calculateItemDependentAttributes() {
     const attributes = this.system.attributes;
-    // The actor's own effects; item effects get their roles in later chunks.
-    const effectChanges = activeEffectChanges(this.effects);
-    const ap = attributeContribution(
-      'ap',
-      attributes.ap.base + attributes.ap.mod + this.calculateArmourPoints(),
-      effectChanges,
-    );
 
     return {
-      ap: {
-        value: ap.value,
-        // The effect breakdown shown in the sheet tooltip; absent when no effect changes AP.
-        effects: ap.contributions.length ? ap : undefined,
-      },
+      ap: this.effectAttribute('ap', attributes.ap.base + attributes.ap.mod + this.calculateArmourPoints()),
       initiative: this.calculateInitiative(),
     };
+  }
+
+  /**
+   * An attribute's effective value and, when effects change it, the breakdown shown in the sheet tooltip.
+   * @param {string} target a key of `EFFECT_TARGETS`
+   * @param {number} unmodified the value without effects
+   * @returns {{value: number, effects: object|undefined}}
+   */
+  effectAttribute(target, unmodified) {
+    const result = attributeContribution(target, unmodified, this.effectChanges);
+    return { value: result.value, effects: result.contributions.length ? result : undefined };
   }
 
   calculateDamageModifier() {

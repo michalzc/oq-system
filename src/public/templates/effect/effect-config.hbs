@@ -15,6 +15,7 @@
           <span class="target">{{localize 'OQ.Effects.Target'}}</span>
           <span class="type">{{localize 'OQ.Effects.Operation'}}</span>
           <span class="value">{{localize 'OQ.Effects.Value'}}</span>
+          <span class="minimum" data-tooltip="{{localize 'OQ.Effects.MinimumHint'}}">{{localize 'OQ.Effects.Minimum'}}</span>
           <span class="controls"></span>
         </div>
         <ol>
@@ -23,11 +24,17 @@
               <select class="target" name="oqChanges.{{index}}.target" aria-label="{{localize 'OQ.Effects.Target'}}">
                 {{selectOptions change.targetOptions selected=change.target localize=true}}
               </select>
-              <select class="type" name="oqChanges.{{index}}.type" aria-label="{{localize 'OQ.Effects.Operation'}}">
+              <select class="type" name="oqChanges.{{index}}.operation" aria-label="{{localize 'OQ.Effects.Operation'}}">
                 {{selectOptions change.typeOptions selected=change.type localize=true}}
               </select>
               <input class="value" type="number" step="any" name="oqChanges.{{index}}.value" value="{{change.value}}"
                      aria-label="{{localize 'OQ.Effects.Value'}}">
+              {{#if change.allowsMinimum}}
+                <input class="minimum" type="number" step="any" name="oqChanges.{{index}}.minimum" value="{{change.minimum}}"
+                       aria-label="{{localize 'OQ.Effects.Minimum'}}" data-tooltip="{{localize 'OQ.Effects.MinimumHint'}}">
+              {{else}}
+                <span class="minimum"></span>
+              {{/if}}
               <span class="controls">
                 {{#if @root.editable}}
                   <button type="button" class="inline-control icon fa-solid fa-trash" data-action="deleteEffectChange"

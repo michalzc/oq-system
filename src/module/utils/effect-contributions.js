@@ -6,11 +6,14 @@
  */
 
 /**
- * The curated change vocabulary: every target an OpenQuest change may name, with the operations it allows. Later
- * chunks add targets here; the effect editor offers only these.
+ * The curated change vocabulary: every target an OpenQuest change may name, with the operations it allows, whether a
+ * multiplied value rounds down and whether a change may carry a minimum. Later chunks add targets here; the effect
+ * editor offers only these.
  */
 export const EFFECT_TARGETS = Object.freeze({
-  ap: { label: 'OQ.Effects.Targets.ap', types: ['add', 'multiply', 'override'] },
+  ap: { label: 'OQ.Effects.Targets.ap', types: ['add', 'multiply', 'override'], roundDown: true },
+  // The SRD states no rounding for movement, so a multiplied rate keeps its fraction.
+  mr: { label: 'OQ.Effects.Targets.mr', types: ['add', 'multiply', 'override'], minimum: true },
 });
 
 /**
@@ -34,9 +37,9 @@ function isActive(effect) {
   return effect.active ?? !effect.disabled;
 }
 
-/** Rounds down, ignoring floating point noise such as 100 × 0.29 = 28.999999999999996. */
-function roundDown(value) {
-  return Math.floor(Math.round(value * 1e9) / 1e9);
+/** Drops floating point noise such as 100 × 0.29 = 28.999999999999996. */
+function withoutNoise(value) {
+  return Math.round(value * 1e9) / 1e9;
 }
 
 function displayValue(value) {
@@ -60,7 +63,9 @@ export function effectListEntry(effect) {
     rulesText: effect.description ?? '',
     state: enabled ? 'enabled' : 'disabled',
     enabled,
-    changes: changes.filter(isManagedChange).map(({ target, type, value }) => ({ target, type, value })),
+    changes: changes
+      .filter(isManagedChange)
+      .map((change) => withMinimum(change, { target: change.target, type: change.type, value: change.value })),
     // Made by a macro or module (keeping core behaviour), or naming a target this version does not know.
     otherChanges: changes
       .filter((change) => !isManagedChange(change))
@@ -78,19 +83,29 @@ export function effectListEntry(effect) {
 export function effectChangesToSave(storedChanges, edited) {
   return [
     ...storedChanges.filter((change) => !isManagedChange(change)),
-    ...edited.map(({ target, type, value }) => ({
+    ...edited.map(({ target, type, value, minimum }) => ({
       key: '',
-      target,
-      type,
-      value: Number(value) || 0,
+      ...withMinimum({ target, minimum }, { target, type, value: Number(value) || 0 }),
       phase: 'initial',
     })),
   ];
 }
 
 /** A change that leaves its target as it is, such as a row just added in the editor. */
-function changesNothing(type, value) {
-  return (type === 'add' && value === 0) || (type === 'multiply' && value === 1);
+function changesNothing(type, value, minimum) {
+  return minimum === undefined && ((type === 'add' && value === 0) || (type === 'multiply' && value === 1));
+}
+
+/** The given fields of a change, plus the minimum it sets, if any. */
+function withMinimum(change, fields) {
+  const minimum = changeMinimum(change);
+  return minimum === undefined ? fields : { ...fields, minimum };
+}
+
+/** The minimum a change sets, if its target allows one. */
+function changeMinimum(change) {
+  const minimum = change.minimum === null || change.minimum === '' ? NaN : Number(change.minimum);
+  return EFFECT_TARGETS[change.target].minimum && Number.isFinite(minimum) ? minimum : undefined;
 }
 
 /**
@@ -98,24 +113,27 @@ function changesNothing(type, value) {
  * effect. Changes that change nothing are left out.
  * @param {Iterable<object>} effects plain effect data or effect documents
  * @returns {Array<{effectId: string, name: string, sourceName: string, rulesText: string, target: string,
- *   type: string, value: number}>}
+ *   type: string, value: number, minimum?: number}>} `minimum` only when the change sets one its target allows
  */
 export function activeEffectChanges(effects) {
   const changes = [];
   for (const effect of effects) {
     if (!isActive(effect)) continue;
     for (const change of effect.system?.changes ?? []) {
+      if (!isManagedChange(change)) continue;
       const value = Number(change.value);
-      if (!isManagedChange(change) || !Number.isFinite(value) || changesNothing(change.type, value)) continue;
-      changes.push({
-        effectId: effect.id ?? effect._id,
-        name: effect.name,
-        sourceName: effect.system?.sourceName ?? '',
-        rulesText: effect.description ?? '',
-        target: change.target,
-        type: change.type,
-        value,
-      });
+      if (!Number.isFinite(value) || changesNothing(change.type, value, changeMinimum(change))) continue;
+      changes.push(
+        withMinimum(change, {
+          effectId: effect.id ?? effect._id,
+          name: effect.name,
+          sourceName: effect.system?.sourceName ?? '',
+          rulesText: effect.description ?? '',
+          target: change.target,
+          type: change.type,
+          value,
+        }),
+      );
     }
   }
   return changes;
@@ -123,34 +141,46 @@ export function activeEffectChanges(effects) {
 
 /**
  * The effective value of one attribute and the effects that contributed to it. Multipliers apply to the unmodified
- * value (rounded down), then additions, then an override replaces the result; of several overrides the highest wins.
+ * value (rounded down where the target rounds), then additions, then an override replaces the result; of several
+ * overrides the highest wins. Last, the result is raised to the highest minimum any contributing change sets.
  * `needsReview` marks results a human should adjudicate: multiplied and added amounts together, or several overrides.
  * @param {string} target a key of `EFFECT_TARGETS`
  * @param {number} unmodified the value without effects
  * @param {object[]} changes from `activeEffectChanges`
- * @returns {{value: number, unmodified: number, needsReview: boolean, contributions: Array<{effectId: string,
- *   name: string, sourceName: string, type: string, value: number}>}} contributions in the order they are applied
+ * @returns {{value: number, unmodified: number, needsReview: boolean, minimum?: number, contributions:
+ *   Array<{effectId: string, name: string, sourceName: string, type: string, value: number, minimum?: number}>}}
+ *   contributions in the order they are applied; `minimum` only when a change sets one
  */
 export function attributeContribution(target, unmodified, changes) {
   const ofType = (type) =>
     changes
       .filter((change) => change.target === target && change.type === type)
-      .map(({ effectId, name, sourceName, value }) => ({ effectId, name, sourceName, type, value }));
+      .map((change) => {
+        const { effectId, name, sourceName, value } = change;
+        return withMinimum(change, { effectId, name, sourceName, type, value });
+      });
   const multipliers = ofType('multiply');
   const additions = ofType('add');
   const overrides = ofType('override');
-  const sum = (contributions) => contributions.reduce((total, { value }) => total + value, 0);
+  // In the order they are applied.
+  const contributions = [...multipliers, ...additions, ...overrides];
+  const sum = (amounts) => amounts.reduce((total, { value }) => total + value, 0);
 
   const factor = multipliers.reduce((product, { value }) => product * value, 1);
-  const calculated = roundDown(unmodified * factor) + sum(additions);
+  const multiplied = withoutNoise(unmodified * factor);
+  const calculated = withoutNoise(
+    (EFFECT_TARGETS[target].roundDown ? Math.floor(multiplied) : multiplied) + sum(additions),
+  );
   // Several overrides are a conflict for a human to adjudicate; the highest is used so the result is deterministic.
-  const value = overrides.length ? Math.max(...overrides.map(({ value }) => value)) : calculated;
+  const replaced = overrides.length ? Math.max(...overrides.map(({ value }) => value)) : calculated;
+  const minimums = contributions.filter(({ minimum }) => minimum !== undefined).map(({ minimum }) => minimum);
+  const minimum = minimums.length ? Math.max(...minimums) : undefined;
   return {
-    value,
+    value: minimum === undefined ? replaced : Math.max(replaced, minimum),
     unmodified,
     needsReview: (multipliers.length > 0 && additions.length > 0) || overrides.length > 1,
-    // In the order they are applied.
-    contributions: [...multipliers, ...additions, ...overrides],
+    ...(minimum === undefined ? {} : { minimum }),
+    contributions,
   };
 }
 

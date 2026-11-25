@@ -15,6 +15,10 @@ function ap(type, value) {
   return { key: '', target: 'ap', type, value, phase: 'initial', priority: null };
 }
 
+function mr(type, value, minimum) {
+  return { key: '', target: 'mr', type, value, ...(minimum === undefined ? {} : { minimum }), phase: 'initial' };
+}
+
 describe('effect-contributions.js', function () {
   describe('#effectListEntry()', function () {
     it('lists changes stored by macros or modules before v0.9 as other stored changes, as stored', function () {
@@ -69,7 +73,7 @@ describe('effect-contributions.js', function () {
   describe('#effectChangesToSave()', function () {
     const legacy = { key: 'system.attributes.ap.mod', type: 'add', value: 2, phase: 'initial', priority: null };
     // Saved by a later version with a target this one does not know.
-    const future = { key: '', target: 'mr', type: 'add', value: 4, phase: 'initial', priority: null };
+    const future = { key: '', target: 'luck', type: 'add', value: 4, phase: 'initial', priority: null };
     const stored = [legacy, ap('add', 3), future, ap('multiply', 0.5)];
 
     it('effectListEntry lists OpenQuest changes apart from changes it does not manage', function () {
@@ -81,7 +85,7 @@ describe('effect-contributions.js', function () {
       ]);
       assert.deepStrictEqual(entry.otherChanges, [
         { key: 'system.attributes.ap.mod', type: 'add', value: '2' },
-        { key: 'mr', type: 'add', value: '4' },
+        { key: 'luck', type: 'add', value: '4' },
       ]);
     });
 
@@ -96,6 +100,40 @@ describe('effect-contributions.js', function () {
         future,
         { key: '', target: 'ap', type: 'override', value: 6, phase: 'initial' },
         { key: '', target: 'ap', type: 'add', value: 0, phase: 'initial' },
+      ]);
+    });
+  });
+
+  describe('minimums in the editor', function () {
+    it('saves a movement minimum, and none when it is left blank', function () {
+      const saved = effectChangesToSave(
+        [],
+        [
+          { target: 'mr', type: 'add', value: -6, minimum: '1' },
+          { target: 'mr', type: 'add', value: 4, minimum: '' },
+          { target: 'mr', type: 'add', value: 2, minimum: null },
+        ],
+      );
+
+      assert.deepStrictEqual(saved, [
+        { key: '', target: 'mr', type: 'add', value: -6, minimum: 1, phase: 'initial' },
+        { key: '', target: 'mr', type: 'add', value: 4, phase: 'initial' },
+        { key: '', target: 'mr', type: 'add', value: 2, phase: 'initial' },
+      ]);
+    });
+
+    it('drops a minimum on a target without minimums', function () {
+      const [saved] = effectChangesToSave([], [{ target: 'ap', type: 'add', value: 3, minimum: 1 }]);
+
+      assert.deepStrictEqual(saved, { key: '', target: 'ap', type: 'add', value: 3, phase: 'initial' });
+    });
+
+    it('lists the minimum a change sets', function () {
+      const entry = effectListEntry(effect('slow', 'Slow 3', [mr('add', -6, 1), ap('add', 1)]));
+
+      assert.deepStrictEqual(entry.changes, [
+        { target: 'mr', type: 'add', value: -6, minimum: 1 },
+        { target: 'ap', type: 'add', value: 1 },
       ]);
     });
   });
@@ -260,6 +298,110 @@ describe('effect-contributions.js', function () {
         result.contributions.map(({ value }) => value),
         [3],
       );
+    });
+  });
+
+  describe('#attributeContribution() for movement', function () {
+    it('adds Mobility 2 (+4m) to a movement rate of 15', function () {
+      const changes = activeEffectChanges([effect('mob', 'Mobility 2', [mr('add', 4)], { sourceName: 'Mobility' })]);
+
+      assert.deepStrictEqual(attributeContribution('mr', 15, changes), {
+        value: 19,
+        unmodified: 15,
+        needsReview: false,
+        contributions: [{ effectId: 'mob', name: 'Mobility 2', sourceName: 'Mobility', type: 'add', value: 4 }],
+      });
+    });
+
+    it('keeps fractional movement from a multiplier: 15m halved is 7.5m', function () {
+      const changes = activeEffectChanges([effect('half', 'Hobbled', [mr('multiply', 0.5)])]);
+
+      assert.strictEqual(attributeContribution('mr', 15, changes).value, 7.5);
+    });
+
+    it('multiplies without floating point noise: 9m × 1.2 is 10.8m', function () {
+      const changes = activeEffectChanges([effect('fast', 'Fleet', [mr('multiply', 1.2)])]);
+
+      assert.strictEqual(attributeContribution('mr', 9, changes).value, 10.8);
+    });
+
+    it('subtracts Slow 3 (−6m) from 15m: 9m', function () {
+      const changes = activeEffectChanges([effect('slow', 'Slow 3', [mr('add', -6, 1)], { sourceName: 'Slow' })]);
+
+      assert.strictEqual(attributeContribution('mr', 15, changes).value, 9);
+    });
+
+    it("never takes Slow 8 (−16m) below its 1m minimum, showing the minimum with Slow's contribution", function () {
+      const changes = activeEffectChanges([effect('slow', 'Slow 8', [mr('add', -16, 1)], { sourceName: 'Slow' })]);
+
+      assert.deepStrictEqual(attributeContribution('mr', 15, changes), {
+        value: 1,
+        unmodified: 15,
+        needsReview: false,
+        minimum: 1,
+        contributions: [{ effectId: 'slow', name: 'Slow 8', sourceName: 'Slow', type: 'add', value: -16, minimum: 1 }],
+      });
+    });
+
+    it('applies the minimum after an override', function () {
+      const changes = activeEffectChanges([
+        effect('root', 'Rooted', [mr('override', 0)]),
+        effect('slow', 'Slow 1', [mr('add', -2, 1)]),
+      ]);
+
+      assert.strictEqual(attributeContribution('mr', 15, changes).value, 1);
+    });
+
+    it('uses the highest of several minimums', function () {
+      const changes = activeEffectChanges([
+        effect('slow', 'Slow 8', [mr('add', -16, 1)]),
+        effect('mire', 'Mire', [mr('add', -2, 3)]),
+      ]);
+
+      const result = attributeContribution('mr', 15, changes);
+
+      assert.strictEqual(result.value, 3);
+      assert.strictEqual(result.minimum, 3);
+    });
+
+    it('lists Mobility 2 and Slow 3 together: 15m + 4m − 6m is 13m', function () {
+      const changes = activeEffectChanges([
+        effect('mob', 'Mobility 2', [mr('add', 4)], { sourceName: 'Mobility' }),
+        effect('slow', 'Slow 3', [mr('add', -6, 1)], { sourceName: 'Slow' }),
+      ]);
+
+      const result = attributeContribution('mr', 15, changes);
+
+      assert.strictEqual(result.value, 13);
+      assert.deepStrictEqual(
+        result.contributions.map(({ name, sourceName, value }) => [name, sourceName, value]),
+        [
+          ['Mobility 2', 'Mobility', 4],
+          ['Slow 3', 'Slow', -6],
+        ],
+      );
+    });
+
+    it('keeps a change that only sets a minimum', function () {
+      const changes = activeEffectChanges([effect('floor', 'Sure-footed', [mr('add', 0, 5)])]);
+
+      assert.strictEqual(attributeContribution('mr', 3, changes).value, 5);
+    });
+
+    it('ignores a minimum stored on a target without minimums', function () {
+      const changes = activeEffectChanges([effect('prot', 'Protection 3', [{ ...ap('add', 3), minimum: 9 }])]);
+
+      const result = attributeContribution('ap', 2, changes);
+
+      assert.strictEqual(result.value, 5);
+      assert.strictEqual(result.minimum, undefined);
+      assert.strictEqual(result.contributions[0].minimum, undefined);
+    });
+
+    it('sets movement with an override', function () {
+      const changes = activeEffectChanges([effect('root', 'Rooted', [mr('override', 0)])]);
+
+      assert.strictEqual(attributeContribution('mr', 15, changes).value, 0);
     });
   });
 

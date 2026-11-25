@@ -70,6 +70,9 @@ OQ:
     EditorLabel: OpenQuest effect editor
     Effects: Effects
     Enable: Enable
+    Minimum: Minimum
+    MinimumOf: 'minimum {minimum}'
+    MinimumHint: Optional. The effective value never goes below it, whatever else applies.
     NeedsReview: Combines multiplied and added amounts, or several overrides. Check which of them apply.
     NewEffect: New effect
     NoChanges: No changes. The effect is a reminder only.
@@ -92,6 +95,7 @@ OQ:
     Target: Target
     Targets:
       ap: Armour points
+      mr: Movement rate
     Value: Value
     WithoutEffects: Without effects
   Errors:
