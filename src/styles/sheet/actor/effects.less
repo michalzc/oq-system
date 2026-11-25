@@ -1,0 +1,104 @@
+// The effects list, a tab on characters and a section on NPCs.
+.oq.sheet .actor-sheet .sheet-content .items .item-group.effects {
+  .item.effect {
+    .effect-icon {
+      flex: 0 0 @item-row-height;
+      width: @item-row-height;
+      height: @item-row-height;
+      border: 0;
+    }
+
+    // A zero width keeps long names out of the column's minimum width; flex-grow sizes both cells.
+    .item-name {
+      flex: 2 1 0;
+      width: 0;
+      padding-right: 0.5em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .effect-source {
+      flex: 1 1 0;
+      width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: @unimportant-color;
+    }
+
+    .effect-state {
+      flex: 0 0 6em;
+      text-align: center;
+    }
+
+    .effect-toggle,
+    .item-edit,
+    .item-delete {
+      flex: 0 0 auto;
+    }
+  }
+
+  .item.effect.effect-disabled {
+    .effect-icon {
+      opacity: 0.5;
+    }
+
+    .item-name,
+    .effect-state {
+      color: @unimportant-color;
+    }
+  }
+
+  .effect-rules-text {
+    padding: 0 0.5em 0.5em calc(@item-row-height + 1em);
+  }
+
+  .item.effects-empty {
+    color: @unimportant-color;
+  }
+}
+
+// A value changed by effects: a marker after it, and a tooltip listing the contributions.
+.oq.sheet .actor-sheet .value.effect-changed {
+  align-items: baseline;
+  gap: 0.2em;
+  cursor: help;
+
+  .effect-marker {
+    font-size: var(--font-size-11);
+  }
+}
+
+// The contributions tooltip, rendered in core's tooltip element outside the sheet.
+.oq-effect-contributions {
+  text-align: left;
+
+  h4 {
+    margin: 0 0 0.25em;
+  }
+
+  table {
+    margin: 0;
+    border: 0;
+    background: none;
+  }
+
+  td {
+    padding: 0 0.5em 0 0;
+  }
+
+  .amount {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .source {
+    opacity: 0.8;
+  }
+
+  .hint {
+    margin: 0.25em 0 0;
+    max-width: 20em;
+    font-style: italic;
+  }
+}

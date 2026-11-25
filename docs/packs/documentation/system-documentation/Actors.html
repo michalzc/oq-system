@@ -25,7 +25,7 @@
         <code>+1d4</code> or <code>2</code>, and is appended to the result.</li>
     <li><strong>Movement Rate</strong>: 15 plus mod.</li>
     <li><strong>Armour Worn</strong>: the highest Armour Points among armour in the Worn or Natural state, plus mod.
-        Armour does not stack.</li>
+        Armour does not stack. Effects add to this; see <em>Effects</em> below.</li>
 </ul>
 <p>The current Hit Points and Magic Points can be typed in, or adjusted by clicking the HP or MP label: left-click
     adds one, right-click removes one. Characters also track <strong>Fortune Points</strong> and
@@ -42,6 +42,7 @@
     <li><strong>Equipment</strong>: money, total encumbrance, weapons, armour and other equipment.</li>
     <li><strong>Magic</strong>: magic skills, resistances, magic abilities, and spells grouped by type, with custom
         spell groups last. See the <em>Magic</em> page.</li>
+    <li><strong>Effects</strong>: the character's effects. See <em>Effects</em> below.</li>
     <li><strong>Notes</strong>: free text.</li>
 </ul>
 
@@ -80,11 +81,76 @@
 <h3>Tabs</h3>
 <ul>
     <li><strong>Details</strong>: skills and general abilities, magic (magic skills, abilities and spells, followed
-        by the custom spell groups), equipment with quantities, initiative, and a combat section with resistances, weapons, combat abilities and
-        armour.</li>
+        by the custom spell groups), equipment with quantities, initiative, a combat section with resistances, weapons,
+        combat abilities and armour, and the NPC's effects (see <em>Effects</em> below).</li>
     <li><strong>Description</strong>: free text.</li>
 </ul>
 <p>NPC sheets have no add buttons: drop items onto the sheet. There is no money or encumbrance tracking.</p>
+
+<h2>Effects</h2>
+<p>An effect records an ongoing benefit or restriction on a creature: a spell, a blessing, a curse or a ruling. It
+    can change values on the sheet, and it can simply remind everyone of a rule. Effects never rewrite the actor's
+    stored values: they are applied each time the sheet is calculated, so disabling or deleting an effect restores
+    the values it changed.</p>
+
+<h3>Effects list</h3>
+<p>Characters have an <strong>Effects</strong> tab; NPCs have an <strong>Effects</strong> section at the end of the
+    Details tab. Each row shows the effect's icon, name, source and state. Click the name to show or hide its rules
+    text. The toggle enables or disables the effect, the edit icon opens the effect editor and the trash icon deletes
+    the effect immediately, without confirmation. Disabled effects stay in the list, marked <em>Disabled</em>, and
+    change nothing until enabled again.</p>
+<p>The <strong>+</strong> button creates a new effect and opens it in the editor. Anyone who can edit the actor can
+    manage its effects. On an unlinked token's sheet the effects belong to that token only; on a linked token they
+    belong to the actor.</p>
+
+<h3>Effect editor</h3>
+<ul>
+    <li><strong>Name</strong> and <strong>icon</strong> in the header.</li>
+    <li><strong>Source</strong>: where the effect came from, such as the spell's name. It is plain text, so it stays
+        readable even when the spell is gone.</li>
+    <li><strong>Disabled</strong>: the same as the toggle in the effects list.</li>
+    <li><strong>Rules text</strong>: what the effect does in play, shown when the row is expanded in the effects
+        list.</li>
+    <li><strong>Changes</strong>: the values the effect changes. <strong>Add change</strong> adds a row; the trash
+        icon removes one. Each row has a target, an operation and a value. The editor offers only the targets the
+        system supports. For now that is <strong>Armour points</strong>, with these operations:
+        <ul>
+            <li><strong>Add</strong>: adds the value; a negative value subtracts.</li>
+            <li><strong>Multiply by</strong>: multiplies the armour points without effects, rounding down. For
+                example 0.5 halves them.</li>
+            <li><strong>Set to</strong>: replaces the result with the value.</li>
+        </ul>
+    </li>
+</ul>
+<p>When several changes affect the same value, multipliers apply first to the value without effects, then additions,
+    then a <em>Set to</em> replaces the result. If several <em>Set to</em> changes apply, the highest is used.</p>
+<p>An effect with no changes is a <strong>reminder</strong>: it only shows its rules text, for example
+    <em>Owes the river spirit a favour</em>.</p>
+<p>Effects created by macros or modules before this version may contain changes the editor does not manage. They
+    are listed under <em>Other stored changes not managed by OpenQuest</em> and saved back exactly as they are; their
+    behaviour is not guaranteed.</p>
+
+<h3>Values changed by effects</h3>
+<p>A value changed by effects shows a wand icon next to it. Hover over the value to see the value without effects and
+    each contributing effect, with its source and amount, such as <code>+3</code>, <code>×0.5</code> or
+    <code>= 8</code>. When a value combines multiplied and added amounts, or several <em>Set to</em> changes, the
+    tooltip asks you to check which of them apply: the system does not decide whether two spells may stack.</p>
+<p>Effect armour points are added on top of the Armour Worn calculation above: the best Worn or Natural armour plus
+    the mod.</p>
+
+<h3>Recipe: Protection</h3>
+<p>Protection gives one extra armour point per point of magnitude. To record Protection 3 cast on a character
+    wearing 2 AP leather:</p>
+<ol>
+    <li>Open the character's <strong>Effects</strong> tab (on an NPC, the Effects section) and click
+        <strong>+</strong>.</li>
+    <li>Name the effect <em>Protection 3</em>, set the source to <em>Protection</em> and paste the spell's
+        description into the rules text if you like.</li>
+    <li>Click <strong>Add change</strong> and choose <em>Armour points</em>, <em>Add</em>, <em>3</em>.</li>
+    <li>Click <strong>Submit Changes</strong>. Armour Worn now shows 5 with the wand icon; its tooltip lists 2 without
+        effects and <em>Protection 3 (Protection) +3</em>.</li>
+</ol>
+<p>When the spell ends, disable or delete the effect and the armour points return to 2.</p>
 
 <h2>Initiative</h2>
 <p>The <strong>Initiative</strong> field selects a skill or special ability with a formula, and the

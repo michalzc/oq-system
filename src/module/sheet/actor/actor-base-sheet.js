@@ -1,12 +1,15 @@
 import _ from 'lodash-es';
 import { AttributesDialog } from '../../application/attributes-dialog.js';
 import { OQBaseActor } from '../../document/actor/base-actor.js';
+import { OQActiveEffect } from '../../document/active-effect.js';
 import { OQSpell } from '../../document/item/spell.js';
+import { formatContribution } from '../../utils/effect-contributions.js';
 import { getInitiativeOptions } from '../../utils/initiative.js';
 import { customSpellGroups } from '../../utils/magic.js';
 import {
   asyncFlattenItemsFromFolder,
   inRangeValue,
+  renderTemplate,
   withAttributeLabels,
   withCharacteristicLabels,
 } from '../../utils/utils.js';
@@ -31,10 +34,18 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
       itemToChat: OQActorBaseSheet.onItemToChat,
       changeQuantity: OQActorBaseSheet.onItemQuantityIncreaseDecrease,
       modifyAttributes: OQActorBaseSheet.onModifyAttributes,
+      addEffect: OQActorBaseSheet.onAddEffect,
+      editEffect: OQActorBaseSheet.onEditEffect,
+      deleteEffect: OQActorBaseSheet.onDeleteEffect,
+      toggleEffect: OQActorBaseSheet.onToggleEffect,
+      toggleEffectRulesText: OQActorBaseSheet.onToggleEffectRulesText,
       // Left click raises the value, right click lowers it.
       adjustResource: { handler: OQActorBaseSheet.onUpdateResource, buttons: [0, 2] },
     },
   };
+
+  /** IDs of effects whose rules text is expanded in the effects list; kept across re-renders. */
+  #expandedEffects = new Set();
 
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
@@ -47,6 +58,8 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
       initiativeOptions: this.getInitiativeOptions(),
       groupedItems: this.prepareGroupedItems(),
       itemTooltips: await this.prepareItemTooltips(),
+      effects: await this.prepareEffects(),
+      effectTooltips: await this.prepareEffectTooltips(),
       ...this.prepareSpentSpells(),
     });
   }
@@ -68,6 +81,52 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
       secrets: this.actor.isOwner,
       relativeTo: this.actor,
     });
+  }
+
+  /**
+   * The actor's own effects for the effects list, enabled or not. On an unlinked token's sheet these are the token's.
+   * @returns {Promise<object[]>}
+   */
+  async prepareEffects() {
+    const effects = _.sortBy(this.actor.effects.contents, (effect) => effect.name);
+    return Promise.all(
+      effects.map(async (effect) => {
+        const entry = effect.listEntry;
+        const expanded = this.#expandedEffects.has(effect.id);
+        return {
+          ...entry,
+          id: effect.id,
+          expanded,
+          enrichedRulesText: expanded && entry.rulesText ? await this.enrichHTML(entry.rulesText) : '',
+        };
+      }),
+    );
+  }
+
+  /**
+   * Tooltips listing the effects that changed an attribute and by how much, keyed by attribute. An attribute without
+   * a tooltip is not changed by effects.
+   * @returns {Promise<Object<string, string>>}
+   */
+  async prepareEffectTooltips() {
+    const attributes = withAttributeLabels(this.actor.system.attributes);
+    const tooltips = await Promise.all(
+      ['ap']
+        .filter((key) => attributes[key].effects)
+        .map(async (key) => {
+          const { effects, label } = attributes[key];
+          const html = await renderTemplate('systems/oq/templates/actor/parts/effect-contributions-tooltip.hbs', {
+            ...effects,
+            label,
+            contributions: effects.contributions.map((contribution) => ({
+              ...contribution,
+              amount: formatContribution(contribution),
+            })),
+          });
+          return [key, html];
+        }),
+    );
+    return Object.fromEntries(tooltips);
   }
 
   async prepareItemTooltips() {
@@ -216,6 +275,46 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
     if (item) {
       await item.delete();
     }
+  }
+
+  getEffectFromElement(element) {
+    const effectId = element.closest('[data-effect-id]')?.dataset.effectId;
+    return effectId ? this.actor.effects.get(effectId) : undefined;
+  }
+
+  static async onAddEffect(event) {
+    event.preventDefault();
+    if (!this.isEditable) return;
+    await OQActiveEffect.createOnActor(this.actor);
+  }
+
+  static onEditEffect(event, target) {
+    event.preventDefault();
+    // Viewers get the effect editor in read-only mode.
+    this.getEffectFromElement(target)?.sheet.render(true);
+  }
+
+  static async onDeleteEffect(event, target) {
+    event.preventDefault();
+    if (!this.isEditable) return;
+    const effect = this.getEffectFromElement(target);
+    if (effect) await effect.delete();
+  }
+
+  static async onToggleEffect(event, target) {
+    event.preventDefault();
+    if (!this.isEditable) return;
+    const effect = this.getEffectFromElement(target);
+    if (effect) await effect.update({ disabled: !effect.disabled });
+  }
+
+  static onToggleEffectRulesText(event, target) {
+    event.preventDefault();
+    const effect = this.getEffectFromElement(target);
+    if (!effect) return;
+    if (this.#expandedEffects.has(effect.id)) this.#expandedEffects.delete(effect.id);
+    else this.#expandedEffects.add(effect.id);
+    return this.render();
   }
 
   static async onItemTestRoll(event, target) {

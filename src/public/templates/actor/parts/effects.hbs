@@ -1,0 +1,38 @@
+<div class="item-group effects">
+  <div class="item label">
+    <div>{{ localize 'OQ.Effects.Effects' }}</div>
+    {{#if @root.editable}}
+      <a class="add-effect" data-action="addEffect" data-tooltip="{{ localize 'OQ.Effects.AddEffect' }}"><i
+          class="fas fa-plus"></i></a>
+    {{/if}}
+  </div>
+  {{#each effects as |effect|}}
+    <div class="item effect{{#unless effect.enabled}} effect-disabled{{/unless}}" data-effect-id="{{effect.id}}">
+      <img class="effect-icon" src="{{effect.img}}" alt="{{effect.name}}">
+      <a class="item-name" data-action="toggleEffectRulesText" aria-expanded="{{effect.expanded}}"
+         data-tooltip="{{ localize 'OQ.Effects.ShowRulesText' }}">
+        <i class="fas {{#if effect.expanded}}fa-caret-down{{else}}fa-caret-right{{/if}}"></i> {{effect.name}}
+      </a>
+      <div class="effect-source">{{effect.sourceName}}</div>
+      <div class="effect-state">{{ localize (concat 'OQ.Effects.States.' effect.state) }}</div>
+      {{#if @root.editable}}
+        <a class="effect-toggle" data-action="toggleEffect"
+           data-tooltip="{{ localize (ifThen effect.enabled 'OQ.Effects.Disable' 'OQ.Effects.Enable') }}">
+          <i class="fas {{#if effect.enabled}}fa-toggle-on{{else}}fa-toggle-off{{/if}}"></i></a>
+      {{/if}}
+      <a class="item-edit" data-action="editEffect" data-tooltip="{{ localize 'OQ.Effects.EditEffect' }}"><i
+          class="fas fa-edit"></i></a>
+      {{#if @root.editable}}
+        <a class="item-delete" data-action="deleteEffect" data-tooltip="{{ localize 'OQ.Effects.DeleteEffect' }}"><i
+            class="fas fa-trash"></i></a>
+      {{/if}}
+    </div>
+    {{#if effect.expanded}}
+      <div class="effect-rules-text" data-effect-id="{{effect.id}}">
+        {{#if effect.rulesText}}{{{effect.enrichedRulesText}}}{{else}}<p class="hint">{{ localize 'OQ.Effects.NoRulesText' }}</p>{{/if}}
+      </div>
+    {{/if}}
+  {{else}}
+    <div class="item effects-empty">{{ localize 'OQ.Effects.NoEffects' }}</div>
+  {{/each}}
+</div>

@@ -1,0 +1,67 @@
+<section class="tab effect-details scrollable{{#if tab.active}} active{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+  {{formGroup systemFields.sourceName name='system.sourceName' value=source.system.sourceName rootId=rootId
+              label=(localize 'OQ.Effects.SourceName') hint=(localize 'OQ.Effects.SourceNameHint')}}
+  {{formGroup fields.disabled value=source.disabled rootId=rootId label=(localize 'OQ.Effects.States.disabled')}}
+  {{formGroup fields.description value=source.description rootId=rootId label=(localize 'OQ.Effects.RulesText')}}
+  {{#if isItemEffect}}
+    {{formGroup fields.transfer value=source.transfer rootId=rootId}}
+  {{/if}}
+
+  {{#if offersChanges}}
+    <fieldset class="oq-changes">
+      <legend>{{localize 'OQ.Effects.Changes'}}</legend>
+      {{#if changes.length}}
+        <div class="change-header">
+          <span class="target">{{localize 'OQ.Effects.Target'}}</span>
+          <span class="type">{{localize 'OQ.Effects.Operation'}}</span>
+          <span class="value">{{localize 'OQ.Effects.Value'}}</span>
+          <span class="controls"></span>
+        </div>
+        <ol>
+          {{#each changes as |change index|}}
+            <li class="change" data-index="{{index}}">
+              <select class="target" name="oqChanges.{{index}}.target" aria-label="{{localize 'OQ.Effects.Target'}}">
+                {{selectOptions change.targetOptions selected=change.target localize=true}}
+              </select>
+              <select class="type" name="oqChanges.{{index}}.type" aria-label="{{localize 'OQ.Effects.Operation'}}">
+                {{selectOptions change.typeOptions selected=change.type localize=true}}
+              </select>
+              <input class="value" type="number" step="any" name="oqChanges.{{index}}.value" value="{{change.value}}"
+                     aria-label="{{localize 'OQ.Effects.Value'}}">
+              <span class="controls">
+                {{#if @root.editable}}
+                  <button type="button" class="inline-control icon fa-solid fa-trash" data-action="deleteEffectChange"
+                          data-tooltip="{{localize 'OQ.Effects.DeleteChange'}}"
+                          aria-label="{{localize 'OQ.Effects.DeleteChange'}}"></button>
+                {{/if}}
+              </span>
+            </li>
+          {{/each}}
+        </ol>
+      {{else}}
+        <p class="hint">{{localize 'OQ.Effects.NoChanges'}}</p>
+      {{/if}}
+      {{#if editable}}
+        <button type="button" class="add-change" data-action="addEffectChange">
+          <i class="fa-solid fa-plus"></i> {{localize 'OQ.Effects.AddChange'}}
+        </button>
+      {{/if}}
+    </fieldset>
+  {{/if}}
+
+  {{#if otherChanges.length}}
+    <fieldset class="other-changes">
+      <legend>{{localize 'OQ.Effects.OtherChanges'}}</legend>
+      <p class="hint">{{localize 'OQ.Effects.OtherChangesHint'}}</p>
+      <ol>
+        {{#each otherChanges as |change|}}
+          <li>
+            <code class="key">{{change.key}}</code>
+            <span class="type">{{change.type}}</span>
+            <code class="value">{{change.value}}</code>
+          </li>
+        {{/each}}
+      </ol>
+    </fieldset>
+  {{/if}}
+</section>

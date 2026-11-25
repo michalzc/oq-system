@@ -37,7 +37,12 @@
 
       <label data-tooltip="{{ localize attributes.ap.label}}">{{ localize
         attributes.ap.abbr}}</label>
-      <div class="value">{{system.attributes.ap.value}}</div>
+      {{#if effectTooltips.ap}}
+        <div class="value effect-changed" data-tooltip-html="{{effectTooltips.ap}}">{{system.attributes.ap.value}}<i
+            class="fa-solid fa-wand-magic-sparkles effect-marker" aria-label="{{ localize 'OQ.Effects.ChangedByEffects' }}"></i></div>
+      {{else}}
+        <div class="value">{{system.attributes.ap.value}}</div>
+      {{/if}}
     </div>
 
 

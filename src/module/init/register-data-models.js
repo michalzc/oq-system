@@ -1,4 +1,5 @@
 import { CharacterDataModel, NpcDataModel } from '../dataModel/data-models-actor.js';
+import { OQEffectDataModel } from '../dataModel/data-models-effect.js';
 import {
   ArmorDataModel,
   EquipmentDataModel,
@@ -23,5 +24,11 @@ export function registerDataModels() {
     equipment: EquipmentDataModel,
     spell: SpellDataModel,
     specialAbility: SpecialAbilityDataModel,
+  };
+
+  // Replaces the core model of the base type, so every effect, including ones stored before v0.9, uses it.
+  CONFIG.ActiveEffect.dataModels = {
+    ...CONFIG.ActiveEffect.dataModels,
+    base: OQEffectDataModel,
   };
 }

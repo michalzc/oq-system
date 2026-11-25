@@ -1,5 +1,6 @@
 import _ from 'lodash-es';
 import { getDefaultItemsForActor } from '../../utils/compendium-utils.js';
+import { activeEffectChanges, attributeContribution } from '../../utils/effect-contributions.js';
 import { getDeclaration } from '../../utils/initiative.js';
 
 /**
@@ -73,6 +74,7 @@ export class OQBaseActor extends Actor {
 
     // Actor#hierarchy covers items and effects - the latter have no ordering requirements.
     this.effects.forEach((effect) => effect._safePrepareData());
+    // Only changes made by macros or modules: OQActiveEffect#shouldApplyChange skips OpenQuest changes.
     this.applyActiveEffects('initial');
   }
 
@@ -146,10 +148,19 @@ export class OQBaseActor extends Actor {
 
   calculateItemDependentAttributes() {
     const attributes = this.system.attributes;
+    // The actor's own effects; item effects get their roles in later chunks.
+    const effectChanges = activeEffectChanges(this.effects);
+    const ap = attributeContribution(
+      'ap',
+      attributes.ap.base + attributes.ap.mod + this.calculateArmourPoints(),
+      effectChanges,
+    );
 
     return {
       ap: {
-        value: attributes.ap.base + attributes.ap.mod + this.calculateArmourPoints(),
+        value: ap.value,
+        // The effect breakdown shown in the sheet tooltip; absent when no effect changes AP.
+        effects: ap.contributions.length ? ap : undefined,
       },
       initiative: this.calculateInitiative(),
     };

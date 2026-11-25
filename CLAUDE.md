@@ -2,8 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-OpenQuest SRD game system (`id: oq`) for Foundry VTT 14 (minimum and verified 14, dev version 14.369). Plain ES
-modules bundled by Vite; no TypeScript. Node.js 24 and Yarn 1.
+OpenQuest SRD game system (`id: oq`) for Foundry VTT 14 (minimum and verified 14; `flake.nix` pins the dev version).
+Plain ES modules bundled by Vite; no TypeScript. Node.js 24 and Yarn 1.
 
 ## Commands
 
@@ -11,7 +11,8 @@ modules bundled by Vite; no TypeScript. Node.js 24 and Yarn 1.
 yarn install --frozen-lockfile
 yarn build            # build:packs then build:code, output in build/
 yarn build:code       # Vite: bundle JS, compile Less, system.yaml/lang YAML -> JSON, copy src/public
-yarn build:packs      # compile src/packs/ YAML into LevelDB under build/packs/ (Foundry must be stopped)
+yarn build:packs      # compile src/packs/ YAML into LevelDB under build/packs/; refuses while Foundry has them open
+yarn check:packs      # compile the packs into a temporary directory: checks src/packs/ while Foundry runs
 yarn build:docs       # regenerate journal sources in src/packs/ from docs/packs/ HTML; not part of build, commit output
 yarn dev              # watch mode for code/styles/meta/public assets; never rebuilds packs
 yarn clean            # remove build/ (stop Foundry and the watcher first)
@@ -22,8 +23,9 @@ npx mocha test/test-roll.js           # one test file
 npx mocha test/test-roll.js -g 'mastered'   # filter by test name
 ```
 
-Run `yarn test`, `yarn lint` and `yarn build` before submitting changes. A pre-commit hook runs lint-staged (eslint
---fix, stylelint, prettier). Prettier: single quotes, trailing commas, 120 columns.
+Run `yarn test`, `yarn lint` and `yarn build` before submitting changes; while the dev world runs, `yarn build:code` and
+`yarn check:packs` stand in for `yarn build`. A pre-commit hook runs lint-staged (eslint --fix, stylelint, prettier).
+Prettier: single quotes, trailing commas, 120 columns.
 
 The optional Nix shell (`direnv allow` / `nix develop`) provides `start-dev [--watch]`, which builds, links `build/`
 into `foundryvtt-data/Data/systems/oq`, starts Foundry on port 32000 with the `oq-dev` world, and opens Chromium with

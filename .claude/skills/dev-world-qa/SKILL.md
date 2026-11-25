@@ -1,0 +1,54 @@
+---
+name: dev-world-qa
+description: >-
+  Drive the running oq-dev Foundry world through the Chrome DevTools MCP. Use for in-world QA, a ticket's Manual
+  acceptance rows, or seeing a change work in Foundry.
+---
+
+# In-world QA in the oq-dev world
+
+`start-dev` (see CLAUDE.md) runs Foundry on port 32000 with the `oq-dev` world and Chromium on `127.0.0.1:9222`, which
+the `chrome-devtools` MCP attaches to. Drive the world with `evaluate_script`, check with data reads and screenshots.
+
+## Steps
+
+1. **Attach.** `list_pages` shows `http://127.0.0.1:32000/game`. When the page or Foundry is missing, ask the user to
+   run `start-dev`; it starts processes they own.
+2. **Rebuild.** `yarn build:code`, then `navigate_page` with `type: reload, ignoreCache: true`. Pack changes need
+   Foundry stopped for `yarn build:packs`; while it runs, `yarn check:packs` only checks that they compile.
+3. **Wait for ready** at the start of every script that follows a reload:
+
+   ```js
+   for (let i = 0; i < 60 && !game.ready; i++) await new Promise((r) => setTimeout(r, 500));
+   ```
+
+4. **Drive the UI** with DOM clicks inside the sheet, the same path a user takes:
+
+   ```js
+   const actor = game.actors.getName('A'); // unlinked token: canvas.scene.tokens.get(id).actor
+   await actor.sheet.render(true);
+   actor.sheet.changeTab('effects', 'primary');
+   actor.sheet.element.querySelector('[data-action=addEffect]').click();
+   await new Promise((r) => setTimeout(r, 1000)); // let the update and re-render land
+   ```
+
+   Fill a form by setting input values, then click its `button[type=submit]`.
+5. **Verify** each step:
+   - Prepared values (`actor.system...`) and stored data (`actor.toObject()`). To prove "no stored field changes",
+     save a baseline in `localStorage` (page state is lost on reload) and compare after each reload.
+   - `take_screenshot` without `filePath`, then `Read` the returned path. To show a tooltip first:
+     `game.tooltip.activate(element)`.
+   - `list_console_messages` with `types: ["error", "warn"]`: none expected.
+6. **Record** the result in the ticket's `## Comments`: date, Foundry version, world, client (GM or player), each
+   scenario with its observed values, and anything not checked.
+
+## Traps
+
+- `take_snapshot` on `/game` includes the whole chat log: about 1,400 lines in `oq-dev`. Read state through
+  `evaluate_script` instead.
+- `take_screenshot` with `filePath` writes only inside the MCP's workspace roots; the job tmp directory is outside.
+- Core `ActiveEffectConfig` (the system effect editor) closes on submit. Call `effect.sheet.render(true)` again before
+  the next interaction; `sheet.form` is `null` while closed.
+- An action that submits the form without closing it (add or delete a change row) re-renders the sheet: query inputs
+  again afterwards.
+- After a browser restart, page ids change: call `list_pages` again.

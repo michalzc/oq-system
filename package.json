@@ -27,6 +27,7 @@
     "lint:fix": "yarn lint:js --fix && yarn lint:templates --fix && yarn lint:styles",
     "build:docs": "node tools/build-docs.mjs",
     "build:packs": "node tools/build-packs.mjs",
+    "check:packs": "node tools/build-packs.mjs --check",
     "build:code": "vite build",
     "build": "yarn build:packs && yarn build:code",
     "dev": "vite build --watch",

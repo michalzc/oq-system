@@ -1,7 +1,7 @@
 # Foundry v14 notes
 
-Behaviour of Foundry 14.369 that the sources do not make obvious, found while building this system on 14.368 and
-rechecked against the 14.369 sources. Paths are relative to the `foundryvtt-api` symlink.
+Behaviour of Foundry 14 that the sources do not make obvious, found while building this system on 14.368 to 14.370.
+Line references were last checked against the 14.370 sources. Paths are relative to the `foundryvtt-api` symlink.
 
 ## Startup order
 
@@ -10,7 +10,7 @@ rechecked against the 14.369 sources. Paths are relative to the `foundryvtt-api`
 1. `Hooks.callAll("init")`. Stored world settings are already in memory (loaded by the `Game` constructor), so
    `game.settings.get` right after `register` returns the saved value. Core settings and translations are not
    available yet: `i18n.initialize()` runs after `init`.
-2. `setupGame()` → `initializeDocuments()` (`game.mjs:729`) constructs every world Actor and Item and prepares its data.
+2. `setupGame()` → `initializeDocuments()` (`game.mjs:733`) constructs every world Actor and Item and prepares its data.
 3. `Hooks.callAll("setup")`, then `ready`.
 
 Anything data preparation reads (e.g. `CONFIG.OQ.Rules`) must be in place by the end of `init`; `setup` is too late.
@@ -34,17 +34,31 @@ World settings cannot be written before `ready`.
 
 ## ApplicationV2 forms
 
-- `_onSubmitForm` (`client/applications/api/application.mjs:2147-2161`) catches an error thrown by the form handler,
-  shows it with `ui.notifications.error(err)` (displayed as `Error: <message>`) and keeps the form open. For a clean
-  message with `closeOnSubmit: false`, call `ui.notifications.error(message)` and return instead of throwing.
+- `_onSubmitForm` (`client/applications/api/application.mjs:2159-2178`) catches an error thrown by the form handler,
+  shows its message with `ui.notifications.error(err.message)`, logs it to the console and keeps the form open. To
+  reject a submission without a console error, call `ui.notifications.error(message)` and return instead of throwing.
 - `_onChangeForm(formConfig, event)` fires on every input change; override it for live updates and call `super`.
 - `{{formGroup field ...}}` renders a `NumberField` with `min`/`max` as a `<range-picker>`. It clamps a typed value to
-  the range and rounds it to the step as it is entered (`client/applications/elements/range-picker.mjs:112-119`), so a
+  the range and rounds it to the step as it is entered (`client/applications/elements/range-picker.mjs:115-119`), so a
   form cannot submit an out-of-range number through it. Its number box is 40px wide in core CSS.
 - Core example of a settings menu with its own form: `client/applications/settings/menus/ui-config.mjs`.
 
 ## Forcing dice results
 
-A die face is `Math.ceil((1 - u) * faces)` with `u = CONFIG.Dice.randomUniform()` (`client/dice/terms/dice.mjs:365-376`).
-To get face `f` on a d100 in a running world, temporarily set
-`CONFIG.Dice.randomUniform = () => 1 - (f - 0.5) / 100`, roll, and restore the original function.
+A die face is `minValue - 1 + Math.ceil((1 - u) * faces)` with `u = CONFIG.Dice.randomUniform()`
+(`DiceTerm#mapRandomFace`, `client/dice/terms/dice.mjs:409-413`); for a d100 `minValue` is 1. To get face `f` on a d100
+in a running world, temporarily set `CONFIG.Dice.randomUniform = () => 1 - (f - 0.5) / 100`, roll, and restore the
+original function.
+
+## Active Effects
+
+- `Actor#applyActiveEffects(phase)` (`client/documents/actor.mjs:212`) asks `ActiveEffect#shouldApplyChange(change,
+  {phase})` per change and skips changes whose `key` is blank. Statuses are collected per active effect outside that
+  check, and `token.`-prefixed changes are split off after it into `actor.tokenActiveEffectChanges`, so overriding
+  `shouldApplyChange` to skip some changes keeps core status and token handling for the rest.
+- A system can replace the change schema of `ActiveEffectTypeDataModel` but must keep `type`, `phase` and `priority`.
+  Field instances cannot be reused across schemas: `SchemaField` throws when a field already has a `parent`
+  (`common/data/fields.mjs:935`) and fields have no `clone`. To extend core's change fields, take them from a
+  throwaway `super.defineSchema()` and clear their `parent` before adopting them.
+- A new optional field without an `initial` (`StringField({required: false, blank: true})`) cleans to `undefined`,
+  which is not serialized, so changes stored without that field are saved back without it.
