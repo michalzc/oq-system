@@ -10,3 +10,7 @@ build
 
 # Journal sources, formatted by hand; `yarn build:docs` reads them
 docs/packs/**/*.html
+
+# Markdown is wrapped by hand at 120 columns with compact tables; Prettier would pad every table row to its widest
+# cell and unwrap list continuations
+*.md

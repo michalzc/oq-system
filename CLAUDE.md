@@ -50,6 +50,7 @@ the data model (`dataModel/`, registered in `init/register-data-models.js`), the
 config maps, `documentTypes` in `src/system.yaml`, and `src/lang/en.yaml` (`TYPES.*`).
 
 **Data preparation order** (`document/actor/base-actor.js`) is deliberate:
+
 1. `prepareBaseData` — reads the actor's active effect changes once (`effectChanges`), then attributes that need only
    characteristics and those changes (e.g. movement rate).
 2. `prepareEmbeddedDocuments` — items prepared in dependency order (skills before weapons/spells that reference them).

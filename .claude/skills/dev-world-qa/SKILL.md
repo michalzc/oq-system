@@ -56,9 +56,11 @@ the `chrome-devtools` MCP attaches to. Drive the world with `evaluate_script`, c
    - What the server stored, when a data model's `migrateData` converts on load and so `toObject()` cannot tell:
      `await new Promise((r) => game.socket.emit('modifyDocument', { type: 'Actor', action: 'get', operation: { query:
      {}, pack } }, r))` returns the raw sources in `.result` (omit `pack` for world documents).
-   - `take_screenshot` without `filePath`, then `Read` the returned path. To show a tooltip first:
-     `game.tooltip.activate(element)`. Shoot every sheet type a changed template appears on, one at a time and
-     unobstructed: a layout bug hidden behind an overlapping window goes unseen.
+   - `take_screenshot` without `filePath`, then `Read` the returned path. Before the first one, set a small
+     viewport with `emulate` (`viewport: '1400x900x1'`): the full window returns images of about 2500×2000 px.
+     Call `emulate` without `viewport` when the QA is done, to give the user their window back. To show a tooltip
+     first: `game.tooltip.activate(element)`. Shoot every sheet type a changed template appears on, one at a time
+     and unobstructed: a layout bug hidden behind an overlapping window goes unseen.
    - Every control of a form the change touches, not only the ones the scenario needs: set each `select`/`input`
      and fire `change` on it while a `window` `error` listener records exceptions. Core listeners that throw on a
      change (see `docs/foundry-v14-notes.md`, Active Effects) leave no console warning and no visible trace.
@@ -85,3 +87,6 @@ migration's dialog with Retry, then reload without the script.
 - An action that submits the form without closing it (add or delete a change row) re-renders the sheet: query inputs
   again afterwards.
 - After a browser restart, page ids change: call `list_pages` again.
+- `resize_page` resizes the user's real browser window, and the window manager overrides the size it asks for (a
+  1400×900 request left a 513 px wide page at a new device pixel ratio). Size screenshots with `emulate`, which
+  changes only the page's viewport.
