@@ -16,16 +16,16 @@ were about other migrations:
 
 Every later migration (the v0.9 chunks still to come) would repeat this rework.
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] A runner test states which migrations it runs: generic runner behaviour (writes, failures, skip/retry, locked
+- [x] A runner test states which migrations it runs: generic runner behaviour (writes, failures, skip/retry, locked
       compendia, newer stored version) runs on small fixture migrations; tests of a real migration through the runner
       run that migration alone.
-- [ ] The production entry points still run the registered `migrations` list, and their `setup`/`ready` callers in
+- [x] The production entry points still run the registered `migrations` list, and their `setup`/`ready` callers in
       `oq.js` are unchanged.
-- [ ] Check: append a dummy migration with handlers for `Actor` and `Token` to `migrations.js` locally; every runner
+- [x] Check: append a dummy migration with handlers for `Actor` and `Token` to `migrations.js` locally; every runner
       test still passes without edits. Remove the dummy afterwards.
-- [ ] `yarn test` and `yarn lint` pass.
+- [x] `yarn test` and `yarn lint` pass.
 
 Design is open. Two candidates:
 
@@ -38,3 +38,8 @@ The first makes the seam explicit; the second is smaller but keeps tests coupled
 first unless it spreads beyond the runner.
 
 ## Comments
+
+Implemented the first candidate: `applyPendingMigrations(migrations = registered)`; the pending plan carries the
+newer stored version to `migrateWorld()`. Generic runner tests run an icon fixture migration; the flag test runs
+migration 2 alone, the HP/MP excess block runs migrations 3 and 4. Checked with a dummy migration 5 (Actor and Token
+handlers): every test passed unedited.

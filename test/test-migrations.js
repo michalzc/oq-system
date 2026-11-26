@@ -22,8 +22,8 @@ describe('migrations.js', function () {
   });
 
   it('Should return the migrations newer than the stored version', function () {
-    expect(pendingMigrations(0)).to.eql(migrations);
-    expect(pendingMigrations(LATEST_MIGRATION_VERSION)).to.eql([]);
+    expect(pendingMigrations(0, migrations)).to.eql(migrations);
+    expect(pendingMigrations(LATEST_MIGRATION_VERSION, migrations)).to.eql([]);
   });
 });
 
@@ -401,8 +401,17 @@ describe('migration-runner.js', function () {
         return batch.map((source) => new FakeDocument(source));
       };
 
-    const run = async () => {
-      applyPendingMigrations();
+    // Generic runner behaviour runs on fixture migrations, so registering a new migration leaves these tests alone.
+    const DOCUMENT_NAMES = ['Actor', 'Item', 'Scene', 'Token', 'Macro', 'ChatMessage', 'RollTable', 'TableResult'];
+    const replaceLegacyIcon = (source) => (source.img === LEGACY ? { img: THEMED } : {});
+    const iconMigration = {
+      version: 1,
+      name: 'Icons',
+      handlers: Object.fromEntries(DOCUMENT_NAMES.map((documentName) => [documentName, replaceLegacyIcon])),
+    };
+
+    const run = async (migrationList = [iconMigration]) => {
+      applyPendingMigrations(migrationList);
       await migrateWorld();
     };
 
@@ -504,10 +513,7 @@ describe('migration-runner.js', function () {
     });
 
     it('Should migrate world documents with their embedded documents and store the version', async function () {
-      const actor = new FakeDocument(
-        { _id: 'a1', img: LEGACY, prototypeToken: { texture: { src: THEMED } } },
-        { updateEmbeddedDocuments: recordEmbedded('a1') },
-      );
+      const actor = new FakeDocument({ _id: 'a1', img: LEGACY }, { updateEmbeddedDocuments: recordEmbedded('a1') });
       actor.items = [new FakeDocument({ _id: 'i1', type: 'armour', img: LEGACY })];
       const item = new FakeDocument({ _id: 'i2', type: 'armour', img: LEGACY });
       const macro = new FakeDocument({ _id: 'm1', img: THEMED });
@@ -523,7 +529,7 @@ describe('migration-runner.js', function () {
           { target: 'Item', batch: [{ _id: 'i2', img: THEMED }] },
         ],
       );
-      expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+      expect(storedVersion).to.be(iconMigration.version);
       expect(notifications.map(([type]) => type)).to.eql(['warn', 'remove', 'info']);
     });
 
@@ -535,7 +541,7 @@ describe('migration-runner.js', function () {
         updateEmbeddedDocuments: recordEmbedded('t1'),
       };
       const token = new FakeDocument(
-        { _id: 't1', texture: { src: LEGACY }, delta: { img: null } },
+        { _id: 't1', img: LEGACY },
         { actorLink: false, delta: { items }, actor: tokenActor },
       );
       const scene = new FakeDocument(
@@ -552,7 +558,7 @@ describe('migration-runner.js', function () {
       assert.deepEqual(
         updates.map(({ target, batch }) => ({ target, batch })),
         [
-          { target: 's1.Token', batch: [{ _id: 't1', texture: { src: THEMED } }] },
+          { target: 's1.Token', batch: [{ _id: 't1', img: THEMED }] },
           { target: 't1.Item', batch: [{ _id: 'd1', img: THEMED }] },
           { target: 'Macro', batch: [{ _id: 'm1', img: THEMED }] },
         ],
@@ -572,7 +578,7 @@ describe('migration-runner.js', function () {
       const worldItem = new FakeDocument(marked('i2'));
       setGlobals({ documents: { actors: [actor], items: [worldItem], scenes: [scene] } });
 
-      await run();
+      await run([embeddedNewActorFlagMigration]);
 
       const removed = { flags: { oq: { newActor: new foundry.data.operators.ForcedDeletion() } } };
       assert.deepEqual(
@@ -583,7 +589,7 @@ describe('migration-runner.js', function () {
         ],
       );
       expect(worldItem.source.flags.oq.newActor).to.eql(['character']);
-      expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+      expect(storedVersion).to.be(embeddedNewActorFlagMigration.version);
     });
 
     it('Should migrate roll tables with their results', async function () {
@@ -606,7 +612,7 @@ describe('migration-runner.js', function () {
           { target: 'r1.TableResult', batch: [{ _id: 'tr1', img: THEMED }] },
         ],
       );
-      expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+      expect(storedVersion).to.be(iconMigration.version);
     });
 
     it('Should migrate world compendia only, restoring their lock', async function () {
@@ -635,9 +641,8 @@ describe('migration-runner.js', function () {
       expect(updates.map(({ target }) => target)).to.eql(['world.Macro', 'world.RollTable']);
       expect(updates[0].options.pack).to.be('world.Macro');
       expect(updates[1].options.pack).to.be('world.RollTable');
-      // Each migration unlocks both world packs and locks them again.
-      const pairs = Array(2 * migrations.length).fill([{ locked: false }, { locked: true }]);
-      expect(_.chunk(configured, 2)).to.eql(pairs);
+      // The migration unlocks both world packs and locks them again.
+      expect(configured).to.eql([{ locked: false }, { locked: true }, { locked: false }, { locked: true }]);
     });
 
     it('Should keep the version when a document fails, so the migration runs again', async function () {
@@ -677,7 +682,7 @@ describe('migration-runner.js', function () {
       await run();
 
       expect(dialogs.length).to.be(1);
-      expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+      expect(storedVersion).to.be(iconMigration.version);
       expect(notifications).to.eql([
         ['warn', 'OQ.Migration.Begin'],
         ['remove', 'OQ.Migration.Begin'],
@@ -690,16 +695,13 @@ describe('migration-runner.js', function () {
 
       beforeEach(function () {
         later = {
-          version: LATEST_MIGRATION_VERSION + 1,
+          version: iconMigration.version + 1,
           name: 'Rename',
           handlers: { Macro: (source) => (source.name === 'old' ? { name: 'new' } : {}) },
         };
-        migrations.push(later);
       });
 
-      afterEach(function () {
-        migrations.pop();
-      });
+      const runBoth = () => run([iconMigration, later]);
 
       it('Should run the later migration after the GM skips the failed documents', async function () {
         setGlobals({ documents: { macros: [new FakeDocument({ _id: 'm1', img: LEGACY, name: 'old' })] } });
@@ -708,7 +710,7 @@ describe('migration-runner.js', function () {
           batch[0].img ? [] : update(batch, options);
         dialogAnswer = 'skip';
 
-        await run();
+        await runBoth();
 
         expect(dialogs.length).to.be(1);
         expect(updates.map(({ batch }) => batch)).to.eql([[{ _id: 'm1', name: 'new' }]]);
@@ -723,7 +725,7 @@ describe('migration-runner.js', function () {
           throw new Error('invalid');
         };
 
-        await run();
+        await runBoth();
 
         expect(updates.map(({ batch }) => batch)).to.eql([
           [
@@ -734,7 +736,7 @@ describe('migration-runner.js', function () {
         expect(dialogs.map(({ content }) => content)).to.eql([
           `<p>OQ.Migration.SkipPrompt {"version":${later.version},"count":2}</p>`,
         ]);
-        expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+        expect(storedVersion).to.be(iconMigration.version);
         expect(notifications.at(-1)).to.eql(['error', 'OQ.Migration.Failed {"count":2}']);
       });
     });
@@ -787,7 +789,7 @@ describe('migration-runner.js', function () {
 
       expect(updates.length).to.be(1);
       expect(dialogs).to.eql([]);
-      expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+      expect(storedVersion).to.be(iconMigration.version);
       expect(notifications.at(-1)).to.eql(['info', 'OQ.Migration.Complete']);
     });
 
@@ -799,7 +801,7 @@ describe('migration-runner.js', function () {
 
       await run();
 
-      expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+      expect(storedVersion).to.be(iconMigration.version);
       expect(notifications.at(-1)).to.eql(['info', 'OQ.Migration.Complete']);
     });
 
@@ -905,7 +907,7 @@ describe('migration-runner.js', function () {
 
       expect(updates.map(({ batch }) => batch)).to.eql([[{ _id: 'm2', img: THEMED }]]);
       expect(persisted.map((source) => source.img)).to.eql([THEMED, THEMED]);
-      expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+      expect(storedVersion).to.be(iconMigration.version);
       expect(notifications.at(-1)).to.eql(['info', 'OQ.Migration.Complete']);
     });
 
@@ -917,6 +919,7 @@ describe('migration-runner.js', function () {
         _.mapValues(_.pick(source.system.attributes, ['hp', 'mp']), (resource) => _.pick(resource, ['value', 'pools']));
       const unlinked = (_id, delta) => new FakeDocument({ _id, actorId: 'a1', actorLink: false, delta });
       const resourceDelta = (resource, points) => ({ system: { attributes: { [resource]: points } } });
+      const runExcess = () => run([legacyHpExcessMigration, legacyMpExcessMigration]);
 
       it('Should persist world actors and give each overriding token delta its own pool lists', async function () {
         // Base actor MP 9 of 10; unlinked tokens override HP 6, MP 12 and MP 15, and one inherits everything.
@@ -930,7 +933,7 @@ describe('migration-runner.js', function () {
         const scene = new FakeDocument({ _id: 's1' }, { tokens, updateEmbeddedDocuments: recordEmbedded('s1') });
         setGlobals({ documents: { actors: [actor], scenes: [scene] } });
 
-        await run();
+        await runExcess();
 
         assert.deepEqual(
           updates.map(({ target, batch }) => ({ target, batch })),
@@ -959,7 +962,7 @@ describe('migration-runner.js', function () {
         });
         expect(tokens[0].source.delta).to.eql(resourceDelta('hp', { value: 6, pools: [] }));
         expect(tokens[3].source.delta).to.eql({ system: {} });
-        expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+        expect(storedVersion).to.be(legacyMpExcessMigration.version);
       });
 
       it('Should convert actors in locked world compendia, keeping their IDs and restoring the lock', async function () {
@@ -976,7 +979,7 @@ describe('migration-runner.js', function () {
         };
         setGlobals({ packs: [pack] });
 
-        await run();
+        await runExcess();
 
         expect(updates.map(({ target, batch, options }) => [target, batch, options.pack])).to.eql([
           [
@@ -990,13 +993,12 @@ describe('migration-runner.js', function () {
             'world.monsters',
           ],
         ]);
-        expect(configured.at(-2)).to.eql({ locked: false });
-        expect(configured.at(-1)).to.eql({ locked: true });
-        expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+        // Each migration unlocks the pack and locks it again.
+        expect(configured).to.eql([{ locked: false }, { locked: true }, { locked: false }, { locked: true }]);
+        expect(storedVersion).to.be(legacyMpExcessMigration.version);
       });
 
       it('Should give the same totals and one recovery pool per resource when retried', async function () {
-        storedVersion = legacyHpExcessMigration.version - 1;
         const persisted = [legacyActor('a1'), legacyActor('a2', 13, 12)];
         const load = (skipId) => {
           const actors = persisted.map((source) => new FakeDocument(structuredClone(source), { items: [] }));
@@ -1016,18 +1018,18 @@ describe('migration-runner.js', function () {
 
         // The HP step fails for a2, so the GM retries and the MP step waits.
         load('a2');
-        await run();
+        await runExcess();
 
-        expect(storedVersion).to.be(legacyHpExcessMigration.version - 1);
+        expect(storedVersion).to.be(0);
         expect(persisted.map(pointsOf)).to.eql([
           { hp: { value: 10, pools: [recoveredPool(5)] }, mp: { value: 14 } },
           { hp: { value: 13 }, mp: { value: 12 } },
         ]);
 
         load();
-        await run();
+        await runExcess();
 
-        expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+        expect(storedVersion).to.be(legacyMpExcessMigration.version);
         expect(persisted.map(pointsOf)).to.eql([
           { hp: { value: 10, pools: [recoveredPool(5)] }, mp: { value: 10, pools: [recoveredPool(4)] } },
           { hp: { value: 10, pools: [recoveredPool(3)] }, mp: { value: 10, pools: [recoveredPool(2)] } },
@@ -1037,13 +1039,13 @@ describe('migration-runner.js', function () {
 
     it('Should apply the changes in memory before the world is stored', function () {
       const actor = new FakeDocument({ _id: 'a1', img: LEGACY }, { items: [] });
-      const message = new FakeDocument({ _id: 'c1', content: `<img src="${LEGACY}">` });
+      const message = new FakeDocument({ _id: 'c1', img: LEGACY });
       setGlobals({ documents: { actors: [actor], messages: [message] } });
 
-      applyPendingMigrations();
+      applyPendingMigrations([iconMigration]);
 
       expect(actor.source.img).to.be(THEMED);
-      expect(message.source.content).to.be(`<img src="${THEMED}">`);
+      expect(message.source.img).to.be(THEMED);
       expect(updates).to.eql([]);
     });
 
@@ -1060,7 +1062,7 @@ describe('migration-runner.js', function () {
     });
 
     it('Should do nothing for an up to date world', async function () {
-      storedVersion = LATEST_MIGRATION_VERSION;
+      storedVersion = iconMigration.version;
       const macro = new FakeDocument({ _id: 'm1', img: LEGACY });
       setGlobals({ documents: { macros: [macro] } });
 
@@ -1071,15 +1073,43 @@ describe('migration-runner.js', function () {
       expect(notifications).to.eql([]);
     });
 
+    describe('without a migration list', function () {
+      const runRegistered = async () => {
+        applyPendingMigrations();
+        await migrateWorld();
+      };
+
+      it('Should run the registered migrations', async function () {
+        setGlobals();
+
+        await runRegistered();
+
+        expect(storedVersion).to.be(LATEST_MIGRATION_VERSION);
+        expect(notifications.at(-1)).to.eql(['info', 'OQ.Migration.Complete']);
+      });
+
+      it('Should warn when the world was migrated by a newer version than the registered migrations', async function () {
+        storedVersion = LATEST_MIGRATION_VERSION + 1;
+        setGlobals();
+
+        await runRegistered();
+
+        expect(notifications.map(([type]) => type)).to.eql(['warn']);
+        expect(storedVersion).to.be(LATEST_MIGRATION_VERSION + 1);
+      });
+    });
+
     it('Should warn when the world was migrated by a newer version', async function () {
-      storedVersion = LATEST_MIGRATION_VERSION + 1;
-      setGlobals({ documents: { macros: [new FakeDocument({ _id: 'm1', img: LEGACY })] } });
+      storedVersion = iconMigration.version + 1;
+      const macro = new FakeDocument({ _id: 'm1', img: LEGACY });
+      setGlobals({ documents: { macros: [macro] } });
 
       await run();
 
+      expect(macro.source.img).to.be(LEGACY);
       expect(updates).to.eql([]);
-      expect(notifications.map(([type]) => type)).to.eql(['warn']);
-      expect(storedVersion).to.be(LATEST_MIGRATION_VERSION + 1);
+      expect(notifications).to.eql([['warn', `OQ.Migration.NewerVersion {"version":${storedVersion}}`]]);
+      expect(storedVersion).to.be(iconMigration.version + 1);
     });
   });
 });

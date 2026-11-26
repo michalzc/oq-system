@@ -34,12 +34,20 @@ export const migrations = [
   legacyMpExcessMigration,
 ];
 
-export const LATEST_MIGRATION_VERSION = Math.max(0, ...migrations.map((migration) => migration.version));
+/**
+ * The version of the latest of the given migrations, 0 when there are none.
+ * @param {Migration[]} migrationList
+ * @returns {number}
+ */
+export const latestVersion = (migrationList) => Math.max(0, ...migrationList.map((migration) => migration.version));
+
+export const LATEST_MIGRATION_VERSION = latestVersion(migrations);
 
 /**
  * The migrations not applied yet to a world at the given version.
  * @param {number} currentVersion
+ * @param {Migration[]} migrationList
  * @returns {Migration[]}
  */
-export const pendingMigrations = (currentVersion) =>
-  migrations.filter((migration) => migration.version > currentVersion);
+export const pendingMigrations = (currentVersion, migrationList) =>
+  migrationList.filter((migration) => migration.version > currentVersion);

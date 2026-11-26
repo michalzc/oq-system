@@ -1,6 +1,6 @@
 import _ from 'lodash-es';
 import { log, logError } from '../utils/logger.js';
-import { LATEST_MIGRATION_VERSION, pendingMigrations } from './migrations.js';
+import { latestVersion, migrations as registeredMigrations, pendingMigrations } from './migrations.js';
 
 /** World collections on `game`, migrated with their embedded documents. */
 const WORLD_COLLECTIONS = ['actors', 'items', 'scenes', 'journal', 'macros', 'messages', 'tables'];
@@ -44,6 +44,8 @@ function embeddedCollections(documentName, document) {
 /**
  * @typedef {object} MigrationPlan The changes of the pending migrations, applied in memory and waiting to be written.
  * @property {MigrationStep[]} steps
+ * @property {number|null} newerVersion The stored version when it is newer than the latest migration, which leaves
+ *   the world alone: it was migrated by a newer version of the system.
  */
 
 /**
@@ -175,16 +177,21 @@ let pendingPlan = null;
  * Applies the pending migrations to the world documents in memory, on every client. It runs in the `setup` hook, after
  * the documents are created and before the sidebar, chat log and canvas render them, so they never show legacy data.
  * The active GM stores the changes in `ready`, see {@link migrateWorld}.
+ * @param {import('./migrations.js').Migration[]} [migrations] The migrations to apply when pending, in ascending
+ *   version order: the registered ones by default.
  */
-export function applyPendingMigrations() {
+export function applyPendingMigrations(migrations = registeredMigrations) {
   pendingPlan = null;
   const currentVersion = storedVersion();
-  if (currentVersion > LATEST_MIGRATION_VERSION) return;
-  const migrations = pendingMigrations(currentVersion);
-  if (!migrations.length) return;
+  const newer = currentVersion > latestVersion(migrations);
+  /** @type {MigrationPlan} */
+  const plan = { steps: [], newerVersion: newer ? currentVersion : null };
+  if (newer) {
+    pendingPlan = plan;
+    return;
+  }
 
-  const plan = { steps: [] };
-  for (const migration of migrations) {
+  for (const migration of pendingMigrations(currentVersion, migrations)) {
     const step = { migration, writes: [], failed: 0 };
     for (const collection of WORLD_COLLECTIONS.map((name) => game[name])) {
       const update = (batch, options) => collection.documentClass.updateDocuments(batch, options);
@@ -218,16 +225,17 @@ async function confirmSkipFailed(migration, count) {
 /**
  * Stores the migrations applied by {@link applyPendingMigrations} and migrates the world compendia, storing the version
  * of each migration once applied. When a migration fails for some documents, the GM chooses whether to retry it on the
- * next load or to skip those documents. Runs on the active GM's client only.
+ * next load or to skip those documents. Runs on the active GM's client only, and acts on the plan of the earlier
+ * {@link applyPendingMigrations} call alone, including its warning about a world migrated by a newer version.
  */
 export async function migrateWorld() {
   if (!game.users.activeGM?.isSelf) return;
 
-  const currentVersion = storedVersion();
-  if (currentVersion > LATEST_MIGRATION_VERSION) {
-    ui.notifications.warn(game.i18n.format('OQ.Migration.NewerVersion', { version: currentVersion }), {
+  if (pendingPlan?.newerVersion != null) {
+    ui.notifications.warn(game.i18n.format('OQ.Migration.NewerVersion', { version: pendingPlan.newerVersion }), {
       permanent: true,
     });
+    pendingPlan = null;
     return;
   }
   if (!pendingPlan?.steps.length) return;

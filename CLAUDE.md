@@ -92,7 +92,8 @@ has handlers per document name (`Actor`, `Item`, `Token`, ...) receiving the doc
 `remove`, `parent`, `worldActor`, and returning the changes (or `{}`). They run on world documents (with embedded ones)
 and world compendia; system compendia are rebuilt from `src/packs/`, so fix those sources directly. Sources are taken
 after load, so a data model's `migrateData` has already converted them; actor deltas (`ObjectField`) are not. Add tests
-to `test/test-migrations.js`. **Never edit a released migration** — add a new one.
+to `test/test-migrations.js`; runner tests pass the migrations they run to `applyPendingMigrations` (only the tests of its
+default run the registered list), so registering one leaves the others alone. **Never edit a released migration** — add a new one.
 
 ## Compendium content
 
