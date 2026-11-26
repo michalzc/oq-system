@@ -24,7 +24,8 @@ the `chrome-devtools` MCP attaches to. Drive the world with `evaluate_script`, c
    ```
 
 2. **Rebuild.** `yarn build:code`, then `navigate_page` with `type: reload, ignoreCache: true`. Pack changes need
-   Foundry stopped for `yarn build:packs`; while it runs, `yarn check:packs` only checks that they compile.
+   the world closed, not Foundry stopped: ask the user, return to Setup, run `yarn build:packs` (or `yarn build`),
+   then relaunch the world as in step 1. While the world runs, `yarn check:packs` only checks that they compile.
 3. **Wait for ready** at the start of every script that follows a reload:
 
    ```js

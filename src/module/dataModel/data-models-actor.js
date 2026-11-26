@@ -1,6 +1,6 @@
 import _ from 'lodash-es';
 import { npcCharacteristics, pcCharacteristics } from './default-characteristics.js';
-import { convertLegacyHp, hasPoolList, RECOVERED_EXCESS_LABEL_KEY } from '../utils/resource-points.js';
+import { convertLegacyResources, RECOVERED_EXCESS_LABEL_KEY } from '../utils/resource-points.js';
 
 const fields = foundry.data.fields;
 
@@ -50,10 +50,6 @@ function modMaxValueFields() {
     max: new fields.NumberField({ min: 0, integer: true, required: true, initial: 0 }),
     value: new fields.NumberField({ min: 0, integer: true, required: true, initial: 0 }),
   };
-}
-
-function modMaxValueAttributeModel() {
-  return new fields.SchemaField(modMaxValueFields());
 }
 
 /**
@@ -116,7 +112,7 @@ function baseAttributesModel() {
   return {
     hp: resourceAttributeModel(),
     dm: stringModAttributeModel(),
-    mp: modMaxValueAttributeModel(),
+    mp: resourceAttributeModel(),
     mr: baseModAttributeModel(15),
     ap: baseModAttributeModel(),
     initiative: initiative(),
@@ -156,14 +152,15 @@ function npcPersonalModel() {
 
 class OQActorDataModel extends foundry.abstract.TypeDataModel {
   /**
-   * HP stored by versions before 0.9, without a pool list, is converted when a complete source is loaded: world and
-   * compendium actors, and imported JSON. Updates and creation input are cleaned as partial data and skipped, as their
-   * missing pool list says nothing about the stored one. Migration 3 persists the conversion for world documents.
+   * HP and MP stored by versions before 0.9, without a pool list, are converted when a complete source is loaded:
+   * world and compendium actors, and imported JSON. Updates and creation input are cleaned as partial data and
+   * skipped, as their missing pool list says nothing about the stored one. Migrations 3 (HP) and 4 (MP) persist the
+   * conversion for world documents.
    */
   static migrateData(source, options) {
-    const hp = source.attributes?.hp;
-    if (!options?.partial && hp && !hasPoolList(hp)) {
-      Object.assign(hp, convertLegacyHp(source.characteristics, hp, game.i18n.localize(RECOVERED_EXCESS_LABEL_KEY)));
+    if (!options?.partial) {
+      const label = game.i18n.localize(RECOVERED_EXCESS_LABEL_KEY);
+      _.merge(source.attributes, convertLegacyResources(source.characteristics, source.attributes, label));
     }
     return super.migrateData(source, options);
   }

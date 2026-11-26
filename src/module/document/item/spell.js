@@ -79,8 +79,9 @@ export class OQSpell extends OQBaseItem {
     const rollData = this.getTestRollData();
     if (!this.castingSkill) return warn('OQ.Warnings.NoCastingSkill');
 
+    // Available MP: ordinary plus temporary, which is spent first.
     const magnitude = this.castingMagnitude;
-    const magicPoints = this.parent.system.attributes.mp.value;
+    const magicPoints = this.parent.availableMp();
     const variant = !this.system.nonVariant;
     const minimalCost = this.magicPointCost(variant ? 1 : magnitude);
     if (magicPoints < minimalCost) return warn('OQ.Warnings.NotEnoughMagicPoints');
@@ -92,15 +93,14 @@ export class OQSpell extends OQBaseItem {
     if (!castOptions) return;
     // MP can change while the dialog is open, so the cast is checked and paid from the current balance.
     const fullCost = this.magicPointCost(castOptions.magnitude);
-    if (fullCost > this.parent.system.attributes.mp.value) {
+    if (fullCost > this.parent.availableMp()) {
       return warn('OQ.Warnings.NotEnoughMagicPoints');
     }
 
     const castRollData = { ...rollData, ...castOptions };
     const testRollResult = await evaluateTestRoll(castRollData);
     const mpSpent = spellCastingCost(testRollResult.rollResult, fullCost);
-    const currentMagicPoints = this.parent.system.attributes.mp.value;
-    await this.parent.update({ 'system.attributes.mp.value': Math.max(0, currentMagicPoints - mpSpent) });
+    await this.parent.spendMp(mpSpent);
     await postTestRoll(castRollData, testRollResult, { rollable: true, mpSpent });
   }
 

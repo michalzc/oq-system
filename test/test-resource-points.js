@@ -1,8 +1,11 @@
 import expect from 'expect.js';
 import {
   applyBarInput,
+  availablePoints,
   availableTemporaryPoints,
   convertLegacyHp,
+  convertLegacyMp,
+  convertLegacyResources,
   correctPool,
   grantPool,
   hasPoolList,
@@ -11,6 +14,8 @@ import {
   restorePoints,
   setOrdinaryPoints,
   spendPoints,
+  TEMPORARY_POINT_RESOURCES,
+  temporaryPointResourceOfBar,
 } from '../src/module/utils/resource-points.js';
 
 /** A stored v0.8 actor `system` source: HP normal maximum is round((SIZ + CON) / 2) + HP modifier. */
@@ -82,6 +87,83 @@ describe('resource-points.js', function () {
       const second = convert(legacySystem({ hp: { value: 15 } }));
       expect(second).to.eql(first);
       expect(hasPoolList(first)).to.be(true);
+    });
+  });
+
+  describe('#convertLegacyMp()', function () {
+    /** Stored v0.8 characteristics: MP normal maximum is POW plus the MP modifier. */
+    const characteristics = (pow = 10, mod = 0) => ({ pow: { base: pow, mod } });
+    const convertMp = (mp, pow, powMod) =>
+      convertLegacyMp(characteristics(pow, powMod), { mod: 0, max: 0, ...mp }, 'Recovered excess');
+
+    it('Should recover MP stored above the normal maximum into one pool', function () {
+      // v0.8 actor: MP maximum 10, stored 14.
+      expect(convertMp({ value: 14 })).to.eql({ value: 10, pools: [recovered(4)] });
+    });
+
+    it('Should give MP within the normal maximum an empty pool list', function () {
+      expect(convertMp({ value: 7 })).to.eql({ value: 7, pools: [] });
+      expect(convertMp({ value: 10 })).to.eql({ value: 10, pools: [] });
+    });
+
+    it('Should recover all stored MP of an actor with a zero normal maximum, flooring a negative one', function () {
+      expect(convertMp({ value: 3, mod: -10 })).to.eql({ value: 0, pools: [recovered(3)] });
+      expect(convertMp({ value: 3, mod: -12 })).to.eql({ value: 0, pools: [recovered(3)] });
+      expect(convertMp({ value: 0, mod: -12 })).to.eql({ value: 0, pools: [] });
+    });
+
+    it('Should ignore a stale stored maximum and use POW and MP modifiers, negative ones included', function () {
+      expect(convertMp({ value: 14, max: 20 })).to.eql({ value: 10, pools: [recovered(4)] });
+      // 12 - 1 - 2 = 9
+      expect(convertMp({ value: 12, mod: -2 }, 12, -1)).to.eql({ value: 9, pools: [recovered(3)] });
+    });
+
+    it('Should treat stored fields missing from a legacy source as zero', function () {
+      expect(convertLegacyMp(undefined, {}, 'Recovered excess')).to.eql({ value: 0, pools: [] });
+      expect(convertLegacyMp(characteristics(), { value: 12 }, 'Recovered excess')).to.eql({
+        value: 10,
+        pools: [recovered(2)],
+      });
+    });
+
+    it('Should give the same result with the same pool identity when converting twice', function () {
+      expect(convertMp({ value: 14 })).to.eql(convertMp({ value: 14 }));
+    });
+  });
+
+  describe('#convertLegacyResources()', function () {
+    const characteristics = { siz: { base: 10, mod: 0 }, con: { base: 10, mod: 0 }, pow: { base: 10, mod: 0 } };
+    const convertAll = (attributes) => convertLegacyResources(characteristics, attributes, 'Recovered excess');
+
+    it('Should convert HP and MP independently, leaving a resource with a pool list alone', function () {
+      // A world upgraded by the HP step only: HP has its pool list, MP is still legacy.
+      expect(convertAll({ hp: { value: 15, pools: [] }, mp: { value: 14 } })).to.eql({
+        mp: { value: 10, pools: [recovered(4)] },
+      });
+      expect(convertAll({ hp: { value: 15 }, mp: { value: 14 } })).to.eql({
+        hp: { value: 10, pools: [recovered(5)] },
+        mp: { value: 10, pools: [recovered(4)] },
+      });
+    });
+
+    it('Should return nothing for converted, missing or partial resources', function () {
+      expect(convertAll({ hp: { value: 3, pools: [] }, mp: { value: 3, pools: [] } })).to.eql({});
+      expect(convertAll({ hp: { mod: 2 } })).to.eql({});
+      expect(convertAll(undefined)).to.eql({});
+    });
+  });
+
+  describe('#availablePoints()', function () {
+    it('Should count ordinary points and every pool, for MP affordability', function () {
+      // MP 0/10 + A=3; MP 8/10, A=2 then B=4.
+      expect(availablePoints({ value: 0, max: 10, pools: [{ id: 'a', label: 'A', remaining: 3 }] })).to.be(3);
+      const pools = [
+        { id: 'a', label: 'A', remaining: 2 },
+        { id: 'x', label: 'X', remaining: 0 },
+        { id: 'b', label: 'B', remaining: 4 },
+      ];
+      expect(availablePoints({ value: 8, max: 10, pools })).to.be(14);
+      expect(availablePoints({ value: 8, max: 10, pools: [] })).to.be(8);
     });
   });
 
@@ -310,6 +392,50 @@ describe('resource-points.js', function () {
           expect(() => setOrdinaryPoints(state(6, 10), value)).to.throwError(RangeError);
         }
       });
+    });
+
+    describe('MP acceptance examples', function () {
+      it('Should spend MP 30 from MP 10/10 + A=25, without a cap on generic pools', function () {
+        expect(spendPoints(state(10, 10, pool('a', 25)), 30)).to.eql({
+          state: state(5, 10, pool('a', 0)),
+          fromPools: 25,
+          fromOrdinary: 5,
+        });
+      });
+
+      it('Should gain MP 5 from MP 8/10 + A=4 into ordinary MP only', function () {
+        expect(restorePoints(state(8, 10, pool('a', 4)), 5)).to.eql({
+          state: state(10, 10, pool('a', 4)),
+          restored: 2,
+        });
+      });
+
+      it('Should follow manual Tap: set MP 10, grant Tap 4, spend 3, lower Tap by 1', function () {
+        // MP 8/10, Tap gains 6: 10/10 Tap=4; 10/10 Tap=1; 10/10 Tap=0.
+        const full = setOrdinaryPoints(state(8, 10), 10).state;
+        const tapped = { ...full, pools: grantPool(full.pools, { id: 'tap', label: 'TAP', amount: 4 }) };
+        expect(tapped).to.eql(state(10, 10, pool('tap', 4)));
+        const spent = spendPoints(tapped, 3).state;
+        expect(spent).to.eql(state(10, 10, pool('tap', 1)));
+        expect({ ...spent, pools: correctPool(spent.pools, 'tap', 0) }).to.eql(state(10, 10, pool('tap', 0)));
+      });
+    });
+  });
+
+  describe('#temporaryPointResourceOfBar()', function () {
+    it('Should name HP and MP as the resources with pools', function () {
+      expect(TEMPORARY_POINT_RESOURCES).to.eql(['hp', 'mp']);
+    });
+
+    it('Should give the resource of an HP or MP bar attribute', function () {
+      expect(temporaryPointResourceOfBar('attributes.hp')).to.be('hp');
+      expect(temporaryPointResourceOfBar('attributes.mp')).to.be('mp');
+    });
+
+    it('Should give nothing for any other attribute', function () {
+      for (const attribute of ['attributes.ap', 'attributes.hpx', 'hp', 'system.attributes.hp', '', undefined, null]) {
+        expect(temporaryPointResourceOfBar(attribute)).to.be(undefined);
+      }
     });
   });
 

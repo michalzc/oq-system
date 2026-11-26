@@ -11,8 +11,8 @@ Plain ES modules bundled by Vite; no TypeScript. Node.js 24 and Yarn 1.
 yarn install --frozen-lockfile
 yarn build            # build:packs then build:code, output in build/
 yarn build:code       # Vite: bundle JS, compile Less, system.yaml/lang YAML -> JSON, copy src/public
-yarn build:packs      # compile src/packs/ YAML into LevelDB under build/packs/; refuses while Foundry has them open
-yarn check:packs      # compile the packs into a temporary directory: checks src/packs/ while Foundry runs
+yarn build:packs      # compile src/packs/ YAML into LevelDB under build/packs/; refuses while a world has them open
+yarn check:packs      # compile the packs into a temporary directory: checks src/packs/ while a world runs
 yarn build:docs       # regenerate journal sources in src/packs/ from docs/packs/ HTML; not part of build, commit output
 yarn dev              # watch mode for code/styles/meta/public assets; never rebuilds packs
 yarn clean            # remove build/ (stop Foundry and the watcher first)
@@ -23,8 +23,9 @@ npx mocha test/test-roll.js           # one test file
 npx mocha test/test-roll.js -g 'mastered'   # filter by test name
 ```
 
-Run `yarn test`, `yarn lint` and `yarn build` before submitting changes; while the dev world runs, `yarn build:code` and
-`yarn check:packs` stand in for `yarn build`. A pre-commit hook runs lint-staged (eslint --fix, stylelint, prettier).
+Run `yarn test`, `yarn lint` and `yarn build` before submitting changes. Foundry need not be stopped: once the world
+is left for Setup (Return to Setup), `yarn build` runs; while the dev world runs, `yarn build:code` and
+`yarn check:packs` stand in for it. A pre-commit hook runs lint-staged (eslint --fix, stylelint, prettier).
 Prettier: single quotes, trailing commas, 120 columns.
 
 The optional Nix shell (`direnv allow` / `nix develop`) provides `start-dev [--watch]`, which builds, links `build/`
@@ -32,7 +33,8 @@ into `foundryvtt-data/Data/systems/oq`, starts Foundry on port 32000 with the `o
 remote debugging on `127.0.0.1:9222`, which the Chrome DevTools MCP in `.mcp.json` attaches to. The shell also creates
 the `foundryvtt-api` symlink to the Foundry sources, the place to look up Foundry v14 APIs; read
 `docs/foundry-v14-notes.md` first for its known traps (startup order, settings, forms, forcing dice). There is no live
-reload: refresh the browser after a rebuild; after changing `src/packs/`, stop Foundry, run `yarn build:packs`, restart.
+reload: refresh the browser after a rebuild; after changing `src/packs/`, return to Setup, run `yarn build:packs`, relaunch the
+world.
 
 ## Architecture
 

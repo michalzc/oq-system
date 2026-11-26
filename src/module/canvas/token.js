@@ -1,7 +1,4 @@
-import { TEMPORARY_POINT_RESOURCES } from '../utils/resource-points.js';
-
-/** Bar attributes with temporary points, by the resource holding them. */
-const TEMPORARY_POINT_BARS = Object.fromEntries(TEMPORARY_POINT_RESOURCES.map((key) => [`attributes.${key}`, key]));
+import { TEMPORARY_POINT_RESOURCES, temporaryPointResourceOfBar } from '../utils/resource-points.js';
 
 /** Fill of the canvas marker for temporary points: `@temporary-points-hud-color` of the token HUD's "+N". */
 const TEMPORARY_MARKER_COLOR = 0x8fe05a;
@@ -13,7 +10,7 @@ const TEMPORARY_MARKER_COLOR = 0x8fe05a;
  * @returns {number}
  */
 function barTemporaryPoints(tokenDocument, barKey) {
-  const resource = TEMPORARY_POINT_BARS[tokenDocument[barKey]?.attribute];
+  const resource = temporaryPointResourceOfBar(tokenDocument[barKey]?.attribute);
   return (resource && tokenDocument.actor?.system.attributes[resource]?.temporary) || 0;
 }
 

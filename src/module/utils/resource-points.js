@@ -3,9 +3,6 @@
  * temporary-point pools. Pure, without Foundry calls, so data models, migrations and actors share it.
  */
 
-/** Resources with temporary-point pools, by their key under `system.attributes`. */
-export const TEMPORARY_POINT_RESOURCES = ['hp'];
-
 /** The identity of the pool that recovers points stored above the normal maximum by versions before 0.9. */
 export const RECOVERED_EXCESS_POOL_ID = 'recoveredExcess';
 
@@ -20,6 +17,14 @@ export const RECOVERED_EXCESS_LABEL_KEY = 'OQ.Resources.RecoveredExcess';
  * @returns {number}
  */
 export const hpNormalMaximum = (siz, con, mod) => Math.round((siz + con) / 2) + mod;
+
+/**
+ * The MP normal maximum, used by actor preparation and legacy conversion alike.
+ * @param {number} pow POW value
+ * @param {number} mod MP modifier
+ * @returns {number}
+ */
+export const mpNormalMaximum = (pow, mod) => pow + mod;
 
 /**
  * Whether a stored resource has a pool list. One without it was stored by a version before 0.9, the legacy signal.
@@ -68,6 +73,54 @@ export function convertLegacyHp(characteristics, hp, label) {
   const { siz, con } = characteristics ?? {};
   const max = hpNormalMaximum(sourceCharacteristic(siz), sourceCharacteristic(con), hp.mod ?? 0);
   return recoverExcess(hp.value ?? 0, max, label);
+}
+
+/**
+ * Legacy MP, stored by a version before 0.9 without a pool list, converted like {@link convertLegacyHp}: the normal
+ * maximum comes from the stored POW and MP modifier.
+ * @param {object} [characteristics] stored characteristics, `{pow: {base, mod}, ...}`
+ * @param {{value?: number, mod?: number}} mp stored MP
+ * @param {string} label label of a recovered excess pool: the translation of {@link RECOVERED_EXCESS_LABEL_KEY}
+ * @returns {{value: number, pools: object[]}}
+ */
+export function convertLegacyMp(characteristics, mp, label) {
+  const max = mpNormalMaximum(sourceCharacteristic(characteristics?.pow), mp.mod ?? 0);
+  return recoverExcess(mp.value ?? 0, max, label);
+}
+
+/** The legacy conversion of each resource with temporary-point pools, by its key under `system.attributes`. */
+const LEGACY_CONVERSIONS = { hp: convertLegacyHp, mp: convertLegacyMp };
+
+/** The resources with temporary-point pools, by their key under `system.attributes`. */
+export const TEMPORARY_POINT_RESOURCES = Object.freeze(Object.keys(LEGACY_CONVERSIONS));
+
+/**
+ * The resource with temporary-point pools a token bar attribute shows.
+ * @param {string} [attribute] a bar attribute path, e.g. `attributes.hp`
+ * @returns {string|undefined} the resource key, undefined for any other attribute
+ */
+export function temporaryPointResourceOfBar(attribute) {
+  const key = attribute?.startsWith('attributes.') ? attribute.slice('attributes.'.length) : undefined;
+  return TEMPORARY_POINT_RESOURCES.includes(key) ? key : undefined;
+}
+
+/**
+ * The legacy resources of a stored actor, converted (see {@link convertLegacyHp}). HP and MP are detected and
+ * converted independently: either may already have its pool list. A resource without a stored current value is
+ * partial data and left alone.
+ * @param {object} [characteristics] stored characteristics
+ * @param {object} [attributes] stored `system.attributes`
+ * @param {string} label label of a recovered excess pool: the translation of {@link RECOVERED_EXCESS_LABEL_KEY}
+ * @returns {Record<string, {value: number, pools: object[]}>} the converted resources by key, empty when none is legacy
+ */
+export function convertLegacyResources(characteristics, attributes, label) {
+  const converted = {};
+  for (const [key, convert] of Object.entries(LEGACY_CONVERSIONS)) {
+    const resource = attributes?.[key];
+    if (resource?.value === undefined || hasPoolList(resource)) continue;
+    converted[key] = convert(characteristics, resource, label);
+  }
+  return converted;
 }
 
 /**
@@ -130,6 +183,13 @@ export const removePool = (pools, id) => pools.filter((pool) => pool.id !== id);
  * @property {number} max normal maximum
  * @property {object[]} pools
  */
+
+/**
+ * The points that can be spent: ordinary current plus every pool's remaining points. Used for MP affordability.
+ * @param {ResourceState} state
+ * @returns {number}
+ */
+export const availablePoints = (state) => state.value + availableTemporaryPoints(state.pools);
 
 /** Ordinary points clamped to zero and the normal maximum (itself floored at zero). */
 const clampOrdinary = (value, max) => Math.min(Math.max(0, max), Math.max(0, value));

@@ -26,7 +26,7 @@ export class TemporaryPointsDialog extends OQActorDialog {
   /**
    * @param {object} options
    * @param {Actor} options.actor
-   * @param {string} options.resource `hp`
+   * @param {string} options.resource `hp` or `mp`
    */
   constructor(options) {
     super(options);
