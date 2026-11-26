@@ -28,7 +28,7 @@
         Armour does not stack. Effects add to this; see <em>Effects</em> below.</li>
 </ul>
 <p>The current Hit Points and Magic Points can be typed in, or adjusted by clicking the HP or MP label: left-click
-    adds one, right-click removes one. Typed Hit Points above the maximum are stored as the maximum. Characters also
+    adds one, right-click removes one. A typed value above the maximum is stored as the maximum. Characters also
     track <strong>Fortune Points</strong> and <strong>Growth Points</strong>. The gear icon opens the <strong>Attributes</strong> dialogue, where only the mods
     can be changed.</p>
 
@@ -43,6 +43,11 @@
     Healing, including left-clicking the HP label, restores ordinary Hit Points only and never refills a pool. Typing
     a new current value changes only the ordinary Hit Points. See the <em>Chat</em> page for applying damage and
     healing.</p>
+<p>Spending Magic Points works the same way. Right-clicking the MP label, the <em>Decrease Magic Points</em> chat
+    button and <code>-N</code> in the token HUD take temporary Magic Points first, oldest pool first, then ordinary
+    Magic Points. Left-clicking the MP label, <em>Increase Magic Points</em> and <code>+N</code> restore ordinary Magic
+    Points only, up to the maximum, and never create or refill a pool. Casting a spell still spends ordinary Magic
+    Points only.</p>
 <p>Each grant is its own <strong>pool</strong>, listed in the order it was granted. Hit Points and Magic Points
     have separate pools. The layers icon next to the Hit Points or Magic Points opens the <strong>Temporary Hit
     Points</strong> or <strong>Temporary Magic Points</strong> dialogue, available to anyone who can edit the
@@ -55,19 +60,19 @@
         list.</li>
     <li><strong>Remove</strong>: the trash icon removes the pool and only its remaining points.</li>
 </ul>
-<p>On the canvas, a token's Hit Points bar still shows the ordinary Hit Points against the maximum. When the token
-    has temporary Hit Points, a green dot is drawn at the right end of the bar, even when the bar is full. The token
-    HUD shows the temporary total in green inside the Hit Points field, for example <code>7 +3</code>. Typing into
-    that field works like the sheet and chat: <code>-3</code> is 3 points of damage, taking temporary points first;
-    <code>+5</code> heals ordinary Hit Points up to the maximum; a plain number such as <code>4</code> sets the
-    ordinary Hit Points, clamped to the maximum.</p>
+<p>On the canvas, a token's Hit Points and Magic Points bars still show the ordinary points against the maximum.
+    When the token has temporary points, a green dot is drawn at the right end of that bar, even when the bar is full.
+    The token HUD shows the temporary total in green inside the Hit Points or Magic Points field, for example
+    <code>7 +3</code>. Typing into that field works like the sheet and chat: <code>-3</code> is 3 points of damage or
+    spending, taking temporary points first; <code>+5</code> restores ordinary points up to the maximum; a plain number
+    such as <code>4</code> sets the ordinary points, clamped to the maximum.</p>
 <p>Amounts are whole numbers of 0 or more, with no upper limit; anything else is rejected. A pool at 0 stays listed
     until you remove it. On an unlinked token's sheet the pools belong to that token only; on a linked token they
     belong to the actor.</p>
 <p>Earlier versions of the system could store a current value above the maximum, hidden on the sheet. When a world is
     upgraded, or an old actor is imported, any Hit Points or Magic Points stored above the maximum become one pool
-    called <em>Recovered excess</em> for that resource, so no points are lost. It works like any other pool: correct or remove it once you
-    know where those points came from.</p>
+    called <em>Recovered excess</em> for that resource, so no points are lost. It works like any other pool: correct
+    or remove it once you know where those points came from.</p>
 
 <h3>Tabs</h3>
 <ul>

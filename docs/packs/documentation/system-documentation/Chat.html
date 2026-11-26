@@ -17,7 +17,10 @@
         through takes <strong>temporary Hit Points</strong> first (see the <em>Actors</em> page), emptying the oldest
         pool before the next, then the ordinary Hit Points. Hit Points never drop below 0.</li>
     <li>Healing restores ordinary Hit Points only, up to the maximum. It never refills temporary Hit Points.</li>
-    <li>Magic points never go above the maximum or below 0.</li>
+    <li>Decreasing Magic Points spends <strong>temporary Magic Points</strong> first, emptying the oldest pool
+        before the next, then the ordinary Magic Points, which never drop below 0.</li>
+    <li>Increasing Magic Points restores ordinary Magic Points only, up to the maximum. It never creates or refills
+        temporary Magic Points.</li>
 </ul>
 <p>Each change is reported in chat with the points actually changed:</p>
 <ul>
@@ -27,6 +30,9 @@
     <li>"Orc soaked all damage." when armour stopped it completely; temporary Hit Points are then untouched.</li>
     <li>"Orc has gained 3 hit points." for healing, counting only the points restored: an Orc at full Hit Points
         gains 0.</li>
+    <li>"Orc has spent 5 magic points." counting temporary and ordinary Magic Points together.</li>
+    <li>"Orc has gained 2 magic points." counting only the ordinary Magic Points restored: an Orc at 8 of 10 that
+        increases by 5 gains 2, and its temporary Magic Points stay as they were.</li>
 </ul>
 <p>For example, an Orc with 6 of 10 Hit Points and two temporary pools, 4 then 3, takes 5 damage that ignores armour:
     the first pool is emptied and the second drops to 2, while its ordinary Hit Points stay at 6.</p>

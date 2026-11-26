@@ -9,7 +9,6 @@ import { getInitiativeOptions } from '../../utils/initiative.js';
 import { customSpellGroups } from '../../utils/magic.js';
 import {
   asyncFlattenItemsFromFolder,
-  inRangeValue,
   renderTemplate,
   withAttributeLabels,
   withCharacteristicLabels,
@@ -178,9 +177,10 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
       if (this.isEditable) return this.onItemUpdateQuantity(event);
       return;
     }
-    // Ordinary HP has no name either: typing sets it through the actor, clamped, without touching temporary HP.
-    if (event.target.matches('.ordinary-hp')) {
-      if (this.isEditable) return this.onSetOrdinaryHp(event);
+    // Ordinary HP and MP have no name either: typing sets them through the actor, clamped, without touching
+    // temporary points.
+    if (event.target.matches('.ordinary-points')) {
+      if (this.isEditable) return this.onSetOrdinaryPoints(event);
       return;
     }
     return super._onChangeForm(formConfig, event);
@@ -220,11 +220,15 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
     await this.actor.createEmbeddedDocuments('Item', [itemData], { renderSheet: true });
   }
 
-  async onSetOrdinaryHp(event) {
+  async onSetOrdinaryPoints(event) {
+    const { resourceId } = event.target.dataset;
     const typed = Number(event.target.value);
-    if (event.target.value.trim() !== '' && Number.isFinite(typed)) await this.actor.setOrdinaryHp(Math.trunc(typed));
+    if (event.target.value.trim() !== '' && Number.isFinite(typed)) {
+      const value = Math.trunc(typed);
+      await (resourceId === 'hp' ? this.actor.setOrdinaryHp(value) : this.actor.setOrdinaryMp(value));
+    }
     // A value clamped to the stored one changes nothing, so nothing re-renders the field: show the stored value.
-    if (Number(event.target.value) !== this.actor.system.attributes.hp.value) this.render();
+    if (Number(event.target.value) !== this.actor.system.attributes[resourceId].value) this.render();
   }
 
   async onItemUpdateQuantity(event) {
@@ -388,14 +392,10 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
     event.preventDefault();
     if (!this.isEditable) return;
 
-    const delta = event.button === 2 ? -1 : 1;
-    const resourceId = target.dataset.resourceId;
-    // HP: +1 heals ordinary HP only, -1 is damage and takes temporary HP first.
-    if (resourceId === 'hp') return delta > 0 ? this.actor.healHp(1) : this.actor.damageHp(1);
-    const { value, max } = this.actor.system.attributes[resourceId];
-    const newValue = inRangeValue(0, max, value + delta);
-
-    if (newValue !== value) await this.actor.update({ [`system.attributes.${resourceId}.value`]: newValue });
+    // +1 restores ordinary points only; -1 is damage or spending and takes temporary points first.
+    const raise = event.button !== 2;
+    if (target.dataset.resourceId === 'hp') return raise ? this.actor.healHp(1) : this.actor.damageHp(1);
+    return raise ? this.actor.gainMp(1) : this.actor.spendMp(1);
   }
 
   getInitiativeOptions() {

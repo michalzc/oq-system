@@ -171,6 +171,13 @@ export const removePool = (pools, id) => pools.filter((pool) => pool.id !== id);
  * @property {object[]} pools
  */
 
+/**
+ * The points that can be spent: ordinary current plus every pool's remaining points. Used for MP affordability.
+ * @param {ResourceState} state
+ * @returns {number}
+ */
+export const availablePoints = (state) => state.value + availableTemporaryPoints(state.pools);
+
 /** Ordinary points clamped to zero and the normal maximum (itself floored at zero). */
 const clampOrdinary = (value, max) => Math.min(Math.max(0, max), Math.max(0, value));
 

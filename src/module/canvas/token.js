@@ -1,5 +1,5 @@
-/** Resources whose token bar shows temporary points. MP joins once its HUD input spends temporary MP first. */
-const TEMPORARY_POINT_BAR_RESOURCES = ['hp'];
+/** Resources whose token bar shows temporary points. */
+const TEMPORARY_POINT_BAR_RESOURCES = ['hp', 'mp'];
 
 /** Bar attributes with temporary points, by the resource holding them. */
 const TEMPORARY_POINT_BARS = Object.fromEntries(TEMPORARY_POINT_BAR_RESOURCES.map((key) => [`attributes.${key}`, key]));

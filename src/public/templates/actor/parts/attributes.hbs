@@ -7,7 +7,8 @@
     <label for="{{rootId}}-hp" class="resource-update" data-action="adjustResource" data-resource-id="hp"
            data-tooltip="{{ localize attributes.hp.label}}">{{ localize attributes.hp.abbr}}</label>
     <div class="value">
-      <input id="{{rootId}}-hp" class="ordinary-hp" type="number" value="{{system.attributes.hp.value}}">
+      <input id="{{rootId}}-hp" class="ordinary-points" data-resource-id="hp" type="number"
+             value="{{system.attributes.hp.value}}">
       <div>&nbsp;/&nbsp{{system.attributes.hp.max}}</div>
       {{> systems/oq/templates/actor/parts/temporary-points.hbs resource='hp' temporary=system.attributes.hp.temporary}}
     </div>
@@ -15,7 +16,7 @@
     <label for="{{rootId}}-mp" class="resource-update" data-action="adjustResource" data-resource-id="mp"
            data-tooltip="{{ localize attributes.mp.label}}">{{ localize attributes.mp.abbr}}</label>
     <div class="value">
-      <input id="{{rootId}}-mp" type="number" data-dtype="Number" name="system.attributes.mp.value"
+      <input id="{{rootId}}-mp" class="ordinary-points" data-resource-id="mp" type="number"
              value="{{system.attributes.mp.value}}">
       <div>&nbsp;/&nbsp{{system.attributes.mp.max}}</div>
       {{> systems/oq/templates/actor/parts/temporary-points.hbs resource='mp' temporary=system.attributes.mp.temporary}}

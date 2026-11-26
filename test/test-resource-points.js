@@ -1,6 +1,7 @@
 import expect from 'expect.js';
 import {
   applyBarInput,
+  availablePoints,
   availableTemporaryPoints,
   convertLegacyHp,
   convertLegacyMp,
@@ -147,6 +148,20 @@ describe('resource-points.js', function () {
       expect(convertAll({ hp: { value: 3, pools: [] }, mp: { value: 3, pools: [] } })).to.eql({});
       expect(convertAll({ hp: { mod: 2 } })).to.eql({});
       expect(convertAll(undefined)).to.eql({});
+    });
+  });
+
+  describe('#availablePoints()', function () {
+    it('Should count ordinary points and every pool, for MP affordability', function () {
+      // MP 0/10 + A=3; MP 8/10, A=2 then B=4.
+      expect(availablePoints({ value: 0, max: 10, pools: [{ id: 'a', label: 'A', remaining: 3 }] })).to.be(3);
+      const pools = [
+        { id: 'a', label: 'A', remaining: 2 },
+        { id: 'x', label: 'X', remaining: 0 },
+        { id: 'b', label: 'B', remaining: 4 },
+      ];
+      expect(availablePoints({ value: 8, max: 10, pools })).to.be(14);
+      expect(availablePoints({ value: 8, max: 10, pools: [] })).to.be(8);
     });
   });
 
