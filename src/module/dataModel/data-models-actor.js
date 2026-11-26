@@ -169,12 +169,16 @@ class OQActorDataModel extends foundry.abstract.TypeDataModel {
    * Characteristic values are the root of every other calculation, including the ones made by
    * embedded items while they prepare themselves. They have to be ready before that happens,
    * which means base data - items are prepared between base and derived data.
+   *
+   * `unmodified` is base plus the native modifier. `value` starts equal to it; the actor's base data preparation then
+   * replaces it with the effective value, after effects.
    */
   /* override */
   prepareBaseData() {
     super.prepareBaseData();
     for (const characteristic of Object.values(this.characteristics)) {
-      characteristic.value = characteristic.base + characteristic.mod;
+      characteristic.unmodified = characteristic.base + characteristic.mod;
+      characteristic.value = characteristic.unmodified;
     }
   }
 }

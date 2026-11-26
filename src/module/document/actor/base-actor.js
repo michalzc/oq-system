@@ -1,6 +1,11 @@
 import _ from 'lodash-es';
 import { getDefaultItemsForActor } from '../../utils/compendium-utils.js';
-import { activeEffectChanges, attributeContribution } from '../../utils/effect-contributions.js';
+import {
+  activeEffectChanges,
+  attributeContribution,
+  effectiveCharacteristics,
+  normalMaximums,
+} from '../../utils/effect-contributions.js';
 import { getDeclaration } from '../../utils/initiative.js';
 import {
   applyBarInput,
@@ -10,8 +15,6 @@ import {
   correctPool,
   grantPool,
   hasPoolList,
-  hpNormalMaximum,
-  mpNormalMaximum,
   RECOVERED_EXCESS_LABEL_KEY,
   removePool,
   restorePoints,
@@ -85,7 +88,25 @@ export class OQBaseActor extends Actor {
     // The OpenQuest changes of the actor's own effects, read once per preparation; item effects get their roles in
     // later chunks.
     this.effectChanges = activeEffectChanges(this.effects);
+    this.applyCharacteristicEffects();
     assignAttributes(this.system.attributes, this.calculateBaseAttributes());
+  }
+
+  /**
+   * Replaces each characteristic's `value` with its effective value, after effects. Its `unmodified` value (base plus
+   * native modifier) stays, and `effects` holds the breakdown when effects change it. Everything else reads the
+   * effective value, except the MP normal maximum and skills' learned values.
+   */
+  applyCharacteristicEffects() {
+    const characteristics = this.system.characteristics;
+    const effective = effectiveCharacteristics(
+      _.mapValues(characteristics, (characteristic) => characteristic.unmodified),
+      this.effectChanges,
+    );
+    for (const [key, result] of Object.entries(effective)) {
+      characteristics[key].value = result.value;
+      characteristics[key].effects = result.contributions.length ? result : undefined;
+    }
   }
 
   /**
@@ -118,15 +139,20 @@ export class OQBaseActor extends Actor {
    * actor is only partially prepared, so this is deliberately limited to level 1 attributes plus
    * the skills prepared so far - anything else does not exist yet and must not be reached for.
    *
+   * @param {object} [options]
+   * @param {boolean} [options.learned] unmodified characteristics and learned skill values, without effects, for
+   *   skills' learned values; effective ones otherwise
    * @returns {object}
    */
-  getDataForItems() {
-    const characteristics = _.mapValues(this.system.characteristics, (char) => char.value);
+  getDataForItems({ learned = false } = {}) {
+    const characteristics = _.mapValues(this.system.characteristics, (char) =>
+      learned ? char.unmodified : char.value,
+    );
 
     return {
       ...characteristics,
-      dm: this.system.attributes.dm.value,
-      skills: this.getSkillsRollData(),
+      dm: learned ? this.calculateDamageModifier({ learned }) : this.system.attributes.dm.value,
+      skills: this.getSkillsRollData({ learned }),
     };
   }
 
@@ -137,9 +163,9 @@ export class OQBaseActor extends Actor {
     };
   }
 
-  getSkillsRollData() {
+  getSkillsRollData({ learned = false } = {}) {
     return _.mapValues(this.system.skillsBySlug ?? {}, (skill) => ({
-      value: skill.system.rollValues?.value,
+      value: learned ? skill.system.rollValues?.learnedValue : skill.system.rollValues?.value,
       mod: skill.system.rollValues?.mod,
     }));
   }
@@ -150,10 +176,10 @@ export class OQBaseActor extends Actor {
 
   calculateBaseAttributes() {
     const attributes = this.system.attributes;
-    const characteristics = this.system.characteristics;
-
-    const hpMax = hpNormalMaximum(characteristics.siz.value, characteristics.con.value, attributes.hp.mod);
-    const mpMax = mpNormalMaximum(characteristics.pow.value, attributes.mp.mod);
+    const { hp: hpMax, mp: mpMax } = normalMaximums(this.system.characteristics, {
+      hp: attributes.hp.mod,
+      mp: attributes.mp.mod,
+    });
 
     return {
       dm: {
@@ -193,11 +219,16 @@ export class OQBaseActor extends Actor {
     return { value: result.value, effects: result.contributions.length ? result : undefined };
   }
 
-  calculateDamageModifier() {
-    const characteristics = this.system.characteristics;
+  /**
+   * @param {object} [options]
+   * @param {boolean} [options.learned] from unmodified STR and SIZ, without effects; effective ones otherwise
+   * @returns {string}
+   */
+  calculateDamageModifier({ learned = false } = {}) {
+    const { str, siz } = this.system.characteristics;
     const defaults = CONFIG.OQ.ActorConfig.characteristicsParams;
 
-    const baseDM = defaults.damageModifierFunction(characteristics.str.value + characteristics.siz.value);
+    const baseDM = defaults.damageModifierFunction(learned ? str.unmodified + siz.unmodified : str.value + siz.value);
     const dmMod = this.system.attributes.dm.mod?.trim();
 
     if (!dmMod) return baseDM;

@@ -17,12 +17,12 @@ export function signedNumberOrEmpty(num) {
 }
 
 /**
- * Clamps a skill value to the range allowed by the rules: never below 0, and not above 100 while
- * `CONFIG.OQ.Rules.skillCap` is on.
+ * Clamps a skill value to the range allowed by the rules: never below 0, and not above 100 while the skill cap is on.
  * @param {number} value
+ * @param {object} [rules] the Rule Options; `CONFIG.OQ.Rules` by default
  * @returns {number}
  */
-export const minMaxValue = (value) => inRangeValue(0, CONFIG.OQ.Rules.skillCap ? 100 : Infinity, value);
+export const minMaxValue = (value, rules = CONFIG.OQ.Rules) => inRangeValue(0, rules.skillCap ? 100 : Infinity, value);
 
 export const inRangeValue = (minimum, maximum, value) => Math.max(minimum, Math.min(maximum, value));
 

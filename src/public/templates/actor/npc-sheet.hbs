@@ -27,9 +27,12 @@
           <label for="{{@root.rootId}}-char-{{ key }}" data-tooltip="{{ localize char.label }}" class="characteristic-label">{{ localize
             char.abbr }}</label>
           <input id="{{@root.rootId}}-char-{{ key }}" type="number" data-dtype="Number" name="system.characteristics.{{key}}.base"
-            data-tooltip="{{ localize char.label }}" class="characteristic-value" value="{{char.value}}">
+            data-tooltip="{{ localize char.label }}" class="characteristic-value" value="{{char.unmodified}}">
           <input class="characteristic-roll" name="system.characteristics.{{key}}.roll" type="text" data-dtype="String"
             data-tooltip="{{ localize char.label}} {{ localize 'OQ.Hints.RollFormula' }}" value="{{char.roll}}">
+          {{#with (lookup @root.effectTooltips key) as |tooltip|}}
+            <div class="characteristic-effective effect-changed" data-tooltip-html="{{tooltip}}">{{char.value}}{{> systems/oq/templates/actor/parts/effect-marker.hbs}}</div>
+          {{/with}}
         </div>
         {{/each}}
         {{#if editable}}

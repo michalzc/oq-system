@@ -11,15 +11,22 @@ export class OQSpecialAbility extends OQBaseItem {
     };
   }
 
+  /**
+   * The effective value, from effective characteristics, and the learned value, from unmodified ones, which Master
+   * eligibility reads.
+   */
   calculateRollValues() {
     if (this.parent && this.system.formula) {
       try {
         const roll = new Roll(this.system.formula, this.parent.getDataForItems());
         if (roll.isDeterministic) {
           const value = minMaxValue(roll.evaluateSync().total);
+          const learned = new Roll(this.system.formula, this.parent.getDataForItems({ learned: true }));
+          const learnedValue = minMaxValue(learned.evaluateSync().total);
 
           return {
             value,
+            learnedValue,
           };
         }
       } catch (e) {

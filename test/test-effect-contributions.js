@@ -3,9 +3,14 @@ import {
   activeEffectChanges,
   attributeContribution,
   effectChangesToSave,
+  effectiveCharacteristics,
   effectListEntry,
   formatContribution,
+  normalMaximums,
+  referencedCharacteristics,
+  skillValues,
 } from '../src/module/utils/effect-contributions.js';
+import { SrdRules } from '../src/module/consts/rules-config.js';
 
 function effect(id, name, changes, { sourceName = '', ...extra } = {}) {
   return { _id: id, name, disabled: false, description: '', system: { sourceName, changes }, ...extra };
@@ -17,6 +22,10 @@ function ap(type, value) {
 
 function mr(type, value, minimum) {
   return { key: '', target: 'mr', type, value, ...(minimum === undefined ? {} : { minimum }), phase: 'initial' };
+}
+
+function characteristic(target, type, value, minimum) {
+  return { key: '', target, type, value, ...(minimum === undefined ? {} : { minimum }), phase: 'initial' };
 }
 
 describe('effect-contributions.js', function () {
@@ -408,6 +417,124 @@ describe('effect-contributions.js', function () {
       const changes = activeEffectChanges([effect('root', 'Rooted', [mr('override', 0)])]);
 
       assert.strictEqual(attributeContribution('mr', 15, changes).value, 0);
+    });
+  });
+
+  describe('#effectiveCharacteristics()', function () {
+    it('halves INT 13 and rounds down: 6', function () {
+      const changes = activeEffectChanges([effect('hal', 'Befuddled', [characteristic('int', 'multiply', 0.5)])]);
+
+      const { int } = effectiveCharacteristics({ int: 13 }, changes);
+
+      assert.deepStrictEqual([int.value, int.unmodified], [6, 13]);
+    });
+
+    it('never takes Diminish INT 20 (−20) below its minimum of 1', function () {
+      const changes = activeEffectChanges([effect('dim', 'Diminish INT', [characteristic('int', 'add', -20, 1)])]);
+
+      assert.strictEqual(effectiveCharacteristics({ int: 13 }, changes).int.value, 1);
+    });
+
+    it('halves STR 13 and rounds down before adding Enhance STR +2: 8, listed for review', function () {
+      const changes = activeEffectChanges([
+        effect('enh', 'Enhance STR', [characteristic('str', 'add', 2)]),
+        effect('wea', 'Weakness', [characteristic('str', 'multiply', 0.5)]),
+      ]);
+
+      const { str } = effectiveCharacteristics({ str: 13 }, changes);
+
+      assert.deepStrictEqual(
+        [str.value, str.needsReview, str.contributions.map(({ name }) => name)],
+        [8, true, ['Weakness', 'Enhance STR']],
+      );
+    });
+
+    it('changes only the characteristic a change names', function () {
+      const changes = activeEffectChanges([effect('enh', 'Enhance STR', [characteristic('str', 'add', 2)])]);
+
+      const { str, siz } = effectiveCharacteristics({ str: 12, siz: 13 }, changes);
+
+      assert.deepStrictEqual([str.value, siz.value, siz.contributions], [14, 13, []]);
+    });
+  });
+
+  describe('#normalMaximums()', function () {
+    const characteristics = (changes) => effectiveCharacteristics({ siz: 10, con: 10, pow: 10 }, changes);
+
+    it('raises the HP normal maximum with Enhance CON +4: 10 becomes 12', function () {
+      const changes = activeEffectChanges([effect('enh', 'Enhance CON', [characteristic('con', 'add', 4)])]);
+
+      assert.deepStrictEqual(normalMaximums(characteristics(changes), { hp: 0, mp: 0 }), { hp: 12, mp: 10 });
+    });
+
+    it('keeps the MP normal maximum at unmodified POW under Enhance POW +3', function () {
+      const changes = activeEffectChanges([effect('enh', 'Enhance POW', [characteristic('pow', 'add', 3)])]);
+
+      assert.deepStrictEqual(normalMaximums(characteristics(changes), { hp: 0, mp: 0 }), { hp: 10, mp: 10 });
+    });
+
+    it('adds the native HP and MP modifiers', function () {
+      assert.deepStrictEqual(normalMaximums(characteristics([]), { hp: 2, mp: -1 }), { hp: 12, mp: 9 });
+    });
+  });
+
+  describe('#skillValues()', function () {
+    const uncapped = { ...SrdRules, skillCap: false };
+
+    it('keeps Deception learned at 98 under Enhance DEX +4: effective 102, not a Master', function () {
+      // Deception `@dex+@int` with DEX 14 and INT 14, advanced by 70; Enhance DEX +4 makes DEX 18.
+      const values = skillValues({ base: 32, learnedBase: 28, advancement: 70 }, uncapped);
+
+      assert.deepStrictEqual(
+        [values.value, values.learnedValue, values.mastered, values.changedByEffects],
+        [102, 98, false, true],
+      );
+    });
+
+    it('caps the effective value under the skill cap: 100, still not a Master', function () {
+      const values = skillValues({ base: 32, learnedBase: 28, advancement: 70 }, SrdRules);
+
+      assert.deepStrictEqual([values.value, values.learnedValue, values.mastered], [100, 98, false]);
+    });
+
+    it('makes a learned 100 skill a Master', function () {
+      const values = skillValues({ base: 30, learnedBase: 30, advancement: 70 }, SrdRules);
+
+      assert.deepStrictEqual([values.value, values.mastered, values.changedByEffects], [100, true, false]);
+    });
+
+    it('does not make a learned 100 skill a Master while Diminish takes it below 100', function () {
+      const values = skillValues({ base: 26, learnedBase: 30, advancement: 70 }, SrdRules);
+
+      assert.deepStrictEqual([values.value, values.learnedValue, values.mastered], [96, 100, false]);
+    });
+
+    it('makes nobody a Master while Mastery is off', function () {
+      const values = skillValues({ base: 30, learnedBase: 30, advancement: 70 }, { ...SrdRules, mastery: false });
+
+      assert.strictEqual(values.mastered, false);
+    });
+
+    it('never goes below 0', function () {
+      const values = skillValues({ base: -10, learnedBase: 4, advancement: 0 }, SrdRules);
+
+      assert.deepStrictEqual([values.value, values.learnedValue], [0, 4]);
+    });
+  });
+
+  describe('#referencedCharacteristics()', function () {
+    it('finds the characteristics a formula references directly, braced or not', function () {
+      assert.deepStrictEqual(
+        ['@int+@pow', '@{dex} * 2', '@str+@dex+@str', '@int - @int + 50'].map(referencedCharacteristics),
+        [['int', 'pow'], ['dex'], ['str', 'dex'], ['int']],
+      );
+    });
+
+    it('finds none in a fixed value, a skill reference or another word starting like a characteristic', function () {
+      assert.deepStrictEqual(
+        ['70', '@skills.athletics.value', '@strength + 10', '', undefined].map(referencedCharacteristics),
+        [[], [], [], [], []],
+      );
     });
   });
 

@@ -20,7 +20,8 @@ import { CriticalRules, FumbleRules } from '../consts/rules-config.js';
  * @property {Object} speaker
  * @property {string} rollType
  * @property {string} entityName
- * @property {number} value
+ * @property {number} value The skill as tested: its effective value
+ * @property {number|undefined} learnedValue The skill without effects, which Master eligibility reads; `value` when absent
  * @property {string|undefined} messageMode Defaults to the mode selected in the chat log.
  */
 
@@ -60,8 +61,9 @@ export async function evaluateTestRoll(rollData) {
   const resultFeatures = getResultFeatures(roll);
   const totalValue = minMaxValue((rollData.value ?? 0) + (rollData.difficulty?.value ?? 0) + (rollData?.mod ?? 0));
 
-  const rollResult = getResult(resultFeatures, roll.total, { value: rollData.value, totalValue });
-  const mastered = !!rollData.mastered && isMaster(rollData.value, totalValue, CONFIG.OQ.Rules);
+  const learnedValue = rollData.learnedValue ?? rollData.value;
+  const rollResult = getResult(resultFeatures, roll.total, { value: learnedValue, totalValue });
+  const mastered = !!rollData.mastered && isMaster(learnedValue, totalValue, CONFIG.OQ.Rules);
   return { roll, rollResult, totalValue, mastered };
 }
 
@@ -108,7 +110,7 @@ export async function postTestRoll(rollData, testRollResult, extraContext = {}) 
  * @param {number} rollValue - The value against which the roll is compared.
  * @param {object} rollData - The data of the roll.
  * @param {number} rollData.totalValue - The Modified skill.
- * @param {number} rollData.value - The unmodified skill.
+ * @param {number} rollData.value - The learned skill, without modifiers or effects.
  *
  * @returns {string} - The result of the roll. Possible values are:
  *   - "criticalSuccess" if the roll is a critical success.
@@ -132,9 +134,9 @@ export function getResult(resultFeatures, rollValue, rollData) {
 }
 
 /**
- * Whether a skill makes its owner a Master: Mastery is on, the unmodified skill is at least 100% and the Modified skill
+ * Whether a skill makes its owner a Master: Mastery is on, the learned skill is at least 100% and the Modified skill
  * is still at least 100%.
- * @param {number} value - The unmodified skill.
+ * @param {number} value - The learned skill, without modifiers or effects.
  * @param {number} modifiedSkill - The Modified skill; the unmodified skill when there are no modifiers.
  * @param {object} rules - The Rule Options, usually `CONFIG.OQ.Rules`.
  * @returns {boolean}

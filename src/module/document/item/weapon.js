@@ -27,12 +27,13 @@ export class OQWeapon extends OQBaseItem {
       const skill = this.parent.system.skillsBySlug?.[correspondingSkill.skillReference];
       if (skill) {
         const skillRollValues = skill.getRollValues();
-        const value = skillRollValues.value;
+        const { value, learnedValue } = skillRollValues;
 
         const mod = mostSignificantModifier(skillRollValues.mod ?? 0, correspondingSkill?.skillMod ?? 0);
         const valueWithMod = mod && minMaxValue(skillRollValues.value + mod);
         return {
           value,
+          learnedValue,
           mod,
           valueWithMod,
         };
