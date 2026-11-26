@@ -4,7 +4,7 @@ import { basename, dirname, join } from 'node:path';
 import { compilePack } from '@foundryvtt/foundryvtt-cli';
 
 // Compiles src/packs/ YAML into LevelDB packs under build/packs/.
-// With --check, compiles into a temporary directory and removes it, leaving build/ alone: safe while Foundry runs.
+// With --check, compiles into a temporary directory and removes it, leaving build/ alone: safe while a world runs.
 const SRC = 'src';
 const PACKS = join(SRC, 'packs');
 const BUILD_PACKS = join('build', 'packs');
@@ -44,7 +44,7 @@ if (!check) {
   const inUse = await packsInUse(BUILD_PACKS);
   if (inUse.length) {
     console.error(
-      `Foundry has ${inUse.join(', ')} open in ${BUILD_PACKS}. Stop Foundry before building packs, ` +
+      `Foundry has ${inUse.join(', ')} open in ${BUILD_PACKS}. Leave the world for Setup before building packs, ` +
         'or run `yarn check:packs` to only check that they compile.',
     );
     process.exit(1);

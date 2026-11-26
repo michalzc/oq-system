@@ -142,8 +142,9 @@ when sources change, and refresh the browser after each rebuild.
 - `yarn dev` (alias `yarn build:watch`): rebuild code, Less styles, YAML metadata, and public assets on change.
 - `yarn clean`: remove generated `build/` and legacy `dist/` output.
 
-Code builds and watch mode preserve existing compendium databases. After changing `src/packs/`, stop
-Foundry, run `yarn build:packs`, then restart Foundry. A browser refresh does not reopen Foundry's databases.
+Code builds and watch mode preserve existing compendium databases. After changing `src/packs/`, leave
+the world for Setup (Return to Setup), run `yarn build:packs`, then launch the world again; Foundry itself can keep
+running. A browser refresh does not reopen Foundry's databases.
 Also stop Foundry and the watcher before running `yarn clean`. Code builds do not remove obsolete output files;
 use `yarn clean && yarn build` for a fresh distribution after removing or renaming sources.
 Restart the watcher after adding new public assets or language files.
