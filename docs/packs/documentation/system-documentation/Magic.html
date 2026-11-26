@@ -21,7 +21,8 @@
 <p>Click a spell's name on the actor sheet to cast it. Shift-click casts at the highest magnitude without asking.</p>
 <h3>Spells using magic points</h3>
 <p>The cast dialogue shows the casting skill's value, the <strong>Spell Magnitude</strong> (for variable spells,
-    from 1 up to the magnitude, or to what the actor's magic points pay for), <strong>Difficulty</strong>,
+    from 1 up to the magnitude, or to what the actor's magic points pay for, temporary ones included),
+    <strong>Difficulty</strong>,
     <strong>Other Mods</strong> and <strong>Visibility</strong>. The spell needs a casting skill and enough magic
     points: one for variable spells, the full cost for non-variable ones.</p>
 <p>A spell costs one magic point per point of magnitude. Sorcery follows the <em>Manipulation cost</em> table instead,
@@ -33,6 +34,13 @@
     <li>Critical Success or Failure: one magic point.</li>
 </ul>
 <p>The chat card shows the magnitude, skill value, modifiers, the result and the magic points spent.</p>
+<p>Temporary magic points (see the <em>Actors</em> page) count towards everything above: what the actor can afford,
+    the highest magnitude offered and the one Shift-click picks. They are spent first, oldest pool first, then
+    ordinary magic points. Cancelling the dialogue spends nothing, and the cost is checked again against the current
+    magic points when you confirm, so points spent or granted meanwhile count.</p>
+<p><em>Tap</em> is not automated. When it draws magic points above the maximum, set the ordinary magic points to the
+    maximum and grant the rest as a temporary pool labelled <em>Tap</em>. Once the spell finishes, lower that pool by
+    one point per minute in the pool editor.</p>
 <h3>Spells without magic points</h3>
 <p>No test is rolled. A variable spell asks for the magnitude to use, up to what remains, and the remaining
     magnitude is reduced; the actor sheet shows it as <em>remaining/magnitude</em>. A non-variable spell is marked

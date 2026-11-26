@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import { RollConfig } from '../src/module/consts/rolls-config.js';
 import { SrdRules } from '../src/module/consts/rules-config.js';
 
-const globals = ['Item', 'Roll', 'ChatMessage', 'CONFIG', 'game', 'ui', 'foundry', 'document'];
+const globals = ['Actor', 'Item', 'Roll', 'ChatMessage', 'CONFIG', 'game', 'ui', 'foundry', 'document'];
 let savedGlobals;
-let OQSpell;
+let OQSpell, OQBaseActor;
 let dialogs, rolls, rollSteps, messages, warnings;
 let nextItemId;
 
@@ -26,14 +26,21 @@ function apply(target, changes) {
   }
 }
 
-function actor(uuid = 'Actor.caster', mp = 10) {
-  return {
+/**
+ * A caster with its OpenQuest actor methods: ordinary MP (prepared value and maximum) and temporary MP pools, in
+ * spending order. Updates apply to `system`, which also stands in for the stored source.
+ */
+function actor(uuid = 'Actor.caster', mp = 10, pools = []) {
+  return Object.assign(new OQBaseActor(), {
     uuid,
     id: uuid,
     type: 'character',
     system: {
-      attributes: { mp: { value: mp } },
+      attributes: { mp: { value: mp, max: Math.max(10, mp), pools: structuredClone(pools) } },
       skillsBySlug: { magic: { name: 'Magic', getRollValues: () => ({ value: 50, mod: 0 }) } },
+    },
+    get _source() {
+      return { system: this.system };
     },
     updates: [],
     async update(changes) {
@@ -42,8 +49,14 @@ function actor(uuid = 'Actor.caster', mp = 10) {
       apply(this, changes);
       return this;
     },
-  };
+  });
 }
+
+const pool = (id, remaining) => ({ id, label: id.toUpperCase(), remaining });
+const mpOf = (caster) => {
+  const { value, pools } = caster.system.attributes.mp;
+  return { value, pools: pools.map(({ id, remaining }) => `${id}=${remaining}`) };
+};
 
 function spell(parent = actor(), system = {}) {
   const item = new OQSpell();
@@ -107,7 +120,9 @@ describe('Spell casting', function () {
 
       async _preCreate() {}
     };
+    globalThis.Actor = class {};
     ({ OQSpell } = await import('../src/module/document/item/spell.js'));
+    ({ OQBaseActor } = await import('../src/module/document/actor/base-actor.js'));
   });
 
   after(function () {
@@ -361,6 +376,86 @@ describe('Spell casting', function () {
       assert.equal(messages.length, 0);
     });
   }
+
+  describe('Temporary MP', function () {
+    it('casts a spell affordable only with temporary MP, spending the pool', async function () {
+      // MP 0/10 + A=3, cast costing 3.
+      const caster = actor('Actor.caster', 0, [pool('a', 3)]);
+      await spell(caster).rollItemTest(true);
+      assert.deepEqual(mpOf(caster), { value: 0, pools: ['a=0'] });
+      assert.equal(messages[0].context.mpSpent, 3);
+      assert.equal(warnings.length, 0);
+    });
+
+    it('spends the oldest pool first, then the next, then ordinary MP', async function () {
+      // MP 8/10, A=2 then B=4, cast costing 5.
+      const caster = actor('Actor.caster', 8, [pool('a', 2), pool('b', 4)]);
+      const cast = await openCast(spell(caster, { magnitude: 5 }));
+      cast.confirm(5);
+      await cast.pending;
+      assert.deepEqual(mpOf(caster), { value: 8, pools: ['a=0', 'b=1'] });
+      assert.equal(messages[0].context.mpSpent, 5);
+
+      rollSteps.push({ total: 77 });
+      const another = actor('Actor.other', 8, [pool('a', 2)]);
+      await spell(another, { magnitude: 5 }).rollItemTest(true);
+      assert.deepEqual(mpOf(another), { value: 5, pools: ['a=0'] });
+    });
+
+    it('counts temporary MP in the maximum affordable magnitude and shift-click', async function () {
+      const caster = actor('Actor.caster', 2, [pool('a', 3)]);
+      const item = spell(caster, { magnitude: 8 });
+      const cast = await openCast(item);
+      assert.equal(dialogs[0].context.maxMagnitude, 5);
+      cast.cancel();
+      await cast.pending;
+      await item.rollItemTest(true);
+      assert.equal(messages[0].context.magnitude, 5);
+      assert.deepEqual(mpOf(caster), { value: 0, pools: ['a=0'] });
+    });
+
+    it('writes nothing when the dialog is cancelled', async function () {
+      // MP 8/10 + A=4.
+      const caster = actor('Actor.caster', 8, [pool('a', 4)]);
+      const cast = await openCast(spell(caster));
+      cast.cancel();
+      await cast.pending;
+      assert.deepEqual(caster.updates, []);
+      assert.deepEqual(mpOf(caster), { value: 8, pools: ['a=4'] });
+    });
+
+    it('rechecks and pays from pools changed while the dialog is open', async function () {
+      const lowered = actor('Actor.lowered', 1, [pool('a', 4)]);
+      const refused = await openCast(spell(lowered));
+      lowered.system.attributes.mp.pools = [pool('a', 1)];
+      refused.confirm(3);
+      await refused.pending;
+      assert.deepEqual(warnings, ['OQ.Warnings.NotEnoughMagicPoints']);
+      assert.equal(rolls.length, 0);
+      assert.deepEqual(lowered.updates, []);
+
+      // A spent elsewhere and B granted while the dialog is open: payment takes the current pools.
+      const changed = actor('Actor.changed', 1, [pool('a', 2)]);
+      const cast = await openCast(spell(changed));
+      changed.system.attributes.mp.pools = [pool('a', 0), pool('b', 4)];
+      cast.confirm(3);
+      await cast.pending;
+      assert.deepEqual(mpOf(changed), { value: 1, pools: ['a=0', 'b=1'] });
+    });
+
+    it('takes what is left, floored at zero, when pools shrink during dice fulfillment', async function () {
+      const gate = deferred();
+      rollSteps.push({ wait: gate.promise });
+      const caster = actor('Actor.caster', 0, [pool('a', 3)]);
+      const cast = spell(caster).rollItemTest(true);
+      await tick();
+      caster.system.attributes.mp.pools = [pool('a', 1)];
+      gate.resolve();
+      await cast;
+      assert.deepEqual(mpOf(caster), { value: 0, pools: ['a=0'] });
+      assert.equal(messages[0].context.mpSpent, 3);
+    });
+  });
 
   describe('Default item mark', function () {
     function marked({ onActor = true } = {}) {
