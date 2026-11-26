@@ -58,14 +58,17 @@ async function adjustMagicPoints(event) {
   const button = event.currentTarget;
   button.blur();
 
-  const updateValue = parseInt(button.dataset.value);
+  // The decrease button's value is the rolled total with a leading minus, "-0" included.
+  const { value } = button.dataset;
+  const decrease = value.trim().startsWith('-');
+  const amount = buttonAmount(Math.abs(parseInt(value)));
   const updates = findTargets().map(async (actor) => {
     // Spending takes temporary MP first; gaining restores ordinary MP only.
-    if (updateValue < 0) {
-      const { fromPools, fromOrdinary } = await actor.spendMp(buttonAmount(-updateValue));
+    if (decrease) {
+      const { fromPools, fromOrdinary } = await actor.spendMp(amount);
       return sendMessage('OQ.Chat.spentMagicPoints', actor, fromPools + fromOrdinary);
     }
-    const { restored } = await actor.gainMp(buttonAmount(updateValue));
+    const { restored } = await actor.gainMp(amount);
     return sendMessage('OQ.Chat.gainMagicPoints', actor, restored);
   });
   await Promise.all(updates);
