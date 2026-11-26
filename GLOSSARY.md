@@ -7,6 +7,14 @@ Foundry VTT implementation of the OpenQuest SRD rules, with optional deviations 
 **Skill**:
 A percentile value a character tests by rolling D100 equal to or under it.
 
+**Effective characteristic**:
+A characteristic after the effects on it (Enhance STR, Diminish INT); the value skills, Damage Modifier and the HP
+normal maximum are calculated from. Its **unmodified** value is base plus the native modifier, without effects.
+
+**Learned skill**:
+A skill calculated from unmodified characteristics: what training gave, without effects. Its **effective** value,
+from effective characteristics, is the one tested; Master eligibility reads the learned value.
+
 **Modified skill**:
 A skill after temporary effects, difficulty and any situational modifiers are applied; the value a test is actually
 rolled against. Temporary effects do not change the character's learned skill.
@@ -83,7 +91,7 @@ The capacity for ordinary HP or MP, including effects that change that capacity.
 do not increase this maximum.
 
 **Master**:
-A character whose unmodified skill is 100% or more; under the SRD their tests are automatic criticals and are not rolled.
+A character whose learned skill is 100% or more; under the SRD their tests are automatic criticals and are not rolled.
 A skill only modified up to 100%, including through temporary effects, does not make a Master.
 
 **Critical success**:

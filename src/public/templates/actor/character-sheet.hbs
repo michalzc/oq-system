@@ -54,7 +54,11 @@
         {{#each characteristics as |char key| }}
           <div class="flexcol characteristic">
             <label data-tooltip="{{ localize char.label }}" class="flex0">{{ localize char.abbr }}</label>
-            <div data-tooltip="{{ localize char.label }}" class="characteristic-value flex0">{{char.value}}</div>
+            {{#with (lookup @root.effectTooltips key) as |tooltip|}}
+              <div data-tooltip-html="{{tooltip}}" class="characteristic-value effect-changed flex0">{{char.value}}{{> systems/oq/templates/actor/parts/effect-marker.hbs}}</div>
+            {{else}}
+              <div data-tooltip="{{ localize char.label }}" class="characteristic-value flex0">{{char.value}}</div>
+            {{/with}}
           </div>
         {{/each}}
         {{#if editable}}

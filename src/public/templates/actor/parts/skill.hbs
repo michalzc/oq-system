@@ -12,9 +12,13 @@
   </div>
   <input class="item-adv mod-value" type="number" data-dtype="Number"
          value="{{system.advancement}}" data-tooltip="{{ localize 'OQ.Labels.Advances' }}">
-  <a class="item-roll total-value" data-action="rollItem"
-     data-tooltip="{{localize 'OQ.Labels.Roll'}} {{name}}">{{system.rollValues.value}} {{#if
-    system.rollValues.mod}}({{system.rollValues.valueWithMod}}){{/if}} %</a>
+  {{#with (lookup @root.skillEffectTooltips id) as |tooltip|}}
+    <a class="item-roll total-value effect-changed" data-action="rollItem" data-tooltip-html="{{tooltip}}">
+      {{~> systems/oq/templates/actor/parts/skill-value.hbs ..}}{{> systems/oq/templates/actor/parts/effect-marker.hbs}}</a>
+  {{else}}
+    <a class="item-roll total-value" data-action="rollItem" data-tooltip="{{localize 'OQ.Labels.Roll'}} {{name}}">
+      {{~> systems/oq/templates/actor/parts/skill-value.hbs}}</a>
+  {{/with}}
   <a class="item-edit" data-action="editItem"><i class="fas fa-edit"></i></a>
   {{#if @root.editable}}
     <a class="item-delete" data-action="deleteItem"><i class="fas fa-trash"></i></a>

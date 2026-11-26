@@ -5,6 +5,13 @@
  * (`sourceName`, `changes`). Effect documents and their `toObject()` copies both fit.
  */
 
+import { hpNormalMaximum, mpNormalMaximum } from './resource-points.js';
+import { isMaster } from './roll.js';
+import { minMaxValue } from './utils.js';
+
+/** The characteristics, in sheet order. Each is a change target of its own. */
+export const CHARACTERISTICS = Object.freeze(['str', 'con', 'dex', 'siz', 'int', 'pow', 'cha']);
+
 /**
  * The curated change vocabulary: every target an OpenQuest change may name, with the operations it allows, whether a
  * multiplied value rounds down and whether a change may carry a minimum. Later chunks add targets here; the effect
@@ -14,6 +21,18 @@ export const EFFECT_TARGETS = Object.freeze({
   ap: { label: 'OQ.Effects.Targets.ap', types: ['add', 'multiply', 'override'], roundsDown: true },
   // The SRD states no rounding for movement, so a multiplied rate keeps its fraction.
   mr: { label: 'OQ.Effects.Targets.mr', types: ['add', 'multiply', 'override'], allowsMinimum: true },
+  // Diminish: "a characteristic may not go below 1 through use of this spell".
+  ...Object.fromEntries(
+    CHARACTERISTICS.map((key) => [
+      key,
+      {
+        label: `OQ.Labels.CharacteristicsNames.${key}.label`,
+        types: ['add', 'multiply', 'override'],
+        roundsDown: true,
+        allowsMinimum: true,
+      },
+    ]),
+  ),
 });
 
 /**
@@ -184,6 +203,69 @@ export function attributeContribution(target, unmodified, changes) {
     ...(minimum === undefined ? {} : { minimum }),
     contributions,
   };
+}
+
+/**
+ * The effective characteristics: each unmodified characteristic (base plus native modifier) with the effects that
+ * change it, as `attributeContribution` combines them.
+ * @param {Object<string, number>} unmodified unmodified values by characteristic key
+ * @param {object[]} changes from `activeEffectChanges`
+ * @returns {Object<string, ReturnType<typeof attributeContribution>>} by characteristic key
+ */
+export function effectiveCharacteristics(unmodified, changes) {
+  return Object.fromEntries(
+    Object.entries(unmodified).map(([key, value]) => [key, attributeContribution(key, value, changes)]),
+  );
+}
+
+/**
+ * The HP and MP normal maximums. HP follows the effective SIZ and CON. MP follows unmodified POW, so Enhance and
+ * Diminish POW never change it, as the SRD says of both spells.
+ * @param {Object<string, {value: number, unmodified: number}>} characteristics from `effectiveCharacteristics`
+ * @param {{hp: number, mp: number}} mods the native HP and MP modifiers
+ * @returns {{hp: number, mp: number}}
+ */
+export function normalMaximums(characteristics, mods) {
+  const { siz, con, pow } = characteristics;
+  return {
+    hp: hpNormalMaximum(siz.value, con.value, mods.hp),
+    mp: mpNormalMaximum(pow.unmodified, mods.mp),
+  };
+}
+
+/**
+ * A skill's effective and learned values. The effective value, from effective characteristics, is the one tested.
+ * The learned value, from unmodified characteristics, is what training gave: Master eligibility reads it, so a skill
+ * pushed to 100% only by an effect does not make its owner a Master.
+ * @param {{base: number, learnedBase: number, advancement: number}} skill the skill formula's value with effective and
+ *   with unmodified characteristics, and the skill's advancement
+ * @param {object} rules the Rule Options, usually `CONFIG.OQ.Rules`
+ * @returns {{value: number, baseValue: number, learnedValue: number, learnedBaseValue: number, mastered: boolean,
+ *   changedByEffects: boolean}} values within the range the rules allow
+ */
+export function skillValues({ base, learnedBase, advancement }, rules) {
+  const value = minMaxValue(base + advancement, rules);
+  const learnedValue = minMaxValue(learnedBase + advancement, rules);
+  return {
+    value,
+    baseValue: base,
+    learnedValue,
+    learnedBaseValue: learnedBase,
+    mastered: isMaster(learnedValue, value, rules),
+    changedByEffects: base !== learnedBase,
+  };
+}
+
+const CHARACTERISTIC_REFERENCE = new RegExp(`@\\{?(${CHARACTERISTICS.join('|')})\\b`, 'g');
+
+/**
+ * The characteristics a formula references directly, as `@int` or `@{int}`, each once, in the order they first appear.
+ * No recursion through skill references, no inference from names, no algebra: `@int - @int + 50` references INT.
+ * @param {string} [formula]
+ * @returns {string[]} characteristic keys
+ */
+export function referencedCharacteristics(formula) {
+  return [...new Set([...(formula ?? '').matchAll(CHARACTERISTIC_REFERENCE)].map((match) => match[1]))];
 }
 
 /**

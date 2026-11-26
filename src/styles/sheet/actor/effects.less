@@ -69,6 +69,37 @@
   }
 }
 
+// A characteristic changed by effects: the marker sits on the edge of the character sheet's round value.
+.oq.sheet .actor-sheet .characteristic-value.effect-changed {
+  position: relative;
+  cursor: help;
+
+  .effect-marker {
+    position: absolute;
+    top: 0;
+    right: -0.25em;
+    font-size: var(--font-size-11);
+    line-height: 1;
+  }
+}
+
+// On the NPC sheet, the input holds the unmodified value and the effective one is shown under the roll formula.
+.oq.sheet .actor-sheet .characteristic-effective.effect-changed {
+  cursor: help;
+  font-size: var(--font-size-14);
+
+  .effect-marker {
+    margin-left: 0.2em;
+    font-size: var(--font-size-11);
+  }
+}
+
+// A skill changed by effects.
+.oq.sheet .actor-sheet .total-value.effect-changed .effect-marker {
+  margin-left: 0.2em;
+  font-size: var(--font-size-11);
+}
+
 // The contributions tooltip, rendered in core's tooltip element outside the sheet.
 .oq-effect-contributions {
   text-align: left;

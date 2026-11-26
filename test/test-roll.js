@@ -249,6 +249,16 @@ describe('roll.js', function () {
       const { mastered, rollResult } = await evaluateTestRoll(masterRollData);
       assert.deepEqual({ mastered, rollResult }, { mastered: false, rollResult: success });
     });
+
+    it('rolls a skill raised to 100 only by an effect normally: learned 98, effective 100', async function () {
+      const { mastered, rollResult } = await evaluateTestRoll({
+        value: 100,
+        learnedValue: 98,
+        mastered: false,
+        messageMode: 'public',
+      });
+      assert.deepEqual({ mastered, rollResult }, { mastered: false, rollResult: success });
+    });
   });
 
   describe('#evaluateTestRoll() Modified skill', function () {

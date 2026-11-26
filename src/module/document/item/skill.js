@@ -1,6 +1,6 @@
 import { OQBaseItem } from './base-item.js';
 import { makeSlug, minMaxValue } from '../../utils/utils.js';
-import { isMaster } from '../../utils/roll.js';
+import { skillValues } from '../../utils/effect-contributions.js';
 
 export class OQSkill extends OQBaseItem {
   prepareDerivedData() {
@@ -27,23 +27,28 @@ export class OQSkill extends OQBaseItem {
     }
   }
 
+  /**
+   * The effective value, from effective characteristics, and the learned value, from unmodified ones; see
+   * `skillValues`.
+   */
   calculateRollValues() {
     if (this.parent) {
       const { formula, advancement, mod } = this.system;
       const finalMod = mod ?? 0;
-      const rollData = this.parent.getDataForItems();
-      const baseValue = this.evalRollSafe(formula, rollData);
-      const total = baseValue + advancement;
-      const value = minMaxValue(total);
-      const valueWithMod = mod && minMaxValue(value + mod);
-      const mastered = isMaster(value, value, CONFIG.OQ.Rules);
+      const values = skillValues(
+        {
+          base: this.evalRollSafe(formula, this.parent.getDataForItems()),
+          learnedBase: this.evalRollSafe(formula, this.parent.getDataForItems({ learned: true })),
+          advancement,
+        },
+        CONFIG.OQ.Rules,
+      );
+      const valueWithMod = mod && minMaxValue(values.value + mod);
 
       return {
-        value,
-        baseValue,
+        ...values,
         mod: finalMod,
         valueWithMod,
-        mastered,
       };
     } else {
       return {};

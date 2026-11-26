@@ -72,6 +72,7 @@ OQ:
     EditorLabel: OpenQuest effect editor
     Effects: Effects
     Enable: Enable
+    Learned: Learned, without effects
     Minimum: Minimum
     MinimumOf: 'minimum {minimum}'
     MinimumHint: Optional. The effective value never goes below it, whatever else applies.

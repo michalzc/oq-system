@@ -3,8 +3,8 @@
     rank, organisation and concept.</p>
 
 <h3>Characteristics</h3>
-<p>The panel shows the final value of each characteristic: base plus mod. The gear icon opens the
-    <strong>Characteristics</strong> dialogue:</p>
+<p>The panel shows the effective value of each characteristic: base plus mod, then any effects (see
+    <em>Effects</em> below). The gear icon opens the <strong>Characteristics</strong> dialogue:</p>
 <ul>
     <li>Each row has the base value, a roll formula with a dice icon, and a mod. The <em>Roll All</em> icon rolls
         every characteristic. Rolls are posted to chat and fill in the base values.</li>
@@ -13,14 +13,16 @@
     <li>Nothing is saved until you click <strong>Save Data</strong>. <strong>Reset Data</strong> restores the
         current values.</li>
 </ul>
-<p>Mod is a simple way to track temporary changes: it is added to the base value.</p>
+<p>Mod is a simple way to record a lasting change: it is added to the base value. For a spell or another ongoing
+    change, use an effect instead.</p>
 
 <h3>Attributes</h3>
 <p>Attributes are calculated from characteristics and items:</p>
 <ul>
-    <li><strong>Hit Points</strong>: (SIZ + CON) / 2, rounded, plus mod.</li>
-    <li><strong>Magic Points</strong>: POW plus mod.</li>
-    <li><strong>Damage Modifier</strong>: from STR + SIZ. Up to 10: -1d6, up to 15: -1d4, up to 25: none,
+    <li><strong>Hit Points</strong>: (SIZ + CON) / 2, rounded, plus mod, from the effective SIZ and CON.</li>
+    <li><strong>Magic Points</strong>: POW plus mod. Effects on POW do not change it, as the Enhance and Diminish
+        spells say.</li>
+    <li><strong>Damage Modifier</strong>: from the effective STR + SIZ. Up to 10: -1d6, up to 15: -1d4, up to 25: none,
         up to 30: +1d4, then +1d6 for 31-45, +2d6 for 46-60, and so on. The mod is text, for example
         <code>+1d4</code> or <code>2</code>, and is appended to the result.</li>
     <li><strong>Movement Rate</strong>: 15 plus mod. Effects change this; see <em>Effects</em> below.</li>
@@ -117,7 +119,8 @@
 <h3>Characteristics</h3>
 <p>Characteristics are edited directly on the sheet. Under each value is a roll formula, by default that of an
     average human: 3d6, or 2d6+6 for SIZ and INT. The dice icon rolls all formulas and updates the values, without a
-    chat message.</p>
+    chat message. The field always holds the value without effects; when effects change a characteristic, the
+    effective value is shown under the roll formula with the wand icon.</p>
 <h3>Attributes</h3>
 <p>Attributes work as for characters, temporary Hit Points and Magic Points included, except that NPCs have no
     Fortune or Growth Points.</p>
@@ -156,15 +159,17 @@
         list.</li>
     <li><strong>Changes</strong>: the values the effect changes. <strong>Add change</strong> adds a row; the trash
         icon removes one. Each row has a target, an operation and a value. The editor offers only the targets the
-        system supports: <strong>Armour points</strong> and <strong>Movement rate</strong>. Both have these
-        operations:
+        system supports: <strong>Armour points</strong>, <strong>Movement rate</strong> and each characteristic, from
+        <strong>Strength</strong> to <strong>Charisma</strong>. All have these operations:
         <ul>
             <li><strong>Add</strong>: adds the value; a negative value subtracts.</li>
             <li><strong>Multiply by</strong>: multiplies the value without effects. For example 0.5 halves it. Armour
-                points round down; movement keeps the fraction, such as 7.5m.</li>
+                points and characteristics round down (INT 13 halved is 6); movement keeps the fraction, such as
+                7.5m.</li>
             <li><strong>Set to</strong>: replaces the result with the value.</li>
         </ul>
-        A movement rate row also has an optional <strong>Minimum</strong>: the rule's floor, such as Slow's 1m.
+        Movement rate and characteristic rows also have an optional <strong>Minimum</strong>: the rule's floor, such
+        as Slow's 1m or Diminish's 1.
         Changing a row's target saves the effect, so the row shows the fields of its new target.
     </li>
 </ul>
@@ -186,6 +191,20 @@
     spells may stack.</p>
 <p>Effect armour points are added on top of the Armour Worn calculation above: the best Worn or Natural armour plus
     the mod.</p>
+
+<h3>Effective and learned values</h3>
+<p>A characteristic changed by effects has two values. The <strong>unmodified</strong> value is base plus mod, as
+    set in the Characteristics dialogue (or the NPC sheet). The <strong>effective</strong> value adds the effects, and
+    it is what the sheet shows and everything else uses: skills, the Damage Modifier, weapon damage, Hit Points and
+    encumbrance. Magic Points are the exception: they always follow unmodified POW.</p>
+<p>Skills likewise have an <strong>effective</strong> value, calculated from effective characteristics, and a
+    <strong>learned</strong> value, calculated from unmodified ones: what training gave. The sheet shows the effective
+    value, and tests are rolled against it. A skill changed this way shows the wand icon; its tooltip gives the learned
+    value and the effects on the characteristics its formula uses, such as <em>Enhance DEX 4 (Enhance) Dex +4</em>.
+    Mastery reads the learned value: a skill raised to 100% or more only by an effect does not make the character a
+    Master, and the test is rolled as usual.</p>
+<p>Typing a negative number into a skill's advances sets the learned value, not the effective one: effects never
+    become advances.</p>
 
 <h3>Recipe: Protection</h3>
 <p>Protection gives one extra armour point per point of magnitude. To record Protection 3 cast on a character
@@ -214,6 +233,21 @@
 <p>When Mobility and Slow are both on a creature, both apply and the tooltip lists both (15 + 4 − 6 = 13). Whether the
     spells really combine is the GM's call: disable or delete the one that does not apply.</p>
 
+<h3>Recipe: Enhance STR</h3>
+<p>Enhance (STR) adds its magnitude to STR. To record Enhance STR 2 on a character with STR 12 and SIZ 13, create an
+    effect named <em>Enhance STR 2</em> with source <em>Enhance</em> and add the change <em>Strength</em>,
+    <em>Add</em>, <em>2</em>. STR shows 14 with the wand icon. Skills whose formula uses STR rise with it (Close
+    Combat <code>@str+@dex</code> by 2), the Damage Modifier goes from none to +1d4 (STR + SIZ 27) and weapon damage
+    that includes it follows, such as 1D8 becoming 1D8 +1D4. Disabling or deleting the effect restores all of it.</p>
+<p>Enhance CON or SIZ changes the Hit Points maximum, but not the current Hit Points: raise or lower them by hand
+    if the creature should gain or lose the points. Enhance POW changes neither the maximum nor the
+    current Magic Points.</p>
+
+<h3>Recipe: Diminish and halving</h3>
+<p>Diminish takes its magnitude from a characteristic, never below 1. For Diminish INT 4, add the change
+    <em>Intelligence</em>, <em>Add</em>, <em>-4</em>, with <em>Minimum</em> 1. To halve a characteristic, use
+    <em>Multiply by</em> <em>0.5</em>: INT 13 becomes 6.</p>
+
 <h2>Initiative</h2>
 <p>The <strong>Initiative</strong> field selects a skill or special ability with a formula, and the
     <strong>Mod</strong> field adds a whole number to it. The result is the actor's initiative; no dice are rolled.
@@ -223,10 +257,10 @@
 <p>Actors provide values for roll formulas, in skill formulas, damage formulas and chat commands:</p>
 <ul>
     <li><code>@str</code>, <code>@con</code>, <code>@siz</code>, <code>@dex</code>, <code>@int</code>,
-        <code>@pow</code>, <code>@cha</code>: final characteristic values.</li>
+        <code>@pow</code>, <code>@cha</code>: effective characteristic values, after effects.</li>
     <li><code>@dm</code>: the damage modifier. It already includes its sign, so write <code>1d6 @dm</code>, not
         <code>1d6 + @dm</code>.</li>
-    <li><code>@skills.&lt;slug&gt;.value</code> and <code>@skills.&lt;slug&gt;.mod</code>: a skill's total and mod,
+    <li><code>@skills.&lt;slug&gt;.value</code> and <code>@skills.&lt;slug&gt;.mod</code>: a skill's effective total and mod,
         for example <code>@skills.close-combat.value</code>.</li>
     <li>Other actor data by its path, for example <code>@attributes.hp.value</code>, <code>@attributes.mp.max</code>
         or <code>@attributes.ap.value</code>.</li>

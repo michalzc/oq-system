@@ -4,7 +4,7 @@ import { TemporaryPointsDialog } from '../../application/temporary-points-dialog
 import { OQBaseActor } from '../../document/actor/base-actor.js';
 import { OQActiveEffect } from '../../document/active-effect.js';
 import { OQSpell } from '../../document/item/spell.js';
-import { formatContribution } from '../../utils/effect-contributions.js';
+import { formatContribution, referencedCharacteristics } from '../../utils/effect-contributions.js';
 import { getInitiativeOptions } from '../../utils/initiative.js';
 import { customSpellGroups } from '../../utils/magic.js';
 import {
@@ -13,6 +13,26 @@ import {
   withAttributeLabels,
   withCharacteristicLabels,
 } from '../../utils/utils.js';
+
+/**
+ * The tooltip listing the effects that changed a value.
+ * @param {{label: string, value: number, unmodified: number, unmodifiedLabel?: string, needsReview?: boolean,
+ *   contributions: Array<{name: string, sourceName: string, amount: string, minimum?: number}>}} data
+ * @returns {Promise<string>}
+ */
+function renderContributionsTooltip(data) {
+  return renderTemplate('systems/oq/templates/actor/parts/effect-contributions-tooltip.hbs', {
+    unmodifiedLabel: 'OQ.Effects.WithoutEffects',
+    ...data,
+    contributions: data.contributions.map((contribution) => ({
+      ...contribution,
+      minimumLabel:
+        contribution.minimum === undefined
+          ? ''
+          : game.i18n.format('OQ.Effects.MinimumOf', { minimum: contribution.minimum }),
+    })),
+  });
+}
 
 export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.sheets.ActorSheetV2,
@@ -61,6 +81,7 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
       itemTooltips: await this.prepareItemTooltips(),
       effects: await this.prepareEffects(),
       effectTooltips: await this.prepareEffectTooltips(),
+      skillEffectTooltips: await this.prepareSkillEffectTooltips(),
       ...this.prepareSpentSpells(),
     });
   }
@@ -105,31 +126,60 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
   }
 
   /**
-   * Tooltips listing the effects that changed an attribute and by how much, keyed by attribute. An attribute without
-   * a tooltip is not changed by effects.
+   * Tooltips listing the effects that changed an attribute or a characteristic and by how much, keyed by attribute or
+   * characteristic. One without a tooltip is not changed by effects.
    * @returns {Promise<Object<string, string>>}
    */
   async prepareEffectTooltips() {
     const attributes = withAttributeLabels(this.actor.system.attributes);
+    const characteristics = withCharacteristicLabels(this.actor.system.characteristics);
     const tooltips = await Promise.all(
-      ['mr', 'ap']
-        .filter((key) => attributes[key].effects)
-        .map(async (key) => {
-          const { effects, label } = attributes[key];
-          const html = await renderTemplate('systems/oq/templates/actor/parts/effect-contributions-tooltip.hbs', {
+      [...Object.entries(_.pick(attributes, ['mr', 'ap'])), ...Object.entries(characteristics)]
+        .filter(([, { effects }]) => effects)
+        .map(async ([key, { effects, label }]) => [
+          key,
+          await renderContributionsTooltip({
             ...effects,
             label,
             contributions: effects.contributions.map((contribution) => ({
               ...contribution,
               amount: formatContribution(contribution),
-              minimumLabel:
-                contribution.minimum === undefined
-                  ? ''
-                  : game.i18n.format('OQ.Effects.MinimumOf', { minimum: contribution.minimum }),
             })),
-          });
-          return [key, html];
-        }),
+          }),
+        ]),
+    );
+    return Object.fromEntries(tooltips);
+  }
+
+  /**
+   * Tooltips of the skills whose effective value differs from the learned one, keyed by item ID. Each shows the learned
+   * value and the effects on the characteristics the skill's formula references directly.
+   * @returns {Promise<Object<string, string>>}
+   */
+  async prepareSkillEffectTooltips() {
+    const characteristics = withCharacteristicLabels(this.actor.system.characteristics);
+    const skills = this.actor.items.filter((item) => item.type === 'skill' && item.system.rollValues?.changedByEffects);
+    const tooltips = await Promise.all(
+      skills.map(async (skill) => {
+        const { value, learnedValue } = skill.system.rollValues;
+        const referenced = referencedCharacteristics(skill.system.formula).map((key) => characteristics[key]);
+        const contributions = referenced.flatMap(({ effects, abbr }) => {
+          const characteristic = game.i18n.localize(abbr);
+          return (effects?.contributions ?? []).map((contribution) => ({
+            ...contribution,
+            amount: `${characteristic} ${formatContribution(contribution)}`,
+          }));
+        });
+        const html = await renderContributionsTooltip({
+          label: skill.name,
+          value,
+          unmodifiedLabel: 'OQ.Effects.Learned',
+          unmodified: learnedValue,
+          needsReview: referenced.some(({ effects }) => effects?.needsReview),
+          contributions,
+        });
+        return [skill.id, html];
+      }),
     );
     return Object.fromEntries(tooltips);
   }
@@ -278,7 +328,8 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
       if (!isNaN(value)) {
         if (value < 0) {
           const rollData = item.getTestRollData();
-          const advancement = -value - (rollData.baseValue ?? 0);
+          // A negative value sets the learned skill: effects do not become advancement.
+          const advancement = -value - (rollData.learnedBaseValue ?? 0);
           await item.update({ 'system.advancement': advancement });
         } else {
           await item.update({ 'system.advancement': value });
