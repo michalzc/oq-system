@@ -18,6 +18,7 @@ export async function preloadTemplates() {
     'systems/oq/templates/actor/parts/effects.hbs',
     'systems/oq/templates/actor/parts/effect-contributions-tooltip.hbs',
     'systems/oq/templates/actor/parts/effect-value.hbs',
+    'systems/oq/templates/actor/parts/temporary-points.hbs',
     'systems/oq/templates/chat/parts/skill-ability-roll.hbs',
     'systems/oq/templates/chat/parts/damage-roll.hbs',
     'systems/oq/templates/chat/parts/weapon-roll.hbs',

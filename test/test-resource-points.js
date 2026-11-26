@@ -3,6 +3,7 @@ import {
   applyBarInput,
   availableTemporaryPoints,
   convertLegacyHp,
+  convertLegacyMp,
   correctPool,
   grantPool,
   hasPoolList,
@@ -82,6 +83,47 @@ describe('resource-points.js', function () {
       const second = convert(legacySystem({ hp: { value: 15 } }));
       expect(second).to.eql(first);
       expect(hasPoolList(first)).to.be(true);
+    });
+  });
+
+  describe('#convertLegacyMp()', function () {
+    /** Stored v0.8 characteristics: MP normal maximum is POW plus the MP modifier. */
+    const characteristics = (pow = 10, mod = 0) => ({ pow: { base: pow, mod } });
+    const convertMp = (mp, pow, powMod) =>
+      convertLegacyMp(characteristics(pow, powMod), { mod: 0, max: 0, ...mp }, 'Recovered excess');
+
+    it('Should recover MP stored above the normal maximum into one pool', function () {
+      // v0.8 actor: MP maximum 10, stored 14.
+      expect(convertMp({ value: 14 })).to.eql({ value: 10, pools: [recovered(4)] });
+    });
+
+    it('Should give MP within the normal maximum an empty pool list', function () {
+      expect(convertMp({ value: 7 })).to.eql({ value: 7, pools: [] });
+      expect(convertMp({ value: 10 })).to.eql({ value: 10, pools: [] });
+    });
+
+    it('Should recover all stored MP of an actor with a zero normal maximum, flooring a negative one', function () {
+      expect(convertMp({ value: 3, mod: -10 })).to.eql({ value: 0, pools: [recovered(3)] });
+      expect(convertMp({ value: 3, mod: -12 })).to.eql({ value: 0, pools: [recovered(3)] });
+      expect(convertMp({ value: 0, mod: -12 })).to.eql({ value: 0, pools: [] });
+    });
+
+    it('Should ignore a stale stored maximum and use POW and MP modifiers, negative ones included', function () {
+      expect(convertMp({ value: 14, max: 20 })).to.eql({ value: 10, pools: [recovered(4)] });
+      // 12 - 1 - 2 = 9
+      expect(convertMp({ value: 12, mod: -2 }, 12, -1)).to.eql({ value: 9, pools: [recovered(3)] });
+    });
+
+    it('Should treat stored fields missing from a legacy source as zero', function () {
+      expect(convertLegacyMp(undefined, {}, 'Recovered excess')).to.eql({ value: 0, pools: [] });
+      expect(convertLegacyMp(characteristics(), { value: 12 }, 'Recovered excess')).to.eql({
+        value: 10,
+        pools: [recovered(2)],
+      });
+    });
+
+    it('Should give the same result with the same pool identity when converting twice', function () {
+      expect(convertMp({ value: 14 })).to.eql(convertMp({ value: 14 }));
     });
   });
 

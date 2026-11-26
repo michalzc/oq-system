@@ -3,9 +3,6 @@
  * temporary-point pools. Pure, without Foundry calls, so data models, migrations and actors share it.
  */
 
-/** Resources with temporary-point pools, by their key under `system.attributes`. */
-export const TEMPORARY_POINT_RESOURCES = ['hp'];
-
 /** The identity of the pool that recovers points stored above the normal maximum by versions before 0.9. */
 export const RECOVERED_EXCESS_POOL_ID = 'recoveredExcess';
 
@@ -20,6 +17,14 @@ export const RECOVERED_EXCESS_LABEL_KEY = 'OQ.Resources.RecoveredExcess';
  * @returns {number}
  */
 export const hpNormalMaximum = (siz, con, mod) => Math.round((siz + con) / 2) + mod;
+
+/**
+ * The MP normal maximum, used by actor preparation and legacy conversion alike.
+ * @param {number} pow POW value
+ * @param {number} mod MP modifier
+ * @returns {number}
+ */
+export const mpNormalMaximum = (pow, mod) => pow + mod;
 
 /**
  * Whether a stored resource has a pool list. One without it was stored by a version before 0.9, the legacy signal.
@@ -69,6 +74,26 @@ export function convertLegacyHp(characteristics, hp, label) {
   const max = hpNormalMaximum(sourceCharacteristic(siz), sourceCharacteristic(con), hp.mod ?? 0);
   return recoverExcess(hp.value ?? 0, max, label);
 }
+
+/**
+ * Legacy MP, stored by a version before 0.9 without a pool list, converted like {@link convertLegacyHp}: the normal
+ * maximum comes from the stored POW and MP modifier.
+ * @param {object} [characteristics] stored characteristics, `{pow: {base, mod}, ...}`
+ * @param {{value?: number, mod?: number}} mp stored MP
+ * @param {string} label label of a recovered excess pool: the translation of {@link RECOVERED_EXCESS_LABEL_KEY}
+ * @returns {{value: number, pools: object[]}}
+ */
+export function convertLegacyMp(characteristics, mp, label) {
+  const max = mpNormalMaximum(sourceCharacteristic(characteristics?.pow), mp.mod ?? 0);
+  return recoverExcess(mp.value ?? 0, max, label);
+}
+
+/**
+ * The legacy conversion of each resource with temporary-point pools, by its key under `system.attributes`. HP and MP
+ * are detected and converted independently: either may already have its pool list.
+ * @type {Record<string, function(object, object, string): {value: number, pools: object[]}>}
+ */
+export const LEGACY_CONVERSIONS = { hp: convertLegacyHp, mp: convertLegacyMp };
 
 /**
  * Whether a value is a valid amount of points: a nonnegative whole number, without an upper cap.

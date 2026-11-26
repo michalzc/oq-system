@@ -112,18 +112,21 @@ pages:
             track <strong>Fortune Points</strong> and <strong>Growth Points</strong>. The gear icon opens the <strong>Attributes</strong> dialogue, where only the mods
             can be changed.</p>
 
-        <h3>Temporary Hit Points</h3>
-        <p>Some spells and rulings give a creature Hit Points beyond its maximum, such as <em>Vigour</em> or
-            <em>5 extra HP until sunrise</em>. These are <strong>temporary points</strong>, kept apart from the ordinary Hit
-            Points: the sheet shows the ordinary value against the maximum, then the temporary total in green, for example
-            <code>6 / 10 +7</code>. Hover over the green number to see it named.</p>
+        <h3>Temporary Hit Points and Magic Points</h3>
+        <p>Some spells and rulings give a creature Hit Points or Magic Points beyond its maximum, such as <em>Vigour</em>,
+            <em>5 extra HP until sunrise</em> or the Magic Points that <em>Tap</em> draws above the maximum. These are
+            <strong>temporary points</strong>, kept apart from the ordinary points: the sheet shows the ordinary value against
+            the maximum, then the temporary total in green, for example <code>6 / 10 +7</code>. Hover over the green number to
+            see it named.</p>
         <p>Damage takes temporary points first: the oldest pool is emptied before the next, and only then are ordinary Hit
             Points lost. Right-clicking the HP label counts as one point of damage, so it removes a temporary point first.
             Healing, including left-clicking the HP label, restores ordinary Hit Points only and never refills a pool. Typing
             a new current value changes only the ordinary Hit Points. See the <em>Chat</em> page for applying damage and
             healing.</p>
-        <p>Each grant is its own <strong>pool</strong>, listed in the order it was granted. The layers icon next to the Hit
-            Points opens the <strong>Temporary Hit Points</strong> dialogue, available to anyone who can edit the sheet:</p>
+        <p>Each grant is its own <strong>pool</strong>, listed in the order it was granted. Hit Points and Magic Points
+            have separate pools. The layers icon next to the Hit Points or Magic Points opens the <strong>Temporary Hit
+            Points</strong> or <strong>Temporary Magic Points</strong> dialogue, available to anyone who can edit the
+            sheet:</p>
         <ul>
             <li><strong>Grant</strong>: type an amount and an optional label, such as <em>Vigour from Aldric</em>, and click
                 <strong>Grant</strong> or press Enter. The new pool goes after every existing one. Without a label it is
@@ -142,8 +145,8 @@ pages:
             until you remove it. On an unlinked token's sheet the pools belong to that token only; on a linked token they
             belong to the actor.</p>
         <p>Earlier versions of the system could store a current value above the maximum, hidden on the sheet. When a world is
-            upgraded, or an old actor is imported, any Hit Points stored above the maximum become one pool called
-            <em>Recovered excess</em>, so no points are lost. It works like any other pool: correct or remove it once you
+            upgraded, or an old actor is imported, any Hit Points or Magic Points stored above the maximum become one pool
+            called <em>Recovered excess</em> for that resource, so no points are lost. It works like any other pool: correct or remove it once you
             know where those points came from.</p>
 
         <h3>Tabs</h3>
@@ -191,7 +194,7 @@ pages:
             average human: 3d6, or 2d6+6 for SIZ and INT. The dice icon rolls all formulas and updates the values, without a
             chat message.</p>
         <h3>Attributes</h3>
-        <p>Attributes work as for characters, temporary Hit Points included, except that NPCs have no Fortune or Growth
+        <p>Attributes work as for characters, temporary Hit Points and Magic Points included, except that NPCs have no Fortune or Growth
             Points.</p>
         <h3>Tabs</h3>
         <ul>

@@ -5,11 +5,12 @@ import { getDeclaration } from '../../utils/initiative.js';
 import {
   applyBarInput,
   availableTemporaryPoints,
-  convertLegacyHp,
   correctPool,
   grantPool,
   hasPoolList,
   hpNormalMaximum,
+  LEGACY_CONVERSIONS,
+  mpNormalMaximum,
   RECOVERED_EXCESS_LABEL_KEY,
   removePool,
   restorePoints,
@@ -56,14 +57,15 @@ export class OQBaseActor extends Actor {
     );
     this.updateSource({ prototypeToken });
 
-    // Creation data is cleaned without data model migration, so legacy HP in raw data (a macro creating an actor from
-    // an old export) is converted here. Data copied from a loaded document already has its pool list, and new actors
-    // get an empty one from the schema.
-    const createdHp = source.system?.attributes?.hp;
-    if (createdHp?.value !== undefined && !hasPoolList(createdHp)) {
+    // Creation data is cleaned without data model migration, so legacy HP and MP in raw data (a macro creating an
+    // actor from an old export) are converted here. Data copied from a loaded document already has its pool lists,
+    // and new actors get empty ones from the schema.
+    for (const [key, convert] of Object.entries(LEGACY_CONVERSIONS)) {
+      const created = source.system?.attributes?.[key];
+      if (created?.value === undefined || hasPoolList(created)) continue;
       const { characteristics } = this._source.system;
-      const hp = convertLegacyHp(characteristics, createdHp, game.i18n.localize(RECOVERED_EXCESS_LABEL_KEY));
-      this.updateSource({ system: { attributes: { hp } } });
+      const converted = convert(characteristics, created, game.i18n.localize(RECOVERED_EXCESS_LABEL_KEY));
+      this.updateSource({ system: { attributes: { [key]: converted } } });
     }
 
     if (!source.items) {
@@ -153,7 +155,7 @@ export class OQBaseActor extends Actor {
     const characteristics = this.system.characteristics;
 
     const hpMax = hpNormalMaximum(characteristics.siz.value, characteristics.con.value, attributes.hp.mod);
-    const mpMax = characteristics.pow.value + attributes.mp.mod;
+    const mpMax = mpNormalMaximum(characteristics.pow.value, attributes.mp.mod);
 
     return {
       dm: {
@@ -167,6 +169,7 @@ export class OQBaseActor extends Actor {
       mp: {
         max: mpMax,
         value: Math.min(mpMax, attributes.mp.value),
+        temporary: availableTemporaryPoints(attributes.mp.pools),
       },
       mr: this.effectAttribute('mr', attributes.mr.base + attributes.mr.mod),
     };
@@ -226,7 +229,7 @@ export class OQBaseActor extends Actor {
   /**
    * The stored temporary-point pools of a resource, in spending order. Read from the source, the base every pool
    * update starts from; preparation never changes pools.
-   * @param {string} resource `hp`
+   * @param {string} resource `hp` or `mp`
    * @returns {object[]}
    */
   temporaryPools(resource) {
@@ -238,7 +241,7 @@ export class OQBaseActor extends Actor {
   /**
    * Grants temporary points as a new pool, spent after every existing one. On an unlinked token's actor the pool
    * belongs to that token only.
-   * @param {string} resource `hp`
+   * @param {string} resource `hp` or `mp`
    * @param {number} amount a nonnegative whole number, without an upper cap
    * @param {string} [label] shown in the pool editor; a blank label becomes "Manual"
    * @returns {Promise<OQBaseActor|undefined>}
@@ -254,7 +257,7 @@ export class OQBaseActor extends Actor {
 
   /**
    * Corrects the remaining amount of a pool without moving it in the spending order.
-   * @param {string} resource `hp`
+   * @param {string} resource `hp` or `mp`
    * @param {string} poolId
    * @param {number} remaining a nonnegative whole number
    * @returns {Promise<OQBaseActor|undefined>}
@@ -265,7 +268,7 @@ export class OQBaseActor extends Actor {
 
   /**
    * Removes a pool, discarding only its remaining points.
-   * @param {string} resource `hp`
+   * @param {string} resource `hp` or `mp`
    * @param {string} poolId
    * @returns {Promise<OQBaseActor|undefined>}
    */
@@ -280,7 +283,7 @@ export class OQBaseActor extends Actor {
   /**
    * A resource's points as the resource-points module works with them: the prepared ordinary current (already
    * within the normal maximum), the normal maximum and the stored pools.
-   * @param {string} resource `hp`
+   * @param {string} resource `hp` or `mp`
    * @returns {import('../../utils/resource-points.js').ResourceState}
    */
   resourceState(resource) {

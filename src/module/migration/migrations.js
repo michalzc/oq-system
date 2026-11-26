@@ -1,6 +1,7 @@
 import { themedIconsMigration } from './migration-1-themed-icons.js';
 import { embeddedNewActorFlagMigration } from './migration-2-embedded-new-actor-flag.js';
 import { legacyHpExcessMigration } from './migration-3-legacy-hp-excess.js';
+import { legacyMpExcessMigration } from './migration-4-legacy-mp-excess.js';
 
 /**
  * @callback MigrationHandler
@@ -26,7 +27,12 @@ import { legacyHpExcessMigration } from './migration-3-legacy-hp-excess.js';
  * with the next version.
  * @type {Migration[]}
  */
-export const migrations = [themedIconsMigration, embeddedNewActorFlagMigration, legacyHpExcessMigration];
+export const migrations = [
+  themedIconsMigration,
+  embeddedNewActorFlagMigration,
+  legacyHpExcessMigration,
+  legacyMpExcessMigration,
+];
 
 export const LATEST_MIGRATION_VERSION = Math.max(0, ...migrations.map((migration) => migration.version));
 
