@@ -90,7 +90,7 @@ Fill in the ticket path once a folder is ticketed and tick Merged when the PR la
 | Chunk | Track folder | Blocked by | Ticket | Merged |
 | --- | --- | --- | --- | --- |
 | Res1 Temporary HP pools | resources | — | [01–04](../v09-resources/issues/) | [x] |
-| Res2 Temporary MP pools | resources | Res1 | [05–07](../v09-resources/issues/) | [ ] |
+| Res2 Temporary MP pools | resources | Res1 | [05–07](../v09-resources/issues/) | [x] |
 | Fx1 Actor effects with Protection | actor-effects | — | [01–02](../v09-actor-effects/issues/) | [x] |
 | Fx2 Movement | actor-effects | Fx1 | [03](../v09-actor-effects/issues/) | [x] |
 | Fx3 Characteristics | actor-effects | Fx1 | [04](../v09-actor-effects/issues/) | [ ] |
