@@ -73,3 +73,23 @@ notice and the two induced invalid-amount messages only. Not checked: a player c
 QA fixtures left in `oq-dev`: `QA MP v08`, `QA MP base` (with an extra `Big=12` MP pool), tokens `QA MP token 12`,
 `QA MP token 15`, `QA MP token inherit`, `QA MP import`, `QA MP created`, `QA MP fresh`, and `QA MP pack` in
 `world.qa-actors`.
+
+### 2026-11-26 review
+
+Two-axis review (standards, spec) of 1e99c19: no documented-standard breaches and nothing missing or wrong in this
+ticket's scope. Changes made:
+
+- The conversion loop duplicated in `OQActorDataModel.migrateData` and `OQBaseActor#_preCreate` became the pure
+  `convertLegacyResources(characteristics, attributes, label)`, with module tests (HP converted and MP legacy, both
+  legacy, partial and missing resources); the conversion table is now private to the module. Re-checked in `oq-dev`:
+  `importFromJSON` and `Actor.create` of an old export with HP 12 (max 8) and MP 14 persisted 8 + 4 and 10 + 4; a new
+  character persisted empty lists. No console errors.
+- `BAR_RESOURCES` in `canvas/token.js` is now `TEMPORARY_POINT_BAR_RESOURCES`.
+
+Kept: migration 4 copies migration 3's handler shape (migration 3 must not be edited); the recovered-excess label is
+translated at each caller, as in Res1.
+
+For ticket 06 (both reviewers): the MP number input on the sheet still stores the typed value unclamped. Now that MP
+has a pool list, a value typed above the maximum is no longer the legacy signal, so it would stay hidden and never be
+recovered. Res2 must not merge without 06's "sets ordinary MP clamped to 0…maximum". Likewise the Actors page names
+Tap's MP as temporary points while spending still takes ordinary MP only until 06 and 07.

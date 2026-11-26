@@ -5,11 +5,11 @@ import { getDeclaration } from '../../utils/initiative.js';
 import {
   applyBarInput,
   availableTemporaryPoints,
+  convertLegacyResources,
   correctPool,
   grantPool,
   hasPoolList,
   hpNormalMaximum,
-  LEGACY_CONVERSIONS,
   mpNormalMaximum,
   RECOVERED_EXCESS_LABEL_KEY,
   removePool,
@@ -60,13 +60,9 @@ export class OQBaseActor extends Actor {
     // Creation data is cleaned without data model migration, so legacy HP and MP in raw data (a macro creating an
     // actor from an old export) are converted here. Data copied from a loaded document already has its pool lists,
     // and new actors get empty ones from the schema.
-    for (const [key, convert] of Object.entries(LEGACY_CONVERSIONS)) {
-      const created = source.system?.attributes?.[key];
-      if (created?.value === undefined || hasPoolList(created)) continue;
-      const { characteristics } = this._source.system;
-      const converted = convert(characteristics, created, game.i18n.localize(RECOVERED_EXCESS_LABEL_KEY));
-      this.updateSource({ system: { attributes: { [key]: converted } } });
-    }
+    const label = game.i18n.localize(RECOVERED_EXCESS_LABEL_KEY);
+    const converted = convertLegacyResources(this._source.system.characteristics, source.system?.attributes, label);
+    if (!_.isEmpty(converted)) this.updateSource({ system: { attributes: converted } });
 
     if (!source.items) {
       const defaultItems = await getDefaultItemsForActor(source.type);

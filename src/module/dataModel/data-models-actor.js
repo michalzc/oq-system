@@ -1,6 +1,6 @@
 import _ from 'lodash-es';
 import { npcCharacteristics, pcCharacteristics } from './default-characteristics.js';
-import { hasPoolList, LEGACY_CONVERSIONS, RECOVERED_EXCESS_LABEL_KEY } from '../utils/resource-points.js';
+import { convertLegacyResources, RECOVERED_EXCESS_LABEL_KEY } from '../utils/resource-points.js';
 
 const fields = foundry.data.fields;
 
@@ -159,12 +159,8 @@ class OQActorDataModel extends foundry.abstract.TypeDataModel {
    */
   static migrateData(source, options) {
     if (!options?.partial) {
-      for (const [key, convert] of Object.entries(LEGACY_CONVERSIONS)) {
-        const resource = source.attributes?.[key];
-        if (!resource || hasPoolList(resource)) continue;
-        const label = game.i18n.localize(RECOVERED_EXCESS_LABEL_KEY);
-        Object.assign(resource, convert(source.characteristics, resource, label));
-      }
+      const label = game.i18n.localize(RECOVERED_EXCESS_LABEL_KEY);
+      _.merge(source.attributes, convertLegacyResources(source.characteristics, source.attributes, label));
     }
     return super.migrateData(source, options);
   }

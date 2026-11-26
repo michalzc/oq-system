@@ -1,8 +1,8 @@
 /** Resources whose token bar shows temporary points. MP joins once its HUD input spends temporary MP first. */
-const BAR_RESOURCES = ['hp'];
+const TEMPORARY_POINT_BAR_RESOURCES = ['hp'];
 
 /** Bar attributes with temporary points, by the resource holding them. */
-const TEMPORARY_POINT_BARS = Object.fromEntries(BAR_RESOURCES.map((key) => [`attributes.${key}`, key]));
+const TEMPORARY_POINT_BARS = Object.fromEntries(TEMPORARY_POINT_BAR_RESOURCES.map((key) => [`attributes.${key}`, key]));
 
 /** Fill of the canvas marker for temporary points: `@temporary-points-hud-color` of the token HUD's "+N". */
 const TEMPORARY_MARKER_COLOR = 0x8fe05a;
@@ -46,7 +46,7 @@ export class OQToken extends foundry.canvas.placeables.Token {
  * @param {object} changed
  */
 export function refreshTemporaryPointBars(actor, changed) {
-  const poolsChanged = BAR_RESOURCES.some((key) =>
+  const poolsChanged = TEMPORARY_POINT_BAR_RESOURCES.some((key) =>
     foundry.utils.hasProperty(changed, `system.attributes.${key}.pools`),
   );
   if (!poolsChanged || !canvas.ready) return;

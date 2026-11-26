@@ -4,6 +4,7 @@ import {
   availableTemporaryPoints,
   convertLegacyHp,
   convertLegacyMp,
+  convertLegacyResources,
   correctPool,
   grantPool,
   hasPoolList,
@@ -124,6 +125,28 @@ describe('resource-points.js', function () {
 
     it('Should give the same result with the same pool identity when converting twice', function () {
       expect(convertMp({ value: 14 })).to.eql(convertMp({ value: 14 }));
+    });
+  });
+
+  describe('#convertLegacyResources()', function () {
+    const characteristics = { siz: { base: 10, mod: 0 }, con: { base: 10, mod: 0 }, pow: { base: 10, mod: 0 } };
+    const convertAll = (attributes) => convertLegacyResources(characteristics, attributes, 'Recovered excess');
+
+    it('Should convert HP and MP independently, leaving a resource with a pool list alone', function () {
+      // A world upgraded by the HP step only: HP has its pool list, MP is still legacy.
+      expect(convertAll({ hp: { value: 15, pools: [] }, mp: { value: 14 } })).to.eql({
+        mp: { value: 10, pools: [recovered(4)] },
+      });
+      expect(convertAll({ hp: { value: 15 }, mp: { value: 14 } })).to.eql({
+        hp: { value: 10, pools: [recovered(5)] },
+        mp: { value: 10, pools: [recovered(4)] },
+      });
+    });
+
+    it('Should return nothing for converted, missing or partial resources', function () {
+      expect(convertAll({ hp: { value: 3, pools: [] }, mp: { value: 3, pools: [] } })).to.eql({});
+      expect(convertAll({ hp: { mod: 2 } })).to.eql({});
+      expect(convertAll(undefined)).to.eql({});
     });
   });
 

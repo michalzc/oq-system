@@ -88,12 +88,27 @@ export function convertLegacyMp(characteristics, mp, label) {
   return recoverExcess(mp.value ?? 0, max, label);
 }
 
+/** The legacy conversion of each resource with temporary-point pools, by its key under `system.attributes`. */
+const LEGACY_CONVERSIONS = { hp: convertLegacyHp, mp: convertLegacyMp };
+
 /**
- * The legacy conversion of each resource with temporary-point pools, by its key under `system.attributes`. HP and MP
- * are detected and converted independently: either may already have its pool list.
- * @type {Record<string, function(object, object, string): {value: number, pools: object[]}>}
+ * The legacy resources of a stored actor, converted (see {@link convertLegacyHp}). HP and MP are detected and
+ * converted independently: either may already have its pool list. A resource without a stored current value is
+ * partial data and left alone.
+ * @param {object} [characteristics] stored characteristics
+ * @param {object} [attributes] stored `system.attributes`
+ * @param {string} label label of a recovered excess pool: the translation of {@link RECOVERED_EXCESS_LABEL_KEY}
+ * @returns {Record<string, {value: number, pools: object[]}>} the converted resources by key, empty when none is legacy
  */
-export const LEGACY_CONVERSIONS = { hp: convertLegacyHp, mp: convertLegacyMp };
+export function convertLegacyResources(characteristics, attributes, label) {
+  const converted = {};
+  for (const [key, convert] of Object.entries(LEGACY_CONVERSIONS)) {
+    const resource = attributes?.[key];
+    if (resource?.value === undefined || hasPoolList(resource)) continue;
+    converted[key] = convert(characteristics, resource, label);
+  }
+  return converted;
+}
 
 /**
  * Whether a value is a valid amount of points: a nonnegative whole number, without an upper cap.
