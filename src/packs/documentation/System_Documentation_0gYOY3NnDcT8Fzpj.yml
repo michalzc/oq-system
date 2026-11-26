@@ -199,8 +199,8 @@ pages:
             average human: 3d6, or 2d6+6 for SIZ and INT. The dice icon rolls all formulas and updates the values, without a
             chat message.</p>
         <h3>Attributes</h3>
-        <p>Attributes work as for characters, temporary Hit Points and Magic Points included, except that NPCs have no Fortune or Growth
-            Points.</p>
+        <p>Attributes work as for characters, temporary Hit Points and Magic Points included, except that NPCs have no
+            Fortune or Growth Points.</p>
         <h3>Tabs</h3>
         <ul>
             <li><strong>Details</strong>: skills and general abilities, magic (magic skills, abilities and spells, followed
@@ -441,8 +441,9 @@ pages:
         <p>The chat card shows the magnitude, skill value, modifiers, the result and the magic points spent.</p>
         <p>Temporary magic points (see the <em>Actors</em> page) count towards everything above: what the actor can afford,
             the highest magnitude offered and the one Shift-click picks. They are spent first, oldest pool first, then
-            ordinary magic points. Cancelling the dialogue spends nothing, and the cost is checked again against the current
-            magic points when you confirm, so points spent or granted meanwhile count.</p>
+            ordinary magic points. Cancelling the dialogue spends nothing. When you confirm, the cost is checked again against
+            the magic points the actor has then, so points spent meanwhile can make the cast fail and points granted meanwhile
+            help pay; the highest magnitude offered stays as it was when the dialogue opened.</p>
         <p><em>Tap</em> is not automated. When it draws magic points above the maximum, set the ordinary magic points to the
             maximum and grant the rest as a temporary pool labelled <em>Tap</em>. Once the spell finishes, lower that pool by
             one point per minute in the pool editor.</p>

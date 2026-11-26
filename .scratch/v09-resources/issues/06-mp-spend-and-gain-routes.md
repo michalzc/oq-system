@@ -81,3 +81,24 @@ payment goes through the actor's resource methods (spell payment is ticket 07); 
 the documentation describes only what the branch does. A fresh two-axis review of the Res2 branch before its PR is
 still worthwhile.
 
+
+### 2026-11-26 branch review fixes
+
+The two-axis review of the Res2 branch found the token HUD calling the actor's private `#spend`, `#restore` and
+`#setOrdinary` instead of the public resource methods (`CODING_STANDARDS.md`, "One route per resource change"), the
+sheet switching on `hp` twice, and the list of resources with pools kept in three places. Fixed:
+`OQBaseActor#resourceRoutes(resource)` maps each resource to its public methods (`damageHp`/`spendMp`, ...) and serves
+the HUD and both sheet routes; `TEMPORARY_POINT_RESOURCES` and `temporaryPointResourceOfBar` in the resource-points
+module are the one list, used by the token bars and the HUD. The chat buttons still read their direction from the
+signed value: cards already in world chat logs carry only that. The spec's three MP rows (spend 30, gain 5, Tap) are
+now module tests.
+
+QA, Foundry 14.370, `oq-dev`, GM, with the public methods wrapped to record calls (temporary actors, deleted after):
+- HUD on a character from 8/8 + A=2: "-3", "+5", "4" on MP → 7/8 A=0; 8/8; 4/8, and the same on HP; calls
+  `spendMp(3)`, `gainMp(5)`, `setOrdinaryMp(4)`, `damageHp(3)`, `healHp(5)`, `setOrdinaryHp(4)`.
+- Label from full + A=1: −1, −1, +1, +1 on MP and HP → full A=0; −1; full; full, on a character and an NPC; calls
+  `spendMp`/`gainMp`/`damageHp`/`healHp` with 1.
+- Typed 3 then 99 on MP and HP → 3/8; 8/8 with the field showing 8; calls `setOrdinaryMp`/`setOrdinaryHp`.
+- Token `A` (unlinked, bars HP and MP): pool of 3 shows "+3" beside the HUD input; HUD "-2" on the MP bar took the
+  pool to 1 and left ordinary MP 2; restored afterwards.
+- Console: no errors or warnings.

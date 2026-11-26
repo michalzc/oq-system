@@ -17,6 +17,7 @@ import {
   restorePoints,
   setOrdinaryPoints,
   spendPoints,
+  temporaryPointResourceOfBar,
 } from '../../utils/resource-points.js';
 
 /**
@@ -350,6 +351,25 @@ export class OQBaseActor extends Actor {
     return availablePoints(this.resourceState('mp'));
   }
 
+  /** The public methods that change each resource with pools, by resource. */
+  static #resourceRouteNames = {
+    hp: { setOrdinary: 'setOrdinaryHp', spend: 'damageHp', restore: 'healHp' },
+    mp: { setOrdinary: 'setOrdinaryMp', spend: 'spendMp', restore: 'gainMp' },
+  };
+
+  /**
+   * The public methods that change a resource with pools, for routes that serve either resource (sheet, token HUD).
+   * They call the named methods (`damageHp`, `spendMp`, ...), so whatever those do reaches every route.
+   * @param {string} resource `hp` or `mp`
+   * @returns {{setOrdinary: Function, spend: Function, restore: Function}} each taking a whole number of points, as
+   *   `setOrdinaryHp`, `damageHp` and `healHp` do for HP
+   */
+  resourceRoutes(resource) {
+    const names = OQBaseActor.#resourceRouteNames[resource];
+    if (!names) throw new Error(`No resource with temporary points: ${resource}`);
+    return _.mapValues(names, (name) => (amount) => this[name](amount));
+  }
+
   async #spend(resource, amount) {
     const before = this.resourceState(resource);
     const { state, fromPools, fromOrdinary } = spendPoints(before, amount);
@@ -389,9 +409,6 @@ export class OQBaseActor extends Actor {
     return changes;
   }
 
-  /** Token bar attributes whose HUD input goes through the resource methods, by resource. */
-  static #barResources = { 'attributes.hp': 'hp', 'attributes.mp': 'mp' };
-
   /**
    * A value typed into a token HUD bar input. On the HP and MP bars it agrees with chat and sheet: "-N" is damage or
    * spending, taking temporary points first, "+N" restores ordinary points up to the maximum, and a plain number sets
@@ -403,7 +420,7 @@ export class OQBaseActor extends Actor {
    * @override
    */
   async modifyTokenAttribute(attribute, value, isDelta = false, isBar = true) {
-    const resource = OQBaseActor.#barResources[attribute];
+    const resource = temporaryPointResourceOfBar(attribute);
     if (!resource || !isBar) return super.modifyTokenAttribute(attribute, value, isDelta, isBar);
     const amount = Math.trunc(Number(value));
     if (!Number.isFinite(amount)) return this;
@@ -413,9 +430,10 @@ export class OQBaseActor extends Actor {
     const preview = foundry.utils.deepClone(updates);
     if (Hooks.call('modifyTokenAttribute', { attribute, value, isDelta, isBar }, updates, this) === false) return this;
     if (!_.isEqual(updates, preview)) return this.update(updates);
-    if (!isDelta) await this.#setOrdinary(resource, amount);
-    else if (amount < 0) await this.#spend(resource, -amount);
-    else await this.#restore(resource, amount);
+    const routes = this.resourceRoutes(resource);
+    if (!isDelta) await routes.setOrdinary(amount);
+    else if (amount < 0) await routes.spend(-amount);
+    else await routes.restore(amount);
     return this;
   }
 }

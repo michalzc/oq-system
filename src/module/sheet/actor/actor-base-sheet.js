@@ -225,7 +225,7 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
     const typed = Number(event.target.value);
     if (event.target.value.trim() !== '' && Number.isFinite(typed)) {
       const value = Math.trunc(typed);
-      await (resourceId === 'hp' ? this.actor.setOrdinaryHp(value) : this.actor.setOrdinaryMp(value));
+      await this.actor.resourceRoutes(resourceId).setOrdinary(value);
     }
     // A value clamped to the stored one changes nothing, so nothing re-renders the field: show the stored value.
     if (Number(event.target.value) !== this.actor.system.attributes[resourceId].value) this.render();
@@ -393,9 +393,8 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
     if (!this.isEditable) return;
 
     // +1 restores ordinary points only; -1 is damage or spending and takes temporary points first.
-    const raise = event.button !== 2;
-    if (target.dataset.resourceId === 'hp') return raise ? this.actor.healHp(1) : this.actor.damageHp(1);
-    return raise ? this.actor.gainMp(1) : this.actor.spendMp(1);
+    const routes = this.actor.resourceRoutes(target.dataset.resourceId);
+    return event.button === 2 ? routes.spend(1) : routes.restore(1);
   }
 
   getInitiativeOptions() {

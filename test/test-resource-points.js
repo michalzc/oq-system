@@ -14,6 +14,8 @@ import {
   restorePoints,
   setOrdinaryPoints,
   spendPoints,
+  TEMPORARY_POINT_RESOURCES,
+  temporaryPointResourceOfBar,
 } from '../src/module/utils/resource-points.js';
 
 /** A stored v0.8 actor `system` source: HP normal maximum is round((SIZ + CON) / 2) + HP modifier. */
@@ -390,6 +392,50 @@ describe('resource-points.js', function () {
           expect(() => setOrdinaryPoints(state(6, 10), value)).to.throwError(RangeError);
         }
       });
+    });
+
+    describe('MP acceptance examples', function () {
+      it('Should spend MP 30 from MP 10/10 + A=25, without a cap on generic pools', function () {
+        expect(spendPoints(state(10, 10, pool('a', 25)), 30)).to.eql({
+          state: state(5, 10, pool('a', 0)),
+          fromPools: 25,
+          fromOrdinary: 5,
+        });
+      });
+
+      it('Should gain MP 5 from MP 8/10 + A=4 into ordinary MP only', function () {
+        expect(restorePoints(state(8, 10, pool('a', 4)), 5)).to.eql({
+          state: state(10, 10, pool('a', 4)),
+          restored: 2,
+        });
+      });
+
+      it('Should follow manual Tap: set MP 10, grant Tap 4, spend 3, lower Tap by 1', function () {
+        // MP 8/10, Tap gains 6: 10/10 Tap=4; 10/10 Tap=1; 10/10 Tap=0.
+        const full = setOrdinaryPoints(state(8, 10), 10).state;
+        const tapped = { ...full, pools: grantPool(full.pools, { id: 'tap', label: 'TAP', amount: 4 }) };
+        expect(tapped).to.eql(state(10, 10, pool('tap', 4)));
+        const spent = spendPoints(tapped, 3).state;
+        expect(spent).to.eql(state(10, 10, pool('tap', 1)));
+        expect({ ...spent, pools: correctPool(spent.pools, 'tap', 0) }).to.eql(state(10, 10, pool('tap', 0)));
+      });
+    });
+  });
+
+  describe('#temporaryPointResourceOfBar()', function () {
+    it('Should name HP and MP as the resources with pools', function () {
+      expect(TEMPORARY_POINT_RESOURCES).to.eql(['hp', 'mp']);
+    });
+
+    it('Should give the resource of an HP or MP bar attribute', function () {
+      expect(temporaryPointResourceOfBar('attributes.hp')).to.be('hp');
+      expect(temporaryPointResourceOfBar('attributes.mp')).to.be('mp');
+    });
+
+    it('Should give nothing for any other attribute', function () {
+      for (const attribute of ['attributes.ap', 'attributes.hpx', 'hp', 'system.attributes.hp', '', undefined, null]) {
+        expect(temporaryPointResourceOfBar(attribute)).to.be(undefined);
+      }
     });
   });
 

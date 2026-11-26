@@ -91,6 +91,19 @@ export function convertLegacyMp(characteristics, mp, label) {
 /** The legacy conversion of each resource with temporary-point pools, by its key under `system.attributes`. */
 const LEGACY_CONVERSIONS = { hp: convertLegacyHp, mp: convertLegacyMp };
 
+/** The resources with temporary-point pools, by their key under `system.attributes`. */
+export const TEMPORARY_POINT_RESOURCES = Object.freeze(Object.keys(LEGACY_CONVERSIONS));
+
+/**
+ * The resource with temporary-point pools a token bar attribute shows.
+ * @param {string} [attribute] a bar attribute path, e.g. `attributes.hp`
+ * @returns {string|undefined} the resource key, undefined for any other attribute
+ */
+export function temporaryPointResourceOfBar(attribute) {
+  const key = attribute?.startsWith('attributes.') ? attribute.slice('attributes.'.length) : undefined;
+  return TEMPORARY_POINT_RESOURCES.includes(key) ? key : undefined;
+}
+
 /**
  * The legacy resources of a stored actor, converted (see {@link convertLegacyHp}). HP and MP are detected and
  * converted independently: either may already have its pool list. A resource without a stored current value is
