@@ -34,3 +34,10 @@ A sheet, dialog or HUD element that shows document state either re-renders when 
 sheets do; other applications register in `document.apps`, see `docs/foundry-v14-notes.md`) or reads it at the
 moment of use. A form that saves on change re-reads the stored state, so an edit made elsewhere since it rendered is
 neither shown stale nor overwritten.
+
+## Writes use values without effects
+
+A document update computed from prepared data reads the values without effects (a characteristic's `base` and
+`unmodified`, a skill's `learnedValue` and `learnedBaseValue`). An effective value written back stores the effect in
+the document, where it outlives the effect. Template inputs are checked by the `handlebars/input-shows-named-field`
+lint rule; this rule covers the JavaScript that builds updates (action handlers, dialogs, chat buttons).
