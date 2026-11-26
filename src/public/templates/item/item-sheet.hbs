@@ -13,6 +13,9 @@
 
   <section class="sheet-content">
     {{ getPartial this.item.type this }}
+    {{#if bearsEffects}}
+      {{> systems/oq/templates/item/parts/effects.hbs }}
+    {{/if}}
     <fieldset class="description-container">
       <legend>{{localize 'OQ.Labels.Description'}}</legend>
       <prose-mirror name="system.description" value="{{system.description}}" toggled

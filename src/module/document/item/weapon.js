@@ -1,20 +1,30 @@
 import { OQBaseItem } from './base-item.js';
 import { minMaxValue, mostSignificantModifier } from '../../utils/utils.js';
+import { weaponDamage } from '../../utils/effect-contributions.js';
 
 export class OQWeapon extends OQBaseItem {
+  /**
+   * The damage formula with the Damage Modifier and, after it, the damage terms of the weapon's "this item" effects.
+   * `formula` is the whole formula as written, which the damage roll dialog starts from; `effects` holds the breakdown
+   * when effects add terms.
+   */
   calculateDamageRollValues() {
     if (this.parent) {
       const damage = this.system.damage;
       const dmValue = this.parent.system.attributes.dm.value;
-      if (damage.damageFormula || (damage.includeDamageMod && dmValue)) {
-        const damageFormula = damage.damageFormula;
-        const includeDM = !!damage.includeDamageMod;
-        const finalFormula = (includeDM ? `${damageFormula} ${dmValue}` : damageFormula).trim();
-        const finalDamageFormula = this.makeRollString(finalFormula);
+      const damageFormula = damage.damageFormula;
+      const includeDM = !!damage.includeDamageMod;
+      const result = weaponDamage({ formula: damageFormula, dm: includeDM ? dmValue : '' }, this.effects);
+      if (result.formula) {
         return {
           damageFormula,
-          finalDamageFormula,
+          formula: result.formula,
+          finalDamageFormula: this.makeRollString(result.formula),
           includeDM,
+          // The formula without effects as the sheet shows formulas.
+          effects: result.contributions.length
+            ? { ...result, unmodified: this.makeRollString(result.unmodified) }
+            : undefined,
         };
       }
     }
@@ -72,7 +82,7 @@ export class OQWeapon extends OQBaseItem {
       cost && { label: `OQ.Labels.Cost`, value: cost },
       damage?.damageFormula && {
         label: `OQ.Labels.Damage`,
-        value: `${damage.damageFormula} ${damage.includeDamageMod ? parentSystem?.attributes?.dm?.value ?? '' : ''}`,
+        value: this.system.damageRollValues?.formula ?? damage.damageFormula,
       },
     ].filter((item) => !!item);
 

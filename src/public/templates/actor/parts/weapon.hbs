@@ -11,9 +11,15 @@
   {{/if}}
 
   {{#if system.damageRollValues.finalDamageFormula }}
-    <a class="damage-roll" data-action="rollDamage" data-tooltip="{{localize 'OQ.Labels.DamageRoll' }}">
-      {{ system.damageRollValues.finalDamageFormula }}
-    </a>
+    {{#with (lookup @root.weaponDamageTooltips id) as |tooltip|}}
+      <a class="damage-roll effect-changed" data-action="rollDamage" data-tooltip-html="{{tooltip}}">
+        {{ ../system.damageRollValues.finalDamageFormula }}{{> systems/oq/templates/actor/parts/effect-marker.hbs}}
+      </a>
+    {{else}}
+      <a class="damage-roll" data-action="rollDamage" data-tooltip="{{localize 'OQ.Labels.DamageRoll' }}">
+        {{ system.damageRollValues.finalDamageFormula }}
+      </a>
+    {{/with}}
   {{/if}}
 
   {{#if system.rollValues.value }}

@@ -1,0 +1,31 @@
+<fieldset class="item-effects">
+  <legend>{{ localize 'OQ.Effects.Effects' }}</legend>
+  <ol class="effect-list">
+    {{#each effects as |effect|}}
+      <li class="effect{{#unless effect.enabled}} effect-disabled{{/unless}}" data-effect-id="{{effect.id}}">
+        <img class="effect-icon" src="{{effect.img}}" alt="{{effect.name}}">
+        <a class="effect-name" data-action="editEffect">{{effect.name}}</a>
+        <span class="effect-role">{{ localize effect.roleLabel }}</span>
+        <span class="effect-state">{{ localize (concat 'OQ.Effects.States.' effect.state) }}</span>
+        {{#if @root.editable}}
+          <a class="effect-toggle" data-action="toggleEffect"
+             data-tooltip="{{ localize (ifThen effect.enabled 'OQ.Effects.Disable' 'OQ.Effects.Enable') }}">
+            <i class="fas {{#if effect.enabled}}fa-toggle-on{{else}}fa-toggle-off{{/if}}"></i></a>
+        {{/if}}
+        <a class="effect-edit" data-action="editEffect" data-tooltip="{{ localize 'OQ.Effects.EditEffect' }}"><i
+            class="fas fa-edit"></i></a>
+        {{#if @root.editable}}
+          <a class="effect-delete" data-action="deleteEffect" data-tooltip="{{ localize 'OQ.Effects.DeleteEffect' }}"><i
+              class="fas fa-trash"></i></a>
+        {{/if}}
+      </li>
+    {{else}}
+      <li class="effects-empty">{{ localize 'OQ.Effects.NoEffects' }}</li>
+    {{/each}}
+  </ol>
+  {{#if @root.editable}}
+    <button type="button" class="add-effect" data-action="addEffect">
+      <i class="fa-solid fa-plus"></i> {{ localize 'OQ.Effects.AddEffect' }}
+    </button>
+  {{/if}}
+</fieldset>

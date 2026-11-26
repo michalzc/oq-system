@@ -1,4 +1,6 @@
 import _ from 'lodash-es';
+import { OQActiveEffect } from '../../document/active-effect.js';
+import { deleteEffect, editEffect, toggleEffect } from '../effect/effect-list-actions.js';
 
 export class OQBaseItemSheet extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.sheets.ItemSheetV2,
@@ -22,8 +24,19 @@ export class OQBaseItemSheet extends foundry.applications.api.HandlebarsApplicat
     actions: {
       deleteTrait: OQBaseItemSheet.onTagDelete,
       configureNewActor: OQBaseItemSheet.onConfigureNewActor,
+      addEffect: OQBaseItemSheet.onAddEffect,
+      editEffect,
+      deleteEffect,
+      toggleEffect,
     },
   };
+
+  /**
+   * The roles (`EFFECT_ROLES`) of the effects this item type can bear. A sheet with any shows an Effects section, and
+   * new effects get the first.
+   * @type {string[]}
+   */
+  static EFFECT_ROLE_KEYS = [];
 
   static PARTS = {
     sheet: {
@@ -44,7 +57,28 @@ export class OQBaseItemSheet extends foundry.applications.api.HandlebarsApplicat
       item: this.item,
       system: this.item.system,
       enrichedDescription,
+      bearsEffects: this.constructor.EFFECT_ROLE_KEYS.length > 0,
+      effects: this.constructor.EFFECT_ROLE_KEYS.length ? this.prepareEffects() : [],
     });
+  }
+
+  /**
+   * The item's effects for its Effects section, with their roles.
+   * @returns {object[]}
+   */
+  prepareEffects() {
+    return _.sortBy(this.item.effects.contents, (effect) => effect.name).map((effect) => ({
+      ...effect.listEntry,
+      id: effect.id,
+      roleLabel: `OQ.Effects.Roles.${effect._source.system.role ?? 'none'}`,
+    }));
+  }
+
+  static async onAddEffect(event) {
+    event.preventDefault();
+    const [role] = this.constructor.EFFECT_ROLE_KEYS;
+    if (!this.isEditable || !role) return;
+    await OQActiveEffect.createOn(this.item, { system: { role } });
   }
 
   async _onRender(context, options) {

@@ -7,6 +7,7 @@ export class OQSpecialAbility extends OQBaseItem {
 
     return {
       damageFormula: finalDamageFormula,
+      formula: finalDamageFormula,
       finalDamageFormula,
     };
   }

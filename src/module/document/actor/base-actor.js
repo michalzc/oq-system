@@ -1,6 +1,7 @@
 import _ from 'lodash-es';
 import { getDefaultItemsForActor } from '../../utils/compendium-utils.js';
 import {
+  ACTOR_TARGETS,
   activeEffectChanges,
   attributeContribution,
   effectiveCharacteristics,
@@ -85,9 +86,8 @@ export class OQBaseActor extends Actor {
    */
   prepareBaseData() {
     super.prepareBaseData();
-    // The OpenQuest changes of the actor's own effects, read once per preparation; item effects get their roles in
-    // later chunks.
-    this.effectChanges = activeEffectChanges(this.effects);
+    // The OpenQuest changes of the actor's own effects, read once per preparation. Items read their own effects.
+    this.effectChanges = activeEffectChanges(this.effects, ACTOR_TARGETS);
     this.applyCharacteristicEffects();
     assignAttributes(this.system.attributes, this.calculateBaseAttributes());
   }

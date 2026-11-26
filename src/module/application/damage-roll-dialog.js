@@ -6,9 +6,7 @@ import { openRollDialog } from './roll-dialog.js';
  * @returns {Promise<{customFormula: string, messageMode: string}|null>} null if the dialog was cancelled or closed
  */
 export async function promptDamageRoll(rollData) {
-  const formula = rollData.includeDM
-    ? `${rollData.damageFormula} ${rollData.actorRollData.dm}`
-    : rollData.damageFormula;
+  const formula = rollData.formula;
 
   const formData = await openRollDialog({
     title: `${game.i18n.localize('OQ.Labels.DamageRoll')}: ${rollData.entityName}`,

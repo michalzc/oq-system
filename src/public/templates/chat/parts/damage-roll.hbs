@@ -18,6 +18,11 @@
           <div class="label">{{ localize 'OQ.Labels.DamageMod' }}</div>
           <div>{{ dm }}</div>
         {{/if}}
+
+        {{#each effects.contributions as |contribution|}}
+          <div class="label">{{ contribution.name }}</div>
+          <div>{{ contribution.term }}</div>
+        {{/each}}
       {{/unless}}
 
       {{# if customFormula }}

@@ -1,11 +1,16 @@
-import { EFFECT_TARGETS, effectChangesToSave } from '../../utils/effect-contributions.js';
+import {
+  EFFECT_ROLES,
+  EFFECT_TARGETS,
+  effectChangesToSave,
+  unreadableDamageTerms,
+} from '../../utils/effect-contributions.js';
 
 const FormDataExtended = foundry.applications.ux.FormDataExtended;
 
 /**
  * The system effect editor, registered as the default sheet for every Active Effect. It edits name, icon, enabled, rules
- * text, source name and, on actor effects, OpenQuest changes chosen from the curated vocabulary instead of free
- * key/type/value rows. Stored changes it does not manage (made by macros or modules) are only listed, and saved back
+ * text, source name and OpenQuest changes chosen from the curated vocabulary instead of free key/type/value rows: actor
+ * targets on actor effects, its role's targets on an item effect with a role (`EFFECT_ROLES`). Stored changes it does not manage (made by macros or modules) are only listed, and saved back
  * exactly as stored. Statuses and duration stay hidden until the conditions and clocks chunks add them.
  */
 export class OQActiveEffectConfig extends foundry.applications.sheets.ActiveEffectConfig {
@@ -34,22 +39,25 @@ export class OQActiveEffectConfig extends foundry.applications.sheets.ActiveEffe
     },
   };
 
-  /** OpenQuest changes are offered on actor effects only; item effects get their roles in later chunks. */
+  /** Item effects stored before v0.9 have no role and are offered no OpenQuest changes. */
   get offersChanges() {
-    return this.document.parent?.documentName === 'Actor';
+    return this.document.targets.length > 0;
   }
 
   async _preparePartContext(partId, context) {
     const partContext = await super._preparePartContext(partId, context);
     if (partId === 'details') {
       const entry = this.document.listEntry;
-      const targetOptions = Object.fromEntries(Object.entries(EFFECT_TARGETS).map(([key, { label }]) => [key, label]));
+      const targetOptions = Object.fromEntries(this.document.targets.map((key) => [key, EFFECT_TARGETS[key].label]));
+      const role = this.document._source.system.role;
       Object.assign(partContext, {
         systemFields: this.document.system.schema.fields,
         offersChanges: this.offersChanges,
+        role: role && { label: EFFECT_ROLES[role].label, hint: `OQ.Effects.RoleHint.${role}` },
         changes: entry.changes.map((change) => ({
           ...change,
           allowsMinimum: EFFECT_TARGETS[change.target].allowsMinimum ?? false,
+          isFormula: EFFECT_TARGETS[change.target].formula ?? false,
           targetOptions,
           typeOptions: Object.fromEntries(
             EFFECT_TARGETS[change.target].types.map((type) => [type, `OQ.Effects.Operations.${type}`]),
@@ -74,7 +82,12 @@ export class OQActiveEffectConfig extends foundry.applications.sheets.ActiveEffe
     data.system ??= {};
     // The operation select is not named `type`: core's change listener would take it for one of its own rows.
     const edited = Object.values(oqChanges ?? {}).map(({ operation, ...change }) => ({ ...change, type: operation }));
-    data.system.changes = effectChangesToSave(this.document._source.system.changes, edited);
+    const unreadable = unreadableDamageTerms(edited);
+    // Thrown, as core's own validation does here: the submission shows the message and the editor stays open.
+    if (unreadable.length) {
+      throw new Error(game.i18n.format('OQ.Effects.InvalidDamageTerms', { terms: unreadable.join(', ') }));
+    }
+    data.system.changes = effectChangesToSave(this.document._source.system.changes, edited, this.document.targets);
     return data;
   }
 
@@ -84,8 +97,10 @@ export class OQActiveEffectConfig extends foundry.applications.sheets.ActiveEffe
    */
   static async #onAddEffectChange() {
     const { system } = this._processFormData(null, this.form, new FormDataExtended(this.form));
-    const [target, { types }] = Object.entries(EFFECT_TARGETS)[0];
-    const added = effectChangesToSave([], [{ target, type: types[0], value: 0 }]);
+    const targets = this.document.targets;
+    const [target] = targets;
+    const { types, formula } = EFFECT_TARGETS[target];
+    const added = effectChangesToSave([], [{ target, type: types[0], value: formula ? '' : 0 }], targets);
     return this.submit({ updateData: { system: { changes: [...system.changes, ...added] } } });
   }
 

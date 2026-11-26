@@ -36,6 +36,7 @@ A reusable definition of an ongoing benefit or restriction that a spell or abili
 
 **Item-local effect**:
 A benefit or restriction that changes only the item bearing it, rather than its owner's general capabilities.
+Recorded as an item effect with the role *This item*.
 
 **Passive effect**:
 A benefit or restriction supplied by an owned item or ability while its activation requirements are met.

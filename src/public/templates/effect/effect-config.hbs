@@ -3,7 +3,13 @@
               label=(localize 'OQ.Effects.SourceName') hint=(localize 'OQ.Effects.SourceNameHint')}}
   {{formGroup fields.disabled value=source.disabled rootId=rootId label=(localize 'OQ.Effects.States.disabled')}}
   {{formGroup fields.description value=source.description rootId=rootId label=(localize 'OQ.Effects.RulesText')}}
-  {{#if isItemEffect}}
+  {{#if role}}
+    <div class="form-group effect-role">
+      <label>{{localize 'OQ.Effects.Role'}}</label>
+      <div class="form-fields"><span>{{localize role.label}}</span></div>
+      <p class="hint">{{localize role.hint}}</p>
+    </div>
+  {{else if isItemEffect}}
     {{formGroup fields.transfer value=source.transfer rootId=rootId}}
   {{/if}}
 
@@ -27,8 +33,14 @@
               <select class="type" name="oqChanges.{{index}}.operation" aria-label="{{localize 'OQ.Effects.Operation'}}">
                 {{selectOptions change.typeOptions selected=change.type localize=true}}
               </select>
-              <input class="value" type="number" step="any" name="oqChanges.{{index}}.value" value="{{change.value}}"
-                     aria-label="{{localize 'OQ.Effects.Value'}}">
+              {{#if change.isFormula}}
+                <input class="value" type="text" name="oqChanges.{{index}}.value" value="{{change.value}}"
+                       aria-label="{{localize 'OQ.Effects.Value'}}" placeholder="1D4"
+                       data-tooltip="{{localize 'OQ.Effects.DamageTermHint'}}">
+              {{else}}
+                <input class="value" type="number" step="any" name="oqChanges.{{index}}.value" value="{{change.value}}"
+                       aria-label="{{localize 'OQ.Effects.Value'}}">
+              {{/if}}
               {{#if change.allowsMinimum}}
                 <input class="minimum" type="number" step="any" name="oqChanges.{{index}}.minimum" value="{{change.minimum}}"
                        aria-label="{{localize 'OQ.Effects.Minimum'}}" data-tooltip="{{localize 'OQ.Effects.MinimumHint'}}">

@@ -4,6 +4,7 @@ import { TemporaryPointsDialog } from '../../application/temporary-points-dialog
 import { OQBaseActor } from '../../document/actor/base-actor.js';
 import { OQActiveEffect } from '../../document/active-effect.js';
 import { OQSpell } from '../../document/item/spell.js';
+import { deleteEffect, editEffect, effectFromElement, toggleEffect } from '../effect/effect-list-actions.js';
 import { formatContribution, referencedCharacteristics } from '../../utils/effect-contributions.js';
 import { getInitiativeOptions } from '../../utils/initiative.js';
 import { customSpellGroups } from '../../utils/magic.js';
@@ -56,9 +57,9 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
       modifyAttributes: OQActorBaseSheet.onModifyAttributes,
       editTemporaryPoints: OQActorBaseSheet.onEditTemporaryPoints,
       addEffect: OQActorBaseSheet.onAddEffect,
-      editEffect: OQActorBaseSheet.onEditEffect,
-      deleteEffect: OQActorBaseSheet.onDeleteEffect,
-      toggleEffect: OQActorBaseSheet.onToggleEffect,
+      editEffect,
+      deleteEffect,
+      toggleEffect,
       toggleEffectRulesText: OQActorBaseSheet.onToggleEffectRulesText,
       // Left click raises the value, right click lowers it.
       adjustResource: { handler: OQActorBaseSheet.onUpdateResource, buttons: [0, 2] },
@@ -82,6 +83,7 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
       effects: await this.prepareEffects(),
       effectTooltips: await this.prepareEffectTooltips(),
       skillEffectTooltips: await this.prepareSkillEffectTooltips(),
+      weaponDamageTooltips: await this.prepareWeaponDamageTooltips(),
       ...this.prepareSpentSpells(),
     });
   }
@@ -179,6 +181,27 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
           contributions,
         });
         return [skill.id, html];
+      }),
+    );
+    return Object.fromEntries(tooltips);
+  }
+
+  /**
+   * Tooltips of the weapons whose damage effects add terms to, keyed by item ID.
+   * @returns {Promise<Object<string, string>>}
+   */
+  async prepareWeaponDamageTooltips() {
+    const weapons = this.actor.items.filter((item) => item.type === 'weapon' && item.system.damageRollValues?.effects);
+    const tooltips = await Promise.all(
+      weapons.map(async (weapon) => {
+        const { finalDamageFormula, effects } = weapon.system.damageRollValues;
+        const html = await renderContributionsTooltip({
+          label: 'OQ.Labels.Damage',
+          value: finalDamageFormula,
+          unmodified: effects.unmodified,
+          contributions: effects.contributions.map((contribution) => ({ ...contribution, amount: contribution.term })),
+        });
+        return [weapon.id, html];
       }),
     );
     return Object.fromEntries(tooltips);
@@ -356,40 +379,15 @@ export class OQActorBaseSheet extends foundry.applications.api.HandlebarsApplica
     }
   }
 
-  getEffectFromElement(element) {
-    const effectId = element.closest('[data-effect-id]')?.dataset.effectId;
-    return effectId ? this.actor.effects.get(effectId) : undefined;
-  }
-
   static async onAddEffect(event) {
     event.preventDefault();
     if (!this.isEditable) return;
-    await OQActiveEffect.createOnActor(this.actor);
-  }
-
-  static onEditEffect(event, target) {
-    event.preventDefault();
-    // Viewers get the effect editor in read-only mode.
-    this.getEffectFromElement(target)?.sheet.render(true);
-  }
-
-  static async onDeleteEffect(event, target) {
-    event.preventDefault();
-    if (!this.isEditable) return;
-    const effect = this.getEffectFromElement(target);
-    if (effect) await effect.delete();
-  }
-
-  static async onToggleEffect(event, target) {
-    event.preventDefault();
-    if (!this.isEditable) return;
-    const effect = this.getEffectFromElement(target);
-    if (effect) await effect.update({ disabled: !effect.disabled });
+    await OQActiveEffect.createOn(this.actor);
   }
 
   static onToggleEffectRulesText(event, target) {
     event.preventDefault();
-    const effect = this.getEffectFromElement(target);
+    const effect = effectFromElement(this, target);
     if (!effect) return;
     if (this.#expandedEffects.has(effect.id)) this.#expandedEffects.delete(effect.id);
     else this.#expandedEffects.add(effect.id);
