@@ -77,6 +77,7 @@ export default [
     },
     rules: {
       'handlebars/valid-syntax': 'error',
+      'handlebars/input-shows-named-field': 'error',
       '@html-eslint/no-duplicate-attrs': 'error',
       '@html-eslint/no-duplicate-id': 'error',
       '@html-eslint/require-closing-tags': 'error',

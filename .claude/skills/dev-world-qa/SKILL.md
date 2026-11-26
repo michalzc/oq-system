@@ -83,6 +83,8 @@ migration's dialog with Retry, then reload without the script.
 
 - `take_snapshot` on `/game` includes the whole chat log: about 1,400 lines in `oq-dev`. Read state through
   `evaluate_script` instead.
+- A reload clears `window`: a helper one script defines there is gone in the next. Define helpers inside each script
+  that follows a reload.
 - `take_screenshot` with `filePath` writes only inside the MCP's workspace roots; the job tmp directory is outside.
 - Core `ActiveEffectConfig` (the system effect editor) closes on submit. Call `effect.sheet.render(true)` again before
   the next interaction; `sheet.form` is `null` while closed.
