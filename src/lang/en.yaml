@@ -64,6 +64,7 @@ OQ:
     AddChange: Add change
     AddEffect: Add effect
     ChangedByEffects: Changed by effects
+    DamageTermHint: A dice or number term, such as 1D4, +2 or -1.
     Changes: Changes
     DeleteChange: Delete change
     DeleteEffect: Delete effect
@@ -72,6 +73,7 @@ OQ:
     EditorLabel: OpenQuest effect editor
     Effects: Effects
     Enable: Enable
+    InvalidDamageTerms: 'Not a damage term: {terms}. Use dice and numbers, such as 1D4, +2 or -1.'
     Learned: Learned, without effects
     Minimum: Minimum
     MinimumOf: 'minimum {minimum}'
@@ -88,6 +90,12 @@ OQ:
       override: Set to
     OtherChanges: Other stored changes not managed by OpenQuest
     OtherChangesHint: Made by a macro or module. They are kept as stored and their behaviour is not guaranteed.
+    Role: Role
+    Roles:
+      none: No role
+      thisItem: This item
+    RoleHint:
+      thisItem: Changes only this item, wherever it goes. Its owner is unaffected.
     RulesText: Rules text
     ShowRulesText: Show or hide the rules text
     SourceName: Source
@@ -99,6 +107,7 @@ OQ:
     Targets:
       ap: Armour points
       mr: Movement rate
+      weaponDamage: Weapon damage
     Value: Value
     WithoutEffects: Without effects
   Errors:

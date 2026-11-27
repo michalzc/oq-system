@@ -271,6 +271,8 @@ pages:
             spells may stack.</p>
         <p>Effect armour points are added on top of the Armour Worn calculation above: the best Worn or Natural armour plus
             the mod.</p>
+        <p>A weapon's damage changed by the weapon's own effects shows the wand icon too; see <em>Item effects</em> on the
+            <em>Items</em> page.</p>
 
         <h3>Effective and learned values</h3>
         <p>A characteristic changed by effects has two values. The <strong>unmodified</strong> value is base plus mod, as
@@ -390,10 +392,50 @@ pages:
                 value is the skill's total. Its mod is not added to the value: the roll dialogue receives the more
                 significant of the weapon's and the skill's mods, following the rules.</li>
             <li><strong>Damage</strong>: a roll formula, which may use the actor's roll data. With <strong>Include DM</strong>
-                ticked, the actor's damage modifier is added automatically.</li>
+                ticked, the actor's damage modifier is added automatically. The weapon's own effects add their terms after
+                it; see <em>Item effects</em> below.</li>
+            <li><strong>Effects</strong>: the weapon's effects. See <em>Item effects</em> below.</li>
         </ul>
         <p>A weapon can be rolled, and is listed in the Combat tab, only when the actor has its skill. Ammunition is a type
             of equipment and is not consumed automatically.</p>
+
+        <h2>Item effects</h2>
+        <p>An item can carry effects of its own, edited in the same effect editor as an actor's effects (see the
+            <em>Actors</em> page). Weapons have an <strong>Effects</strong> section, between their fields and the description.
+            Each row shows the effect's icon, name, role and state. Click the name or the edit icon to open the editor; the
+            toggle enables or disables the effect and the trash icon deletes it immediately, without confirmation.
+            <strong>Add effect</strong> creates a new effect and opens it in the editor.</p>
+        <p>Every effect created in an item's Effects section has a <strong>role</strong>, shown in the list and in the
+            editor, which decides what it changes. Weapons have one role:</p>
+        <ul>
+            <li><strong>This item</strong>: changes only the weapon bearing it. Its owner, the owner's skills and other
+                weapons, even ones using the same skill, are unaffected. The editor offers one target, <strong>Weapon
+                damage</strong>, with the operation <em>Add</em>: its value is a dice or number term, such as
+                <code>1D4</code>, <code>+2</code> or <code>-1</code>. The editor refuses anything else; a blank value adds
+                nothing.</li>
+        </ul>
+        <p>The weapon's damage adds the terms of its enabled <em>This item</em> effects after the damage modifier. On the
+            actor sheet the damage formula then shows the wand icon; hover over it to see the formula without effects and each
+            effect's term. Rolling damage uses the full formula, and the damage roll dialogue starts from it. A damage roll
+            made without the dialogue lists each effect's term on its card; one made with the dialogue shows the formula as
+            you confirmed it.</p>
+        <p>The effects are part of the weapon: they stay through renaming and state changes, and a copy of the weapon on
+            another actor or in the Items directory has them too.</p>
+        <p>An item effect without a role, such as one created before this version or by a macro, is listed as <em>No
+            role</em>. The editor offers it no changes, only the <strong>Transfer</strong> checkbox.</p>
+
+        <h3>Recipe: an intrinsically enchanted sword</h3>
+        <p>A sword forged with a lasting enchantment deals an extra 1D4 damage. To make it:</p>
+        <ol>
+            <li>Open the sword's sheet and click <strong>Add effect</strong> in its Effects section. The new effect has the
+                role <em>This item</em>.</li>
+            <li>Name the effect <em>Enchanted edge</em> and set the source to, for example, the smith who forged it.</li>
+            <li>Click <strong>Add change</strong>; the row has <em>Weapon damage</em> and <em>Add</em>. Enter
+                <code>1D4</code>.</li>
+            <li>Click <strong>Submit Changes</strong>. On a character with damage modifier +1d4, a sword dealing
+                <code>1d8</code> with <em>Include DM</em> shows <code>1d8 + 1d4 + 1d4</code> with the wand icon. A second
+                sword using the same skill keeps <code>1d8 + 1d4</code>.</li>
+        </ol>
 
         <h2>Armour</h2>
         <p><strong>Armour Points</strong>, <strong>Encumbrance</strong>, <strong>Cost</strong> and <strong>State</strong>

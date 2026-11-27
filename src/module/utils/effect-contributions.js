@@ -33,7 +33,42 @@ export const EFFECT_TARGETS = Object.freeze({
       },
     ]),
   ),
+  // A damage formula term (1D4, -1), added after the Damage Modifier.
+  weaponDamage: { label: 'OQ.Effects.Targets.weaponDamage', types: ['add'], formula: true },
 });
+
+/** The targets actor effects may name. */
+export const ACTOR_TARGETS = Object.freeze(['ap', 'mr', ...CHARACTERISTICS]);
+
+/**
+ * The roles an item-borne effect may have, each with whether it transfers to the item's owner and the targets it may
+ * name. "This item" changes only the weapon bearing it.
+ */
+export const EFFECT_ROLES = Object.freeze({
+  thisItem: { label: 'OQ.Effects.Roles.thisItem', transfer: false, targets: Object.freeze(['weaponDamage']) },
+});
+
+/**
+ * The `transfer` an effect's role requires, which no other setting may change.
+ * @param {object} effect plain effect data
+ * @returns {boolean|undefined} undefined for an effect without a role
+ */
+export function roleTransfer(effect) {
+  return EFFECT_ROLES[effect.system?.role]?.transfer;
+}
+
+/**
+ * The targets an effect's editor offers: those of its role, or the actor targets for an actor effect. An item effect
+ * without a role (stored before v0.9) is offered none; its changes keep core behaviour.
+ * @param {object} effect plain effect data
+ * @param {string} [parentDocumentName] `Actor` or `Item`
+ * @returns {readonly string[]} keys of `EFFECT_TARGETS`
+ */
+export function effectTargets(effect, parentDocumentName) {
+  const role = EFFECT_ROLES[effect.system?.role];
+  if (role) return role.targets;
+  return parentDocumentName === 'Actor' ? ACTOR_TARGETS : [];
+}
 
 /**
  * Whether a stored change is an OpenQuest change. Such changes name a `target` and are applied only by this module;
@@ -46,8 +81,13 @@ export function isOpenQuestChange(change) {
   return Boolean(change?.target);
 }
 
-/** An OpenQuest change whose target and operation the vocabulary knows, so this system can apply and edit it. */
-function isManagedChange(change) {
+/**
+ * An OpenQuest change whose target and operation the vocabulary knows, so this system can apply and edit it.
+ * @param {object} change
+ * @param {readonly string[]} [targets] the targets the change's effect may name; any in the vocabulary by default
+ */
+function isManagedChange(change, targets) {
+  if (targets && !targets.includes(change?.target)) return false;
   return EFFECT_TARGETS[change?.target]?.types.includes(change.type) ?? false;
 }
 
@@ -68,12 +108,14 @@ function displayValue(value) {
 /**
  * What the effects list and the effect editor show for one effect.
  * @param {object} effect plain effect data
+ * @param {readonly string[]} [targets] the targets the effect may name, from `effectTargets`; actor targets by default
  * @returns {{name: string, img: string, sourceName: string, rulesText: string, state: 'enabled'|'disabled',
  *   enabled: boolean, changes: Array<{target: string, type: string, value: number}>,
  *   otherChanges: Array<{key: string, type: string, value: string}>}}
  */
-export function effectListEntry(effect) {
+export function effectListEntry(effect, targets = ACTOR_TARGETS) {
   const changes = effect.system?.changes ?? [];
+  const managed = (change) => isManagedChange(change, targets);
   const enabled = !effect.disabled;
   return {
     name: effect.name,
@@ -83,11 +125,11 @@ export function effectListEntry(effect) {
     state: enabled ? 'enabled' : 'disabled',
     enabled,
     changes: changes
-      .filter(isManagedChange)
+      .filter(managed)
       .map((change) => withMinimum(change, { target: change.target, type: change.type, value: change.value })),
     // Made by a macro or module (keeping core behaviour), or naming a target this version does not know.
     otherChanges: changes
-      .filter((change) => !isManagedChange(change))
+      .filter((change) => !managed(change))
       .map(({ key, target, type, value }) => ({ key: key || target, type, value: displayValue(value) })),
   };
 }
@@ -96,23 +138,64 @@ export function effectListEntry(effect) {
  * The changes an effect editor saves: the stored changes it does not manage, exactly as stored, followed by the edited
  * OpenQuest changes.
  * @param {object[]} storedChanges the effect's stored changes
- * @param {Array<{target: string, type: string, value: number|null}>} edited the OpenQuest changes from the editor
+ * @param {Array<{target: string, type: string, value: number|string|null}>} edited the OpenQuest changes from the
+ *   editor; a damage term is saved as typed, trimmed
+ * @param {readonly string[]} [targets] the targets the effect may name, from `effectTargets`; actor targets by default
  * @returns {object[]}
  */
-export function effectChangesToSave(storedChanges, edited) {
+export function effectChangesToSave(storedChanges, edited, targets = ACTOR_TARGETS) {
   return [
-    ...storedChanges.filter((change) => !isManagedChange(change)),
+    ...storedChanges.filter((change) => !isManagedChange(change, targets)),
     ...edited.map(({ target, type, value, minimum }) => ({
       key: '',
-      ...withMinimum({ target, minimum }, { target, type, value: Number(value) || 0 }),
+      ...withMinimum(
+        { target, minimum },
+        { target, type, value: EFFECT_TARGETS[target].formula ? String(value ?? '').trim() : Number(value) || 0 },
+      ),
       phase: 'initial',
     })),
   ];
 }
 
+/**
+ * The damage terms among the edited changes that are neither blank nor readable by `damageTerm`, which the editor
+ * refuses to save.
+ * @param {Array<{target: string, value: *}>} edited
+ * @returns {string[]} as typed
+ */
+export function unreadableDamageTerms(edited) {
+  return edited
+    .filter(({ target }) => EFFECT_TARGETS[target]?.formula)
+    .map(({ value }) => String(value ?? '').trim())
+    .filter((value) => value && !damageTerm(value));
+}
+
 /** A change that leaves its target as it is, such as a row just added in the editor. */
 function changesNothing(type, value) {
   return (type === 'add' && value === 0) || (type === 'multiply' && value === 1);
+}
+
+const DAMAGE_TERM = /^[+-]?(\d*D\d+|\d+)([+-](\d*D\d+|\d+))*$/;
+
+/**
+ * A damage formula term as it is added to a damage formula: signed, without spaces, dice in capitals (`+1D4`, `-1`,
+ * `+2D6+1`). Undefined for anything else, such as a blank value or a formula with references.
+ * @param {*} value
+ * @returns {string|undefined}
+ */
+export function damageTerm(value) {
+  const term = String(value ?? '')
+    .replace(/\s+/g, '')
+    .toUpperCase();
+  if (!DAMAGE_TERM.test(term)) return undefined;
+  return /^[+-]/.test(term) ? term : `+${term}`;
+}
+
+/** What a change applies: a number, or a damage term for formula targets. Undefined if it changes nothing. */
+function changeValue(change) {
+  if (EFFECT_TARGETS[change.target].formula) return damageTerm(change.value);
+  const value = Number(change.value);
+  return Number.isFinite(value) && !changesNothing(change.type, value) ? value : undefined;
 }
 
 /** The given fields of a change, plus the minimum it sets, if any. */
@@ -131,17 +214,18 @@ function changeMinimum(change) {
  * The OpenQuest changes of the active effects, each with the identity, name, source name and rules text of its
  * effect. Changes that change nothing are left out.
  * @param {Iterable<object>} effects plain effect data or effect documents
+ * @param {readonly string[]} [targets] only changes naming these targets, such as `ACTOR_TARGETS`; any by default
  * @returns {Array<{effectId: string, name: string, sourceName: string, rulesText: string, target: string,
  *   type: string, value: number, minimum?: number}>} `minimum` only when the change sets one its target allows
  */
-export function activeEffectChanges(effects) {
+export function activeEffectChanges(effects, targets) {
   const changes = [];
   for (const effect of effects) {
     if (!isActive(effect)) continue;
     for (const change of effect.system?.changes ?? []) {
-      if (!isManagedChange(change)) continue;
-      const value = Number(change.value);
-      if (!Number.isFinite(value) || changesNothing(change.type, value)) continue;
+      if (!isManagedChange(change, targets)) continue;
+      const value = changeValue(change);
+      if (value === undefined) continue;
       changes.push(
         withMinimum(change, {
           effectId: effect.id ?? effect._id,
@@ -282,4 +366,28 @@ export function formatContribution({ type, value }) {
     default:
       return value < 0 ? `−${-value}` : `+${value}`;
   }
+}
+
+/**
+ * A weapon's damage formula with the damage terms of its own "this item" definitions after the Damage Modifier.
+ * @param {{formula: string, dm: string}} weapon the weapon's damage formula and the Damage Modifier it adds, blank when
+ *   it adds none
+ * @param {Iterable<object>} itemEffects the weapon's own effects, plain data or documents
+ * @returns {{formula: string, unmodified: string, contributions: Array<{effectId: string, name: string,
+ *   sourceName: string, term: string}>}} `unmodified` without the terms of effects
+ */
+export function weaponDamage({ formula, dm }, itemEffects) {
+  const local = activeEffectChanges(
+    [...itemEffects].filter((effect) => effect.system?.role === 'thisItem'),
+    EFFECT_ROLES.thisItem.targets,
+  );
+  const contributions = local
+    .filter((change) => change.target === 'weaponDamage')
+    .map(({ effectId, name, sourceName, value }) => ({ effectId, name, sourceName, term: value }));
+  const unmodified = [formula, dm].filter(Boolean).join(' ');
+  return {
+    formula: [unmodified, ...contributions.map(({ term }) => term)].filter(Boolean).join(' '),
+    unmodified,
+    contributions,
+  };
 }

@@ -3,12 +3,16 @@ import {
   activeEffectChanges,
   attributeContribution,
   effectChangesToSave,
+  effectTargets,
   effectiveCharacteristics,
   effectListEntry,
   formatContribution,
+  roleTransfer,
   normalMaximums,
   referencedCharacteristics,
   skillValues,
+  unreadableDamageTerms,
+  weaponDamage,
 } from '../src/module/utils/effect-contributions.js';
 import { SrdRules } from '../src/module/consts/rules-config.js';
 
@@ -22,6 +26,16 @@ function ap(type, value) {
 
 function mr(type, value, minimum) {
   return { key: '', target: 'mr', type, value, ...(minimum === undefined ? {} : { minimum }), phase: 'initial' };
+}
+
+function weaponDamageChange(value) {
+  return { key: '', target: 'weaponDamage', type: 'add', value, phase: 'initial' };
+}
+
+/** A definition on a weapon that changes only that weapon. */
+function thisItem(id, name, changes, extra = {}) {
+  const definition = effect(id, name, changes, extra);
+  return { ...definition, transfer: false, system: { ...definition.system, role: 'thisItem' } };
 }
 
 function characteristic(target, type, value, minimum) {
@@ -110,6 +124,55 @@ describe('effect-contributions.js', function () {
         { key: '', target: 'ap', type: 'override', value: 6, phase: 'initial' },
         { key: '', target: 'ap', type: 'add', value: 0, phase: 'initial' },
       ]);
+    });
+  });
+
+  describe('item effects in the editor', function () {
+    it('offers "this item" definitions only the weapon damage target, and actor effects only actor targets', function () {
+      assert.deepStrictEqual(effectTargets({ system: { role: 'thisItem' } }, 'Item'), ['weaponDamage']);
+      assert.ok(effectTargets({ system: {} }, 'Actor').includes('ap'));
+      assert.ok(!effectTargets({ system: {} }, 'Actor').includes('weaponDamage'));
+    });
+
+    it('never transfers a "this item" definition, and leaves transfer alone on effects without a role', function () {
+      assert.strictEqual(roleTransfer({ transfer: true, system: { role: 'thisItem' } }), false);
+      assert.strictEqual(roleTransfer({ transfer: true, system: {} }), undefined);
+    });
+
+    it('offers item effects without a role, stored before v0.9, no targets at all', function () {
+      assert.deepStrictEqual(effectTargets({ system: {} }, 'Item'), []);
+    });
+
+    it('lists and saves a "this item" damage term as typed, keeping changes outside its targets as stored', function () {
+      const stray = ap('add', 2);
+      const definition = thisItem('ench', 'Enchanted edge', [weaponDamageChange('1D4'), stray]);
+      const targets = effectTargets(definition, 'Item');
+
+      assert.deepStrictEqual(effectListEntry(definition, targets).changes, [
+        { target: 'weaponDamage', type: 'add', value: '1D4' },
+      ]);
+      assert.deepStrictEqual(effectListEntry(definition, targets).otherChanges, [
+        { key: 'ap', type: 'add', value: '2' },
+      ]);
+      assert.deepStrictEqual(
+        effectChangesToSave(
+          definition.system.changes,
+          [{ target: 'weaponDamage', type: 'add', value: ' 1d6 ' }],
+          targets,
+        ),
+        [stray, { key: '', target: 'weaponDamage', type: 'add', value: '1d6', phase: 'initial' }],
+      );
+    });
+
+    it('finds damage terms the editor cannot save, allowing a blank one', function () {
+      const edited = [
+        { target: 'weaponDamage', type: 'add', value: '1D4' },
+        { target: 'weaponDamage', type: 'add', value: '' },
+        { target: 'weaponDamage', type: 'add', value: '1D4 + @str' },
+        { target: 'ap', type: 'add', value: 2 },
+      ];
+
+      assert.deepStrictEqual(unreadableDamageTerms(edited), ['1D4 + @str']);
     });
   });
 
@@ -549,6 +612,60 @@ describe('effect-contributions.js', function () {
         ].map(([type, value]) => formatContribution({ type, value })),
         ['+3', '−2', '×0.5', '= 8'],
       );
+    });
+  });
+
+  describe('#weaponDamage()', function () {
+    const sword = { formula: '1D8', dm: '+1D4' };
+
+    it("adds sword A's local +1D4 after the Damage Modifier and lists it", function () {
+      const enchanted = thisItem('ench', 'Enchanted edge', [weaponDamageChange('1D4')], { sourceName: 'Smith' });
+
+      assert.deepStrictEqual(weaponDamage(sword, [enchanted]), {
+        formula: '1D8 +1D4 +1D4',
+        unmodified: '1D8 +1D4',
+        contributions: [{ effectId: 'ench', name: 'Enchanted edge', sourceName: 'Smith', term: '+1D4' }],
+      });
+    });
+
+    it("keeps sword A's local term off sword B, which shares its skill", function () {
+      const swordA = [thisItem('ench', 'Enchanted edge', [weaponDamageChange('1D4')])];
+
+      assert.strictEqual(weaponDamage(sword, swordA).formula, '1D8 +1D4 +1D4');
+      assert.deepStrictEqual(weaponDamage(sword, []), {
+        formula: '1D8 +1D4',
+        unmodified: '1D8 +1D4',
+        contributions: [],
+      });
+    });
+
+    it('reads only "this item" definitions of the weapon, enabled and not suppressed', function () {
+      const legacy = effect('old', 'Transferred bonus', [weaponDamageChange('1D6')]);
+      const disabled = thisItem('off', 'Dormant edge', [weaponDamageChange('1D4')], { disabled: true });
+      const suppressed = { ...thisItem('sup', 'Suppressed edge', [weaponDamageChange('1D4')]), active: false };
+
+      assert.strictEqual(weaponDamage(sword, [legacy, disabled, suppressed]).formula, '1D8 +1D4');
+    });
+
+    it('adds terms to a weapon without the Damage Modifier, and to one with no formula of its own', function () {
+      const edge = [thisItem('ench', 'Enchanted edge', [weaponDamageChange('1D4')])];
+
+      assert.strictEqual(weaponDamage({ formula: '1D6', dm: '' }, edge).formula, '1D6 +1D4');
+      assert.strictEqual(weaponDamage({ formula: '', dm: '' }, edge).formula, '+1D4');
+    });
+
+    it('writes terms signed, without spaces, with capital dice, and skips blank or unreadable ones', function () {
+      const edge = [
+        thisItem('ench', 'Mixed edge', [
+          weaponDamageChange(' 1d4 + 1 '),
+          weaponDamageChange('-1'),
+          weaponDamageChange(''),
+          weaponDamageChange('@str'),
+          weaponDamageChange('1D4+'),
+        ]),
+      ];
+
+      assert.strictEqual(weaponDamage({ formula: '1D8', dm: '' }, edge).formula, '1D8 +1D4+1 -1');
     });
   });
 });

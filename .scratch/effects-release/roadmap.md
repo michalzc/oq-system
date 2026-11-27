@@ -12,7 +12,7 @@ a folder gets its tickets or a chunk merges.
 | Chunk list and dependency graph | [08 release chunks](issues/08-release-chunks.md), section "Chunks and dependency graph" | Done |
 | One spec per track | `.scratch/v09-*/spec.md`, section "Delivery and dependencies" in each | Done |
 | Tickets per track | `.scratch/v09-*/issues/` | Done |
-| Implementation | One PR per chunk into `master` | In progress (Fx1, Fx2, Res1, Res2 merged) |
+| Implementation | One PR per chunk into `master` | In progress (Fx1, Fx2, Fx3, Res1, Res2 merged) |
 
 Where 08 and a spec disagree on a blocking edge, the spec is newer and wins. The specs added three edges:
 App4 also needs Itm2, App6 also needs Fx5, and Clk1 also needs App1. The actor-effects tickets added two more: Itm1's
@@ -93,7 +93,7 @@ Fill in the ticket path once a folder is ticketed and tick Merged when the PR la
 | Res2 Temporary MP pools | resources | Res1 | [05–07](../v09-resources/issues/) | [x] |
 | Fx1 Actor effects with Protection | actor-effects | — | [01–02](../v09-actor-effects/issues/) | [x] |
 | Fx2 Movement | actor-effects | Fx1 | [03](../v09-actor-effects/issues/) | [x] |
-| Fx3 Characteristics | actor-effects | Fx1 | [04](../v09-actor-effects/issues/) | [ ] |
+| Fx3 Characteristics | actor-effects | Fx1 | [04](../v09-actor-effects/issues/) | [x] |
 | Fx4 Maximum/current transitions | actor-effects | Res1, Res2, Fx3 | [05](../v09-actor-effects/issues/), 17 if after Itm2 | [ ] |
 | Fx5 Skill test modifiers | actor-effects | Fx1 | [06–07](../v09-actor-effects/issues/) | [ ] |
 | Fx6a Conditional choices | actor-effects | Fx5 | [08–10](../v09-actor-effects/issues/) | [ ] |

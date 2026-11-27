@@ -199,7 +199,10 @@ export function getResultFeatures(roll) {
  * @property {Object} speaker
  * @property {Object|undefined} actorRollData
  * @property {string|undefined} damageFormula
+ * @property {string|undefined} formula the whole damage formula as written, with the Damage Modifier and the terms of
+ *   effects; the damage roll dialog starts from it
  * @property {string|undefined} finalDamageFormula
+ * @property {object|undefined} effects the damage terms effects add, from `weaponDamage`
  * @property {string} entityName
  * @property {boolean} includeDM
  * @property {Object|undefined} customFormula

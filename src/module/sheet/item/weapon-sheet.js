@@ -2,6 +2,8 @@ import { OQBaseItemSheet } from './base-item-sheet.js';
 import _ from 'lodash-es';
 
 export class OQWeaponSheet extends OQBaseItemSheet {
+  static EFFECT_ROLE_KEYS = ['thisItem'];
+
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     const itemConfig = CONFIG.OQ.ItemConfig;

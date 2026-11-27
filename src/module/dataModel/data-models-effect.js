@@ -1,3 +1,5 @@
+import { EFFECT_ROLES } from '../utils/effect-contributions.js';
+
 const fields = foundry.data.fields;
 
 /**
@@ -30,6 +32,9 @@ export class OQEffectDataModel extends foundry.data.ActiveEffectTypeDataModel {
       ),
       // Readable text, so it survives the deletion of whatever the effect came from.
       sourceName: new fields.StringField({ trim: true, initial: '' }),
+      // What an item-borne effect does (`EFFECT_ROLES`), which also fixes its `transfer`. Absent on actor effects and
+      // on item effects stored before v0.9.
+      role: new fields.StringField({ required: false, blank: false, choices: () => Object.keys(EFFECT_ROLES) }),
     };
   }
 }
